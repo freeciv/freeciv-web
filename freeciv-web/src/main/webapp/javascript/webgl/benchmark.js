@@ -83,7 +83,7 @@ function benchmark_check()
                   "actor_id"    : 101,
                   "target_id"   : units[101]['tile'],
                   "extra_id"    : EXTRA_NONE,
-                  "value"       : 0,
+                  "sub_tgt_id"  : 0,
                   "name"        : "Hello world",
                   "action_type" : ACTION_FOUND_CITY};
     send_request(JSON.stringify(packet));

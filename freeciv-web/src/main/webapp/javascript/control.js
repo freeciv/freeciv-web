@@ -1452,7 +1452,7 @@ function do_map_click(ptile, qtype, first_time_called)
         packet['orders'] = [];
         packet['dir'] = [];
         packet['activity'] = [];
-        packet['target'] = [];
+        packet['sub_target'] = [];
         packet['extra'] = [];
         packet['action'] = [];
         for (var i = 0; i < goto_path['length']; i++) {
@@ -1472,7 +1472,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
           packet['dir'][i] = goto_path['dir'][i];
           packet['activity'][i] = ACTIVITY_LAST;
-          packet['target'][i] = 0;
+          packet['sub_target'][i] = 0;
           packet['extra'][i] = EXTRA_NONE;
           packet['action'][i] = ACTION_COUNT;
         }
@@ -1495,7 +1495,7 @@ function do_map_click(ptile, qtype, first_time_called)
             packet['orders'][pos] = ORDER_LAST;
             packet['dir'][pos] = -1;
             packet['activity'][pos] = ACTIVITY_LAST;
-            packet['target'][pos] = 0;
+            packet['sub_target'][pos] = 0;
             packet['extra'][pos] = EXTRA_NONE;
             packet['action'][pos] = ACTION_COUNT;
           } else {
@@ -1563,7 +1563,7 @@ function do_map_click(ptile, qtype, first_time_called)
       "actor_id"    : punit['id'],
       "target_id"   : ptile['index'],
       "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
+      "sub_tgt_id"  : 0,
       "name"        : "",
       "action_type" : ACTION_PARADROP
     };
@@ -1579,7 +1579,7 @@ function do_map_click(ptile, qtype, first_time_called)
         "actor_id"    : punit['id'],
         "target_id"   : pcity['id'],
         "extra_id"    : EXTRA_NONE,
-        "value"       : 0,
+        "sub_tgt_id"  : 0,
         "name"        : "",
         "action_type" : ACTION_AIRLIFT
       };
@@ -2438,7 +2438,7 @@ function key_unit_upgrade()
       "actor_id"    : punit['id'],
       "target_id"   : target_id,
       "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
+      "sub_tgt_id"  : 0,
       "name"        : "",
       "action_type" : ACTION_UPGRADE_UNIT
     };
@@ -2565,7 +2565,7 @@ function key_unit_homecity()
                     "actor_id" : punit['id'],
                     "target_id": pcity['id'],
                     "extra_id" : EXTRA_NONE,
-                    "value" : 0,
+                    "sub_tgt_id" : 0,
                     "name" : "",
                     "action_type": ACTION_HOME_CITY};
       send_request(JSON.stringify(packet));
@@ -2673,7 +2673,7 @@ function request_unit_cancel_orders(punit)
       vigilant: false,
       dest_tile: punit.tile
     };
-    packet.orders = packet.dir = packet.activity = packet.target
+    packet.orders = packet.dir = packet.activity = packet.sub_target
                   = packet.extra = packet.action = [];
     send_request(JSON.stringify(packet));
   }
@@ -2736,7 +2736,7 @@ function request_unit_build_city()
             "actor_id"    : punit['id'],
             "target_id"   : target_city['id'],
             "extra_id"    : EXTRA_NONE,
-            "value"       : 0,
+            "sub_tgt_id"  : 0,
             "name"        : "",
             "action_type" : ACTION_JOIN_CITY };
         }
@@ -2778,7 +2778,7 @@ function(){
       "target_id"   : (target_city == null ? punit['id']
                                            : target_city['id']),
       "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
+      "sub_tgt_id"  : 0,
       "name"        : "",
       "action_type" : (target_city == null ? ACTION_DISBAND_UNIT
                                            : ACTION_RECYCLE_UNIT)
@@ -2824,7 +2824,7 @@ function key_unit_move(dir)
       "orders"   : [ORDER_ACTION_MOVE],
       "dir"      : [dir],
       "activity" : [ACTIVITY_LAST],
-      "target"   : [0],
+      "sub_target": [0],
       "extra"    : [EXTRA_NONE],
       "action"   : [ACTION_COUNT],
       "dest_tile": newtile['index']

@@ -94,7 +94,7 @@ function can_actor_unit_move(actor_unit, target_tile)
 }
 
 /**************************************************************************
-  Encode a building ID for transfer in the value field of
+  Encode a building ID for transfer in the sub_tgt_id field of
   packet_unit_do_action for targeted sabotage city.
 **************************************************************************/
 function encode_building_id(building_id)
@@ -226,7 +226,7 @@ function act_sel_click_function(parent_id,
         "actor_id"    : actor_unit_id,
         "target_id"   : tgt_id,
         "extra_id"    : sub_tgt_id,
-        "value"       : 0,
+        "sub_tgt_id"  : 0,
         "name"        : "",
         "action_type" : action_id
       };
@@ -241,7 +241,7 @@ function act_sel_click_function(parent_id,
         "actor_id"    : actor_unit_id,
         "target_id"   : tgt_id,
         "extra_id"    : EXTRA_NONE,
-        "value"       : 0,
+        "sub_tgt_id"  : 0,
         "name"        : "",
         "action_type" : action_id
       };
@@ -387,7 +387,7 @@ function popup_action_selection(actor_unit, action_probabilities,
             "orders"    : [ORDER_MOVE],
             "dir"       : [dir],
             "activity"  : [ACTIVITY_LAST],
-            "target"    : [0],
+            "sub_target": [0],
             "extra"     : [EXTRA_NONE],
             "action"    : [ACTION_COUNT],
             "dest_tile" : target_tile['index']
@@ -446,7 +446,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                               "actor_id"    : actor_unit['id'],
                               "target_id"   : target_tile['index'],
                               "extra_id"    : EXTRA_NONE,
-                              "value"       : 0,
+                              "sub_tgt_id"  : 0,
                               "name"        : "",
                               "action_type" : ACTION_ATTACK
                             };
@@ -462,7 +462,7 @@ function popup_action_selection(actor_unit, action_probabilities,
               "actor_id"    : actor_unit['id'],
               "target_id"   : target_tile['index'],
               "extra_id"    : EXTRA_NONE,
-              "value"       : 0,
+              "sub_tgt_id"  : 0,
               "name"        : "",
               "action_type" : ACTION_ATTACK
             };
@@ -530,7 +530,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost, act_id)
                     "actor_id" : actor_unit['id'],
                     "target_id": target_unit['id'],
                     "extra_id" : EXTRA_NONE,
-                    "value" : 0,
+                    "sub_tgt_id" : 0,
                     "name" : "",
                     "action_type": act_id};
       send_request(JSON.stringify(packet));
@@ -594,7 +594,7 @@ function popup_incite_dialog(actor_unit, target_city, cost, act_id)
                                                "actor_id" : actor_unit['id'],
                                                "target_id": target_city['id'],
                                                "extra_id" : EXTRA_NONE,
-                                               "value" : 0,
+                                               "sub_tgt_id" : 0,
                                                "name" : "",
                                                "action_type": act_id};
                                  send_request(JSON.stringify(packet));
@@ -652,7 +652,7 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
                                     "actor_id" : actor_unit['id'],
                                     "target_id": target_city['id'],
                                     "extra_id" : EXTRA_NONE,
-                                    "value" : 0,
+                                    "sub_tgt_id" : 0,
                                     "name" : "",
                                     "action_type": act_id
                                   };
@@ -691,7 +691,7 @@ function create_steal_tech_button(parent_id, tech,
         "actor_id" : actor_unit_id,
         "target_id": target_city_id,
         "extra_id" : EXTRA_NONE,
-        "value" : tech['id'],
+        "sub_tgt_id" : tech['id'],
         "name" : "",
         "action_type": action_id};
 
@@ -768,7 +768,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                        "actor_id" : actor_unit['id'],
                        "target_id": target_city['id'],
                        "extra_id" : EXTRA_NONE,
-                       "value" : 0,
+                       "sub_tgt_id" : 0,
                        "name" : "",
                        "action_type": untargeted_action_id};
                      send_request(JSON.stringify(packet));
@@ -813,7 +813,7 @@ function create_sabotage_impr_button(improvement, parent_id,
         "actor_id"     : actor_unit_id,
         "target_id"    : target_city_id,
         "extra_id"     : EXTRA_NONE,
-        "value"        : encode_building_id(improvement['id']),
+        "sub_tgt_id"   : encode_building_id(improvement['id']),
         "name"         : "",
         "action_type"  : act_id
       };

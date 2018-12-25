@@ -18,10 +18,7 @@
 
 ***********************************************************************'''
 
-from threading import Thread
-from tornado import web, websocket, ioloop, httpserver
-from tornado.ioloop import IOLoop
-import re
+from tornado import web, ioloop, httpserver
 import time
 
 STATUS_PORT = 3999
@@ -64,7 +61,7 @@ class MapHandler(web.RequestHandler):
 
     # validate users_map_string.
     if (len(users_map_string) > 1000000 or (map_xsize * map_ysize > 18000)):
-      self.set_status(504)
+      self.set_status(400)
       return;
 
     for c in users_map_string:
@@ -73,7 +70,7 @@ class MapHandler(web.RequestHandler):
          or c=='"' or c=='=' or c=="0" or c=="1" or c=="2" or c=="3" \
          or c=="4" or c=="5" or c=="6" or c=="7" or c=="8" or c=="9"): 
         print("error:" + c);
-        self.set_status(503)
+        self.set_status(400)
         return;
 
     user_new_savegame = savetemplate.replace("{xsize}", str(map_xsize)).replace("{ysize}", str(map_ysize)) + users_map_string;

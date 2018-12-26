@@ -19,6 +19,7 @@
 ***********************************************************************'''
 
 from tornado import web, ioloop, httpserver
+import io
 import time
 
 STATUS_PORT = 3999
@@ -55,23 +56,56 @@ class MapHandler(web.RequestHandler):
     self.set_header("Content-Type", "text/plain")
     client_request = self.request.body.decode("utf-8");
     msg_part = client_request.split(";");
+    if len(msg_part) != 3:
+      self.set_status(400, "Wrong number of parameters: " + str(len(msg_part)))
+      return
+
     users_map_string = msg_part[0];
-    map_xsize = int(msg_part[1]);
-    map_ysize = int(msg_part[2]);
+    try:
+      map_xsize = int(msg_part[1]);
+      map_ysize = int(msg_part[2]);
+    except ValueError:
+      self.set_status(400, "Incorrect map size ["
+                           + msg_part[1][:10] + ", "
+                           + msg_part[2][:10] + "]")
+      return
 
     # validate users_map_string.
-    if (len(users_map_string) > 1000000 or (map_xsize * map_ysize > 18000)):
-      self.set_status(400)
-      return;
+    if (len(users_map_string) > 1000000 or (map_xsize * map_ysize > 18000)
+        or map_xsize < 10 or map_ysize < 10):
+      self.set_status(400, "Incorrect map size ["
+                           + msg_part[1][:10] + ", "
+                           + msg_part[2][:10] + ", "
+                           + str(len(users_map_string)) + "]")
+      return
 
-    for c in users_map_string:
-      if not (c=='a' or c=='g' or c=='t' or c=='d' or c=='f' or c=='p' \
-         or c=='m' or c=='h' or c==':' or c==' ' or c=='\n' \
-         or c=='"' or c=='=' or c=="0" or c=="1" or c=="2" or c=="3" \
-         or c=="4" or c=="5" or c=="6" or c=="7" or c=="8" or c=="9"): 
-        print("error:" + c);
-        self.set_status(400)
-        return;
+    line_n = 0
+    for line in io.StringIO(users_map_string):
+      if len(line) != map_xsize + 9:
+        self.set_status(400, "Incorrect row length: "
+                             + str(line_n) + ", "
+                             + str(len(line)) + ", "
+                             + str(map_xsize))
+        return
+      if ((not line.startswith('t' + ('0000'+str(line_n))[-4:] + '="'))
+          or (not line.endswith('"\n'))):
+        self.set_status(400, "Incorrect row format: "
+                             + str(line_n) + ", "
+                             + line)
+        return
+      for c in line[7:-2]:
+        if c not in "i+ :adfghjmpst":
+          self.set_status(400, "Incorrect terrain: "
+                               + str(line_n) + ", "
+                               + bytes(c, "utf-8").hex())
+          return
+      line_n += 1
+
+    if line_n != map_ysize:
+      self.set_status(400, "Incorrect number of rows: "
+                           + str(line_n) + ", "
+                           + str(map_ysize))
+      return
 
     user_new_savegame = savetemplate.replace("{xsize}", str(map_xsize)).replace("{ysize}", str(map_ysize)) + users_map_string;
 

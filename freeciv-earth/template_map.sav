@@ -94,14 +94,14 @@ vars=$$
 
 [settings]
 set={"name","value","gamestart"
-"aifill",32,32
+"aifill",8,8
 "alltemperate",FALSE,FALSE
 "flatpoles",100,100
 "generator","SCENARIO","SCENARIO"
 "landmass",30,30
 "mapseed",0,0
 "mapsize","XYSIZE","XYSIZE"
-"maxplayers",91,91
+"maxplayers",32,32
 "metamessage","Scenario: Earth(Large)",""
 "naturalcitynames",FALSE,FALSE
 "revolentype","RANDOM","RANDOM"

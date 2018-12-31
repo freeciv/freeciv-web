@@ -101,16 +101,22 @@ public class TokenSignin extends HttpServlet {
                 ResultSet rs1 = ps1.executeQuery();
                 if (!rs1.next()) {
                     // if username or subject not found, then a new user.
-                    String query = "INSERT INTO google_auth (username, subject, email, activated, ip) "
-                            + "VALUES (?, ?, ?, ?, ?)";
-                    PreparedStatement preparedStatement = conn.prepareStatement(query);
-                    preparedStatement.setString(1, username.toLowerCase());
-                    preparedStatement.setString(2, userId);
-                    preparedStatement.setString(3, email);
-                    preparedStatement.setInt(4, 1);
-                    preparedStatement.setString(5, ipAddress);
-                    preparedStatement.executeUpdate();
-                    response.getOutputStream().print(userId);
+                    if ("proxy".equals(ipAddress)) {
+                        // X-Real-IP == "proxy" when called just for validation
+                        response.getOutputStream().print("Failed");
+                    } else {
+                        String query = "INSERT INTO google_auth "
+                                     + "(username, subject, email, activated, ip) "
+                                     + "VALUES (?, ?, ?, ?, ?)";
+                        PreparedStatement preparedStatement = conn.prepareStatement(query);
+                        preparedStatement.setString(1, username.toLowerCase());
+                        preparedStatement.setString(2, userId);
+                        preparedStatement.setString(3, email);
+                        preparedStatement.setInt(4, 1);
+                        preparedStatement.setString(5, ipAddress);
+                        preparedStatement.executeUpdate();
+                        response.getOutputStream().print("OK");
+                    }
                 } else {
                     String dbSubject = rs1.getString(1);
                     int dbActivated = rs1.getInt(2);
@@ -118,14 +124,16 @@ public class TokenSignin extends HttpServlet {
 
                     if (dbSubject != null && dbSubject.equalsIgnoreCase(userId) && dbActivated == 1 && username.equalsIgnoreCase(Username)) {
                         // if username and userId matches, then login OK!
-                        response.getOutputStream().print(userId);
+                        response.getOutputStream().print("OK");
 
-                        String query = "UPDATE google_auth SET ip = ? WHERE LOWER(username) = ?";
-                        PreparedStatement preparedStatement = conn.prepareStatement(query);
-                        preparedStatement.setString(1, ipAddress);
-                        preparedStatement.setString(2, username.toLowerCase());
-                        preparedStatement.executeUpdate();
-
+                        if (!"proxy".equals(ipAddress)) {
+                            // X-Real-IP == "proxy" when called just for validation
+                            String query = "UPDATE google_auth SET ip = ? WHERE LOWER(username) = ?";
+                            PreparedStatement preparedStatement = conn.prepareStatement(query);
+                            preparedStatement.setString(1, ipAddress);
+                            preparedStatement.setString(2, username.toLowerCase());
+                            preparedStatement.executeUpdate();
+                        }
 
                     } else {
                         // if username and userId doesn't match, then login not OK!

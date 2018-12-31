@@ -28,7 +28,7 @@ var logged_in_with_password = false;
 var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
 var password_reset_count = 0;
-var google_user_subject = null;
+var google_user_token = null;
 
 /****************************************************************************
   ...
@@ -1172,7 +1172,7 @@ function show_intro_dialog(title, message) {
 **************************************************************************/
 function show_longturn_intro_dialog() {
 
-  var title = "Welcome to Freeciv-web: One Turn per Day!"
+  var title = "Welcome to Freeciv-web: One Turn per Day!";
 
   var message = "<br>This is a Freeciv-web: One Turn per Day game, which is a Freeciv multiplayer game "+
         "where the turns are 23 hours each, so players logs in once every day to do their turn. This format allows for more players to "+
@@ -1239,7 +1239,7 @@ function show_longturn_intro_dialog() {
 
   blur_input_on_touchdevice();
 
-
+  google_user_token = null;
  gapi.signin2.render('fc-signin2', {
         'scope': 'profile email',
         'width': 240,
@@ -1561,7 +1561,7 @@ function handle_customized_nation(player_id)
     var reader = new FileReader();
     reader.onload = function(e) {
       handle_new_flag(reader.result, player_id);
-    }
+    };
     reader.readAsDataURL(file);
   } else {
     $.unblockUI();
@@ -1701,14 +1701,14 @@ function google_signin_on_success(googleUser)
   xhr.open('POST', '/token_signin');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
-    if (xhr.responseText == "Failed" || xhr.responseText == null || xhr.responseText.length < 5) {
-      swal("Login failed.");
+    if (xhr.responseText == "OK") {
+      google_user_token = id_token;
+      simpleStorage.set("username", username);
+      $("#dialog").dialog('close');
     } else if (xhr.responseText == "Email not verified") {
       swal("Login failed. E-mail not verified.");
     } else {
-      google_user_subject = xhr.responseText;
-      simpleStorage.set("username", username);
-      $("#dialog").dialog('close');
+      swal("Login failed.");
     }
   };
   xhr.send('idtoken=' + id_token + "&username=" + username);

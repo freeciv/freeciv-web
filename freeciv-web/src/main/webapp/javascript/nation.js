@@ -167,7 +167,7 @@ function update_nation_screen()
 
     for (var player_id in players) {
       var pplayer = players[player_id];
-      if (online_players[pplayer['name'].toLowerCase()]) {
+      if (online_players[pplayer['username'].toLowerCase()]) {
         $("#player_state_" + player_id).html("<span style='color: #00EE00;'><b>Online</b></span>");
       }
     }

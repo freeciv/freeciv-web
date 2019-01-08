@@ -23,6 +23,8 @@ var unit_classes = {};  /* packet_ruleset_unit_class */
 
 var U_NOT_OBSOLETED = null;
 
+var U_LAST = MAX_NUM_UNITS;
+
 var UCF_TERRAIN_SPEED = 0;
 var UCF_TERRAIN_DEFENSE = 1;
 var UCF_DAMAGE_SLOWS = 2;

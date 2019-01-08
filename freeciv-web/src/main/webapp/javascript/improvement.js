@@ -23,7 +23,7 @@
 const B_AIRPORT_NAME = 'Airport';
 const B_PALACE_NAME = 'Palace';
 
-var B_LAST = MAX_NUM_ITEMS;
+var B_LAST = MAX_NUM_BUILDINGS;
 
 const improvements = {};
 /** @private */

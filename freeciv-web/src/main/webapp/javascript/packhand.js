@@ -638,6 +638,20 @@ function handle_connect_msg(packet)
   add_chatbox_text(packet);
 }
 
+/* done */
+function handle_server_info(packet)
+{
+
+  if (packet['emerg_version'] > 0) {
+    console.log('Server has version %d.%d.%d.%d%s',
+      packet.major_version, packet.minor_version, packet.patch_version,
+      packet.emerg_version, packet.version_label);
+  } else {
+    console.log("Server has version %d.%d.%d%s",
+      packet.major_version, packet.minor_version, packet.patch_version,
+      packet.version_label);
+  }
+}
 
 /* done */
 function handle_city_name_suggestion_info(packet)

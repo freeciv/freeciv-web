@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Use systemd to start the services Freeciv-web depends on.
 # Need to start the dependency services in a different way to work with

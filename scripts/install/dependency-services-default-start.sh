@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Start Freeciv-web's dependency services.
 #
@@ -21,7 +21,6 @@ then
   echo "nginx already running!"
   sudo nginx -s reload
 else
-  echo "Please enter root password:"
   sudo service nginx start && \
   echo "nginx started!" && \
   sleep 1

@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 # Startup script for running all processes of Freeciv-web
 
-SCRIPT_DIR="$(dirname "$0")"
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+cd ${SCRIPT_DIR}
+
 export FREECIV_WEB_DIR="${SCRIPT_DIR}/.."
 export FREECIV_DATA_PATH="${HOME}/freeciv/share/freeciv/"
 export LC_ALL=en_US.UTF-8

@@ -4,15 +4,15 @@ cmdlevel ctrl first
 rulesetdir longturn-web-x 
 set topology WRAPX
 set nationset all
-set compresstype xs
+set compresstype xz
 set maxplayers 300
 set startunits=cccwwwxx
 set aifill 300
 set allowtake=""
-set autotoggle false
+set autotoggle disabled
 set timeout 82800
 set unitwaittime=36000
-set netwait 150
+set netwait 20
 set nettimeout 120
 set pingtime 30
 set pingtimeout 240

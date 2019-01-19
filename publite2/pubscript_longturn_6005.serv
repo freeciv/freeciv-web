@@ -4,15 +4,15 @@ cmdlevel ctrl first
 rulesetdir multiplayer 
 set topology WRAPX
 set nationset all
-set compresstype xs
+set compresstype xz
 set maxplayers 300
 set startunits=cwx
 set aifill 300
 set allowtake=""
-set autotoggle false
+set autotoggle disabled
 set timeout 82800
 set unitwaittime=3600
-set netwait 150
+set netwait 20
 set nettimeout 120
 set pingtime 30
 set pingtimeout 240
@@ -31,7 +31,7 @@ set steepness 0
 set specials 1000
 set temperature 50
 set wetness 90
-set generator FRACT
+set generator FRACTAL
 set huts 0
 set gold 400
 

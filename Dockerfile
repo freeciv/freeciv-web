@@ -21,12 +21,24 @@ ADD tests /docker/tests
 ADD music /docker/music
 ADD blender /docker/blender
 ADD nginx /docker/nginx
+ADD config /docker/config
 
 ## Install relevant packages
 
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y upgrade && apt-get install -y sudo lsb-release
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y upgrade && apt-get install -y \
+    sudo \
+    lsb-release \
+    locales
 
 EXPOSE 80 8080 4002 6000 6001 6002 7000 7001 7002
+
+## Fix locate issues
+
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8 
 
 ## Create user and ensure no passwd questions during scripts
 

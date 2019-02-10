@@ -7,28 +7,46 @@ if [ "$#" -ne 6 ]; then
   exit 1
 fi
 
+declare -a args
+
+addArgs() {
+  local i=${#args[*]}
+  for v in "$@"; do
+    args[i]=${v}
+    let i++
+  done
+}
+
 echo "init-freeciv-web.sh port ${2}"
 
-if [ $5 = "pbem" ]; then
-   pbemcmd="--Ranklog /var/lib/tomcat8/webapps/data/ranklogs/rank_${2}.log "
+addArgs --debug 1
+addArgs --port "${2}"
+addArgs --Announce none
+addArgs --exit-on-end
+addArgs --meta --keep --Metaserver "http://${4}"
+addArgs --type "${5}"
+addArgs --read "pubscript_${6}.serv"
+addArgs --log "../logs/freeciv-web-log-${2}.log"
+
+if [ "$5" = "pbem" ]; then
+  addArgs --Ranklog "/var/lib/tomcat8/webapps/data/ranklogs/rank_${2}.log"
 fi
 
 savesdir=${1}
-quitidle=" -q 20"
-if [[ $6 == *"longturn"* ]]; then
-  quitidle=" "
+if [ "$5" = "longturn" ]; then
   savesdir="${savesdir}/lt/${6}"
   mkdir -p "${savesdir}"
+else
+  addArgs --quitidle 20
 fi
+addArgs --saves "${savesdir}"
 
 export FREECIV_SAVE_PATH=${savesdir};
-rm -f /var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log; 
+rm -f "/var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log"
 
-python3 ../freeciv-proxy/freeciv-proxy.py ${3} > ../logs/freeciv-proxy-${3}.log 2>&1 &
+python3 ../freeciv-proxy/freeciv-proxy.py "${3}" > "../logs/freeciv-proxy-${3}.log" 2>&1 &
 proxy_pid=$! && 
-${HOME}/freeciv/bin/freeciv-web --debug=1 --port ${2} --keep ${quitidle} --Announce none -e  -m \
--M http://${4} --type ${5} --read pubscript_${6}.serv --log ../logs/freeciv-web-log-${2}.log \
---saves "${savesdir}" ${pbemcmd:- } > /dev/null 2> ../logs/freeciv-web-stderr-${2}.log;
+${HOME}/freeciv/bin/freeciv-web "${args[@]}" > /dev/null 2> "../logs/freeciv-web-stderr-${2}.log"
 
 rc=$?; 
 kill -9 $proxy_pid; 

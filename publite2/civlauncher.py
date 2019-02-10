@@ -25,13 +25,13 @@ class Civlauncher(Thread):
             try:
                 print("Start freeciv-web on port " + str(self.new_port) + 
                       " and freeciv-proxy on port " + str(1000 + self.new_port) + ".");
-                retcode = call("../publite2/init-freeciv-web.sh " 
-                               + self.savesdir + " " 
-                               + str(self.new_port) + " " 
-                               + str(1000 + self.new_port) + " " 
-                               + self.metahostpath + " "
-                               + self.gametype + " "
-                               + self.scripttype, shell=True)
+                retcode = call(["../publite2/init-freeciv-web.sh"
+                               , self.savesdir
+                               , str(self.new_port)
+                               , str(1000 + self.new_port)
+                               , self.metahostpath
+                               , self.gametype
+                               , self.scripttype])
                 self.num_start += 1;
                 if retcode > 0:
                     print("Freeciv-web port " + str(self.new_port) + " was terminated by signal " + str(retcode))

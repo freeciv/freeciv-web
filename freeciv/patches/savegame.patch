@@ -40,10 +40,9 @@ index afbf376..db62262 100644
    timer_cpu = timer_new(TIMER_CPU, TIMER_ACTIVE);
    timer_start(timer_cpu);
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE);
-diff --git a/server/stdinhand.c b/server/stdinhand.c
-index 4762171..4b0eb15 100644
---- a/server/stdinhand.c
-+++ b/server/stdinhand.c
+diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
+--- freeciv/server/stdinhand.c.orig	2019-02-12 21:23:47.907762931 +0100
++++ freeciv/server/stdinhand.c	2019-02-12 22:04:18.526114928 +0100
 @@ -19,6 +19,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -52,7 +51,7 @@ index 4762171..4b0eb15 100644
  
  #ifdef FREECIV_HAVE_LIBREADLINE
  #include <readline/readline.h>
-@@ -654,11 +655,6 @@ Save the game, with filename=arg, provided server state is ok.
+@@ -656,11 +657,6 @@ static bool show_serverid(struct connect
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -64,24 +63,29 @@ index 4762171..4b0eb15 100644
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3641,10 +3637,15 @@ bool load_command(struct connection *caller, const char *filename, bool check,
+@@ -3652,10 +3648,20 @@ bool load_command(struct connection *cal
    }
  
    {
-+    char websave[300], pbem[300];
-+    fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username); fc_snprintf(pbem, sizeof(pbem), "%s/pbem", srvarg.saves_pathname);
-+    struct strvec *webdirs = strvec_new(); strvec_append(webdirs, websave);
-+    struct strvec *pbemdirs = strvec_new(); strvec_append(pbemdirs, pbem);
++    char websave[300];
++    struct strvec *webdirs = strvec_new();
++
++    if (caller != NULL) {
++      fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username);
++      strvec_append(webdirs, websave);
++    }
++    fc_snprintf(websave, sizeof(websave), "%s/pbem", srvarg.saves_pathname);
++    strvec_append(webdirs, websave);
 +
      /* it is a normal savegame or maybe a scenario */
      char testfile[MAX_LEN_PATH];
      const struct strvec *pathes[] = {
 -      get_save_dirs(), get_scenario_dirs(), NULL
-+      get_save_dirs(), get_scenario_dirs(), webdirs, pbemdirs, NULL
++      get_save_dirs(), get_scenario_dirs(), webdirs, NULL
      };
      const char *exts[] = {
        "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", NULL
-@@ -4191,6 +4192,31 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
+@@ -4205,6 +4211,31 @@ static bool handle_stdin_input_real(stru
  
    level = command_level(command_by_number(cmd));
  

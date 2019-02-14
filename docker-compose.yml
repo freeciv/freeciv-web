@@ -1,0 +1,19 @@
+version: "3"
+services:
+
+  freeciv-web:
+    image: freeciv/freeciv-web
+    build: .
+    container_name: freeciv-web
+    command: ["sleep", "infinity"]
+    ports:
+      - "80"
+      - "4002"
+      - "6000"
+      - "6001"
+      - "6002"
+      - "7000"
+      - "7001"
+      - "7002"
+      - "8888:8080"
+    user: docker

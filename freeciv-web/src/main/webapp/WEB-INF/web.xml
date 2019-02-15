@@ -5,6 +5,21 @@
 
 	<display-name>Freeciv-web Client</display-name>
 
+	<filter>
+		<filter-name>setCharacterEncodingFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<async-supported>true</async-supported>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>setCharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<resource-ref>
 		<description>MySQL DB Connection</description>
 		<res-ref-name>jdbc/freeciv_mysql</res-ref-name>

@@ -1,9 +1,10 @@
-diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2018-03-05 16:43:39.460226279 +0200
-+++ freeciv/common/networking/packets.def	2018-03-05 16:44:07.640050958 +0200
-@@ -2251,3 +2251,17 @@
-   TURN granary_turns;
-   UINT16 buy_gold_cost;
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index c3dc412815..da94aa631c 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -2305,3 +2305,17 @@ PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend
+ 
+   BV_ACTIONS utype_actions;
  end
 +
 +# used for showing GOTO path in web client.
@@ -19,9 +20,10 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  TILE dest;
 +  UINT32 turns;
 +end
-diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2018-03-05 16:43:39.848223865 +0200
-+++ freeciv/server/unithand.c	2018-03-05 16:45:54.663385336 +0200
+diff --git a/server/unithand.c b/server/unithand.c
+index 15f63dd55c..d8b7168da6 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
 @@ -70,6 +70,8 @@
  /* server/scripting */
  #include "script_server.h"
@@ -31,10 +33,11 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
  #include "unithand.h"
  
  /* An explanation why an action isn't enabled. */
-@@ -2882,6 +2884,107 @@
+@@ -3040,6 +3042,88 @@ static bool city_build(struct player *pplayer, struct unit *punit,
+   return TRUE;
  }
  
- /**********************************************************************//**
++/**********************************************************************//**
 +  This function handles GOTO path requests from the client.
 +**************************************************************************/
 +void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
@@ -93,25 +96,6 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +
 +    old_tile = path->positions[0].tile;
 +
-+    /* Remove city spot reservations for AI settlers on city founding
-+     * mission, before goto_tile reset. */
-+    if (punit->server.adv->task != AUT_NONE) {
-+      adv_unit_new_task(punit, AUT_NONE, NULL);
-+    }
-+
-+    punit->ai_controlled = FALSE;
-+    punit->goto_tile = NULL;
-+
-+    free_unit_orders(punit);
-+    /* If we waited on a tile, reset punit->done_moving */
-+    punit->done_moving = (punit->moves_left <= 0);
-+    punit->has_orders = TRUE;
-+    punit->orders.length = path->length - 1;
-+    punit->orders.index = 0;
-+    punit->orders.repeat = FALSE;
-+    punit->orders.vigilant = FALSE;
-+    punit->orders.list
-+      = fc_malloc(path->length * sizeof(*(punit->orders.list)));
 +    for (i = 0; i < path->length - 1; i++) {
 +      struct tile *new_tile = path->positions[i + 1].tile;
 +      int dir;
@@ -135,7 +119,6 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +  }
 +}
 +
-+/**********************************************************************//**
+ /**********************************************************************//**
    Handle change in unit activity.
  **************************************************************************/
- static void handle_unit_change_activity_real(struct player *pplayer,

@@ -6,14 +6,15 @@ services:
     build: .
     container_name: freeciv-web
     command: ["sleep", "infinity"]
+    volumes:
+      - "data:/var/lib/tomcat8/webapps/data"
     ports:
       - "80"
       - "4002"
-      - "6000"
-      - "6001"
-      - "6002"
-      - "7000"
-      - "7001"
-      - "7002"
+      - "6000-6009:6000-6009"
+      - "7000-7009:7000-7009"
       - "8888:8080"
     user: docker
+
+volumes:
+  data:

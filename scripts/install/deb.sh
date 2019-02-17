@@ -13,7 +13,45 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-dependencies="nginx maven mysql-server openjdk-8-jdk-headless acl procps curl sed tar unzip git gnupg libcurl4-openssl-dev libjansson-dev pngcrush python3-pil python3-dev python3-setuptools python3-wheel libtool patch make automake autoconf autotools-dev python3-minimal libbz2-dev imagemagick python3-pip liblzma-dev libicu-dev pkg-config zlib1g-dev libsqlite3-dev webp libmagickcore.*extra libmagickwand-dev"
+dependencies="\
+  acl \
+  autoconf \
+  automake \
+  autotools-dev \
+  curl \
+  git \
+  gnupg \
+  imagemagick \
+  libbz2-dev \
+  libcurl4-openssl-dev \
+  libicu-dev \
+  libjansson-dev \
+  liblzma-dev \
+  libmagickcore.*extra \
+  libmagickwand-dev \
+  libsqlite3-dev \
+  libtool \
+  make \
+  maven \
+  mysql-server \
+  nginx \
+  openjdk-8-jdk-headless \
+  patch \
+  pkg-config \
+  pngcrush \
+  procps \
+  python3-dev \
+  python3-minimal \
+  python3-pil \
+  python3-pip \
+  python3-setuptools \
+  python3-wheel \
+  sed \
+  tar \
+  unzip \
+  webp \
+  zlib1g-dev \
+"
 
 export DEBIAN_FRONTEND=noninteractive
 INSTALLED_TOMCAT=N

@@ -159,7 +159,7 @@ class WSHandler(websocket.WebSocketHandler):
             return "password"
 
     def check_user_password(self, cursor, username, password):
-        query = ("select secure_hashed_password, ENCRYPT(%(pwd)s, secure_hashed_password), activated from auth where lower(username)=lower(%(usr)s)")
+        query = ("select secure_hashed_password, CAST(ENCRYPT(%(pwd)s, secure_hashed_password) AS CHAR), activated from auth where lower(username)=lower(%(usr)s)")
         cursor.execute(query, {'usr': username, 'pwd': password})
         result = cursor.fetchall()
 
@@ -169,7 +169,7 @@ class WSHandler(websocket.WebSocketHandler):
 
         for db_pass, encrypted_pass, active in result:
             if (active == 0): return False
-            if db_pass == encrypted_pass.decode(): return True
+            if db_pass == encrypted_pass: return True
 
         return False
 

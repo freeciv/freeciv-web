@@ -1,0 +1,3 @@
+Pillow
+wikipedia
+requests2

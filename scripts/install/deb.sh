@@ -60,7 +60,7 @@ done
 
 echo "==== Installing Updates and Dependencies ===="
 echo "apt-get upgrade"
-sudo ${APT_GET} upgrade
+sudo ${APT_GET} upgrade --with-new-pkgs
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASSWORD}"

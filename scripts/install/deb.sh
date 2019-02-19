@@ -40,9 +40,7 @@ dependencies="\
   pkg-config \
   pngcrush \
   procps \
-  python3-dev \
   python3-minimal \
-  python3-pil \
   python3-pip \
   python3-setuptools \
   python3-wheel \
@@ -55,7 +53,6 @@ dependencies="\
 
 export DEBIAN_FRONTEND=noninteractive
 INSTALLED_TOMCAT=N
-INSTALLED_MYSQLPYCON=N
 APT_GET='apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
@@ -82,20 +79,6 @@ if [ "${FCW_INSTALL_MODE}" = TEST ]; then
   dependencies="${dependencies} xvfb"
 fi
 
-apt-cache policy python3-mysql.connector | while IFS= read -r line; do
-  if [ "${line::13}" = "  Candidate: " ]; then
-    IFS=. v=(${line#  Candidate: })
-    if [ ${v[0]} -lt 2 ]; then
-      INSTALLED_MYSQLPYCON=N
-    elif [ ${v[0]} -eq 2 ] && [ ${v[1]} -lt 1 ]; then
-      INSTALLED_MYSQLPYCON=N
-    else
-      dependencies="${dependencies} python3-mysql.connector"
-      INSTALLED_MYSQLPYCON=Y
-    fi
-  fi
-done
-
 echo "==== Installing Updates and Dependencies ===="
 echo "apt-get upgrade"
 sudo ${APT_GET} upgrade --with-new-pkgs
@@ -114,17 +97,7 @@ if [ "${INSTALLED_TOMCAT}" = N ]; then
   ext_install_tomcat8
 fi
 
-if [ "${INSTALLED_MYSQLPYCON}" = N ]; then
-  ext_install_mysql_connector_python
-fi
-
-ext_install_tornado
-
 TMPINSTDIR=$(mktemp -d)
-
-echo "==== Installing Wikipedia helper ===="
-cd "${TMPINSTDIR}"
-sudo -H pip3 install wikipedia
 
 echo "==== Installing Node.js ===="
 cd "${TMPINSTDIR}"

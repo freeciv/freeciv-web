@@ -159,14 +159,27 @@ function get_diplstate_text(state_id)
 **************************************************************************/
 function get_embassy_text(player_id)
 {
-  if (client_is_observer() || client.conn.playing == null) return "-";
-  var pplayer = players[player_id];
+  const NO_INFO = "-";
 
-  if (player_id == client.conn.playing['playerno']) {
-    return "-";
-  } else if (client.conn.playing.real_embassy[player_id]) {
+  if (player_id == null) return NO_INFO;
+
+  const me = client.conn.playing;
+  if (me == null || client_is_observer()) return NO_INFO;
+
+  const my_id = me.playerno;
+  if (player_id == my_id) return NO_INFO;
+
+  const them = players[player_id];
+  if (them == null) return NO_INFO;
+
+  const embassy_with = me.real_embassy[player_id];
+  const embassy_from = them.real_embassy[my_id];
+
+  if (embassy_with && embassy_from) {
+    return "Both";
+  } else if (embassy_with) {
     return "We have embassy";
-  } else if (pplayer.real_embassy[client.conn.playing['playerno']]) {
+  } else if (embassy_from) {
     return "They have embassy";
   } else {
     return "None"

@@ -25,7 +25,6 @@ from os import chdir
 import re
 import sys
 from tornado import web, websocket, ioloop, httpserver
-from tornado.ioloop import IOLoop
 from debugging import *
 import logging
 from civcom import *
@@ -71,7 +70,7 @@ class StatusHandler(web.RequestHandler):
 
 class WSHandler(websocket.WebSocketHandler):
     logger = logging.getLogger("freeciv-proxy")
-    io_loop = IOLoop.instance()
+    io_loop = ioloop.IOLoop.current()
 
     def open(self):
         self.id = str(uuid.uuid4())
@@ -232,7 +231,7 @@ if __name__ == "__main__":
 
         http_server = httpserver.HTTPServer(application)
         http_server.listen(PROXY_PORT)
-        ioloop.IOLoop.instance().start()
+        ioloop.IOLoop.current().start()
 
     except KeyboardInterrupt:
         print('Exiting...')

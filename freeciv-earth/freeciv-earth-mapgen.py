@@ -41,7 +41,7 @@ class MapGen():
 
     http_server = httpserver.HTTPServer(application)
     http_server.listen(STATUS_PORT)
-    ioloop.IOLoop.instance().start()
+    ioloop.IOLoop.current().start()
 
 class MapHandler(web.RequestHandler):
 

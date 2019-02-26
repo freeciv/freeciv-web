@@ -1,6 +1,5 @@
 from threading import Thread
-from tornado import web, websocket, ioloop, httpserver
-from tornado.ioloop import IOLoop
+from tornado import web, ioloop, httpserver
 
 STATUS_PORT = 4002
 
@@ -11,13 +10,14 @@ class PubStatus(Thread):
     self.metachecker = mc
 
   def run(self):
+    io_loop = ioloop.IOLoop()
+    io_loop.make_current()
     application = web.Application([
             (r"/pubstatus", StatusHandler, dict(metachecker=self.metachecker)),
     ])
-
     http_server = httpserver.HTTPServer(application)
     http_server.listen(STATUS_PORT)
-    ioloop.IOLoop.instance().start()
+    io_loop.start()
 
 class StatusHandler(web.RequestHandler):
   def initialize(self, metachecker):

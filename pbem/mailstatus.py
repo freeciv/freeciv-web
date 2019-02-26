@@ -32,6 +32,8 @@ class MailStatus(Thread):
     self.last_invitation = None
 
   def run(self):
+    io_loop = ioloop.IOLoop()
+    io_loop.make_current()
     application = web.Application([
             (r"/mailstatus", StatusHandler, dict(mailchecker=self)),
             (r"/pbemstatus", PbemstatusHandler, dict(mailchecker=self)),
@@ -39,7 +41,7 @@ class MailStatus(Thread):
 
     http_server = httpserver.HTTPServer(application)
     http_server.listen(STATUS_PORT)
-    ioloop.IOLoop.instance().start()
+    io_loop.start()
 
 class StatusHandler(web.RequestHandler):
   def initialize(self, mailchecker):

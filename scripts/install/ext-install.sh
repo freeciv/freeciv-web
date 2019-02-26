@@ -55,23 +55,6 @@ ext_install_tomcat8 () {
   ext_installed[${#ext_installed[@]}]="tomcat8"
 }
 
-ext_install_tornado () {
-  local TMPINSTDIR
-
-  echo "==== Installing Tornado Web Server ===="
-
-  TMPINSTDIR=$(mktemp -d)
-  (
-    cd "${TMPINSTDIR}"
-    curl -LOsS 'https://github.com/tornadoweb/tornado/archive/v4.5.3.tar.gz'
-    tar -xzf v4.5.3.tar.gz
-    cd tornado-4.5.3
-    sudo -H python3 setup.py install
-  )
-  sudo rm -rf "${TMPINSTDIR}"
-  ext_installed[${#ext_installed[@]}]="tornado"
-}
-
 ext_install_casperjs () {
   echo "==== Installing CasperJS for testing ===="
   cd "${basedir}/tests"
@@ -82,19 +65,3 @@ ext_install_casperjs () {
   ext_installed[${#ext_installed[@]}]="casperjs"
 }
 
-ext_install_mysql_connector_python () {
-  local TMPINSTDIR
-
-  echo "==== Installing mysql-connector-python ===="
-
-  TMPINSTDIR=$(mktemp -d)
-  (
-    cd "${TMPINSTDIR}"
-    curl -LOsS 'https://github.com/mysql/mysql-connector-python/archive/2.1.3.zip'
-    unzip -qo 2.1.3.zip
-    cd mysql-connector-python-2.1.3
-    sudo -H python3 setup.py install
-  )
-  sudo rm -rf "${TMPINSTDIR}"
-  ext_installed[${#ext_installed[@]}]="mysql-connector-python"
-}

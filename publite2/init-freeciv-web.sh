@@ -36,6 +36,14 @@ savesdir=${1}
 if [ "$5" = "longturn" ]; then
   savesdir="${savesdir}/lt/${6}"
   mkdir -p "${savesdir}"
+
+  grep -q '^#\s*autoreload\s*$' "pubscript_${6}.serv"
+  if [ $? -eq 0 ]; then
+    lastsave=$(ls -t "${savesdir}" | head -n 1)
+    if [ -n "${lastsave}" ]; then
+      addArgs --file "${lastsave%.*}"
+    fi
+  fi
 else
   addArgs --quitidle 20
 fi

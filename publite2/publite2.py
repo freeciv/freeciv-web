@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python3
 
 '''**********************************************************************
  Publite2 is a process manager which launches multiple Freeciv-web servers.

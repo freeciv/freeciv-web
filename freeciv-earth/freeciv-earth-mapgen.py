@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python3
 
 '''**********************************************************************
     Copyright (C) 2009-2015  The Freeciv-web project
@@ -41,7 +41,7 @@ class MapGen():
 
     http_server = httpserver.HTTPServer(application)
     http_server.listen(STATUS_PORT)
-    ioloop.IOLoop.instance().start()
+    ioloop.IOLoop.current().start()
 
 class MapHandler(web.RequestHandler):
 

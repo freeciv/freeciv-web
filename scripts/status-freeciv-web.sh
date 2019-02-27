@@ -113,6 +113,9 @@ checkWebURL "Tomcat" "http://localhost:8080/" --head
 checkWebURL "freeciv-web on Tomcat" "http://localhost:8080/freeciv-web" --head
 checkWebURL "Tomcat DB connection" "http://localhost/game/list" --head
 
+checkWebURL "Pubstatus" "http://localhost:4002/pubstatus"
+checkWebURL "Mailstatus" "http://localhost:4003/mailstatus"
+
 checkWebURL "freeciv-proxy directly" "http://localhost:7001/status"
 checkWebURL "freeciv-proxy through nginx" "http://localhost/civsocket/7001/status"
 

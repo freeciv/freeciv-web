@@ -256,9 +256,6 @@ function control_init()
   /* prevents keyboard input from changing tabs. */
   $('#tabs>ul>li').off('keydown');
   $('#tabs>div').off('keydown');
-
-  $('#tabs-map').keydown(map_keyboard_listener);
-  $('#map_tab').keydown(map_keyboard_listener);
 }
 
 /****************************************************************************
@@ -1645,6 +1642,28 @@ function do_map_click(ptile, qtype, first_time_called)
   action_tgt_sel_active = false;
 }
 
+
+/**************************************************************************
+ Returns a possibly active dialog.
+ Helper function to know if the map keyhandler may apply.
+**************************************************************************/
+function find_active_dialog()
+{
+  const permanent_widgets = ["game_overview_panel", "game_unit_panel", "game_chatbox_panel"];
+  const dialogs = $(".ui-dialog");
+  for (var i = 0; i < dialogs.length; i++) {
+    const dialog = $(dialogs[i]);
+    if (dialog.css("display") == "none") {
+      continue;
+    }
+    const children = dialog.children();
+    if (children.length >= 2 && permanent_widgets.indexOf(children[1].id) < 0) {
+      return dialog;
+    }
+  }
+  return null;
+}
+
 /**************************************************************************
  Callback to handle keyboard events
 **************************************************************************/
@@ -1658,6 +1677,12 @@ function global_keyboard_listener(ev)
   if (!ev) ev = window.event;
   var keyboard_key = String.fromCharCode(ev.keyCode);
 
+  if (0 === $("#tabs").tabs("option", "active")) {
+    // The Map tab is active
+    if (find_active_dialog() == null) {
+      map_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'], ev['altKey'], ev['shiftKey'], ev);
+    }
+  }
   civclient_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
 
   if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
@@ -1692,24 +1717,6 @@ civclient_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
         send_end_turn();
       }
   }
-}
-
-/**************************************************************************
- Callback to handle map keyboard events
-**************************************************************************/
-function map_keyboard_listener(ev)
-{
-  // Check if focus is in chat field, where these keyboard events are ignored.
-  if ($('input:focus').length > 0 || !keyboard_input) return;
-
-  if (C_S_RUNNING != client_state()) return;
-
-  if (!ev) ev = window.event;
-  var keyboard_key = String.fromCharCode(ev.keyCode);
-
-  map_handle_key(keyboard_key, ev.keyCode, ev['ctrlKey'],  ev['altKey'], ev['shiftKey'], ev);
-
-  if (renderer == RENDERER_2DCANVAS) $("#canvas").contextMenu('hide');
 }
 
 /**************************************************************************

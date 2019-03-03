@@ -265,8 +265,13 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
     case LAYER_SPECIAL1:
       if (ptile != null) {
 
-        var river_sprite = get_tile_river_sprite(ptile);
+        var river_sprite = get_tile_river_like_sprite(ptile, EXTRA_RIVER, "road.river");
         if (river_sprite != null) sprite_array.push(river_sprite);
+
+        if (typeof EXTRA_CANAL !== "undefined") {
+          var canal_sprite = get_tile_river_like_sprite(ptile, EXTRA_CANAL, "road.canal");
+          if (canal_sprite != null) sprite_array.push(canal_sprite);
+        }
 
         var spec_sprite = get_tile_specials_sprite(ptile);
         if (spec_sprite != null) sprite_array.push(spec_sprite);
@@ -1091,26 +1096,26 @@ function get_tile_specials_sprite(ptile)
 /****************************************************************************
  ...
 ****************************************************************************/
-function get_tile_river_sprite(ptile)
+function get_tile_river_like_sprite(ptile, extra, prefix)
 {
   if (ptile == null) {
     return null;
   }
 
-  if (tile_has_extra(ptile, EXTRA_RIVER)) {
+  if (tile_has_extra(ptile, extra)) {
     var river_str = "";
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
       if (checktile
-          && (tile_has_extra(checktile, EXTRA_RIVER) || is_ocean_tile(checktile))) {
+          && (tile_has_extra(checktile, extra) || is_ocean_tile(checktile))) {
         river_str = river_str + dir_get_tileset_name(dir) + "1";
       } else {
         river_str = river_str + dir_get_tileset_name(dir) + "0";
       }
 
     }
-    return {"key" : "road.river_s_" + river_str};
+    return {"key" : prefix + "_s_" + river_str};
   }
 
   var pterrain = tile_terrain(ptile);
@@ -1118,8 +1123,8 @@ function get_tile_river_sprite(ptile)
     for (var i = 0; i < num_cardinal_tileset_dirs; i++) {
       var dir = cardinal_tileset_dirs[i];
       var checktile = mapstep(ptile, dir);
-      if (checktile != null && tile_has_extra(checktile, EXTRA_RIVER)) {
-        return {"key" : "road.river_outlet_" + dir_get_tileset_name(dir)};
+      if (checktile != null && tile_has_extra(checktile, extra)) {
+        return {"key" : prefix + "_outlet_" + dir_get_tileset_name(dir)};
       }
     }
   }

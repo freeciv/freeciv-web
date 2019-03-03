@@ -1321,14 +1321,24 @@ function fill_road_rail_sprite_array(ptile, pcity)
 {
   var road = tile_has_extra(ptile, EXTRA_ROAD);
   var rail = tile_has_extra(ptile, EXTRA_RAIL);
+
+  if (typeof EXTRA_MAGLEV !== "undefined") {
+    var maglev = tile_has_extra(ptile, EXTRA_MAGLEV);
+  }
+
   var road_near = [];
   var rail_near = [];
+  var maglev_near = [];
   var draw_rail = [];
   var draw_road = [];
+  var draw_maglev = [];
+
   var result_sprites = [];
 
   var draw_single_road = road == true && pcity == null && rail == false;
   var draw_single_rail = rail && pcity == null;
+  var draw_single_maglev = maglev == true && pcity == null && maglev == false;
+
 
   for (var dir = 0; dir < 8; dir++) {
     /* Check if there is adjacent road/rail. */
@@ -1336,21 +1346,33 @@ function fill_road_rail_sprite_array(ptile, pcity)
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
       road_near[dir] = tile_has_extra(tile1, EXTRA_ROAD);
       rail_near[dir] = tile_has_extra(tile1, EXTRA_RAIL);
+      if (typeof EXTRA_MAGLEV !== "undefined") {
+        maglev_near[dir] = tile_has_extra(tile1, EXTRA_MAGLEV);
+      } 
 
-      /* Draw rail/road if there is a connection from this tile to the
+      /* Draw rail/road/maglev if there is a connection from this tile to the
+       * adjacent tile.  But don't draw road/rail if there is also a rail/maglev
+       * connection. */
+      if (typeof EXTRA_MAGLEV !== "undefined") {
+        draw_maglev[dir] = maglev && maglev_near[dir];
+        draw_rail[dir] = rail && rail_near[dir] && !draw_maglev[dir];
+        draw_road[dir] = road && road_near[dir] && !draw_rail[dir] && !draw_maglev[dir];
+
+        draw_single_maglev &= !draw_maglev[dir];
+        draw_single_rail &= !draw_maglev[dir] && !draw_rail[dir];
+        draw_single_road &= !draw_maglev[dir] && !draw_rail[dir] && !draw_road[dir];
+      } else {         // same as above if ruleset has no EXTRA_MAGLEVS in it:
+        /* Draw rail/road if there is a connection from this tile to the
         * adjacent tile.  But don't draw road if there is also a rail
         * connection. */
-      draw_rail[dir] = rail && rail_near[dir];
-      draw_road[dir] = road && road_near[dir] && !draw_rail[dir];
+       draw_rail[dir] = rail && rail_near[dir];
+       draw_road[dir] = road && road_near[dir] && !draw_rail[dir];
 
-      /* Don't draw an isolated road/rail if there's any connection. */
-      draw_single_rail &= !draw_rail[dir];
-      draw_single_road &= !draw_rail[dir] && !draw_road[dir];
-
+       draw_single_rail &= !draw_rail[dir];
+       draw_single_road &= !draw_rail[dir] && !draw_road[dir];
+      }
     }
   }
-
-
     /* With roadstyle 0, we simply draw one road/rail for every connection.
      * This means we only need a few sprites, but a lot of drawing is
      * necessary and it generally doesn't look very good. */
@@ -1374,13 +1396,26 @@ function fill_road_rail_sprite_array(ptile, pcity)
       }
     }
 
-
+    /* Then draw maglevs over rails over roads. */
+    if (typeof EXTRA_MAGLEV !== "undefined") {
+        if (maglev) {
+        for (i = 0; i < 8; i++) {
+          if (draw_maglev[i]) {
+	        result_sprites.push({"key" : "road.maglev_" + dir_get_tileset_name(i)});
+          }
+        }
+      }
+    }
  /* Draw isolated rail/road separately (styles 0 and 1 only). */
 
   if (draw_single_rail) {
       result_sprites.push({"key" : "road.rail_isolated"});
   } else if (draw_single_road) {
       result_sprites.push({"key" : "road.road_isolated"});
+  } else if (typeof EXTRA_MAGLEV !== "undefined") {
+            if (draw_single_maglev) {
+              result_sprites.push({"key" : "road.maglev_isolated"});
+            }
   }
 
   return result_sprites;

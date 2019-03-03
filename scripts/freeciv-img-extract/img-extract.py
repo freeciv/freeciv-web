@@ -74,7 +74,8 @@ spec_files = {
     "upkeep.spec",
     "veterancy.spec",
     "water.spec",
-    "canal.spec"
+    "canal.spec",
+    "maglev.spec"
   ],
   "trident" : [
     "auto_ll.spec",

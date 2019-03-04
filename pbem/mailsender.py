@@ -36,7 +36,7 @@ class MailSender():
     smtp_host = "localhost"
   smtp_port = settings.get("Config", "smtp_port", fallback="")
   if smtp_port.isnumeric():
-    smtp_port = int(stmp_port)
+    smtp_port = int(smtp_port)
   else:
     smtp_port = 587 if smtp_auth else 25
   smtp_sender = settings.get("Config", "smtp_sender")

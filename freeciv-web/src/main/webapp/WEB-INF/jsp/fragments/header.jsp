@@ -32,18 +32,7 @@
 					<li><a href="/game/list?v=play-by-email">Play by Email</a></li>
 				</ul>
 			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					<span onclick="window.location='http://forum.freegamedev.net/viewforum.php?f=97'">Forums</span> <span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li><a href="http://forum.freegamedev.net/viewforum.php?f=97">Freeciv-web <fmt:message key="nav-forum"/></a></li>
-					<li role="separator" class="divider"></li>
-					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
-				</ul>
-			</li>
-			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
-			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
+			<li><a href="https://www.patreon.com/freecivweb">Please Donate</a></li>
 			<%--<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="${pageContext.request.locale.language} ${pageContext.request.locale.country}">
 					Language <span class="caret"></span>

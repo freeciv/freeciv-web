@@ -1,19 +1,17 @@
-#Freeciv-web: One Turn per day game #XII
+#Freeciv-web: One Turn per day game ALPHA TEST
 
 #load longturnxii
 #
 cmdlevel ctrl first
-rulesetdir multiplayer 
+rulesetdir mp2 
 set topology WRAPX
 set nationset all
 set compresstype xz
-set maxplayers 300
-set startunits=cccwwwx
-set aifill 300
+set maxplayers 30
+set startunits=cccwwwxxa
+set aifill 30
 set allowtake=""
 set autotoggle disabled
-set timeout 82800
-set unitwaittime=36000
 set netwait 20
 set nettimeout 120
 set pingtime 30
@@ -26,12 +24,32 @@ set size 32
 set landm 59
 set dispersion=1
 
-set endt 365
+#SPEED it along for testing **** CHANGE LATER *****
+set techlevel 8
+set gold 2000
+set shieldbox 40
+set sciencebox 30
+set first_timeout 1200
+set timeout 600
+set unitwaittime=200
+set foodbox 50
+set endt 15000 #SO WE CAN SLEEP AND IGNORE IT 
+
+#typical mp2 default settings for some things:
+set restrictinfra enabled
+set foggedborders true
+set borders enabled 
+set nationset all 
+set revolen 1
+set specials 350
+#set startpos single --scenario may have other settings
+set techpenalty 0
+set trading_city disabled
+set victories ALLIED
+set endspaceship disabled 
 
 set diplomacy=HUMAN
 set contactturns=0
-
-set trading_tech=disabled
 
 set minp 0
 set saveturns=1
@@ -41,7 +59,6 @@ set ec_chat=enabled
 set ec_info=enabled 
 set ec_max_size=5000
 set ec_turns=9
-metamessage One Turn per day #XII | Map of Europe with 300 players! 
-
+metamessage FCW NOT-SO-LONGTURN TEST-RUN MP2| Map of Europe with 30 players! 
 
 cmdlevel basic

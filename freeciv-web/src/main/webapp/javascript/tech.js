@@ -27,7 +27,7 @@ var is_tech_tree_init = false;
 var tech_dialog_active = false;
 
 var tech_xscale = 1.2;
-var wikipedia_url = "http://en.wikipedia.org/wiki/";
+var wikipedia_url = "http://freeciv.fandom.com/wiki/";
 
 /* TECH_KNOWN is self-explanatory, TECH_PREREQS_KNOWN are those for which all
  * requirements are fulfilled; all others (including those which can never
@@ -125,10 +125,15 @@ function init_tech_screen()
 
   if (is_tech_tree_init) return;
 
+  // if classic is not selected, default to mpplus reqtree. Now we don't have to make code changes every time
+  // we want to add or test a new ruleset:
+  if (ruleset_control['name'] != "Classic ruleset") reqtree = reqtree_mpplus;
+ 
   if (ruleset_control['name'] == "Civ2Civ3 ruleset") reqtree = reqtree_civ2civ3;
   if (ruleset_control['name'] == "Multiplayer ruleset") reqtree = reqtree_multiplayer;
   if (ruleset_control['name'] == "Longturn-Web-X ruleset") reqtree = reqtree_multiplayer;
   if (ruleset_control['name'] == "Multiplayer-Plus ruleset") reqtree = reqtree_mpplus;
+  if (ruleset_control['name'] == "Multiplayer-Evolution ruleset") reqtree = reqtree_mpplus;
 
   tech_canvas = document.getElementById('tech_canvas');
   if (tech_canvas == null) {

@@ -866,6 +866,8 @@ function update_unit_order_commands()
     }
   }
 
+  $("#order_maglev").hide();
+
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
     ptype = unit_type(punit);
@@ -922,6 +924,11 @@ function update_unit_order_commands()
         $("#order_road").hide();
         $("#order_railroad").show();
 	    unit_actions['railroad'] = {name: "Build railroad (R)"};
+      } else if (can_build_maglev(punit, ptile)) {
+        $("#order_road").hide();
+        $("#order_railroad").hide();
+        $("#order_maglev").show();
+        unit_actions['maglev'] = {name: "Build maglev (R)"};
       } else {
         $("#order_road").hide();
         $("#order_railroad").hide();
@@ -1996,6 +2003,10 @@ function handle_context_menu_callback(key)
       key_unit_road();
       break;
 
+    case "maglev":
+      key_unit_road();
+      break;
+
     case "mine":
       key_unit_mine();  // and plant forest
       break;
@@ -2539,6 +2550,22 @@ function key_unit_mine()
 }
 
 /**************************************************************************
+ Check whether a unit can build a maglev in a tile.
+**************************************************************************/
+function can_build_maglev(punit, ptile)
+{
+  return ((typeof EXTRA_MAGLEV !== "undefined")
+      &&  (punit != null && ptile != null)
+      &&  (!tile_has_extra(ptile, EXTRA_MAGLEV))
+      &&  (tile_has_extra(ptile, EXTRA_RAIL))
+      &&  (unit_can_do_action(punit, ACTION_ROAD))
+      &&  (player_invention_state(client.conn.playing, tech_id_by_name('Superconductors')) == TECH_KNOWN)
+      &&  ((!tile_has_extra(ptile, EXTRA_RIVER))
+           || (player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_KNOWN))
+         );
+}
+
+/**************************************************************************
  Tell the units in focus to build road or railroad.
 **************************************************************************/
 function key_unit_road()
@@ -2551,6 +2578,8 @@ function key_unit_road()
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
     } else if (!tile_has_extra(ptile, EXTRA_RAIL)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
+    } else if (can_build_maglev(punit, ptile)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Maglev']['id']);
     }
   }
   setTimeout(update_unit_focus, 700);

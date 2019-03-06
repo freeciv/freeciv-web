@@ -867,6 +867,7 @@ function update_unit_order_commands()
   }
 
   $("#order_maglev").hide();
+  $("#order_canal").hide();
 
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
@@ -1001,6 +1002,11 @@ function update_unit_order_commands()
       $("#order_explore").show();
       $("#order_pollution").hide();
       unit_actions["fortify"] = {name: "Fortify (F)"};
+    }
+
+    if (can_build_canal(punit, ptile)) {
+      $("#order_canal").show();
+      unit_actions["canal"] = {name: "Build canal"};
     }
 
     /* Practically all unit types can currently perform some action. */
@@ -2007,6 +2013,10 @@ function handle_context_menu_callback(key)
       key_unit_road();
       break;
 
+    case "canal":
+      key_unit_canal();
+      break;
+
     case "mine":
       key_unit_mine();  // and plant forest
       break;
@@ -2545,6 +2555,39 @@ function key_unit_mine()
     var punit = funits[i];
     /* EXTRA_NONE -> server decides */
     request_new_unit_activity(punit, ACTIVITY_MINE, EXTRA_NONE);
+  }
+  setTimeout(update_unit_focus, 700);
+}
+
+
+/**************************************************************************
+ Check whether a unit can build a canal in a tile.
+**************************************************************************/
+function can_build_canal(punit, ptile)
+{
+  return ((typeof EXTRA_CANAL !== "undefined")
+      &&  (punit != null && ptile != null)
+      &&  (!tile_has_extra(ptile, EXTRA_CANAL))
+      &&  (unit_can_do_action(punit, ACTION_ROAD))
+      // TODO: &&  (tile custom flag low land)
+      &&  (player_invention_state(client.conn.playing, tech_id_by_name('Engineering')) == TECH_KNOWN)
+         );
+}
+
+/**************************************************************************
+ Tell the units in focus to build canal.
+**************************************************************************/
+function key_unit_canal()
+{
+  if (typeof EXTRA_CANAL === "undefined") return;
+
+  const funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    const punit = funits[i];
+    const ptile = index_to_tile(punit['tile']);
+    if (can_build_canal(punit, ptile)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Canal']['id']);
+    }
   }
   setTimeout(update_unit_focus, 700);
 }

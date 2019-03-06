@@ -47,6 +47,10 @@
     <a href="#" onclick="key_unit_road();"><img src="/images/orders/maglev.png" name="maglev_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_canal" class="order_button" title="Build canal">
+    <a href="#" onclick="key_unit_canal();"><img src="/images/orders/canal.png" name="canal_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
 
   <div id="order_mine" class="order_button" title="Build mine (M)">
     <a href="#" onclick="key_unit_mine();"><img src="/images/orders/mine_default.png" name="mine_button" alt="" border="0" width="30" height="30"></a>

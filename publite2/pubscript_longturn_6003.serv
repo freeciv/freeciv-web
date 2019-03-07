@@ -54,6 +54,7 @@ set rapturedelay 2
 set revolen 1
 set endturn 365
 set contactturns 0
+set barbarians "DISABLED"
 
 #military
 set borders "ENABLED"

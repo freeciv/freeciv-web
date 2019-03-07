@@ -44,6 +44,7 @@ set specials 350
 set alltemperate "ENABLED"
 separatepoles "DISABLED"
 set tinyisles "DISABLED"
+set huts 0
 
 #sociological
 set startunits=ccccwwwwxx

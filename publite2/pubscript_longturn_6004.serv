@@ -1,0 +1,68 @@
+#LongTurn game #19
+
+cmdlevel ctrl first
+
+set rulesetdir mpplus
+
+set minplayers 0
+set maxplayers 60
+set aifill 60
+set timeout 82800
+set first_timeout 259200
+set nationset all
+set compresstype xs
+set allowtake=""
+set autotoggle false
+set unitwaittime=36000
+set netwait 150
+set nettimeout 120
+set pingtime 30
+set pingtimeout 240
+set maxconnectionsperhost 500
+set threaded_save enabled
+set scorelog enabled
+set saveturns=1
+set autosaves=TURN
+metaconnection persistent
+set ec_chat=enabled
+set ec_info=enabled 
+set ec_max_size=5000
+set ec_turns=7
+
+#economic
+set gold 100
+
+#geological
+set mapsize XYSIZE
+set xsize 190
+set ysize 133
+set topology WRAPX
+set generator RANDOM
+set startpos DEFAULT
+set landmass 64
+set specials 350 
+set alltemperate "ENABLED"
+separatepoles "DISABLED"
+set tinyisles "DISABLED"
+
+#sociological
+set startunits=ccccwwwwxx
+set dispersion 2
+set trading_city disabled
+set rapturedelay 2
+set revolen 1
+set endturn 365
+set contactturns 0
+
+#military
+set borders "ENABLED"
+set diplomacy "HUMAN"
+set foggedborders enabled
+set airliftingstyle "FROM_ALLIES|TO_ALLIES|DEST_UNLIMITED"
+set victories ALLIED
+set restrictinfra "ENABLED"
+#scientific
+set endspaceship DISABLED
+
+
+metamessage not in use - future game.

@@ -1,0 +1,2483 @@
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+;
+; You should sort role units from worst to better, as often the best
+; available role unit of a given sort will be picked by choosing
+; the first available (not obsolete) such unit, or by picking the last
+; such unit directly. When determining starting units, the first 
+; unit with the relevant role that the player can build will be chosen.
+; If no such unit can be found (eg Explorers that require Seafaring),
+; then the first unit with this role will be chosen.
+
+[datafile]
+description="Unit definitions for the Multiplayer+ ruleset."
+options="+Freeciv-ruleset-Devel-2017.Jan.02 web-compatible"
+format_version=20
+
+[control]
+; Names for custom unit type flags. There can be up to 45 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for unit types with this flag (optional)
+flags =
+  { "name", "helptxt"
+    _("Airbase")
+    _("Transform")
+    _("AirAttacker"), _("Very bad at attacking AEGIS.")
+    _("Horse"), _("Attack value halved when attacking Pikemen.")
+    _("Helicopter"), _("Defends very badly against Fighters.")
+    _("Unbribable")
+    _("HelpWonder")
+    _("Cities")
+    _("AddToCity")
+    _("Nuclear")
+    _("Infra"), _("Can build infrastructure.")
+    _("Paratroopers"), _("Can be paradropped from a friendly city or suitable base.")
+    _("Marines"), _("Can launch attack from non-native tiles.")
+  }
+
+; Names for custom unit class flags. There can be up to 8 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for unit types belonging to a class
+;                 with this flag (optional)
+class_flags =
+  { "name", "helptxt"
+    _("AttFromNonNative"), _("Can launch attack from non-native tiles.")
+  }
+
+[veteran_system]
+; What are the names of the levels?
+veteran_names = _("green"), _("veteran"), _("hardened"), _("elite")
+
+; The percentage chance of increasing level through combat
+veteran_raise_chance = 50, 33, 20, 0
+
+; The percentage chance of a settler/engineer increasing level through
+; performing useful work (per turn)
+veteran_work_raise_chance = 0, 0, 0, 0
+
+; Power factors are as a percentage.
+; +50% is represented by 150
+veteran_power_fact = 100, 150, 175, 200
+
+; The additional number of movement points granted for different veteran
+; levels. These are fractional move points as defined by move_fragments in
+; terrain.ruleset.
+veteran_move_bonus = 0, 0, 0, 0
+
+; /* <-- avoid gettext warnings
+;
+; Unit classes
+; The number can be variable, up to 32
+; When adding new classes, remember to check effects.ruleset also.
+; Eg. if you divide class 'Land' to two separate classes, you may
+; want add effect giving City Walls defence bonus against new class
+; too.
+;
+; The actual tag used (the * in [unitclass_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; ** Fields **
+;
+; name                = translatable name as seen by user
+; rule_name           = (optional) internal name for savegames, rulesets etc;
+;                       if not present, "name" is used for this purpose too.
+;                       Since the name used in savegames must not change, if
+;                       you want to rename an item after a ruleset has been
+;                       released, you should set "rule_name" to the original
+;                       value of "name".
+; min_speed           = Minimum speed after damage and effects (whole movement points)
+; hp_loss_pct         = Hitpoints lost each turn if unit not in city or native base
+; non_native_def_pct  = Defense power percentage applying when defending on
+;                       non-native terrain (such as ship in harbour)
+; hut_behavior        = What happens to huts when unit enters tile:
+;                       "Normal", "Nothing", or "Frighten"
+; flags               = List of unit class flags (from the following list; you
+;                       cannot add custom unit class flags)
+; helptext            = optional help text string; should escape all raw newlines
+;                       so that xgettext parsing works
+;
+; ** Unit class Flags **
+;
+; "TerrainSpeed"      = Units use terrain specific speed
+; "TerrainDefense"    = Units gain defense bonus from terrain
+; "DamageSlows"       = Damaged units are slowed down
+; "CanOccupyCity"     = Military units of this class can occupy enemy cities
+; "Missile"           = Unit is destroyed when it attacks
+; "BuildAnywhere"     = Unit can be built even in the middle of non-native terrain
+; "Unreachable"       = Unit can be attacked only by units explicitly listing this
+;                       class in its 'targets', unless on a city or native base.
+;                       For class members which are transports, cargo cannot load/
+;                       unload except in a city or native base, unless that unit
+;                       explicitly lists this class in its 'embarks'/'disembarks'.
+; "CollectRansom"     = Unit can collect ransom when killing lone barbarian leader
+; "ZOC"               = Unit is subject to ZOC rules. Unit type flag "IgZOC" can
+;                       override this
+; "CanFortify"        = Unit can fortify at land tiles. Unit type flag
+;                       "Cant_Fortify" can override this
+; "CanPillage"        = Unit can pillage tile infrastructure
+; "DoesntOccupyTile"  = Even if this kind of enemy unit is on tile, cities can
+;                       still work that tile
+; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type
+;                       flag "Only_Native_Attack" can override this
+; "KillCitizen"       = Upon successful attack against a city, unit kills one
+;                       citizen. The effect "Unit_No_Lose_Pop" and the server
+;                       setting 'killcitizen' can disable this.
+;
+; */ <-- avoid gettext warnings
+
+[unitclass_missile]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Missile")
+min_speed     = 1
+hp_loss_pct   = 0
+hut_behavior  = "Frighten"
+flags         = "Missile", "Unreachable", "DoesntOccupyTile"
+
+[unitclass_land]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Land")
+min_speed     = 1
+hp_loss_pct   = 0
+flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
+                "CollectRansom", "ZOC", "CanFortify", "CanPillage",
+                "TerrainDefense", "KillCitizen"
+helptext      = _("\
+  * Can be airlifted from a suitable city.\
+")
+
+[unitclass_sea]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Sea")
+min_speed     = 2
+hp_loss_pct   = 0
+flags         = "DamageSlows", "AttackNonNative", "AttFromNonNative", "CanPillage"
+
+[unitclass_trireme]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Trireme")
+min_speed     = 2
+hp_loss_pct   = 0
+flags         = "DamageSlows", "AttFromNonNative"
+
+[unitclass_heli]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Helicopter")
+min_speed     = 1
+hp_loss_pct   = 10
+flags         = "CanOccupyCity", "CollectRansom"
+
+[unitclass_air]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Air")
+min_speed     = 1
+hp_loss_pct   = 0
+hut_behavior  = "Frighten"
+flags         = "Unreachable", "DoesntOccupyTile"
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual unit types, one per section.
+;
+; The number can be variable, up to 200.
+; However for the "official" rulesets, units should not be removed
+; because that would break backward compatability with savegames.
+;
+; The order here matters: later units are considered "better" for
+; a given flag or role.
+;
+; The actual tag used (the * in [unit_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; ** Fields **
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; graphic       = tag specifying preferred graphic
+; graphic_alt   = tag for alternate graphic if preferred graphic is not
+;                 present; especially if preferred graphic is non-standard,
+;                 this should be a standard tag.  Otherwise can use eg "-"
+;                 for no alternate graphic.
+; tech_req      = required advance, names from techs.ruleset, or special:
+;                 "None" => available from start
+; impr_req	= required city improvement, names from buildings.ruleset
+; gov_req       = required government, names from governments.ruleset
+; obsolete_by   = can be upgraded to and made obsolete by another unit by name
+; build_cost    = production shields required to build
+; pop_cost      = population removed from city when built; for 'Join City'
+;                 units this is also the population added to the destination
+; attack        = base attack strength (0 = cannot attack)
+; defense       = base defense strength (0 = cannot defend)
+; hitpoints     = how much damage unit can withstand
+; firepower     = number of hitpoints removed per round of combat; at least 1
+; move_rate     = base move rate (whole movement points)
+; vision_radius_sq = base vision of unit: unit can see tile up to the square
+;                 root of this value away
+; convert_to    = can be converted to another type of unit by name
+; convert_time  = number of movement points it takes to convert to
+;                 another unit type
+; class         = One of the classes listed above
+; transport_cap = Number of units (ground, or air/missiles, depending on flags)
+; fuel          = Number of turns unit can spend outside refuel points.
+;                 If more time passes without unit refueling over turn change,
+;                 they are lost. If this is zero, unit has no need to refuel
+;                 Units with "Coast" flag set consider any tile next to coast
+;                 refuel point
+; uk_*          = upkeep costs, these are used as base values in the game
+; cargo         = Unit classes this unit can transport
+; city_slots    = How many of homecity's unit maintenance slots unit takes
+; city_size     = Initial size of the cities built by 'Found City' type units
+;                 (but 'Join City' uses pop_cost)
+; targets       = list of unit classes this unit can attack against even
+;                 if they have Unreachable unit class flag
+; embarks       = list of unit classes this unit may load into while not in
+;                 native base or city even if transporter has Unreachable unit
+;                 class flag
+; disembarks    = list of unit classes this unit may unload from while not in
+;                 native base or city even if transporter has Unreachable unit
+;                 class flag
+; vision_layer  = At which layer this unit is visible; "Main", "Stealth",
+;                 or "Subsurface"
+; bonuses       = definitions of combat bonuses against specific other units
+; bonuses.flag  = flag of the unit that bonus applies against
+; bonuses.type  = type of the bonus. See below
+; bonuses.value = value of the bonus. Sum of these is used if multiple apply.
+; bonuses.quiet = don't auto generate help text for this bonus. Use this if
+;                 the bonus is documented in the unit type's help text.
+;                 This is useful when the combination of a unit's bonuses
+;                 becomes complex enough to make the auto generated help
+;                 ugly or inaccurate.
+; flags         = special flag strings; list of built-in flags described below
+;                 and/or user flags defined above
+;
+; veteran_names = Special veteran level for this unit. See the definitions in
+;                 game.ruleset. All of the veteran_* entries have to have the
+;                 same length!
+; veteran_raise_chance =
+; veteran_work_raise_chance =
+; veteran_power_fact =
+; veteran_move_bonus =
+;
+; roles          = special role strings
+; sound_move     = optional sound effect when the unit moves
+; sound_move_alt = optional alternative sound effect if above not
+;                   supported in client
+; sound_fight     = optional sound effect when the unit fights
+; sound_fight_alt = optional alternative sound effect if above not
+;                   supported in client
+; helptext        = optional help text string; should escape all raw newlines
+;                   so that xgettext parsing works
+;
+;
+; ** Bonuses **
+;
+; "DefenseMultiplier" = Multiply defense value (1 + 'value') times.
+;                       Value of 1 means multiplication by 2, value 2 by 3...
+;                       Bonus is defined in defenders entry.
+; "DefenseDivider"    = Divide defense value with (1 + 'value').
+;                       Bonus is defined in attackers entry.
+; "FirePower1"        = Defender firepower is reduced to value 1 when
+;                       ever this has non-zero value.
+;                       Bonus is defined in attackers entry.
+;
+;
+; ** Flags **
+;
+; "IgZOC"       = ignore Zones of Control (ZOC) even if unit class has
+;                 "ZOC" flag
+; "HasNoZOC"	= unit has no Zone of Control (ZOC), thus any unit can move
+;		  around it freely
+; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
+;                 peaceful borders; DoesntOccupyTile
+; "IgTer"       = use constant move cost defined in igter_cost (terrain.ruleset)
+;                 rather than terrain/road etc cost, unless terrain cost is
+;                 less
+; "OneAttack"	= can only make a single attack, regardless of movement points
+; "FieldUnit"	= cause unhappiness even when not being aggressive
+; "BeachLander" = won't lose all its movement when moving from non-native
+;                 terrain to native terrain even if slow_invasions is on.
+; "Settlers"	= can irrigate and build roads
+; "Diplomat"	= can defend against diplomat actions (see diplchance
+;                 server option)
+; "Spy"         = strong in diplomatic battles. _Must_ be "Diplomat" also
+; "CoastStrict" = (sea only) cannot leave coast
+; "Coast"       = (sea only) can refuel on coast. Set fuel to force unit
+;                 to regularly end turn on coast
+; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
+;                 unit class can
+; "Cant_Fortify" =  cannot fortify even if unit class has "CanFortify" flag
+; "Fanatic"	= can only be built by governments that allow them
+;		  (see civ2/governments.ruleset, Fundamentalism government)
+; "Unique"	= a player can only have one of these units in the game at
+;		  the same time; barbarians cannot use this at present
+; "GameLoss"	= losing one of these units means you lose the game, but it
+;		  is produced without homecity and upkeep
+; "EvacuateFirst" = the game will try to rescue units with this flag before
+;                 it tries to rescue units without it when their transport
+;                 is destroyed. Think of the Birkenhead drill ("women and
+;                 children first"). Replace "women and children" with
+;                 "units with the EvacuateFirst unit type flag".
+; "SuperSpy"	= this unit always wins diplomatic contests, that is, unless
+;		  it encounters another SuperSpy, in which case defender wins;
+;		  can also be used on non-diplomat units, in which case it can
+;		  protect cities from diplomats; also 100% spy survival chance
+; "NoHome"	= this unit has no homecity and will be free of all upkeep, and
+;		  therefore will not revolt along with its city of origin should
+;		  it be incited
+; "NoVeteran"   = this unit cannot gain veteran levels through experience
+;                 (as if both raise_chance and work_raise_chance were zero);
+;                 it can still gain veterancy through Veteran_Build, etc
+; "CityBuster"  = this unit has double firepower against cities
+; "NoBuild"     = this unit cannot be built
+; "BadWallAttacker"	= the firepower of this unit is set to 1 if
+;                 attacking a city
+;		  defended by a city wall (or other city building defense)
+; "BadCityDefender"	= if attacked while in a city, firepower is set to 1
+;		  and firepower of attacker is doubled (the Pearl Harbour
+;                 rule)
+; "BarbarianOnly" = only barbarians can build this unit
+; "Shield2Gold" = Switch from shield upkeep to gold upkeep possible
+; "NewCityGamesOnly" = unit can't be built on scenarios where founding new cities
+;                 is not allowed. Give this flag to units that would make no sense
+;                 to have in a game with such a scenario
+; "CanEscape"   = this unit has, given that certain conditions are
+;                 fulfilled, a 50% chance to escape rather than being
+;                 killed when killstack is enabled and the defender of its
+;                 tile is defeated. The conditions are that it has more move
+;                 points than required to move to an adjacent tile plus the
+;                 attackers move points and that the attacker doesn't have
+;                 the "CanKillEscaping" unit type flag.
+; "CanKillEscaping" = an attack from this unit ignores the "CanEscape" unit
+;                 type flag.
+; "Provoking" =   a unit considering to auto attack this unit will choose to
+;                 do so even if has better odds when defending against it
+;                 then when attacking it. Applies when the autoattack server
+;                 setting is enabled.
+;
+; Following actions require extra fields:
+;  "Attack"
+;   attack = base attack strength
+;  "Bombard"
+;   attack       = base attack strength
+;   bombard_rate = the number of shots fired at enemy units when attacking
+;  "Join City"
+;   pop_cost = the number of population added to the target city
+;  "Paradrop Unit"
+;   paratroopers_range  = the maximal range the unit can be paradropped to.
+;                         Max range is 65534.
+;   paratroopers_mr_req = the move rate which is required at least for
+;                         paradropping (whole movement points)
+;   paratroopers_mr_sub = the move rate which is subtracted after paradropping
+;                         (whole movement points)
+;  "Upgrade Unit"
+;   obsolete_by = the unit type upgraded to.
+;  "Convert Unit"
+;   convert_to = the unit type converted to.
+;
+; ** Roles **
+;
+; "FirstBuild"            = first to be built when city founded
+; "Explorer"              = unit to use for exploring
+; "Hut"                   = can be found in a hut
+; "HutTech"               = can be found in a hut, but its techs required
+; "Partisan"              = can be created as a partisan (only one unit can have this
+;                           flag), see end of this file for its tech requirements option
+; "DefendOk"              = AI hint: ok for defending with
+; "DefendGood"            = AI hint: good for defending with
+; "Ferryboat"             = AI hint: useful for ferrying
+; "Barbarian"             = can be created as land barbarian
+; "BarbarianTech"         = can be created as land barbarian, if someone has
+;                           researched its tech requirements
+; "BarbarianBoat"         = can be created as boat for sea barbarian
+; "BarbarianBuild"        = can be built by barbarians
+; "BarbarianBuildTech"    = can be built by barbarians if someone has
+;                           researched its tech requirements
+; "BarbarianLeader"       = this unit is the barbarian leader (only one)
+; "BarbarianSea"          = can be created as a barbarian that disembarks from a barbarian boat
+; "BarbarianSeaTech"      = can be created as a barbarian that disembarks from a barbarian boat
+;                           if someone has researched its tech requirements
+; "Settlers"              = can irrigate and build roads
+; "Hunter"                = AI hint: good for hunting other units
+; "CitiesStartUnit"       = Gets granted as 'c' startunit
+; "WorkerStartUnit"       = Gets granted as 'w' startunit
+; "ExplorerStartUnit"     = Gets granted as 'x' startunit
+; "KingStartUnit"         = Gets granted as 'k' startunit
+; "DiplomatStartUnit"     = Gets granted as 's' startunit
+; "FerryStartUnit"        = Gets granted as 'f' startunit
+; "DefendOkStartUnit"     = Gets granted as 'd' startunit
+; "DefendGoodStartUnit"   = Gets granted as 'D' startunit
+; "AttackFastStartUnit"   = Gets granted as 'a' startunit
+; "AttackStrongStartUnit" = Gets granted as 'A' startunit
+;
+; */ <-- avoid gettext warnings
+
+[unit_settlers]
+name          = _("Settlers")
+class         = "Land"
+tech_req      = "None"
+obsolete_by   = "None"
+graphic       = "u.settlers"
+graphic_alt   = "-"
+sound_move    = "m_settlers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_settlers"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 1
+attack        = 0
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 1
+uk_gold       = 0
+flags         = "Settlers", "Infra", "NonMil", "HasNoZOC", "AddToCity", "Cities", "Cant_Fortify"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "CitiesStartUnit"
+helptext      = _("\
+Settlers are one of the key units in the game, as they are your main\
+ means of founding new cities.\
+"), _("\
+Settlers can also perform most of the same terrain alterations as\
+ Workers (but cannot build Airbases or Buoys).\
+"), _("\
+Upkeep for Settlers is in food as well as production, and a Settler\
+ can die if its supporting city runs out of food. Settlers in a\
+ Republic or Democracy require twice as much food per turn, and in\
+ Fundamentalist societies, three times as much.\
+")
+
+[unit_worker]
+name          = _("?unit:Workers")
+class         = "Land"
+tech_req      = "Pottery"
+obsolete_by   = "Engineers"
+graphic       = "u.worker"
+graphic_alt   = "u.engineers" ; for compatibility
+sound_move    = "m_worker"
+sound_move_alt = "m_generic"
+sound_fight   = "f_worker"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Settlers", "Infra", "NonMil", "HasNoZOC", "Airbase", "Cant_Fortify"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "Settlers", "WorkerStartUnit"
+helptext      = _("\
+Workers have the ability to improve terrain tiles. See the help on \
+Terrain and Terrain Alterations for the effects of their actions.\
+"), _("\
+Workers can build airbases and buoys, which Settlers cannot. \
+Workers must be on board a ship to build buoys.\
+")
+
+[unit_engineers]
+name          = _("Engineers")
+class         = "Land"
+tech_req      = "Explosives"
+obsolete_by   = "None"
+graphic       = "u.engineers"
+graphic_alt   = "-"
+sound_move    = "m_engineers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_engineers"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 0
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Settlers", "Infra", "NonMil", "HasNoZOC", "Transform", "Airbase", "Cant_Fortify"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "Settlers", "WorkerStartUnit"
+helptext      = _("\
+Engineers are similar to Workers, but they work twice as fast and\
+ move twice as fast. Engineers may also perform major terrain\
+ transformations which are beyond the capabilities of Workers and\
+ Settlers, such as converting Tundra into Desert, or even Ocean into\
+ Swamp in some circumstances (when on board an ocean-going vessel,\
+ on a tile surrounded by sufficient existing land). See the\
+ Terrain Alterations section for more details.\
+"), _("\
+TIP 1:  Upgrade Workers to Engineers when possible, as Engineers\
+ require the same resources as ordinary Workers.\
+"), _("\
+TIP 2:  If you manage to build Leonardo's Workshop, research\
+ Explosives before the Workshop becomes obsolete.  This way,\
+ your Workers units will be upgraded for free.\
+")
+
+[unit_warriors]
+name          = _("Warriors")
+class         = "Land"
+tech_req      = "None"
+obsolete_by   = "Pikemen"
+graphic       = "u.warriors"
+graphic_alt   = "-"
+sound_move    = "m_warriors"
+sound_move_alt = "m_generic"
+sound_fight   = "f_warriors"
+sound_fight_alt = "f_generic"
+build_cost    = 10
+pop_cost      = 0
+attack        = 1
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+helptext      = _("\
+This unit may be built from the start of the game.  It is the\
+ weakest offensive unit.\
+")
+
+[unit_phalanx]
+name          = _("Phalanx")
+class         = "Land"
+tech_req      = "Bronze Working"
+obsolete_by   = "Pikemen"
+graphic       = "u.phalanx"
+graphic_alt   = "-"
+sound_move    = "m_phalanx"
+sound_move_alt = "m_generic"
+sound_fight   = "f_phalanx"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 1
+defense       = 2
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+helptext      = _("\
+The Phalanx is armored infantry, suitable for defending your cities.\
+")
+
+[unit_archers]
+name          = _("Archers")
+class         = "Land"
+tech_req      = "Warrior Code"
+obsolete_by   = "Musketeers"
+graphic       = "u.archers"
+graphic_alt   = "-"
+sound_move    = "m_archers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_archers"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 3
+defense       = 2
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendOk", "DefendOkStartUnit"
+helptext      = _("\
+Archers fight with bows and arrows and have a good offensive\
+ value as well as decent defense.\
+")
+
+[unit_legion]
+name          = _("Legion")
+class         = "Land"
+tech_req      = "Iron Working"
+obsolete_by   = "Musketeers"
+graphic       = "u.legion"
+graphic_alt   = "-"
+sound_move    = "m_legion"
+sound_move_alt = "m_generic"
+sound_fight   = "f_legion"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 4
+defense       = 2
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendOk", "DefendOkStartUnit", "Hut", "BarbarianBuild", "BarbarianSea"
+helptext      = _("\
+Legions are heavily armed and well disciplined infantry\
+ units with an excellent offensive value.\
+")
+
+[unit_pikemen]
+name          = _("Pikemen")
+class         = "Land"
+tech_req      = "Feudalism"
+obsolete_by   = "Musketeers"
+graphic       = "u.pikemen"
+graphic_alt   = "-"
+sound_move    = "m_pikemen"
+sound_move_alt = "m_generic"
+sound_fight   = "f_pikemen"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 1
+defense       = 2
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+bonuses       =
+   { "flag", "type", "value"
+     "Horse", "DefenseMultiplier", 1
+   }
+flags         = ""
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+helptext      = _("\
+Equipped with long pikes and a 2x defence bonus against\
+ mounted units, Pikemen replace the Phalanx as the\
+ preferred city defender.\
+")
+
+[unit_musketeers]
+name          = _("Musketeers")
+class         = "Land"
+tech_req      = "Gunpowder"
+obsolete_by   = "Riflemen"
+graphic       = "u.musketeers"
+graphic_alt   = "-"
+sound_move    = "m_musketeers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_musketeers"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 3
+defense       = 3
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
+                "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
+helptext      = _("\
+Musketeers are infantry equipped with early\
+ firearms and replace Pikemen as the preferred\
+ city defender. They replace Archers and Legions\
+ as offensive foot soldiers.\
+")
+
+[unit_fanatics]
+name          = _("Fanatics")
+class         = "Land"
+tech_req      = "Fundamentalism"
+gov_req       = "Fundamentalism"
+obsolete_by   = "None"
+graphic       = "u.fanatics"
+graphic_alt   = "-"
+sound_move    = "m_fanatics"
+sound_move_alt = "m_generic"
+sound_fight   = "f_fanatics"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 4
+defense       = 4
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Fanatic"
+roles         = "DefendGood", "DefendGoodStartUnit"
+helptext      = _("\
+Fanatics are warriors extremely devoted to a higher cause.\
+"), _("\
+Fundamentalist nations can maintain Fanatic units without\
+ having to pay any shields for upkeep.\
+")
+
+[unit_partisan]
+name          = _("Partisan")
+class         = "Land"
+tech_req      = "Guerilla Warfare"
+obsolete_by   = "None"
+graphic       = "u.partisan"
+graphic_alt   = "-"
+sound_move    = "m_partisan"
+sound_move_alt = "m_generic"
+sound_fight   = "f_partisan"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 4
+defense       = 4
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "IgTer", "IgZOC"
+roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
+helptext      = _("\
+Partisans are guerilla fighters who are experts\
+ at using the terrain to their advantage.\
+"), _("\
+A number of Partisans are granted free when an enemy conquers your\
+ city -- they automatically assume defensive positions in the\
+ surrounding countryside -- but only under these conditions:\n\
+ - Guerilla Warfare must be known by at least one player.\n\
+ - You must be the player who originally built the city.\n\
+ - You must know about Communism and Gunpowder.\n\
+ - You must run either a Democracy or a Communist government.\
+")
+
+[unit_alpine_troops]
+name          = _("Alpine Troops")
+class         = "Land"
+tech_req      = "Tactics"
+obsolete_by   = "None"
+graphic       = "u.alpine_troops"
+graphic_alt   = "-"
+sound_move    = "m_alpine_troops"
+sound_move_alt = "m_generic"
+sound_fight   = "f_alpine_troops"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 5
+defense       = 5
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "IgTer"
+roles         = "DefendGood", "DefendGoodStartUnit"
+helptext      = _("\
+Alpine Troops are highly mobile units as well as\
+ excellent defenders.  Similar to an Explorer, they\
+ treat every land tile as if it had a road on it.\
+")
+
+[unit_riflemen]
+name          = _("Riflemen")
+class         = "Land"
+tech_req      = "Conscription"
+obsolete_by   = "None"
+graphic       = "u.riflemen"
+graphic_alt   = "-"
+sound_move    = "m_riflemen"
+sound_move_alt = "m_generic"
+sound_fight   = "f_riflemen"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 5
+defense       = 4
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+helptext      = _("\
+Riflemen are World War-era infantry. They are good\
+ at defending cities and have decent attack\
+ capabilities.\
+")
+
+[unit_marines]
+name          = _("Marines")
+class         = "Land"
+tech_req      = "Amphibious Warfare"
+obsolete_by   = "None"
+graphic       = "u.marines"
+graphic_alt   = "-"
+sound_move    = "m_marines"
+sound_move_alt = "m_generic"
+sound_fight   = "f_marines"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 8
+defense       = 5
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Marines", "BeachLander"
+roles         = "DefendOk", "DefendOkStartUnit", "BarbarianSeaTech"
+helptext      = _("\
+Marines are infantry who are experts at marine warfare.\
+")
+
+[unit_paratroopers]
+name          = _("Paratroopers")
+class         = "Land"
+tech_req      = "Combined Arms"
+obsolete_by   = "None"
+graphic       = "u.paratroopers"
+graphic_alt   = "-"
+sound_move    = "m_paratroopers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_paratroopers"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 6
+defense       = 4
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Paratroopers"
+roles         = "DefendOk", "DefendOkStartUnit"
+helptext      = _("\
+Paratroopers are experts at airborne attacks. \
+From a friendly city or airbase, Paratroopers who have not expended any \
+movement points can paradrop directly to any tile in range, and be \
+immediately ready to act there. (Beware dropping into unseen territory, \
+as Paratroopers landing on a tile occupied by enemy units are easy \
+targets!)\
+")
+paratroopers_range = 10
+paratroopers_mr_req = 1
+paratroopers_mr_sub = 0
+
+[unit_mech_inf]
+name          = _("Mech. Inf.")
+class         = "Land"
+tech_req      = "Labor Union"
+obsolete_by   = "None"
+graphic       = "u.mech_inf"
+graphic_alt   = "-"
+sound_move    = "m_mech_inf"
+sound_move_alt = "m_generic"
+sound_fight   = "f_mech_inf"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 6
+defense       = 6
+hitpoints     = 30
+firepower     = 1
+move_rate     = 6
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "DefendGood", "DefendGoodStartUnit"
+helptext      = _("\
+The Mechanized Infantry has the strongest defensive strength\
+ of any land unit, but is only available near the end of the\
+ technology tree.\
+")
+
+[unit_horsemen]
+name          = _("Horsemen")
+class         = "Land"
+tech_req      = "Horseback Riding"
+obsolete_by   = "Knights"
+graphic       = "u.horsemen"
+graphic_alt   = "-"
+sound_move    = "m_horsemen"
+sound_move_alt = "m_generic"
+sound_fight   = "f_horsemen"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 2
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
+helptext      = _("\
+Horsemen are mounted warriors and an early\
+ shock-troop that can penetrate deep into\
+ enemy territory.\
+")
+
+[unit_chariot]
+name          = _("Chariot")
+class         = "Land"
+tech_req      = "The Wheel"
+obsolete_by   = "Knights"
+graphic       = "u.chariot"
+graphic_alt   = "-"
+sound_move    = "m_chariot"
+sound_move_alt = "m_generic"
+sound_fight   = "f_chariot"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 3
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit", "Hut", "Hunter"
+helptext      = _("\
+Chariots are horse-pulled war wagons, stronger\
+ but more expensive than horsemen.\
+")
+
+[unit_elephants]
+name          = _("Elephants")
+class         = "Land"
+tech_req      = "Polytheism"
+obsolete_by   = "Crusaders"
+graphic       = "u.elephants"
+graphic_alt   = "-"
+sound_move    = "m_elephants"
+sound_move_alt = "m_generic"
+sound_fight   = "f_elephants"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 4
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit"
+helptext      = _("\
+Elephants are towering animals trained for war that are often used as\
+ powerful shock troops, but defend poorly against most other units.\
+")
+
+[unit_crusaders]
+name          = _("Crusaders")
+class         = "Land"
+tech_req      = "Monotheism"
+obsolete_by   = "Dragoons"
+graphic       = "u.crusaders"
+graphic_alt   = "-"
+sound_move    = "m_crusaders"
+sound_move_alt = "m_generic"
+sound_fight   = "f_crusaders"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 5
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit"
+helptext      = _("\
+Crusaders are highly disciplined mounted\
+ warriors driven by a higher cause.\
+")
+
+[unit_knights]
+name          = _("Knights")
+class         = "Land"
+tech_req      = "Chivalry"
+obsolete_by   = "Dragoons"
+graphic       = "u.knights"
+graphic_alt   = "-"
+sound_move    = "m_knights"
+sound_move_alt = "m_generic"
+sound_fight   = "f_knights"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 4
+defense       = 2
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit", "HutTech", "BarbarianTech",
+                "BarbarianBuildTech", "BarbarianSeaTech", "Hunter"
+helptext      = _("\
+Knights are mounted and heavily armored warriors.\
+")
+
+[unit_dragoons]
+name          = _("Dragoons")
+class         = "Land"
+tech_req      = "Leadership"
+obsolete_by   = "Cavalry"
+graphic       = "u.dragoons"
+graphic_alt   = "-"
+sound_move    = "m_dragoons"
+sound_move_alt = "m_generic"
+sound_fight   = "f_dragoons"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 5
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "Horse"
+roles         = "AttackFastStartUnit", "BarbarianBuildTech", "BarbarianSeaTech",
+                "Hunter"
+helptext      = _("\
+Dragoons are mounted warriors carrying early firearms.\
+ As the first very mobile gunpowder unit, they are\
+ formidable for offensive campaigns.\
+")
+
+[unit_cavalry]
+name          = _("Cavalry")
+class         = "Land"
+tech_req      = "Tactics"
+obsolete_by   = "Armor"
+graphic       = "u.cavalry"
+graphic_alt   = "-"
+sound_move    = "m_cavalry"
+sound_move_alt = "m_generic"
+sound_fight   = "f_cavalry"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 8
+defense       = 3
+hitpoints     = 20
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackFastStartUnit", "Hunter"
+helptext      = _("\
+Cavalry are mounted and highly trained soldiers.\
+")
+
+[unit_armor]
+name          = _("Armor")
+class         = "Land"
+tech_req      = "Mobile Warfare"
+obsolete_by   = "None"
+graphic       = "u.armor"
+graphic_alt   = "-"
+sound_move    = "m_armor"
+sound_move_alt = "m_generic"
+sound_fight   = "f_armor"
+sound_fight_alt = "f_generic"
+build_cost    = 80
+pop_cost      = 0
+attack        = 10
+defense       = 5
+hitpoints     = 30
+firepower     = 1
+move_rate     = 6
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackFastStartUnit", "Hunter"
+helptext      = _("\
+Armors are motorized war wagons that are faster,\
+ stronger, and can take more damage than any\
+ mounted unit.\
+")
+
+[unit_catapult]
+name          = _("Catapult")
+class         = "Land"
+tech_req      = "Mathematics"
+obsolete_by   = "Cannon"
+graphic       = "u.catapult"
+graphic_alt   = "-"
+sound_move    = "m_catapult"
+sound_move_alt = "m_generic"
+sound_fight   = "f_catapult"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 6
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackStrongStartUnit"
+helptext      = _("\
+Catapults are large rock-throwing machines of war.\
+ They are very strong attackers but equally weak\
+ defenders and will need an escort to be effective.\
+")
+
+[unit_cannon]
+name          = _("Cannon")
+class         = "Land"
+tech_req      = "Metallurgy"
+obsolete_by   = "Artillery"
+graphic       = "u.cannon"
+graphic_alt   = "-"
+sound_move    = "m_cannon"
+sound_move_alt = "m_generic"
+sound_fight   = "f_cannon"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 8
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
+helptext      = _("\
+Cannons are large firearms that can fire heavy\
+ projectiles over long distances. They are very\
+ strong attackers but equally weak defenders and\
+ will need an escort to be effective.\
+")
+
+[unit_artillery]
+name          = _("Artillery")
+class         = "Land"
+tech_req      = "Machine Tools"
+obsolete_by   = "Howitzer"
+graphic       = "u.artillery"
+graphic_alt   = "-"
+sound_move    = "m_artillery"
+sound_move_alt = "m_generic"
+sound_fight   = "f_artillery"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 10
+defense       = 1
+hitpoints     = 20
+firepower     = 2
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackStrongStartUnit"
+helptext      = _("\
+The artillery is an upgraded cannon. It is a very\
+ strong attacker but equally weak defender and\
+ will need an escort to be effective.\
+")
+
+[unit_howitzer]
+name          = _("Howitzer")
+class         = "Land"
+tech_req      = "Robotics"
+obsolete_by   = "None"
+graphic       = "u.howitzer"
+graphic_alt   = "-"
+sound_move    = "m_howitzer"
+sound_move_alt = "m_generic"
+sound_fight   = "f_howitzer"
+sound_fight_alt = "f_generic"
+build_cost    = 70
+pop_cost      = 0
+attack        = 12
+defense       = 2
+hitpoints     = 30
+firepower     = 2
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = ""
+roles         = "AttackStrongStartUnit"
+helptext      = _("\
+Howitzers are upgraded artillery with improved\
+ defensive as well as offensive capabilities.\
+ They can shoot over city walls, ignoring their effect.\
+")
+
+[unit_fighter]
+name          = _("Fighter")
+class         = "Air"
+tech_req      = "Flight"
+obsolete_by   = "Stealth Fighter"
+graphic       = "u.fighter"
+graphic_alt   = "-"
+sound_move    = "m_fighter"
+sound_move_alt = "m_generic"
+sound_fight   = "f_fighter"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 4
+defense       = 3
+hitpoints     = 20
+firepower     = 2
+move_rate     = 20
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 1
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+targets       = "Air", "Missile"
+bonuses       =
+   { "flag", "type", "value"
+     "Helicopter", "DefenseDivider", 1
+     "Helicopter", "Firepower1", 1
+   }
+flags         = "AirAttacker", "Unbribable", "HasNoZOC"
+roles         = ""
+helptext      = _("\
+Fighters are your first airborne units. They can\
+ move anywhere and attack any unit.\
+")
+
+[unit_bomber]
+name          = _("Bomber")
+class         = "Air"
+tech_req      = "Advanced Flight"
+obsolete_by   = "Stealth Bomber"
+graphic       = "u.bomber"
+graphic_alt   = "-"
+sound_move    = "m_bomber"
+sound_move_alt = "m_generic"
+sound_fight   = "f_bomber"
+sound_fight_alt = "f_generic"
+build_cost    = 120
+pop_cost      = 0
+attack        = 12
+defense       = 1
+hitpoints     = 20
+firepower     = 2
+move_rate     = 16
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 2
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "FieldUnit", "Unbribable", "OneAttack", "AirAttacker", "HasNoZOC"
+roles         = ""
+helptext      = _("\
+Bombers are specialized airborne units that may\
+ only attack ground targets, not other airborne\
+ units.\
+")
+
+[unit_helicopter]
+; /* TRANS: unit type */
+name          = _("Helicopter")
+class         = "Helicopter"
+tech_req      = "Combined Arms"
+obsolete_by   = "None"
+graphic       = "u.helicopter"
+graphic_alt   = "-"
+sound_move    = "m_helicopter"
+sound_move_alt = "m_generic"
+sound_fight   = "f_helicopter"
+sound_fight_alt = "f_generic"
+build_cost    = 100
+pop_cost      = 0
+attack        = 10
+defense       = 3
+hitpoints     = 20
+firepower     = 2
+move_rate     = 12
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "FieldUnit", "OneAttack", "Helicopter", "AirAttacker", "Unbribable"
+roles         = ""
+helptext      = _("\
+The Helicopter is a very powerful unit, as it can both fly and\
+ conquer cities.  Care must be exercised, because Helicopters lose a\
+ small amount of health for every turn not spent in a city or airbase\
+ or on a Carrier, and they may be attacked by ground units.\
+")
+
+[unit_stealth_fighter]
+name          = _("Stealth Fighter")
+class         = "Air"
+tech_req      = "Stealth"
+obsolete_by   = "None"
+graphic       = "u.stealth_fighter"
+graphic_alt   = "-"
+sound_move    = "m_stealth_fighter"
+sound_move_alt = "m_generic"
+sound_fight   = "f_stealth_fighter"
+sound_fight_alt = "f_generic"
+build_cost    = 80
+pop_cost      = 0
+attack        = 8
+defense       = 4
+hitpoints     = 20
+firepower     = 2
+move_rate     = 28 
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 1
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+targets       = "Air", "Missile"
+bonuses       =
+   { "flag", "type", "value"
+     "Helicopter", "DefenseDivider", 1
+     "Helicopter", "Firepower1", 1
+   }
+vision_layer  = "Stealth"
+flags         = "AirAttacker", "Unbribable", "HasNoZOC"
+roles         = ""
+helptext      = _("\
+An improved Fighter, with improved attack and a higher movement\
+ radius.\
+")
+
+[unit_stealth_bomber]
+name          = _("Stealth Bomber")
+class         = "Air"
+tech_req      = "Stealth"
+obsolete_by   = "None"
+graphic       = "u.stealth_bomber"
+graphic_alt   = "-"
+sound_move    = "m_stealth_bomber"
+sound_move_alt = "m_generic"
+sound_fight   = "f_stealth_bomber"
+sound_fight_alt = "f_generic"
+build_cost    = 160
+pop_cost      = 0
+attack        = 18
+defense       = 5
+hitpoints     = 20
+firepower     = 2
+move_rate     = 24 
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 2
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+vision_layer  = "Stealth"
+flags         = "FieldUnit", "OneAttack", "AirAttacker",
+                "HasNoZOC", "Unbribable"
+roles         = ""
+helptext      = _("\
+An improved Bomber, with improved attack and a higher movement\
+ radius.\
+")
+
+[unit_trireme]
+; /* TRANS: unit type */
+name          = _("Trireme")
+class         = "Trireme"
+tech_req      = "Map Making"
+obsolete_by   = "Caravel"
+graphic       = "u.trireme"
+graphic_alt   = "-"
+sound_move    = "m_trireme"
+sound_move_alt = "m_generic"
+sound_fight   = "f_trireme"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 1
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 6
+vision_radius_sq = 2
+transport_cap = 2
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Land"
+flags         = "BadCityDefender", "Provoking"
+roles         = "Ferryboat", "FerryStartUnit"
+helptext      = _("\
+The Trireme is your first boat unit. It can act\
+ as a transport ship and has rudimentary offensive\
+ capabilities, but may not enter deep ocean tiles.\
+")
+
+[unit_caravel]
+name          = _("Caravel")
+class         = "Sea"
+tech_req      = "Navigation"
+obsolete_by   = "Galleon"
+graphic       = "u.caravel"
+graphic_alt   = "-"
+sound_move    = "m_caravel"
+sound_move_alt = "m_generic"
+sound_fight   = "f_caravel"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 2
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 6
+vision_radius_sq = 2
+transport_cap = 3
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Land"
+flags         = "BadCityDefender", "Provoking"
+roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
+helptext      = _("\
+The Caravel replaces the Trireme and can enter\
+ any ocean tile.\
+")
+
+[unit_galleon]
+name          = _("Galleon")
+class         = "Sea"
+tech_req      = "Magnetism"
+obsolete_by   = "Transport"
+graphic       = "u.galleon"
+graphic_alt   = "-"
+sound_move    = "m_galleon"
+sound_move_alt = "m_generic"
+sound_fight   = "f_galleon"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 0
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 8
+vision_radius_sq = 2
+transport_cap = 4
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Land"
+flags         = "BadCityDefender", "Provoking"
+roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
+helptext      = _("\
+The Galleon is a pure transport ship and cannot\
+ attack other ships, though it may still defend\
+ itself when attacked.\
+")
+
+[unit_frigate]
+name          = _("Frigate")
+class         = "Sea"
+tech_req      = "Magnetism"
+obsolete_by   = "Ironclad"
+graphic       = "u.frigate"
+graphic_alt   = "-"
+sound_move    = "m_frigate"
+sound_move_alt = "m_generic"
+sound_fight   = "f_frigate"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 4
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 8
+vision_radius_sq = 2
+transport_cap = 2
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Land"
+flags         = "BadCityDefender", "Provoking"
+roles         = "Hunter"
+helptext      = _("\
+The Frigate is a highly versatile boat unit,\
+ that is both a strong offensive unit as well\
+ as a decent transport ship.\
+")
+
+[unit_ironclad]
+name          = _("Ironclad")
+class         = "Sea"
+tech_req      = "Steam Engine"
+obsolete_by   = "Destroyer"
+graphic       = "u.ironclad"
+graphic_alt   = "-"
+sound_move    = "m_ironclad"
+sound_move_alt = "m_generic"
+sound_fight   = "f_ironclad"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 4
+defense       = 4
+hitpoints     = 30
+firepower     = 1
+move_rate     = 8
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "BadCityDefender"
+roles         = "Hunter"
+helptext      = _("\
+The Ironclad is an armored ship that is\
+ much more sturdy than the Frigate but\
+ loses the latter's transport capability.\
+")
+
+[unit_destroyer]
+name          = _("Destroyer")
+class         = "Sea"
+tech_req      = "Electricity"
+obsolete_by   = "None"
+graphic       = "u.destroyer"
+graphic_alt   = "-"
+sound_move    = "m_destroyer"
+sound_move_alt = "m_generic"
+sound_fight   = "f_destroyer"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 4
+defense       = 4
+hitpoints     = 30
+firepower     = 1
+move_rate     = 12
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "BadCityDefender"
+roles         = "Hunter"
+helptext      = _("\
+An improved Ironclad, with better move rate and vision.\
+"), _("\
+TIP:  A very fast unit, which is very useful for hunting down enemy\
+ Transports.\
+")
+
+[unit_cruiser]
+name          = _("Cruiser")
+class         = "Sea"
+tech_req      = "Steel"
+obsolete_by   = "AEGIS Cruiser"
+graphic       = "u.cruiser"
+graphic_alt   = "-"
+sound_move    = "m_cruiser"
+sound_move_alt = "m_generic"
+sound_fight   = "f_cruiser"
+sound_fight_alt = "f_generic"
+build_cost    = 80
+pop_cost      = 0
+attack        = 6
+defense       = 6
+hitpoints     = 30
+firepower     = 2
+move_rate     = 11
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "BadCityDefender"
+roles         = "DefendGood", "DefendGoodStartUnit"
+helptext      = _("\
+The Cruiser is a large surface warship with equally strong\
+ offensive and defensive capabilities.\
+"), _("\
+A Cruiser's main duties are offensive strikes against\
+ weaker ships and to protecting other ships.\
+")
+
+[unit_aegis_cruiser]
+name          = _("AEGIS Cruiser")
+class         = "Sea"
+tech_req      = "Rocketry"
+obsolete_by   = "None"
+graphic       = "u.aegis_cruiser"
+graphic_alt   = "-"
+sound_move    = "m_aegis_cruiser"
+sound_move_alt = "m_generic"
+sound_fight   = "f_aegis_cruiser"
+sound_fight_alt = "f_generic"
+build_cost    = 100
+pop_cost      = 0
+attack        = 8
+defense       = 8
+hitpoints     = 30
+firepower     = 2
+move_rate     = 11
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+bonuses       =
+   { "flag", "type", "value"
+     "AirAttacker", "DefenseMultiplier", 4
+   }
+flags         = "BadCityDefender"
+roles         = "DefendGood", "DefendGoodStartUnit"
+helptext      = _("\
+The AEGIS Cruiser is equipped with an advanced\
+ defensive missile system.\
+")
+
+[unit_battleship]
+name          = _("Battleship")
+class         = "Sea"
+tech_req      = "Automobile"
+obsolete_by   = "None"
+graphic       = "u.battleship"
+graphic_alt   = "-"
+sound_move    = "m_battleship"
+sound_move_alt = "m_generic"
+sound_fight   = "f_battleship"
+sound_fight_alt = "f_generic"
+build_cost    = 160
+pop_cost      = 0
+attack        = 12
+defense       = 12
+hitpoints     = 40
+firepower     = 2
+move_rate     = 10
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "BadCityDefender"
+roles         = ""
+helptext      = _("\
+The Battleship is the supreme naval unit with\
+ excellent offensive and defensive values.\
+")
+
+[unit_submarine]
+name          = _("Submarine")
+class         = "Sea"
+tech_req      = "Combustion"
+obsolete_by   = "None"
+graphic       = "u.submarine"
+graphic_alt   = "-"
+sound_move    = "m_submarine"
+sound_move_alt = "m_generic"
+sound_fight   = "f_submarine"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 9
+defense       = 2
+hitpoints     = 30
+firepower     = 2
+move_rate     = 10
+vision_radius_sq = 8
+transport_cap = 8
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Missile"
+vision_layer  = "Subsurface"
+flags         = "BadCityDefender", "Provoking",
+	        "Only_Native_Attack"
+roles         = "Hunter"
+helptext      = _("\
+Traveling under the surface of the sea, Submarines have\
+ high strategic value, but weak defense if caught\
+ off guard. They have the ability to carry Nuclear\
+ and Cruise Missiles.\
+"), _("\
+TIP:  Against stronger ships, Submarines can cause\ 
+ greater losses than incurred when they attack in numbers.\
+")
+
+[unit_carrier]
+name          = _("Carrier")
+class         = "Sea"
+tech_req      = "Advanced Flight"
+obsolete_by   = "None"
+graphic       = "u.carrier"
+graphic_alt   = "-"
+sound_move    = "m_carrier"
+sound_move_alt = "m_generic"
+sound_fight   = "f_carrier"
+sound_fight_alt = "f_generic"
+build_cost    = 160
+pop_cost      = 0
+attack        = 1
+defense       = 9
+hitpoints     = 40
+firepower     = 2
+move_rate     = 10
+vision_radius_sq = 8
+transport_cap = 8
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Air", "Missile", "Helicopter"
+flags         = "BadCityDefender", "Only_Native_Attack", "Provoking"
+roles         = ""
+helptext      = _("\
+The Carrier is a mobile airport.\
+"), _("\
+TIP:  Guard Carriers with a handful of fast-moving ships and a\
+ battleship, as losing a fully-equipped Carrier is VERY\
+ painful and expensive.\
+")
+
+[unit_transport]
+name          = _("Transport")
+class         = "Sea"
+tech_req      = "Industrialization"
+obsolete_by   = "None"
+graphic       = "u.transport"
+graphic_alt   = "-"
+sound_move    = "m_transport"
+sound_move_alt = "m_generic"
+sound_fight   = "f_transport"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 0
+defense       = 3
+hitpoints     = 30
+firepower     = 1
+move_rate     = 10
+vision_radius_sq = 8
+transport_cap = 8
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+cargo         = "Land"
+flags         = "BadCityDefender", "Provoking"
+roles         = "Ferryboat", "FerryStartUnit"
+helptext      = _("\
+The Transport cannot attack on its own but\
+ may defend itself when under attack.\
+ Marines can directly attack from a Transport.\
+")
+
+[unit_cruise_missile]
+name          = _("Cruise Missile")
+class         = "Missile"
+tech_req      = "Rocketry"
+obsolete_by   = "None"
+graphic       = "u.cruise_missile"
+graphic_alt   = "-"
+sound_move    = "m_cruise_missile"
+sound_move_alt = "m_generic"
+sound_fight   = "f_cruise_missile"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 18
+defense       = 0
+hitpoints     = 10
+firepower     = 3
+move_rate     = 24
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 1
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC", "Unbribable"
+roles         = ""
+helptext      = _("\
+The Cruise Missile is a long-distance missile\
+ that can strike deep into enemy territory.\
+"), _("\
+TIP:  A handful of these can successfully keep the waters around\
+ your treasured homeland free of enemy ships.\
+")
+
+[unit_nuclear]
+name          = _("Nuclear")
+class         = "Missile"
+tech_req      = "Rocketry"
+obsolete_by   = "None"
+graphic       = "u.nuclear"
+graphic_alt   = "-"
+sound_move    = "m_nuclear"
+sound_move_alt = "m_generic"
+sound_fight   = "f_nuclear"
+sound_fight_alt = "f_generic"
+build_cost    = 160
+pop_cost      = 0
+attack        = 99
+defense       = 0
+hitpoints     = 10
+firepower     = 1
+move_rate     = 32
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 1
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "Unbribable"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = ""
+helptext      = _("\
+You can build Nuclear units when you have the required advance, and\
+ the Manhattan Project wonder has been built by any player.\
+"), _("\
+On impact, the blast will destroy any unit in an area 3 tiles wide\
+ (3x3 squares for rectangular grids), including friendly units.\
+ Any city within the blast area loses half its population, and\
+ land tiles within the blast area are subject to nuclear fallout.\
+"), _("\
+Nuclear fallout reduces tile output and increases the risk of global\
+ nuclear winter; see the help on Fallout.\
+"), _("\
+TIP 1:  Nuking the ocean will not generate fallout, and is a most\
+ effective (but expensive!!) way of getting rid of enemy\
+ ships.\
+"), _("\
+TIP 2:  You may be involved in a situation where you've invaded an\
+ enemy country en masse, but the enemy cities are too strong.\
+ Before using a Nuclear unit, assemble a gang of Settlers, Workers,\
+ and/or Engineers next to the city and have them ready to fix\
+ the fallout on the same turn it occurs!  This minimizes the\
+ chance of nuclear winter.  Eco-friendly nukes!\
+")
+
+[unit_diplomat]
+name          = _("Diplomat")
+class         = "Land"
+tech_req      = "Writing"
+obsolete_by   = "Spy"
+graphic       = "u.diplomat"
+graphic_alt   = "-"
+sound_move    = "m_diplomat"
+sound_move_alt = "m_generic"
+sound_fight   = "f_diplomat"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 0
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Provoking"
+veteran_names =
+; /* TRANS: diplomatic rank. */
+  _("?diplomatic_rank:attaché"),
+; /* TRANS: diplomatic rank */
+  _("?diplomatic_rank:secretary"),
+; /* TRANS: diplomatic rank */
+  _("?diplomatic_rank:envoy"),
+; /* TRANS: diplomatic rank */
+  _("?diplomatic_rank:ambassador")
+veteran_raise_chance = 50, 33, 20, 0
+veteran_work_raise_chance = 0, 0, 0, 0
+veteran_power_fact = 100, 105, 110, 115
+veteran_move_bonus = 0, 0, 0, 0
+roles         = "DiplomatStartUnit"
+helptext      = _("\
+A Diplomat is an official that carries your dispatches and\
+ is authorized to deal with foreign dignitaries. He may\
+ also undertake various covert operations with the intent of\
+ harming your opponents; Diplomats in your own cities defend\
+ them against such actions.\
+"), _("\
+Many covert actions may be attempted even in peacetime, but the more\
+ aggressive actions will be discovered and cause diplomatic incidents,\
+ which can allow Republics and Democracies to break treaties.\
+"), _("\
+If a foreign unit is alone on a tile, you may attempt to bribe it\
+ with your Diplomat. By paying a sum of gold the unit will immediately\
+ become yours; the exact sum depends on the status of the unit and\
+ that of the civilization owning it. However, units belonging to\
+ Democratic governments cannot be bribed. Bribery when not at war\
+ will cause a diplomatic incident.\
+"), _("\
+Diplomats can also perform a number of actions in another player's\
+ city, although each Diplomat may attempt only one action. Most of\
+ these actions have a chance of failure. Also, any enemy Diplomats or\
+ Spies in the city will oppose hostile actions, as will the enemy Leader\
+ in games with leaders; in this case, either your unit or the defending\
+ unit will die (if you go up against the Leader you will always die). If\
+ the defending unit dies, you lose one movement point and may try again.\
+"), _("\
+The actions available to Diplomats in a city are:\
+"), _("\
+ - \"Establish Embassy\": This action always succeeds, and gives\
+ permanent contact with the city's owner, as well as intelligence\
+ on their tax rates and technology.\
+"), _("\
+ - \"Investigate City\": Your unit attempts to report detailed\
+ information about the city: its status, what buildings and units are\
+ within, and what it is currently producing.\
+"), _("\
+ - \"Sabotage City\": Your unit attempts either to disrupt all the\
+ city's work so far towards its current project, or to destroy an\
+ existing building in the city, at random. Once built, Palaces and\
+ Wonders cannot be sabotaged, and attempts to sabotage City Walls\
+ or any building in a capital each halve the chance of success.\
+ Sabotage may only be attempted when openly at war.\
+"), _("\
+ - \"Steal Technology\": Your unit attempts to learn the secrets of a\
+ random technology known to the city's owner but not to you. Technology\
+ may only be stolen once from a given enemy city by Diplomats. This\
+ action may be attempted even when not at war, but will cause a\
+ diplomatic incident.\
+"), _("\
+ - \"Incite a Revolt\": In return for gold a foreign city will change\
+ allegiance and join your empire, bringing along all nearby units that\
+ call it home, but reducing its size by 1. Units in other cities\
+ remain in the enemy's control, but units outside cities are lost to\
+ both players. The exact sum depends on the status of the city and\
+ that of the civilization that owns it. It is not possible to incite\
+ a rebellion in a capital, or in any city governed by a democracy.\
+ Incitement may be attempted in peacetime, but will cause a\
+ diplomatic incident.\
+"), _("\
+In some game strategies, hordes of Diplomats can be used to wreak\
+ havoc on the enemy.  Little wonder that Diplomats are often\
+ viewed with suspicion and fear!\
+"), _("\
+Diplomats built under a Communist government will start at the first\
+ veteran level (secretary).\
+")
+
+[unit_spy]
+name          = _("Spy")
+class         = "Land"
+tech_req      = "Espionage"
+obsolete_by   = "None"
+graphic       = "u.spy"
+graphic_alt   = "-"
+sound_move    = "m_spy"
+sound_move_alt = "m_generic"
+sound_fight   = "f_spy"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 0
+hitpoints     = 10
+firepower     = 1
+move_rate     = 6
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy",
+                "Provoking"
+veteran_names =
+; /* TRANS: Spy veteran level */
+  _("?spy_level:informant"),
+; /* TRANS: Spy veteran level */
+  _("?spy_level:handler"),
+; /* TRANS: Spy veteran level */
+  _("?spy_level:agent"),
+; /* TRANS: Spy veteran level */
+  _("?spy_level:spymaster")
+veteran_raise_chance = 50, 33, 20, 0
+veteran_work_raise_chance = 0, 0, 0, 0
+veteran_power_fact = 100, 105, 110, 115
+veteran_move_bonus = 0, 0, 0, 0
+roles         = "DiplomatStartUnit"
+helptext      = _("\
+A Spy is more skilled in the arts of espionage than her Diplomat predecessor.\
+"), _("\
+She can perform all the functions of the Diplomat; refer to the Diplomat\
+ entry for more details. Unlike a Diplomat, a Spy may also survive an\
+ operation in a foreign city and become more experienced as a result.\
+ Spies are also more effective than Diplomats at defending cities\
+ against foreign Diplomats and Spies.\
+"), _("\
+A Spy can also be used to:\n\
+ - sabotage an enemy unit (reducing its hit points to half), if it is\
+ alone on a tile and the players are at war;\n\
+ - poison the water supply of an enemy city (reducing the population\
+ by one);\n\
+ - steal specific technology (with a reduced chance of success);\n\
+ - steal further technologies from a city which has already been\
+ stolen from (although cities become more resistant each time they\
+ are stolen from);\n\
+ - sabotage predetermined city targets (with a reduced chance of\
+ success).\
+"), _("\
+A Spy that survives the more aggressive actions (sabotage, theft,\
+ inciting rebellion, and poisoning) escapes to the safety of the\
+ nearest friendly city.\
+"), _("\
+Spies built under a Communist government will start at the first\
+ veteran level (handler).\
+")
+
+[unit_caravan]
+name          = _("Caravan")
+class         = "Land"
+tech_req      = "Trade"
+obsolete_by   = "Freight"
+graphic       = "u.caravan"
+graphic_alt   = "-"
+sound_move    = "m_caravan"
+sound_move_alt = "m_generic"
+sound_fight   = "f_caravan"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
+roles         = ""
+helptext      = _("\
+A Caravan carries goods or material to help build wonders in your\
+ cities.\
+"), _("\
+Every Caravan that is used to build a wonder will add 30 shields\
+ towards the production of the wonder.\
+"), _("\
+TIP:  You can stockpile a stack of Caravans in advance and bring\
+ them all into a city where you have started to build a wonder,\
+ and finish it in only one turn!\
+")
+
+[unit_freight]
+name          = _("Freight")
+class         = "Land"
+tech_req      = "The Corporation"
+obsolete_by   = "None"
+graphic       = "u.freight"
+graphic_alt   = "-"
+sound_move    = "m_freight"
+sound_move_alt = "m_generic"
+sound_fight   = "f_freight"
+sound_fight_alt = "f_generic"
+build_cost    = 50
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "HelpWonder", "IgZOC", "NonMil", "HasNoZOC"
+roles         = ""
+helptext      = _("\
+The Freight unit replaces the Caravan, and moves at twice the speed.\
+ Each Freight used to build a wonder will add 50 shields.\
+")
+
+[unit_explorer]
+name          = _("Explorer")
+class         = "Land"
+tech_req      = "Seafaring"
+obsolete_by   = "Partisan"
+graphic       = "u.explorer"
+graphic_alt   = "-"
+sound_move    = "m_explorer"
+sound_move_alt = "m_generic"
+sound_fight   = "f_explorer"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC"
+roles         = "Explorer", "ExplorerStartUnit"
+helptext      = _("\
+Explorers are brave individuals that are very useful for\
+ mapping unknown territory. They can slip through ZoC,\
+ have no unit upkeep, and move over any tile as if it\
+ had a road.
+")
+
+[unit_leader]
+name          = _("?unit:Leader")
+class         = "Land"
+tech_req      = "None"
+obsolete_by   = "None"
+graphic       = "u.leader"
+graphic_alt   = "u.explorer"
+sound_move    = "m_leader"
+sound_move_alt = "m_generic"
+sound_fight   = "f_leader"
+sound_fight_alt = "f_generic"
+build_cost    = 10
+pop_cost      = 0
+attack        = 0
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 8
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "IgZOC", "NonMil", "HasNoZOC", "NoBuild", "NoHome", "SuperSpy", 
+                "EvacuateFirst", "Unbribable", "GameLoss", "Unique",
+                "Provoking"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "KingStartUnit"
+helptext      = _("\
+This is you. If you lose this unit, you lose the game. So don't.\
+"), _("\
+Won't unleash barbarians from huts.\
+")
+
+[unit_barbarian_leader]
+name          = _("Barbarian Leader")
+class         = "Land"
+tech_req      = "None"
+obsolete_by   = "None"
+graphic       = "u.barbarian_leader"
+graphic_alt   = "u.diplomat"
+sound_move    = "m_barbarian_leader"
+sound_move_alt = "m_generic"
+sound_fight   = "f_barbarian_leader"
+sound_fight_alt = "f_generic"
+build_cost    = 40
+pop_cost      = 0
+attack        = 0
+defense       = 0
+hitpoints     = 10
+firepower     = 1
+move_rate     = 4
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 0
+uk_gold       = 0
+flags         = "IgZOC", "NonMil", "HasNoZOC", "Unbribable",
+                "EvacuateFirst", "SuperSpy", "NoHome", "NoBuild"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "BarbarianLeader"
+helptext      = _("\
+One Barbarian Leader appears every time there is a barbarian uprising\
+ somewhere in the world.\
+"), _("\
+When a Barbarian Leader is killed on a tile without any defending units,\
+ the 100 gold ransom is paid, but only to land units and helicopters.\
+")
+
+[unit_awacs]
+name          = _("AWACS")
+class         = "Air"
+tech_req      = "Advanced Flight"
+obsolete_by   = "None"
+graphic       = "u.awacs"
+graphic_alt   = "u.bomber"  ; backwards compatibility
+sound_move    = "m_awacs"
+sound_move_alt = "m_generic"
+sound_fight   = "f_awacs"
+sound_fight_alt = "f_generic"
+build_cost    = 140
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 32
+vision_radius_sq = 26
+transport_cap = 0
+fuel          = 2
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 0
+flags         = "HasNoZOC", "Unbribable"
+roles         = ""
+helptext      = _("\
+The AWACS (Airborne Warning and Control System) is an airplane with an \
+advanced radar that can determine the location of enemy units over a \
+wide area.\
+")

@@ -66,5 +66,6 @@ set restrictinfra "ENABLED"
 #scientific
 set endspaceship DISABLED
 
-
 metamessage FREECIVWEB Game XIX | 1 turn per day | 60 players | MP+ ruleset | 24000 tiles | Join now!
+
+cmdlevel basic

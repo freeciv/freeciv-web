@@ -2,13 +2,13 @@
 
 cmdlevel ctrl first
 
-set rulesetdir mpplus
+rulesetdir mpplus
 
 set minplayers 0
 set maxplayers 60
 set aifill 60
 set timeout 82800
-set first_timeout 259200
+set first_timeout 168000
 set nationset all
 set compresstype xs
 set allowtake=""
@@ -42,7 +42,7 @@ set startpos DEFAULT
 set landmass 64
 set specials 350 
 set alltemperate "ENABLED"
-separatepoles "DISABLED"
+set separatepoles "DISABLED"
 set tinyisles "DISABLED"
 set huts 0
 
@@ -66,5 +66,6 @@ set restrictinfra "ENABLED"
 #scientific
 set endspaceship DISABLED
 
-
 metamessage FREECIVWEB Game XIX | 1 turn per day | 60 players | MP+ ruleset | 24000 tiles | Join now!
+
+cmdlevel basic

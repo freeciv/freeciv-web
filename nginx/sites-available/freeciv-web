@@ -137,6 +137,9 @@
           proxy_redirect     off;
 	}
 
+        location = /meta/metaserver {
+          deny all;
+        }
 
 	# proxy for app-server on port 8080
 	location ~ / {

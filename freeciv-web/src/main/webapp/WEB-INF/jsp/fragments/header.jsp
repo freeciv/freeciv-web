@@ -33,6 +33,7 @@
 				</ul>
 			</li>
 			<li><a href="https://www.patreon.com/freecivweb">Please Donate</a></li>
+			<li><a href="https://github.com/freeciv/freeciv-web">Development</a></li>
 			<%--<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="${pageContext.request.locale.language} ${pageContext.request.locale.country}">
 					Language <span class="caret"></span>

@@ -32,15 +32,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.util.Constants;
+
 /**
  * This servlet will collect statistics about time played, and number of games stated.
  *
  * URL: /freeciv_time_played_stats
  */
 public class FreecivStatsServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	private final static Map<String, Integer> gameTypes = new HashMap<>();
+	
 	static {
 		gameTypes.put("single2d", 0);
 		gameTypes.put("single3d", 5);
@@ -60,8 +64,8 @@ public class FreecivStatsServlet extends HttpServlet {
 				return;
 			}
 
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
 			int gameTypeId = gameTypes.get(gameType);

@@ -24,6 +24,9 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 import javax.sql.*;
+
+import org.freeciv.util.Constants;
+
 import javax.naming.*;
 
 
@@ -33,6 +36,7 @@ import javax.naming.*;
  * URL: /random_user
  */
 public class RandomUser extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,8 +44,8 @@ public class RandomUser extends HttpServlet {
 
 		Connection conn = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
 			String query =

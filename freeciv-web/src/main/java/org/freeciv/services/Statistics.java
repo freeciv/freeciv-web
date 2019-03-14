@@ -14,6 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.freeciv.util.Constants;
+
 public class Statistics {
 
 	public List<Map<String, String>> getPlayByEmailWinners() {
@@ -21,9 +23,9 @@ public class Statistics {
 		Connection connection = null;
 		try {
 			Context env;
-			env = (Context) (new InitialContext().lookup("java:comp/env"));
+			env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
 
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 
 			String query = "SELECT winner, r.playerOne, r.playerTwo, endDate, "
@@ -66,8 +68,8 @@ public class Statistics {
 
 		Connection connection = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 			String query = "SELECT DISTINCT statsDate AS date, "
 					+ "(SELECT gameCount FROM games_played_stats WHERE statsDate = date AND gameType = '0') AS webSinglePlayer, "
@@ -110,8 +112,8 @@ public class Statistics {
 
 		Connection connection = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 			String query = "SELECT id, username, nation, score, end_turn, end_date, (select sum(s.score) from hall_of_fame s where s.username = a.username) as total_score FROM hall_of_fame a order by score DESC limit 500";
 

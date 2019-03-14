@@ -15,6 +15,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.freeciv.util.Constants;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -40,14 +41,21 @@ import java.util.Properties;
  * URL: /reset_password
  */
 public class ResetPassword extends HttpServlet {
+	
     private static final long serialVersionUID = 1L;
 
     private String captchaSecret;
+    
     private String emailUsername;
+    
     private String emailPassword;
+    
     private String emailHost;
+    
     private String emailPort;
+    
     private String emailSender;
+    
     private String fcwHost;
 
     public void init(ServletConfig config) throws ServletException {
@@ -115,8 +123,8 @@ public class ResetPassword extends HttpServlet {
         try {
             Thread.sleep(1000);
 
-            Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+            Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+            DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
             conn = ds.getConnection();
 
             String query = "UPDATE auth SET secure_hashed_password = ? where email = ? and activated = 1";

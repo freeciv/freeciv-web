@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.util.Constants;
 import org.json.JSONObject;
 
 /**
@@ -39,9 +40,11 @@ import org.json.JSONObject;
  * URL: /meta/status
  */
 public class RecentServerStatistics extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	private static final String CONTENT_TYPE = "application/json";
+	
 	private static final String INTERNAL_SERVER_ERROR = new JSONObject() //
 			.put("statusCode", HttpServletResponse.SC_INTERNAL_SERVER_ERROR) //
 			.put("error", "Internal server error.") //
@@ -53,8 +56,8 @@ public class RecentServerStatistics extends HttpServlet {
 		Connection conn = null;
 
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
 			String query = "" //

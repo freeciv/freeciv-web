@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.freeciv.model.Game;
+import org.freeciv.util.Constants;
 
 public class Games {
 
@@ -23,8 +24,8 @@ public class Games {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 
 			query = "SELECT COUNT(*) AS count " //
@@ -63,8 +64,8 @@ public class Games {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 
 			query = "SELECT host, port, type, version, patches, state, message, " //
@@ -123,8 +124,8 @@ public class Games {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 			query = "SELECT COUNT(*) AS count " //
 					+ "FROM servers s " //
@@ -155,8 +156,8 @@ public class Games {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 			query = "SELECT host, port, type, version, patches, state, message, " //
 					+ "	unix_timestamp()-unix_timestamp(stamp) AS duration, " //
@@ -224,8 +225,8 @@ public class Games {
 
 		Connection connection = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 
 			String query = "" //

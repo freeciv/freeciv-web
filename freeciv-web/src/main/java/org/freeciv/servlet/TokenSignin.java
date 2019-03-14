@@ -31,6 +31,9 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import java.sql.*;
 import java.util.Properties;
 import javax.sql.*;
+
+import org.freeciv.util.Constants;
+
 import javax.naming.*;
 
 /**
@@ -40,6 +43,7 @@ import javax.naming.*;
  * https://developers.google.com/identity/sign-in/web/backend-auth
  */
 public class TokenSignin extends HttpServlet {
+	
     private static final long serialVersionUID = 1L;
 
     private static final JacksonFactory jacksonFactory = new JacksonFactory();
@@ -85,8 +89,8 @@ public class TokenSignin extends HttpServlet {
                     return;
                 }
 
-                Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-                DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+                Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+                DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
                 conn = ds.getConnection();
 
                 // 1. Check if username and userId is already stored in the database,

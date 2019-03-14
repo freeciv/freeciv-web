@@ -199,7 +199,7 @@ some tasks you can work on. Pull requests on Github is welcome!
 
 Contributors to Freeciv-web
 ---------------------------
-Andreas Røsdal  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Andreas Røsdal  [@andreasrosdal](https://github.com/andreasrosdal)  
 Marko Lindqvist [@cazfi](https://github.com/cazfi)  
 Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
 Gerik Bonaert [@adaxi](https://github.com/adaxi)  

@@ -15,6 +15,25 @@
 -- does not provide an override is default/default.lua.
 
 
+-- This flags whether philosophy awards a bonus advance, and gets set to off (0) after T85.
+philosophy_possible = 1
+
+--Give players custom messages on certain years.  Currently at 400BC (T85), Philosophy expires. Let them know.
+function history_turn_notifications(turn, year)
+  if turn > 78 and turn < 85 then
+    notify.all("Philosophy will no longer award a bonus tech after turn 85.")
+  end
+
+  if turn == 85 then
+  -- Philosophy no longer gives advances after 400BC
+    notify.all("Philosophers around the world mourn the execution of Socrates. Philosophy no longer gives a bonus advance.")
+    philosophy_possible = 0
+  end
+  
+  return false
+end 
+signal.connect("turn_begin", "history_turn_notifications")          --  *************** turn_started deprecated in 3.1, renamed turn_begin
+
 -- Place Ruins at the location of the destroyed city.
 function city_destroyed_callback(city, loser, destroyer)
   city.tile:create_extra("Ruins", NIL)
@@ -23,51 +42,6 @@ function city_destroyed_callback(city, loser, destroyer)
 end
 
 signal.connect("city_destroyed", "city_destroyed_callback")
-
-
--- Grant tech when the wonder Darwin`s Voyage is built.
-function building_built_handler(btype, city)
-  local darw_btype = find.building_type("Darwin's Voyage")
-  local darw_id = darw_btype.id
-  local player, id = city.owner, btype.id
-  local gained
-
-  if id == darw_id then
-    -- Block the player from destroying the wonder, rebuilding it and
-    -- getting free advance again.
-    -- This also prevents those they share research with from getting
-    -- free advance from building Darwin`s Voyage themselves.
-    if player:give_tech(find.tech_type("Theory of Evolution"),
-                        0, false, "researched") then
-      -- Give the player free advance.
-      gained = player:give_tech(nil, 0, false, "researched")
-
-      -- Notify the player. Include the tech name in a way that makes it
-      -- look natural no matter if tech is announced or not.
-      notify.event(player, NIL, E.TECH_GAIN,
-        _("%s boosts research; you gain the immediate advance %s."),
-        darw_btype:name_translation(),
-        gained:name_translation())
-
-      notify.research(player, false, E.TECH_GAIN,
-        _("%s boosts %s research; you gain the immediate advance %s."),
-        darw_btype:name_translation(),
-        player.nation:name_translation(),
-        gained:name_translation())
-
-      -- default.lua informs the embassies when the tech source is a hut.
-      -- They should therefore be informed about the source here too.
-      notify.research_embassies(player, E.TECH_EMBASSY,
-                                -- /* TRANS: 1st %s is leader or team name */
-                                _("%s gains %s from %s."),
-                                player:research_name_translation(),
-                                gained:name_translation(),
-                                darw_btype:name_translation())
-    end
-  end
-end
-
-signal.connect("building_built", "building_built_handler")
 
 
 -- Hack: record which players already got Philosophy, to avoid
@@ -113,6 +87,35 @@ function tech_researched_handler(tech, player, how)
 
     record_philo(player)
 
+    
+    -- Philosophy does not give a bonus tech under certain conditions. Check for those conditions -------------------
+    if philosophy_possible == 0 then
+      -- No Philosophy advance after turn 85 (400 BCE)
+        return
+      end
+  
+      -- Philosophy can't give advances that come after Industrialization, Electricity, and Conscription --------------
+      -- Even knowing any of these techs makes an advance impossible !
+      
+      local researcher = player
+      local forbidden_tech = find.tech_type("Industrialization")
+  
+      if researcher:knows_tech(forbidden_tech) then
+        return
+      end
+  
+      forbidden_tech = find.tech_type("Electricity")
+  
+      if researcher:knows_tech(forbidden_tech) then
+        return
+      end
+  
+      forbidden_tech = find.tech_type("Conscription")
+  
+      if researcher:knows_tech(forbidden_tech) then
+        return
+      end
+  
     -- Give the player a free advance.
     -- This will give a free advance for each player that shares research.
     gained = player:give_tech(nil, -1, false, "researched")

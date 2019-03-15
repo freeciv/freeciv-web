@@ -94,7 +94,7 @@ function can_actor_unit_move(actor_unit, target_tile)
 }
 
 /**************************************************************************
-  Encode a building ID for transfer in the value field of
+  Encode a building ID for transfer in the sub_tgt_id field of
   packet_unit_do_action for targeted sabotage city.
 **************************************************************************/
 function encode_building_id(building_id)
@@ -221,32 +221,12 @@ function act_sel_click_function(parent_id,
   case ACTION_MINE:
   case ACTION_IRRIGATE:
     return function() {
-      var packet = {
-        "pid"         : packet_unit_do_action,
-        "actor_id"    : actor_unit_id,
-        "target_id"   : tgt_id,
-        "extra_id"    : sub_tgt_id,
-        "value"       : 0,
-        "name"        : "",
-        "action_type" : action_id
-      };
-      send_request(JSON.stringify(packet));
-
+      request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
       $(parent_id).remove();
     };
   default:
     return function() {
-      var packet = {
-        "pid"         : packet_unit_do_action,
-        "actor_id"    : actor_unit_id,
-        "target_id"   : tgt_id,
-        "extra_id"    : EXTRA_NONE,
-        "value"       : 0,
-        "name"        : "",
-        "action_type" : action_id
-      };
-      send_request(JSON.stringify(packet));
-
+      request_unit_do_action(action_id, actor_unit_id, tgt_id);
       $(parent_id).remove();
     };
   }
@@ -387,8 +367,7 @@ function popup_action_selection(actor_unit, action_probabilities,
             "orders"    : [ORDER_MOVE],
             "dir"       : [dir],
             "activity"  : [ACTIVITY_LAST],
-            "target"    : [0],
-            "extra"     : [EXTRA_NONE],
+            "sub_target": [0],
             "action"    : [ACTION_COUNT],
             "dest_tile" : target_tile['index']
           };
@@ -441,33 +420,17 @@ function popup_action_selection(actor_unit, action_probabilities,
             text    : "Auto attack from now on!",
             title   : "Attack without showing this attack dialog in the future",
             click   : function() {
-                          var packet = {
-                              "pid"         : packet_unit_do_action,
-                              "actor_id"    : actor_unit['id'],
-                              "target_id"   : target_tile['index'],
-                              "extra_id"    : EXTRA_NONE,
-                              "value"       : 0,
-                              "name"        : "",
-                              "action_type" : ACTION_ATTACK
-                            };
-                            send_request(JSON.stringify(packet));
-                            auto_attack = true;
-                            $(id).remove();
-                          }
+              request_unit_do_action(ACTION_ATTACK,
+                actor_unit['id'], target_tile['index']);
+              auto_attack = true;
+              $(id).remove();
+            }
           };
           buttons.push(button);
         } else {
-          var packet = {
-              "pid"         : packet_unit_do_action,
-              "actor_id"    : actor_unit['id'],
-              "target_id"   : target_tile['index'],
-              "extra_id"    : EXTRA_NONE,
-              "value"       : 0,
-              "name"        : "",
-              "action_type" : ACTION_ATTACK
-            };
-            send_request(JSON.stringify(packet));
-            return;
+          request_unit_do_action(ACTION_ATTACK,
+            actor_unit['id'], target_tile['index']);
+          return;
         }
   }
 
@@ -526,14 +489,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost, act_id)
   var close_button = {	Close: function() {$(id).dialog('close');}};
   var bribe_close_button = {	"Cancel": function() {$(id).dialog('close');},
   				"Do it!": function() {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : actor_unit['id'],
-                    "target_id": target_unit['id'],
-                    "extra_id" : EXTRA_NONE,
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": act_id};
-      send_request(JSON.stringify(packet));
+      request_unit_do_action(act_id, actor_unit['id'], target_unit['id']);
       $(id).dialog('close');
     }
   };
@@ -590,15 +546,7 @@ function popup_incite_dialog(actor_unit, target_city, cost, act_id)
   var close_button = {         Close:    function() {$(id).dialog('close');}};
   var incite_close_buttons = { 'Cancel': function() {$(id).dialog('close');},
                                'Do it!': function() {
-                                 var packet = {"pid" : packet_unit_do_action,
-                                               "actor_id" : actor_unit['id'],
-                                               "target_id": target_city['id'],
-                                               "extra_id" : EXTRA_NONE,
-                                               "value" : 0,
-                                               "name" : "",
-                                               "action_type": act_id};
-                                 send_request(JSON.stringify(packet));
-
+      request_unit_do_action(act_id, actor_unit['id'], target_city['id']);
                                  $(id).dialog('close');
                                }
                              };
@@ -647,17 +595,7 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
   var close_button = {          Close:    function() {$(id).dialog('close');}};
   var upgrade_close_buttons = { 'Cancel': function() {$(id).dialog('close');},
                                 'Do it!': function() {
-                                  var packet = {
-                                    "pid" : packet_unit_do_action,
-                                    "actor_id" : actor_unit['id'],
-                                    "target_id": target_city['id'],
-                                    "extra_id" : EXTRA_NONE,
-                                    "value" : 0,
-                                    "name" : "",
-                                    "action_type": act_id
-                                  };
-                                  send_request(JSON.stringify(packet));
-
+      request_unit_do_action(act_id, actor_unit['id'], target_city['id']);
                                   $(id).dialog('close');
                                 }
                              };
@@ -680,23 +618,13 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
   Needed because of JavaScript's scoping rules.
 **************************************************************************/
 function create_steal_tech_button(parent_id, tech,
-                                  actor_unit_id, target_city_id,
-                                  action_id)
+                                  actor_id, city_id, action_id)
 {
   /* Create the initial button with this tech */
   var button = {
     text : tech['name'],
     click : function() {
-      var packet = {"pid" : packet_unit_do_action,
-        "actor_id" : actor_unit_id,
-        "target_id": target_city_id,
-        "extra_id" : EXTRA_NONE,
-        "value" : tech['id'],
-        "name" : "",
-        "action_type": action_id};
-
-      send_request(JSON.stringify(packet));
-
+      request_unit_do_action(action_id, actor_id, city_id, tech['id']);
       $("#" + parent_id).remove();
     }
   };
@@ -763,16 +691,8 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                    text  : "At " + unit_types[actor_unit['type']]['name']
                            + "'s Discretion",
                    click : function() {
-                     var packet = {
-                       "pid" : packet_unit_do_action,
-                       "actor_id" : actor_unit['id'],
-                       "target_id": target_city['id'],
-                       "extra_id" : EXTRA_NONE,
-                       "value" : 0,
-                       "name" : "",
-                       "action_type": untargeted_action_id};
-                     send_request(JSON.stringify(packet));
-
+                     request_unit_do_action(untargeted_action_id,
+                       actor_unit['id'], target_city['id']);
                      $("#" + id).remove();
                    }
                  });
@@ -805,26 +725,14 @@ function create_sabotage_impr_button(improvement, parent_id,
                                      actor_unit_id, target_city_id, act_id)
 {
   /* Create the initial button with this tech */
-  var button = {
+  return {
     text : improvement['name'],
     click : function() {
-      var packet = {
-        "pid"          : packet_unit_do_action,
-        "actor_id"     : actor_unit_id,
-        "target_id"    : target_city_id,
-        "extra_id"     : EXTRA_NONE,
-        "value"        : encode_building_id(improvement['id']),
-        "name"         : "",
-        "action_type"  : act_id
-      };
-      send_request(JSON.stringify(packet));
-
+      request_unit_do_action(act_id, actor_unit_id, target_city_id,
+        encode_building_id(improvement['id']));
       $("#" + parent_id).remove();
     }
   };
-
-  /* The button is ready. */
-  return button;
 }
 
 /**************************************************************************

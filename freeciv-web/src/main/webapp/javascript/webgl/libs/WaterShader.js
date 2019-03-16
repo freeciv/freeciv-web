@@ -232,7 +232,8 @@ THREE.Water.prototype.render = function () {
 
 		this.material.visible = false;
 
-		this.renderer.render( scene, this.mirrorCamera, this.renderTarget, true );
+        //this.renderer.setRenderTarget(this.renderTarget);
+		this.renderer.render( scene, this.mirrorCamera);
 
 		this.material.visible = true;
 

@@ -33,9 +33,11 @@ import org.freeciv.services.Validation;
  * URL: /listsavegames
  */
 public class ListSaveGames extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	private final Validation validation = new Validation();
+	
 	private String savegameDirectory;
 
 	public void init(ServletConfig config) throws ServletException {

@@ -56,7 +56,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "mapimg_bugfix"
 )
 
 apply_patch() {

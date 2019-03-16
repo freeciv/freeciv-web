@@ -4,7 +4,7 @@
 FCW_DEST=/var/lib/tomcat8/webapps/freeciv-web
 
 mvn compile && \
-echo "Copying target/javascript/webclient.* to ${FCW_DEST}/javascript" && \
+echo "Copying target/freeciv-web/javascript/webclient.* to ${FCW_DEST}/javascript" && \
   cp target/freeciv-web/javascript/webclient.* "${FCW_DEST}"/javascript/ && \
 echo target/freeciv-web/javascript/webgl/libs/webgl-client* "${FCW_DEST}"/javascript/webgl/libs && \
   cp target/freeciv-web/javascript/webgl/libs/webgl-client* "${FCW_DEST}"/javascript/webgl/libs/

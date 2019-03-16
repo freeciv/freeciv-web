@@ -37,6 +37,7 @@ import org.json.JSONObject;
  * URL: /game/statistics/details
  */
 public class GameStatisticsDetails extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Override

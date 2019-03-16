@@ -11,7 +11,7 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Currently known servers based on Freeciv-web:
-- [freecivweb.org](https://freecivweb.org) (Only longturn games, no 3D)
+- [freecivweb.org](https://www.freecivweb.org) 
 - [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:
@@ -199,7 +199,7 @@ some tasks you can work on. Pull requests on Github is welcome!
 
 Contributors to Freeciv-web
 ---------------------------
-Andreas Røsdal  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Andreas Røsdal  [@andreasrosdal](https://github.com/andreasrosdal)  
 Marko Lindqvist [@cazfi](https://github.com/cazfi)  
 Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
 Gerik Bonaert [@adaxi](https://github.com/adaxi)  

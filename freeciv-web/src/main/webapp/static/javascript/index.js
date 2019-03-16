@@ -6,6 +6,9 @@ $(document).ready(function () {
 			loadBestOfPlayByEmail();
 			displayStore();
 
+			if (window.location.href == 'https://freecivweb.org/') window.location.href='https://www.freecivweb.org/';
+
+
 			if (!Detector.webgl) {
 	          $("#webgl_button").addClass("disabled");
 	          $("#webgl_button").html("WebGL not enabled!");

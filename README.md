@@ -11,7 +11,8 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Currently known servers based on Freeciv-web:
-- [freecivweb.org](https://www.freecivweb.org) 
+- [Freecivweb.org](https://www.freecivweb.org) - Full Freeciv-web
+- [Freeciv.xyz](http://freeciv.xyz) - LongTurn only.
 - [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:
@@ -51,7 +52,7 @@ Freeciv-Web consists of these components:
 Freeciv WebGL
 -------------
 Freeciv WebGL is the 3D version, which uses the Three.js 3D engine. More info about the WebGL 3D version can be found for [developers](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl) and [3D artists](https://github.com/freeciv/freeciv-web/wiki/Contributing-Blender-models-for-Freeciv-WebGL).
-Developer: Andreas Røsdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Developer: Andreas Røsdal [@andreasrosdal](http://www.github.com/andreasrosdal)  
 
 Running Freeciv-web on your computer
 ------------------------------------

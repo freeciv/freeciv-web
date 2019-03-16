@@ -1180,8 +1180,6 @@ function show_longturn_intro_dialog() {
         "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
         "little bit every day. <br><br> "+
         "Please be polite to the other players and don't cheat. "+
-        "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
-        "to report players who behave badly or cheat.<br><br>" +
         "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the game only if you are interested in playing one turn every day. " +
         "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
         "Joining this game requires signing in with a player name and validated Google Account."+

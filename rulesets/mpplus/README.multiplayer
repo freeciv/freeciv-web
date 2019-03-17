@@ -1,0 +1,155 @@
+----------------------------------------------------------------------
+                   Multiplayer Freeciv Ruleset
+----------------------------------------------------------------------
+
+The 'multiplayer' ruleset is intended to rectify some game balance
+issues encountered on multiplayer servers with the classic ruleset.
+It is based on the 'rewonder' ruleset designed by Madeline Book for
+Freeciv 2.1.
+
+This ruleset is also suited for LongTurn and Play-By-Email games.
+
+
+1. Changes compared to the classic ruleset
+   ---------------------------------------
+
+The differences can be extracted by
+
+#> diff -ur data/classic data/multiplayer
+
+Gameplay
+--------
+
+Unit movement rates are twice that of the classic ruleset, to
+make this ruleset usable for LongTurn games.
+
+Trade routes are disabled. (The Marco Polo's Embassy wonder provides
+an alternative way to increase trade; see below.)
+
+The cost of inciting a city to change hands has been greatly
+increased.
+
+Units attacking with less than a full movement point get penalized because
+of their tiredness. Only the fragment of their normal attack strength
+equivalent to their movement point fragment is considered. If they have 2/3
+movement points, they will attack with 2/3 strength. If they have 1/3 movement
+points, they will attack with 1/3 strength.
+
+Wonder changes
+--------------
+
+Almost all great wonders have been changed into small wonders; that
+is, they are player-unique rather than world-unique. Each player may
+build their own "Oracle", for example, or even move such small wonders
+around by rebuilding them in other cities. For small wonders that
+become obsolete, this happens only when the relevant technology is
+discovered by the owning player (rather than by any player).
+
+Unless otherwise noted, for these small wonders, all wonder effects
+that affect all of a player's cities have been changed to affect only
+cities on the same continent as the city with the small wonder.
+
+The Palace is still the only Small Wonder that can be moved around
+by rebuilding it to a new city. Other Small Wonders can be rebuilt
+only if you have lost them with the city where they were.
+
+For the Colossus, Copernicus' Observatory, Great Wall, Hoover Dam,
+King Richard's Crusade, Oracle, Shakespeare's Theater, Statue of
+Liberty, and Sun Tzu's War Academy, these are the only changes. Other
+now-small wonders have been adjusted or completely changed:
+
+- Apollo Program: Does not reveal the map.
+- A.Smith's Trading Co.: Costs 300 (was 400).
+- Darwin's Voyage: Costs 400 (was 300). Gives only one advance.
+- Eiffel Tower: You get one unit free of shield upkeep per city,
+  instead of "AI love".
+- Great Library: Reduces city corruption by 50%, instead of the
+  tech-parasite effect. Costs 200 (was 300) and never obsoletes (used
+  to be "Electricity").
+- Hanging Gardens: Just makes two citizens happy in each city on the
+  same continent. Costs 150 (was 200).
+- Isaac Newton's College: Costs 400 (was 300).
+- J.S. Bach's Cathedral: Costs 300 (was 400).
+- Leonardo's Workshop: Costs 300 (was 400). Upgrades two units per
+  turn (was one).
+- Lighthouse: No longer makes sea units veteran (justs add +1 movement).
+- Magellan's Expedition: Instead of the +2 move rate, it just makes
+  new sea units built on the same continent veteran.
+- Marco Polo's Embassy: Costs 400 (was 200). Instead of giving
+  embassies, it increases trade output by 40% on the continent.
+- Michelangelo's Chapel: Costs 300 (was 400).
+- Pyramids: Instead of giving the granary effect, it allows the city
+  where it is built to rapture grow.
+- SETI Program: Renamed to "The Internet".
+- Women's Suffrage: Costs 300 (was 600). Affects 2 and 4 citizens
+  under republic and democracy respectively (was 1 and 2).
+
+As for the remaining great wonders:
+
+- Cure For Cancer: Costs 400 (was 600), and makes two citizens happy
+  in every city owned by _any_ player who knows "Genetic Engineering".
+- Manhattan Project: No change.
+- United Nations: Instead of unit healing, gives the senate and
+  anarchy-from-disorder effects of Democracy to all nations,
+  regardless of government.
+
+Building changes
+----------------
+
+- Colosseum: Renamed to "Amphitheater", and cost decreased to 60 (was 70).
+- Supermarket: Increases farmland tile food output by 100% (was 50%).
+- Police Station: Affects 2 and 4 unhappy citizens under Republic and
+  Democracy respectively (was 1 and 2).
+
+Government changes
+------------------
+
+The Fundamentalism government is added. This is similar to the one in
+the civ2 ruleset, with following exceptions:
+- Food upkeep for Settlers is 3
+- Free unit upkeep is worth 10 shields in each city
+
+Technology changes
+------------------
+
+- Philosophy gives a free tech to each player when they research it
+  (not just the first player).
+- Discovery of Environmentalism additionally knocks 50% off cities'
+  pollution from production.
+- Added Fundamentalism from the civ2 ruleset.
+
+Unit changes
+------------
+- Unit movement rates are twice the values in the classic ruleset.
+- Caravans and Freight cannot create trade routes.
+- Caravans cost 30 production (was 50); Freight remain at 50.
+- Elephants, Crusaders, and Fanatics added from the civ2 ruleset.
+
+Default settings
+----------------
+
+The ruleset suggests some server setting changes, although these can
+be overridden. Notably, huts, barbarians, national borders, and
+diplomacy are all disabled, more initial units are given, and "fairer"
+map settings are used.
+
+
+2. Use the new ruleset
+   -------------------
+
+To play a game with the multiplayer rules, start the server with:
+       ./fcser -r data/multiplayer.serv
+or a single player game with
+       ./freeciv-gtk3 -r data/multiplayer.serv
+(and any other command-line arguments you normally use; depending on
+how you have Freeciv installed you may have to give the installed
+data directory path instead of "data")
+
+Start the client normally.  The client must be network-compatible
+(usually meaning the same or similar version) but otherwise nothing
+special is needed.
+
+Note that the Freeciv AI might not play as well with rules other
+than standard Freeciv.  The AI is supposed to understand and
+utilize all sane rules variations, so please report any AI
+failures so that they can be fixed.

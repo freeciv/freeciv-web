@@ -20,9 +20,52 @@
 
 from threading import Thread
 from tornado import web, ioloop, httpserver
+import functools
+import hashlib,base64,random
 from processfinder import *
+import psutil
 
 STATUS_PORT = 4002
+
+API_KEYS = {
+	'test': 'test'
+}
+
+
+def api_auth(username, password):
+	if username in API_KEYS:
+		return True
+	return False
+
+def basic_auth(auth):
+	def decore(f):
+		def _request_auth(handler):
+			handler.set_header('WWW-Authenticate', 'Basic realm=JSL')
+			handler.set_status(401)
+			handler.finish()
+			return False
+		
+		@functools.wraps(f)
+		def new_f(*args):
+			handler = args[0]
+ 
+			auth_header = handler.request.headers.get('Authorization')
+			if auth_header is None: 
+				return _request_auth(handler)
+			if not auth_header.startswith('Basic '): 
+				return _request_auth(handler)
+ 
+			auth_decoded = base64.b64decode(auth_header[6:]).decode('ascii')
+			username, password = str(auth_decoded).split(':', 1)
+ 
+			if (auth(username, password)):
+				f(*args)
+			else:
+				_request_auth(handler)
+					
+		return new_f
+	return decore
+
 
 """Serves the Publite2 status page, on the url:  /pubstatus """
 class PubStatus(Thread):
@@ -44,6 +87,7 @@ class StatusHandler(web.RequestHandler):
   def initialize(self, metachecker):
     self.metachecker = metachecker
 
+  @basic_auth(api_auth)
   def get(self):
     game_count = 0;
     for server in self.metachecker.server_list:
@@ -82,6 +126,8 @@ class StatusHandler(web.RequestHandler):
     self.write("<div class='row'><div class='col-md-12'><h3>Running Freeciv-web servers:</h3>");
     self.write("<table class='table table-bordred table-striped'><tr><td>Server Port</td><td>Type</td><td>Started time</td><td>Restarts</td>"+
             "<td>Errors</td><td>Freeciv PIDs</td><td>Freeciv-proxy PIDs</td></tr>");
+
+
     for server in self.metachecker.server_list:
       proxy_port = server.new_port + 1000;  
       self.write("<tr><td><a href='/civsocket/" + str(proxy_port) 

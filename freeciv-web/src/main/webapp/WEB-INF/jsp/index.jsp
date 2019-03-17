@@ -117,7 +117,7 @@
 		<div class="jumbotron">
 			<div class="row">
 
-				<img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;">
+				<img src="/static/images/fcw-front-page.gif" alt="" style="width: 95%;">
 
 			</div>
 			<div class="container-fluid">

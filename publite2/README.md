@@ -8,9 +8,14 @@ webapplication to be already running on Resin to work.
 Publite2 also launches one Freeciv-proxy server instance for each 
 Freeciv C server.
 
+Access to Publite2 is restricted with HTTP basic authentication.
+The default username: test
+The default password: test
+Remember to change this in production.
+
 Publite2 is started automatically by the start-freeciv-web.sh script.
 
-Requires Python 3.5 and the Freeciv C server built for Freeciv-web
+Requires Python 3.6+ and the Freeciv C server built for Freeciv-web
 This process logs to logs/publite2.log file.
 
 Publite2 has a HTTP status page which can be accessed at:

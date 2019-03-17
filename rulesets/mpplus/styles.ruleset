@@ -1,0 +1,265 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Nation theme data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02 web-compatible"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Nation styles
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+;
+; */ <-- avoid gettext warnings
+
+[style_european]
+name = _("?style:European")
+
+[style_classical]
+name = _("?style:Classical")
+
+[style_tropical]
+name = _("?style:Tropical")
+
+[style_asian]
+name = _("?style:Asian")
+
+[style_babylonian]
+name = _("?style:Babylonian")
+
+[style_celtic]
+name = _("?style:Celtic")
+
+; /* <-- avoid gettext warnings
+;
+; City styles define the way cities are drawn
+;
+; name             = translatable name as seen by user
+; rule_name        = (optional) internal name for savegames, rulesets etc; if
+;                    not present, "name" is used for this purpose too. Since
+;                    the name used in savegames must not change, if you want
+;                    to rename an item after a ruleset has been released, you
+;                    should set "rule_name" to the original value of "name".
+; graphic          = group of tiles to use, see cities spec for
+;                    more info on city tiles
+; citizens_graphic = group of citizens tiles to use, see citizens/small
+;                    spec for more info on citizens tiles
+;                    FIXME: this and _alt not currently used!
+; reqs             = requirements for this city style (see README.effects)
+;
+; */ <-- avoid gettext warnings
+
+[citystyle_european]
+name        = _("?citystyle:European")
+graphic     = "city.european"
+graphic_alt = "-"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "European", "Player"
+       }
+
+[citystyle_classical]
+name        = _("?citystyle:Classical")
+graphic     = "city.classical"
+graphic_alt = "-"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "Classical", "Player"
+       }
+
+[citystyle_tropical]
+name        = _("?citystyle:Tropical")
+graphic     = "city.tropical"
+graphic_alt = "city.european"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "Tropical", "Player"
+       }
+
+[citystyle_asian]
+name        = _("?citystyle:Asian")
+graphic     = "city.asian"
+graphic_alt = "city.classical"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "Asian", "Player"
+       }
+
+[citystyle_babylonian]
+name        = _("?citystyle:Babylonian")
+graphic     = "city.babylonian"
+graphic_alt = "city.classical"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "Babylonian", "Player"
+       }
+
+[citystyle_celtic]
+name        = _("?citystyle:Celtic")
+graphic     = "city.celtic"
+graphic_alt = "city.european"
+citizens_graphic     = "ancient"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "Style", "Celtic", "Player"
+       }
+
+[citystyle_industrial]
+name        = _("?citystyle:Industrial")
+graphic     = "city.industrial"
+graphic_alt = "-"
+citizens_graphic     = "industrial"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Railroad", "Player"
+       }
+
+[citystyle_electric]
+name        = _("?citystyle:ElectricAge")
+graphic     = "city.electricage"
+graphic_alt = "city.modern"
+citizens_graphic     = "electricage"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Automobile", "Player"
+       }
+
+[citystyle_modern]
+name        = _("?citystyle:Modern")
+graphic     = "city.modern"
+graphic_alt = "-"
+citizens_graphic     = "modern"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Rocketry", "Player"
+       }
+
+[citystyle_postmodern]
+name        = _("?citystyle:PostModern")
+graphic     = "city.postmodern"
+graphic_alt = "-"
+citizens_graphic     = "postmodern"
+citizens_graphic_alt = "generic"
+reqs = { "type", "name", "range"
+         "tech", "Superconductors", "Player"
+       }
+
+; /* <-- avoid gettext warnings
+;
+; Music styles
+;
+; Order is important. The last one for which activation requirements
+; are fulfilled is the one that plays.
+;
+; music_peaceful = Music to play when nation in peaceful mood
+; music_combat   = Music to play when nation in combat mood
+; reqs		 = requirements to activate the style (see effects.ruleset
+;		   and README.effects for help on requirements)
+;
+; */ <-- avoid gettext warnings
+
+[musicstyle_european]
+music_peaceful     = "music_european_peace"
+music_combat       = "music_european_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "European", "Player"
+    }
+
+[musicstyle_classical]
+music_peaceful     = "music_classical_peace"
+music_combat       = "music_classical_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "Classical", "Player"
+    }
+
+[musicstyle_tropical]
+music_peaceful     = "music_tropical_peace"
+music_combat       = "music_tropical_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "Tropical", "Player"
+    }
+
+[musicstyle_asian]
+music_peaceful     = "music_asian_peace"
+music_combat       = "music_asian_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "Asian", "Player"
+    }
+
+[musicstyle_babylonian]
+music_peaceful     = "music_babylonian_peace"
+music_combat       = "music_babylonian_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "Babylonian", "Player"
+    }
+
+[musicstyle_celtic]
+music_peaceful     = "music_celtic_peace"
+music_combat       = "music_celtic_combat"
+reqs	=
+    { "type", "name", "range"
+      "Style", "Celtic", "Player"
+    }
+
+[musicstyle_renaissance]
+music_peaceful     = "music_renaissance_peace"
+music_combat       = "music_renaissance_combat"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "University", "Player"
+    }
+
+[musicstyle_industrial]
+music_peaceful     = "music_industrial_peace"
+music_combat       = "music_industrial_combat"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Railroad", "Player"
+    }
+
+[musicstyle_electricage]
+music_peaceful     = "music_electricage_peace"
+music_combat       = "music_electricage_combat"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Automobile", "Player"
+    }
+
+[musicstyle_modern]
+music_peaceful     = "music_modern_peace"
+music_combat       = "music_modern_combat"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Rocketry", "Player"
+    }
+
+[musicstyle_postmodern]
+music_peaceful     = "music_postmodern_peace"
+music_combat       = "music_postmodern_combat"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Superconductors", "Player"
+    }

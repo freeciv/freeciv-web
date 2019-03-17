@@ -119,7 +119,7 @@
 
 				<img src="/static/images/fcw-front-page.gif" alt="" style="width: 95%;">
 
-			</div>
+      </div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
@@ -157,13 +157,13 @@
 								Start on a scenario map, such as <br> World map, America, Italy or Japan.
 							</div>
 						</c:if>
-						<a href="/webclient/?action=load&amp;scenario=true&type=singleplayer" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
+						<%--<a href="/webclient/?action=load&amp;scenario=true&type=singleplayer" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
 						<c:if test="${default_lang}">
 							<div class="features">
 								Choose your map from a real earth map.
 							</div>
 						</c:if>
-						<a href="/freeciv-earth/" class="btn"><i class="fa fa-globe"></i> <fmt:message key="index-game-launcher-real-earth"/></a>
+						<a href="/freeciv-earth/" class="btn"><i class="fa fa-globe"></i> <fmt:message key="index-game-launcher-real-earth"/></a>--%>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -213,23 +213,6 @@
 			</div> <!-- end statistics -->
 		</c:if>
 
-
-		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<img src="/static/images/chrome-web-store.png" alt="">
-			</a>
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<fmt:message key="index-chrome-web-store"/>
-			</a>
-		</div>
-		<div id="google-play-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<img src="/static/images/google-play-store.png" alt="">
-			</a>
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<fmt:message key="index-play-store"/>
-			</a>
-		</div>  <!-- end apps/browser plugins -->
 
 
 		<div class="row">
@@ -327,6 +310,22 @@
 		</div> <!-- end multiplayer/best play by email -->
 
 
+		<div class="row">
+			<div class="col-md-12">
+					<h2>Find Players and Games to join on Freeciv-Web's live Discord Chat:</h2>
+			</div>
+		</div>
+
+		<div  class="row" style="padding-top: 30px;">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<iframe src="https://discordapp.com/widget?id=417324237926301698&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0"></iframe>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div> <!-- end Discord chat -->
+
                 <div class="row">
                         <div class="col-md-12">
                                 <h2><fmt:message key="index-youtube"/></h2>
@@ -345,7 +344,7 @@
                         </div>
 
 
-</div> <!-- end youtube -->
+				</div> <!-- end youtube -->
 
 
 		<div class="row">
@@ -390,7 +389,7 @@
 					<div class="panel-freeciv">
 						<h4><fmt:message key="index-credits"/></h4>
 						<ul>
-							<li>Andreas R&oslash;sdal <i class="fa fa-twitter"></i>  <a href="https://twitter.com/andreasrosdal/">@andreasrosdal</a></li>
+							<li>Andreas R&oslash;sdal <i class="fa fa-twitter"></i>  <a href="https://github.com/andreasrosdal/">@andreasrosdal</a></li>
 							<li>Sveinung Kvilhaugsvik <i class="fa fa-github"></i>  <a href="https://github.com/kvilhaugsvik">@kvilhaugsvik</a></li>
 							<li>Marko Lindqvist <i class="fa fa-github"></i>  <a href="https://github.com/cazfi">@cazfi</a></li>
 

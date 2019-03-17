@@ -27,6 +27,7 @@ import psutil
 
 STATUS_PORT = 4002
 
+# TODO: Make the username / password configurabe.
 API_KEYS = {
 	'test': 'test'
 }

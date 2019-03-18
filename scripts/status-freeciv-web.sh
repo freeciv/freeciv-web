@@ -114,7 +114,7 @@ checkWebURL "freeciv-web on Tomcat" "http://localhost:8080/freeciv-web" --head
 checkWebURL "Tomcat DB connection" "http://localhost/game/list" --head
 
 # TODO: Add HTTP basic authentication username / password.
-checkWebURL "Pubstatus" "http://localhost:4002/pubstatus"
+checkWebURL "Pubstatus" "http://localhost:4002/pubstatus" -u test:test
 checkWebURL "Mailstatus" "http://localhost:4003/mailstatus"
 
 checkWebURL "freeciv-proxy directly" "http://localhost:7001/status"

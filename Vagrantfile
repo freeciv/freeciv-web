@@ -19,11 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu-disco64"
+  config.vm.box = "ubuntu-bionic-64"
 
   config.vm.provider "virtualbox"
 
-  config.vm.box_url = "https://cloud-images.ubuntu.com/disco/current/disco-server-cloudimg-amd64-vagrant.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64-vagrant.box"
 
   if Vagrant::Util::Platform.windows?
 	  config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "127.0.0.1"

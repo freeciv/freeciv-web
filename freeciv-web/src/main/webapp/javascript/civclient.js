@@ -149,14 +149,14 @@ function civclient_init()
    * http://soledadpenades.com/2007/05/17/arrayindexof-in-internet-explorer/
    */
   if(!Array.indexOf){
-	    Array.prototype.indexOf = function(obj){
-	        for(var i=0; i<this.length; i++){
-	            if(this[i]==obj){
-	                return i;
-	            }
-	        }
-	        return -1;
-	    };
+      Array.prototype.indexOf = function(obj){
+          for(var i=0; i<this.length; i++){
+              if(this[i]==obj){
+                  return i;
+              }
+          }
+          return -1;
+      };
   }
 
 
@@ -321,14 +321,14 @@ function show_dialog_message(title, message) {
   $("#generic_dialog").html(message);
   $("#generic_dialog").attr("title", title);
   $("#generic_dialog").dialog({
-			bgiframe: true,
-			modal: false,
-			width: is_small_screen() ? "90%" : "50%",
-			close: closing_dialog_message,
-			buttons: {
-				Ok: close_dialog_message
-			}
-		}).dialogExtend({
+      bgiframe: true,
+      modal: false,
+      width: is_small_screen() ? "90%" : "50%",
+      close: closing_dialog_message,
+      buttons: {
+        Ok: close_dialog_message
+      }
+    }).dialogExtend({
                    "minimizable" : true,
                    "closable" : true,
                    "icons" : {
@@ -545,20 +545,20 @@ function show_auth_dialog(packet) {
   $("#dialog").html(intro_html);
   $("#dialog").attr("title", "Private server needs password to enter");
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			buttons:
-			{
-				"Ok" : function() {
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "80%" : "60%",
+      buttons:
+      {
+        "Ok" : function() {
                                   var pwd_packet = {"pid" : packet_authentication_reply, "password" : $('#password_req').val()};
                                   var myJSONText = JSON.stringify(pwd_packet);
                                   send_request(myJSONText);
 
                                   $("#dialog").dialog('close');
-				}
-			}
-		});
+        }
+      }
+    });
 
 
   $("#dialog").dialog('open');
@@ -630,7 +630,7 @@ function switch_renderer()
 
   $.contextMenu({
         selector: (renderer == RENDERER_2DCANVAS) ? '#canvas' : '#canvas_div' ,
-	    zIndex: 5000,
+      zIndex: 5000,
         autoHide: true,
         callback: function(key, options) {
           handle_context_menu_callback(key);

@@ -661,3 +661,12 @@ function is_longturn()
 {
   return game_type == "longturn";
 }
+
+
+/**************************************************************************
+ Is this an ongoing LongTurn game?
+*************************************************************************/
+function is_ongoing_longturn()
+{
+  return is_longturn() && game_info['turn'] > 0;
+}

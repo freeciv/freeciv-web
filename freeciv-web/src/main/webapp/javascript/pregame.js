@@ -138,20 +138,21 @@ function update_game_info_pregame()
   only call update_player_info_pregame_real once in a short timespan.
 ****************************************************************************/
 function update_player_info_pregame()
-{
+{      
   if (update_player_info_pregame_queued) return;
   setTimeout(update_player_info_pregame_real, 1000);
-  update_player_info_pregame_queued = true;
-
+  update_player_info_pregame_queued = true;  
+  
 }
 
 /****************************************************************************
   Shows the pick nation dialog.
 ****************************************************************************/
 function update_player_info_pregame_real()
-{
+{  
   var id;
-  if (C_S_PREPARING == client_state()) {
+  /* Don't render the player list if this is an ongoing longturn game */
+  if (C_S_PREPARING == client_state() && !is_ongoing_longturn()) {
     var player_html = "";
     for (id in players) {
       var player = players[id];
@@ -257,27 +258,46 @@ function update_player_info_pregame_real()
   update_player_info_pregame_queued = false;
 }
 
+function pick_nation_ongoing_longturn()
+{
+    $("#start_game_button").hide();
+    $("#pick_nation_button").hide();
+    pick_nation(null);
+}
 
 /****************************************************************************
   Shows the pick nation dialog.
 ****************************************************************************/
 function pick_nation(player_id)
 {
+  if (C_S_RUNNING == client_state()) return;
+
   if (player_id == null) player_id = client.conn['player_num'];
   var pplayer = players[player_id]; 
+
+  if (pplayer == null && !is_ongoing_longturn()) { swal("AGHGHGHGHH!"); return; }
   choosing_player = player_id;
 
-  if (pplayer == null) return; 
+  var player_nations = {};
+  var player_name = !is_ongoing_longturn() ? pplayer['name'] : simpleStorage.get("username", "");
 
-  var nations_html = "<div id='nation_heading'><span>Select nation for " + pplayer['name'] + ":</span> <br>"
+  if (is_ongoing_longturn()) {
+    /* We only show the nations that are not already taken by human players */ 
+    for (id in players) {
+        if (players[id]['name'].indexOf("AI") == -1) player_nations[players[id]['nation']] = true;
+    }
+  }
+
+  var nations_html = "<div id='nation_heading'><span>Select nation for " + player_name + ":</span> <br>"
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
 		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
 
   /* prepare a list of flags and nations. */
   var nation_name_list = [];
-  for (var nation_id in nations) {
+
+  for (var nation_id in nations) {    
     var pnation = nations[nation_id];
-    if (pnation['is_playable']) {
+    if (pnation['is_playable'] && (!is_ongoing_longturn() || !(nation_id in player_nations))) {
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
              + "<div id='nation_" + nation_id + "' class='nation_choice'>"
              + "<canvas id='pick_flag_" + nation_id + "' width='29' height='20' class='pick_nation_flags'></canvas>"
@@ -288,27 +308,31 @@ function pick_nation(player_id)
 
   nations_html += "</div><div id='nation_style_choices'></div>"
                + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
+                
+
+  var buttons = { "1" : { id: "play", text:"Play this nation!", click: function() { $("#pick_nation_dialog").dialog('close');
+                                                    if (!is_ongoing_longturn()) submit_nation_choice();
+                                                    else submit_nation_choice_ongoing_longturn(); } },
+                  "2" : { id: "customize", text:"Customize this nation", click: function() {show_customize_nation_dialog(player_id);} }
+                }
+
+  if (is_ongoing_longturn()) {
+    buttons["3"] = { id: "random", text: "Pick a random nation", click: function() { chosen_nation = -1; $("#pick_nation_dialog").dialog( "close" ) 
+    submit_nation_choice_ongoing_longturn(); } }
+  }     
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "What Nation Will " + pplayer['name'] + " Be Ruler Of?");
+  $("#pick_nation_dialog").attr("title", "What Nation Will " + player_name + " Be Ruler Of?");
   $("#pick_nation_dialog").dialog({
+      closeOnEscape: !is_ongoing_longturn(),
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "99%" : "70%",
             height: $(window).height() - 100,
-			buttons: {
-			    "Customize this nation": function() {
-                   show_customize_nation_dialog(player_id);
-            	}
-            				,
-				"Play this nation!": function() {
-					$("#pick_nation_dialog").dialog('close');
-					submit_nation_choice();
-				}
-			}
+			buttons: buttons
 		});
-
-  $("#nation_legend").html("Please choose nation for " + pplayer['name'] + ".");
+  
+  $("#nation_legend").html("Please choose the nation for " + player_name + ".");
 
 
   $("#nation_autocomplete_box").autocomplete({
@@ -323,7 +347,25 @@ function pick_nation(player_id)
     $("#nation_list").width("80%");
   }
 
+  if (is_ongoing_longturn()) {
+    $(".ui-dialog-titlebar-close").css("display", "none");    
+    $(".ui-dialog-buttonpane").css("width","100%");
+    /* Removing the paddings, because I wasn't able to find the default width of the pane (width of 100% + the paddings
+    resulted in clipping and a scrollbar) so instead the button margins are set to the default JQuery Dialog value
+    of the right button (the left one doesn't have a margin by default because the default float for the whole buttonset is right) 
+    + the value of the respective buttonpane paddings */
+    $(".ui-dialog-buttonpane").css("padding-right","0em");
+    $(".ui-dialog-buttonpane").css("padding-left","0em");    
+    $(".ui-dialog-buttonset").css("width","100%");
+    $("#play").css("float","right");    
+    $("#play").css("margin-right","1.4em");
+    $("#customize").css("float","right");
+    $("#random").css("float","left");
+    $("#random").css("margin-left","1.4em");
+  }
+
   nation_select_id = setTimeout (update_nation_selection, 150);
+
   $("#pick_nation_dialog").dialog('open');
 
   if (!is_small_screen()) {
@@ -334,7 +376,7 @@ function pick_nation(player_id)
 
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
-    if (pnation['is_playable']) {
+    if (pnation['is_playable'] && (!is_ongoing_longturn() || !(nation_id in player_nations))) {
       var flag_canvas = document.getElementById('pick_flag_' + nation_id);
       var flag_canvas_ctx = flag_canvas.getContext("2d");
       var tag = "f." + pnation['graphic_str'];
@@ -426,9 +468,36 @@ function select_nation(new_nation_id)
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();
   }
-
+  
   chosen_nation = parseFloat(new_nation_id);
   $("#nation_" + chosen_nation).css("background-color", "#FFFFFF");
+}
+
+
+/****************************************************************************
+  Sends a packet to the server telling it to change an ai's player nation
+  and attach the player to it (start the game), -1 means no change
+****************************************************************************/
+function submit_nation_choice_ongoing_longturn()
+{
+  if (client.conn['player_num'] == null) return;
+
+  var style = -1
+
+  if (chosen_nation != -1) {
+    style = nations[chosen_nation]['style'];
+    if (chosen_style != -1) style = chosen_style;  
+  }
+
+  var test_packet = {"pid" : packet_ongoing_longturn_nation_select_req, 
+                   "nation_no" : chosen_nation,
+                   "is_male" : true, 
+                   "style": style};
+
+  send_request(JSON.stringify(test_packet));
+  clearInterval(nation_select_id);
+
+  setup_window_size();
 }
 
 /****************************************************************************
@@ -436,7 +505,7 @@ function select_nation(new_nation_id)
 ****************************************************************************/
 function submit_nation_choice()
 {
-  if (chosen_nation == -1 || client.conn['player_num'] == null 
+   if (chosen_nation == -1 || client.conn['player_num'] == null 
       || choosing_player == null || choosing_player < 0) return;
 
   var pplayer = players[choosing_player];
@@ -482,10 +551,6 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
     return "multiplayer";
   case "Webperimental":
     return "webperimental";
-  case "Multiplayer-Plus ruleset":
-    return "mpplus";
-  case "Multiplayer-Evolution ruleset":
-    return "mp2";
   default:
     console.log("Don't know the ruleset dir of \"" + ruleset_name
                 + "\". Guessing \"" + fall_back_dir + "\".");
@@ -537,11 +602,9 @@ function pregame_settings()
       + "<div id='pregame_settings_tabs-1'><table id='settings_table'> "
       + "<tr title='Ruleset version'><td>Ruleset:</td>"
       + "<td><select name='ruleset' id='ruleset'>"
-      + "<option value='mp2'>Multiplayer II Expansion</option>"
-      + "<option value='mpplus'>Multiplayer+ v1.1</option>"
-      + "<option value='multiplayer'>Multiplayer  v1.0 (old)</option>"
       + "<option value='classic'>Classic</option>"
       + "<option value='civ2civ3'>Civ2Civ3</option>"
+      + "<option value='webperimental'>Webperimental</option>"
       + "</select><a id='ruleset_description'></a></td></tr>"
       + "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
@@ -1213,24 +1276,24 @@ function show_longturn_intro_dialog() {
 
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
-			  if (dialog_close_trigger != "button") {
-			    if (validate_username()) {
-			      network_init();
-			      if (!is_touch_device()) $("#pregame_text_input").focus();
-			      return true;
-			    } else {
-			      return false;
-			    }
-			  }
-			},
-			buttons: []
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "80%" : "60%",
+      beforeClose: function( event, ui ) {
+        // if intro dialog is closed, then check the username and connect to the server.
+        if (dialog_close_trigger != "button") {
+          if (validate_username()) {
+            network_init();
+            if (!is_touch_device()) $("#pregame_text_input").focus();
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      buttons: []
 
-		});
+    });
 
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/

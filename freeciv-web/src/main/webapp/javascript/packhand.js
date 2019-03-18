@@ -111,8 +111,9 @@ function handle_server_join_reply(packet)
       }
     } else if (observing) {
       wait_for_text("You are logged in as", request_observe_game);
-    }
+      }
 
+    
   } else {
 
     swal("You were rejected from the game.", (packet['message'] || ""), "error");
@@ -120,7 +121,6 @@ function handle_server_join_reply(packet)
     set_client_page(PAGE_MAIN);
 
   }
-
 }
 
 /**************************************************************************
@@ -468,6 +468,7 @@ function handle_map_info(packet)
 function handle_game_info(packet)
 {
   game_info = packet;
+  if (is_ongoing_longturn()) wait_for_text("You are logged in as", pick_nation_ongoing_longturn);
 }
 
 /**************************************************************************

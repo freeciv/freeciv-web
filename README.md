@@ -194,7 +194,7 @@ Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and b
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO) for 
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO.md) for 
 some tasks you can work on. Pull requests on Github is welcome! 
   
 

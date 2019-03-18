@@ -10,8 +10,10 @@ you want an idea for a good starting project, poke someone in there first.
 
 ## Pull Request Guidelines
 
-- Try not to exceed 200 LOC +- in a single PR.
+- Try not to exceed 200 LOC +- in a single PR. Larger pull-requests are also 
+  welcome, if the improvement or refactoring requires larger changes.
 - Avoid whitespace-only or other trivial changes that do not change logic.
+- Always test your changes properly.
 
 The best thing you can do is to keep commits and PRs contextual. Small PRs
 are great, as they're easy to review and approve. Large, multi-faceted PRs

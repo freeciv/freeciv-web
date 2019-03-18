@@ -17,8 +17,7 @@ you want an idea for a good starting project, poke someone in there first.
 
 The best thing you can do is to keep commits and PRs contextual. Small PRs
 are great, as they're easy to review and approve. Large, multi-faceted PRs
-are more difficult to review, and may get rejected for one portion,though
-other portions would have been accepted if they were independent.
+are more difficult to review.
 
 A PR should generally have a purpose other than "fixing code"; changing
 lines just for the sake of style or syntax obscures the commit history of a

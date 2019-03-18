@@ -12,7 +12,6 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 
 Currently known servers based on Freeciv-web:
 - [Freecivweb.org](https://www.freecivweb.org) - Full Freeciv-web
-- [Freeciv.xyz](http://freeciv.xyz) - LongTurn only.
 - [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:

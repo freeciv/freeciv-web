@@ -105,7 +105,7 @@ class StatusHandler(web.RequestHandler):
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
     self.write("<div class='container'><div class='row'><div class='col-md-6'>"+
                "<h2>Freeciv-web Admin</h2>" + 
-               "<table class='table table-bordred table-striped' style='font-size:80%;'>"+
+               "<table class='table table-bordred table-striped' style='font-size:90%;'>"+
                "<tr><td>Number of Freeciv-web games run:</td><td>" + str(game_count) + "</td></tr>" +
                "<tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
                "<tr><td>Server capacity:</td><td>" + str(self.metachecker.server_capacity_single) + "," +  

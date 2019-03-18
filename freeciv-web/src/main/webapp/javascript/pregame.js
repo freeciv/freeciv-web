@@ -138,18 +138,18 @@ function update_game_info_pregame()
   only call update_player_info_pregame_real once in a short timespan.
 ****************************************************************************/
 function update_player_info_pregame()
-{      
+{
   if (update_player_info_pregame_queued) return;
   setTimeout(update_player_info_pregame_real, 1000);
-  update_player_info_pregame_queued = true;  
-  
+  update_player_info_pregame_queued = true;
+
 }
 
 /****************************************************************************
   Shows the pick nation dialog.
 ****************************************************************************/
 function update_player_info_pregame_real()
-{  
+{
   var id;
   /* Don't render the player list if this is an ongoing longturn game */
   if (C_S_PREPARING == client_state() && !is_ongoing_longturn()) {
@@ -505,7 +505,7 @@ function submit_nation_choice_ongoing_longturn()
 ****************************************************************************/
 function submit_nation_choice()
 {
-   if (chosen_nation == -1 || client.conn['player_num'] == null 
+  if (chosen_nation == -1 || client.conn['player_num'] == null 
       || choosing_player == null || choosing_player < 0) return;
 
   var pplayer = players[choosing_player];

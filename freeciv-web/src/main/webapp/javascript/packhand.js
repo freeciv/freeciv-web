@@ -111,8 +111,7 @@ function handle_server_join_reply(packet)
       }
     } else if (observing) {
       wait_for_text("You are logged in as", request_observe_game);
-      }
-
+    }
     
   } else {
 
@@ -121,6 +120,7 @@ function handle_server_join_reply(packet)
     set_client_page(PAGE_MAIN);
 
   }
+  
 }
 
 /**************************************************************************

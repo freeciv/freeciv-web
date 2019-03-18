@@ -270,4 +270,3 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    pplayer = player_by_name_prefix(arg, &match_result);
  
    if (!pplayer) {
-    

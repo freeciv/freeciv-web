@@ -37,6 +37,7 @@ import org.json.JSONObject;
  * URL: /hall_of_fame
  */
 public class HallOfFameList extends HttpServlet {
+	
     private static final long serialVersionUID = 1L;
 
     @Override

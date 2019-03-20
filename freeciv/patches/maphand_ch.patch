@@ -33,7 +33,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
  
  /* generator */
  #include "utilities.h"
-@@ -2326,3 +2328,324 @@
+@@ -2326,3 +2328,325 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -134,6 +134,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  	 	                   struct unit *punit)
 +{
 +  const char *activity_text;
++  if (ptile == NULL || !ptile || !pplayer || pplayer == NULL) return NULL; 
 +  struct city *pcity = tile_city(ptile);
 +  const char *diplo_nation_plural_adjectives[DS_LAST] =
 +    {Q_("?nation:Neutral"), Q_("?nation:Hostile"),
@@ -353,7 +354,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  struct tile *ptile = index_to_tile(&(wld.map), loc);
 +  struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
 +  const char *info_text = popup_info_text(ptile, pplayer, punit);
-+
++  if (info_text == NULL) return;
 +  conn_list_iterate(pplayer->connections, pconn) {
 +    dsend_packet_info_text_message(pconn, info_text);
 +  } conn_list_iterate_end;

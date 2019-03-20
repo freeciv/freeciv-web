@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import org.freeciv.services.Validation;
+import org.freeciv.util.Constants;
 
 
 /**
@@ -27,9 +28,13 @@ import org.freeciv.services.Validation;
 public class HallOfFamePost extends HttpServlet {
 
     private final Validation validation = new Validation();
+    
     private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
+    
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
+    
     private static final String mapSrcImgPaths = "/var/lib/tomcat8/webapps/data/savegames/";
+    
     private static final String mapDstImgPaths = "/var/lib/tomcat8/webapps/data/mapimgs/";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,8 +66,8 @@ public class HallOfFamePost extends HttpServlet {
         try {
             Thread.sleep(200);
 
-            Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-            DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+            Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+            DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
             conn = ds.getConnection();
 
             String idQuery = "select max(id) from hall_of_fame";

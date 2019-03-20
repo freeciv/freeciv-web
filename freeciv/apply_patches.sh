@@ -47,7 +47,7 @@ declare -a PATCHLIST=(
   "freeciv_segfauls_fix"
   "scorelog_filenames"
   "disable_global_warming"
-  "win_chance"
+  #"win_chance"  disabled. needs to be updated and synced with maphand_ch patch.
   "navajo-remove-long-city-names"
   "webperimental_install"
   "longturn"
@@ -56,7 +56,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "mapimg_bugfix"
 )
 
 apply_patch() {

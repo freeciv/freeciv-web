@@ -124,30 +124,29 @@ function init_webgl_mapview() {
 
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
 
-  // high quality water using WebGL shader
-  water = new THREE.Water( maprenderer, camera, scene, {
-      textureWidth: (graphics_quality == QUALITY_LOW) ? 256 : 512,
-      textureHeight: (graphics_quality == QUALITY_LOW) ? 256 : 512,
-      waterNormals: webgl_textures["waternormals"],
-      alpha: 0.7,
-      sunDirection: directionalLight.position.clone().normalize(),
-      sunColor: 0xfaf100,
-      waterColor: 0x003e7b,
-      distortionScale: 3.0,
-      fog: false
+  var waterGeometry = new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10 );
+
+  var params = {
+			color: '#ffffff',
+			scale: 10,
+			flowX: 0.14,
+			flowY: -0.14
+  };
+
+  water = new THREE.Water( waterGeometry, {
+    color: params.color,
+    scale: params.scale,
+    flowDirection: new THREE.Vector2( params.flowX, params.flowY ),
+    textureWidth: 1024,
+    textureHeight: 1024,
+    clipBias : 0.7
   } );
 
-  var mirrorMesh = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10),
-    water.material
-  );
-
-  mirrorMesh.add( water );
-  mirrorMesh.rotation.x = - Math.PI * 0.5;
-  mirrorMesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
-  mirrorMesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
-  mirrorMesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
-  scene.add( mirrorMesh );
+  water.rotation.x = - Math.PI * 0.5;
+  water.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+  water.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+  water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+  scene.add( water );
 
   if (graphics_quality > QUALITY_LOW) {
     var sunGeometry = new THREE.PlaneGeometry( 1000, 1000, 2, 2);
@@ -261,15 +260,6 @@ function animate() {
   if (mapview_slide['active']) update_map_slide_3d();
 
   update_animated_objects();
-
-  if (water != null && tree_points != null && jungle_points != null) {
-    water.material.uniforms.time.value += 1.0 / 60.0;
-    tree_points.visible = false;
-    jungle_points.visible = false;
-    water.render();
-    tree_points.visible = true;
-    jungle_points.visible = true;
-  }
 
   if (selected_unit_indicator != null && selected_unit_material != null) {
     selected_unit_material.color.multiplyScalar (0.994);

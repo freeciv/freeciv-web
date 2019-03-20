@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu-bionic64"
+  config.vm.box = "ubuntu-bionic-64"
 
   config.vm.provider "virtualbox"
 
@@ -49,8 +49,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       mem = `wmic computersystem Get TotalPhysicalMemory`.split[1].to_i / 1024
     end
 
-    mem = mem / 1024 / 2
-    v.customize ["modifyvm", :id, "--memory", mem]
+    mem = 2 * mem / 1024 / 3
+    v.customize ["modifyvm", :id, "--memory", mem.floor]
 
     # Disable serial port. It is unnecessary, and may cause error on Win10
     #   https://github.com/joelhandwell/ubuntu_vagrant_boxes/issues/1#issuecomment-292370353
@@ -59,6 +59,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "./", "/vagrant"
 
+  config.vm.boot_timeout = 100000
+
   # There are problems with the default configuration of a DNS stub in some
   # versions of systemd-resolved
   config.vm.provision "systemd-resolved workaround", type: "shell", inline: "ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf"
@@ -66,5 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "bootstrap", type: "shell", inline: "/vagrant/scripts/install/install.sh --mode=TEST", privileged: false
   # run the Freeciv start script on startup
   config.vm.provision "startup", type: "shell", inline: "/vagrant/scripts/start-freeciv-web.sh", run: "always", privileged: false
+
+
 
 end

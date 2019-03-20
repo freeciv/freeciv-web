@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.util.Constants;
 import org.json.JSONObject;
 
 /**
@@ -48,6 +49,7 @@ import org.json.JSONObject;
 public class Metaserver extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
 	private static final String CONTENT_TYPE = "application/json";
 
 	private static final String INTERNAL_SERVER_ERROR = new JSONObject() //
@@ -151,8 +153,8 @@ public class Metaserver extends HttpServlet {
 		PreparedStatement statement;
 		try {
 
-			Context env = (Context) (new InitialContext().lookup("java:comp/env"));
-			DataSource ds = (DataSource) env.lookup("jdbc/freeciv_mysql");
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
 			if (serverIsStopping != null) {

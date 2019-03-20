@@ -226,6 +226,11 @@ function control_init()
     show_help();
   });
 
+    $("#chat_tab").click(function(event) {
+      set_default_mapview_inactive();
+      $("widgetbot").height($(window).height() - 100) ;
+    });
+
   if (!is_touch_device()) {
     $("#game_unit_orders_default").tooltip();
   }
@@ -866,6 +871,9 @@ function update_unit_order_commands()
     }
   }
 
+  $("#order_maglev").hide();
+  $("#order_canal").hide();
+
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
     ptype = unit_type(punit);
@@ -922,6 +930,11 @@ function update_unit_order_commands()
         $("#order_road").hide();
         $("#order_railroad").show();
 	    unit_actions['railroad'] = {name: "Build railroad (R)"};
+      } else if (can_build_maglev(punit, ptile)) {
+        $("#order_road").hide();
+        $("#order_railroad").hide();
+        $("#order_maglev").show();
+        unit_actions['maglev'] = {name: "Build maglev (R)"};
       } else {
         $("#order_road").hide();
         $("#order_railroad").hide();
@@ -994,6 +1007,11 @@ function update_unit_order_commands()
       $("#order_explore").show();
       $("#order_pollution").hide();
       unit_actions["fortify"] = {name: "Fortify (F)"};
+    }
+
+    if (can_build_canal(punit, ptile)) {
+      $("#order_canal").show();
+      unit_actions["canal"] = {name: "Build canal"};
     }
 
     /* Practically all unit types can currently perform some action. */
@@ -1449,8 +1467,7 @@ function do_map_click(ptile, qtype, first_time_called)
         packet['orders'] = [];
         packet['dir'] = [];
         packet['activity'] = [];
-        packet['target'] = [];
-        packet['extra'] = [];
+        packet['sub_target'] = [];
         packet['action'] = [];
         for (var i = 0; i < goto_path['length']; i++) {
           /* TODO: Have the server send the full orders in stead of just the
@@ -1469,8 +1486,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
           packet['dir'][i] = goto_path['dir'][i];
           packet['activity'][i] = ACTIVITY_LAST;
-          packet['target'][i] = 0;
-          packet['extra'][i] = EXTRA_NONE;
+          packet['sub_target'][i] = 0;
           packet['action'][i] = ACTION_COUNT;
         }
 
@@ -1492,8 +1508,7 @@ function do_map_click(ptile, qtype, first_time_called)
             packet['orders'][pos] = ORDER_LAST;
             packet['dir'][pos] = -1;
             packet['activity'][pos] = ACTIVITY_LAST;
-            packet['target'][pos] = 0;
-            packet['extra'][pos] = EXTRA_NONE;
+            packet['sub_target'][pos] = 0;
             packet['action'][pos] = ACTION_COUNT;
           } else {
             /* Replace the existing last order with the final order */
@@ -1555,32 +1570,14 @@ function do_map_click(ptile, qtype, first_time_called)
 
   } else if (paradrop_active && current_focus.length > 0) {
     punit = current_focus[0];
-    packet = {
-      "pid"         : packet_unit_do_action,
-      "actor_id"    : punit['id'],
-      "target_id"   : ptile['index'],
-      "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
-      "name"        : "",
-      "action_type" : ACTION_PARADROP
-    };
-    send_request(JSON.stringify(packet));
+    request_unit_do_action(ACTION_PARADROP, punit['id'], ptile['index']);
     paradrop_active = false;
 
   } else if (airlift_active && current_focus.length > 0) {
     punit = current_focus[0];
     pcity = tile_city(ptile);
     if (pcity != null) {
-      packet = {
-        "pid"         : packet_unit_do_action,
-        "actor_id"    : punit['id'],
-        "target_id"   : pcity['id'],
-        "extra_id"    : EXTRA_NONE,
-        "value"       : 0,
-        "name"        : "",
-        "action_type" : ACTION_AIRLIFT
-      };
-      send_request(JSON.stringify(packet));
+      request_unit_do_action(ACTION_AIRLIFT, punit['id'], pcity['id']);
     }
     airlift_active = false;
 
@@ -1994,6 +1991,14 @@ function handle_context_menu_callback(key)
 
     case "railroad":
       key_unit_road();
+      break;
+
+    case "maglev":
+      key_unit_road();
+      break;
+
+    case "canal":
+      key_unit_canal();
       break;
 
     case "mine":
@@ -2440,16 +2445,7 @@ function key_unit_upgrade()
     var punit = funits[i];
     var pcity = tile_city(index_to_tile(punit['tile']));
     var target_id = (pcity != null) ? pcity['id'] : 0;
-    var packet = {
-      "pid"         : packet_unit_do_action,
-      "actor_id"    : punit['id'],
-      "target_id"   : target_id,
-      "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
-      "name"        : "",
-      "action_type" : ACTION_UPGRADE_UNIT
-    };
-    send_request(JSON.stringify(packet));
+    request_unit_do_action(ACTION_UPGRADE_UNIT, punit['id'], target_id);
   }
   update_unit_focus();
 }
@@ -2538,6 +2534,55 @@ function key_unit_mine()
   setTimeout(update_unit_focus, 700);
 }
 
+
+/**************************************************************************
+ Check whether a unit can build a canal in a tile.
+**************************************************************************/
+function can_build_canal(punit, ptile)
+{
+  return ((typeof EXTRA_CANAL !== "undefined")
+      &&  (punit != null && ptile != null)
+      &&  (!tile_has_extra(ptile, EXTRA_CANAL))
+      &&  (unit_can_do_action(punit, ACTION_ROAD))
+      // TODO: &&  (tile custom flag low land)
+      &&  (player_invention_state(client.conn.playing, tech_id_by_name('Engineering')) == TECH_KNOWN)
+         );
+}
+
+/**************************************************************************
+ Tell the units in focus to build canal.
+**************************************************************************/
+function key_unit_canal()
+{
+  if (typeof EXTRA_CANAL === "undefined") return;
+
+  const funits = get_units_in_focus();
+  for (var i = 0; i < funits.length; i++) {
+    const punit = funits[i];
+    const ptile = index_to_tile(punit['tile']);
+    if (can_build_canal(punit, ptile)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Canal']['id']);
+    }
+  }
+  setTimeout(update_unit_focus, 700);
+}
+
+/**************************************************************************
+ Check whether a unit can build a maglev in a tile.
+**************************************************************************/
+function can_build_maglev(punit, ptile)
+{
+  return ((typeof EXTRA_MAGLEV !== "undefined")
+      &&  (punit != null && ptile != null)
+      &&  (!tile_has_extra(ptile, EXTRA_MAGLEV))
+      &&  (tile_has_extra(ptile, EXTRA_RAIL))
+      &&  (unit_can_do_action(punit, ACTION_ROAD))
+      &&  (player_invention_state(client.conn.playing, tech_id_by_name('Superconductors')) == TECH_KNOWN)
+      &&  ((!tile_has_extra(ptile, EXTRA_RIVER))
+           || (player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_KNOWN))
+         );
+}
+
 /**************************************************************************
  Tell the units in focus to build road or railroad.
 **************************************************************************/
@@ -2551,6 +2596,8 @@ function key_unit_road()
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
     } else if (!tile_has_extra(ptile, EXTRA_RAIL)) {
       request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
+    } else if (can_build_maglev(punit, ptile)) {
+      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Maglev']['id']);
     }
   }
   setTimeout(update_unit_focus, 700);
@@ -2568,14 +2615,7 @@ function key_unit_homecity()
     var pcity = tile_city(ptile);
 
     if (pcity != null) {
-      var packet = {"pid" : packet_unit_do_action,
-                    "actor_id" : punit['id'],
-                    "target_id": pcity['id'],
-                    "extra_id" : EXTRA_NONE,
-                    "value" : 0,
-                    "name" : "",
-                    "action_type": ACTION_HOME_CITY};
-      send_request(JSON.stringify(packet));
+      request_unit_do_action(ACTION_HOME_CITY, punit['id'], pcity['id']);
       $("#order_change_homecity").hide();
     }
   }
@@ -2680,8 +2720,8 @@ function request_unit_cancel_orders(punit)
       vigilant: false,
       dest_tile: punit.tile
     };
-    packet.orders = packet.dir = packet.activity = packet.target
-                  = packet.extra = packet.action = [];
+    packet.orders = packet.dir = packet.activity = packet.sub_target
+                  = packet.action = [];
     send_request(JSON.stringify(packet));
   }
 }
@@ -2739,19 +2779,38 @@ function request_unit_build_city()
           packet = {"pid" : packet_city_name_suggestion_req,
             "unit_id"     : punit['id'] };
         } else {
-          packet = {"pid" : packet_unit_do_action,
-            "actor_id"    : punit['id'],
-            "target_id"   : target_city['id'],
-            "extra_id"    : EXTRA_NONE,
-            "value"       : 0,
-            "name"        : "",
-            "action_type" : ACTION_JOIN_CITY };
+          request_unit_do_action(ACTION_JOIN_CITY, punit.id, target_city.id);
         }
 
         send_request(JSON.stringify(packet));
       }
     }
   }
+}
+
+/**************************************************************************
+ * Send a request for an actor unit to do a specific action.
+ *
+ * @param action_id - action type to be requested
+ * @param actor_id - acting unit id
+ * @param target_id - target unit, city or tile
+ * @param [sub_tgt_id=0] - optional sub target. Only some actions take
+ *     a sub target. The sub target kind depends on the action. e.g.
+ *     the technology to steal from a city, the extra to
+ *     pillage at a tile, and the building to sabotage in a city.
+ * @param [name=""] - optional name, used by ACTION_FOUND_CITY
+**************************************************************************/
+function request_unit_do_action(action_id, actor_id, target_id, sub_tgt_id,
+                                name)
+{
+  send_request(JSON.stringify({
+    pid: packet_unit_do_action,
+    action_type: action_id,
+    actor_id: actor_id,
+    target_id: target_id,
+    sub_tgt_id: sub_tgt_id || 0,
+    name: name || ""
+  }));
 }
 
 /**************************************************************************
@@ -2773,25 +2832,14 @@ function(){
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    var packet = null;
     var target_city = tile_city(index_to_tile(punit['tile']));
 
     /* Do Recycle Unit if located inside a city. */
     /* FIXME: Only rulesets where the player can do Recycle Unit to all
      * domestic and allied cities are supported here. */
-    packet = {
-      "pid"         : packet_unit_do_action,
-      "actor_id"    : punit['id'],
-      "target_id"   : (target_city == null ? punit['id']
-                                           : target_city['id']),
-      "extra_id"    : EXTRA_NONE,
-      "value"       : 0,
-      "name"        : "",
-      "action_type" : (target_city == null ? ACTION_DISBAND_UNIT
-                                           : ACTION_RECYCLE_UNIT)
-    };
-
-    send_request(JSON.stringify(packet));
+    var action_id = target_city ? ACTION_RECYCLE_UNIT : ACTION_DISBAND_UNIT;
+    var target_id = target_city ? target_city['id'] : punit['id'];
+    request_unit_do_action(action_id, punit['id'], target_id);
   }
   setTimeout(update_unit_focus, 700);
   setTimeout(update_active_units_dialog, 800);
@@ -2831,8 +2879,7 @@ function key_unit_move(dir)
       "orders"   : [ORDER_ACTION_MOVE],
       "dir"      : [dir],
       "activity" : [ACTIVITY_LAST],
-      "target"   : [0],
-      "extra"    : [EXTRA_NONE],
+      "sub_target": [0],
       "action"   : [ACTION_COUNT],
       "dest_tile": newtile['index']
     };

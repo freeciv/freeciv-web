@@ -11,7 +11,7 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Currently known servers based on Freeciv-web:
-- [freecivweb.org](https://freecivweb.org) (Only longturn games, no 3D)
+- [Freecivweb.org](https://www.freecivweb.org) - Full Freeciv-web
 - [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:
@@ -51,7 +51,7 @@ Freeciv-Web consists of these components:
 Freeciv WebGL
 -------------
 Freeciv WebGL is the 3D version, which uses the Three.js 3D engine. More info about the WebGL 3D version can be found for [developers](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl) and [3D artists](https://github.com/freeciv/freeciv-web/wiki/Contributing-Blender-models-for-Freeciv-WebGL).
-Developer: Andreas Røsdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Developer: Andreas Røsdal [@andreasrosdal](http://www.github.com/andreasrosdal)  
 
 Running Freeciv-web on your computer
 ------------------------------------
@@ -193,13 +193,13 @@ Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and b
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO) for 
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO.md) for 
 some tasks you can work on. Pull requests on Github is welcome! 
   
 
 Contributors to Freeciv-web
 ---------------------------
-Andreas Røsdal  [@andreasrosdal](http://www.twitter.com/andreasrosdal)  
+Andreas Røsdal  [@andreasrosdal](https://github.com/andreasrosdal)  
 Marko Lindqvist [@cazfi](https://github.com/cazfi)  
 Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
 Gerik Bonaert [@adaxi](https://github.com/adaxi)  

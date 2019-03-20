@@ -11,6 +11,7 @@
 				<li id="players_tab"><a href="#tabs-nat"><i class="fa fa-flag" aria-hidden="true"></i> Nations</a></li>
 				<li id="cities_tab"><a href="#tabs-cities"><i class="fa fa-fort-awesome" aria-hidden="true"></i> Cities</a></li>
 				<li id="opt_tab"><a href="#tabs-opt"><i class="fa fa-cogs" aria-hidden="true"></i> Options</a></li>
+				<li id="chat_tab"><a href="#tabs-chat"><i class="fa fa-commenting-o" aria-hidden="true"></i> Chat</a></li>
 				<li id="hel_tab"><a href="#tabs-hel"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Manual</a></li>
 
 
@@ -36,6 +37,9 @@
 			</div>
 			<div id="tabs-cities">
 				<jsp:include page="cities.jsp" flush="false"/>
+			</div>
+			<div id="tabs-chat">
+				<jsp:include page="chat.jsp" flush="false"/>
 			</div>
 
 			<div id="tabs-hel" class="manual_doc">

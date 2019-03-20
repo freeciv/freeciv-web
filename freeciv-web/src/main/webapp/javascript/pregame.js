@@ -482,6 +482,10 @@ function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
     return "multiplayer";
   case "Webperimental":
     return "webperimental";
+  case "Multiplayer-Plus ruleset":
+    return "mpplus";
+  case "Multiplayer-Evolution ruleset":
+    return "mp2";
   default:
     console.log("Don't know the ruleset dir of \"" + ruleset_name
                 + "\". Guessing \"" + fall_back_dir + "\".");
@@ -533,9 +537,11 @@ function pregame_settings()
       + "<div id='pregame_settings_tabs-1'><table id='settings_table'> "
       + "<tr title='Ruleset version'><td>Ruleset:</td>"
       + "<td><select name='ruleset' id='ruleset'>"
+      + "<option value='mp2'>Multiplayer II Expansion</option>"
+      + "<option value='mpplus'>Multiplayer+ v1.1</option>"
+      + "<option value='multiplayer'>Multiplayer  v1.0 (old)</option>"
       + "<option value='classic'>Classic</option>"
       + "<option value='civ2civ3'>Civ2Civ3</option>"
-      + "<option value='webperimental'>Webperimental</option>"
       + "</select><a id='ruleset_description'></a></td></tr>"
       + "<tr title='Set metaserver info line'><td>Game title:</td>" +
 	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
@@ -1180,8 +1186,6 @@ function show_longturn_intro_dialog() {
         "occur in a standard multi-player Freeciv game. It takes a lot longer to play a game, about 2 to 6 months, but you can play it just a "+
         "little bit every day. <br><br> "+
         "Please be polite to the other players and don't cheat. "+
-        "Contact a moderator at <a style='color: black;' href='mailto:freeciv-web-moderation@tutanota.com'>freeciv-web-moderation@tutanota.com</a> "+
-        "to report players who behave badly or cheat.<br><br>" +
         "You will get to play for turn immediately after signing up, and your next turn tomorrow. Please join the game only if you are interested in playing one turn every day. " +
         "Players who are idle for more than 12 turns can be replaced by new players. This means that idle players will continually be replaced by new players.<br><br>" +
         "Joining this game requires signing in with a player name and validated Google Account."+

@@ -52,10 +52,17 @@ addArgs --saves "${savesdir}"
 export FREECIV_SAVE_PATH=${savesdir};
 rm -f "/var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log"
 
-python3 ../freeciv-proxy/freeciv-proxy.py "${3}" > "../logs/freeciv-proxy-${3}.log" 2>&1 &
+# Start Freeciv-proxy in background
+../freeciv-proxy/start-freeciv-proxy.sh "${3}" &
+
+# Start Freeciv C server
 proxy_pid=$! && 
 ${HOME}/freeciv/bin/freeciv-web "${args[@]}" > /dev/null 2> "../logs/freeciv-web-stderr-${2}.log"
 
+
+# Game over. Do cleanup.
 rc=$?; 
+#kill Freeciv-proxy and start-freeciv-proxy.sh procecsses
+pkill -9 -P $proxy_pid;
 kill -9 $proxy_pid; 
 exit $rc

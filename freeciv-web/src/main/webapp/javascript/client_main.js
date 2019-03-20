@@ -133,6 +133,7 @@ function setup_window_size ()
     $("#tech_tab").children().html("<i class='fa fa-flask' aria-hidden='true'></i>");
     $("#civ_tab").children().html("<i class='fa fa-university' aria-hidden='true'></i>");
     $("#hel_tab").children().html("<i class='fa fa-question-circle-o' aria-hidden='true'></i>");
+    $("#chat_tab").children().html("<i class='fa fa-question-circle-o' aria-hidden='true'></i>");
 
 
     $(".ui-tabs-anchor").css("padding", "7px");

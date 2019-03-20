@@ -226,6 +226,11 @@ function control_init()
     show_help();
   });
 
+    $("#chat_tab").click(function(event) {
+      set_default_mapview_inactive();
+      $("widgetbot").height($(window).height() - 100) ;
+    });
+
   if (!is_touch_device()) {
     $("#game_unit_orders_default").tooltip();
   }

@@ -20,6 +20,9 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 - [www.gnu.org/licenses/agpl-3.0.en.html](https://www.gnu.org/licenses/agpl-3.0.en.html) - The GNU AGPL license document.
 - [en.wikipedia.org/wiki/Affero_General_Public_License](https://en.wikipedia.org/wiki/Affero_General_Public_License) - Wikipedia on the AGPL license.
 
+
+Screenshots
+-----------
 Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
 
@@ -27,8 +30,8 @@ Freeciv-web HTML5 version:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/scripts/freeciv-web-screenshot.png "Freeciv-web screenshot")
 
 
-Overview
---------
+System Overview
+---------------
 
 Freeciv-Web consists of these components:
 

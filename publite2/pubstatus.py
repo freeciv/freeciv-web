@@ -20,52 +20,11 @@
 
 from threading import Thread
 from tornado import web, ioloop, httpserver
-import functools
-import hashlib,base64,random
 from processfinder import *
 import psutil
+from auth import *
 
 STATUS_PORT = 4002
-
-# TODO: Make the username / password configurabe.
-API_KEYS = {
-	'test': 'test'
-}
-
-
-def api_auth(username, password):
-	if username in API_KEYS:
-		return True
-	return False
-
-def basic_auth(auth):
-	def decore(f):
-		def _request_auth(handler):
-			handler.set_header('WWW-Authenticate', 'Basic realm=JSL')
-			handler.set_status(401)
-			handler.finish()
-			return False
-		
-		@functools.wraps(f)
-		def new_f(*args):
-			handler = args[0]
- 
-			auth_header = handler.request.headers.get('Authorization')
-			if auth_header is None: 
-				return _request_auth(handler)
-			if not auth_header.startswith('Basic '): 
-				return _request_auth(handler)
- 
-			auth_decoded = base64.b64decode(auth_header[6:]).decode('ascii')
-			username, password = str(auth_decoded).split(':', 1)
- 
-			if (auth(username, password)):
-				f(*args)
-			else:
-				_request_auth(handler)
-					
-		return new_f
-	return decore
 
 
 """Serves the Publite2 status page, on the url:  /pubstatus """

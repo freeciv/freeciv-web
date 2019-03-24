@@ -127,8 +127,8 @@ function init_webgl_mapview() {
   var waterGeometry = new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10 );
 
   var params = {
-			color: '#ffffff',
-			scale: 10,
+			color: '#003b83aa',
+			scale: 7,
 			flowX: 0.14,
 			flowY: -0.14
   };

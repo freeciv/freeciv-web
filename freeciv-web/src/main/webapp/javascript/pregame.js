@@ -388,7 +388,6 @@ function pick_nation(player_id)
   }
 
   nation_select_id = setTimeout (update_nation_selection, 150);
-
   $("#pick_nation_dialog").dialog('open');
 
   if (!is_small_screen()) {

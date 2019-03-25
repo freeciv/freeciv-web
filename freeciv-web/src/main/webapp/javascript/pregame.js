@@ -491,7 +491,7 @@ function select_nation(new_nation_id)
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
     $("#nation_" + new_nation_id).get(0).scrollIntoView();
   }
-  
+
   chosen_nation = parseFloat(new_nation_id);
   $("#nation_" + chosen_nation).css("background-color", "#FFFFFF");
 }
@@ -1343,7 +1343,7 @@ function show_longturn_intro_dialog() {
         'onsuccess': google_signin_on_success,
         'onfailure': google_signin_on_failure
       });
- 
+
 }
 
 /**************************************************************************

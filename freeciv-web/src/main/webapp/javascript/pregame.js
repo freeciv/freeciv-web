@@ -341,7 +341,7 @@ function pick_nation(player_id)
                 }
 
   if (is_ongoing_longturn()) {
-    buttons["3"] = { id: "random", text: "Draw a random nation", click: function() { draw_random_nation_ongoing_longturn(player_nations); } }
+    buttons["3"] = { id: "random", text: "Pick a random nation", click: function() { draw_random_nation_ongoing_longturn(player_nations); } }
   }     
 
   $("#pick_nation_dialog").html(nations_html);

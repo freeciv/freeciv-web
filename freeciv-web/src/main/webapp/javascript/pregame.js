@@ -151,18 +151,19 @@ function update_player_info_pregame()
 function update_player_info_pregame_real()
 {
   var id;
-  if (C_S_PREPARING == client_state()) {
+  /* Don't render the player list if this is an ongoing longturn game */
+  if (C_S_PREPARING == client_state() && !is_ongoing_longturn()) {
     var player_html = "";
     for (id in players) {
       var player = players[id];
       if (player != null) {
         if (player['name'].indexOf("AI") != -1) {
           player_html += "<div id='pregame_plr_" + id
-		        + "' class='pregame_player_name'><div id='pregame_ai_icon'></div><b>"
+            + "' class='pregame_player_name'><div id='pregame_ai_icon'></div><b>"
                         + player['name'] + "</b></div>";
         } else {
           player_html += "<div id='pregame_plr_" + id
-		        + "' class='pregame_player_name'><div id='pregame_player_icon'></div><b>"
+            + "' class='pregame_player_name'><div id='pregame_player_icon'></div><b>"
                         + player['name'] + "</b></div>";
         }
       }
@@ -259,25 +260,68 @@ function update_player_info_pregame_real()
 
 
 /****************************************************************************
+  Draw a nation from a list of playable nations in an ongoing longturn game.
+  Sadly, we can't can just use the AI nation the player is taking over, because 
+  that opens up the possibility of a double nation bug (Player1 joins and 
+  chooses Israel. Player2 joins, chooses to "draw" and takes over an AI Israel.) 
+****************************************************************************/
+function draw_random_nation_ongoing_longturn(player_nations)
+{
+    var available_nations = [];
+    for (nation_id in nations) {               
+        if (nations[nation_id]['is_playable'] && !(nation_id in player_nations)) available_nations.push({'id' : nation_id, 'nation' : nations[nation_id]});
+    }
+    chosen_nation = parseInt(available_nations[Math.floor(Math.random() * available_nations.length)]['id']);
+    $("#pick_nation_dialog").dialog( "close" );
+    submit_nation_choice_ongoing_longturn();        
+}
+
+/****************************************************************************
+  A wrapper so we can use wait_for_text.
+****************************************************************************/
+function pick_nation_ongoing_longturn()
+{
+    $("#start_game_button").hide();
+    $("#pick_nation_button").hide();
+    pick_nation(null);
+}
+
+/****************************************************************************
   Shows the pick nation dialog.
 ****************************************************************************/
 function pick_nation(player_id)
 {
+  if (C_S_RUNNING == client_state()) return;
+
   if (player_id == null) player_id = client.conn['player_num'];
   var pplayer = players[player_id]; 
+  var player_nations = {};    
+
+  if (pplayer == null && !is_ongoing_longturn()) return;
   choosing_player = player_id;
 
-  if (pplayer == null) return; 
+  var player_name = !is_ongoing_longturn() ? pplayer['name'] : simpleStorage.get("username", "");
 
-  var nations_html = "<div id='nation_heading'><span>Select nation for " + pplayer['name'] + ":</span> <br>"
+  if (is_ongoing_longturn()) { 
+    /* We only show the nations that are not already taken by human players */ 
+    for (id in players) {
+        if (players[id]['nturns_idle'] >= 12) return; /* The joining player would have taken over an idler, don't show the dialog */
+        if (players[id]['name'].indexOf("New Available Player") == -1) {
+            player_nations[players[id]['nation']] = true;
+        }
+    }
+  }
+
+  var nations_html = "<div id='nation_heading'><span>Select nation for " + player_name + ":</span> <br>"
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
-		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
+      + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
 
   /* prepare a list of flags and nations. */
   var nation_name_list = [];
-  for (var nation_id in nations) {
+
+  for (var nation_id in nations) {    
     var pnation = nations[nation_id];
-    if (pnation['is_playable']) {
+    if (pnation['is_playable'] && (!is_ongoing_longturn() || !(nation_id in player_nations))) {
       nations_html += "<div class='nation_pickme_line' onclick='select_nation(" + nation_id + ");'>"
              + "<div id='nation_" + nation_id + "' class='nation_choice'>"
              + "<canvas id='pick_flag_" + nation_id + "' width='29' height='20' class='pick_nation_flags'></canvas>"
@@ -288,27 +332,30 @@ function pick_nation(player_id)
 
   nations_html += "</div><div id='nation_style_choices'></div>"
                + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
+                
+
+  var buttons = { "1" : { id: "play", text:"Play this nation!", click: function() { $("#pick_nation_dialog").dialog('close');
+                                                    if (!is_ongoing_longturn()) submit_nation_choice();
+                                                    else submit_nation_choice_ongoing_longturn(); } },
+                  "2" : { id: "customize", text:"Customize this nation", click: function() {show_customize_nation_dialog(player_id);} }
+                }
+
+  if (is_ongoing_longturn()) {
+    buttons["3"] = { id: "random", text: "Pick a random nation", click: function() { draw_random_nation_ongoing_longturn(player_nations); } }
+  }     
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "What Nation Will " + pplayer['name'] + " Be Ruler Of?");
+  $("#pick_nation_dialog").attr("title", "What Nation Will " + player_name + " Be Ruler Of?");
   $("#pick_nation_dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "99%" : "70%",
+      closeOnEscape: !is_ongoing_longturn(),
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "99%" : "70%",
             height: $(window).height() - 100,
-			buttons: {
-			    "Customize this nation": function() {
-                   show_customize_nation_dialog(player_id);
-            	}
-            				,
-				"Play this nation!": function() {
-					$("#pick_nation_dialog").dialog('close');
-					submit_nation_choice();
-				}
-			}
-		});
-
-  $("#nation_legend").html("Please choose nation for " + pplayer['name'] + ".");
+      buttons: buttons
+    });
+  
+  $("#nation_legend").html("Please choose the nation for " + player_name + ".");
 
 
   $("#nation_autocomplete_box").autocomplete({
@@ -323,6 +370,23 @@ function pick_nation(player_id)
     $("#nation_list").width("80%");
   }
 
+  if (is_ongoing_longturn()) {
+    $(".ui-dialog-titlebar-close").css("display", "none");    
+    $(".ui-dialog-buttonpane").css("width","100%");
+    /* Removing the paddings, because I wasn't able to find the default width of the pane (width of 100% + the paddings
+    resulted in clipping and a scrollbar) so instead the button margins are set to the default JQuery Dialog value
+    of the right button (the left one doesn't have a margin by default because the default float for the whole buttonset is right) 
+    + the value of the respective buttonpane paddings */
+    $(".ui-dialog-buttonpane").css("padding-right","0em");
+    $(".ui-dialog-buttonpane").css("padding-left","0em");    
+    $(".ui-dialog-buttonset").css("width","100%");
+    $("#play").css("float","right");    
+    $("#play").css("margin-right","1.4em");
+    $("#customize").css("float","right");
+    $("#random").css("float","left");
+    $("#random").css("margin-left","1.4em");
+  }
+
   nation_select_id = setTimeout (update_nation_selection, 150);
   $("#pick_nation_dialog").dialog('open');
 
@@ -334,7 +398,7 @@ function pick_nation(player_id)
 
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
-    if (pnation['is_playable']) {
+    if (pnation['is_playable'] && (!is_ongoing_longturn() || !(nation_id in player_nations))) {
       var flag_canvas = document.getElementById('pick_flag_' + nation_id);
       var flag_canvas_ctx = flag_canvas.getContext("2d");
       var tag = "f." + pnation['graphic_str'];
@@ -420,7 +484,7 @@ function select_nation(new_nation_id)
 
   if (!pnation['customized']) {
     $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
-		            + pnation['graphic_str'] + "-web" + get_tileset_file_extention() + "'>");
+                + pnation['graphic_str'] + "-web" + get_tileset_file_extention() + "'>");
   }
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
@@ -429,6 +493,33 @@ function select_nation(new_nation_id)
 
   chosen_nation = parseFloat(new_nation_id);
   $("#nation_" + chosen_nation).css("background-color", "#FFFFFF");
+}
+
+
+/****************************************************************************
+  Sends a packet to the server telling it to change an ai's player nation
+  and attach the player to it (start the game), -1 means no change
+****************************************************************************/
+function submit_nation_choice_ongoing_longturn()
+{
+  if (client.conn['player_num'] == null) return;
+
+  var style = -1
+
+  if (chosen_nation != -1) {
+    style = nations[chosen_nation]['style'];
+    if (chosen_style != -1) style = chosen_style;  
+  }
+
+  var test_packet = {"pid" : packet_ongoing_longturn_nation_select_req, 
+                   "nation_no" : chosen_nation,
+                   "is_male" : true, 
+                   "style": style};
+
+  send_request(JSON.stringify(test_packet));
+  clearInterval(nation_select_id);
+
+  setup_window_size();
 }
 
 /****************************************************************************
@@ -544,45 +635,45 @@ function pregame_settings()
       + "<option value='civ2civ3'>Civ2Civ3</option>"
       + "</select><a id='ruleset_description'></a></td></tr>"
       + "<tr title='Set metaserver info line'><td>Game title:</td>" +
-	  "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
-	  "<tr title='Enables music'><td>Music:</td>" +
+    "<td><input type='text' name='metamessage' id='metamessage' size='28' maxlength='42'></td></tr>" +
+    "<tr title='Enables music'><td>Music:</td>" +
           "<td><input type='checkbox' name='music_setting' id='music_setting'>Play Music</td></tr>" +
-	  "<tr class='not_pbem' title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
-	  "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='12' step='1'></td></tr>" +
-	  "<tr class='not_pbem' title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
-	  "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
+    "<tr class='not_pbem' title='Total number of players (including AI players)'><td>Number of Players (including AI):</td>" +
+    "<td><input type='number' name='aifill' id='aifill' size='4' length='3' min='0' max='12' step='1'></td></tr>" +
+    "<tr class='not_pbem' title='Maximum seconds per turn'><td>Timeout (seconds per turn):</td>" +
+    "<td><input type='number' name='timeout' id='timeout' size='4' length='3' min='30' max='3600' step='1'></td></tr>" +
           "<tr class='not_pbem' title='Creates a private game where players need to know this password in order to join.'><td>Password for private game:</td>" +
-	  "<td><input type='text' name='password' id='password' size='10' length='10'></td></tr>" +
-	  "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
-	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='10' step='1'></td></tr>" +
-	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
-	  "<td><select name='skill_level' id='skill_level'>" +
-	      "<option value='1'>Handicapped</option>" +
-	      "<option value='2'>Novice</option>" +
-	      "<option value='3'>Easy</option>" +
+    "<td><input type='text' name='password' id='password' size='10' length='10'></td></tr>" +
+    "<tr title='Map size (in thousands of tiles)'><td>Map size:</td>" +
+    "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='10' step='1'></td></tr>" +
+    "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
+    "<td><select name='skill_level' id='skill_level'>" +
+        "<option value='1'>Handicapped</option>" +
+        "<option value='2'>Novice</option>" +
+        "<option value='3'>Easy</option>" +
           "<option value='4'>Normal</option>" +
           "<option value='5'>Hard</option>" +
           "<option value='6'>Cheating</option>" +
-	  "</select></td></tr>"+
-	  "<tr title='Number of initial techs per player'><td>Tech level:</td>" +
-	  "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
-	  "<tr title='This setting gives the approximate percentage of the map that will be made into land.'><td>Landmass:</td>" +
-	  "<td><input type='number' name='landmass' id='landmass' size='3' length='3' min='15' max='85' step='10'></td></tr>" +
-	  "<tr title='Amount of special resource squares'><td>Specials:</td>" +
-	  "<td><input type='number' name='specials' id='specials' size='4' length='4' min='0' max='1000' step='50'></td></tr>" +
-	  "<tr title='Minimum distance between cities'><td>City mindist :</td>" +
-	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
+    "</select></td></tr>"+
+    "<tr title='Number of initial techs per player'><td>Tech level:</td>" +
+    "<td><input type='number' name='techlevel' id='techlevel' size='3' length='3' min='0' max='100' step='10'></td></tr>" +
+    "<tr title='This setting gives the approximate percentage of the map that will be made into land.'><td>Landmass:</td>" +
+    "<td><input type='number' name='landmass' id='landmass' size='3' length='3' min='15' max='85' step='10'></td></tr>" +
+    "<tr title='Amount of special resource squares'><td>Specials:</td>" +
+    "<td><input type='number' name='specials' id='specials' size='4' length='4' min='0' max='1000' step='50'></td></tr>" +
+    "<tr title='Minimum distance between cities'><td>City mindist :</td>" +
+    "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
           "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
-	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
-	  "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
+    "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
+    "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
           " This will lead to information leakage about other players.'><td>Score graphs</td>" +
           "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
       "<tr id='killstack_area'><td id='killstack_label'></td>" +
           "<td><input type='checkbox' id='killstack_setting'>Enable killstack</td></tr>" +
       "<tr id='selct_multiple_units_area'><td id='select_multiple_units_label'></td>" +
           "<td><input type='checkbox' id='select_multiple_units_setting'>Right-click selects units</td></tr>" +
-	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
-	  "<td><select name='generator' id='generator'>" +
+    "<tr title='Method used to generate map'><td>Map generator:</td>" +
+    "<td><select name='generator' id='generator'>" +
           "<option value='RANDOM'>Fully random height</option>" +
           "<option value='FRACTAL'>Pseudo-fractal height</option>" +
           "<option value='ISLAND'>Island-based</option>" +
@@ -590,20 +681,20 @@ function pregame_settings()
           "<option value='FRACTURE'>Fracture map</option>" +
     "</select></td></tr>"
     + "</table><br>"+
-	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
+    "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
           "other ways also. Type /help in the command line for more information.</i></span></div>" +
 
       "<div id='pregame_settings_tabs-2'>"+
       "<br><span id='settings_info'><i>3D WebGL requires a fast computer with 3D graphics card, such as Nvidia GeForce and at least 3GB of RAM. " +
       "Here you can configure the 3D WebGL version:</i></span><br><br>" +
-	    "<table id='settings_table'>" +
-	    "<tr title='Graphics quality level'><td>Graphics quality:</td>" +
-        	  "<td><select name='graphics_quality' id='graphics_quality'>" +
+      "<table id='settings_table'>" +
+      "<tr title='Graphics quality level'><td>Graphics quality:</td>" +
+            "<td><select name='graphics_quality' id='graphics_quality'>" +
               "<option value='1'>Low</option>" +
               "<option value='2'>Medium</option>" +
               "<option value='3'>High</option>" +
               "</select></td></tr>"+
-	    "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'><br></td>" +
+      "<tr id='3d_antialiasing_enabled'><td id='3d_antialiasing_label' style='min-width: 150px;'><br></td>" +
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
@@ -618,34 +709,34 @@ function pregame_settings()
       "</div>" +
 
       "<div id='pregame_settings_tabs-3'>" +
-	    "<table id='settings_table'>" +
+      "<table id='settings_table'>" +
         "<tr title='Font on map'><td>Font on map:</td>" +
-	    "<td><input type='text' name='mapview_font' id='mapview_font' size='28' maxlength='42' value='16px Georgia, serif'></td></tr>" +
-	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
+      "<td><input type='text' name='mapview_font' id='mapview_font' size='28' maxlength='42' value='16px Georgia, serif'></td></tr>" +
+      "<tr id='speech_enabled'><td id='speech_label'></td>" +
         "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
-	    "<tr id='voice_row'><td id='voice_label'></td>" +
+      "<tr id='voice_row'><td id='voice_label'></td>" +
         "<td><select name='voice' id='voice'></select></td></tr>" +
         "</table>" +
       "</div>"
-	  ;
+    ;
   $(id).html(dhtml);
 
   $(id).attr("title", "Game Settings");
   $(id).dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "98%" : "60%",
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "98%" : "60%",
             height: is_small_screen() ?  $(window).height() - 40 : $(window).height() - 250,
-			 buttons: {
-				Ok: function() {
-					$("#pregame_settings").dialog('close');
-					if (benchmark_start > 0) {
-					  $(window).unbind('beforeunload');
+       buttons: {
+        Ok: function() {
+          $("#pregame_settings").dialog('close');
+          if (benchmark_start > 0) {
+            $(window).unbind('beforeunload');
                       alert("Reloading game to setup new graphics quality.");
-					  location.reload();
-					}
-				}
-			  }
+            location.reload();
+          }
+        }
+        }
   });
 
   $("#pregame_settings_tabs").tabs();
@@ -1038,7 +1129,7 @@ function show_intro_dialog(title, message) {
 
   var intro_html = message + "<br><br><table><tr><td>Player name:</td><td><input id='username_req' type='text' size='25' maxlength='31'></td></tr>"
       +  "<tr id='password_row' style='display:none;'><td>Password:</td><td id='password_td'></td></tr></table>"
-	  + " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>";
+    + " <br><br><span id='username_validation_result' style='display:none;'></span><br><br>";
 
   if (renderer == RENDERER_WEBGL) {
     try {
@@ -1085,46 +1176,46 @@ function show_intro_dialog(title, message) {
 
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
-			  if (dialog_close_trigger != "button") {
-			    if (validate_username()) {
-			      network_init();
-			      if (!is_touch_device()) $("#pregame_text_input").focus();
-			      return true;
-			    } else {
-			      return false;
-			    }
-			  }
-			},
-			buttons:
-			[
-			  {
-				  text : "Start Game",
-				  click : function() {
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "80%" : "60%",
+      beforeClose: function( event, ui ) {
+        // if intro dialog is closed, then check the username and connect to the server.
+        if (dialog_close_trigger != "button") {
+          if (validate_username()) {
+            network_init();
+            if (!is_touch_device()) $("#pregame_text_input").focus();
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      buttons:
+      [
+        {
+          text : "Start Game",
+          click : function() {
                      if (is_touch_device() || is_small_screen()) {
                        BigScreen.toggle();
                      }
-					dialog_close_trigger = "button";
-					autostart = true;
-					validate_username_callback();
-				  },
-				  icons: { primary: "ui-icon-play" }
-			  },
-			  {
-				  text : join_game_customize_text,
-				  click : function() {
+          dialog_close_trigger = "button";
+          autostart = true;
+          validate_username_callback();
+          },
+          icons: { primary: "ui-icon-play" }
+        },
+        {
+          text : join_game_customize_text,
+          click : function() {
                     if (is_touch_device() || is_small_screen()) {
                       BigScreen.toggle();
                     }
-					dialog_close_trigger = "button";
-					validate_username_callback();
-				},
-				icons : { primary: "ui-icon-gear" }
-			  },
+          dialog_close_trigger = "button";
+          validate_username_callback();
+        },
+        icons : { primary: "ui-icon-gear" }
+        },
               {
                   text : "New user account",
                   click : function() {
@@ -1132,9 +1223,9 @@ function show_intro_dialog(title, message) {
                 },
                 icons : { primary: "ui-icon-person" }
               }
-			]
+      ]
 
-		});
+    });
 
   if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
          && $.getUrlVar('load') != "tutorial") {
@@ -1213,24 +1304,24 @@ function show_longturn_intro_dialog() {
 
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "60%",
-			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
-			  if (dialog_close_trigger != "button") {
-			    if (validate_username()) {
-			      network_init();
-			      if (!is_touch_device()) $("#pregame_text_input").focus();
-			      return true;
-			    } else {
-			      return false;
-			    }
-			  }
-			},
-			buttons: []
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "80%" : "60%",
+      beforeClose: function( event, ui ) {
+        // if intro dialog is closed, then check the username and connect to the server.
+        if (dialog_close_trigger != "button") {
+          if (validate_username()) {
+            network_init();
+            if (!is_touch_device()) $("#pregame_text_input").focus();
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      buttons: []
 
-		});
+    });
 
   if (is_small_screen()) {
     /* some fixes for pregame screen on small devices.*/
@@ -1367,28 +1458,28 @@ function show_new_user_account_dialog(gametype)
   $("#dialog").html(message);
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "90%" : "60%",
-			buttons:
-			{
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "90%" : "60%",
+      buttons:
+      {
                 "Cancel" : function() {
                     if (gametype == "pbem") {
                       show_pbem_dialog();
                     } else {
-	                  init_common_intro_dialog();
-	                }
-				},
-				"Signup new user" : function() {
-				    if (gametype == "pbem") {
-				      create_new_freeciv_user_account_request("pbem");
-				    } else {
-				      create_new_freeciv_user_account_request("normal");
-				    }
+                    init_common_intro_dialog();
+                  }
+        },
+        "Signup new user" : function() {
+            if (gametype == "pbem") {
+              create_new_freeciv_user_account_request("pbem");
+            } else {
+              create_new_freeciv_user_account_request("normal");
+            }
 
-				}
-			}
-		});
+        }
+      }
+    });
 
   $("#dialog").dialog('open');
 
@@ -1519,20 +1610,20 @@ function show_customize_nation_dialog(player_id) {
   $("#dialog").html(message);
   $("#dialog").attr("title", "Customize nation: " + pnation['adjective']);
   $("#dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "90%" : "50%",
-			buttons:
-			{
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "90%" : "50%",
+      buttons:
+      {
                 "Cancel" : function() {
                   $("#dialog").dialog('close');
                   pick_nation(player_id);
-				},
-				"OK" : function() {
-				    handle_customized_nation(player_id);
-				}
-			}
-		});
+        },
+        "OK" : function() {
+            handle_customized_nation(player_id);
+        }
+      }
+    });
 
   $("#dialog").dialog('open');
 }
@@ -1636,30 +1727,30 @@ function forgot_pbem_password()
   $("#pwd_dialog").html(message);
   $("#pwd_dialog").attr("title", title);
   $("#pwd_dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			width: is_small_screen() ? "80%" : "40%",
-			buttons:
-			{
+      bgiframe: true,
+      modal: true,
+      width: is_small_screen() ? "80%" : "40%",
+      buttons:
+      {
                 "Cancel" : function() {
-	                 $("#pwd_dialog").remove();
-				},
-				"Send password" : function() {
-				    password_reset_count++;
+                   $("#pwd_dialog").remove();
+        },
+        "Send password" : function() {
+            password_reset_count++;
                     if (password_reset_count > 3) {
                       swal("Unable to reset password.");
                       return;
                     }
-				    var reset_email = $("#email_reset").val();
-				    var captcha = $("#g-recaptcha-response").val();
-				    if (reset_email == null || reset_email.length == 0) {
-				      swal("Please fill in e-mail.");
-				      return;
-				    }
-				    if (captcha_site_key != '' && (captcha == null || captcha.length == 0)) {
-				      swal("Please fill complete the captcha.");
-				      return;
-				    }
+            var reset_email = $("#email_reset").val();
+            var captcha = $("#g-recaptcha-response").val();
+            if (reset_email == null || reset_email.length == 0) {
+              swal("Please fill in e-mail.");
+              return;
+            }
+            if (captcha_site_key != '' && (captcha == null || captcha.length == 0)) {
+              swal("Please fill complete the captcha.");
+              return;
+            }
                     $.ajax({
                        type: 'POST',
                        url: "/reset_password?email=" + reset_email + "&captcha=" + encodeURIComponent(captcha),
@@ -1671,9 +1762,9 @@ function forgot_pbem_password()
                          swal("Error, password was not reset.");
                        }
                       });
-				}
-			}
-		});
+        }
+      }
+    });
 
   $("#pwd_dialog").dialog('open');
 

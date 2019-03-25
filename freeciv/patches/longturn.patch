@@ -1,6 +1,19 @@
+diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def 2019-03-11 06:18:02.000000000 +0100
++++ freeciv/common/networking/packets.def  2019-03-18 15:22:14.000000000 +0100
+@@ -2305,3 +2305,9 @@
+ 
+   BV_ACTIONS utype_actions;
+ end
++
++PACKET_ONGOING_LONGTURN_NATION_SELECT_REQ = 291; cs, handle-per-conn, dsend
++  NATION nation_no;
++  BOOL is_male;
++  UINT8 style;
++end
 diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
---- freeciv/server/connecthand.c	2018-03-05 17:08:25.294999119 +0200
-+++ freeciv/server/connecthand.c	2018-03-05 17:10:27.770239134 +0200
+--- freeciv/server/connecthand.c    2018-03-05 17:08:25.294999119 +0200
++++ freeciv/server/connecthand.c    2018-03-05 17:10:27.770239134 +0200
 @@ -50,6 +50,11 @@
  #include "stdinhand.h"
  #include "voting.h"
@@ -13,14 +26,14 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
  #include "connecthand.h"
  
  
-@@ -102,6 +107,36 @@
+@@ -102,6 +107,56 @@
    conn_set_access(pconn, level, FALSE);
  }
  
 +/************************************************************************//**
 +  Give techs for the late joiners in freeciv-web longturn game.
 +****************************************************************************/
-+static void do_longturn_tech_latejoiner_effect(struct player *pplayer)
++void do_longturn_tech_latejoiner_effect(struct player *pplayer)
 +{
 +  struct research *presearch;
 +  
@@ -38,8 +51,8 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +    players_iterate(aplayer) {
 +      if (TECH_KNOWN == research_invention_state(research_get(aplayer), ptech)) {
 +        if (mod <= ++num_players) {
-+          found_new_tech(presearch, ptech, FALSE, TRUE);		
-+	  break;
++          found_new_tech(presearch, ptech, FALSE, TRUE);       
++     break;
 +        }
 +      }
 +    } players_iterate_end;
@@ -47,10 +60,30 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +
 +}
 +
++/************************************************************************//**
++  Attach a joining connection to an available player and give them bonuses
++  to offset their late joining.
++****************************************************************************/
++void attach_longturn_player(struct connection *pc, struct player *pplayer)
++{
++    set_as_human(pplayer);
++
++    pplayer->economic.gold += game.info.turn * 10; 
++    if (pplayer->economic.gold > 700) { 
++      pplayer->economic.gold = 700; 
++    }
++
++    pplayer->economic.science = 60;
++    pplayer->economic.tax = 40;
++
++    connection_attach(pc, pplayer, FALSE);
++    do_longturn_tech_latejoiner_effect(pplayer);
++}
++
  /**********************************************************************//**
    This is used when a new player joins a server, before the game
    has started.  If pconn is NULL, is an AI, else a client.
-@@ -251,6 +286,23 @@
+@@ -251,6 +306,22 @@
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to no player."),
                  pconn->username);
@@ -58,14 +91,13 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +    if (is_longturn()) {
 +      pplayer = find_uncontrolled_player();
 +      if (pplayer) {
-+        /* Make it human! */
-+        set_as_human(pplayer);
-+        pplayer->economic.gold += game.info.turn * 10; if (pplayer->economic.gold > 700) pplayer->economic.gold = 700;
-+        pplayer->economic.science = 60;
-+        pplayer->economic.tax = 40;
-+        connection_attach(pconn, pplayer, FALSE);
-+        do_longturn_tech_latejoiner_effect(pplayer);
-+      } else {
++        if ((pplayer->is_alive && pplayer->nturns_idle > 12)
++        && !player_delegation_active(pplayer)
++        && strlen(pplayer->server.delegate_to) == 0) {
++          attach_longturn_player(pconn, pplayer);
++        }
++      }
++      else {
 +        notify_conn(dest, NULL, E_CONNECTION, ftc_server,
 +           _("Unable to join LongTurn game. The game is probably full."));
 +      }
@@ -74,7 +106,7 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
    } else {
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to %s."),
-@@ -540,8 +592,15 @@
+@@ -540,8 +613,15 @@
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -102,9 +134,19 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
  
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
        toggle_ai_player_direct(NULL, pplayer);
+diff -Nurd freeciv/server/connecthand.h freeciv/server/connecthand.h
+--- freeciv/server/connecthand.h  2019-03-11 06:18:02.000000000 +0100
++++ freeciv/server/connecthand.h 2019-03-18 15:17:48.106626709 +0100
+@@ -48,4 +48,6 @@
+ 
+ void connection_close_server(struct connection *pconn, const char *reason);
+ 
++void attach_longturn_player(struct connection *pc, struct player *pplayer);
++
+ #endif /* FC__CONNECTHAND_H */
 diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2018-03-05 17:08:25.282999193 +0200
-+++ freeciv/server/settings.c	2018-03-05 17:12:06.365627347 +0200
+--- freeciv/server/settings.c   2018-03-05 17:08:25.282999193 +0200
++++ freeciv/server/settings.c   2018-03-05 17:12:06.365627347 +0200
 @@ -756,6 +756,10 @@
  ****************************************************************************/
  static void metamessage_action(const struct setting *pset)
@@ -117,9 +159,58 @@ diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
     * An empty user metaserver message results in an automatic meta message.
     * A non empty user meta message results in the user meta message. */
 diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2018-03-05 17:08:25.306999044 +0200
-+++ freeciv/server/srv_main.c	2018-03-05 17:08:48.934852427 +0200
-@@ -3139,6 +3139,15 @@
+--- freeciv/server/srv_main.c   2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/srv_main.c   2018-03-05 17:08:48.934852427 +0200
+@@ -1963,6 +1963,7 @@
+       || type == PACKET_CONN_PONG
+       || type == PACKET_CLIENT_HEARTBEAT
+       || type == PACKET_SAVE_SCENARIO
++      || type == PACKET_ONGOING_LONGTURN_NATION_SELECT_REQ
+       || is_client_edit_packet(type)) {
+ 
+     /* Except for PACKET_EDIT_MODE (used to set edit mode), check
+@@ -2220,6 +2221,40 @@
+   send_player_info_c(pplayer, game.est_connections);
+ }
+ 
++/**************************************************************//**
++  Handle a joining player's nation choice in FreecivWeb Longturn Games
++******************************************************************/
++
++void handle_ongoing_longturn_nation_select_req(struct connection *pc,
++                                       Nation_type_id nation_no,
++                                       bool is_male, int style)
++{
++  struct conn_list *dest = pc->self;
++  struct nation_type *new_nation;
++  struct player *pplayer;
++  new_nation = nation_by_number(nation_no);    
++
++  pplayer = find_uncontrolled_player();
++  if (pplayer) {
++    /* Nation and style at -1 mean the player has
++       selected to randomise his nation, in which
++       case we simply go with the AI's nation */
++    if (style >= 0 && style < game.control.num_styles
++        && new_nation != NO_NATION_SELECTED) {
++
++      pplayer->is_male = is_male;
++      pplayer->style = style_by_number(style);
++      (void) player_set_nation(pplayer, new_nation);
++    }
++
++    attach_longturn_player(pc, pplayer);
++  }
++  else {
++    notify_conn(dest, NULL, E_CONNECTION, ftc_server,
++       _("Unable to join LongTurn game. The game is probably full."));
++  }
++}
++
+ /**********************************************************************//**
+   Handle a player-ready packet from global observer.
+ **************************************************************************/
+@@ -3139,6 +3174,15 @@
          map_show_all(pplayer);
        } players_iterate_end;
      }
@@ -128,14 +219,14 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +      players_iterate(pplayer) {
 +        if (is_ai(pplayer)) {
 +          set_as_human(pplayer);
-+	  server_player_set_name(pplayer, "New Available Player ");
-+	}
-+      } players_iterate_end;	    
++     server_player_set_name(pplayer, "New Available Player ");
++   }
++      } players_iterate_end;       
 +    }
    }
  
    if (game.scenario.is_scenario && game.scenario.players) {
-@@ -3503,3 +3512,11 @@
+@@ -3503,3 +3546,11 @@
  {
    return playercolor_get(i);
  }
@@ -148,8 +239,8 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +  return (fc_strcasecmp(game.server.meta_info.type, "longturn") == 0);
 +}
 diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
---- freeciv/server/srv_main.h	2018-03-05 17:08:25.306999044 +0200
-+++ freeciv/server/srv_main.h	2018-03-05 17:08:48.934852427 +0200
+--- freeciv/server/srv_main.h   2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/srv_main.h   2018-03-05 17:08:48.934852427 +0200
 @@ -93,6 +93,7 @@
  void srv_main(void);
  void server_quit(void);
@@ -159,8 +250,8 @@ diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
  enum server_states server_state(void);
  void set_server_state(enum server_states newstate);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2018-03-05 17:08:25.306999044 +0200
-+++ freeciv/server/stdinhand.c	2018-03-05 17:12:40.477415686 +0200
+--- freeciv/server/stdinhand.c  2018-03-05 17:08:25.306999044 +0200
++++ freeciv/server/stdinhand.c  2018-03-05 17:12:40.477415686 +0200
 @@ -599,6 +599,10 @@
  {
    struct setting *pset;
@@ -182,7 +273,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 +
    if (is_human(pplayer)) {
      cmd_reply(CMD_AITOGGLE, caller, C_OK,
- 	      _("%s is now under AI control."),
+        _("%s is now under AI control."),
 @@ -712,6 +720,10 @@
    enum m_pre_result match_result;
    struct player *pplayer;

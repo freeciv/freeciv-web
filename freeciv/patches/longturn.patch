@@ -99,7 +99,7 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +      }
 +      else {
 +        notify_conn(dest, NULL, E_CONNECTION, ftc_server,
-+            _("Unable to join LongTurn game. The game is probably full."));
++           _("Unable to join LongTurn game. The game is probably full."));
 +      }
 +    }
 +
@@ -203,7 +203,7 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +  }
 +  else {
 +    notify_conn(dest, NULL, E_CONNECTION, ftc_server,
-+        _("Unable to join LongTurn game. The game is probably full."));
++       _("Unable to join LongTurn game. The game is probably full."));
 +  }
 +}
 +

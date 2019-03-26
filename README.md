@@ -154,7 +154,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
-- Tornado 5.1 or later - http://www.tornadoweb.org/
+- Tornado 6.0.2 or later - http://www.tornadoweb.org/
 
 - Jansson 2.6 - http://www.digip.org/jansson/
 

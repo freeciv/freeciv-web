@@ -7,7 +7,7 @@ index 372325b..96dcaa9 100644
      }
  
 -    send_tile_info(dest, ptile, FALSE);
-+    send_tile_info(dest, ptile, TRUE);
++    send_tile_info(dest, ptile, !is_longturn());
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
@@ -16,13 +16,13 @@ index 372325b..96dcaa9 100644
        info.worked = IDENTITY_NUMBER_ZERO;
  
 -      info.terrain = terrain_count();
-+      info.terrain = (NULL != tile_terrain(ptile))
++      info.terrain = (NULL != tile_terrain(ptile) && !is_longturn())
 +                      ? terrain_number(tile_terrain(ptile))
 +                      : terrain_count();
        info.resource = MAX_EXTRA_TYPES;
  
 -      BV_CLR_ALL(info.extras);
-+      info.extras = ptile->extras; //WebGL client needs to know which tiles are rivers on game start.
++      if (!is_longturn()) {info.extras = ptile->extras; } else {BV_CLR_ALL(info.extras); } //WebGL client needs to know which tiles are rivers on game start.
  
        info.label[0] = '\0';
  

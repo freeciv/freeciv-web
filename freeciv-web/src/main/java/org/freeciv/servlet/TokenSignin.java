@@ -32,6 +32,7 @@ import java.sql.*;
 import java.util.Properties;
 import javax.sql.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.*;
@@ -95,10 +96,7 @@ public class TokenSignin extends HttpServlet {
 
                 // 1. Check if username and userId is already stored in the database,
                 //  and check if the username and userId matches.
-                String authQuery =
-                        "SELECT subject, activated, username "
-                                + "FROM google_auth "
-                                + "WHERE LOWER(username) = LOWER(?) OR subject = ?";
+                String authQuery = DbManager.getQuerySelectGoogleUser();
                 PreparedStatement ps1 = conn.prepareStatement(authQuery);
                 ps1.setString(1, username);
                 ps1.setString(2, userId);
@@ -109,9 +107,7 @@ public class TokenSignin extends HttpServlet {
                         // X-Real-IP == "proxy" when called just for validation
                         response.getOutputStream().print("Failed");
                     } else {
-                        String query = "INSERT INTO google_auth "
-                                     + "(username, subject, email, activated, ip) "
-                                     + "VALUES (?, ?, ?, ?, ?)";
+                        String query = DbManager.getQueryInsertGoogleUser();
                         PreparedStatement preparedStatement = conn.prepareStatement(query);
                         preparedStatement.setString(1, username.toLowerCase());
                         preparedStatement.setString(2, userId);
@@ -132,7 +128,7 @@ public class TokenSignin extends HttpServlet {
 
                         if (!"proxy".equals(ipAddress)) {
                             // X-Real-IP == "proxy" when called just for validation
-                            String query = "UPDATE google_auth SET ip = ? WHERE LOWER(username) = ?";
+                            String query = DbManager.getQueryUpdateGoogleUser();
                             PreparedStatement preparedStatement = conn.prepareStatement(query);
                             preparedStatement.setString(1, ipAddress);
                             preparedStatement.setString(2, username.toLowerCase());

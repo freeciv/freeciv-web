@@ -25,6 +25,7 @@ import java.sql.*;
 
 import javax.sql.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.*;
@@ -49,7 +50,7 @@ public class UserCount extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "SELECT COUNT(*) FROM `auth`";
+			String query = DbManager.getQueryCountUsers();
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.next()) {

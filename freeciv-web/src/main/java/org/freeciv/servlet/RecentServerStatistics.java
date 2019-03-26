@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 import org.json.JSONObject;
 
@@ -60,28 +61,7 @@ public class RecentServerStatistics extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "" //
-					+ "	SELECT COUNT(*) AS count " //
-					+ "	  FROM servers " //
-					+ "UNION ALL " //
-					+ "	SELECT COUNT(*) AS count " //
-					+ "	  FROM servers " //
-					+ "	 WHERE type = 'singleplayer' " //
-					+ "    AND state = 'Pregame' " //
-					+ "    AND humans = '0' " //
-					+ "    AND stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) " //
-					+ "UNION ALL " //
-					+ "	SELECT COUNT(*) AS count " //
-					+ "	  FROM servers " //
-					+ "	 WHERE type = 'multiplayer' " //
-					+ "	   AND state = 'Pregame' " //
-					+ "	   AND stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE) " //
-					+ "UNION ALL " //
-					+ "	SELECT COUNT(*) AS count " //
-					+ "	  FROM servers " //
-					+ "  WHERE type = 'pbem' " //
-					+ "    AND state = 'Pregame' " //
-					+ "    AND stamp >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)";
+			String query = DbManager.getQuerySelectRecentServerStats();
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();

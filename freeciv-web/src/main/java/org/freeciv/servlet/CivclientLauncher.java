@@ -25,6 +25,7 @@ import java.sql.*;
 
 import javax.sql.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.*;
@@ -81,15 +82,7 @@ public class CivclientLauncher extends HttpServlet {
 			if (civServerPort == null || civServerPort.length() == 0) {
 				// If the user requested a new game, then get host and port for an available
 				// server from the metaserver DB, and use that one.
-				String lookupQuery =
-						"SELECT port "
-								+ "FROM servers "
-								+ "WHERE state = 'Pregame' "
-								+ "	AND type = ? "
-								+ "	AND humans = '0' "
-								+ "ORDER BY RAND() "
-								+ "LIMIT 1 ";
-
+				String lookupQuery = DbManager.getQuerySelectPort();
 				PreparedStatement lookupStmt = conn.prepareStatement(lookupQuery);
 				lookupStmt.setString(1, gameType);
 				ResultSet lookupRs = lookupStmt.executeQuery();
@@ -103,7 +96,7 @@ public class CivclientLauncher extends HttpServlet {
 			}
 
 			/* Validate port */
-			String validateQuery = "SELECT COUNT(*) FROM servers WHERE port = ?";
+			String validateQuery = DbManager.getQueryCountServers();
 			PreparedStatement validateStmt = conn.prepareStatement(validateQuery);
 			if (civServerPort == null || civServerPort.length() == 0) {
 				response.setHeader("result", "invalid port validation");

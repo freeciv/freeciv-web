@@ -25,6 +25,7 @@ import java.sql.*;
 
 import javax.sql.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.*;
@@ -48,12 +49,7 @@ public class RandomUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query =
-					  "SELECT username "
-					+ "FROM `auth` "
-					+ "WHERE activated='1' "
-					+ "	AND id >= (SELECT FLOOR(MAX(id) * RAND()) FROM `auth`) "
-					+ "ORDER BY id LIMIT 1;";
+			String query = DbManager.getQuerySelectUserById();
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (!rs.next()) {

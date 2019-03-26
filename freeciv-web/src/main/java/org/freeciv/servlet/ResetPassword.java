@@ -15,6 +15,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.Context;
@@ -127,7 +128,7 @@ public class ResetPassword extends HttpServlet {
             DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
             conn = ds.getConnection();
 
-            String query = "UPDATE auth SET secure_hashed_password = ? where email = ? and activated = 1";
+            String query = DbManager.getQueryUpdateAuthSecurePassword();
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, Crypt.crypt(hashedPwd));
             preparedStatement.setString(2, email_parameter);

@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 /**
@@ -123,7 +124,7 @@ public class GameDetails extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			query = "SELECT * FROM servers WHERE host = ? AND port = ?";
+			query = DbManager.getQuerySelectServers();
 
 			statement = conn.prepareStatement(query);
 			statement.setString(1, sHost);
@@ -145,7 +146,7 @@ public class GameDetails extends HttpServlet {
 				return;
 			}
 
-			query = "SELECT * FROM players WHERE hostport = ? ORDER BY name";
+			query = DbManager.getQuerySelectPlayers();
 			statement = conn.prepareStatement(query);
 			statement.setString(1, hostPort);
 			rs = statement.executeQuery();
@@ -161,7 +162,7 @@ public class GameDetails extends HttpServlet {
 			}
 			request.setAttribute("players", players);
 
-			query = "SELECT * FROM variables WHERE hostport = ? ORDER BY name";
+			query = DbManager.getQuerySelectVariables();
 			statement = conn.prepareStatement(query);
 			statement.setString(1, hostPort);
 			rs = statement.executeQuery();

@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 import org.json.JSONObject;
 
@@ -68,10 +69,7 @@ public class GameStatistics extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "SELECT " //
-					+ "	(SELECT COUNT(*) FROM servers WHERE state = 'Running') AS ongoingGames, " //
-					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (0, 5)) AS totalSinglePlayerGames, " //
-					+ "	(SELECT SUM(gameCount) FROM games_played_stats WHERE gametype IN (1, 2)) AS totalMultiPlayerGames";
+			String query = DbManager.getQuerySelectStats();
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();

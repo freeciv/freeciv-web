@@ -25,6 +25,7 @@ import java.sql.*;
 
 import javax.sql.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 import javax.naming.*;
@@ -52,11 +53,7 @@ public class ValidateUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query =
-					  "SELECT username, activated "
-					+ "FROM auth "
-					+ "WHERE LOWER(username) = LOWER(?) "
-					+ "	OR LOWER(email) = LOWER(?)";
+			String query = DbManager.getQuerySelectUser();
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, usernameOrEmail);

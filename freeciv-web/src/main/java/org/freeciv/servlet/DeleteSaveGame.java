@@ -32,6 +32,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
 
@@ -86,11 +87,7 @@ public class DeleteSaveGame extends HttpServlet {
 			conn = ds.getConnection();
 
 			// Salted, hashed password.
-			String saltHashQuery =
-					"SELECT secure_hashed_password "
-							+ "FROM auth "
-							+ "WHERE LOWER(username) = LOWER(?) "
-							+ "	AND activated = '1' LIMIT 1";
+			String saltHashQuery = DbManager.getQuerySaltHash();
 			PreparedStatement ps1 = conn.prepareStatement(saltHashQuery);
 			ps1.setString(1, username);
 			ResultSet rs1 = ps1.executeQuery();

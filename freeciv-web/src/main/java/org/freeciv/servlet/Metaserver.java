@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 import org.json.JSONObject;
 
@@ -49,7 +50,7 @@ import org.json.JSONObject;
 public class Metaserver extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String CONTENT_TYPE = "application/json";
 
 	private static final String INTERNAL_SERVER_ERROR = new JSONObject() //
@@ -158,18 +159,18 @@ public class Metaserver extends HttpServlet {
 			conn = ds.getConnection();
 
 			if (serverIsStopping != null) {
-				query = "DELETE FROM servers WHERE host = ? AND port = ?";
+				query = DbManager.getQueryDeleteServers();
 				statement = conn.prepareStatement(query);
 				statement.setString(1, sHost);
 				statement.setInt(2, port);
 				statement.executeUpdate();
 
-				query = "DELETE FROM variables WHERE hostport = ?";
+				query = DbManager.getQueryDeleteVariables();
 				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
 
-				query = "DELETE FROM players WHERE hostport = ?";
+				query = DbManager.getQueryDeletePlayers();
 				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
@@ -184,13 +185,13 @@ public class Metaserver extends HttpServlet {
 					&& (sPlHost != null) && !sPlHost.isEmpty();
 
 			if (isSettingPlayers || (dropPlayers != null)) {
-				query = "DELETE FROM players WHERE hostport = ?";
+				query = DbManager.getQueryDeletePlayers();
 				statement = conn.prepareStatement(query);
 				statement.setString(1, hostPort);
 				statement.executeUpdate();
 
 				if (dropPlayers != null) {
-					query = "UPDATE servers SET available = 0, humans = -1 WHERE host = ? AND port = ?";
+					query = DbManager.getQueryUpdateServer();
 					statement = conn.prepareStatement(query);
 					statement.setString(1, sHost);
 					statement.setInt(2, port);
@@ -199,7 +200,7 @@ public class Metaserver extends HttpServlet {
 
 				if (isSettingPlayers) {
 
-					query = "INSERT INTO players (hostport, user, name, nation, flag, type, host) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					query = DbManager.getQueryInsertPlayer();
 					statement = conn.prepareStatement(query);
 					try {
 						for (int i = 0; i < sPlUser.size(); i++) {
@@ -222,13 +223,13 @@ public class Metaserver extends HttpServlet {
 			}
 
 			// delete this variables that this server might have already set
-			statement = conn.prepareStatement("DELETE FROM variables WHERE hostport = ?");
+			statement = conn.prepareStatement(DbManager.getQueryDeleteVariables());
 			statement.setString(1, hostPort);
 			statement.executeUpdate();
 
 			if ((!variableNames.isEmpty()) && (!variableValues.isEmpty())) {
 
-				query = "INSERT INTO variables (hostport, name, value) VALUES (?, ?, ?)";
+				query = DbManager.getQueryInsertVariable();
 				statement = conn.prepareStatement(query);
 				try {
 					for (int i = 0; i < variableNames.size(); i++) {
@@ -246,7 +247,7 @@ public class Metaserver extends HttpServlet {
 
 			}
 
-			query = "SELECT COUNT(*) FROM servers WHERE host = ? and port = ?";
+			query = DbManager.getQueryCountServersByHost();
 			statement = conn.prepareStatement(query);
 			statement.setString(1, sHost);
 			statement.setInt(2, port);
@@ -255,21 +256,7 @@ public class Metaserver extends HttpServlet {
 			boolean serverExists = rs.next() && (rs.getInt(1) == 1);
 
 			List<String> setServerVariables = new ArrayList<>(serverVariables.keySet());
-			StringBuilder queryBuilder = new StringBuilder();
-			if (serverExists) {
-				queryBuilder.append("UPDATE servers SET ");
-				for (String parameter : setServerVariables) {
-					queryBuilder.append(parameter).append(" = ?, ");
-				}
-				queryBuilder.append(" stamp = NOW() ");
-				queryBuilder.append(" WHERE host = ? AND port = ?");
-			} else {
-				queryBuilder = new StringBuilder("INSERT INTO servers SET ");
-				for (String parameter : setServerVariables) {
-					queryBuilder.append(parameter).append(" = ?, ");
-				}
-				queryBuilder.append(" stamp = NOW() ");
-			}
+			StringBuilder queryBuilder = DbManager.getQueryUpdateServers(serverExists, setServerVariables);
 
 			query = queryBuilder.toString();
 			statement = conn.prepareStatement(query);
@@ -305,4 +292,5 @@ public class Metaserver extends HttpServlet {
 			}
 		}
 	}
+
 }

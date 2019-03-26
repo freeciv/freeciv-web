@@ -60,10 +60,10 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +
 +}
 +
-+/************************************************************************//**
++/**********************************************************************//**
 +  Attach a joining connection to an available player and give them bonuses
 +  to offset their late joining.
-+****************************************************************************/
++**************************************************************************/
 +void attach_longturn_player(struct connection *pc, struct player *pplayer)
 +{
 +    set_as_human(pplayer);
@@ -91,22 +91,22 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +    if (is_longturn()) {
 +      pplayer = find_uncontrolled_player();
 +      if (pplayer) {
-+        if ((pplayer->is_alive && pplayer->nturns_idle > 12)
-+        && !player_delegation_active(pplayer)
++        if (pplayer->is_alive && pplayer->nturns_idle > 12
++        && !pplayer->unassigned_user && !player_delegation_active(pplayer)
 +        && strlen(pplayer->server.delegate_to) == 0) {
 +          attach_longturn_player(pconn, pplayer);
 +        }
 +      }
 +      else {
 +        notify_conn(dest, NULL, E_CONNECTION, ftc_server,
-+           _("Unable to join LongTurn game. The game is probably full."));
++            _("Unable to join LongTurn game. The game is probably full."));
 +      }
 +    }
 +
    } else {
      notify_conn(dest, NULL, E_CONNECTION, ftc_server,
  		_("You are logged in as '%s' connected to %s."),
-@@ -540,8 +613,15 @@
+@@ -540,8 +613,19 @@
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -117,14 +117,18 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +        return played;
 +      }
 +    } else {
-+      if (((!played->is_connected && !played->was_created && played->unassigned_user && played->is_alive) 
-+          || (played->is_alive && played->nturns_idle > 12 )) && !player_delegation_active(played) && strlen(played->server.delegate_to) == 0) {
++      if (((!played->is_connected && !played->was_created 
++      && played->unassigned_user && played->is_alive)
++      || (!played->unassigned_user && played->is_alive
++      && played->nturns_idle > 12 )) 
++      && !player_delegation_active(played) 
++      && strlen(played->server.delegate_to) == 0) {
 +        return played;
 +      }
      }
    } players_iterate_end;
  
-@@ -615,6 +674,9 @@
+@@ -615,6 +678,9 @@
        }
        (void) aifill(game.info.aifill);
      }
@@ -203,7 +207,7 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +  }
 +  else {
 +    notify_conn(dest, NULL, E_CONNECTION, ftc_server,
-+       _("Unable to join LongTurn game. The game is probably full."));
++        _("Unable to join LongTurn game. The game is probably full."));
 +  }
 +}
 +

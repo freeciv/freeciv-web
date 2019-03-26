@@ -305,9 +305,9 @@ function pick_nation(player_id)
   if (is_ongoing_longturn()) { 
     /* We only show the nations that are not already taken by human players */ 
     for (id in players) {
-        if (players[id]['nturns_idle'] >= 12) return; /* The joining player would have taken over an idler, don't show the dialog */
         if (players[id]['name'].indexOf("New Available Player") == -1) {
-            player_nations[players[id]['nation']] = true;
+            if (players[id]['nturns_idle'] >= 12) return; /* The joining player would have taken over an idler, don't show the dialog */
+            else player_nations[players[id]['nation']] = true;
         }
     }
   }

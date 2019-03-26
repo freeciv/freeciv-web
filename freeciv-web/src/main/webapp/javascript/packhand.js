@@ -468,7 +468,7 @@ function handle_map_info(packet)
 function handle_game_info(packet)
 {
   game_info = packet;
-  if (is_ongoing_longturn()) wait_for_text("You are logged in as", pick_nation_ongoing_longturn);
+  if (is_ongoing_longturn() && C_S_PREPARING == client_state()) wait_for_text("You are logged in as", pick_nation_ongoing_longturn);
 }
 
 /**************************************************************************

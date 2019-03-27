@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -69,11 +70,7 @@ public class GamePlayByEmailTop extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "" //
-					+ "SELECT winner AS player, COUNT(winner) AS wins " //
-					+ "  FROM game_results " //
-					+ " GROUP BY winner " //
-					+ " ORDER BY wins DESC LIMIT 10";
+			String query = DbManager.getQuerySelectGameResults();
 
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();

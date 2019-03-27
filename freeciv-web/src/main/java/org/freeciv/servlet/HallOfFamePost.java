@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
 
@@ -70,7 +71,7 @@ public class HallOfFamePost extends HttpServlet {
             DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
             conn = ds.getConnection();
 
-            String idQuery = "select max(id) from hall_of_fame";
+            String idQuery = DbManager.getQuerySelectMaxPlayerHallOfFame();
             PreparedStatement maxStmt = conn.prepareStatement(idQuery);
             ResultSet rs =  maxStmt.executeQuery();
             int newId = 1;
@@ -85,8 +86,7 @@ public class HallOfFamePost extends HttpServlet {
                 resultFile.renameTo(new File(mapDstImgPaths + newId + ".gif"));
             }
 
-            String query = "INSERT INTO hall_of_fame (username, nation, score, end_turn, end_date, ip) "
-                    + "VALUES (?, ?, ?, ?, NOW(), ?)";
+            String query = DbManager.getQueryInsertHallofFame();
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, nation);

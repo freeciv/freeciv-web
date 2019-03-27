@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.util.Constants;
 
 /**
@@ -70,10 +71,7 @@ public class FreecivStatsServlet extends HttpServlet {
 
 			int gameTypeId = gameTypes.get(gameType);
 
-			String insert =
-							  "INSERT INTO games_played_stats (statsDate, gameType, gameCount) "
-							+ "VALUES (CURDATE(), ?, 1) "
-							+ "ON DUPLICATE KEY UPDATE gameCount = gameCount + 1";
+			String insert = DbManager.getQueryInsertStats();
 			PreparedStatement preparedStatement = conn.prepareStatement(insert);
 			preparedStatement.setInt(1, gameTypeId);
 			preparedStatement.executeUpdate();

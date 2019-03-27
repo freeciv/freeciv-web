@@ -28,6 +28,7 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
 
@@ -62,11 +63,8 @@ public class DeactivateUser extends HttpServlet {
 			conn = ds.getConnection();
 
 			// Salted, hashed password.
-			String saltHashQuery =
-					"SELECT secure_hashed_password "
-							+ "FROM auth "
-							+ "WHERE LOWER(username) = LOWER(?) "
-							+ "	AND activated = '1' LIMIT 1";
+			String saltHashQuery = DbManager.getQuerySaltHash();
+					
 			PreparedStatement ps1 = conn.prepareStatement(saltHashQuery);
 			ps1.setString(1, username);
 			ResultSet rs1 = ps1.executeQuery();
@@ -77,7 +75,7 @@ public class DeactivateUser extends HttpServlet {
 				String hashedPasswordFromDB = rs1.getString(1);
 				if (hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
 
-					String query = "UPDATE auth SET activated = '0' WHERE username = ? ";
+					String query = DbManager.getQueryUpdateAuthDeactivate();
 					PreparedStatement preparedStatement = conn.prepareStatement(query);
 					preparedStatement.setString(1, username);
 					int no_updated = preparedStatement.executeUpdate();

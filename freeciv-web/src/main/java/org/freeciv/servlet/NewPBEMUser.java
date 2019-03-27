@@ -40,6 +40,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import javax.naming.*;
 
+import org.freeciv.persistence.DbManager;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
 
@@ -128,8 +129,7 @@ public class NewPBEMUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "INSERT INTO auth (username, email, secure_hashed_password, activated, ip) "
-							+ "VALUES (?, ?, ?, ?, ?)";
+			String query = DbManager.getQueryInsertAuthPlayer();
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);

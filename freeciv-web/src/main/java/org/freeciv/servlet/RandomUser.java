@@ -53,7 +53,7 @@ public class RandomUser extends HttpServlet {
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (!rs.next()) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user.");
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSER);
 				return;
 			}
 			response.getOutputStream().print(rs.getString(1));
@@ -61,7 +61,7 @@ public class RandomUser extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_LOGIN);
 		} finally {
 			if (conn != null)
 				try {
@@ -75,7 +75,7 @@ public class RandomUser extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

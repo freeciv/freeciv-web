@@ -66,7 +66,7 @@ public class ValidateUser extends HttpServlet {
 				if (activated == 1) {
 					response.getOutputStream().print(username);
 				} else {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user");
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSER);
 				}
 			} else if (usernameOrEmail != null && usernameOrEmail.contains("@")) {
 				response.getOutputStream().print("invitation");
@@ -77,7 +77,7 @@ public class ValidateUser extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_LOGIN);
 		} finally {
 			if (conn != null)
 				try {
@@ -92,7 +92,7 @@ public class ValidateUser extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

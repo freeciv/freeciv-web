@@ -73,8 +73,8 @@ public class CivclientLauncher extends HttpServlet {
 				break;
 			default:
 				response.setHeader("result", "invalid port validation");
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Unable to find a valid Freeciv server to play on. Please try again later.");
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_SERVERUNAVAILABLE
+						);
 				return;
 			}
 			
@@ -89,8 +89,7 @@ public class CivclientLauncher extends HttpServlet {
 				if (lookupRs.next()) {
 					civServerPort = Integer.toString(lookupRs.getInt(1));
 				} else {
-					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-							"No servers available for creating a new game on.");
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_SERVERUNAVAILABLE2);
 					return;
 				}
 			}
@@ -100,8 +99,7 @@ public class CivclientLauncher extends HttpServlet {
 			PreparedStatement validateStmt = conn.prepareStatement(validateQuery);
 			if (civServerPort == null || civServerPort.length() == 0) {
 				response.setHeader("result", "invalid port validation");
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Unable to find a valid Freeciv server to play on. Please try again later.");
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_SERVERUNAVAILABLE);
 				return;
 			}
 
@@ -110,8 +108,7 @@ public class CivclientLauncher extends HttpServlet {
 			validateRs.next();
 			if (validateRs.getInt(1) != 1) {
 				response.setHeader("result", "invalid port validation");
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Invalid input values to civclient.");
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_INVALIDINPUT);
 				return;
 			}
 
@@ -138,7 +135,7 @@ public class CivclientLauncher extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

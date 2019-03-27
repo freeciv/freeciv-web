@@ -86,18 +86,15 @@ public class NewPBEMUser extends HttpServlet {
 		}
 
 		if (password == null || password.length() <= 2) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid password. Please try again with another password.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDPASSWORD_EXTENDED);
 			return;
 		}
 		if (!validation.isValidUsername(username)) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid username. Please try again with another username.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAME_EXTENDED);
 			return;
 		}
 		if (email == null || email.length() <= 4) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid e-mail address. Please try again with another username.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDMAIL_EXTENDED);
 			return;
 		}
 
@@ -116,7 +113,7 @@ public class NewPBEMUser extends HttpServlet {
 			InputStream in = captchaResponse.getEntity().getContent();
 			String body = IOUtils.toString(in, "UTF-8");
 			if (!(body.contains("success") && body.contains("true"))) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Captcha failed!");
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_CAPTCHA);
 				return;
 			}
 		}
@@ -140,7 +137,7 @@ public class NewPBEMUser extends HttpServlet {
 
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to create user: " + err);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_CREATEUSER + err);
 		} finally {
 			if (conn != null)
 				try {
@@ -155,7 +152,7 @@ public class NewPBEMUser extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

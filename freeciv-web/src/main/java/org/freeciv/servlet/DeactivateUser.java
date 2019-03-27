@@ -51,8 +51,8 @@ public class DeactivateUser extends HttpServlet {
 		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
 
 		if (!validation.isValidUsername(username)) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid username. Please try again with another username.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAME_EXTENDED
+					);
 			return;
 		}
 
@@ -82,14 +82,13 @@ public class DeactivateUser extends HttpServlet {
 					if (no_updated == 1) {
 						response.getOutputStream().print("OK!");
 					} else {
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-								"Invalid username or password.");
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAMEORPASSWORD
+								);
 						return;
 					}
 
 				} else {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-							"Invalid username or password.");
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAMEORPASSWORD);
 					return;
 				}
 			}
@@ -97,7 +96,7 @@ public class DeactivateUser extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_LOGIN);
 		} finally {
 			if (conn != null)
 				try {
@@ -113,7 +112,7 @@ public class DeactivateUser extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

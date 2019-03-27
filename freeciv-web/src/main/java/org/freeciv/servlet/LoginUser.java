@@ -52,13 +52,11 @@ public class LoginUser extends HttpServlet {
 
 
 		if (secure_password == null || secure_password.length() <= 2) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid password. Please try again with another password.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDPASSWORD_EXTENDED);
 			return;
 		}
 		if (!validation.isValidUsername(username)) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Invalid username. Please try again with another username.");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAME_EXTENDED);
 			return;
 		}
 
@@ -91,7 +89,7 @@ public class LoginUser extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_LOGIN);
 		} finally {
 			if (conn != null)
 				try {
@@ -105,7 +103,7 @@ public class LoginUser extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

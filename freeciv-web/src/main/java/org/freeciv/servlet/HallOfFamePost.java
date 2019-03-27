@@ -52,14 +52,13 @@ public class HallOfFamePost extends HttpServlet {
         }
 
         if (!validation.isValidUsername(username)) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                    "Invalid username. Please try again with another username.");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDUSERNAME
+                    );
             return;
         }
 
         if (!p.matcher(score).matches() || !p.matcher(turn).matches()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                    "Invalid data submitted. ");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_INVALIDDATA);
             return;
         }
 
@@ -97,7 +96,7 @@ public class HallOfFamePost extends HttpServlet {
 
         } catch (Exception err) {
             response.setHeader("result", "error");
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to submit to Hall of Fame: " + err);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_HALLSUBMIT + err);
         } finally {
             if (conn != null)
                 try {

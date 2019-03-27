@@ -60,7 +60,7 @@ public class UserCount extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to count users");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_USERCOUNT);
 		} finally {
 			if (conn != null)
 				try {
@@ -75,7 +75,7 @@ public class UserCount extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

@@ -25,6 +25,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import org.freeciv.services.Validation;
+import org.freeciv.util.Constants;
 
 
 /**
@@ -90,7 +91,7 @@ public class ListSaveGames extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ERROR");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_GENERIC);
 		}
 
 	}
@@ -98,7 +99,7 @@ public class ListSaveGames extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

@@ -70,13 +70,11 @@ public class DeleteSaveGame extends HttpServlet {
 		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
 
 		if (!validation.isValidUsername(username)) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-					"Invalid username");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_INVALIDUSERNAME);
 			return;
 		}
 		if (savegame == null || savegame.length() > 100 || savegame.contains(".") || savegame.contains("/") || savegame.contains("\\")) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-					"Invalid savegame");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, Constants.ERRMSG_INVALIDSAVEGAME);
 			return;
 		}
 
@@ -111,7 +109,7 @@ public class DeleteSaveGame extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_LOGIN);
 		} finally {
 			if (conn != null)
 				try {
@@ -142,7 +140,7 @@ public class DeleteSaveGame extends HttpServlet {
 		} catch (Exception err) {
 			response.setHeader("result", "error");
 			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ERROR");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, Constants.ERRMSG_GENERIC);
 		}
 
 	}
@@ -150,7 +148,7 @@ public class DeleteSaveGame extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, Constants.ERRMSG_POST);
 
 	}
 

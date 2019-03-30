@@ -1583,7 +1583,6 @@ AC_CONFIG_FILES([Makefile
 	  data/hex2t/Makefile
           data/hexemplio/Makefile
           data/alio/Makefile
-	  data/misc/Makefile
 	  data/cimpletoon/Makefile
 	  data/isophex/Makefile
 	  data/stdsounds/Makefile

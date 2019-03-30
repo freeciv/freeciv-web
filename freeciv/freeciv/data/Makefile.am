@@ -78,8 +78,8 @@ EXTRA_DIST = \
 	sandbox.serv
 
 if CLIENT
-CLIENTDATADIRS = amplio2 misc flags buildings cimpletoon isotrident trident\
- isophex hex2t hexemplio alio stdsounds stdmusic themes wonders
+CLIENTDATADIRS = cimpletoon \
+ isophex hex2t hexemplio alio stdsounds stdmusic themes 
 else
 CLIENTDATADIRS = 
 endif

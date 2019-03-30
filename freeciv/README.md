@@ -1,10 +1,10 @@
 Freeciv C server for Freeciv-web
 --------------------------------
-The Freeiv C server fork for Freeciv-web is here. It is a fork, because "Freeciv-web first".
+The Freeiv C server fork for Freeciv-web is here. 
+
+This is a fork, because "Freeciv-web first".
 
 prepare_freeciv.sh  - a script to compile the Freeciv C server.
-
-version.txt - contains the Git revision of Freeciv to check out from Git.
 
 The Freeciv C server is installed to $HOME/freeciv.
 

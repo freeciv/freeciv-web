@@ -33,8 +33,7 @@ out_dir = args.outdir
 freeciv_dir = args.freeciv
 verbose = args.verbose
 
-freeciv_data_dir = path.join(freeciv_dir, "data")
-
+freeciv_data_dir = freeciv_dir
 gfxdir = freeciv_data_dir
 
 misc_files = [

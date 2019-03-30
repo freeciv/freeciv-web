@@ -9,12 +9,14 @@ resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
 while [[ $# -gt 0 ]]; do
   case $1 in
     -f) FREECIV_DIR=$(resolve "$2"); shift; shift;;
+    -g) GRAPHICS_DIR=$(resolve "$2"); shift; shift;;
     -o) WEBAPP_DIR=$(resolve "$2"); shift; shift;;
     -d) DATA_APP_DIR=$(resolve "$2"); shift; shift;;
     *) echo "Unrecognized argument: $1"; shift;;
   esac
 done
 : ${FREECIV_DIR:?Must specify (original) freeciv project dir with -f}
+: ${GRAPHICS_DIR:?Must specify freeciv graphics dir with -g}
 : ${WEBAPP_DIR:?Must specify existing freeciv-web (webapp) dir with -o}
 : ${DATA_APP_DIR:?Must specify existing save-game data (webapp) dir with -d}
 
@@ -27,7 +29,7 @@ SOUNDS_DEST="${WEBAPP_DIR}/sounds"
 GAME_DEST="${DATA_APP_DIR}/savegames"
 
 mkdir -p "${DOCS_DEST}" "${JS_DEST}" "${SOUNDS_DEST}" "${GAME_DEST}" && \
-"${DIR}"/freeciv-img-extract/sync.sh -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
+"${DIR}"/freeciv-img-extract/sync.sh -f "${GRAPHICS_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/helpdata_gen/ruleset_auto_gen.sh -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/generate_js_hand/generate_js_hand.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \
 "${DIR}"/gen_event_types/gen_event_types.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}" && \

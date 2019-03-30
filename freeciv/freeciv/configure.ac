@@ -1582,15 +1582,10 @@ AC_CONFIG_FILES([Makefile
           data/Makefile
 	  data/hex2t/Makefile
           data/hexemplio/Makefile
-	  data/amplio2/Makefile
           data/alio/Makefile
-	  data/buildings/Makefile
-	  data/flags/Makefile
 	  data/misc/Makefile
 	  data/cimpletoon/Makefile
-	  data/trident/Makefile
 	  data/isophex/Makefile
-	  data/isotrident/Makefile
 	  data/stdsounds/Makefile
           data/stdmusic/Makefile
           data/override/Makefile
@@ -1658,7 +1653,6 @@ AC_CONFIG_FILES([Makefile
 	  data/themes/gui-qt/System/Makefile
 	  data/themes/gui-sdl2/Makefile
 	  data/themes/gui-sdl2/human/Makefile
-	  data/wonders/Makefile
 	  data/icons/Makefile
 	  utility/Makefile
 	  dependencies/Makefile

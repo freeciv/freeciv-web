@@ -1,0 +1,106 @@
+[nation_gepid]
+
+name=_("Gepid")
+plural=_("?plural:Gepids")
+groups="Ancient", "Medieval", "European" 
+legend = _("The Gepids were a group of ancient East Germanic tribes,\
+ closely related to the Goths. Their original settlement was located on\
+ the Scandinavian Peninsula. By the time of the wake of the Goths from\
+ Scandinavia they had relocated to the southern coast of the Baltic.\
+ According to Jordanes, they inhabited a land called Specis, near the\
+ mouth of the Vistula, probably located on the Elblag Uplands. After the\
+ migration of the Goths on the Black Sea, the Gepids extended their\
+ possessions in Pomerania. In the 3rd century CE they moved to Dacia.\
+ From the 4th to the mid 5th century they were under the authority of the\
+ Huns. After the death of Attila the Gepids moved to Pannonia, where they\
+ defeated the Huns in the Battle of the River Nedao and won\
+ a place to live east of the River Tisza. In Pannonia they fought\
+ constantly against the Longobards west of the Danube. In 567 the\
+ Longobards allied themselves with the nomadic Avars against the Gepids\
+ and defeated them, breaking up their country. Gepids formed part of the\
+ Avar Khaganate, founded on former Gepid territory.")
+leaders = {
+"name",             "sex"
+"Fastida",          "Male"
+"Ardareiks",        "Male"
+"Gunderit",         "Male"
+"Trapstila",        "Male"
+"Trasereiks",       "Male"
+"Mundon",           "Male"
+"Elemunds",         "Male"
+"Þurisinds",        "Male"
+"Kunimunds",        "Male"
+}
+flag= "gepid"
+flag_alt = "-" 
+style = "Celtic"
+
+ruler_titles = {
+ "government",        "male_title",           "female_title"
+ "Fundamentalism",    _("Presbyter %s"),      _("?female:Presbyter %s") 
+ "Anarchy",           _("Usurper %s"),        _("?female:Usurper %s")
+ "Despotism",         _("Great Warrior %s"),  _("?female:Great Warrior %s")
+ "Republic",          _("Spokesman %s"),      _("Spokeswoman %s")
+ "Democracy",         _("Speaker %s"),        _("?female:Speaker %s") 
+}
+
+init_techs="" 
+init_buildings=""
+init_units=""
+
+conflicts_with = "Germanic", "Hungarian", "Romanian", "Transylvanian",
+                 "Slovakian", "Polish"
+civilwar_nations = "Gothic", "Hunnic", "Slavic"
+
+cities =
+
+"Sirmium",
+"Singidunum",
+
+;Archeological sites in Romania:
+
+"Apahida",
+"Moreşti",
+"Noşlac",
+"Brateiu",
+"Şeica Mică",
+"Timişoara",
+"Turda",
+"Vlaha",
+
+;Other towns from Gepidia area:
+
+"Abrutus",
+"Napoca",
+"Potaissa",
+
+;Constructed names in Gothic language (Gepid language was likely a dialect of this):
+
+"Fraujabairgs",
+"Armainsstaþs",
+"Fastidasbaurgs",
+"Gunderitsbaurgs",
+"Fastidaswinja",
+"Hulsbairgs",
+"Mundonisbairgs",
+"Ahmaswinja",
+"Mikilsharjis",
+"Haurnbaurgs",
+"Harjiswaiþa",
+"Wulfisbaurgs",
+"Wulþagsbaurgs",
+"Swartishults",
+"Modisharjisbairgs",
+"Auþidashults",
+"Snaiwsbairgs",
+"Gepantaswinja",
+"Sahsisbairgs",
+"Mundonisahwa",
+"Funinsbaurgs",
+"Hweidiskelikn",
+"Þiudansbairgs",
+"Godisfera",
+"Skeirisfera",
+"Skeirisahwa",
+"Aujasweihs",
+"Grimmsauja"

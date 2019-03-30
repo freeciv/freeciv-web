@@ -1,0 +1,6 @@
+# Server commands to make multiplayer Freeciv rules
+#
+
+rulesetdir multiplayer
+
+# changed game settings are defined in game.ruleset

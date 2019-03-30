@@ -1,0 +1,87 @@
+[nation_tahitian]
+
+name=_("Tahitian")
+plural=_("?plural:Tahitians")
+groups="Oceanian"
+legend=_("The islands of what is now French Polynesia were first settled\
+ by Polynesian peoples in the 3rd century CE. France established a\
+ protectorate over Tahiti, the main island of the archipelago, in 1842.\
+ In 1889 the entire area was declared a French colony. The islands remain\
+ an overseas collectivity of France today but they enjoy a large internal\
+ autonomy. Because of its lush vegetation and Polynesian culture, Tahiti\
+ has become the archetypical exotic island.")
+
+leaders = {
+ "name",                "sex"
+ "Pomare I",            "Male"
+ "Pomare II",           "Male"
+ "Pomare IV",           "Female"
+ "Pomare V",            "Male"
+ "Pouvana'a a O'opa",   "Male"
+ "Alexandre Léontieff", "Male"
+ "Oscar Temaru",        "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",            "female_title"
+ "Democracy",      _("Premier %s"),         _("Premiere %s")
+ "Monarchy",       _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
+
+flag="french_polynesia"
+flag_alt = "-"
+style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "hawaiian", "rapa nui" ;wallisan and futunan
+
+cities =
+ "Pape'ete",
+ "Bora Bora",
+ "Rangiroa",
+ "Tai O Hae",
+ "Tubuai",
+ "Fa'a'a",
+ "Mahina",
+ "Mangareva",
+ "Mo'orea",
+ "Paea",
+ "Papara",
+ "Afa'ahiti",
+ "Mataiea",
+ "Paoapao",
+ "Papeari",
+ "Ha'atipi",
+ "Hiva Oa",
+ "Uturoa",
+ "Hitia'a O Te Ra",
+ "Toahotu",
+ "Afareaitu",
+ "Avera",
+ "Puna'auia",
+ "Pirae",
+ "Arue",
+ "Teavaro",
+ "Vairao",
+ "Fa'anui",
+ "Papetoai",
+ "Tautira",
+ "Pueu",
+ "Anau",
+ "Fakarava",
+ "Fa'aone",
+ "Tevaitoa",
+ "Hakahao",
+ "Fare",
+ "Opoa",
+ "Tarakoa",
+ "Hao",
+ "Maeava",
+ "Fakarava",
+ "Arutua",
+ "Rapa",
+ "Taipi Vai'i",
+ "Mururoa"

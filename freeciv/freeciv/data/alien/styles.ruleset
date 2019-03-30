@@ -1,0 +1,99 @@
+; This is Alien World styles ruleset.
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+[datafile]
+description="Nation theme data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Nation styles
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+;
+; */ <-- avoid gettext warnings
+
+[style_human]
+name = _("?style:Human")
+
+; /* <-- avoid gettext warnings
+;
+; City styles define the way cities are drawn
+;
+; name             = translatable name as seen by user
+; rule_name        = (optional) internal name for savegames, rulesets etc; if
+;                    not present, "name" is used for this purpose too. Since
+;                    the name used in savegames must not change, if you want
+;                    to rename an item after a ruleset has been released, you
+;                    should set "rule_name" to the original value of "name".
+; graphic          = group of tiles to use, see cities spec for
+;                    more info on city tiles
+; citizens_graphic = group of citizens tiles to use, see citizens/small
+;                    spec for more info on citizens tiles
+;                    FIXME: this and _alt not currently used!
+; reqs             = requirements for this city style (see README.effects)
+;
+; */ <-- avoid gettext warnings
+
+[citystyle_human]
+name        = _("?citystyle:Human")
+graphic     = "city.human"
+graphic_alt = "city.classical"
+citizens_graphic     = "human"
+citizens_graphic_alt = "ancient"
+reqs = { "type", "name", "range"
+         "Style", "Human", "Player"
+       }
+
+[citystyle_dual]
+name        = _("?citystyle:Dual")
+graphic     = "city.dual"
+graphic_alt = "city.modern"
+citizens_graphic     = "dual"
+citizens_graphic_alt = "modern"
+reqs =
+   { "type", "name", "range"
+     "Tech", "Alien Rights", "Player"
+   }
+
+[citystyle_oceanic]
+name        = _("?citystyle:Oceanic")
+graphic     = "city.ocean"
+graphic_alt = "city.modern"
+citizens_graphic     = "dual"
+citizens_graphic_alt = "modern"
+reqs =
+   { "type", "name", "range"
+     "TerrainClass", "Oceanic", "Local"
+   }
+
+; /* <-- avoid gettext warnings
+;
+; Music styles
+;
+; Order is important. The last one for which activation requirements
+; are fulfilled is the one that plays.
+;
+; music_peaceful = Music to play when nation in peaceful mood
+; music_combat   = Music to play when nation in combat mood
+; reqs		 = requirements to activate the style (see effects.ruleset
+;		   and README.effects for help on requirements)
+;
+; */ <-- avoid gettext warnings
+
+[musicstyle_human]
+music_peaceful     = "music_peace"
+music_combat       = "music_combat"

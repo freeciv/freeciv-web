@@ -1,0 +1,149 @@
+[nation_confederate]
+
+name=_("Confederate")
+plural=_("?plural:Confederates")
+groups="American"
+legend=_("The Confederate States of America was a splinter nation of the\
+ United States, formed by eleven Southern states, existing from 1861 to\
+ 1865. The states seceded from the United States because of political and\
+ cultural differences with the North, most prominently the issue of slavery,\
+ which they feared the government of the recently elected United States\
+ president Abraham Lincoln would abolish. The Confederate capital was\
+ Richmond, Virginia, and Jefferson Davis was the country's only president.\
+ The American Civil War pitted the Confederacy against the United States.\
+ After several military defeats by United States troops the southern states\
+ had to abandon their claims of independence; much of their territory laid in\
+ ruins. Furthermore, the Union victory in the Civil War opened the way for\
+ the abolition of slavery in the United States.")
+
+leaders = {
+ "name",                "sex"
+ "John Bell Hood",      "Male"
+ "Robert E. Lee",       "Male"
+ "John C. Calhoun",     "Male"
+ "Stonewall Jackson",   "Male"
+ "John Hunt Morgan",    "Male"
+ "James Longstreet",    "Male"
+ "Alexander Stephens",  "Male"
+ "Jefferson Davis",     "Male"
+ "Belle Boyd",          "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Democracy",       _("Speaker %s"),   _("?female:Speaker %s")
+ "Despotism",       _("General %s"),   _("?female:General %s")
+ "Fundamentalism",  _("Reverend %s"),  _("?female:Reverend %s")
+}
+
+flag="southern_cross"
+flag_alt="-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="texan"
+civilwar_nations="american", "texan"
+
+cities =
+; Capitals and was-to-be capitals
+ "Richmond",
+ "Montgomery",
+ "Danville",
+
+; Major cities in order of population
+ "New Orleans",
+ "Charleston",
+ "Mobile",
+ "Memphis",
+ "Savannah",
+ "Petersburg",
+ "Nashville",
+ "Norfolk",
+ "Augusta",
+ "Columbus",
+ "Atlanta", 
+ "Wilmington",
+ "Columbia",
+
+; A few more cities
+ "Alexandria",
+ "Jacksonville",
+ "Little Rock",
+ "Vicksburg",
+ "Shreveport (river)",
+ "Houston",
+ "Baton Rouge",
+ "Galveston",
+ "Austin",
+ "San Antonio",
+ "Corpus Christi",
+ "Tallahassee",
+ "El Paso",
+ "Jackson",
+ "Raleigh",
+ "Dallas",
+ "Bowling Green (grassland)",
+ "Mesilla",
+ "Charlotte",
+ "Fort Worth",
+ "Selma",
+ "Tucson",
+ "Winchester",
+ "Manassas",
+ "St. Augustine",
+ "Fredericksburg",
+ "Macon",
+ "Miami",
+ "Milledgeville",
+ "Neosho",
+ "Opelousas",
+ "Appomattox",
+ "Donaldsonville",
+ "Washington on the Brazos (river)",
+ "Pensacola",
+ "Harper's Ferry (river)",
+ "Biloxi",
+ "Greensboro",
+ "Lafayette",
+ "Spotsylvania Courthouse",
+ "Murfreesboro",
+ "Chickamauga",
+ "Greenville",
+ "Tampa",
+ "Meridian",
+ "Tuscaloosa",
+ "Huntsville",
+ "New Bern",
+ "Fernandina",
+ "Chattanooga",
+ "Fort Smith",
+ "Natchez",
+ "Corinth",
+ "Velasco",
+ "Fayetteville",
+ "Springfield",
+ "Knoxville",
+ "Laredo",
+ "Athens",
+ "Pea Ridge",
+ "Franklin",
+ "Greeneville",
+ "Pine Bluff",
+ "Marshall",
+ "Kansas City",
+ "Salem",
+ "Tulsa",
+ "Clarksville",
+ "Arlington",
+ "Hampton",
+ "Brownsville",
+ "Norman",
+ "Durham Station",
+ "Winston",
+ "Independence",
+ "Falls Church",
+ "Gainesville",
+ "Perryville"

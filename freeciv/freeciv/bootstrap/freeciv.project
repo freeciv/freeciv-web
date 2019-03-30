@@ -1,0 +1,13 @@
+# Default metaserver URL
+META_URL="http://meta.freeciv.org/metaserver.php"
+
+# We want default MODPACK_LIST_URL constructed compile time, so not giving
+# one here. This is just an example.
+# MODPACK_LIST_URL="http://modpack.freeciv.org/${DATASUBDIR}/modpack.list"
+
+# Where to store user files. Note that changing this after user has already stored
+# something to the old dir with older version of the project means that those
+# files won't be used any more.
+# Use '/' as portable directory separator character - those will be converted to '\'
+# as needed depending on the target environment.
+FREECIV_STORAGE_DIR="~/.freeciv"

@@ -1,0 +1,64 @@
+[nation_cuyavian]
+
+name=_("Cuyavian")
+plural=_("?plural:Cuyavians")
+groups="European", "Medieval"
+legend=_("Cuyavia is a historical region in Northern-Central Poland,\
+ bordered to the East by Masovia, on the West by Greater Poland and on the\
+ North by Pomerania.")
+leaders = {
+ "name",                      "sex"
+ "Kazimierz I Kujawski",      "Male"
+ "Leszek Czarny",             "Male"
+ "Kazimierz II Kujawski",     "Male"
+ "Władysław Garbaty",         "Male"
+ "Kazimierz III Gniewkowski", "Male"
+ "Leszek Inowrocławski",      "Male"
+ "Władysław Biały",           "Male"	   
+}
+flag="cuyavia"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",     "male_title",         "female_title"
+ "Despotism",      _("Prince %s"),       _("Princess %s")
+ "Monarchy",       _("Grand Prince %s"), _("Grand Princess %s")
+ "Fundamentalism", _("Bishop %s"),       _("Mother Superior %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="polish", "slavic" ; gothic polanian
+civilwar_nations = "greater polish", "mazovian", "polish"
+
+cities =
+ "Włocławek",
+ "Inowrocław",
+ "Kruszwica",
+ "Gniewkowo",
+ "Bydgoszcz",
+ "Brześć Kujawski",
+ "Radziejów",
+ "Raciążek",
+ "Solec Kujawski",
+ "Strzelno",
+ "Pakość",
+ "Przedecz",
+ "Koronowo",
+ "Fordon",
+ "Gębice",
+ "Skulsk",
+ "Podgórz",
+ "Sompolno",
+ "Chodecz",
+ "Izbica Kujawska",
+ "Lubień Kujawski",
+ "Lubraniec",
+ "Służewo",
+ "Kowal",
+ "Aleksandrów Kujawski",
+ "Nowa Wieś Wielka"
+

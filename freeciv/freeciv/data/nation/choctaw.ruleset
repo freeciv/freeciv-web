@@ -1,0 +1,136 @@
+[nation_choctaw] 
+
+name=_("Choctaw") 
+plural=_("?plural:Choctaws") 
+groups="American", "Early Modern"
+legend=_("One of the so-called Five Civilized Tribes, the Choctaw\
+ traditionally occupied much of the middle and south of today's U.S.\
+ state of Mississippi. First encountered by Spanish explorers in the\
+ 16th century, they became long-time French allies before siding\
+ with the Confederate States during the American Civil War. The majority\
+ of Choctaw today live in Oklahoma following forced removal from their\
+ homeland under president Andrew Jackson in 1831, but there is also a\
+ vibrant band in Mississippi made up of Choctaw who managed to escape\
+ removal and stay behind. The word \"Oklahoma\" itself is derived from\
+ a Choctaw language term meaning \"red people\".")
+
+leaders = {
+ "name",                "sex"
+ "Phillip Martin",      "Male"
+ "Peter Pitchlynn",     "Male"
+ "George W. Harkins",   "Male"
+ "Greenwood LeFlore",   "Male"
+ "Mushulatubbee",       "Male"
+ "Apuckshunubbee",      "Male"
+ "Pushmataha",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Shaman %s"),          _("?female:Shaman %s")
+}
+
+flag="choctaw"
+flag_alt="-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="Muskogee", "Chickasaw", "Seminole" 
+
+cities =
+; legendary origin location
+ "Nanih Waiya",
+; various historical villages in Mississippi
+ "Pooscoostekale",
+ "Pooshapukanuk",
+ "Ikatchiocata",
+ "Bayou Chicot",
+ "Schekaha",
+ "Etuck Chukke",
+ "Cuthi Uckehaca",
+ "Conchachitou",
+ "Oskelagna",
+ "Hoola-tassa",
+ "Nashwaiya",
+ "Lushapa",
+ "Taliepataua",
+ "Ebita Poocolo Skatane",
+ "Okhata Talaya",
+ "Cushtusha",
+ "Yowani",
+ "Oka Kapassa",
+ "Yagna Shoogawa",
+ "Otakshanabe",
+ "Imongalasha Skatane",
+ "Okapoolo",
+ "Heitotowa",
+ "Yazoo",
+ "Ch Chinakbi",
+ "Coatraw",
+ "Escooba",
+ "Cutha Aimethaw",
+ "Olitassa",
+ "Oka Chippo",
+ "Yazoo Skatane",
+ "Okatakana",
+ "Osuktalaya",
+ "Concha Consapa",
+ "West Abeika",
+ "Bissasha",
+ "Panthe",
+ "Okalusa",
+ "Teeakhaily Ekutapa",
+ "Chunkey",
+ "Oka Altakala",
+ "Lukfa",
+ "Ayanahi",
+ "Shuqualak",
+ "Mahewala",
+ "Chicasawhay",
+ "Yanatoe",
+ "Chooca Hoola",
+ "Ehita Poocolo",
+ "Talpahoka",
+ "Coosha",
+ "Skanapa",
+ "Tonicahaw",
+ "Pineshuk",
+ "Faluktabunnee",
+ "Chitto",
+ "Fuketcheepoonta",
+ "Couechitou",
+ "Shukhata",
+ "Bishkon",
+ "Oka Coopoly",
+ "Kaffetalaya",
+ "Imongalasha",
+ "Sukinatchi",
+ "Alloou Lpanshaw",
+ "Oony",
+ "Bogue Toocola Chitto",
+ "Tombigbee",
+ "Cabea Hoola",
+ "Boutte Station",
+ "Chishafoka",
+ "Tala",
+ "East Abeika",
+ "Haanka Ullah",
+ "Oka Hullo",
+ "Coila",
+ "Chomontokali",
+ "Shanhaw",
+ "Wia Takali",
+ "Sapeessa",
+ "Booctolooee",
+ "Concha",
+ "Chunkey Chitto",
+ "Sapa Chitto",
+ "Hyukkeni",
+ "Conchatikpi",
+ "Chiskelikbatcha",
+ "Boucfouca"

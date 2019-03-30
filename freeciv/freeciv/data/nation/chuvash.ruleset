@@ -1,0 +1,67 @@
+[nation_chuvash]
+
+name=_("Chuvash")
+plural=_("?plural:Chuvashes")
+groups="European"
+legend=_("Chuvashes are a Turkic ethnic group in Eastern European Russia\
+ and Western Siberia. They may be descendants of Old Bulgarian Turkic\
+ tribes and possibly Huns. Today there are about 1.8 million Chuvashes,\
+ about half of them in the Republic of Chuvashia, which is part of the\
+ Russian Federation.")
+leaders = {
+ "name",                         "sex"
+ "Vakrim",                       "Male"
+ "Mĕtri Căvaš",                  "Male"
+ "Kamaj",                        "Male"
+ "Aransajpik",                   "Male"
+ "Iskej Pajtulĕ",                "Male"
+ "Vasily Chapayev",              "Male"
+ "Tanil El'men",                 "Male"
+ "Nikolay Vasilyevich Fyodorov", "Male"
+}
+flag="chuvashia"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",     "male_title",               "female_title"
+ "Communism",      _("People's Commissar %s"), _("?female:People's Commissar %s")
+ "Fundamentalism", _("Patriarch %s"),          _("Matriarch %s")
+ }
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="volga bulgar", "soviet", "golden horde", "russian", "gokturk"
+civilwar_nations = "tatar", "bashkir", "mordvin", "volga bulgar"
+
+cities =
+  "Šupaškar",      ;Cheboksary
+  "Ulatăr",        ;Alatyr
+  "Etěrne",        ;Yadrin
+  "Kanaš",         ;Kanash
+  "Śěměrle",       ;Shumertya
+  "Śěně Šupaškar", ;Novocheboksarsk
+  "Śěrnü",         ;Tsivilsk
+  "Kuslavkka",     ;Kozlovka
+  "Sěntěrvărri",   ;Mariinsky Posad
+  "Vărmar",        ;Urmary
+  "Tăvaj",         ;Yantikovo
+  "Elěk",          ;Alikovo
+  "Patăr'el",      ;Batyrevo
+  "Jěpreś",        ;Ibresi
+  "Komsomolski",   ;Komsomolskiye
+  "Trak",          ;Krasnoarmeyskoye
+  "Hĕrlĕ Čutaj",   ;Krasnye Chetai
+  "Murkaš",        ;Morgaushi
+  "Păračkav",      ;Poretskoye
+  "Šămăršă",       ;Shemursha
+  "Elčĕk",         ;Yalchiki
+  "Kükeś",         ;Kugesi
+  "Śěně Lapsar",   ;Novyye Lapsary
+  "Vărnar",        ;Vurnary
+  "Shănkărtam",	   ;Shygyrdan
+  "Kirye",         ;Kirya
+  "Năvakassi",     ;Buinsk
+  "Tren'el"        ;Novoye Kotyakovo

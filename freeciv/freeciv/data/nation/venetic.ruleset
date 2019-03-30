@@ -1,0 +1,64 @@
+[nation_venetic]
+
+name=_("Venetic")
+plural=_("?plural:Veneti")
+groups="Ancient", "European"
+legend=_("The Veneti were an ancient Indo-European people who inhabited an\
+ area roughly coinciding with the modern Italian region of Veneto. Their\
+ language is of unknown origin, but probably from Central Europe, because it\
+ shares some features with Celtic and Germanic languages. The Veneti allied with\
+ the Romans during the Punic Wars. By the 1st century BCE they had been absorbed\
+ into the Roman Republic and the region gradually Romanized.")
+leaders = {
+ "name",                "sex"
+ "Suros",               "Male"
+ "Resunkos",            "Male"
+ "Kantes",              "Male"
+ "Vottos",              "Male"
+ "Akutos",              "Male"
+ "Nerka",               "Female"
+ "Lementor",            "Male"
+ "Fugia",               "Female"
+ "Andetos",             "Male"
+ "Reitia",              "Female"
+}
+flag="venetic"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="italian", "venetian", "slovenian", "croatian", "friulian",
+               "holy roman", "western roman", "yugoslav"
+civilwar_nations = "liburnian", "roman", "illyrian" ; sabine samnite
+
+cities =
+ "Ateste",
+ "Tergeste",
+ "Akilis",
+ "Atra",
+ "Venitia",
+ "Tarvisium",
+ "Berga",
+ "Patavium",
+ "Opitergium",
+ "Keneta",
+ "Osopus",
+ "Akelum",
+ "Aponus",
+ "Anneianum",
+ "Forum Iulia",
+ "Konkordia",
+ "Portus Aidro",
+ "Brundulum",
+ "Avesika",
+ "Pukinum",
+ "Feltria",
+ "Laibartes",
+ "Bellinum",
+ "Hostilia",
+ "Verona",
+ "Skaptia",
+ "Lagole"

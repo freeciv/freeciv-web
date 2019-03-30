@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="360"
+   height="240"
+   id="svg4510"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   version="1.0"
+   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg"
+   sodipodi:docname="Flag_of_Kurdistan.svg">
+  <defs
+     id="defs4512" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.5541667"
+     inkscape:cx="180"
+     inkscape:cy="120"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="756"
+     inkscape:window-height="540"
+     inkscape:window-x="363"
+     inkscape:window-y="148" />
+  <metadata
+     id="metadata4515">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.99999998;stroke-opacity:1"
+       id="rect4518"
+       width="360"
+       height="240"
+       x="0"
+       y="-3.8146973e-006" />
+    <rect
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.99999998;stroke-opacity:1"
+       id="rect4520"
+       width="360"
+       height="80"
+       x="0"
+       y="2.8421709e-014" />
+    <rect
+       y="160"
+       x="0"
+       height="80"
+       width="360"
+       id="rect4522"
+       style="opacity:1;fill:#298b00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.99999998;stroke-opacity:1" />
+    <path
+       sodipodi:type="star"
+       style="opacity:1;fill:#febd00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.99999998;stroke-opacity:1"
+       id="path4524"
+       sodipodi:sides="21"
+       sodipodi:cx="119.67828"
+       sodipodi:cy="122.89544"
+       sodipodi:r1="45.113689"
+       sodipodi:r2="22.1884"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-1.4211966"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 119.67828,77.78175 L 122.98529,100.95487 L 132.97578,79.786025 L 129.30547,102.90438 L 145.09173,85.62076 L 134.77023,106.63019 L 154.94959,94.767515 L 138.894,111.80124 L 161.67343,106.41356 L 141.31037,117.95806 L 164.66583,119.52409 L 141.80464,124.55358 L 163.66088,132.93418 L 140.33288,131.00177 L 158.74788,145.45228 L 137.02587,136.72968 L 150.36338,155.96611 L 132.17745,141.22836 L 139.25238,163.54147 L 126.21843,144.09807 L 126.40213,167.50525 L 119.67828,145.08384 L 112.95444,167.50525 L 113.13814,144.09807 L 100.10419,163.54147 L 107.17911,141.22835 L 88.993181,155.96611 L 102.33069,136.72968 L 80.608682,145.45228 L 99.023684,131.00177 L 75.695688,132.93418 L 97.551927,124.55358 L 74.690741,119.52409 L 98.046193,117.95805 L 77.683135,106.41356 L 100.46257,111.80124 L 84.406982,94.767513 L 104.58634,106.63019 L 94.264839,85.620759 L 110.0511,102.90438 L 106.38079,79.786024 L 116.37128,100.95486 L 119.67828,77.78175 z "
+       transform="matrix(1.337442,0,0,1.337442,19.93724,-44.02857)" />
+  </g>
+</svg>

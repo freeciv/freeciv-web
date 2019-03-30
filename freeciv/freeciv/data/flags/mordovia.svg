@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80">
+<rect width="120" height="80" fill="blue"/>
+<rect width="120" height="60" fill="#fff"/>
+<rect width="120" height="20" fill="#d20000"/>
+<polygon fill="#d20000" points="55,25 75,45 45,45 65,25 65,55 45,35 75,35 55,55"/>
+<path d="M54,34l12,12m-12,0l12,-12" stroke="#fff" stroke-width="1"/>
+</svg>

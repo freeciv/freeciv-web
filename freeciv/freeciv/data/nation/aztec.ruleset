@@ -1,0 +1,107 @@
+[nation_aztec]
+
+translation_domain="freeciv"
+
+name=_("Aztec")
+plural=_("?plural:Aztecs")
+groups="Medieval", "American", "Core"
+legend=_("The Azteca, a Nahuatl speaking people from the Sonoran desert,\
+ seized control of the Toltec-derived civilizations of Central Mexico\
+ during the 15th century, reviving the practice of human sacrifice.\
+ They were conquered by the Spanish under Cortés in 1521.")
+
+leaders = {
+ "name",                        "sex"
+ "Acamapichtli",                "Male"
+ "Itzcoatl",                    "Male"
+ "Nezahualcoyotl",              "Male"
+ "Motecuhzoma Ilhuicamina",     "Male"
+ "Axayacatl",                   "Male"
+ "Ahuitzotl",                   "Male"
+ "Motecuhzoma Xocoyotzin",      "Male"
+ "Cuauhtemoc",                  "Male"
+ "Ixtlilxochitl",               "Male"
+ "Tecuichpo",                   "Female"
+}
+
+ruler_titles = {
+ "government",  "male_title",            "female_title"
+ "Democracy",   _("Speaker %s"),         _("?female:Speaker %s")
+ "Monarchy",    _("Emperor %s"),         _("Empress %s")
+} 
+
+flag="aztec"
+flag_alt = "mexico"	; Used previously
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+conflicts_with = "Mexican"
+civilwar_nations = "Otomi", "P'urhepecha"
+
+cities =
+ "Mexihco Tenochtitlan (swamp, mountains, lake)",
+ "Tetzcoco (mountains)",
+ "Tlacopan (mountains, hills, lake)",
+ "Tlatelulco (swamp, lake)",
+ "Azcapotzalco (hills)",
+ "Iztapallapan (lake, hills)",
+ "Cuauhnanahuac (mountains, hills, forest, !ocean)",
+ "Tlachco (mountains)",
+ "Tollocan (mountains, plains)",
+ "Chapoltepec (hills, forest)",
+ "Coyohuacan (forest)",
+ "Culhuacan (swamp)",
+ "Huitzilipochco",
+ "Mexihcatzinco",
+ "Cuauhtitlan",
+ "Coacalco",
+ "Mixcoac",
+ "Petlacalco",
+ "Otompan (swamp)",
+ "Malinalco",
+ "Chalco (swamp)",
+ "Xochimilco (swamp)",
+ "Coatlichan",
+ "Teloloapan",
+ "Cuauhtinchan (river)",
+ "Tochpan (ocean)",
+ "Xiuhcoac",
+ "Huaxtepec",
+ "Xicotepec",
+ "Tzompanco (swamp)",
+ "Tlatauhquitepec",
+ "Cuitlahuac",
+ "Xico",
+ "Ahuilizapan (mountains)",
+ "Cuetlaxtlan",
+ "Xaltocan",
+ "Tenayuca",
+ "Tepeyacac",
+ "Tochtepec",
+ "Coaixtlahuacan",
+ "Tepozcolollan",
+ "Ixtapallocan",
+ "Tillantonco",
+ "Nonohualco",
+ "Huaxyacac",
+ "Tizapan",
+ "Mictlan",
+ "Ehecatepec",
+ "Oztoman",
+ "Hueypochtlan",
+ "Tlalnepantlan",
+ "Chiconautlan",
+ "Acolman",
+ "Coatlinchan",
+ "Naucalpan",
+ "Oxitipan",
+ "Xoconochco",
+ "Cihuatlan",
+ "Tlaxquiauhco",
+ "Huexotla",
+ "Tziuhcoac", 
+ "Ocuillan",
+ "Axocopan",
+ "Nopallan"

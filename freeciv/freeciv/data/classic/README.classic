@@ -1,0 +1,63 @@
+===============
+Classic Ruleset
+===============
+
+History
+-------
+
+Classic ruleset was freeciv's default ruleset until freeciv version 3.0,
+where it got replaced by civ2civ3 ruleset.
+
+
+Main differences to civ2civ3 (the default)
+------------------------------------------
+
+- The Republic and Democracy have rapture growth enabled
+
+- There's no Tribal, Fundamentalism, or Federation government types
+
+- Government values are different, see help of each government type
+
+- Settlers cost only one population
+
+- Domestic trade routes are supported
+
+- No unit pays upkeep in Gold
+
+- There's no Fort or Airstrip extras
+
+- There's no Tech Leakage
+
+- There's no Tech Upkeep
+
+- There's no Plague risk
+
+- Terrain outputs are different, see help for each terrain type
+
+- Wonders that need coastal city are available next to Lake tiles
+
+- There's no pollution on Oceanic terrains
+
+- City size does not affect defense bonuses
+
+- There's no Mausoleum of Mausolos, Statue of Zeus, or Temple of Artemis
+  wonders
+
+- Some wonders are made available from a different technology, see
+  help for each wonder
+
+- Engineers are always able to do all the terrain transformations,
+  there's no additional requirements for any of them
+
+- There's no Food Waste
+
+- There's no separate Wheeled units class, but all land units belong
+  to the same class
+
+- There's no units able to capture others
+
+- Air units cannot pillage
+
+- Helicopters cannot carry units
+
+- Nukes can always move at full speed

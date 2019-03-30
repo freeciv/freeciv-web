@@ -1,0 +1,263 @@
+[nation_american]
+
+translation_domain="freeciv"
+
+name=_("American")
+plural=_("?plural:Americans")
+groups="Early Modern", "Modern", "American", "Core"
+legend=_("The United States of America achieved its independence from\
+ Great Britain after a revolution in 1776-1783 CE. Its constitution was\
+ proclaimed in 1789, making the country one of the first modern\
+ representative republics. The United States then started to expand its\
+ territory, first on the North American mainland and later also overseas.\
+ By the 20th century the country had become a world superpower; its\
+ cultural, economic and political influence on the rest of the world is\
+ enormous.")
+
+leaders = {
+ "name",                        "sex"
+ "George Washington",           "Male"
+ "Alexander Hamilton",          "Male"
+ "Benjamin Franklin",           "Male"
+ "John Adams",                  "Male"
+ "Thomas Jefferson",            "Male"
+ "James Madison",               "Male"
+ "James Monroe",                "Male"
+ "Andrew Jackson",              "Male"
+ "James Polk",                  "Male"
+ "Zachary Taylor",              "Male"
+ "Abraham Lincoln",             "Male"
+ "Andrew Johnson",              "Male"
+ "Ulysses S. Grant",            "Male"
+ "Grover Cleveland",            "Male"
+ "William McKinley",            "Male"
+ "Theodore Roosevelt",          "Male"
+ "Woodrow Wilson",              "Male"
+ "Herbert Hoover",              "Male"
+ "Franklin D. Roosevelt",       "Male"
+ "Eleanor Roosevelt",           "Female"
+ "Harry S. Truman",             "Male"
+ "Dwight Eisenhower",           "Male"
+ "John F. Kennedy",             "Male"
+ "Lyndon B. Johnson",           "Male"
+ "Richard Nixon",               "Male"
+ "Ronald Reagan",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Democracy",       _("Speaker %s"),      _("?female:Speaker %s")
+ "Fundamentalism",  _("Reverend %s"),     _("?female:Reverend %s")
+}
+
+flag="usa"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "confederate"
+
+cities =
+ "Washington (ocean, river, swamp, !desert)", 
+ "New York (ocean, river, forest, !desert, !jungle)", 
+ "Boston (ocean, forest, !desert, !jungle)", 
+ "Philadelphia (ocean, river, forest, !desert)", 
+ "Los Angeles (ocean, desert, plains)",
+ "Atlanta (!ocean, forest, !desert)", 
+ "Chicago (!ocean, forest, !desert, !jungle)", 
+ "St. Louis (river, grassland, !desert)", 
+ "Detroit (!ocean, forest, !desert, !jungle)",
+ "New Orleans (ocean, river, swamp, !desert)", 
+ "Baltimore (ocean, river, swamp, !desert)", 
+ "Denver (!ocean, hills, mountains)", 
+ "Cincinnati (!ocean, forest, !desert)", 
+ "Dallas (!ocean, desert, plains)",
+ "Houston (ocean, desert, plains)", 
+ "San Antonio (!ocean, desert, plains)", 
+ "San Francisco (ocean, hills)",
+ "Fresno (hills, plains)", 
+ "Seattle (ocean, hills, forest, !desert, !jungle)",
+ "Portland (river, forest, !desert, !jungle)", 
+ "Miami (ocean, jungle, swamp, !desert, !tundra, !hills, !mountains)", 
+ "Las Vegas (!ocean, desert)",
+ "Cleveland (!ocean, forest, !desert)",
+ "Toledo (!ocean, forest, !desert)", 
+ "Pittsburgh (!ocean, river, forest, hills, !desert)",
+ "Salt Lake City (!ocean, plains, desert)", 
+ "San Diego (ocean, plains, desert)", 
+ "Phoenix (!ocean, desert)", 
+ "Minneapolis (!ocean, !hills, !mountains, !desert, !jungle)",
+ "St. Paul (!ocean, !hills, !mountains, !desert, !jungle)", 
+ "Kansas City (!ocean, river, !hills, !mountains)",
+ "Buffalo (!ocean, !desert, !jungle)",
+ "Syracuse (!ocean, !desert)", 
+ "Wichita (!ocean, !forest, !jungle, !hills, !mountains)", 
+ "Indianapolis (!ocean, forest, !desert)",
+ "Orlando (swamp, jungle, !hills, !mountains)", 
+ "Omaha (!ocean, river, !hills, !mountains)", 
+ "Baton Rouge (river, swamp, !desert, !hills, !mountains)", 
+ "Milwaukee (!ocean, !jungle, !desert)", 
+ "Honolulu (ocean, swamp, jungle, !desert)", 
+ "Boise (!ocean, hills, mountains, !jungle)", 
+ "Fargo (!ocean, tundra, !hills, !mountains, !jungle)", 
+ "Springfield (!ocean, !desert)",
+ "Nashville (!ocean, !desert)", 
+ "Hartford (ocean, !desert)", 
+ "Charlotte (forest, !desert)",
+ "Raleigh (forest, !desert)",
+ "Charleston (ocean, river, swamp, !desert)",
+ "Savannah (ocean, swamp, !desert)",
+ "Mobile (ocean, river, swamp, !desert)",
+ "El Paso (!ocean, desert, plains)", 
+ "Anchorage (ocean, tundra, !jungle)",
+ "Fairbanks (!ocean, tundra, !jungle)",
+ "Spokane (!ocean, plains, !jungle)", 
+ "Tacoma (ocean, river, swamp, forest, !desert, !jungle)", 
+ "Fort Worth (!ocean, desert, plains)", 
+ "Austin (!ocean, desert, plains)", 
+ "Sacramento (!ocean, grassland)", 
+ "Oklahoma City (!ocean, !forest, !hills, !mountains)",
+ "Jacksonville (jungle, swamp, !hills, !mountains)", 
+ "Sioux Falls (!ocean, !jungle)", 
+ "Madison (!ocean, !jungle)", 
+ "Lubbock (!ocean, desert, plains)",
+ "Amarillo (!ocean, desert, plains)", 
+ "Little Rock (!ocean, !desert)", 
+ "Tucson (!ocean, desert)",
+ "Erie (!ocean, !desert, !jungle)", 
+ "Flint (!ocean, !desert, !jungle)", 
+ "Trenton (ocean, forest, !desert)", 
+ "Newark (ocean, forest, !desert)",  
+ "Richmond (!ocean, forest, !desert)",
+ "Reno (!ocean, !forest, desert)",
+ "Santa Fe (!ocean, desert, hills, mountains)",
+ "San Jose (hills, plains)",
+ "Tulsa (!ocean, !forest, !hills, !mountains)", 
+ "Annapolis (ocean, river, swamp, forest, !desert)", 
+ "Akron (!ocean, forest, !desert)", 
+ "Urbana-Champaign (!ocean, forest, !desert)",
+ "Columbus",
+ "Memphis",
+ "Albuquerque",
+ "Virginia Beach (ocean)",
+ "Louisville",
+ "Lincoln",
+ "Birmingham",
+ "Montgomery",
+ "Des Moines",
+ "Arlington",
+ "Jackson",
+ "Providence",
+ "Tallahassee",
+ "Bridgeport",
+ "Salem",
+ "Topeka",
+ "Lansing",
+ "Columbia",
+ "Manchester",
+ "Albany",
+ "Billings",
+ "Wilmington",
+ "Greenville",
+ "Bismarck",
+ "Cheyenne",
+ "Carson City",
+ "Harrisburg",
+ "Olympia",
+ "Concord",
+ "Jefferson City",
+ "Burlington",
+ "Dover",
+ "Juneau",
+ "Frankfort",
+ "Helena",
+ "Augusta",
+ "Pierre",
+ "Montpelier",
+ "Newport",
+ "Marblehead",
+ "Norfolk",
+ "Long Beach (ocean)",
+ "Mesa",
+ "Colorado Springs",
+ "Oakland",
+ "Tampa",
+ "Riverside (river)",
+ "Jersey City",
+ "Dayton",
+ "Winston-Salem",
+ "Galveston",
+ "Alexandria",
+ "Berkeley",
+ "Corpus Christi",
+ "Aurora",
+ "Lexington",
+ "Stockton",
+ "Henderson",
+ "Chesapeake",
+ "Yonkers",
+ "Knoxville",
+ "Hilo",
+ "Selma",
+ "New Haven",
+ "Anaheim",
+ "Brownsville",
+ "Wheeling",
+ "Duluth",
+ "Amherst",
+ "Laredo",
+ "Santa Ana",
+ "Greensboro",
+ "St. Petersburg",
+ "Plano",
+ "Fort Wayne",
+ "Chula Vista",
+ "Chandler",
+ "Lancaster",
+ "Durham",
+ "Shreveport",
+ "Pasadena",
+ "Ann Arbor",
+ "Fairfax",
+ "Allentown",
+ "Poughkeepsie",
+ "Fort Lauderdale",
+ "Scranton",
+ "Plymouth",
+ "Casper",
+ "Yuma",
+ "Lakewood",
+ "Gresham",
+ "Hialeah",
+ "Lowell",
+ "Provo",
+ "McAllen",
+ "Fort Collins",
+ "Anderson",
+ "Rapid City",
+ "Medford",
+ "Roanoke",
+ "Donaldsonville",
+ "Waco",
+ "Flagstaff",
+ "Gulfport (ocean)",
+ "Amarillo",
+ "Bangor",
+ "Danville",
+ "Sioux City",
+ "Meridian",
+ "York",
+ "Huntsville",
+ "Greeneville",
+ "Pensacola",
+ "Iowa City",
+ "Williamsburg",
+ "Tuscaloosa",
+ "New Castle",
+ "Milledgeville",
+ "Natchez",
+ "Canton",
+ "Falls Church"

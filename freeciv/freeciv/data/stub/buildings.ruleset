@@ -1,0 +1,74 @@
+; This is minimal buildings ruleset. Replace <modpack> with your module name in
+; description.
+
+[datafile]
+description="<modpack> buildings data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual buildings, one per section.
+; (Buildings = City Improvements and Wonders)
+;
+; The actual tag used (the * in [building_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; Notes:
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; genus	        = genus; one of:
+;                 "GreatWonder", "SmallWonder", "Improvement", "Special".
+; reqs		= requirements to build the building (see effects.ruleset
+;		  and README.effects for help on requirements)
+; graphic	= icon of improvement (used in city dialog)
+; graphic_alt	= alternate icon of improvement
+; obsolete_by	= requirements for the building to become obsolete
+; build_cost	= production shields required to build
+; upkeep	= monetary upkeep value
+; sabotage	= percent chance of diplomat sabotage being successful
+; flags         = special flag strings
+;
+; ** Building flags **
+; "VisibleByOthers"  = Anyone who can see your city knows whether it has
+;                      this improvement. (Great and small wonders are
+;                      always visible.)
+; "SaveSmallWonder"  = If you lose the city with this building in, and the
+;                      "savepalace" server setting is enabled, another will
+;                      be built for free in a random city.
+;                      Should only be used with genus "SmallWonder".
+; "Gold"             = Not a real building; production turned into gold
+;                      indefinitely (capitalization/coinage).
+;                      Genus should be "Special".
+; "DisasterProof"    = Disasters never destroy this building. Is meaningful
+;                      only for genus "Improvement" buildings as others are
+;                      automatically disaster proof.
+;
+; */ <-- avoid gettext warnings
+
+[building_generic]
+name		= _("Generic")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+; No requirements
+    }
+graphic	= "b.barracks"
+graphic_alt	= "-"
+obsolete_by     =
+    { "type", "name", "range"
+    }
+build_cost	= 100
+upkeep		= 0
+sabotage	= 100
+sound		= "b_barracks"
+sound_alt	= "b_generic"
+helptext	= _("\
+This is the only building you can build.\
+")

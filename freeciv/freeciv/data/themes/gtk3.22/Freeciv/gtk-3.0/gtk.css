@@ -1,0 +1,249 @@
+* {
+  -GtkWidget-outline-style: auto;
+  -GtkButton-margin: 1;
+  -GtkButton-padding: 2;
+ 
+  -GtkRange-margin: 1;
+  -GtkRange-min-width: 15;
+  -GtkRange-min-height: 15;
+ 
+  -GtkScale-min-width: 11;
+  -GtkScale-min-height: 21;
+
+  -GtkPaned-width: 6;
+  -GtkScrollbar-min-width: 50;
+  -GtkScrollbar-min-height: 50;
+  -GtkCheckButton-min-width: 12;
+  -GtkCheckButton-min-height: 12;
+  -GtkCheckButton-margin: 3;
+  -GtkStatusbar-text-shadow: none;
+  -GtkSpinButton-text-shadow: none;
+
+  padding: 2px;
+
+/*
+  color                 : #ff0000;
+  background-color      : #e1cea1;
+*/
+}
+
+/*
+#Freeciv {
+  color: rgba(1.0, 0.5, 0.5, 1);
+  background-color: rgba(0.88, 0.80, 0.63, 1);
+}
+*/
+
+@import url("menubar.css");
+
+.progressbar {
+  color: #000000;
+  background-color: #ffffff;
+  background-image: none;
+}
+
+:hover {
+  color: #635b48;
+  /* background-color: #0000FF; */
+  /* background-color: #9ca4b7; */
+  /* background-color: #adb5c8; */
+}
+
+:selected {
+  color: #635b48;
+  background-color: #e7d6b0;
+}
+
+:disabled {
+  color: #9d9d9d;
+  /* background-color: #0000FF; */
+  /* background-color: #626262; */
+}
+
+.background {
+  background-image: url("bg.png");
+  background-repeat: repeat;
+}
+
+.notebook {
+  background-image: linear-gradient(to bottom right, #e8ddaa, #d1c4a7);
+}
+
+.toolbar {
+  background-image: url("Toolbar/toolbar.png");
+  background-size: cover;
+}
+
+.entry {
+  background-image: url("Shadows/text-entry.png");
+  /* background-repeat: repeat; */
+  background-size: cover;
+  -Gtkwidget-outline-width: 0;
+  color: #635b48;
+  background-color: #e7d6b0;
+}
+
+.button {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-normal.png");
+  border-image-repeat: stretch;
+}
+
+.button.default {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-default.png");
+  border-image-repeat: stretch;
+}
+
+.button:hover {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-prelight.png");
+  border-image-repeat: stretch;
+}
+
+.button:active {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-pressed.png");
+  border-image-repeat: stretch;
+}
+
+.button:disabled {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-insensitive.png");
+  border-image-repeat: stretch;
+}
+
+.button,
+.button:hover,
+.button:active,
+.button:backdrop,
+.button:focus,
+.button:focus:active,
+.button:disabled,
+.button:hover {
+  background-image: none;
+  background-color: #e7d6b0;
+}
+
+.check,
+.check row:selected,
+.check row:selected:focus {
+  background-image: url("Check-Radio/check1.png");
+  background-size: cover;
+}
+
+.check:disabled,
+.check row:selected:disabled,
+.check row:selected:focus:disabled {
+  background-image: url("Check-Radio/check3.png");
+  background-size: cover;
+}
+
+.check:active,
+.check row:selected:active,
+.check row:selected:focus:active {
+  background-image: url("Check-Radio/check4.png");
+  background-size: cover;
+}
+
+.radio,
+.radio row:selected,
+.radio row:selected:focus {
+  background-image: url("Check-Radio/option1.png");
+  background-size: cover;
+}
+
+.radio:disabled,
+.radio row:selected:disabled,
+.radio row:selected:focus:disabled {
+  background-image: url("Check-Radio/option3.png");
+  background-size: cover;
+}
+
+.radio:active,
+.radio row:selected:active,
+.radio row:selected:focus:active {
+  background-image: url("Check-Radio/option4.png");
+  background-size: cover;
+}
+
+GtkComboBox .button {
+  background-image: none;
+  background-color: #e7d6b0;
+}
+
+GtkScale.trough {
+  border-image-source: url("Scrollbars/trough-scrollbar-horiz.png");
+  border-image-repeat: stretch;
+}
+
+GtkTreeMenu.menu {
+  background-color: #e7d6b0;
+}
+
+.tooltip {
+  color: #635b48;
+  background-color: #d7d7d7;
+}
+
+#Freeciv #city_info_label {
+  font-family: Monospace;
+  font-size:   8px;
+}
+
+#Freeciv #help_label {
+  color: #FF0000;
+}
+
+#Freeciv #help_link {
+  color: #0000FF;
+}
+
+GtkTreeView {
+/*
+  #Comment out the ythickness setting below for thicker column headers.
+  #ythickness = 0
+*/
+  -GtkTreeView-odd-row-color: #ffffff;
+  -GtkTreeView-even-row-color: #ffffff;
+
+/*
+#  fg[NORMAL] = "#ffffff"
+#  text[NORMAL] = "#ffffff"
+*/
+
+  border-width: 2px;
+
+}
+
+GtkTreeview column-header {
+  /* border-color : #e1cea1; */
+  background-color : #e1cea1;
+}
+
+column-header .button {
+  background-image: url("ListHeaders/list_header.png");
+  padding: 0;
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:active {
+  background-image: url("ListHeaders/list_header-pressed.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:selected,
+column-header .button:hover {
+  background-image: url("ListHeaders/list_header-prelight.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:disabled {
+  background-image: url("ListHeaders/list_header-insens.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+

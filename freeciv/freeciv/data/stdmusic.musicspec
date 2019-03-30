@@ -1,0 +1,35 @@
+[musicspec]
+; Format and options of this spec file:
+options = "+Freeciv-2.6-musicset"
+
+[info]
+artists = "\
+"
+
+[files]
+music_menu = "stdmusic/CullamBruce-Lockhart--Dawning_Fanfare.ogg"
+;music_victory = ""
+;music_defeat = ""
+
+;music_european_peace = ""
+;music_european_combat = ""
+;music_classical_peace = ""
+;music_classical_combat = ""
+;music_tropical_peace = ""
+;music_tropical_combat = ""
+;music_asian_peace = ""
+;music_asian_combat = ""
+;music_babylonian_peace = ""
+;music_babylonian_combat = ""
+;music_celtic_peace = ""
+;music_celtic_combat = ""
+;music_renaissance_peace = ""
+;music_renaissance_combat = ""
+;music_industrial_peace = ""
+;music_industrial_combat = ""
+;music_electricage_peace = ""
+;music_electricage_combat = ""
+;music_modern_peace = ""
+;music_modern_combat = ""
+;music_postmodern_peace = ""
+;music_postmodern_combat = ""

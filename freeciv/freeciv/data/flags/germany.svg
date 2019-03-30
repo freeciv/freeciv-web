@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="1062.99"
+   height="708.661"
+   id="svg378"
+   sodipodi:docname="germany.svg"
+   sodipodi:docbase="/home/daniel/freeciv/data/flags"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.48683361"
+     inkscape:cx="124.7852"
+     inkscape:cy="354.33051"
+     inkscape:window-width="753"
+     inkscape:window-height="654"
+     inkscape:window-x="10"
+     inkscape:window-y="72"
+     inkscape:current-layer="svg378"
+     showgrid="false" />
+  <defs
+     id="defs380">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 354.33051 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1062.99 : 354.33051 : 1"
+       inkscape:persp3d-origin="531.495 : 236.22034 : 1"
+       id="perspective9" />
+  </defs>
+  <rect
+     width="1062.990000"
+     height="708.661000"
+     x="0.000000"
+     y="0.000000"
+     style="font-size:12;fill:#dd0000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="rect171"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     width="1062.990000"
+     height="236.220000"
+     x="0.000000"
+     y="475.558554"
+     style="font-size:12;fill:#ffce00;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="rect256"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     width="1062.99"
+     height="236.22"
+     x="0"
+     y="0"
+     style="font-size:12;fill:#000000;fill-rule:evenodd;stroke-width:1pt;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1.0000000"
+     id="rect255" />
+</svg>

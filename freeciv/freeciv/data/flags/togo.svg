@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="750"
+   height="500">
+  <rect
+     id="green_ground"
+     width="750"
+     height="500"
+     style="fill:#006a4e"/>
+  <rect
+     id="upper_yellow_stripe"
+     width="750"
+     height="100"
+     y="100"
+     style="fill:#ffce00" />
+  <rect
+     id="lower_yellow_stripe"
+     width="750"
+     height="100"
+     y="300"
+     style="fill:#ffce00" />
+  <rect
+     id="red_square"
+     width="300"
+     height="300"
+     style="fill:#d21034" />
+  <g
+     id="star"
+     transform="matrix(94.998006,0,0,91.65494,149.99685,144.72848)"
+     style="fill:#ffffff">
+    <g
+       id="cone">
+      <polygon
+         id="triangle"
+         points="0,0 0,1 0.5,1 0,0 "
+         transform="matrix(0.9510565,0.309017,-0.309017,0.9510565,0,-1)" />
+      <use
+         xlink:href="#triangle"
+         transform="scale(-1,1)"
+         id="use11"
+         x="0"
+         y="0"
+         width="16.18034"
+         height="10" />
+    </g>
+    <use
+       xlink:href="#cone"
+       transform="matrix(0.309017,0.9510565,-0.9510565,0.309017,0,0)"
+       id="use13"
+       x="0"
+       y="0"
+       width="16.18034"
+       height="10" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(0.309017,-0.9510565,0.9510565,0.309017,0,0)"
+       id="use15"
+       x="0"
+       y="0"
+       width="16.18034"
+       height="10" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(-0.809017,0.5877853,-0.5877853,-0.809017,0,0)"
+       id="use17"
+       x="0"
+       y="0"
+       width="16.18034"
+       height="10" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(-0.809017,-0.5877853,0.5877853,-0.809017,0,0)"
+       id="use19"
+       x="0"
+       y="0"
+       width="16.18034"
+       height="10" />
+  </g>
+</svg>

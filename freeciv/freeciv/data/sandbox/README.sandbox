@@ -1,0 +1,128 @@
+===============
+Sandbox Ruleset
+===============
+
+History
+-------
+
+Sandbox ruleset started out as a copy of civ2civ3 ruleset as it stood
+in Freeciv 2.6 (civ2civ3 is Freeciv's default ruleset starting from
+version 3.0).
+The former ruleset for testing unusual features of the freeciv engine
+was called 'Experimental' and based on classic ruleset that was
+the default ruleset earlier. As the default ruleset changed, we felt
+the need to base also the testing ruleset to the new default.
+
+
+Warning
+-------
+
+This ruleset is a playpen for demonstrating new features. There's no
+guarantee that games started with one release will continue to be
+playable with another release (even a minor version), nor that the
+game will be any fun to play. Nor are there guaranteed to be
+appropriate graphics for all the game elements in the supplied
+tilesets, so substitutes may be used.
+
+
+Main features relative to civ2civ3 ruleset
+------------------------------------------
+
+Nuke Upkeep:
+If nuke upkeep cannot be paid, they explode in place.
+
+Airlifting:
+Light weight units can be airlifted once Flight is known. Medium weight
+units can be airlifted once Advanced Flight is known. Heavy weight units
+can be airlifted once Fusion Power is known.
+To airlift heavy and medium weight units an airport is required both in
+the source and in the destination city.
+Cities that know Flight can airlift one light weight unit per turn. An
+Airport allows a city to airlift one more unit per turn.
+
+Map Stealing:
+Spies can steal other player's world map
+
+Border Vision:
+Border Vision is gained mid-game once Electricity is known
+
+Destroy City:
+Leader unit can destroy domestic cities.
+
+Unit Expulsion:
+Foreign units can be expelled from the territory of a player.
+
+Paradropping:
+It's impossible for green Paratroopers to land on Forest and Jungle
+tiles. Veteran, hardened and elite Paratroopers can still do it.
+
+Unit Disbanding:
+A unit can be Disbandable, Undisbandable or ConsensusUndisbandable. The
+consensus among the player's bureaucracy is that ConsensusUndisbandable
+units never should be disbanded (or recycled). Under some governments it
+has the power to enforce its will.
+The unit types Battleship and Carrier are ConsensusUndisbandable. Both unit
+types gets an Easter Egg in their ruleset comments: a reference to a news
+paper article indicating that ConsensusUndisbandable isn't a completely
+fictional concept.
+
+Single Barbarian Nation:
+All barbarians belong to the same barbarian nation. There's no separate
+Pirates and (land) Barbarians.
+
+Hermit's Place:
+Hermit's places are spontaneously, during game, appearing bonus extras
+that can grant techs to units exploring them. See its Help entry under
+Terrains for more information.
+
+Sea Units in port:
+Sea Units in cities defend with 1/4 of their usual defense value.
+
+Goods:
+Trade routes can carry many kinds of goods. There is production chains
+like that city with Mine can trade Ore to a city that then can trade
+Metal to third city which can then trade Goods or Equipment to fourth
+city. Goods later in chains trade for higher value.
+
+Corruption and World Size:
+Under Republic government, the speed corruption increases as one goes
+further from the capital is relative to the size of the world. At
+the maximum distance corruption is the same regardless of the size of
+the world.
+
+Units can be bribed/sabotaged if not alone on their tile:
+Being part of a unit stack won't protect against spy actions.
+
+Merchant movement restrictions:
+Caravans and Freight can only moves on roads and rivers (as in older
+versions of civ2civ3).
+
+One-time trade bonuses:
+Caravans and Freight get one-time bonuses when establishing trade
+routes, and can get revenue even when a trade route exists
+('Enter Marketplace'), as in older versions of civ2civ3; however,
+this latter action really requires a Marketplace building in the city.
+
+Custom policy "Personal Freedom":
+You can trade off a science bonus against extra unhappiness from your
+aggressive military units.
+
+Opponents not seeing units in fortress or airbase:
+Opponents can't see units that are inside fortress or airbase.
+Units inside fort and airstrip can still be seen.
+
+Buoys visible only once Radio known:
+One can see Buoys only when one knows Radio. The leading player
+may build Buoys that others can't yet see.
+
+Stealing techs on city conquest
+Getting a tech with city conquest is never guaranteed to give techs.
+In early game you have 50% chance to get tech from the player losing the city.
+After University is known, no techs are got from the city conquest.
+
+Nationality conversion on conquest
+When a city is conquered, 25% of its inhabitants convert to the nationality
+of the conqueror.
+
+Combat Rounds
+Each combat lasts 15 rounds at max, even if neither side dies in that time.

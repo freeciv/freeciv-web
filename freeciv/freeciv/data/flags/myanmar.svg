@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="300">
+<defs>
+<polygon id="pt" points="-0.1624598481164531,0 0,-0.5 0.1624598481164531,0" transform="scale(250)" fill="#FFF"/>
+<g id="star"><use xlink:href="#pt" transform="rotate(-144)"/><use xlink:href="#pt" transform="rotate(-72)"/><use xlink:href="#pt"/><use xlink:href="#pt" transform="rotate(72)"/><use xlink:href="#pt" transform="rotate(144)"/></g>
+</defs>
+<rect width="450" height="300" style="fill:#ffdb00"/>
+<rect width="450" height="150" y="150" style="fill:#d81e05"/>
+<rect width="450" height="100" y="100" style="fill:#3a7728"/>
+<use xlink:href="#star" x="225" y="150"/>
+</svg>

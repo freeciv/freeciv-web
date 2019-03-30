@@ -1,0 +1,7 @@
+if SYS_TOLUA_CMD
+CMD_SUBDIR=
+else
+CMD_SUBDIR=bin
+endif
+
+SUBDIRS = lib $(CMD_SUBDIR)

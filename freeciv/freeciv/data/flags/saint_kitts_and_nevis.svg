@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg>
+<svg width="900" height="600" viewBox="-75 -50 150 100" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+      <clipPath id="frame">
+         <rect width="150" height="100" x="-75" y="-50"/>
+      </clipPath>
+   </defs>
+   <path d="M 75,-50 h -150 v 100" fill="#009e49"/>
+   <path d="M -75,50 h 150 v -100" fill="#ce1126"/>
+   <g clip-path="url(#frame)">
+      <path d="M -75,50 L 75,-50" stroke-width="42" stroke="#fcd116"/>
+      <path d="M -75,50 L 75,-50" stroke-width="30" stroke="black"/>
+   </g>
+   <g id="star" transform="translate(28.5,-19) rotate(-33.69) scale(14)" fill="white">
+   <comment>the rotation angle above should be -arctan(2/3)</comment>
+      <g id="cone">
+        <polygon id="triangle" points="0,0 0,1 .5,1" transform="translate(0,-1) rotate(18)"/>
+        <use xlink:href="#triangle" transform="scale(-1,1)" />
+      </g>
+      <use xlink:href="#cone" transform="rotate(72)" />
+      <use xlink:href="#cone" transform="rotate(-72)" />
+      <use xlink:href="#cone" transform="rotate(144)" />
+      <use xlink:href="#cone" transform="rotate(-144)" />
+   </g>
+   <use xlink:href="#star" transform="translate(-57,38)"/>
+</svg>

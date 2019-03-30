@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="900"
+   height="600"
+   id="svg13846"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   version="1.0"
+   sodipodi:docbase="D:\Kuvat\Wikipedia"
+   sodipodi:docname="Flag_of_Suriname.svg">
+  <defs
+     id="defs13848" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3211111"
+     inkscape:cx="451.47225"
+     inkscape:cy="402.68044"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="968"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4" />
+  <metadata
+     id="metadata13851">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#007229;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect13854"
+       width="900"
+       height="120"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#007229;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect14731"
+       width="900"
+       height="120"
+       x="0"
+       y="480" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect14733"
+       width="900"
+       height="60"
+       x="0"
+       y="120" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect15608"
+       width="900"
+       height="60"
+       x="0"
+       y="420" />
+    <rect
+       style="fill:#d21034;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect15612"
+       width="900"
+       height="240"
+       x="0"
+       y="180" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffce00;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="path4004"
+       sodipodi:sides="5"
+       sodipodi:cx="267.19934"
+       sodipodi:cy="288.1413"
+       sodipodi:r1="122.48848"
+       sodipodi:r2="46.7906"
+       sodipodi:arg1="0.94336306"
+       sodipodi:arg2="1.5716816"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 339.10851,387.30026 L 267.15792,334.93188 L 195.11472,387.17278 L 222.68605,302.56099 L 150.73943,250.18716 L 239.73004,250.26257 L 267.30778,165.65286 L 294.73567,250.31127 L 383.72627,250.39342 L 311.68703,302.63978 L 339.10851,387.30026 z "
+       transform="matrix(1.008749,0,0,1.008749,180.3628,20.15325)" />
+  </g>
+</svg>

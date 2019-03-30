@@ -1,0 +1,96 @@
+*[city_name_button="true"] {
+  font-weight: bold italic;
+  border: 0px;
+  background: transparent;
+  text-align: right;
+}
+
+*[doomchat="true"] {
+  background-color: white;
+  color: black;
+  border: 1px solid #c3b48e;
+}
+
+chatwdg QTextBrowser
+{
+  background-color: transparent;
+  border: none;
+  color: rgb( 240, 240, 240);
+}
+
+chatwdg QLineEdit
+{
+  background-color: black;
+  border: 1px solid #13395f;
+  color: rgb( 240, 240, 240);
+}
+
+info_tile, notify_dialog {
+  color: #e8ff00;
+  border: 1px solid #e8ff00;
+  background-color: rgba(0, 0, 0,175);
+}
+
+info_tab {
+  background-color: rgba(0,0,0,175);
+}
+
+chatwdg QScrollBar:vertical
+{
+  background: transparent;
+}
+
+messagewdg QTableWidget
+{
+  border: none;
+  background-color: transparent;
+}
+
+units_select {
+  background-color: rgba(0, 0, 0, 135);
+  color: #e8ff00;
+  selection-color: rgba(100, 100, 100, 140);
+  border: 1px solid black;
+}
+
+messagewdg QTableWidget::item:hover {
+  color: #3399FF;
+  background-color: rgba(55, 55, 54, 225);
+  border-radius: 9px;
+}
+
+xvote QPushButton {
+  background-color: transparent;
+  color: #038713;
+  min-width: 80px;
+  border: none;
+}
+
+xvote QPushButton:enabled {
+  color: #038713;
+}
+
+xvote QPushButton:hover {
+  background-color: blue;
+}
+
+QProgressBar {
+  color: white;
+  background: #ceced0;
+  selection-background-color: #36c620;
+}
+
+fc_sidewidget {
+  color: white;
+  /* Box around current widget */
+  selection-background-color: rgb(34, 150, 4);
+  /* Hover effect */
+  alternate-background-color: rgba(125, 25, 25, 125);
+  /* blink */
+  selection-color: rgba(85, 25, 25, 185);
+}
+
+hud_unit_combat {
+  selection-background-color: rgba(0, 0, 75,165);
+  alternate-background-color: #0000AA;
+}

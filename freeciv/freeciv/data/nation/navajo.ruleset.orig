@@ -1,0 +1,114 @@
+[nation_navajo]
+
+name=_("Navajo")
+plural=_("?plural:Navajo")
+groups="American"
+legend=_("The Navajo or Diné are the most populous Native American\
+ nation of the United States. They are closely related to the Apache.\
+ Their language is famous for being one of the world's most\
+ complex.")
+
+leaders = {
+ "name",                "sex"
+ "Dághaaʼ",             "Male" ; Barboncito
+ "Bislahalani",         "Male"
+ "Hózhǫ́ǫ́jí Naatʼą́",     "Male"
+ "Askkii Dighin",       "Male"
+ "Ch’ilhajinii",        "Male" ; Manuelito
+ "Hildjajin",           "Male"
+ "Haskeh",              "Male"
+ "Narbona",             "Male"
+ "Annie Dodge Wauneka", "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Great Shaman %s"),    _("?female:Great Shaman %s")
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+}
+
+flag="navajo"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations= "hopi", "apache"
+
+cities =
+ "Tségháhoodzání",
+ "Naʼnízhoozhí",
+ "Tó Naneesdizí",
+ "Naatʼáanii Nééz",
+ "Tó Dinéeshzhee",
+ "Chʼínílį́",
+ "Tséhootsooí",
+ "Tʼiistsʼóóz Ńdeeshgizh",
+ "Hoozdoh",
+ "Kinłání Dookʼoʼoosłííd Biyaagi",
+ "Yootó",
+ "Kin Łání",
+ "Beeʼeldííl Dahsinil",
+ "Tséyaa Akʼahí",
+ "Chʼilzhóóʼ",
+ "Naʼazhoosh hatsoh",
+ "Tsostsʼid Beʼekʼid",
+ "Beehai",
+ "Naʼníʼá Hótsaa",
+ "Tʼiis Ntsxaa Chʼéélį́",
+ "Náyaasęęsí",
+ "Shash Bitoo",
+ "Haʼagizh",
+ "Kʼaiʼ biłhaʼhaaztéél",
+ "Tséyaaniichiiʼ",
+ "Dził Łeezhchʼihí",
+ "Tówoł",
+ "Lókʼaaʼdeeshjin",
+ "Tótsʼózí",
+ "Naatooh Sikʼaiʼí",
+ "Tsé Noodǫ́ǫ́z",
+ "Sighóla",
+ "Náhodeeshgiizh Chʼínílíní",
+ "Béésh sinil",
+ "Tsézhin Deezʼáhí",
+ "Tó Sidó",
+ "Kin Dootłʼizhí",
+ "Bíina",
+ "Łichííʼ Deezʼáhí",
+ "Dághaaʼ Łichííʼ",
+ "Kin Noodǫ́ǫ́z",
+ "Kʼaalógii Dziil",
+ "Kinteel",
+ "Tséłgaii Deezʼáhí",
+ "Tsé Yaatóhí",
+ "Tó Háálį́",
+ "Tótaʼ",
+ "Oozéí",
+ "Bíniishdáhí",
+ "Tó Hasłeeh",
+ "Naashtʼézhí",
+ "Tsʼímah",
+ "Yaʼniilzhiin",
+ "Tó Náálíní",
+ "Tʼiisyaakin",
+ "Dibé Ííjééʼ",
+ "Toojįʼ Hwiidzoh",
+ "Łitsooí",
+ "Naakaii Chʼah",
+ "Tó Diłhił Biih Yílį́",
+ "Chį́į́h Ntłʼizii",
+ "Haltso",
+ "Kʼaiʼ Chʼíneeltłʼǫ́",
+ "Dólii Dził",
+ "Dlǫ́ʼí Yázhí",
+ "Naabiʼání",
+ "Tsin Názbąs",
+ "Naʼazísí Toʼí",
+ "Naʼníʼá Hátsoh",
+ "Taahóóteel"
+
+
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="270"
+   height="180"
+   viewBox="-10 -10 290 290"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="hansa.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs27">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 200 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="400 : 200 : 1"
+       inkscape:persp3d-origin="200 : 133.33333 : 1"
+       id="perspective31" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="729"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="0.76"
+     inkscape:cx="200"
+     inkscape:cy="200"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="opacity:1;fill:#ffffff;fill-opacity:1"
+     id="rect2382"
+     width="435"
+     height="290"
+     x="-82.5"
+     y="-10" />
+  <g
+     id="g6">
+    <path
+       d="M269.291,188.191c-24.384-9.216-65.552-23.604-109.82-28.814c5.226,44.238,19.621,85.383,28.837,109.752    H80.984c9.215-24.369,23.619-65.514,28.837-109.752C65.548,164.588,24.384,178.976,0,188.191V80.941    c24.384,9.208,65.548,23.596,109.821,28.81C104.603,65.502,90.199,24.368,80.984,0h107.324    c-9.216,24.368-23.611,65.502-28.837,109.751c44.269-5.214,85.437-19.602,109.82-28.81V188.191"
+       id="path8"
+       style="fill:#ff0000"
+       fill="#939393" />
+  </g>
+</svg>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg1055"
+   sodipodi:version="0.32"
+   inkscape:version="0.42"
+   width="225.00000pt"
+   height="150.00000pt"
+   sodipodi:docbase="/Users/daniel/Desktop/updated flags"
+   sodipodi:docname="cheyenne.svg">
+  <defs
+     id="defs1057" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2916482"
+     inkscape:cx="182.00659"
+     inkscape:cy="85.921647"
+     inkscape:window-width="701"
+     inkscape:window-height="529"
+     inkscape:window-x="17"
+     inkscape:window-y="112"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:current-layer="svg1055">
+    <sodipodi:guide
+       orientation="vertical"
+       position="67.355802"
+       id="guide3772" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="212.90627"
+       id="guide3774" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="123.87274"
+       id="guide3776" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="-13.161479"
+       id="guide3778" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="140.90524"
+       id="guide3780" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1058">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     style="font-size:12.000000px;fill:#0053ff;fill-opacity:1.0000000;fill-rule:evenodd;stroke-width:1.0000000pt"
+     id="rect1221"
+     width="281.25000"
+     height="187.50000"
+     x="0.0000000"
+     y="4.7016720e-06"
+     ry="0.0000000" />
+  <path
+     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+     d="M 140.62902,20.833298 L 109.37908,52.083237 L 78.129140,20.833298 L 67.712500,31.249944 L 98.962430,62.499884 L 67.712500,93.750117 L 98.962430,125.00006 L 67.712500,156.25000 L 78.129140,166.66664 L 109.37908,135.41670 L 140.62902,166.66664 L 171.87896,135.41670 L 203.12919,166.66664 L 213.54584,156.25000 L 182.29590,125.00006 L 213.54584,93.750117 L 182.29590,62.499884 L 213.54584,31.249944 L 203.12919,20.833298 L 171.87896,52.083237 L 140.62902,20.833298 z "
+     id="path1222"
+     sodipodi:nodetypes="ccccccccccccccccccccc" />
+  <path
+     sodipodi:nodetypes="ccccc"
+     id="path1223"
+     d="M 88.545790,93.750117 L 140.62902,41.666591 L 192.71255,93.750117 L 140.62902,145.83335 L 88.545790,93.750117 z "
+     style="fill:#0053ff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000" />
+</svg>

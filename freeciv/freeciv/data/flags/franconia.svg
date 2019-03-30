@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   width="600"
+   height="400"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\Office\Desktop"
+   sodipodi:docname="franconia.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <rect
+     style="fill:#ffffff"
+     id="rect2389"
+     width="600"
+     height="400"/>
+  <rect
+     style="fill:#ff0000"
+     id="rect2391"
+     width="600"
+     height="200"/>
+  <path
+     sodipodi:nodetypes="czcccsc"
+     d="M 300.04487,313.44621 C 218.84395,313.44621 201.54886,242.83981 201.55379,232.50527 C 201.55872,222.17062 201.57803,86.558765 201.57803,86.558765 L 299.99949,86.553608 L 398.42096,86.558765 C 398.42096,86.558765 398.45177,222.12604 398.44519,232.50527 C 398.43862,242.83664 381.15504,313.44621 300.04487,313.44621 z"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:13.108;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path2212" />
+  <path
+     style="fill:#ff0101;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.29515409px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 302.74789,92.170716 L 207.40158,92.241451 C 207.40158,92.241451 208.30993,237.2565 208.38996,234.79794 C 207.66073,236.38185 241.75039,157.95256 241.75039,157.95256 L 271.50322,229.05588 L 302.75286,157.97527 L 332.25285,229.08628 L 361.81937,157.92712 L 392.53791,234.82004 L 392.33721,91.398292 L 302.74789,92.170716 z"
+     id="path2222"
+     sodipodi:nodetypes="ccccccccccc" />
+  <path
+     id="path2233"
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.10757709;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 300.04487,313.44621 C 218.84395,313.44621 201.54886,242.83981 201.55379,232.50527 C 201.55872,222.17062 201.57803,86.558765 201.57803,86.558765 L 299.99949,86.553608 L 398.42096,86.558765 C 398.42096,86.558765 398.45177,222.12604 398.44519,232.50527 C 398.43862,242.83664 381.15504,313.44621 300.04487,313.44621 z"
+     sodipodi:nodetypes="czcccsc" />
+</svg>

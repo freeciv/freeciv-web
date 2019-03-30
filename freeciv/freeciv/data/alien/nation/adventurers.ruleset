@@ -1,0 +1,40 @@
+[nation_adventurers]
+
+translation_domain="freeciv"
+
+name = _("Adventurers")
+plural = _("?plural:Adventurers")
+legend = _("Without any destination, they were just traveling around, looking \
+for trouble.\n\n\
+* All units have one extra movement point\n\
+* City size limits one size bigger than for other factions")
+
+leaders = {
+ "name", "sex"
+ "Orion Hunter", "male"
+ "Cassiopeia", "female"
+}
+
+flag = "adventurers"
+flag_alt = "denmark"
+style = "Human"
+
+color.r = 124
+color.g = 252
+color.b =   0
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+trait_expansionist_min = 150
+trait_expansionist_max = 150
+
+; /* <-- avoid gettext warnings
+;
+; */
+
+cities =
+  "Lost Temple", "Black Forest", "Dark Alley", "Alien Planet",
+  "Hostile Moon", "Strange Nebula", "Broken Ship", "Deadly Encounter",
+  "Jungle", "Icy Peaks", "Crushed Skull", "Laser Crossing", "Monster's Belly"

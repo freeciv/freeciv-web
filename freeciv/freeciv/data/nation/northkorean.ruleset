@@ -1,0 +1,62 @@
+[nation_northkorean]
+
+name=_("North Korean")
+plural=_("?plural:North Koreans")
+groups="Modern", "Asian"
+legend=_("In 1945 Korea was split by the Soviet Union and\
+ the United States into two states along the 38th parallel,\
+ forming North Korea and South Korea. 60 years on,\
+ North Korea remains a communist state of the Stalinist type.")
+
+leaders = {
+ "name",                "sex"
+ "Kim Jong-il",         "Male" ; Second leader of DPRK.
+ "Kim Il-sung",         "Male" ; First leader of DPRK.
+}
+
+flag="north_korea"
+flag_alt = "-"
+style = "Asian"
+
+ruler_titles = {
+ "government",      "male_title",               "female_title"
+ "Anarchy",        _("Enemy of the People %s"), _("?female:Enemy of the People %s")
+ "Despotism",      _("Commissar %s"),           _("?female:Commissar %s")
+ "Fundamentalism", _("Dear Leader %s"),         _("?female:Dear Leader %s")
+ "Monarchy",       _("Great Leader %s"),        _("?female:Great Leader %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "South Korean"
+
+; Sorted according to 2005 population
+cities =
+ "Pyongyang",
+ "Hamhung",
+ "Nampho",
+ "Hungnam",
+ "Kaesong",
+ "Wonsan",
+ "Chongjin",
+ "Sinuiju",
+ "Haeju",
+ "Kanggye",
+ "Kimchaek",
+ "Sariwon",
+ "Songnim",
+ "Pyongsong",
+ "Hyesan",
+ "Sinpho",
+ "Tanchon",
+ "Rason",
+ "Anju",
+ "Hoeryong",
+ "Tokchon",
+ "Huichon",
+ "Kaechon",
+ "Manpho",
+ "Munchon",
+ "Sunchon"

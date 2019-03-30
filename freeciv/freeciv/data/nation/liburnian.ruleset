@@ -1,0 +1,68 @@
+[nation_liburnian]
+
+name=_("Liburnian")
+plural=_("?plural:Liburnians")
+groups="Ancient", "European"
+legend=_("The Liburnians were an ancient Indo-European tribe living along\
+ the Northeastern Adriatic coast in modern Croatia. They were probably\
+ distinct from their neighbors, the Illyrians, and spoke an Italic\
+ language. They were Romanized after the annexation of their land by\
+ Rome.")
+
+leaders = {
+ "name",     "sex"
+ "Plator",    "Male"
+ "Volsouna",  "Female"
+ "Volsounus", "Male"
+ "Oclatinus", "Male"
+ "Colatina",  "Female"
+ "Zupricus",  "Male"
+ "Volaesa",   "Female"
+ "Mamaester", "Male"
+}
+
+flag= "liburnian" 
+flag_alt = "-" 
+style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_units="" 
+
+conflicts_with="yugoslav", "slovenian", "croatian", "italian", "venetian"
+civilwar_nations="illyrian", "roman", "venetic"
+
+cities=
+ "Iadera",                ;Zadar
+ "Scardona",              ;Skradin
+ "Aenona",                ;Nin
+ "Tarsatica",             ;Rijeka
+ "Curicum",               ;Krk
+ "Burnum",
+ "Flanona",
+ "Alvona",
+ "Apsorus",               ;Lošinj
+ "Crepsa",                ;Cres
+ "Promona",
+ "Argyruntum",            ;Starigrad-Paklenica
+ "Portunata",             ;Novalja
+ "Gissa",
+ "Arba",
+ "Fulfinium",             ;Omišalj
+ "Issa",
+ "Senia",                 ;Senj
+ "Colentum",
+ "Sidrona",
+ "Varvaria",
+ "Vegia",
+ "Ortoplinia",            ;Stinica
+ "Pasinium",              ;Pazin
+ "Nedinum",
+ "Lopsica",               ;Sv. Juraj
+ "Asseria",
+ "Corinium",
+ "Tediastum",
+ "Salvia",
+ "Stulpinos",
+ "Burnistas",
+ "Flanates"

@@ -1,0 +1,78 @@
+[nation_bissauguinean]
+
+name = _("Bissau-Guinean")
+plural = _("?plural:Bissau-Guineans")
+groups="African", "Modern"
+legend=_("Guinea-Bissau is a country in West Africa. Formerly known as\
+ Portuguese Guinea, it declared independence in 1973.")
+
+leaders = {
+ "name",                 "sex"
+ "Nuno Tristão",         "Male"
+ "Amílcar Cabral",       "Male"
+ "Luis Cabral",          "Male"
+ "Carmen Pereira",       "Female"
+ "João Bernardo Vieira", "Male"
+ "Ansumane Mané",        "Male"
+ "Kumba Yalá",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Despotism",       _("Captain-Major %s"), _("?female:Captain-Major %s")
+ "Fundamentalism",  _("Padre %s"),         _("Madre %s")
+}
+
+flag = "guinea-bissau"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="guinean", "cape verdean"
+
+cities =
+ "Bissau",
+ "Bolama",
+ "Cacheu",
+ "Gabú",
+ "Bafatá",
+ "Catió",
+ "Buba",
+ "Farim",
+ "Quinhámel",
+ "Canghungo",
+ "Bissorã",
+ "Mansôa",
+ "Safim",
+ "Quebo",
+ "Ingoré",
+ "Bula",
+ "São Domingos",
+ "Bubaque",
+ "Bambadinca",
+ "Caboxanque",
+ "Piche",
+ "Paunca",
+ "Contuboel",
+ "Pelundo",
+ "Mansabá",
+ "Nhacra",
+ "Fasse",
+ "Calequisse",
+ "Olossato",
+ "Cumeré",
+ "Mato Farroba",
+ "Fulacunda",
+ "Contuba",
+ "Prábis",
+ "Cacine",
+ "Jobicunda",
+ "Empada",
+ "Bigene",
+ "Tite",
+ "Canfate",
+ "Utia"
+

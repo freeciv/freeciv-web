@@ -1,0 +1,152 @@
+/**********************************************************************
+ Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+***********************************************************************/
+
+/* This header is generated from gen_headers/freeciv_config.h.in.
+ * It contains values to specific freeciv build, but only such
+ * values that should not conflict with configuration headers from
+ * other autotools projects. This is meant to be usable for external
+ * projects building against some freeciv components. */
+
+#ifndef FC__FREECIV_CONFIG_H
+#define FC__FREECIV_CONFIG_H
+
+/* Is this freeciv-web instead of regular build */
+#undef FREECIV_WEB
+
+/* Testmatic integration enabled */
+#undef FREECIV_TESTMATIC
+
+/* Metaserver URL */
+#undef FREECIV_META_URL
+
+/* Month next version will be released */
+#undef FREECIV_RELEASE_MONTH
+
+/* Use pthreads as thread implementation */
+#undef FREECIV_HAVE_PTHREAD
+
+/* Use Windows threads as thread implementation */
+#undef FREECIV_HAVE_WINTHREADS
+
+/* Use tinycthread as thread implementation */
+#undef FREECIV_HAVE_TINYCTHR
+
+/* Has thread condition variable implementation */
+#undef FREECIV_HAVE_THREAD_COND
+
+/* Build xml-backend for registry */
+#undef FREECIV_HAVE_XML_REGISTRY
+
+/* Native language support enabled */
+#undef FREECIV_ENABLE_NLS
+
+/* locale.h available */
+#undef FREECIV_HAVE_LOCALE_H
+
+/* libintl.h available */
+#undef FREECIV_HAVE_LIBINTL_H
+
+/* inttypes.h available */
+#undef FREECIV_HAVE_INTTYPES_H
+
+/* stdint.h available */
+#undef FREECIV_HAVE_STDINT_H
+
+/* ws2tcpip.h available */
+#undef FREECIV_HAVE_WS2TCPIP_H
+
+/* sys/types.h available */
+#undef FREECIV_HAVE_SYS_TYPES_H
+
+/* unistd.h available */
+#undef FREECIV_HAVE_UNISTD_H
+
+/* sys/time.h available */
+#undef FREECIV_HAVE_SYS_TIME_H
+
+/* sys/socket.h available */
+#undef FREECIV_HAVE_SYS_SOCKET_H
+
+/* sys/select.h available */
+#undef FREECIV_HAVE_SYS_SELECT_H
+
+/* netinet/in.h available */
+#undef FREECIV_HAVE_NETINET_IN_H
+
+/* dirent.h available */
+#undef FREECIV_HAVE_DIRENT_H
+
+/* Have standard compliant stdbool.h */
+#undef FREECIV_HAVE_STDBOOL_H
+
+/* Readline support */
+#undef FREECIV_HAVE_LIBREADLINE
+
+/* Have socklen_t type defined */
+#undef FREECIV_HAVE_SOCKLEN_T
+
+/* jansson network protocol in use */
+#undef FREECIV_JSON_CONNECTION
+
+/* Delta protocol enabled */
+#undef FREECIV_DELTA_PROTOCOL
+
+/* Windows build */
+#undef FREECIV_MSWINDOWS
+
+/* uses some winsock version */
+#undef FREECIV_HAVE_WINSOCK
+
+/* uses winsock2 */
+#undef FREECIV_HAVE_WINSOCK2
+
+/* socket zero isn't same stdin */
+#undef FREECIV_SOCKET_ZERO_NOT_STDIN
+
+/* Extra debugging support */
+#undef FREECIV_DEBUG
+
+/* No freeciv specific debugging support at all */
+#undef FREECIV_NDEBUG
+
+/* zlib is available */
+#undef FREECIV_HAVE_LIBZ
+
+/* libbzip2 is available */
+#undef FREECIV_HAVE_LIBBZ2
+
+/* liblzma is available */
+#undef FREECIV_HAVE_LIBLZMA
+
+/* Location for freeciv to store its information */
+#undef FREECIV_STORAGE_DIR
+
+/* IPv6 Support built in */
+#undef FREECIV_IPV6_SUPPORT
+
+/* Max number of AI modules */
+#undef FREECIV_AI_MOD_LAST
+
+/* C11 static assert supported */
+#undef FREECIV_C11_STATIC_ASSERT
+
+/* strlen() in static assert supported */
+#undef FREECIV_STATIC_STRLEN
+
+/* C++11 static assert supported */
+#undef FREECIV_CXX11_STATIC_ASSERT
+
+/* opendir() available */
+#undef FREECIV_HAVE_OPENDIR
+
+#endif /* FC__FREECIV_CONFIG_H */

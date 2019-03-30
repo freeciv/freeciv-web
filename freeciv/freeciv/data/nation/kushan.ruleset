@@ -1,0 +1,75 @@
+[nation_kushan]
+
+name=_("Kushan")
+plural=_("?plural:Kushans")
+groups="Ancient", "Asian"
+legend=_("The Kushans were an ancient Indo-European people, perhaps of\
+ Tocharian origin, originally leading a nomadic life in Central Asia.\
+ Under pressure from Turkic peoples they left their old lands and migrated\
+ to India. In India they founded a vast empire whose rulers converted to\
+ Buddhism. The Kushans used the Greek alphabet to write their language.\
+ The Kushan empire maintained trade relations with Rome and China. They\
+ were subordinated to the Persian Sassanids and replaced by a Persian\
+ vassal kingdom. The last remnants of the Kushans eventually succumbed\
+ to the Hephthalites.")
+leaders = {
+ "name",                "sex"
+ "Sapadbizes",          "Male"
+ "Heraios",             "Male"
+ "Kujula Kadphises",    "Male"
+ "Vima Takto",          "Male"
+ "Vima Kadphises",      "Male"
+ "Kanishka I",          "Male"
+ "Vāsishka",            "Male"
+ "Huvishka",            "Male"
+ "Vasudeva I",          "Male"
+ "Kanishka II",         "Male"
+ "Vashishka",           "Male"
+ "Kanishka III",        "Male"
+ "Vasudeva II",         "Male"
+ "Chhu",                "Male"
+ "Shaka I",             "Male"
+ "Kipunada",            "Male"
+}
+flag="kushan"
+flag_alt = "-"
+style = "European"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Raja %s"),         _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),     _("Maharani %s")
+ "Communism",       _("Brother %s"),      _("Sister %s")
+ "Fundamentalism",  _("Guru %s"),         _("?female:Guru %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Indian", "Pakistani", "Afghani", "Uzbek" ; Bactrian
+civilwar_nations = "Tocharian", "Gupta", "Persian", "Hephthalite" ; Bactrian
+
+cities =
+ "Purushapura",          ;Peshawar
+ "Begram",
+ "Taxila",
+ "Mathura",
+ "Surkh Kotal",
+ "Bactra",
+ "Pattala",
+ "Saketa",
+ "Ujjain",
+ "Vidisa",
+ "Pataliputra",
+ "Kundina",
+ "Champa",
+ "Kashgar",
+ "Kucha",
+ "Turfan",
+ "Ai Khanoum",
+ "Hadda",
+ "Kabul",
+ "Samarkand",
+ "Kunduz",
+ "Kausambi"

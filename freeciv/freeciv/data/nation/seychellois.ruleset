@@ -1,0 +1,66 @@
+[nation_seychellois]
+
+name=_("Seychellois")
+plural=_("?plural:Seychellois")
+groups="African", "Modern"
+legend=_("The Seychelles is an archipelagic country off the coast of\
+ Eastern Africa in the Indian Ocean. The Islands have been visited by\
+ Austronesian, Maldivian and Arab merchants in antiquity but by the\
+ time of the European discoveries the Seychelles had no indigenous\
+ population. The Seychelles were intermittently under French and British\
+ possession until becoming independent in 1976. Its population consists\
+ of people of African, Chinese, European, Indian and Malagasy descent.\
+ The Seychelles are the least populated country of Africa and have the\
+ highest human development of the continent.")
+
+leaders = {
+ "name",                "sex"
+ "Olivier Levasseur",  "Male"
+ "Arthur Grimble",     "Male"
+ "James Mancham",      "Male"
+ "France-Albert René", "Male"
+}
+
+flag ="seychelles"
+style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "comorian", "mauritian", "maldivian"
+
+cities =
+ "Victoria",
+ "De Quincey",
+ "Anse Boileau",
+ "Anse Volbert",
+ "Beau Vallon",
+ "Anse Royale",
+ "Belombre",
+ "Cascade",
+ "Machabee",
+ "Grand'Anse",
+ "Misere",
+ "Takamaka",
+ "Port Glaud",
+ "La Réunion",
+ "Anse Etoile",
+ "English River",
+ "Mont Fleuri",
+ "Glacis",
+ "Bel Ombre",
+ "Anse Aux Pins",
+ "Saint Louis",
+ "Mont Buxton",
+ "La Plaine Saint André",
+ "Baie Lazare",
+ "Bel Air",
+ "Pointe La Rue",
+ "Roche Caïman",
+ "Les Mamelles",
+ "La Passe",
+ "Coëtivy",
+ "Desroches",
+ "Alphonse",
+ "Assumption",
+ "Farquhar"

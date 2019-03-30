@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="750"
+   height="500"
+   version="1.0"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="piratini.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs13">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 250 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="707 : 250 : 1"
+       inkscape:persp3d-origin="353.5 : 166.66667 : 1"
+       id="perspective15" />
+  </defs>
+  <path
+     style="fill:#de2910;fill-opacity:1;stroke:none"
+     d="M 0,0 L 0,500 L 749.89393,500 L 749.89393,0 L 0,0 z"
+     id="path4" />
+  <path
+     style="fill:#319400;fill-opacity:1;stroke:none"
+     d="M 0,0 L 0,250 L 750,0 L 0,0 z"
+     id="path6" />
+  <path
+     style="fill:#ffde00;fill-opacity:1;stroke:none"
+     d="M 0,500 L 749.89393,250 L 749.89393,500 L 0,500 z"
+     id="path8" />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Flag of Riograndense Republic, made by Felipe Michels Fontoura</dc:title>
+        <dc:description>Flag of Riograndense Republic based on Rio Grande Flag.</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>flags</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Felipe Michels Fontoura</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain">
+          <dc:date />
+        </cc:license>
+        <dc:language>pt</dc:language>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

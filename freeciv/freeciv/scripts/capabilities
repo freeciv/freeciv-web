@@ -1,0 +1,301 @@
+#!/bin/bash
+#/**********************************************************************
+# Freeciv - Copyright (C) 2010
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2, or (at your option)
+#   any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#***********************************************************************/
+
+# update capability string for
+# - network
+# - tilespec
+# - soundspec
+# - musicspec
+# - spec
+# - ruleset
+
+# print usage
+function usage()
+{
+  echo ""
+  echo "USAGE:"
+  echo "    ${basename} -h [-d <dir>] [-c <capability> -s <string>]"
+  echo ""
+  echo "OPTIONS:"
+  echo "    -c  the capability to change. One of:"
+  echo "        aimodules:  AI modules capability"
+  echo "                    (\"+Freeciv-ai-module-YYYY.MMM.DD\")"
+  echo "        network:    network capability"
+  echo "                    (\"+Freeciv.Devel.YYYY.MMM.DD\")"
+  echo "        tilespec:   tileset capability"
+  echo "                    (\"+Freeciv-tilespec-Devel-YYYY.MMM.DD\")"
+  echo "        soundspec:  soundset capability"
+  echo "                    (\"+Freeciv-soundset-Devel-YYYY.MMM.DD\")"
+  echo "        musicspec:  musicset capability"
+  echo "                    (\"+Freeciv-musicset-Devel-YYYY.MMM.DD\")"
+  echo "        spec:       spec file capability"
+  echo "                    (\"+Freeciv-spec-Devel-YYYY.MMM.DD\")"
+  echo "        ruleset:    ruleset capability"
+  echo "                    (\"+Freeciv-ruleset-Devel-YYYY.MMM.DD\")"
+  echo "    -d  base directory (defaults to './')"
+  echo "    -h  this help"
+  echo "    -s  new string value for the capability"
+  echo ""
+  echo "EXAMPLE:"
+  echo "    ${basename} -c network -s +Freeciv.Devel.2011.JAN.30"
+  echo ""
+}
+
+# print carfulness hint
+function careful()
+{
+  echo ""
+  echo "Please check all changes done by this script carefully!"
+  echo ""
+}
+
+# process arguments
+capability="usage"
+string=
+basedir="./"
+while getopts "c:d:hs:" option
+do
+  case $option in
+    h )
+      usage
+      exit 0
+      ;;
+
+    c )
+      capability=$OPTARG
+      ;;
+
+    d )
+      basedir=$OPTARG
+      ;;
+
+    s )
+      string=$OPTARG
+      ;;
+
+    * )
+      echo ""
+      echo "Unimplemented option chosen (${option})."
+      usage
+      exit 1
+      ;;
+
+  esac
+done
+
+if test "x$string" = "x" ; then
+  echo "Not setting empty capability string, use -s \"string\"" >&2
+  exit 1
+fi
+
+case $capability in
+  aimodules )
+    careful
+
+    echo -e "setting ai module capability: ${string}\n"
+    file=`find $basedir -name "ai.h"`
+
+    old=`cat $file \
+         | grep "FC_AI_MOD_CAPSTR " \
+         | sed 's/#define FC_AI_MOD_CAPSTR "\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old\"/\"$string\"/g" \
+        > $file.$$
+
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+    ;;
+
+  network )
+    careful
+
+    echo -e "setting network capability: ${string}\n"
+    file=`find $basedir -name "fc_version"`
+
+    old=`cat $file \
+         | grep "NETWORK_CAPSTRING_MANDATORY=" \
+         | sed 's/NETWORK_CAPSTRING_MANDATORY="\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old\"/\"$string\"/g" \
+        > $file.$$
+
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+    ;;
+
+  tilespec )
+    careful
+    echo -e "setting tilespec capability: $string\n"
+    file=`find $basedir -name "tilespec\.c"`
+
+    old=`cat $file \
+         | grep "#define TILESPEC_CAPSTR" \
+         | sed 's/#define TILESPEC_CAPSTR "\(.*\) duplicates_ok".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old/\"$string/g" \
+        > $file.$$
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+
+    files=`find $basedir -name "*\.tilespec"`
+    for file in $files; do
+      cat $file \
+          | sed "s/$old/$string/g" \
+          > $file.$$
+
+      cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+      rm -f $file.$$
+    done
+    ;;
+
+  soundspec )
+    careful
+    echo -e "setting soundspec capability: $string\n"
+    file=`find $basedir -name "audio\.c"`
+
+    old=`cat $file \
+         | grep "#define SOUNDSPEC_CAPSTR" \
+         | sed 's/#define SOUNDSPEC_CAPSTR "\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old/\"$string/g" \
+        > $file.$$
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+
+    files=`find $basedir -name "*\.soundspec"`
+    for file in $files; do
+      cat $file \
+          | sed "s/$old/$string/g" \
+          > $file.$$
+
+      cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+      rm -f $file.$$
+    done
+    ;;
+
+  musicspec )
+    careful
+    echo -e "setting musicspec capability: $string\n"
+    file=`find $basedir -name "audio\.c"`
+
+    old=`cat $file \
+         | grep "#define MUSICSPEC_CAPSTR" \
+         | sed 's/#define MUSICSPEC_CAPSTR "\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old/\"$string/g" \
+        > $file.$$
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+
+    files=`find $basedir -name "*\.musicspec"`
+    for file in $files; do
+      cat $file \
+          | sed "s/$old/$string/g" \
+          > $file.$$
+
+      cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+      rm -f $file.$$
+    done
+    ;;
+
+  spec )
+    echo -e "setting spec capability: $string\n"
+    careful
+    file=`find $basedir -name "tilespec.c"`
+
+    old=`cat $file \
+         | grep "#define SPEC_CAPSTR " \
+         | sed 's/#define SPEC_CAPSTR "\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old/\"$string/g" \
+        > $file.$$
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+    rm -f $file.$$
+
+    files=`find $basedir -name "*\.spec"`
+    for file in $files; do
+      cat $file \
+          | sed "s/$old/$string/g" \
+          > $file.$$
+
+      cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+      rm -f $file.$$
+    done
+    ;;
+
+  ruleset )
+    echo -e "setting ruleset capability: $string\n"
+    careful
+    file=`find $basedir -name "ruleset\.h"`
+
+    old=`cat $file \
+         | grep "#define RULESET_CAPABILITIES_BASE " \
+         | sed 's/#define RULESET_CAPABILITIES_BASE "\(.*\)".*/\1/'`
+
+    echo "* Replacing \"${old}\" with \"${string}\" in:"
+    cat $file \
+        | sed "s/\"$old/\"$string/g" \
+        > $file.$$
+    cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  - ${file}")
+    rm -f $file.$$
+
+    files=`find $basedir -name "*\.ruleset"`
+    for file in $files; do
+      cat $file \
+          | sed "s/$old/$string/g" \
+          > $file.$$
+
+      cmp $file $file.$$ >/dev/null \
+        || (mv $file.$$ $file && echo "  ${file}")
+      rm -f $file.$$
+    done
+    ;;
+
+  usage )
+    usage
+    exit 0
+    ;;
+
+  * )
+    echo ""
+    echo "Unknown capability value: ${capability}"
+    usage
+    exit 1
+    ;;
+
+esac

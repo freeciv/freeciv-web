@@ -1,0 +1,116 @@
+[nation_japanese]
+
+translation_domain="freeciv"
+
+name=_("Japanese")
+plural=_("?plural:Japanese")
+groups="Medieval", "Early Modern", "Modern", "Asian", "Core"
+legend=_("According to traditional Japanese mythology, Japan was founded\
+ in the 7th century BCE by the ancestral Emperor Jimmu.")
+
+leaders = {
+ "name",                "sex"
+ "Jimmu",               "Male"
+ "Mutsuhito",           "Male"
+ "Hirohito",            "Male"
+ "Oda Nobunaga",        "Male"
+ "Tokugawa Ieyasu",     "Male"
+ "Suiko",               "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Monarchy",        _("Emperor %s"),        _("Empress %s")
+ "Republic",        _("Shogun %s"),         _("?female:Shogun %s")
+}
+
+flag="japan"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="ryukyuan", "ainu"
+
+cities =
+  "Tokyo (ocean)",
+  "Osaka (ocean)",
+  "Kyoto (!ocean)",
+  "Nara (!ocean)",
+  "Sapporo (ocean)",
+  "Nagoya (ocean)",
+  "Fukuoka (ocean)",
+  "Kobe (ocean)",
+  "Hiroshima (ocean)",
+  "Sendai (ocean)",
+  "Kawasaki (ocean)",
+  "Kokura (ocean)",	; Modern-day "Kita-Kyushu"
+  "Saitama (!ocean)",
+  "Yokohama (ocean)",
+  "Chiba (ocean)",
+  "Shizuoka (ocean)",
+  "Niigata (ocean)",
+  "Matsuyama (ocean)",
+  "Kanazawa (ocean)",
+  "Sakai (ocean)",
+  "Sagamihara (!ocean)",
+  "Hachioji (!ocean)",
+  "Nagano (!ocean)",
+  "Kumamoto (ocean)",
+  "Okayama (ocean)",
+  "Kagoshima (ocean)",
+  "Hamamatsu (ocean)",
+  "Akita (ocean)",
+  "Himeji (ocean)",
+  "Nagasaki (ocean)",
+  "Yokosuka (ocean)",
+  "Oita (ocean)",
+  "Gifu (!ocean)",
+  "Wakayama (ocean)",
+  "Iwaki (ocean)",
+  "Asahikawa (!ocean)",
+  "Takamatsu (ocean)",
+  "Kochi (ocean)",
+  "Toyama (ocean)",
+  "Naha (ocean)",
+  "Aomori (ocean)",
+  "Hakodate (ocean)",
+  "Maebashi (!ocean)",
+  "Morioka (!ocean)",
+  "Otsu",
+  "Tokushima (ocean)",
+  "Yamagata (!ocean)",
+  "Fukui (ocean)",
+  "Matsumoto (!ocean)",
+  "Kofu (!ocean)",
+  "Funabashi",
+  "Utsunomiya (!ocean)",
+  "Miyazaki (ocean)",
+  "Fukuyama",
+  "Toyota (!ocean)",
+  "Tokorozawa (!ocean)",
+  "Fukushima (!ocean)",
+  "Yokkaichi (ocean)",
+  "Shimonoseki (ocean)",
+  "Koganei (!ocean)",
+  "Hachinohe (ocean)",
+  "Mito (!ocean)",
+  "Sasebo (ocean)",
+  "Matsue (ocean)",
+  "Kawaguchi (!ocean)",
+  "Kushiro (ocean)",
+  "Chofu (!ocean)",
+  "Fuse (!ocean)",	; One of the old cities that now is "Higashi-Osaka"
+  "Kumagaya (!ocean)",
+  "Amagasaki (ocean)",
+  "Ichikawa",
+  "Saga",
+  "Machida (!ocean)",
+  "Tottori (ocean)",
+  "Toyonaka (!ocean)",
+  "Fujisawa (ocean)",
+  "Kurume (!ocean)",
+  "Toyohashi (ocean)",
+  "Kawagoe (!ocean)",
+  "Tsu (ocean)"

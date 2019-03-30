@@ -1,0 +1,89 @@
+[nation_anhaltian]
+
+name=_("Anhaltian")
+plural=_("?plural:Anhaltians")
+groups="Medieval", "Early Modern", "European"
+legend=_("Anhalt was a German state. Initially a county, it was split\
+ from Saxony in 1212. For most of its history, it was partitioned into\
+ several territories that were ruled by the same family. The counts of\
+ Anhalt were raised to dukes upon the dissolution of the Holy Roman\
+ Empire by Napoleon in 1806. Anhalt was reunited into a single duchy in\
+ 1863. Upon the downfall of the German monarchies in 1918, it became a\
+ free state. After World War II, Anhalt finally ceased to exist when the\
+ allies decided to merge it with the former Prussian Province of Saxony\
+ to form the state of Saxony-Anhalt.")
+
+leaders = {
+ "name",                     "sex"
+ "Heinrich I",               "Male"
+ "Georg I",                  "Male"
+ "Wolfgang der Bekenner",    "Male"
+ "Johann IV",                "Male"
+ "Christian I",              "Male"
+ "Sophie Augusta Frederika", "Female"
+ "Friedrich August",         "Male"
+ "Heinrich Deist",           "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",               "female_title"
+ "Communism",      _("First Secretary %s"),    _("?female:First Secretary %s")
+ "Democracy",      _("Minister-President %s"), _("?female:Minister-President %s")
+ "Despotism",      _("Count %s"),              _("Countess %s")
+ "Fundamentalism", _("Bishop %s"),             _("?female:Bishop %s")
+ "Monarchy",       _("Grand Duke %s"),         _("Grand Duchess %s")
+}
+
+flag="anhalt"
+flag_alt = "-"
+style = "european"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "saxon", "hanoverian" ; braunschweigian
+
+cities =
+ "Dessau",
+ "Köthen",
+ "Bernburg",
+ "Zerbst",
+ "Ballenstedt",
+ "Aschersleben",
+ "Harzgerode",
+ "Schaumburg",
+ "Hoym",
+ "Roßlau",
+ "Plötzkau",
+ "Pleß",
+ "Coswig",
+ "Jeßnitz",
+ "Leopoldshall",
+ "Raguhn",
+ "Güsten",
+ "Nienburg",
+ "Hecklingen",
+ "Kochstedt",
+ "Gernrode",
+ "Gröbzig",
+ "Sandersleben",
+ "Radegast",
+ "Großalsleben",
+ "Gödnitz",
+ "Mühlingen",
+ "Dornburg",
+ "Staßfurt",
+ "Worlitz",
+ "Tilkerode",
+ "Alsleben",
+ "Hintersberge",
+ "Worlitz",
+ "Serno",
+ "Lindau",
+ "Oranienbaum",
+ "Wulfen",
+ "Krohse",
+ "Nedlitz",
+ "Plötzkau",
+ "Vockerode"

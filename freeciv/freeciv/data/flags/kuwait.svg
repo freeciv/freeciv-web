@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   height="300"
+   width="450">
+  <rect
+     height="100"
+     fill="#ce1126"
+     width="450"
+     y="200" />
+  <rect
+     height="100"
+     fill="#ffffff"
+     width="450"
+     y="100" />
+  <rect
+     height="100"
+     fill="#007a3d"
+     width="450" />
+  <path
+     d="M 0,0 0,300 112.5,200 112.5,100 0,0 z"
+     sodipodi:nodetypes="ccccc"
+     fill="#000000" />
+</svg>

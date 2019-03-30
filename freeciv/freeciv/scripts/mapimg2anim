@@ -1,0 +1,196 @@
+#!/bin/bash
+#/**********************************************************************
+# Freeciv - Copyright (C) 2010
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2, or (at your option)
+#   any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#***********************************************************************/
+
+# convert map images to animations
+#
+# requirements:
+# - convert (from ImageMagick)
+# - ffmpeg (for avi and flv)
+
+# default values
+animation="gif"
+civgame="freeciv"
+mapstr=""
+mapext="gif"
+loop=1
+
+scriptname=$0
+basename=`basename ${scriptname}`
+
+# check for required tools (convert)
+have_convert=TRUE
+prog_convert=`which convert`
+RES=$?
+if [ $RES -ne 0 ]; then
+  # without this tool nothing can be done
+  echo "ERROR: The required program 'convert' from ImageMagick is missing."
+  exit 1
+fi
+
+# check for required tools (ffmpeg)
+have_ffmpef=TRUE
+prog_ffmpeg=`which ffmpeg`
+RES=$?
+if [ $RES -ne 0 ]; then
+  have_ffmpef=FALSE
+fi
+
+# print usage
+function usage()
+{
+  echo ""
+  echo "USAGE:"
+  echo "    ${basename} -h [-c <civgame>] [-l <nr>] -m <mapstr> [-e <mapext>] [-a <gif|mpg]|avi|flv|ALL>]"
+  echo ""
+  echo "OPTIONS:"
+  echo "    -a  animation format (default: gif)"
+  echo "    -c  basename for the save files (default: freeciv)"
+  echo "    -e  map image extension (default: gif)"
+  echo "    -h  this help"
+  echo "    -l  number of loops (only for the gif file; default: 1)"
+  echo "        (FIXME: has no effect?)"
+  echo "    -m  map image definition string"
+  echo ""
+  echo "EXAMPLE:"
+  echo "    ${basename} -m M-bcfktuZ2P000each -e png -a mpg"
+  echo ""
+}
+
+# ffmpeg is needed
+function check_ffmpeg()
+{
+  if [ "x$HAVE_FFMPEG" == "xFALSE" ]; then
+    # ffmpeg is missing
+    echo "ERROR: The required program 'ffmpeg' is missing."
+    exit 1
+  fi
+}
+
+# process arguments
+while getopts "a:c:e:hl:m:" option
+do
+  case $option in
+    h )
+      usage
+      exit 0
+      ;;
+    c )
+      civgame=$OPTARG
+      ;;
+    m )
+      mapstr=$OPTARG
+      ;;
+    e )
+      mapext=$OPTARG
+      ;;
+    a )
+      animation=$OPTARG
+      ;;
+    l )
+      loop=$OPTARG
+      ;;
+    * )
+      echo ""
+      echo "Unimplemented option chosen (${option})."
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+# file definitions
+FILES="${civgame}-T*-Y*-${mapstr}.map.${mapext}"
+
+# check for files
+CHECK=`ls ${FILES} 2> /dev/null | wc -l`
+if [ $CHECK -eq 0 ]; then
+  echo "ERROR: no map images found ($FILES)"
+  usage
+  exit 1
+fi
+
+# get first and last image
+FILE_A=`ls $FILES | head -n 1`
+FILE_Z=`ls $FILES | tail -n 1`
+
+# output file names
+ANIM_GIF="${civgame}-${mapstr}.anim.gif"
+ANIM_AVI="${civgame}-${mapstr}.anim.avi"
+ANIM_FLV="${civgame}-${mapstr}.anim.flv"
+ANIM_MPG="${civgame}-${mapstr}.anim.mpg"
+
+# main part
+case $animation in
+  ALL )
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a gif
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a mpg
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a avi_from_mpg
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a flv_from_mpg
+    ;;
+  gif )
+    echo -e "generating animated gif (${ANIM_GIF}) ..."
+    [ -e ${ANIM_GIF} ] && rm ${ANIM_GIF}
+    convert -delay 100 -loop ${loop} \
+            ${FILES} ${FILE_Z} \
+            ${ANIM_GIF}
+    ;;
+  mpg )
+    echo -e "generating mpg file ($ANIM_MPG) ..."
+    [ -e ${ANIM_MPG} ] && rm ${ANIM_MPG}
+    convert -delay 5 -quality 100 \
+            ${FILES} ${FILE_Z} \
+            ${ANIM_MPG}
+    ;;
+  avi )
+    echo -e "generating avi file ($ANIM_AVI) ..."
+    check_ffmpeg
+    # need to first generate the mpg file
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a mpg
+    [ -e ${ANIM_AVI} ] && rm ${ANIM_AVI}
+    ffmpeg -i ${ANIM_MPG} -f avi ${ANIM_AVI}
+    echo $animation
+    ;;
+  avi_from_mpg )
+    # this is an internal tag; it assumes that the mpg file exists
+    echo -e "generating avi file ($ANIM_AVI) ..."
+    check_ffmpeg
+    [ ! -e ${ANIM_MPG} ] && echo "ERROR: ${ANIM_MPG} missing ..." && exit 1
+    [ -e ${ANIM_AVI} ] && rm ${ANIM_AVI}
+    ffmpeg -i ${ANIM_MPG} -f avi ${ANIM_AVI}
+    echo $animation
+    ;;
+  flv )
+    echo -e "generating flv file (${ANIM_FLV}) ..."
+    check_ffmpeg
+    # need to first generate the mpg file
+    ${0} -c ${civgame} -m ${mapstr} -e ${mapext} -a mpg
+    [ -e ${ANIM_FLV} ] && rm ${ANIM_FLV}
+    ffmpeg -i ${ANIM_MPG} -f flv ${ANIM_FLV}
+    ;;
+  flv_from_mpg )
+    # this is an internal tag; it assumes that the mpg file exists
+    echo -e "generating flv file (${ANIM_FLV}) ..."
+    check_ffmpeg
+    [ ! -e ${ANIM_MPG} ] && echo "ERROR: ${ANIM_MPG} missing ..." && exit 1
+    [ -e ${ANIM_FLV} ] && rm ${ANIM_FLV}
+    ffmpeg -i ${ANIM_MPG} -f flv ${ANIM_FLV}
+    ;;
+  * )
+    echo ""
+    echo "Unimplemented value for -a: '${animation}'"
+    usage
+    exit 1
+    ;;
+esac

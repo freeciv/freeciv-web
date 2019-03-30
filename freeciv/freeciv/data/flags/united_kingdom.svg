@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<!-- /Creative Commons Public Domain -->
+<!--
+
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+    <dc:title>New Zealand, Australia, United Kingdom, United States, 
+Bosnia and Herzegovina, Azerbaijan, Armenia, Bahamas, Belgium, Benin, 
+Bulgaria, Estonia, Finland, Gabon, Gambia, Germany, Greece, Greenland, 
+Guinea, Honduras, Israel, Jamaica, Jordan, and Romania Flags</dc:title>
+    <dc:rights><Agent>
+       <dc:title>Daniel McRae</dc:title>
+    </Agent></dc:rights>
+    <license rdf:resource="http://web.resource.org/cc/PublicDomain" />
+</Work>
+
+<License rdf:about="http://web.resource.org/cc/PublicDomain">
+    <permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+    <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+    <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+</License>
+</rdf:RDF>
+-->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg1"
+   sodipodi:version="0.32"
+   width="1000"
+   height="533.33000pt"
+   sodipodi:docname="united_kingdom.svg"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/daniel/Desktop/updated flags">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.42921382"
+     inkscape:cx="468.95104"
+     inkscape:cy="290.09069"
+     inkscape:window-width="797"
+     inkscape:window-height="687"
+     inkscape:window-x="20"
+     inkscape:window-y="42"
+     inkscape:current-layer="svg1" />
+  <g
+     id="g578"
+     transform="matrix(16.66667,0.000000,0.000000,22.22208,0.000000,1.366211e-4)">
+    <rect
+       style="font-size:12.000000px;fill:#000066;stroke-width:1.0000000pt"
+       id="rect124"
+       x="0.0000000"
+       width="60.000000"
+       height="30.000000"
+       y="0.0000000" />
+    <g
+       id="g584"
+       style="font-size:12.000000px">
+      <path
+         style="font-size:12.000000px;fill:#ffffff;stroke-width:1.0000000pt"
+         d="M 0.0000000,0.0000000 L 0.0000000,3.3541000 L 53.291800,30.000000 L 60.000000,30.000000 L 60.000000,26.645900 L 6.7082000,0.0000000 L 0.0000000,0.0000000 z M 60.000000,0.0000000 L 60.000000,3.3540500 L 6.7082000,30.000000 L 0.0000000,30.000000 L 0.0000000,26.645800 L 53.291800,0.0000000 L 60.000000,0.0000000 z "
+         id="path146" />
+      <path
+         style="font-size:12.000000px;fill:#ffffff;stroke-width:1.0000000pt"
+         d="M 25.000000,0.0000000 L 25.000000,30.000000 L 35.000000,30.000000 L 35.000000,0.0000000 L 25.000000,0.0000000 z M 0.0000000,10.000000 L 0.0000000,20.000000 L 60.000000,20.000000 L 60.000000,10.000000 L 0.0000000,10.000000 z "
+         id="path136" />
+      <path
+         style="font-size:12.000000px;fill:#cc0000;stroke-width:1.0000000pt"
+         d="M 0.0000000,12.000000 L 0.0000000,18.000000 L 60.000000,18.000000 L 60.000000,12.000000 L 0.0000000,12.000000 z M 27.000000,0.0000000 L 27.000000,30.000000 L 33.000000,30.000000 L 33.000000,0.0000000 L 27.000000,0.0000000 z "
+         id="path141" />
+      <path
+         style="font-size:12.000000px;fill:#cc0000;stroke-width:1.0000000pt"
+         d="M 0.0000000,30.000000 L 20.000000,20.000000 L 24.472100,20.000000 L 4.4721400,30.000000 L 0.0000000,30.000000 z M 0.0000000,0.0000000 L 20.000000,10.000000 L 15.527900,10.000000 L 0.0000000,2.2360700 L 0.0000000,0.0000000 z M 35.527900,10.000000 L 55.527900,0.0000000 L 60.000000,0.0000000 L 40.000000,10.000000 L 35.527900,10.000000 z M 60.000000,30.000000 L 40.000000,20.000000 L 44.472100,20.000000 L 60.000000,27.763900 L 60.000000,30.000000 z "
+         id="path150" />
+    </g>
+  </g>
+</svg>

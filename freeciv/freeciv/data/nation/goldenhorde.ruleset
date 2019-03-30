@@ -1,0 +1,73 @@
+[nation_goldenhorde]
+
+name=_("Golden Horde")
+plural=_("?plural:Golden Horde")
+groups="European", "Asian", "Medieval"
+legend=_("The Golden Horde was a historical Mongol and Tatar state,\
+ founded around 1240 in the western part of the empire of Genghis Khan by\
+ his grandson Batu Khan, with its capital at Sarai Batu. After the\
+ conquests its greatest extent covered the territories from the Irtysh to\
+ the mountains of the Caucasus, Black Sea and the Volga and Kama basins.\
+ In 1375 the whole country was conquered by Tamerlane and\
+ became vassalized. From the 14th century the country gradually\
+ descended into instability, which at the beginning of the 15th century\
+ led to the complete disintegration of the state.")
+leaders ={
+ "name",                "sex"
+ "Orda",                "Male"
+ "Batu",                "Male"
+ "Bayan",               "Male"
+ "Sartaq",              "Male"
+ "Ilbasan",             "Male"
+ "Ulaghchi",            "Male"
+ "Berke",               "Male"
+ "Urus",                "Male"
+ "Toqtatiya",           "Male"
+ "Mengu-Timur",         "Male"
+ "Toqtamish",           "Male"
+ "Öz",                  "Male"
+}
+flag="golden_horde"
+flag_alt = "-"
+style = "Babylonian"
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Despotism",      _("%s Khan"),        _("%s Khatan")
+ "Monarchy",       _("%s Khagan"),      _("?female:%s Khagan")
+ "Fundamentalism", _("Grand Mufti %s"), _("?female:Grand Mufti %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="tatar", "crimean tatar", "volga bulgar", "kazakh",
+ "bashkir", "ukrainian"
+civilwar_nations = "tatar", "crimean tatar", "bashkir", "volga bulgar", "russian",
+ "kazakh", "mordvin"
+
+cities =
+ "Sarai Batu",
+ "Sarai Berke",
+ "Bolgar",
+ "Gulıstan",
+ "Qazan",
+ "Xacıtarxan",
+ "Bahçısaray",
+ "Tumun",
+ "Qasim",
+ "Kezlev",
+ "Sarai Şyk",
+ "Orda-Bazar",
+ "Sıgnak",
+ "Urgenç",
+ "Çimgi-Tura",
+ "Qaşliq",
+ "Kefe",
+ "Tana",
+ "Yangi-Şerkh",
+ "Yasi",
+ "Sudak",
+ "Derbent",
+ "Buhara"

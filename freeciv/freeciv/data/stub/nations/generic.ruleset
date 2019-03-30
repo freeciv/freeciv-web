@@ -1,0 +1,22 @@
+[nation_generic]
+
+name=_("People")
+plural=_("?plural:People")
+groups="Generic"
+legend=_("This is the only nation you can select.\
+")
+leaders = { "name", "sex"
+ "Generic", "male"
+}
+
+flag     = "aborigines"
+flag_alt = "-"
+style    = "Generic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+; civilwar_nations = ""
+
+cities =
+ "Generic"

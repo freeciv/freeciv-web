@@ -1,0 +1,35 @@
+#!/bin/sh
+#/***********************************************************************
+# Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+# script by Rene Schalburg
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2, or (at your option)
+#   any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#***********************************************************************/
+
+BUILDDIR=`dirname $0`
+PROGNAME=freeciv-ruleup
+EXENAME=${PROGNAME}@EXEEXT@
+
+if test "x$FREECIV_DATA_PATH" = "x" ; then
+  FREECIV_DATA_PATH=".@HOST_PATH_SEPARATOR@data"
+fi
+FREECIV_DATA_PATH="${FREECIV_DATA_PATH}@HOST_PATH_SEPARATOR@@top_builddir@@HOST_DIR_SEPARATOR@data@HOST_PATH_SEPARATOR@@top_srcdir@@HOST_DIR_SEPARATOR@data"
+export FREECIV_DATA_PATH
+
+[ -x $BUILDDIR@HOST_DIR_SEPARATOR@tools@HOST_DIR_SEPARATOR@$EXENAME ] && EXE=$BUILDDIR@HOST_DIR_SEPARATOR@tools@HOST_DIR_SEPARATOR@$EXENAME
+[ -x $BUILDDIR@HOST_DIR_SEPARATOR@$EXENAME ] && EXE=$BUILDDIR@HOST_DIR_SEPARATOR@$EXENAME
+
+if [ "$EXE" = "" ]; then
+  echo $0: Unable to find rule upgrader executable $EXENAME.
+  exit 1
+fi
+
+exec $EXE ${1+"$@"}

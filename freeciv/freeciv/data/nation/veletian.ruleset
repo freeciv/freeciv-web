@@ -1,0 +1,67 @@
+[nation_veletian]
+
+name=_("Veletian")
+plural=_("?plural:Veletians")
+groups="European", "Medieval"
+legend=_("The Veletians or Lutici were a medieval West Lechitic tribal\
+ confederation in what is nowadays the northeastern part of Germany\
+ (Brandenburg and Mecklenburg). Their tribes were of mixed Slavic and\
+ Germanic origin, which was visible in their language. The basis for the\
+ existence of the Veletian confederation was to preserve the Slavic pagan\
+ religion and to resist the expansion of Germany and the Polanian state.\
+ The Veletians eventually succumbed to Germanization or were murdered\
+ following the Crusades and the German settlement on their lands.")
+leaders = {
+ "name",             "sex"
+ "Dragowit",         "Male"
+ "Jaksa z Kopaniku", "Male"
+ "Tągomir",          "Male"
+ "Pribislaw",        "Male"
+ "Dobromir",         "Male"
+ "Wichmann",         "Male"
+}
+flag="veletian"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Voivode %s"),      _("?female:Voivode %s")
+ "Fundamentalism",  _("Elder %s"),        _("?female:Elder %s")
+ "Monarchy",        _("Grand Prince %s"), _("Grand Princess %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="mecklenburgian", "brandenburgian", "german", "east german", "slavic"
+civilwar_nations = "western pomeranian", "sorbian" ; rugian polanian obrodite
+
+cities =
+ "Brenna",                    ; Branibor/Brandenburg
+ "Dimin",                     ; Demmin
+ "Berlin",
+ "Kopanik",                   ; Köpenick
+ "Hobolin",                   ; Havelberg
+ "Radogošč",                  ; Rethra
+ "Guščerow",                  ; Güstrow
+ "Roztoka",                   ; Rostock
+ "Malkinia",                  ; Malchin
+ "Wolgošč",                   ; Wołogoszcz
+ "Stralow",                   ; Stralsund
+ "Spądow",                    ; Spandau
+ "Ląčin",                     ; Lenzen
+ "Chižin",                    ; Kessin
+ "Bardo",                     ; Barth
+ "Teterow",
+ "Lubuš",                     ; Lubusz
+ "Losowo",                    ; Lossow
+ "Rajtwinoj",                 ; Rytwiny/Reitwein
+ "Trebin",                    ; Neutrebbin
+ "Bukow",                     ; Buckow
+ "Lemerice",                  ; Lemierzyce
+ "Pręclaw",                   ; Prenzlau
+ "Pozdawolk",                 ; Pasewalk
+ "Wkrajust'e",                ; Wkryujście
+ "Prignica"                   ; Prignitz

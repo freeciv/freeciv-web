@@ -1,0 +1,87 @@
+/*****************************************************************************
+ Freeciv - Copyright (C) 2005 - The Freeciv Project
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+*****************************************************************************/
+
+/*****************************************************************************
+  ADVERTISEMENT: do not attempt to change the name of the API functions.
+  They may be in use in Lua scripts in savefiles, so once released, the
+  name and signature cannot change shape even in new major versions of
+  Freeciv, until the relevant save format version can no longer be loaded.
+  If you really like to change a function name, be sure to keep also the
+  old one running.
+*****************************************************************************/
+
+$#ifdef HAVE_CONFIG_H
+$#include <fc_config.h>
+$#endif
+
+/* common/scriptcore */
+$#include "api_signal_base.h"
+$#include "luascript_types.h"
+
+/* Signal module. */
+module signal {
+  void api_signal_connect
+    @ connect(lua_State *L, const char *signal_name,
+              const char *callback_name);
+  void api_signal_remove
+    @ remove(lua_State *L, const char *signal_name,
+              const char *callback_name);
+  bool api_signal_defined
+    @ defined(lua_State *L, const char *signal_name,
+              const char *callback_name);
+}
+
+$[
+-- Signal module implementation.
+
+function signal.list()
+  local signal_id = 0;
+  local signal_name = nil;
+
+  log.normal("List of signals:");
+  repeat
+    local signal_name = find.signal(signal_id);
+    if (signal_name) then
+      local callback_id = 0;
+      local callback_name = nil;
+
+      log.normal("- callbacks for signal '%s':", signal_name);
+      repeat
+        local callback_name = find.signal_callback(signal_name, callback_id);
+        if (callback_name) then
+          log.normal("   [%3d] '%s'", callback_id, callback_name);
+        end
+        callback_id = callback_id + 1;
+      until (callback_name == nil);
+
+      signal_id = signal_id + 1;
+    end
+  until (signal_name == nil);
+end
+
+function signal.replace(signal_name, callback_name)
+  if signal.defined(signal_name, callback_name) then
+    signal.remove(signal_name, callback_name)
+  end
+  signal.connect(signal_name, callback_name)
+end
+
+$]
+
+/* Module find. */
+module find {
+  const char *api_signal_by_index
+    @ signal (lua_State *L, int sindex);
+  const char *api_signal_callback_by_index
+    @ signal_callback(lua_State *L, const char *signal_name, int sindex);
+}

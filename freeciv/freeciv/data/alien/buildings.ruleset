@@ -1,0 +1,759 @@
+; This is buildings ruleset for Alien World.
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Alien World buildings data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual buildings, one per section.
+; (Buildings = City Improvements and Wonders)
+;
+; The actual tag used (the * in [building_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; Notes:
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; genus	        = genus; one of:
+;                 "GreatWonder", "SmallWonder", "Improvement", "Special".
+; reqs		= requirements to build the building (see effects.ruleset
+;		  and README.effects for help on requirements)
+; graphic	= icon of improvement (used in city dialog)
+; graphic_alt	= alternate icon of improvement
+; obsolete_by	= requirements for the building to become obsolete
+; build_cost	= production shields required to build
+; upkeep	= monetary upkeep value
+; sabotage	= percent chance of diplomat sabotage being successful
+; flags         = special flag strings
+;
+; ** Building flags **
+; "VisibleByOthers"  = Anyone who can see your city knows whether it has
+;                      this improvement. (Great and small wonders are
+;                      always visible.)
+; "SaveSmallWonder"  = If you lose the city with this building in, and the
+;                      "savepalace" server setting is enabled, another will
+;                      be built for free in a random city.
+;                      Should only be used with genus "SmallWonder".
+; "Gold"             = Not a real building; production turned into gold
+;                      indefinitely (capitalization/coinage).
+;                      Genus should be "Special".
+; "DisasterProof"    = Disasters never destroy this building. Is meaningful
+;                      only for genus "Improvement" buildings as others are
+;                      automatically disaster proof.
+;
+; */ <-- avoid gettext warnings
+
+[building_antigrav_port]
+name		= _("Antigrav Port")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Commercial Antigravity", "Player"
+    }
+graphic         = "b.antigrav_port"
+graphic_alt     = "b.airport"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 140
+upkeep		= 1
+sabotage	= 100
+sound		= "b_airport"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Allows one unit airlift from and to city, increased to three once \
+Low-Level Orbit is known.")
+
+[building_archive]
+name		= _("Archive")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Data Storage", "Player"
+    }
+graphic         = "b.archive"
+graphic_alt     = "b.library"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 80
+upkeep		= 1
+sabotage	= 100
+sound		= "b_library"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Increases the science production of a city by 75%.")
+
+[building_basic_infrastructure]
+name		= _("Basic Infrastructure")
+genus		= "Improvement"
+graphic         = "b.basic_infra"
+graphic_alt     = "b.super_highways"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 30
+upkeep		= 0
+sabotage	= 0
+sound		= "b_super_highways"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Basic Infrastructure to the city. This improvement has no maintenance, and \
+cannot be sabotaged by enemy Stealth Spy.\n\n\
+Without this improvement city cannot grow bigger than size 2.\
+")
+
+[building_bunker]
+name            = _("Bunker")
+genus           = "Improvement"
+reqs    =
+    {
+      "type", "name", "range"
+      "Tech", "Underground Habitat", "Player"
+      "TerrainClass", "Land", "Local"
+    }
+graphic         = "b.bunker"
+graphic_alt     = "b.sam_battery"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 120
+upkeep          = 1
+sabotage        = 15
+sound           = "b_sam_battery"
+sound_alt       = "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Revolt cannot be incited in a city with bunker.\
+")
+
+[building_central_mine]
+name            = _("Central Mine")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Mining", "Player"
+      "TerrainClass", "Land", "Local"
+    }
+graphic         = "b.central_mine"
+graphic_alt     = "b.mfg_plant"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 100
+upkeep          = 1
+sabotage        = 80
+sound           = "b_mfg_plant"
+sound_alt       = "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+City center tile produces three extra shields.\
+")
+
+[building_cyberpart_factory]
+name		= _("Cyberpart Factory")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Cybermodules", "Player"
+    }
+graphic         = "b.cyberpart_factory"
+graphic_alt     = "b.marketplace"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 70
+upkeep		= 0
+sabotage	= 100
+sound		= "b_marketplace"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Increases the tax output in a city by 75%.\
+")
+
+[building_factory]
+name            = _("Factory")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Manufacturing", "Player"
+    }
+graphic         = "b.factory"
+graphic_alt     = "-"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 80
+upkeep          = 1
+sabotage        = 50
+sound           = "b_factory"
+sound_alt       = "b_generic"
+helptext        = _("\
+Factory produces spare parts for two units removing their production upkeep.\
+")
+
+[building_filter]
+name            = _("Filter")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "High-Tech Filtering", "Player"
+      "TerrainClass", "Oceanic", "Adjacent"
+    }
+graphic         = "b.filter"
+graphic_alt     = "b.sewer_system"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 120
+upkeep          = 1
+sabotage        = 30
+sound           = "b_sewer_system"
+sound_alt       = "b_generic"
+helptext        = _("\
+Filter System gets 1 extra food and 1 extra production from each oceanic tile.\
+")
+
+[building_force_walls]
+name            = _("Force Walls")
+genus           = "Improvement"
+flags           = "VisibleByOthers"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "City Defense", "Player"
+    }
+graphic         = "b.force_walls"
+graphic_alt     = "b.city_walls"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 80
+upkeep          = 1
+sabotage        = 30
+sound           = "b_city_walls"
+sound_alt       = "b_generic"
+; /* xgettext:no-c-format */
+helptext        = _("\
+Force Walls doubles city defense against all kind of attacks. \
+Bonus is increased to 150% when Strong Force technology is known.")
+
+[building_headquarters]
+name		= _("Headquarters")
+genus		= "SmallWonder"
+reqs	=
+    { "type", "name", "range"
+    }
+graphic         = "b.headquarters"
+graphic_alt     = "b.palace"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 80
+upkeep		= 1
+sabotage	= 0
+sound		= "b_palace"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Headquarters building marks city as your capital. City with \
+headquarters is also safe from enemy's incite revolt attacks.")
+
+[building_hospital]
+name		= _("Hospital")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Regeneration", "Player"
+    }
+graphic         = "b.hospital"
+graphic_alt     = "b.aqueduct"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 70
+upkeep		= 1
+sabotage	= 100
+sound		= "b_aqueduct"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Damaged units which stay in city without moving, heal 50% of their hitpoints \
+each turn.")
+
+[building_information_distillery]
+name		= _("Information Distillery")
+genus		= "SmallWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Global Knowledge", "Player"
+    }
+graphic         = "b.information_distillery"
+graphic_alt     = "b.isaac_newtons_college"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 280
+upkeep		= 1
+sabotage	= 100
+sound		= "w_isaac_newtons_college"
+sound_alt	= "w_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Improved information gathering. Only 2 other factions needs to know \
+given technology before we gain access to it.")
+
+[building_mood_center]
+name		= _("Mood Center")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Mood Manipulation", "Player"
+    }
+graphic         = "b.mood_center"
+graphic_alt     = "b.colosseum"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 120
+upkeep		= 1
+sabotage	= 100
+sound		= "b_colosseum"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Makes 3 unhappy citizens content.\
+")
+
+[building_training_facility]
+name		= _("Training Facility")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Virtual Reality Training", "Player"
+    }
+graphic         = "b.training_facility"
+graphic_alt     = "b.barracks_i"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 50
+upkeep		= 2
+sabotage	= 100
+sound		= "b_barracks_i"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+All new units are built as Elite ones.\
+")
+
+[building_transportation]
+name		= _("Transportation")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Travel", "Player"
+    }
+graphic         = "b.transportation"
+graphic_alt     = "b.mass_transit"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 70
+upkeep		= 1
+sabotage	= 100
+sound		= "b_mass_transit"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+City workers can travel further from city center to work and \
+goods can be transported from further away to city center. \
+On hex maps city radius grows to 2 tiles. \
+On square based maps increases city area by 8 tiles.\
+")
+
+[building_radar_tower]
+name		= _("Radar Tower")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Deneb Radar", "Player"
+    }
+graphic         = "b.radar_tower"
+graphic_alt     = "b.coastal_defense"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 100
+upkeep		= 1
+sabotage	= 100
+sound		= "b_coastal_defense"
+sound_alt	= "b_generic"
+helptext	= _("\
+City with Radar Tower sees much further than one without.")
+
+[building_radiation_resistor]
+name		= _("Radiation Resistor")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Radiation Resistance", "Player"
+    }
+graphic         = "b.radiation_resistor"
+graphic_alt     = "b.nuclear_plant"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 70
+upkeep		= 0
+sabotage	= 100
+sound		= "b_nuclear_plant"
+sound_alt	= "b_generic"
+helptext	= _("\
+Radiation Resistor increases maximum city size by 3.\
+")
+
+[building_research_nest]
+name		= _("Research Nest")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Brain Development", "Player"
+    }
+graphic         = "b.research_nest"
+graphic_alt     = "b.university"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 130
+upkeep		= 1
+sabotage	= 100
+sound		= "b_university"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Increases the science production of a city by 100%.")
+
+[building_secret_police]
+name            = _("Secret Police")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Brute Force", "Player"
+    }
+graphic         = "b.secret_police"
+graphic_alt     = "b.police_station"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 90
+upkeep          = 1
+sabotage        = 100
+sound           = "b_police_station"
+sound_alt       = "b_generic"
+helptext        = _("\
+Secret Police is good at leading army.\n\n\
+Makes martial law possible. Each military unit in city makes one unhappy \
+citizen content, to the maximum of 2.")
+
+[building_skyscraper]
+name            = _("Skyscraper")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Gravity Manipulation", "Player"
+    }
+graphic         = "b.skyscraper"
+graphic_alt     = "b.stock_exchange"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 150
+upkeep          = 2
+sabotage        = 100
+sound           = "b_stock_exchange"
+sound_alt       = "b_generic"
+helptext        = _("\
+Radiation is weaker miles high. Top levels of really tall buildings can safely house \
+more people.\n\nCities can grow 5 sizes bigger.")
+
+[building_virtual_reality_theatre]
+name		= _("Virtual Reality Theatre")
+genus		= "Improvement"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Virtual Entertainment", "Player"
+    }
+graphic         = "b.vr_theatre"
+graphic_alt     = "b.temple"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 80
+upkeep		= 1
+sabotage	= 100
+sound		= "b_temple"
+sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+Makes two unhappy citizens content.\
+")
+
+[building_coinage]
+name		= _("Coinage")
+genus		= "Special"
+flags		= "Gold"
+reqs	=
+    { "type", "name", "range"
+
+    }
+graphic         = "b.coinage"
+graphic_alt     = "b.capitalization"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 999
+upkeep		= 0
+sabotage	= 0
+helptext	= _("\
+This is not a normal improvement.  Instead, setting a city's\
+ production to Coinage means its shield production is\
+ converted to tax output (money, coins!).\
+")
+
+
+[building_space_component]
+name		= _("Space Component")
+genus		= "Special"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Escape", "Player"
+    }
+graphic         = "b.space_component"
+graphic_alt	= "-"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 160
+upkeep		= 0
+sabotage	= 100
+sound		= "b_space_component"
+sound_alt	= "b_generic"
+helptext	= _("\
+Space Components can be differentiated into Propulsion and Fuel\
+ Components.  Each pair of them reduces your spaceship's travel\
+ time.  You can build up to 8 pairs.\
+")
+
+[building_space_module]
+name		= _("Space Module")
+genus		= "Special"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Escape", "Player"
+    }
+graphic         = "b.space_modules"
+graphic_alt	= "-"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 320
+upkeep		= 0
+sabotage	= 100
+sound		= "b_space_module"
+sound_alt	= "b_generic"
+helptext	= _("\
+Space Modules are the most expensive parts of spaceships.  There\
+ are three different types of Space Module:\
+"), _("\
+- Habitation Module: provides living space for 10,000 people.\
+"), _("\
+- Life Support Module: provides food and water for the population of\
+ one Habitation Module.\
+"), _("\
+- Solar Panels: provides the energy needed for any two of the other\
+ Modules.\
+"), _("\
+You can build up to 4 Space Modules of each kind.\
+")
+
+[building_space_structural]
+name		= _("Space Structural")
+genus		= "Special"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Escape", "Player"
+    }
+graphic         = "b.space_structural"
+graphic_alt	= "-"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 80
+upkeep		= 0
+sabotage	= 100
+sound		= "b_space_structural"
+sound_alt	= "b_generic"
+helptext	= _("\
+Space Structurals form the base of your spaceship.  All other\
+ spaceship parts need to be connected to Structurals in order to\
+ function.  You can build up to 32 Space Structurals.\
+")
+
+[building_earth_monument]
+name		= _("Earth Monument")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+    }
+graphic         = "b.earth_monument"
+graphic_alt     = "b.colossus"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 150
+upkeep		= 0
+sabotage	= 0
+sound		= "w_colossus"
+sound_alt	= "w_generic"
+helptext	= _("\
+Monument to celebrate our true home planet, Earth.\n\n\
+Each square around the city where this wonder is built that is already \
+generating some trade produces one extra trade resource.\
+")
+
+[building_great_tunnel]
+name		= _("Great Tunnel")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Burrowing", "Player"
+    }
+graphic         = "b.great_tunnel"
+graphic_alt     = "b.king_richards_crusade"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 300
+upkeep		= 0
+sabotage	= 0
+sound		= "w_king_richards_crusade"
+sound_alt	= "w_generic"
+helptext	= _("\
+Real deep mining.\n\n\
+Each square around the city where this wonder is built that is already \
+generating some production produces one extra shield resource.\
+")
+
+[building_antigrav_control_center]
+name		= _("Antigrav Control Center")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Antigravity", "Player"
+    }
+graphic         = "b.antigrav_ctrl_center"
+graphic_alt     = "b.eiffel_tower"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 400
+upkeep		= 0
+sabotage	= 0
+sound		= "w_eiffel_tower"
+sound_alt	= "w_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+All player's antigravity units will regenerate 50% of their hitpoints each \
+turn.\
+")
+
+[building_oceanic_downtown]
+name		= _("Oceanic Downtown")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Ocean Cities", "Player"
+      "TerrainClass", "Oceanic", "Local"
+    }
+graphic         = "b.oceanic_downtown"
+graphic_alt     = "b.asmiths_trading_co"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 400
+upkeep		= 0
+sabotage	= 0
+sound		= "w_asmiths_trading_co"
+sound_alt	= "w_generic"
+helptext	= _("\
+Each oceanic city center generates 3 points more trade and production.\
+")
+
+[building_monument_of_cooperation]
+name		= _("Monument of Co-operation")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Alien Rights", "Player"
+    }
+graphic         = "b.monument_co_op"
+graphic_alt     = "b.womens_suffrage"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 300
+upkeep		= 0
+sabotage	= 0
+sound		= "w_womens_suffrage"
+sound_alt	= "w_generic"
+; /* xgettext:no-c-format */
+helptext	= _("\
+All player's native alien units will regenerate 50% of their hitpoints each \
+turn.\
+")
+
+[building_protector]
+name		= _("Protector")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "City Defense", "Player"
+    }
+graphic         = "b.protector"
+graphic_alt     = "b.great_wall"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 250
+upkeep		= 0
+sabotage	= 0
+sound		= "w_great_wall"
+sound_alt	= "w_generic"
+helptext	= _("\
+Provides additional protection against radiation making it possible for \
+all cities player owns to grow 2 sizes bigger, unless growth is blocked by \
+lack of the Basic Infrastructure.\
+")

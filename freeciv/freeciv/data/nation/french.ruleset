@@ -1,0 +1,262 @@
+[nation_french]
+
+translation_domain="freeciv"
+
+name=_("French")
+plural=_("?plural:French")
+groups="Modern", "Early Modern", "Medieval", "European", "Core"
+legend=_("France has long been a major power in Europe. French conquerors\
+ like Emperor Napoleon and King Charlemagne united large parts of Europe\
+ under the French flag. The country also built the world's second largest\
+ colonial empire. The French kingdom first came into existence when it\
+ grew out of the western part of the Frankish empire during the High\
+ Middle Ages. France - and indeed the world - was shaken on its\
+ foundations by the French Revolution of 1789.")
+
+leaders = {
+ "name",                      "sex"
+ "Clovis",                    "Male"
+ "Charles Martel",            "Male"
+ "Charlemagne",	              "Male"
+ "Hugo Capet",                "Male"
+ "Louis VII",                 "Male"
+ "Philippe Auguste",          "Male"
+ "Jeanne d'Arc",              "Female"
+ "Henri IV",                  "Male"
+ "Richelieu",                 "Male"
+ "Louis XIV",                 "Male"
+ "Marie Antoinette",          "Female"
+ "Maximilien de Robespierre", "Male"
+ "Napoléon Bonaparte",        "Male"
+ "Louis Philippe",            "Male"
+ "Napoléon III",              "Male"
+ "Adolphe Thiers",            "Male"
+ "Georges Clemenceau",        "Male"
+ "Charles de Gaulle",         "Male"
+ "François Mitterrand",       "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Anarchy",         _("Citizen %s"),      _("?female:Citizen %s")
+ "Despotism",       _("Chieftain %s"),    _("?female:Chieftain %s")
+ "Democracy",       _("Premier %s"),      _("Premiere %s")
+ "Fundamentalism",  _("Cardinal %s"),     _("Mother Superior %s")
+}
+
+flag="france"
+flag_alt = "france_old"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations =
+; sub-national nations
+ "Alsatian", "Breton", "Burgundian", "Lorrain", "Norman", "Occitan",
+ "Savoyard",
+; overseas settlements
+ "Acadian", "Algerian", "Quebecois", "Tahitian"
+
+cities =
+ "Paris",
+ "Lyon (river)",
+ "Marseille (ocean)",
+ "Lille (plains, grassland)",
+ "Toulouse (grassland)",
+ "Nice (ocean)",
+ "Bordeaux (river, swamp)",
+ "Nantes (ocean)",
+ "Strasbourg (river, plains)",
+ "Toulon (ocean)",
+ "Rennes (grassland)",
+ "Rouen (grassland, forest)",
+ "Grenoble (mountains)",
+ "Montpellier (swamp, grassland)",
+ "Metz (river)",
+ "Versailles",
+ "Nancy (river)",
+ "Clermont-Ferrand (!ocean, hills)",
+ "Valenciennes",
+ "Tours",
+ "Caen",
+ "Orléans (!ocean)",
+ "Angers",
+ "Dijon (!ocean)",
+ "Fort-de-France (ocean)",
+ "Saint-Étienne",
+ "Brest (ocean)",
+ "Le Havre (ocean)",
+ "Le Mans",
+ "Reims (!ocean)",
+ "Avignon (river)",
+ "Mulhouse (!ocean)",
+ "Amiens",
+ "Béthune",
+ "Dunkerque (ocean)",
+ "Perpignan (ocean)",
+ "Limoges (mountains)",
+ "Besançon",
+ "Nîmes",
+ "Pau",
+ "Bayonne (ocean)",
+ "Annemasse",
+ "Poitiers",
+ "Annecy",
+ "Lorient (ocean)",
+ "Montbéliard",
+ "Saint-Denis",
+ "Troyes",
+ "Saint-Nazaire (ocean)",
+ "Ajaccio (ocean, mountains)",
+ "La Rochelle (ocean)",
+ "Valence",
+ "Thionville (ocean)",
+ "Angoulême",
+ "Boulogne-sur-Mer (ocean)",
+ "Chambéry",
+ "Chalon-sur-Saône (river)",
+ "Chartres",
+ "Saint-Pierre (ocean)",
+ "Niort",
+ "Calais (ocean)",
+ "Béziers",
+ "Arras",
+ "Bourges",
+ "Lens",
+ "Saint-Brieuc (ocean)",
+ "Quimper",
+ "Cayenne (ocean, jungle)",
+ "Vannes",
+ "Cherbourg (ocean)",
+ "Maubeuge",
+ "Aix-en-Provence (ocean, mountains)",
+ "Blois",
+ "Vichy (!ocean)",
+ "Colmar",
+ "Tarbes",
+ "Compiègne",
+ "Charleville-Mézières",
+ "Belfort (mountains)",
+ "Roanne",
+ "Forbach",
+ "Saint-Quentin",
+ "Laval",
+ "Bourg-en-Bresse (!ocean)",
+ "Beauvais",
+ "Nevers",
+ "Villeurbanne",
+ "La Roche-sur-Yon (river)",
+ "Créteil",
+ "Montauban",
+ "Mamoudzou (ocean, jungle)",
+ "Boulogne-Billancourt",
+ "Soissons",
+ "Albi",
+ "Nanterre",
+ "Montluçon",
+ "Narbonne (ocean)",
+ "Châteauroux",
+ "Cergy",
+ "Foix",
+ "Châlons-en-Champagne",
+ "Évry",
+ "Carcassonne",
+ "Évreux",
+ "Bastia (ocean)",
+ "Bobigny",
+ "Melun",
+ "Gap",
+ "Auxerre",
+ "Épinal",
+ "Cambrai",
+ "Mâcon",
+ "Agen",
+ "Mont-de-Marsan (forest)",
+ "Aurillac (mountains)",
+ "Périgeux (mountains, river)",
+ "Alençon",
+ "Rodez",
+ "Laon",
+ "Chaumont",
+ "Moulins",
+ "Auch",
+ "Cahors",
+ "Saint-Lô",
+ "Le Puy-en-Velay (!ocean)",
+ "Lons-le-Saunier",
+ "Digne-les-Bains (mountains)",
+ "Vesoul",
+ "Bar-le-Duc",
+ "Carpentras",
+ "Tulle",
+ "Guéret",
+ "Mende",
+ "Basseterre (ocean)",
+ "Verdun",
+ "Privas",
+ "Pontoise",
+ "Navarrenx",
+ "Grasse",
+ "Oloron-Sainte-Marie",
+ "Pointe-à-Pitre (ocean)",
+ "Saint-Flour",
+ "Feurs",
+ "Douai",
+ "Montbrison",
+ "Villefranche-de-Rouergue (!ocean)",
+ "Castres",
+ "Draguignan",
+ "Gray",
+ "Fontenay-le-Comte",
+ "Saintes",
+ "Coutances",
+ "Pamiers",
+ "Brive-la-Gaillarde",
+ "Dole",
+ "Saint-Dizier",
+ "Cannes (ocean)",
+ "Meaux",
+ "Tournon-sur-Rhône (river)",
+ "Tourcoing",
+ "Chelles",
+ "Antibes (ocean)",
+ "Argenteuil",
+ "Creil",
+ "Saint-Omer",
+ "Alès",
+ "Elbeuf",
+ "Saint-Chamond",
+ "Fréjus (ocean)",
+ "Dieppe (ocean)",
+ "Arles",
+ "Mérignac",
+ "Saint-Malo (ocean)",
+ "Courbevoie",
+ "Sète",
+ "Évian-les-Bains",
+ "Corbeil-Essonnes",
+ "Saint-Laurent-du-Maroni (ocean, jungle)",
+ "Sainte-Geneviève-des-Bois",
+ "Haguenau",
+ "Châtellerault",
+ "Thonon-les-Bains",
+ "Les Sables-d'Olonne (ocean)",
+ "Biarritz (ocean)",
+ "Bergerac",
+ "Villeneuve-d'Ascq",
+ "Saint-Jean-Pied-de-Port (mountains)",
+ "Vittel",
+ "Lourdes",
+ "Orange",
+ "Sens",
+ "Lisieux",
+ "Toul",
+ "Aix-les-Bains",
+ "Briançon",
+ "Sedan (hills)",
+ "Millau (mountains, hills)",
+ "Vienne",
+ "Saint-Amand-Montrond (!ocean)",
+ "Amboise (river)"

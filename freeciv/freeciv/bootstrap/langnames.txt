@@ -1,0 +1,36 @@
+ar Arabic
+bg Bulgarian
+ca Catalan
+cs Czech
+da Danish
+de German
+el Greek
+en_GB British English
+eo Esperanto
+es Spanish
+et Estonian
+fa Persian
+fi Finnish
+fr French
+ga Irish
+gd Scottish Gaelic
+he Hebrew
+hu Hungarian
+id Indonesian
+it Italian
+ja Japanese
+ko Korean
+lt Lithuanian
+nl Dutch
+nb Norwegian Bokmål
+pl Polish
+pt_BR Brazilian Portuguese
+pt Portuguese
+ro Romanian
+ru Russian
+sr Serbian
+sv Swedish
+tr Turkish
+uk Ukrainian
+zh_CN Simplified Chinese
+zh_TW Traditional Chinese

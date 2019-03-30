@@ -1,3 +1,5 @@
-This directory contains patches containing the modifications
+These patches are not in use, and just included for historical reference.
+
+This directory contains old patches containing the modifications
 against standard Freeciv Git revision listed in version.txt in parent
 directory, to make the webclient work.

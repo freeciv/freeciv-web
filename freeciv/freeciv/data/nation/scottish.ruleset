@@ -1,0 +1,128 @@
+[nation_scottish]
+
+name=_("Scottish")
+plural=_("?plural:Scots")
+groups="Medieval", "Early Modern", "European"
+legend=_("Scotland, originally settled in late Roman times by Irish\
+ raiders who displaced the native Picts, was an independent kingdom from\
+ around 1034 CE to the Union of Crowns with England in 1701.")
+
+leaders = {
+ "name",                "sex"
+ "Henry McLeish",       "Male"
+ "Donald Dewar",        "Male"
+ "Charles II",          "Male"
+ "James IV",            "Male"
+ "Robert the Bruce",    "Male"
+ "William Wallace",     "Male"
+ "Mary Stuart",         "Female"
+}
+
+ruler_titles = {
+ "government",  "male_title",           "female_title"
+ "Anarchy",     _("Pretender %s"),      _("?female:Pretender %s")
+ "Despotism",   _("Chieftain %s"),      _("?female:Chieftain %s")
+ "Fundamentalism",  _("Elder %s"),      _("?female:Elder %s")
+ "Democracy",   _("First Minister %s"), _("?female:First Minister %s")
+}
+
+flag="scotland"
+flag_alt = "united_kingdom"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "scottish gaelic", "irish", "american"
+
+cities =
+ "Edinburgh",
+ "Glesga (river)",		; Glasgow
+ "Aiberdeen (ocean, river)",	; Aberdeen
+ "Perth (river)",
+ "Dundee (ocean, river)",
+ "Stirlin (hills)",		; Stirling
+ "Innerness (river)",		; Inverness
+ "Hamilton",
+ "Mitherwall",			; Motherwell
+ "Dunfermline",
+ "Fawkirk",			; Falkirk
+ "Kilmarnock",
+ "Dumfries (river)",
+ "East Kilbride (hills)",
+ "Coatbridge (river)", 
+ "Dumbarton (ocean)",
+ "Irvine (ocean, river)",
+ "Lanrick (river)",		; Lanark
+ "Saunt Andras (ocean,river)",	; St Andrews
+ "Kirkcaldy (ocean)",
+ "Fort William (ocean)", 
+ "Bathgate",
+ "Cumbernauld",
+ "Port Glesga (ocean)",		; Port Glasgow
+ "Johnstone",
+ "Leevinston (river)",		; Livingston
+ "Lockerbie",
+ "Oban (ocean)",
+ "Leven (ocean)",
+ "Paisley (ocean, river)",
+ "Peterheid (ocean)",		; Peterhead
+ "Prestwick (ocean)",
+ "Stranraer (ocean)",
+ "Airdrie (hills)",
+ "Troon (ocean)",
+ "Ullapool (ocean)", 
+ "Ayr (ocean, river)",
+ "Aviemore (mountains)",
+ "Lerwick (ocean)", 
+ "Largs (ocean, river)",
+ "Bellshill (hills)",
+ "Week (ocean)",		; Wick
+ "Larkhall (river)",
+ "Cowdenbeath",
+ "Gretna (ocean, river)", 
+ "Brechin (river)",
+ "Helensburgh (ocean)",
+ "Dunblane (river)", 
+ "Montrose (ocean, river)",
+ "Kilwinnin",			; Kilwinning
+ "Monifieth (ocean)", 
+ "Dunbar (ocean, river)",
+ "Cumnock",
+ "Stornoway (ocean)",
+ "Callander (river)", 
+ "Portree (ocean)",
+ "Kelsae (river)",		; Kelso
+ "Whitebridge (river)",
+ "Kirkintilloch", 
+ "Mallaig (ocean)",
+ "Braemar (hills)",
+ "Jeddart (river)",		; Jedburgh
+ "Alloa (river)",
+ "Newton Stewart (river)",
+ "Wigtoun",			; Wigtown
+ "Girvan (ocean, river)", 
+ "Fort Augustus (ocean, river)",
+ "Arbroath (ocean)",
+ "Shotts (hills)",
+ "Kinghorn (ocean)",
+ "Cauldstream (river)",		; Coldstream
+ "Hymooth (ocean, river)",	; Eyemouth
+ "Wishae",			; Wishaw
+ "Kirkwaa (ocean)",		; Kirkwall
+ "Hadentoun (grassland)",	; Haddington
+ "Glencoe (river, hills)",
+ "Rothesay (ocean)",
+ "Culross (ocean)",
+ "Gourock (ocean)",
+ "Copshie (hills)",		; Newcastleton
+ "Burghstounness (ocean)",	; /* Bo'ness */
+ "Fraserburgh (ocean)",
+ "Nairn (ocean, river)",
+ "Annan (ocean, river)",
+ "Dervel (hills)",		; Darvel
+ "Huntly (hills)",
+ "Inverurie (river)",
+ "Peebles (river)", 
+ "Elgin (river)",
+ "Dunkeld (river, grassland)"

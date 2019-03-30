@@ -1,0 +1,68 @@
+[nation_malawian]
+
+name = _("Malawian")
+plural = _("?plural:Malawians")
+groups="African", "Modern"
+legend=_("Called Nyasaland by the British, Malawi adopted its current\
+ name, referring to the old Maravi Empire upon independence in 1964.\
+ The country's politics were dominated by Dr. Hastings Banda for three\
+ decades, until he was stripped of his titles in 1993.")
+leaders = {
+ "name",               "sex"
+ "Kanyama Chiume",     "Male"
+ "Hastings Banda",     "Male"
+ "Bingu wa Mutharika", "Male"
+ "Joyce Banda",        "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",    "female_title"
+ "Fundamentalism",  _("Bishop %s"),     _("?female:Bishop %s")
+}
+
+flag = "malawi"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Zambian", "Zimbabwean"
+
+cities =
+ "Lilongwe",
+ "Blantyre",
+ "Mzuzu",
+ "Mangochi",
+ "Mzimba",
+ "Dedza",
+ "Kasungu",
+ "Thyolo",
+ "Dowa",
+ "Mulanje",
+ "Machinga",
+ "Ntcheu",
+ "Mchinji",
+ "Chikwawa",
+ "Salima",
+ "Balaka",
+ "Phalombe",
+ "Nkhotakota",
+ "Chiradzulu",
+ "Karonga",
+ "Nsanje",
+ "Ntchisi",
+ "Nkhata Bay (lake)",
+ "Chitipa",
+ "Rumphi",
+ "Neno",
+ "Mwanza",
+ "Zomba",
+ "Likoma",
+ "Liwonde",
+ "Mponela",
+ "Luchenza",
+ "Ngabu",
+ "Livingstonia",
+ "Chipoka"

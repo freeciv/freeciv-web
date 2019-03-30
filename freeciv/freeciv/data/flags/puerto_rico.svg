@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   width="1062.99"
+   height="708.661">
+  <rect
+     width="1062.99"
+     height="708.661"
+     style="font-size:12;fill:#ed0000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="rect149" />
+  <rect
+     width="1062.99"
+     height="141.732"
+     y="141.732"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect280" />
+  <rect
+     width="1062.99"
+     height="141.732"
+     y="425.197"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect281" />
+  <path
+     d="M 0 0 L 609.958 353.876 L 0 707.296 L 0 0 z "
+     style="font-size:12;fill:#0050f0;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="path279" />
+  <path
+     d="M 266.186 534.45 L 255.778 527.018 L 245.421 534.523 L 249.273 522.327 L 238.935 514.796 L 251.725 514.691 L 255.692 502.532 L 259.744 514.663 L 272.534 514.679 L 262.249 522.281 L 266.186 534.45 z "
+     transform="matrix(6.30967,0,0,6.59872,-1411.38,-3076.2)"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:0.112872;"
+     id="path205" />
+</svg>

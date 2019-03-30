@@ -1,0 +1,249 @@
+* {
+  -GtkWidget-interior-focus: true;
+  -GtkWidget-focus-padding: 0;
+  -GtkButton-default-border: 1;
+  -GtkButton-default-outside-border: 2;
+ 
+  -GtkRange-trough-border: 1;
+  -GtkRange-slider-width: 15;
+  -GtkRange-stepper-size: 15;
+ 
+  -GtkScale-slider-length: 11;
+  -GtkRange-slider-width: 21;
+
+  -GtkPaned-handle-size: 6;
+  -GtkScrollbar-min-slider-length: 50;
+  -GtkCheckButton-indicator-size: 12;
+  -GtkCheckButton-indicator-spacing: 3;
+  -GtkMenuBar-internal-padding: 1;
+  -GtkStatusbar-shadow-type: none;
+  -GtkSpinButton-shadow-type: none;
+
+  padding: 2px;
+
+/*
+  color                 : #ff0000;
+  background-color      : #e1cea1;
+*/
+}
+
+/*
+#Freeciv {
+  color: rgba(1.0, 0.5, 0.5, 1);
+  background-color: rgba(0.88, 0.80, 0.63, 1);
+}
+*/
+
+@import url("menubar.css");
+
+.progressbar {
+  color: #000000;
+  background-color: #ffffff;
+  background-image: none;
+}
+
+:hover {
+  color: #635b48;
+  /* background-color: #0000FF; */
+  /* background-color: #9ca4b7; */
+  /* background-color: #adb5c8; */
+}
+
+:selected {
+  color: #635b48;
+  background-color: #e7d6b0;
+}
+
+:insensitive {
+  color: #9d9d9d;
+  /* background-color: #0000FF; */
+  /* background-color: #626262; */
+}
+
+.background {
+  background-image: url("bg.png");
+  background-repeat: repeat;
+}
+
+.notebook {
+  background-image: -gtk-gradient (linear, left top, right top, from (#e8ddaa), to (#d1c4a7));
+}
+
+.toolbar {
+  background-image: url("Toolbar/toolbar.png");
+  background-size: cover;
+}
+
+.entry {
+  background-image: url("Shadows/text-entry.png");
+  /* background-repeat: repeat; */
+  background-size: cover;
+  -GtkWidget-interior-focus: false;
+  color: #635b48;
+  background-color: #e7d6b0;
+}
+
+.button {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-normal.png");
+  border-image-repeat: stretch;
+}
+
+.button.default {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-default.png");
+  border-image-repeat: stretch;
+}
+
+.button:hover {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-prelight.png");
+  border-image-repeat: stretch;
+}
+
+.button:active {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-pressed.png");
+  border-image-repeat: stretch;
+}
+
+.button:insensitive {
+  border-width: 3px;
+  border-image-source: url("Buttons/button-insensitive.png");
+  border-image-repeat: stretch;
+}
+
+.button,
+.button:hover,
+.button:active,
+.button:backdrop,
+.button:focus,
+.button:focus:active,
+.button:insensitive,
+.button:prelight {
+  background-image: none;
+  background-color: #e7d6b0;
+}
+
+.check,
+.check row:selected,
+.check row:selected:focused {
+  background-image: url("Check-Radio/check1.png");
+  background-size: cover;
+}
+
+.check:insensitive,
+.check row:selected:insensitive,
+.check row:selected:focused:insensitive {
+  background-image: url("Check-Radio/check3.png");
+  background-size: cover;
+}
+
+.check:active,
+.check row:selected:active,
+.check row:selected:focused:active {
+  background-image: url("Check-Radio/check4.png");
+  background-size: cover;
+}
+
+.radio,
+.radio row:selected,
+.radio row:selected:focused {
+  background-image: url("Check-Radio/option1.png");
+  background-size: cover;
+}
+
+.radio:insensitive,
+.radio row:selected:insensitive,
+.radio row:selected:focused:insensitive {
+  background-image: url("Check-Radio/option3.png");
+  background-size: cover;
+}
+
+.radio:active,
+.radio row:selected:active,
+.radio row:selected:focused:active {
+  background-image: url("Check-Radio/option4.png");
+  background-size: cover;
+}
+
+GtkComboBox .button {
+  background-image: none;
+  background-color: #e7d6b0;
+}
+
+GtkScale.trough {
+  border-image-source: url("Scrollbars/trough-scrollbar-horiz.png");
+  border-image-repeat: stretch;
+}
+
+GtkTreeMenu.menu {
+  background-color: #e7d6b0;
+}
+
+.tooltip {
+  color: #635b48;
+  background-color: #d7d7d7;
+}
+
+#Freeciv #city_info_label {
+  font-family: Monospace;
+  font-size:   8px;
+}
+
+#Freeciv #help_label {
+  color: #FF0000;
+}
+
+#Freeciv #help_link {
+  color: #0000FF;
+}
+
+GtkTreeView {
+/*
+  #Comment out the ythickness setting below for thicker column headers.
+  #ythickness = 0
+*/
+  -GtkTreeView-odd-row-color: #ffffff;
+  -GtkTreeView-even-row-color: #ffffff;
+
+/*
+#  fg[NORMAL] = "#ffffff"
+#  text[NORMAL] = "#ffffff"
+*/
+
+  border-width: 2px;
+
+}
+
+GtkTreeview column-header {
+  /* border-color : #e1cea1; */
+  background-color : #e1cea1;
+}
+
+column-header .button {
+  background-image: url("ListHeaders/list_header.png");
+  padding: 0;
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:active {
+  background-image: url("ListHeaders/list_header-pressed.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:selected,
+column-header .button:hover {
+  background-image: url("ListHeaders/list_header-prelight.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+
+column-header .button:insensitive {
+  background-image: url("ListHeaders/list_header-insens.png");
+  background-size: cover;
+  background-clip: border-box;
+}
+

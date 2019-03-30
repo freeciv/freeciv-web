@@ -1,0 +1,24 @@
+[Desktop Entry]
+Name=Freeciv server
+Name[ca]=Freeciv server
+Name[es]=Freeciv server
+Name[fr]=Freeciv server
+Name[nb]=Freeciv server
+Name[pt]=Freeciv server
+Name[ru]=Сервер Freeciv
+Comment=Turn-based strategy game inspired by the history of human civilization
+Comment[ca]=Joc d'estratègia inspirat en la història de la civilització humana
+Comment[da]=Strategispil inspireret af den menneskelige civilisations historie
+Comment[de]=Rundenbasiertes Strategiespiel, inspiriert durch die Geschichte der menschlichen Zivilisation
+Comment[fi]=Ihmiskunnan historian inspiroima vuoropohjainen strategiapeli
+Comment[nb]=Strategispill inspirert av historien til menneskelig sivilisasjon
+Comment[pt]=Jogo de estratégia por turnos inspirado na História da civilização humana
+Comment[ru]=Пошаговая стратегическая игра, вдохновлённая историей человеческой цивилизации
+Comment[sv]=Turordningsbaserat strategispel inspirerat av den mänskliga historien
+Exec=freeciv-server
+Icon=freeciv-server
+StartupNotify=true
+Terminal=true
+Type=Application
+Categories=ConsoleOnly;Game;StrategyGame;
+Keywords=strategy;simulation;civilization;tiles;history;mankind;multiplayer;

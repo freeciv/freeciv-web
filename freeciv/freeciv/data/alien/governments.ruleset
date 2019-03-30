@@ -1,0 +1,200 @@
+; This is Alien World governments ruleset.
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Alien World governments data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+[governments]
+during_revolution = "Anarchy"
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual government types, one per section.
+;
+; The actual tag used (the * in [government_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; For the "official" rulesets, the order of these sections should not
+; be changed because that would break backward compatability with
+; savegames.  (In particular, if Fundamentalism is added to default
+; ruleset, should be added at end.)
+;
+; Notes on fields:
+;
+; name         = translatable name as seen by user
+; rule_name    = (optional) internal name for savegames, rulesets etc; if
+;                not present, "name" is used for this purpose too. Since
+;                the name used in savegames must not change, if you want
+;                to rename an item after a ruleset has been released, you
+;                should set "rule_name" to the original value of "name".
+; reqs         = requirements for this government (see README.effects)
+; graphic      = tag specifing preferred graphic
+; graphic_alt  = alternate graphics tag if preferred is not found;
+;                should be a standard tag if preferred is not;
+;                otherwise may be "-"
+; ai_better    = AI will not consider this government for use if the
+;                government listed here is available
+; ruler_titles = ruler titles by nation, "-" is default, and non-matched
+;                nations are ignored
+; helptext     = optional help text string; should escape all raw newlines
+;                so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+;------------------------------------------------------------------------
+[government_anarchy]
+
+name        = _("Anarchy")
+; No reqs
+graphic     = "gov.anarchy"
+graphic_alt = "-"
+
+ruler_male_title = _("Usurper %s")
+ruler_female_title = _("?female:Usurper %s")
+
+helptext = _("\
+Anarchy happens between government changes.\
+")
+
+;------------------------------------------------------------------------
+[government_despotism]
+
+name        = _("Despotism")
+reqs =
+   { "type", "name", "range"
+; No requirements
+   }
+graphic     = "gov.despotism"
+graphic_alt = "-"
+
+ruler_male_title = _("Leader %s")
+ruler_female_title = _("?female:Leader %s")
+
+; /* xgettext:no-c-format */
+helptext = _("\
+This is the only available form of government in the beginning.\n\n\
+Max tax/science/lux rate is 40%.\
+")
+
+;------------------------------------------------------------------------
+[government_communism]
+
+name        = _("Communism")
+reqs =
+   { "type", "name", "range"
+     "Tech", "Faction Government", "Player"
+   }
+graphic     = "gov.communism"
+graphic_alt = "-"
+
+ruler_male_title = _("Comrade %s")
+ruler_female_title = _("?female:Comrade %s")
+
+; /* xgettext:no-c-format */
+helptext = _("\
+Government type for military might.\n\n\
+Max tax/science/lux rate is 60%.\n\n\
+Communism gains 20% bonus to production.\
+")
+
+;------------------------------------------------------------------------
+[government_democracy]
+
+name        = _("Democracy")
+reqs =
+   { "type", "name", "range"
+     "Tech", "Faction Government", "Player"
+   }
+graphic     = "gov.democracy"
+graphic_alt = "-"
+
+ruler_male_title = _("President %s")
+ruler_female_title = _("?female:President %s")
+
+; /* xgettext:no-c-format */
+helptext = _("\
+Government type of freedom.\n\n\
+Max tax/science/lux rate is 70%.\n\n\
+Democracy gains 20% bonus to trade.\
+")
+
+;------------------------------------------------------------------------
+[government_dual_communism]
+
+name        = _("Dual Communism")
+reqs =
+   { "type", "name", "range"
+     "Tech", "Dual Government", "Player"
+   }
+graphic     = "gov.dual_communism"
+graphic_alt = "gov.monarchy"
+
+ruler_male_title = _("Comrade %s")
+ruler_female_title = _("?female:Comrade %s")
+
+; /* xgettext:no-c-format */
+helptext = _("\
+Government type for military might for both humans and aliens alike.\n\n\
+Max tax/science/lux rate is 80%.\n\n\
+Dual Communism gains 40% production bonus, and 20% trade bonus.\
+")
+
+;------------------------------------------------------------------------
+[government_dual_democracy]
+
+name        = _("Dual Democracy")
+reqs =
+   { "type", "name", "range"
+     "Tech", "Dual Government", "Player"
+   }
+graphic     = "gov.dual_democracy"
+graphic_alt = "gov.republic"
+
+ruler_male_title = _("President %s")
+ruler_female_title = _("?female:President %s")
+
+; /* xgettext:no-c-format */
+helptext = _("\
+Government type of freedom for both humans and aliens alike.\n\n\
+Max tax/science/lux rate is 90%.\n\n\
+Dual Democracy gains 40% trade bonus, and 20% production bonus.\
+")
+
+; /* <-- avoid gettext warnings
+;
+; Multipliers (aka policies)
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; default                 = default value (as presented in UI)
+; start                   = minimum value (as presented in UI)
+; stop                    = maximum value (as presented in UI)
+; step                    = minimum increase/decrease (as presented in UI)
+; offset                  = offset/factor control how UI values are turned
+; factor                  = into effect values for use in effects.ruleset.
+;                           effect_value = (ui_value + offset) * (factor/100)
+;                           Optional; by default offset=0, factor=100, so
+;                           that UI values are used as-is.
+; reqs                    = requirements for adjusting this policy (see README.effects)
+; helptext                = optional help text string; should escape all raw
+;                           newlines so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings

@@ -1,0 +1,57 @@
+[nation_kanem-bornu]
+
+name=_("Kanem-Bornu")
+plural=_("?plural:Kanem-Bornu")
+groups="Medieval", "Early Modern", "African"
+
+legend=_("This empire lasted in some form from the 9th-century until 1893 in\
+ modern Chad and Nigeria and controlled much of the trans-Saharan trade.")
+
+leaders = {
+ "name",                "sex"
+ "Dugu",                "Male"
+ "Dunama Dabbalemi",    "Male"
+ "Katuri",              "Male"
+ "Biri II",             "Male"
+}
+
+flag         = "kanem-bornu"
+flag_alt     = "-"
+style        = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="nigerian", "chadian"
+
+cities =
+ "Ngazargamu",
+ "Njima",
+ "Yao",
+ "Manan",
+ "Bornu",
+ "Wudi",
+ "Abzu",
+ "Nuwabiya",
+ "Dunkula",
+ "Sao",
+ "Gazargamo",
+ "Makari",
+ "Alwa",
+ "Tadjuwa",
+ "Tamalma",
+ "Ankalas",
+ "Andjimi",
+ "Zaghawa",
+ "Kawkaw",
+ "Tadmekka",
+ "Nuba",
+ "Kawar",
+ "Kuri",
+ "Badi",
+ "Djadja",
+ "Magzha",
+ "Nayy",
+ "Djimi",
+ "Dunkula"

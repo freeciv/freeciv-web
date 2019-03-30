@@ -1,0 +1,110 @@
+[nation_norwegian]
+
+name=_("Norwegian")
+plural=_("?plural:Norwegians")
+groups="Medieval", "Modern", "European"
+legend=_("After centuries of Danish rule, the Norwegians made their\
+ own constitution in Eidsvoll, 1814 CE. Finally, in 1905 CE the Norwegians\
+ got their independence after a union with Sweden.")
+
+leaders = {
+ "name",                        "sex"
+ "Harald Hårfagre",             "Male" ; Norwegian king (9th century)
+ "Olav Trygvasson",             "Male" ; Norwegian royalty (10th century)
+ "Olav Haraldsson",             "Male" ; Norwegian king (11th century)
+ "Harald Hardråde",             "Male" ; Norwegian king (11th century)
+ "Sigurd Jorsalfare",           "Male" ; Norwegian king (12th century)
+ "Magnus Berrføtt",             "Male" ; Norwegian king (12th century)
+ "Magnus Lagabøter",            "Male" ; Norwegian king (13th century)
+ "Johan Nygaardsvold",          "Male"
+ "Einar Gerhardsen",            "Male"
+ "Trygve Bratteli",             "Male"
+ "Gro Harlem Brundtland",       "Female"
+ "Jan P. Syse",                 "Male"
+ "Haakon VII",                  "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Earl %s"),           _("?female:Earl %s")
+ "Fundamentalism",  _("Bishop %s"),         _("?female:Bishop %s")
+}
+
+flag="norway"
+flag_alt = "denmark"  ; Now used by Danish
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Icelandic", "Sami"
+
+; Norwegian places listed up in the order it struck my mind.
+
+cities =
+ "Oslo (grassland, ocean, !mountains)",
+ "Bergen (ocean, grassland, !river)",
+ "Stavanger (ocean, plains, !river)", 
+ "Trondheim (river, grassland, ocean)", 
+ "Narvik (ocean)", 
+ "Tromsø (ocean)",
+ "Harstad (ocean)",
+ "Fagernes (ocean)",
+ "Tønsberg (grassland)", 
+ "Kirkenes (tundra, ocean)",
+ "Hamar (river)",
+ "Fredrikstad (hills)",
+ "Kristiansand (ocean)",
+ "Kristiansund (ocean)",
+ "Molde (ocean)",
+ "Ålesund (ocean)",
+ "Drammen (grassland)",
+ "Sandnes (desert)",
+ "Arendal (plains)",
+ "Vardø (tundra)",
+ "Vadsø (tundra)", 
+ "Haugesund (ocean)",
+ "Sarpsborg (hills)",
+ "Kongsberg (hills)", 
+ "Kongsvinger (hills)",
+ "Gjøvik (river, forest)",
+ "Bardufoss (river)",
+ "Skjold (mountains)",
+ "Setermoen (mountains)",
+ "Lillehammer (river)",
+ "Lillestrøm (river)", 
+ "Strømmen (river)",
+ "Halden (hills)",
+ "Oppdal (mountains)",
+ "Rjukan (mountains)",
+ "Karmøy (ocean)",
+ "Kragerø (ocean)",
+ "Fauske (plains)", 
+ "Bodø (hills, ocean)",
+ "Andenes (tundra, ocean)",
+ "Stokmarknes (ocean)",
+ "Svolvær (plains)",
+ "Sortland (plains)",
+ "Moss (ocean, grassland)",
+ "Honningsvåg (ocean)", 
+ "Hammerfest (ocean, hills)",
+ "Ås (hills)", 
+ "Os (hills)", 
+ "Tynset (grassland)",
+ "Longyearbyen (ocean)",
+ "Mandal (plains)",
+ "Porsgrunn",
+ "Tingvoll",
+ "Kaupang",
+
+; Eg skal ikkje gløyme kvelden, det var ein augustikveld,
+; Vårherre heldt fest for folket i Fjaler prestegjeld,
+;  - Bergens stift, som det heitte, - Ytre Sunnfjord provsti.
+; Gud unne oss alle nåden når timen vår er forbi.
+;
+; Jakob Sande 1954
+; added to Freeciv by Gaute Strokkenes RCNUWC 96-98
+; for sentimental reasons.
+
+ "Fjaler"

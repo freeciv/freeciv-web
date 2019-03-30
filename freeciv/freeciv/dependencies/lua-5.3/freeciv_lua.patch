@@ -1,0 +1,155 @@
+diff -Nurd lua-5.3/freeciv_lua.patch lua-5.3/freeciv_lua.patch
+--- lua-5.3/freeciv_lua.patch	2016-06-25 01:06:33.039306525 +0300
++++ lua-5.3/freeciv_lua.patch	2016-06-25 01:10:28.171040689 +0300
+@@ -1,71 +0,0 @@
+-diff -Nurd lua-5.3/src/ldo.c lua-5.3/src/ldo.c
+---- lua-5.3/src/ldo.c	2015-08-05 01:16:36.823491105 +0300
+-+++ lua-5.3/src/ldo.c	2015-08-05 01:02:57.653012740 +0300
+-@@ -60,7 +60,7 @@
+- 	try { a } catch(...) { if ((c)->status == 0) (c)->status = -1; }
+- #define luai_jmpbuf		int  /* dummy variable */
+- 
+--#elif defined(LUA_USE_POSIX)				/* }{ */
+-+#elif defined(LUA_USE_ULONGJMP)				/* }{ */
+- 
+- /* in POSIX, try _longjmp/_setjmp (more efficient) */
+- #define LUAI_THROW(L,c)		_longjmp((c)->b, 1)
+-diff -Nurd lua-5.3/src/liolib.c lua-5.3/src/liolib.c
+---- lua-5.3/src/liolib.c	2015-08-05 01:16:36.823491105 +0300
+-+++ lua-5.3/src/liolib.c	2015-08-05 01:02:57.653012740 +0300
+-@@ -47,7 +47,7 @@
+- 
+- #if !defined(l_popen)		/* { */
+- 
+--#if defined(LUA_USE_POSIX)	/* { */
+-+#if defined(LUA_USE_POPEN)      /* { */
+- 
+- #define l_popen(L,c,m)		(fflush(NULL), popen(c,m))
+- #define l_pclose(L,file)	(pclose(file))
+-diff -Nurd lua-5.3/src/loslib.c lua-5.3/src/loslib.c
+---- lua-5.3/src/loslib.c	2015-08-05 01:16:36.823491105 +0300
+-+++ lua-5.3/src/loslib.c	2015-08-05 01:23:04.578681552 +0300
+-@@ -65,7 +65,7 @@
+- ** where it uses gmtime_r/localtime_r
+- */
+- 
+--#if defined(LUA_USE_POSIX)	/* { */
+-+#if defined(LUA_USE_GMTIME_R) /* { */
+- 
+- #define l_gmtime(t,r)		gmtime_r(t,r)
+- #define l_localtime(t,r)	localtime_r(t,r)
+-@@ -92,7 +92,7 @@
+- */
+- #if !defined(lua_tmpnam)	/* { */
+- 
+--#if defined(LUA_USE_POSIX)	/* { */
+-+#if defined(LUA_USE_MKSTEMP) /* { */
+- 
+- #include <unistd.h>
+- 
+-diff -Nurd lua-5.3/src/luaconf.h lua-5.3/src/luaconf.h
+---- lua-5.3/src/luaconf.h	2015-08-05 01:16:36.823491105 +0300
+-+++ lua-5.3/src/luaconf.h	2015-08-05 01:02:57.657012735 +0300
+-@@ -11,6 +11,7 @@
+- #include <limits.h>
+- #include <stddef.h>
+- 
+-+#include "localluaconf.h"
+- 
+- /*
+- ** ===================================================================
+-@@ -61,14 +62,12 @@
+- #if defined(LUA_USE_LINUX)
+- #define LUA_USE_POSIX
+- #define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
+--#define LUA_USE_READLINE	/* needs some extra libraries */
+- #endif
+- 
+- 
+- #if defined(LUA_USE_MACOSX)
+- #define LUA_USE_POSIX
+- #define LUA_USE_DLOPEN		/* MacOS does not need -ldl */
+--#define LUA_USE_READLINE	/* needs an extra library: -lreadline */
+- #endif
+- 
+- 
+diff -Nurd lua-5.3/src/ldo.c lua-5.3/src/ldo.c
+--- lua-5.3/src/ldo.c	2016-06-25 01:06:49.199270913 +0300
++++ lua-5.3/src/ldo.c	2016-06-23 09:06:32.878331693 +0300
+@@ -60,7 +60,7 @@
+ 	try { a } catch(...) { if ((c)->status == 0) (c)->status = -1; }
+ #define luai_jmpbuf		int  /* dummy variable */
+ 
+-#elif defined(LUA_USE_POSIX)				/* }{ */
++#elif defined(LUA_USE_ULONGJMP)				/* }{ */
+ 
+ /* in POSIX, try _longjmp/_setjmp (more efficient) */
+ #define LUAI_THROW(L,c)		_longjmp((c)->b, 1)
+diff -Nurd lua-5.3/src/liolib.c lua-5.3/src/liolib.c
+--- lua-5.3/src/liolib.c	2016-06-25 01:07:29.151182940 +0300
++++ lua-5.3/src/liolib.c	2016-06-25 01:05:21.175465084 +0300
+@@ -53,7 +53,7 @@
+ 
+ #if !defined(l_popen)		/* { */
+ 
+-#if defined(LUA_USE_POSIX)	/* { */
++#if defined(LUA_USE_POPEN)      /* { */
+ 
+ #define l_popen(L,c,m)		(fflush(NULL), popen(c,m))
+ #define l_pclose(L,file)	(pclose(file))
+@@ -102,7 +102,7 @@
+ 
+ #if !defined(l_fseek)		/* { */
+ 
+-#if defined(LUA_USE_POSIX)	/* { */
++#if defined(LUA_USE_FSEEKO)	/* { */
+ 
+ #include <sys/types.h>
+ 
+diff -Nurd lua-5.3/src/loslib.c lua-5.3/src/loslib.c
+--- lua-5.3/src/loslib.c	2016-06-25 01:09:00.591037419 +0300
++++ lua-5.3/src/loslib.c	2016-06-23 09:06:32.878331693 +0300
+@@ -81,7 +81,7 @@
+ ** where it uses gmtime_r/localtime_r
+ */
+ 
+-#if defined(LUA_USE_POSIX)	/* { */
++#if defined(LUA_USE_GMTIME_R)   /* { */
+ 
+ #define l_gmtime(t,r)		gmtime_r(t,r)
+ #define l_localtime(t,r)	localtime_r(t,r)
+@@ -108,7 +108,7 @@
+ */
+ #if !defined(lua_tmpnam)	/* { */
+ 
+-#if defined(LUA_USE_POSIX)	/* { */
++#if defined(LUA_USE_MKSTEMP)    /* { */
+ 
+ #include <unistd.h>
+ 
+diff -Nurd lua-5.3/src/luaconf.h lua-5.3/src/luaconf.h
+--- lua-5.3/src/luaconf.h	2016-06-25 01:06:49.203270905 +0300
++++ lua-5.3/src/luaconf.h	2016-06-23 09:06:32.882331685 +0300
+@@ -11,6 +11,7 @@
+ #include <limits.h>
+ #include <stddef.h>
+ 
++#include "localluaconf.h"
+ 
+ /*
+ ** ===================================================================
+@@ -61,14 +62,12 @@
+ #if defined(LUA_USE_LINUX)
+ #define LUA_USE_POSIX
+ #define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
+-#define LUA_USE_READLINE	/* needs some extra libraries */
+ #endif
+ 
+ 
+ #if defined(LUA_USE_MACOSX)
+ #define LUA_USE_POSIX
+ #define LUA_USE_DLOPEN		/* MacOS does not need -ldl */
+-#define LUA_USE_READLINE	/* needs an extra library: -lreadline */
+ #endif
+ 
+ 

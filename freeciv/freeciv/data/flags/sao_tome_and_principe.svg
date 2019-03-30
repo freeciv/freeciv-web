@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="2100"
+   height="1400">
+  <rect
+     width="2100"
+     height="1400"
+     id="green background"
+     x="0"
+     y="0"
+     style="fill:#12ad2b" />
+  <rect
+     width="2100"
+     height="600"
+     y="400"
+     id="yellow strip"
+     x="0"
+     style="fill:#ffce00" />
+  <polygon
+     points="0,0 0,1400 700,700 "
+     id="red triangle"
+     style="fill:#d21034" />
+  <polygon
+     id="left star"
+     transform="matrix(220.80695,0,0,221.11456,1050,721.11456)"
+     points="0.951057,-0.309017 -0.587785,0.809017 0,-1 0.587785,0.809017 -0.951057,-0.309017 "
+     style="fill:#000000" />
+  <use
+     id="right star"
+     xlink:href="#left star"
+     x="700"
+     y="0"
+     width="2800"
+     height="1400" />
+  <polygon
+     id="left star-3"
+     transform="matrix(220.80695,0,0,221.11456,1575,721.11456)"
+     points="0.951057,-0.309017 -0.587785,0.809017 0,-1 0.587785,0.809017 -0.951057,-0.309017 "
+     style="fill:#000000" />
+</svg>

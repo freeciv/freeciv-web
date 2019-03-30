@@ -1,0 +1,79 @@
+[nation_aborigines]
+
+name=_("Australian Aboriginal")
+plural=_("?plural:Aborigines")
+groups="Oceanian"
+
+legend=_("Australian Aborigines is a collective term for the original\
+ inhabitants of the Australian continent. Aborigines from different parts of\
+ Australia refer to themselves with different names, including Koori,\
+ Yamaji, Nunga, and Murri.")
+
+leaders = {
+ "name",                "sex"
+ "Yagan",               "Male"
+ "Neville Bonner",      "Male"
+ "Beruk",               "Male" ; Also known as William Barak
+ "Gatjil Djerrkura",    "Male"
+ "Pearl Gibbs",         "Female"
+}
+
+flag="aborigines"
+flag_alt = "-"
+style = "Tropical"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Democracy",      _("Principal Chief %s"),  _("?female:Principal Chief %s")
+ "Fundamentalism", _("Elder %s"),            _("?female:Elder %s")
+ "Monarchy",       _("Great Chief %s"),      _("?female:Great Chief %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "australian", "papuan"
+
+; City names are a more or less random selection of Aboriginal place names
+; in modern Australia, mostly from the state of New South Wales.
+cities =
+ "Kamberra", ; Aboriginal name that became Canberra in English
+ "Beeliar",
+ "Raukkan",
+ "Ukerabagh",
+ "Karlkurla",
+ "Mutitjulu",
+ "Meekatharra",
+ "Eromanga",
+ "Kapooka",
+ "Bulli", 
+ "Woonona", 
+ "Bellambi", 
+ "Boorowa",
+ "Dunedoo",
+ "Balgownie", 
+ "Corrimal", 
+ "Towradgi",
+ "Coonabarabran",
+ "Gerringong",
+ "Moothi",
+ "Unanderra",
+ "Warrawong", 
+ "Dapto", 
+ "Nulladulla",
+ "Warragamba",
+ "Watanobbi",
+ "Winmalee",
+ "Kanahooka",
+ "Boggabri",
+ "Bombala",
+ "Cooma",
+ "Cootamundry",
+ "Dungog",
+ "Murrumbateman",
+ "Murwillumbah",
+ "Narrabri",
+ "Tinobi (river)",
+ "Tooraweenah",
+ "Woodenbong",
+ "Walungurru"

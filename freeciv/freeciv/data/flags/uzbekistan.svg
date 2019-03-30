@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1062.9921"
+   height="708.66138"
+   viewBox="0 0 500 250"
+   id="svg2482"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docname="uzbekistan.svg"
+   sodipodi:docbase="/home/divanov"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   sodipodi:modified="true">
+  <metadata
+     id="metadata2527">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="755"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="300mm"
+     height="200mm"
+     units="mm"
+     inkscape:zoom="0.61557221"
+     inkscape:cx="500"
+     inkscape:cy="366.20116"
+     inkscape:window-x="-5"
+     inkscape:window-y="-5"
+     inkscape:current-layer="svg2482" />
+  <rect
+     width="500"
+     height="106.89698"
+     id="blue_stripe"
+     x="0"
+     y="-41.666668"
+     style="fill:#0099b5" />
+  <rect
+     width="500"
+     height="6.6810613"
+     y="65.230316"
+     id="upper_red_stripe"
+     x="0"
+     style="fill:#ce1126" />
+  <rect
+     width="500"
+     height="6.6810613"
+     y="178.80836"
+     id="lower_red_stripe"
+     x="0"
+     style="fill:#ce1126" />
+  <rect
+     width="500"
+     height="106.89698"
+     y="185.48943"
+     id="green_stripe"
+     x="0"
+     style="fill:#1eb53a" />
+  <defs
+     id="defs2489">
+    <g
+       id="star"
+       style="fill:#ffffff">
+      <g
+         id="cone">
+        <polygon
+           id="triangle"
+           points="0,0 0,1 0.5,1 0,0 "
+           transform="matrix(0.9510565,0.309017,-0.309017,0.9510565,0,-1)" />
+        <use
+           xlink:href="#triangle"
+           transform="scale(-1,1)"
+           id="use2494"
+           x="0"
+           y="0"
+           width="500"
+           height="250" />
+      </g>
+      <use
+         xlink:href="#cone"
+         transform="matrix(0.309017,0.9510565,-0.9510565,0.309017,0,0)"
+         id="use2496"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#cone"
+         transform="matrix(0.309017,-0.9510565,0.9510565,0.309017,0,0)"
+         id="use2498"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#cone"
+         transform="matrix(-0.809017,0.5877853,-0.5877853,-0.809017,0,0)"
+         id="use2500"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#cone"
+         transform="matrix(-0.809017,-0.5877853,0.5877853,-0.809017,0,0)"
+         id="use2502"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+    </g>
+  </defs>
+  <path
+     style="fill:#ffffff"
+     d="M 178.4375 41.84375 C 135.65116 41.84375 100.90625 76.588662 100.90625 119.375 C 100.90625 162.16134 135.65116 196.875 178.4375 196.875 C 194.65996 196.875 209.70478 191.87427 222.15625 183.34375 C 219.26474 183.74019 216.31234 183.96875 213.3125 183.96875 C 177.65722 183.96875 148.71875 155.03028 148.71875 119.375 C 148.71875 83.719719 177.65722 54.78125 213.3125 54.78125 C 216.31234 54.78125 219.26474 54.978556 222.15625 55.375 C 209.70478 46.84448 194.65996 41.84375 178.4375 41.84375 z "
+     transform="matrix(0.4703704,0,0,0.4703704,0,-41.666667)"
+     id="circle2504" />
+  <g
+     id="stars"
+     transform="matrix(1.2153036,0,0,1.2153036,11.009186,-34.134498)">
+    <g
+       id="upper_row_of_three_stars">
+      <use
+         xlink:href="#star"
+         transform="matrix(6,0,0,6,136,16)"
+         id="use2510"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#star"
+         transform="matrix(6,0,0,6,160,16)"
+         id="use2512"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#star"
+         transform="matrix(6,0,0,6,184,16)"
+         id="use2514"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+    </g>
+    <g
+       id="middle_row_of_four_stars">
+      <use
+         xlink:href="#star"
+         transform="matrix(6,0,0,6,112,40)"
+         id="use2517"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#upper_row_of_three_stars"
+         transform="translate(0,24)"
+         id="use2519"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+    </g>
+    <g
+       id="lower_row_of_five_stars">
+      <use
+         xlink:href="#star"
+         transform="matrix(6,0,0,6,88,64)"
+         id="use2522"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+      <use
+         xlink:href="#middle_row_of_four_stars"
+         transform="translate(0,24)"
+         id="use2524"
+         x="0"
+         y="0"
+         width="500"
+         height="250" />
+    </g>
+  </g>
+  <rect
+     style="fill:#ffffff;fill-opacity:1"
+     y="72.16304"
+     x="0"
+     id="rect2996"
+     height="106.89698"
+     width="500" />
+</svg>

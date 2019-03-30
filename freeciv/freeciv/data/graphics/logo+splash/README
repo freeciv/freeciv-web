@@ -1,0 +1,16 @@
+The following files are the work of James Blewitt for the benefit of the Freeciv project.
+jim@jblewitt.com  -  Please contact me if anybody has any questions.
+
+I hearby place my work under the GPL, (General Public License).  The following should also be noted:
+The globe image "earth_cutout.png" is a derivative of a Public Domain image obtained from NASA.  This image
+is used to texture the globe.
+The map strip used in the splash screens is also a derivative of a PD NASA image.
+
+NOTE: It is necessary to keep the file "earth_cutout.png" in the same directory as the file "Freeciv_Logo.svg",
+otherwise you will get a "broken image" error in Inkscape.
+
+Tools used:
+.svg - Inkscape: www.inkscape.org
+.xcf - GIMP (Graphics Image Manipulation Toolkit): www.gimp.org
+
+Happy Freeciv'ing :-)

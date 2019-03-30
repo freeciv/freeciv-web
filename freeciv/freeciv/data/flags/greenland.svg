@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<!-- /Creative Commons Public Domain -->
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+    <dc:title>New Zealand, Australia, United Kingdom, United States, 
+Bosnia and Herzegovina, Azerbaijan, Armenia, Bahamas, Belgium, Benin, 
+Bulgaria, Estonia, Finland, Gabon, Gambia, Germany, Greece, Greenland, 
+Guinea, Honduras, Israel, Jamaica, Jordan, and Romania Flags</dc:title>
+    <dc:rights><Agent>
+       <dc:title>Daniel McRae</dc:title>
+    </Agent></dc:rights>
+    <license rdf:resource="http://web.resource.org/cc/PublicDomain" />
+</Work>
+
+<License rdf:about="http://web.resource.org/cc/PublicDomain">
+    <permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+    <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+    <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+</License>
+</rdf:RDF>
+-->
+<svg
+   version="1"
+   x="0"
+   y="0"
+   width="1062.99"
+   height="708.661"
+   id="svg378"
+   sodipodi:version="0.32-hydra1"
+   sodipodi:docname="/home/yemu/clipart/flags/grenland.svg"
+   sodipodi:docbase="/home/yemu/clipart/flags/"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+  <sodipodi:namedview
+     id="base">
+    <sodipodi:guide
+       orientation="vertical"
+       position="154.847488"
+       id="guide565" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="502.619720"
+       id="guide566" />
+  </sodipodi:namedview>
+  <defs
+     id="defs380" />
+  <rect
+     width="1062.989990"
+     height="708.661011"
+     x="-1062.989990"
+     y="-708.660950"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;stroke:#000000;stroke-opacity:1;"
+     id="rect149"
+     transform="scale(-1.000000,-1.000000)" />
+  <rect
+     width="1062.989990"
+     height="354.330994"
+     x="-1062.989990"
+     y="-708.660919"
+     style="font-size:12;fill:#df0000;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect148"
+     transform="scale(-1.000000,-1.000000)" />
+  <path
+     sodipodi:type="arc"
+     style="font-size:12;fill:#df0000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="path567"
+     d="M 628.274841,506.375549 A 217.357712,217.357727 0 1 1 193.559402,506.375488"
+     sodipodi:cx="410.917114"
+     sodipodi:cy="506.375549"
+     sodipodi:rx="217.357712"
+     sodipodi:ry="217.357727"
+     transform="matrix(1.000000,0.000000,0.000000,-1.000000,0.000000,860.5060)"
+     sodipodi:start="0.000000"
+     sodipodi:end="3.141593"
+     sodipodi:open="true" />
+  <path
+     sodipodi:type="arc"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="path568"
+     d="M 628.274841,506.375549 A 217.357712,217.357727 0 1 1 193.559402,506.375488"
+     sodipodi:cx="410.917114"
+     sodipodi:cy="506.375549"
+     sodipodi:rx="217.357712"
+     sodipodi:ry="217.357727"
+     transform="translate(0.000000,-152.3964)"
+     sodipodi:start="0.000000"
+     sodipodi:end="3.141593"
+     sodipodi:open="true" />
+</svg>

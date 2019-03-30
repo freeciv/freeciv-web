@@ -1,0 +1,122 @@
+[nation_italiangreek]
+
+name=_("Italian Greek")
+plural=_("?plural:Italian Greeks")
+groups="Ancient", "European"
+legend=_("Ancient Magna Graecia was a complex of Greek cities-colonies on\
+ the coasts of Italy and Sicily, founded during the Greek Colonization.\
+ They played an important role in the development of Etruscan and Roman\
+ cultures. In the 5th century BCE Magna Graecia was dominated by the\
+ city-state of Syracuse, a great center of Greek culture. Other major\
+ urban centers included Taranto, Croton, Sybaris and Messana. Magna\
+ Graecia was gradually conquered by Rome, a conquest that was completed\
+ by 272 BC. After the fall of the Western Roman Empire, Southern Italy was\
+ temporarily part of the Byzantine Empire as the Catepanate of Italia. A\
+ Greek-speaking population has survived in these areas to modern times.")
+leaders = {
+ "name",                        "sex"
+; Tyrants of Syracuse
+ "Gelon I",                     "Male"
+ "Hiero I",                     "Male"
+ "Dionysios I",                 "Male"
+ "Dionysios II",                "Male"
+ "Agathokles",                  "Male"
+ "Hiero II",                    "Male"
+ "Hieronymos",                  "Male"
+; Tyrants of Agrigentum
+ "Phalaris",                    "Male"
+ "Theron",                      "Male"
+; Tyrants of Katane
+ "Euarkhos",                    "Male"
+ "Deinomenes",                  "Male"
+ "Mamerkos",                    "Male"
+; Tyrant of Region
+ "Anaxilas",                    "Male"
+; Catapans of Italy
+ "Basileios Boannes",           "Male"
+ "Georgios Maniakes",           "Male"
+}
+flag="italian_greek"
+flag_alt = "-"
+style = "Classical"
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Usurper %s"),   _("?female:Usurper %s")
+ "Communism",       _("Brother %s"),   _("Sister %s")
+ "Democracy",       _("Speaker %s"),   _("?female:Speaker %s")
+ "Despotism",       _("Tyrant %s"),    _("Tyranne %s")
+ "Republic",        _("Captain %s"),   _("?female:Captain %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Western Roman", "Byzantine", "Neapolitan", "Sicilian", "Italian"
+civilwar_nations = "Greek", "Epirote", "Roman", "Etruscan"
+
+cities =
+  "Syrakousai",
+  "Neapolis",
+  "Taras",
+  "Sybaris",
+  "Akragas",
+  "Region",
+  "Kroton",
+  "Metaponton",
+  "Lokroi Episephyrion",
+  "Thourioi",
+  "Eleia",
+  "Nola",
+  "Angon",
+  "Suessa",
+  "Barion",
+  "Naulokhos",
+  "Kapri",
+  "Pallantion",
+  "Pandosia",
+  "Kymai",
+  "Pixous",
+  "Siponton",
+  "Aitna",
+  "Agathyrna",
+  "Akrillai",
+  "Eryx",
+  "Katane",
+  "Kefaloidion",
+  "Medme",
+  "Selinous",
+  "Hybla e Gereiatis",
+  "Daidalion",
+  "Apollonia",
+  "Khersonesos",
+  "Inykos",
+  "Kasmenai",
+  "Ameselon",
+  "Kenturipai",
+  "Agyrion",
+  "Atria",
+  "Halaisa",
+  "Abella",
+  "Entella",
+  "Himera",
+  "Enna",
+  "Heloros",
+  "Leon",
+  "Herakleia Minoia",
+  "Phintias",
+  "Maktorion",
+  "Megara Hyblaia",
+  "Motue",
+  "Naxos",
+  "Halountion",
+  "Skidros",
+  "Tauromenion",
+  "Tyndaris",
+  "Kaulonia",
+  "Terina",
+  "Skyllaion",
+  "Aikai",
+  "Poseidonia",
+  "Kumai"

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="242"
+   height="242"
+   id="svg4093"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   version="1.0"
+   inkscape:export-filename="c:\freeciv\polytheism"
+   inkscape:export-xdpi="17.85"
+   inkscape:export-ydpi="17.85"
+   sodipodi:docbase="C:\freeciv"
+   sodipodi:docname="polytheism.svg">
+  <defs
+     id="defs4095" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="375"
+     inkscape:cy="291.42857"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     height="242px"
+     width="242px"
+     inkscape:window-width="847"
+     inkscape:window-height="579"
+     inkscape:window-x="110"
+     inkscape:window-y="145" />
+  <metadata
+     id="metadata4098">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#fa0;fill-opacity:1;stroke:none;stroke-width:5.36600018;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4091"
+       width="242"
+       height="242"
+       x="0"
+       y="0" />
+    <g
+       transform="translate(0.998953,21.26199)"
+       id="g3201"
+       style="fill:#890000;fill-opacity:1">
+      <path
+         style="fill:#890000;fill-opacity:1;fill-rule:evenodd"
+         id="path3192"
+         d="M 110.986,16.235 C 111.176,15.1 111.989,15.68 111.986,16.235 C 117.615,20.462 122.685,22.846 126.985,28.234 C 130.577,32.735 132.24,39.903 136.983,45.232 C 147.447,56.987 167.468,61.769 182.978,60.23 C 203.518,58.191 219.115,40.292 217.973,15.236 C 223.04,17.449 226.464,21.651 229.972,25.235 C 233.9,29.248 239.643,33.822 239.97,41.233 C 240.88,61.851 223.887,79.922 205.975,82.228 C 182.026,85.311 159.201,71.005 146.982,60.231 C 130.861,46.016 121.354,30.583 110.986,16.235 z "
+         clip-rule="evenodd" />
+      <path
+         style="fill:#890000;fill-opacity:1;fill-rule:evenodd"
+         id="path3194"
+         d="M 3,150.219 C 5.805,150.273 7.575,153.389 9.999,155.218 C 19.038,162.039 32.578,169.417 46.995,173.216 C 64.65,177.868 83.548,180.324 94.989,172.216 C 105.909,164.477 113.333,135.49 95.989,127.222 C 81.845,120.48 72.268,135.91 54.994,133.221 C 46.629,131.919 41.371,122.995 35.996,117.223 C 34.296,115.398 31.214,114.807 31.996,112.224 C 46.477,113.754 57.142,106.039 65.992,100.225 C 75.44,94.017 85.45,87.486 83.99,70.229 C 68.012,63.626 48.387,66.302 30.997,71.229 C 27.38,72.254 23.837,74.447 21.998,74.229 C 12.378,73.088 6.979,58.357 0,53.231 C 17.235,46.76 33.888,43.066 53.993,45.232 C 67.707,46.71 81.101,56.97 90.989,67.229 C 97.691,74.183 108.017,85.425 104.987,101.225 C 104.704,102.699 101.558,107.808 99.987,110.224 C 96.845,115.058 91.867,116.511 97.987,122.223 C 101.493,125.494 108.431,130.261 110.986,133.221 C 129.213,122.569 144.141,105.821 175.977,108.224 C 194.958,109.658 205.175,117.424 215.972,128.222 C 225.794,138.044 240.515,149.654 239.969,163.217 C 239.392,177.58 223.815,172.551 212.973,179.215 C 205.961,183.525 204.728,187.712 202.974,198.213 C 197.006,195.16 194.527,192.765 190.976,189.214 C 187.514,185.752 182.811,181.585 181.977,177.216 C 180.452,169.23 185.006,160.854 188.976,158.218 C 197.84,152.331 215.283,156.683 217.972,145.22 C 218.427,143.279 218.101,137.555 217.972,137.221 C 215.357,130.433 194.415,129.357 185.976,130.222 C 160.601,132.821 141.519,149.65 126.984,162.217 C 129.68,187.138 118.255,200.904 91.988,199.213 C 53.93,196.763 20.814,171.461 3,150.219 z "
+         clip-rule="evenodd" />
+      <rect
+         style="fill:#890000;fill-opacity:1;fill-rule:evenodd"
+         id="rect3196"
+         height="23.318001"
+         width="23.318001"
+         clip-rule="evenodd"
+         transform="matrix(0.7071,-0.7071,0.7071,0.7071,39.1583,127.513)"
+         y="4.829"
+         x="161.842" />
+    </g>
+  </g>
+</svg>

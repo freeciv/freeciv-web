@@ -1,0 +1,69 @@
+[nation_khoisan]
+
+name=_("Khoisan")
+plural=_("?plural:Khoisan")
+groups="Ancient", "African"
+legend=_("Khoisan speakers are typically divided between the Khoikhoi,\
+ traditionally herders, and the San, traditionally hunter gatherers.\
+ They are traditionally among the most egalitarian societies on the\
+ planet. San society in particular is organized around the institutions\
+ of family and band. Khoisan peoples carry some of the most ancient\
+ genetic lineages in the world. Today there are over 300,000 Khoisan\
+ people, forming significant minorities in and around the Kalahari desert\
+ in Namibia, Botswana, South Africa, and Angola.")
+
+leaders = {
+"name", 			"sex"
+"!U", 				"Male"
+"Krotoa", 			"Male"
+"╪Toma", 			"Male"
+"/Gawamūma /Ōnōb", 		"Male"
+"Tsamgao", 			"Male"
+"╪Gao", 			"Male"
+"/Ti!kay", 			"Male"
+"Adam Kok III", 		"Male"
+"Manasse ǃNoreseb Gamab", 	"Male"
+"DaSo", 			"Female"
+}
+
+flag="khoisan"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "namibian", "xhosa"
+
+cities =
+"//Hui !Gaeb",
+"Khorixas",
+"Gam",
+"Hoachanas",
+"Seeis",
+"ǀAiǁGams",
+"!Hoaxa !nâs",
+"Keitsa",
+"Cho/ana",
+"Khumsa",
+"!No!Go",
+"Nama",
+"//Gon//Gana",
+"Kai Kai",
+"Dom!Na",
+"Khownwa",
+"╪Go╪Gowe",
+"Nam Tchoha",
+"//No!Gau",
+"Kautsa",
+"Gura",
+"Khumsa",
+"Gautscha",
+"Khaxutsus",
+"Tsumkwe",
+"//Khara hais",
+"!Huni //hāb",
+"Huri ╪oaxa",
+"Gūdaos",
+"Kai mûs",
+"!Gariep"

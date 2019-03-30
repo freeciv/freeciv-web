@@ -1,0 +1,11 @@
+sudo: required
+dist: trusty
+
+language: c
+
+compiler:
+  - gcc
+python:
+  - "3.3"
+
+script: "sudo bash ./scripts/travis-build.sh"  

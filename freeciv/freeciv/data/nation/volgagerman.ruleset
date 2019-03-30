@@ -1,0 +1,106 @@
+[nation_volgagerman]
+
+name=_("Volga German")
+plural=_("?plural:Volga Germans")
+groups="European"
+legend=_("The Volga Germans were ethnic Germans who lived along the River\
+ Volga in Southern Russia, around the city of Saratov and to the South.\
+ They were recruited as immigrants in the 18th century. The Russian\
+ authorities allowed them to cultivate their German language and\
+ traditions. From 1918 to 1941 there was a Volga German ASSR within the\
+ Soviet Union. After the attack of the Third Reich in the USSR, the\
+ autonomous republic was abolished by a decree of Stalin. Volga Germans\
+ were sent to other parts of the Soviet Union, mainly to Kazakhstan and\
+ Siberia.")
+leaders = {
+ "name",               "sex"
+ "Katharina II",       "Female"
+ "Jacob Hoeppner",     "Male"
+ "Ernst Reuter",       "Male"
+ "Adam Reichert",      "Male"
+ "Alexander Dotz",     "Male"
+ "Alexander Moor",     "Male"
+ "Wilhelm Kurz",       "Male"
+ "Johannes Schwab",    "Male"
+ "Heinrich Fuchs",     "Male"
+ "Adam Welsch",        "Male"
+ "Konrad Hoffmann",    "Male"
+ "Alexander Heckmann", "Male"
+ "Gustav Klinger",     "Male"
+}
+flag="volga_german"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",     "male_title",               "female_title"
+ "Communism",      _("People's Commissar %s"), _("?female:People's Commissar %s")
+ "Fundamentalism", _("Bishop %s"),             _("?female:Bishop %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="soviet", "golden horde", "khazar", "volga bulgar", "gokturk",
+               "scythian", "sarmatian", "ruthenian", "slavic", "hunnic"
+civilwar_nations = "soviet", "russian", "tatar"
+
+cities =
+ ;main cities of Volga German ASSR:
+ "Kosakenstadt",                ;Pokrovsk, Engels
+ "Marxstadt",
+ "Fjodorowka",
+ "Tonkoschurowka",
+ "Woljskoje",
+ "Krasnojar",
+ "Krasny-Kut",
+ "Neu-Gelka",
+ "Staraja Poltawka",
+ "Rownoje",
+ "Soloroje",
+ "Kamenka",
+ "Balzer",
+ ;Original German colonies:
+ "Katharinenstadt",
+ "Ernestinendorf",
+ "Keller",
+ "Cäsarsfeld",
+ "Brabander",
+ "Husaren",
+ "Susannental",
+ "Mariental",
+ "Meinhard",
+ "Zug",
+ "Schwed",
+ "Hummel",
+ "Frank",
+ "Pfeifer",
+ "Schönchen",
+ "Hölzel",
+ "Huck",
+ "Chasselois",
+ "Leitsinger",
+ "Merkel",
+ "Leichtling",
+ "Neu-Kolonie",
+ "Hussenbach",
+ "Kautz",
+ "Jost",
+ "Dönhof",
+ "Grimm",
+ "Warenburg",
+ "Enders",
+ "Dehler",
+ "Urbach",
+ "Straub",
+ "Moor",
+ "Wittmann",
+ "Sewald",
+ "Lauwe",
+ "Göbel",
+ "Rohleder",
+ "Rothammel",
+ "Philippsfeld",
+ "Trakt",
+ "Neu-Samara"

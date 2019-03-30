@@ -1,0 +1,571 @@
+<interface>
+  <object class="GtkMenuBar" id="MENU">
+    <child>
+      <object class="GtkMenuItem" id="MENU_GAME">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/GAME">
+            <child>
+              <object class="GtkMenuItem" id="CLEAR_CHAT_LOGS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SAVE_CHAT_LOGS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_OPTIONS" >
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/OPTIONS">
+                    <child>
+                      <object class="GtkMenuItem" id="LOCAL_OPTIONS" />
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="MESSAGE_OPTIONS" />
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="SERVER_OPTIONS" />
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="SAVE_OPTIONS" />
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="SAVE_OPTIONS_ON_EXIT" />
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/GAME/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="RELOAD_TILESET" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="GAME_SAVE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="GAME_SAVE_AS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MAPIMG_SAVE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MAPIMG_SAVE_AS" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/GAME/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="LEAVE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="QUIT" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_EDIT">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/EDIT">
+            <child>
+              <object class="GtkMenuItem" id="FIND_CITY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="WORKLISTS" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/EDIT/SEP1" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="EDIT_MODE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="RECALC_BORDERS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="TOGGLE_FOG" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SCENARIO_PROPERTIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SAVE_SCENARIO" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/EDIT/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CLIENT_LUA_SCRIPT" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_VIEW">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/VIEW">
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_OUTLINES" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_OUTPUT" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_MAP_GRID" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_NATIONAL_BORDERS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_NATIVE_TILES" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_FULL_BAR" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_NAMES" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_GROWTH" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_PRODUCTIONS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_BUY_COST" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITY_TRADE_ROUTES" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/VIEW/SEP1" />
+            </child>
+            <child>  
+              <object class="GtkCheckMenuItem" id="SHOW_TERRAIN" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_COASTLINE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_IMPROVEMENTS" >
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/IMPROVEMENTS" >
+                    <child>
+                      <object class="GtkCheckMenuItem" id="SHOW_PATHS" />
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="SHOW_IRRIGATION" />
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="SHOW_MINES" />
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="SHOW_BASES" />
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_RESOURCES" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_HUTS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_POLLUTION" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_CITIES" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_UNITS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_UNIT_SOLID_BG" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_UNIT_SHIELDS" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_FOCUS_UNIT" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="SHOW_FOG_OF_WAR" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/VIEW/SEP2" />
+            </child>
+            <child>
+              <object class="GtkCheckMenuItem" id="FULL_SCREEN" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/VIEW/SEP3" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CENTER_VIEW" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_SELECT">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/SELECT">
+            <child>
+              <object class="GtkMenuItem" id="SELECT_SINGLE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SELECT_ALL_ON_TILE" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/SELECT/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SELECT_SAME_TYPE_TILE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SELECT_SAME_TYPE_CONT" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SELECT_SAME_TYPE" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/SELECT/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="SELECT_DLG" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/SELECT/SEP3" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_WAIT" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_DONE" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_UNIT">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/UNIT">
+            <child>
+              <object class="GtkMenuItem" id="UNIT_GOTO" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_GOTO_AND" >
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/GOTO_AND" />
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_GOTO_CITY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_RETURN" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/UNIT/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_EXPLORE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_PATROL" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/UNIT/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_SENTRY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_UNSENTRY" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/UNIT/SEP3" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_LOAD" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_UNLOAD" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_UNLOAD_TRANSPORTER" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/UNIT/SEP4"/>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_HOMECITY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_UPGRADE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_CONVERT" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="UNIT_DISBAND" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_WORK">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/WORK" >
+            <child>
+              <object class="GtkMenuItem" id="BUILD_CITY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="AUTO_SETTLER" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/WORK/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="BUILD_ROAD" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_BUILD_PATH" >
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/BUILD_PATH" />
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="BUILD_IRRIGATION" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="BUILD_MINE" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/WORK/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CONNECT_ROAD" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CONNECT_RAIL" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CONNECT_IRRIGATION" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/WORK/SEP3" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="TRANSFORM_TERRAIN" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CLEAN_POLLUTION" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="CLEAN_FALLOUT" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_COMBAT">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/COMBAT">
+            <child>
+              <object class="GtkMenuItem" id="FORTIFY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="BUILD_FORTRESS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="BUILD_AIRBASE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_BUILD_BASE">
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/BUILD_BASE" />
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="DO_PILLAGE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="DIPLOMAT_ACTION" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_CIVILIZATION">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/CIVILIZATION">
+            <child>
+              <object class="GtkMenuItem" id="MAP_VIEW" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_UNITS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_NATIONS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_CITIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_ECONOMY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_RESEARCH" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/CIVILIZATION/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="TAX_RATE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="POLICIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="MENU_GOVERNMENT">
+                <child type="submenu">
+                  <object class="GtkMenu" id="<MENU>/GOVERNMENT">
+                  <child>
+                    <object class="GtkMenuItem" id="START_REVOLUTION" />
+                  </child>
+                </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/CIVILIZATION/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_WOW" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_TOP_CITIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_MESSAGES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_DEMOGRAPHIC" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_SPACESHIP" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="REPORT_ACHIEVEMENTS" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="MENU_HELP">
+        <child type="submenu">
+          <object class="GtkMenu" id="<MENU>/HELP" >
+            <child>
+              <object class="GtkMenuItem" id="HELP_OVERVIEW" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_PLAYING" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_TERRAIN" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_ECONOMY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_CITIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_IMPROVEMENTS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_WONDERS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_UNITS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_COMBAT" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_ZOC" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_GOVERNMENT" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_POLICIES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_DIPLOMACY" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_TECH" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_SPACE_RACE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_RULESET" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_TILESET" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_NATIONS" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/HELP/SEP1" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_CONNECTING" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_CONTROLS" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_CMA" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_CHATLINE" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_WORKLIST_EDITOR" />
+            </child>
+            <child>
+              <object class="GtkSeparatorMenuItem" id="<MENU>/HELP/SEP2" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_LANGUAGES" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_COPYING" />
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="HELP_ABOUT" />
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -1,0 +1,58 @@
+[nation_bengali]
+
+name=_("Bengali")
+plural=_("?plural:Bengalis")
+groups="Asian", "Medieval"
+legend=_("Bengal is a region in the easternmost part of the Indian\
+ subcontinent. The first recorded independent king of the Bengali is\
+ Shashanka who reigned around 606 CE. Today the People's Republic of\
+ Bangladesh occupies the eastern part of the region, while the western part\
+ is the Indian state of West Bengal.")
+
+leaders = {
+ "name",                "sex"
+ "Isa Khan",            "Male"
+ "Vijay Sen",           "Male"
+ "Lakshman Sen",        "Male"
+ "Devapala",            "Male"
+ "Dharampala",          "Male" ; Dhôrmopal
+ "Gopala",              "Male"
+ "Shashanka",           "Male" ; Shôshangko
+}
+
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Despotism",       _("Raja %s"),        _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),    _("Maharani %s")
+ "Republic",        _("Nabob %s"),       _("?female:Nabob %s")
+}
+
+flag="bengal"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "tibetan", "burmese", "bhutanese", "bangladeshi"
+
+cities =
+ "Karnasuvarna", ; কর্ণসুবর্ণ Karnasubarna
+ "Gaur", ; গৌড়
+ "Pataliputra",
+ "Paharpur",
+ "Nabadwip",
+ "Bikrampur",
+ "Bhawal",
+ "Sonargaon",
+ "Betor", ; বেতড়
+ "Devkot", ; দেবকোট
+ "Mahasthangarh", ; Môhasthangôṛ মহাস্থানগড়
+ "Gobindapur", ; গোবিন্দপুর
+ "Kalikata", ; কলিকাতা
+ "Sutanuti", ; সুতানুটি
+ "Mainamati", ; ময়নামতি Môenamoti
+ "Pandua", ; পান্ডুয়া
+ "Saptagram", ; সপ্তগ্রাম
+ "Tamralipta", ; or Tamralipti তাম্রলিপ
+ "Koch Behar"

@@ -1,0 +1,173 @@
+[nation_polish]
+
+translation_domain="freeciv"
+
+name=_("Polish")
+plural=_("?plural:Poles")
+groups="Medieval", "Early Modern", "Modern", "European", "Core"
+legend=_("The Polish state was formed about a millennium ago, and reached\
+ its Golden Age near the end of the 16th century.")
+
+leaders = {
+ "name",                        "sex"
+ "Mieszko I",                   "Male"
+ "Bolesław Chrobry",            "Male"
+ "Bolesław Krzywousty",         "Male"
+ "Władysław Łokietek",          "Male"
+ "Kazimierz Wielki",            "Male"
+ "Jadwiga",                     "Female"
+ "Władysław Jagiełło",          "Male"
+ "Zygmunt I Stary",             "Male"
+ "Stefan Batory",               "Male"
+ "Zygmunt III Waza",            "Male"
+ "Władysław IV Waza",           "Male"
+ "Jan II Kazimierz",            "Male"
+ "Jeremi Wiśniowiecki",         "Male"
+ "Jan III Sobieski",            "Male"
+ "Stanisław Poniatowski",       "Male"
+ "Tadeusz Kościuszko",          "Male"
+ "Józef Piłsudski",             "Male"
+ "Ignacy Mościcki",             "Male"
+ "Edward Gierek",               "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Prince %s"),          _("Princess %s")
+ "Fundamentalism",  _("Bishop %s"),          _("Mother Superior %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
+flag="poland"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with =
+ "Silesian",
+ "Mazovian",
+ "Greater Polish",
+ "Slavic",
+ "Gothic"
+; "Polanian"
+
+civilwar_nations =
+ "Lithuanian",
+ "Silesian",
+ "Mazovian",
+ "Greater Polish",
+ "Western Pomeranian",
+ "Lendian",
+ "Lipka Tatar",
+ "Belarusian",
+ "Ukrainian",
+ "Kashubian",
+ "Old Prussian",
+ "Cuyavian",
+ "Central Lithuanian",
+ "Rusyn"
+; "Polanian"
+
+cities =
+; Te bedą pierwsze, bo tak pasuje
+	"Kraków",
+	"Gniezno",
+; Obecne miasta wojewódzkie (2004)
+	"Warszawa (river)",
+	"Szczecin",
+	"Gdańsk",
+	"Białystok (hills)",
+	"Toruń (river)",
+	"Olsztyn",
+	"Bydgoszcz",
+	"Wrocław",
+	"Gorzów",
+	"Zielona Góra (hills, forest)",
+	"Poznań",
+	"Łódź",
+	"Lublin",
+	"Kielce",
+	"Opole",
+	"Katowice",
+	"Rzeszów",
+; Byłe miasta wojewódzkie
+	"Koszalin",
+	"Słupsk",
+	"Elbląg",
+	"Jelenia Góra (hills)",
+	"Piła",
+	"Włocławek",
+	"Płock",
+	"Ciechanów",
+	"Łomża",
+	"Konin",
+	"Siedlce",
+	"Biała Podlaska (forest)",
+	"Leszno",
+	"Kalisz",
+	"Sieradz",
+	"Skierniewice",
+	"Piotrków Trybunalski",
+	"Radom",
+	"Chełm",
+	"Legnica",
+	"Suwałki",
+	"Wałbrzych",
+	"Częstochowa",
+	"Tarnobrzeg",
+	"Tarnów",
+	"Zamość",
+	"Przemyśl",
+	"Bielsko-Biała",
+	"Nowy Sącz",
+	"Krosno",
+; Inne powyżej 100 tys
+	"Gdynia",
+	"Grudziądz",
+	"Bytom",
+	"Zabrze",
+	"Gliwice",
+	"Ruda Śląska",
+	"Rybnik",
+	"Tychy",
+	"Chorzów",
+	"Sosnowiec",
+	"Jastrzębie-Zdrój",
+	"Dąbrowa Górnicza",
+; Inne ważne z różnych względów
+	"Kołobrzeg",
+	"Sopot (ocean)",
+	"Wolin",
+	"Świnoujście (ocean)",
+	"Zakopane (mountains)",
+	"Stargard",
+	"Malbork",
+	"Ełk",
+	"Sochaczew",
+	"Łowicz",
+	"Września",
+	"Inowrocław",
+	"Kruszwica",
+	"Głogów",
+	"Kłodzko",
+	"Sandomierz",
+	"Wiślica (river)",
+	"Łęczyca",
+	"Chełmno",
+	"Brzeg (river)",
+	"Wieluń",
+	"Starachowice",
+	"Skarżysko-Kamienna",
+	"Ostrowiec Świętokrzyski",
+	"Stalowa Wola",
+	"Oświęcim",
+	"Wieliczka",
+	"Sanok",
+	"Jasło",
+	"Biłgoraj",
+	"Puławy",
+	"Cieszyn",
+	"Wisła (river)"

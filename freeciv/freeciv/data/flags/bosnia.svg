@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   x="0"
+   y="0"
+   width="600.00000pt"
+   height="500"
+   id="svg609">
+  <metadata
+     id="metadata3073">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="603"
+     inkscape:window-width="1050"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.607"
+     inkscape:cx="498.84679"
+     inkscape:cy="244.85554"
+     inkscape:window-x="371"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg609"
+     showgrid="false"
+     inkscape:window-maximized="0" />
+  <defs
+     id="defs611">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 250 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="750 : 250 : 1"
+       inkscape:persp3d-origin="375 : 166.66667 : 1"
+       id="perspective18" />
+  </defs>
+  <rect
+     width="750.00000"
+     height="500.00000"
+     x="0.0000000"
+     y="0.0000000"
+     style="font-size:12.000000px;fill:#000099;fill-rule:evenodd;stroke-width:1.0000000pt"
+     id="rect614" />
+  <path
+     d="M 167.44612,0.0000000 L 667.44612,500.00000 L 667.44612,0.0000000 L 167.44612,0.0000000 z "
+     style="font-size:12.000000px;fill:#ffcc00;fill-rule:evenodd;stroke-width:1.0000000pt"
+     id="path615" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,-27.325,63.880768)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon622" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,35.175,126.38077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon616" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,97.675,188.88077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon623" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,160.175,251.38077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon624" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,222.675,313.88077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon625" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,285.175,376.38077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon626" />
+  <polygon
+     points="416.35,-43.3566 360.511,-2.78677 381.84,62.8566 326,22.2868 270.16,62.8566 291.489,-2.78677 235.65,-43.3566 304.671,-43.3566 326,-109 326,-109 347.329,-43.3566 "
+     transform="matrix(0.5,0,0,0.5,347.675,438.88077)"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     id="polygon627" />
+</svg>

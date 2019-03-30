@@ -1,0 +1,71 @@
+[nation_santomean]
+
+name = _("Santomean")
+plural = _("?plural:Santomeans")
+groups="African", "Modern"
+legend=_("São Tomé and Príncipe are two islands in the Atlantic Ocean off\
+ the coast of Africa. The main island was named after Saint Thomas by the\
+ Portuguese sailors who first discovered the island on the saint's feast\
+ day around 1470. The islands turned into the first major European\
+ plantation colony. Slavery was abolished in the 19th century and the country\
+ became independent in 1975. The islands' economy remains dependent on\
+ the export of cocoa.")
+
+leaders = {
+ "name",                   "sex"
+ "Álvaro Caminha",         "Male"
+ "Amador",                 "Male"
+ "Manuel Pinto da Costa",  "Male"
+ "Alda do Espírito Santo", "Female"
+}
+
+ruler_titles = {
+ "government",     "male_title",              "female_title"
+ "Communism",      _("Secretary General %s"), _("?female:Secretary General %s")
+ "Despotism",      _("Admiral %s"),           _("?female:Admiral %s")
+ "Fundamentalism", _("Padre %s"),             _("Madre %s")
+}
+
+flag = "sao_tome_and_principe"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="cape verdean", "angolan"
+
+cities =
+ "São Tomé",
+ "Santo António",
+ "Trinidade",
+ "Santo Amaro",
+ "Neves",
+ "Santana",
+ "São João dos Angolares",
+ "Guadalupe",
+ "Pantufo",
+ "Santa Catarina",
+ "Porto Alegre (ocean)",
+ "Belo Monte",
+ "Ribeira Afonso",
+ "Bom Successo",
+ "Conde",
+ "Monteforte",
+ "Praia Cruz (ocean)",
+ "Dona Augusta",
+ "Sundi",
+ "Micolo",
+ "Roca Agostinho Neto",
+ "Monte Café",
+ "Anselmo de Andrade",
+ "Monte Mario",
+ "Guayaquil",
+ "Santa Clotilde",
+ "Bombaim",
+ "Morroe Peixe",
+ "Praia Francesa (ocean)",
+ "Neves Ferreira",
+ "Monte Vilela",
+ "Milagrosa"

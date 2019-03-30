@@ -1,0 +1,90 @@
+[nation_viking]
+
+translation_domain="freeciv"
+
+name=_("Viking")
+plural=_("?plural:Vikings")
+groups="Medieval", "European", "Core"
+legend=_("The Vikings raided and traded along the coasts of Europe\
+ between 800 CE and 1100 CE. Viking raiders eventually became the rulers\
+ of Normandy, Russia, and a short-lived kingdom in Sicily.")
+
+leaders = {
+ "name",                "sex"
+ "Aud Ivarsdottir",     "Female"
+ "Rörikr",              "Male" ; Rurik
+ "Gudfred",             "Male"
+ "Hrolf Gangr",         "Male" ; Rollo
+ "Gunnhildr",           "Female" ; Gunnhild
+ "Styrbjörn Sterki",    "Male" ; Styrbjörn the Strong
+ "Eiríkr",              "Male" ; Eric Bloodaxe
+ "Gormr Gamli",         "Male" ; Gorm the Old
+ "Haraldr Gormsson",    "Male" ; Harald I
+ "Sveinn Tjúguskegg",   "Male" ; Sweyn Forkbeard
+ "Knutr",               "Male" ; Cnut the Great
+}
+
+ruler_titles = {
+ "government",   "male_title",           "female_title"
+ "Despotism",    _("Earl %s"),           _("?female:Earl %s")
+}
+
+flag="viking"
+flag_alt="norway"	; Used previously
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; We do not want the Vikings to start together with any Scandinavian nation.
+conflicts_with="Danish", "Icelandic", "Norwegian", "Swedish", "Alander",
+ "Scanian", "Faroese"
+
+civilwar_nations=
+; Scandinavian nations
+ "Danish", "Icelandic", "Norwegian", "Swedish",
+; Other nations claiming viking heritage
+ "Finnish", "Ruthenian", "Scottish", "Norman"
+
+cities =
+; In Scandinavia
+ "Skíringssalr", ; Kaupang, Norway
+ "Sigtún", ; Sigtuna, Sweden
+ "Heiðabýr", ; Hedeby, Denmark (formerly)
+ "Hlaðir", ; Lade, Denmark
+ "Hleiðra", ; Lejre, Denmark
+ "Niðarós", ; Trondheim, Norway
+ "Stafangr", ; Stavanger, Norway
+ "Skálaholt", ; Skálholt, Iceland
+ "Svǫlver", ; Svolvær, Norway
+ "Þórshöfn (ocean)", ; Tórshavn, Faroes
+ "Bergvin", ; Bergen, Norway
+ "Hrafnista", ; Ramsta, Norway
+ "Fjalir", ; Fjaler, Norway
+ "Omd", ; Andøya, Norway
+ "Bólmr", ; Bolmsö, Sweden
+
+; Outside Scandinavia
+ "Kirkjuvagr", ; Kirkwall, Scotland
+ "Hlymrekr", ; Limerick, Ireland
+ "Jórvík (ocean)", ; York, England
+ "Skarðaborg", ; Scarborough, England
+ "Melr (ocean)", ; Meols, England
+ "Holmgarðr", ; Veliky Novgorod, Russia
+ "Aldeigjuborg", ; Staraya Ladoga, Russia
+ "Brattahlíð", ; Brattahlid, Greenland
+ "Garðar", ; Gardar, Greenland
+ "Eystribygð", ; Eastern Settlement, Greenland
+ "Vestribygð", ; Western Settlement, Greenland
+ "Þórs-á (river)", ; Thurso, Scotland
+ "Veðrafjǫrðr (river)", ; Waterford, Ireland
+ "Veisafjǫrðr (river)", ; Wexford, Ireland
+ "Arnkell-lág", ; Arklow, Ireland
+ "Vík (ocean)", ; Wick, Scotland
+
+; No attested Old Norse form
+ "Alabu", ; Aalborg, Denmark
+ "Birka", ; Björkö, Sweden
+ "Agnafit", ; Stockholm, Sweden
+ "Dorestad" ; Wijk bij Duurstede, Netherlands

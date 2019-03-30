@@ -1,0 +1,7 @@
+# Server commands to make default Freeciv rules
+#
+# You don't need this when starting the server but it can be used to restore
+# rules after they've been changed.
+#
+
+rulesetdir civ2civ3

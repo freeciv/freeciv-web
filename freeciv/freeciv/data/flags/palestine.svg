@@ -1,0 +1,41 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="400"
+   width="600"
+   id="svg2">
+  <g
+     id="g7765">
+    <rect
+       y="266.6571"
+       x="0"
+       width="600"
+       style="font-size:12px;fill:#007a3d;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+       id="rect551"
+       height="133.34285" />
+    <rect
+       y="133.31418"
+       x="0"
+       width="600"
+       style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+       id="rect552"
+       height="133.34285" />
+    <rect
+       y="0"
+       x="0"
+       width="600"
+       style="font-size:12px;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+       id="rect553"
+       height="133.34285" />
+  </g>
+  <path
+     d="M 0,7.6440956e-05 L 0,400 L 266.65903,200.00041 L 0,7.6440956e-05 z"
+     id="path556"
+     sodipodi:nodetypes="cccc"
+     style="font-size:12px;fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt" />
+</svg>

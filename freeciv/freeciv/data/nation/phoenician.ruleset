@@ -1,0 +1,101 @@
+[nation_phoenician]
+
+name=_("Phoenician")
+plural=_("?plural:Phoenicians")
+groups="Ancient", "Asian"
+legend=_("Phoenicia was an ancient civilization, based in what is now the\
+ coastal regions of Lebanon and Syria. They spoke a Canaanite language\
+ related to Hebrew and were famed mariners. Their alphabet served as the\
+ source of the Greek alphabet, and from there evolved into the Etruscan\
+ and Latin alphabets as well. The Greeks and Romans knew them for their\
+ manufacture of purple dye from the murex shell, which gave them their\
+ Greek and Latin names. They referred to themselves as Kan'ani and their\
+ Punic (Carthaginian) descendants in St. Augustine's day called themselves\
+ Chanani.")
+
+leaders = {
+ "name",        "sex"
+ "Hiram",       "Male"
+ "Agenor",      "Male"
+ "Eshmunazar",  "Male"
+ "Kadmos",      "Male"
+ "Ithobaal",    "Male"
+ "Abd'ashtart", "Male"
+}
+ruler_titles = {
+ "government",      "male_title",        "female_title"
+ "Anarchy",         _("Usurper %s"),     _("?female:Usurper %s")
+}
+flag="phoenicia"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="aramean", "carthaginian", "israelite"
+
+cities =
+ "Sur", 	; English: "Tyre"
+ "Saidoon", ; English: "Sidon", modern "Sayda"
+ "Berut",	; Greek: "Berytos"; Modern "Beirut"
+ "Gebal",	; Greek: "Byblos"
+ "Batrun", 
+ "Athar",   ; Greek: "Tripoli" in Lebanon
+ "Sarepta", ; modern "Sarafand"
+ "Ugarit",
+ "Baalbek",
+ "Arvad",   ; Greek: "Arados"
+ "Yafo",    ; modern "Jaffa"
+ "Kition",  ; modern "Larnaka"
+ "Amathus",
+ "Zemar",
+ "Safita",
+ "Leptis",	; Latin: "Leptis Magna"
+ "Oia",     ; modern "Tarabulus" (English: "Tripoli" in Lybia), alt.spelling "Oea"
+ "Sabratha",
+ "Lilibeo",   ; Latin: "Lilybaeum", modern "Marsala"
+ "Qart Hadasht",	; Latin: "Carthago"
+ "Gadir",         ; modern "Cadiz"
+ "Ibshim",     ; Latin: "Ebusos", modern "Ibiza"
+ "Hadrumetum",     ; modern "Sousse"
+ "Tipasa",
+ "Siga",     ; modern "Rachgoun"
+ "Lixus",     ; modern "Larache"
+ "Har Anbin",  ; Portuguese: "Mogador", modern "Essaouira"
+ "Nora",
+ "Sulcis",
+ "Tharros",
+ "Malaka",   ; modern "Malaga"
+ "Sexi",    ; modern "Almuñecár"
+ "Utica", 
+ "Karalis",
+ "Zili",
+ "Tingis",   ; modern "Tangier"
+ "Melita",  ; modern "Malta"
+ "Onoba",    ; modern "Huelva"
+ "Ikosim",  ; Latin: "Icosium", modern "Algiers"
+ "Hippo",   ; Latin: "Hippo Regius", modern "Annaba"
+ "Acholla",
+ "Kossyra",
+ "Abdera",   ; modern "Almeria"
+ "Solus",
+ "Motye",
+ "Gaulos",  ; modern "Gozo"
+ "Sulcis",
+ "Karteia",
+ "Ziz",       ; Latin: "Panormos", modern "Palermo"
+ "Hippo Diarrhytos",   ; modern "Bizerte"
+ "Kerkouane",
+ "Thapsus",
+ "Rusicade",  ; modern "Skikda"
+ "Theveste",
+ "Iol",
+ "Rusadir",    ; modern "Melilla"
+ "Akra Leuke", ; modern "Alicante"
+ "Ligs",
+ "Agadir",
+ "Kir Chares", ; modern "Azzemour"
+ "Rash",
+ "Gytte",
+ "Kossyra"   ; modern "Pantelleria"

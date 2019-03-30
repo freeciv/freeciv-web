@@ -1,0 +1,120 @@
+[nation_venezuelan]
+
+name=_("Venezuelan")
+plural=_("?plural:Venezuelans")
+groups="American", "Modern"
+legend=_("Venezuela is the northernmost country in South America. Having\
+ been a Spanish colony since the 16th century, the country gained\
+ independence on July 5th 1811 under the leadership of El Libertador Simón\
+ Bolivar - The Liberator. Venezuela has one of the largest proven oil and\
+ gas reserves of the world; during the oil boom of the 1970s it was the\
+ wealthiest country of Latin America. The country is known for its varied\
+ landscapes and high biodiversity.")
+
+leaders = {
+ "name",                        "sex"
+ "Nicolás de Federmán",         "Male"
+ "Francisco de Miranda",        "Male"
+ "Simón Bolívar",               "Male"
+ "Cristóbal Mendoza",           "Male"
+ "José Antonio Páez",           "Male"
+ "Juan Vicente Gómez",          "Male"
+ "Rómulo Gallegos",             "Male"
+ "Marcos Pérez Jiménez",        "Male"
+ "Rómulo Betancourt",           "Male"
+ "Hugo Chávez",                 "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",       "female_title"
+ "Despotism",      _("General %s"),    _("?female:General %s")
+ "Fundamentalism", _("Bishop %s"),     _("Mother Superior %s")
+}
+
+flag="venezuela"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; Similar flags:
+conflicts_with="colombian"
+civilwar_nations="cuban", "colombian", "guyanese"
+
+cities =
+ "Caracas",
+ "Maracaibo",
+ "Valencia",
+ "Maracay",
+ "Barquisimeto",
+ "Ciudad Guayana",
+ "Barcelona",
+ "Ciudad Bolívar",
+ "San Cristóbal (mountains)",
+ "Maturín",
+ "Coro (ocean)",
+ "Mérida (hills)",
+ "Trujillo",
+ "Los Teques",
+ "Cumaná",
+ "Guanare",
+ "Barinas",
+ "San Juan de los Morros",
+ "Puerto Ayacucho (jungle, river)",
+ "San Felipe",
+ "La Asunción",
+ "San Fernando",
+ "San Carlos",
+ "La Guaira",
+ "Punto Fijo (ocean)",
+ "Petare",
+ "Porlamar (ocean)",
+ "Calabozo",
+ "Puerto Cabello (ocean)",
+ "Santa Teresa",
+ "Carora",
+ "Valle de Pascua",
+ "Tucupita",
+ "Puerto la Cruz (ocean)",
+ "Guasdualito",
+ "Ejido",
+ "Anaco",
+ "La Fría",
+ "Rubio",
+ "La Vela de Coro (ocean)",
+ "Nirgua",
+ "Baruta",
+ "Tinaquillo",
+ "Turmero",
+ "El Tigre",
+ "Cagua",
+ "Cabudare",
+ "Cabimas",
+ "Valera",
+ "Guatire",
+ "La Puerta",
+ "El Tocuyo",
+ "Nueva Cádiz",
+ "Santa María de Ipire",
+ "Yaritagua",
+ "Santa Elena de Uairén",
+ "El Limón",
+ "Santa Rita",
+ "Catia La Mar (ocean)",
+ "Acarigua",
+ "Ocumare del Tuy",
+ "San Carlos de Río Negro (jungle, river)",
+ "Guarenas",
+ "Cúa",
+ "Mariara",
+ "Palo Negro",
+ "Charallave",
+ "Carúpano",
+ "La Victoria",
+ "Ciudad Ojeda",
+ "San Antonio del Táchira",
+ "El Cafetal",
+ "San Carlos del Zulia",
+ "Puerto Miranda (ocean)"

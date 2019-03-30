@@ -1,0 +1,64 @@
+[nation_assyrian]
+
+name=_("Assyrian")
+plural=_("?plural:Assyrians")
+groups="Ancient", "Asian"
+legend=_("Assyria was an empire in northern Mesopotamia, named after its\
+ capital Ashur.")
+
+leaders = {
+ "name",                "sex"
+ "Ashurbanipal",        "Male"
+ "Tiglat Pileser III",  "Male"
+ "Ashurnasirpal II",    "Male"
+ "Shamiram",            "Female"
+ "Agha Petros",         "Male"
+ "Naoum Faik",          "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Anarchy",        _("Usurper %s"),     _("?female:Usurper %s")
+}
+
+flag = "assyria"
+flag_alt = "-"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="babylonian", "israelite", "aramean", "mitanni"
+
+cities =
+ "Ashur",
+ "Nineveh",
+ "Kalhu",
+ "Arbela",
+ "Edessa",
+ "Osrhoene",
+ "Nisibin",
+ "Alqosh",
+ "Urmia",
+ "Kirkuk",
+ "Akkad",
+ "Mosul",
+ "Dohuk",
+ "Aqra",
+ "Zibar",
+ "Supna",
+ "Zakho",
+ "Hakkari",
+ "Bohtan",
+ "Ayn-Slibo",
+ "Omed",
+ "Tur-Abdin",
+ "Merdo",
+ "Tella-Shleela",
+ "Kharput",
+ "Perin",
+ "Urhoy",
+ "Ayn-Towo",
+ "Salamas",
+ "Khabour",
+ "Malatya"

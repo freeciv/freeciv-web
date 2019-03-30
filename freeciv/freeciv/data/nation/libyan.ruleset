@@ -1,0 +1,70 @@
+[nation_libyan]
+
+name=_("Libyan")
+plural=_("?plural:Libyans")
+groups="Modern", "African"
+legend=_("The region that is now Libya was a Roman colony until it was\
+ conquered by the Arab civilization in the 7th century. In 1912 it came\
+ under the control of Italy and after the Second World War Libya was granted\
+ independence as a condition of the Allied peace treaty with Italy.")
+
+leaders = {
+ "name",                "sex"
+ "Muammar al-Qadhafi",  "Male"
+ "Omar al-Moktar",      "Male"
+ "Suleiman Safar",      "Male"
+ "Ahmad ash-Sharif",    "Male"
+ "Muhammad Idris",      "Male"
+ "Ramadan as Suwaythi", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",        _("%s Dey"),         _("?female:%s Dey")
+}
+
+flag ="libya"
+flag_alt = "libya_old"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "cyrenaican"
+
+cities =
+ "Tarabulus",	; Also known as "Tripoli"
+ "Binghazi",
+ "Tubruq",
+ "Zuwara",
+ "Surt",
+ "Ra's Lanuf",
+ "Al-Bayda",
+ "Al-Burayqa",
+ "Darna",
+ "Sabha",
+ "Al-Jawf",
+ "Ghadamis",
+ "Al-Marj",
+ "Igdabiya",
+ "Waddan",
+ "Bani Walid",
+ "Mishrata",
+ "Al-Khums",
+ "Gharyan",
+ "Az-Zawiya",
+ "Yifrin",
+ "Awbari",
+ "Al-'Aziziya",
+ "Al-Khums",
+ "Darna",
+ "Nalut",
+ "Murzuq",
+ "Adri",
+ "Hun",
+ "Ghat",
+ "Tarhuna",
+ "Tajura",
+ "Al-Abyar",
+ "Al-Quba",
+ "Mizda"

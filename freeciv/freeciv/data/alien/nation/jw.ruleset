@@ -1,0 +1,44 @@
+[nation_jw]
+
+translation_domain="freeciv"
+
+name = _("J&W Corporation")
+plural = _("?plural:JeeWees")
+; /* xgettext:no-c-format */
+legend = _("J&W Corporation ship was heading to establish another \
+branch.\n\n\
+* 40% bonus to trade.")
+
+leaders = {
+ "name", "sex"
+ "Big J", "male"
+ "Great W", "female"
+}
+
+flag = "jw"
+flag_alt = "russia"
+style = "Human"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+color.r = 255
+color.g = 255
+color.b =   0
+
+trait_trader_min       = 300
+trait_trader_max       = 300
+trait_expansionist_min = 70
+trait_expansionist_max = 70
+
+; /* <-- avoid gettext warnings
+;
+; */
+
+cities =
+  "Marketing", "Production", "Development", "Sales", "Support",
+  "Recruiting", "Espionage", "Finances", "Taxes", "Bugfixing",
+  "Research", "Testing", "Statistics", "Legal", "Blackmailing",
+  "Training", "Documenting", "Combat", "Maintenance", "Shipping",
+  "Management", "Security", "Lobbying"

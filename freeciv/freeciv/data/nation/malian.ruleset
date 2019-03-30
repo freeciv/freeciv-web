@@ -1,0 +1,73 @@
+[nation_malian]
+
+name=_("Malian")
+plural=_("?plural:Malians")
+groups="Modern", "African"
+legend=_("Mali is a large country in Western Africa. Once part of French\
+ Sudan, it gained independence together with Senegal in 1959.")
+
+leaders = {
+ "name",                "sex"
+ "Aminata Traoré",      "Female"
+ "Moussa Traoré",       "Male"
+ "Modibo Keïta",        "Male"
+ "Aoua Keïta",          "Female"
+ "Ahmed Baba",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Mansa %s"),        _("?female:Mansa %s")
+}
+
+flag="mali"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Mali"
+civilwar_nations="Burkinabe", "Senegalese", "tuareg"
+
+; City list based on http://de.wikipedia.org/wiki/Liste_der_Städte_in_Mali
+cities =
+ "Bamako",
+ "Sikasso",
+ "Mopti",
+ "Koutiala",
+ "Kayes",
+ "Ségou",
+ "Nioro du Sahel",
+ "Niono",
+ "Markala",
+ "Kolondiéba",
+ "Kati",
+ "Gao",
+ "Kolokani",
+ "Ménaka",
+ "Bougouni",
+ "Niafunké",
+ "Tombouctou",
+ "Banamba",
+ "Macina",
+ "Nara",
+ "Bafoulabé",
+ "San",
+ "Koulikoro",
+ "Djenné",
+ "Sokolo",
+ "Yorosso",
+ "Kangaba",
+ "Kidal",
+ "Diré",
+ "Goundam",
+ "Douentza",
+ "Tenenkou",
+ "Bandiagara",
+ "Kimparana",
+ "Kita",
+ "Araouane",
+ "Taoudenni",
+ "Tessalit"

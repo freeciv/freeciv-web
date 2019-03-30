@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="225"
+   height="150"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="otomi.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <metadata
+     id="metadata25">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs23">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 96.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="193 : 96.5 : 1"
+       inkscape:persp3d-origin="96.5 : 64.333333 : 1"
+       id="perspective27" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="729"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="2.4145078"
+     inkscape:cx="96.5"
+     inkscape:cy="90.724847"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect2403"
+     width="225"
+     height="150"
+     x="0"
+     y="1.0560997e-14" />
+  <g
+     id="g2396"
+     transform="translate(-32.25,-21.5)">
+    <path
+       id="path10"
+       d="M 121.25,24 L 101.25,44 L 101.25,45 L 117.25,61 L 118.25,61 L 128.25,51 L 128.25,50 L 123.25,45 L 122.25,45 L 118.25,50 L 117.25,50 L 112.25,45 L 112.25,44 L 121.25,35 L 122.25,35 L 139.25,52 L 139.25,53 C 126.0631,62.2891 110.5391,77.8131 101.25,91 L 100.25,91 L 83.25,74 L 83.25,73 L 92.25,64 L 93.25,64 L 98.25,69 L 98.25,70 L 93.25,74 L 93.25,75 L 98.25,80 L 99.25,80 L 109.25,70 L 109.25,69 L 93.25,53 L 92.25,53 L 72.25,73 L 72.25,74 L 95.25,96 L 95.25,97 L 72.25,119 L 72.25,120 L 92.25,140 L 93.25,140 L 109.25,124 L 109.25,123 L 99.25,113 L 98.25,113 L 93.25,118 L 93.25,119 L 98.25,123 L 98.25,124 L 93.25,129 L 92.25,129 L 83.25,120 L 83.25,119 L 100.25,102 L 101.25,102 C 110.5391,115.187 126.0631,130.711 139.25,140 L 139.25,141 L 122.25,158 L 121.25,158 L 112.25,149 L 112.25,148 L 117.25,143 L 118.25,143 L 122.25,148 L 123.25,148 L 128.25,143 L 128.25,142 L 118.25,132 L 117.25,132 L 101.25,148 L 101.25,149 L 121.25,169 L 122.25,169 L 144.25,146 L 145.25,146 L 167.25,169 L 168.25,169 L 188.25,149 L 188.25,148 L 172.25,132 L 171.25,132 L 161.25,142 L 161.25,143 L 166.25,148 L 167.25,148 L 171.25,143 L 172.25,143 L 177.25,148 L 177.25,149 L 168.25,158 L 167.25,158 L 150.25,141 L 150.25,140 C 163.437,130.711 178.961,115.187 188.25,102 L 189.25,102 L 206.25,119 L 206.25,120 L 197.25,129 L 196.25,129 L 191.25,124 L 191.25,123 L 196.25,119 L 196.25,118 L 191.25,113 L 190.25,113 L 180.25,123 L 180.25,124 L 196.25,140 L 197.25,140 L 217.25,120 L 217.25,119 L 194.25,97 L 194.25,96 L 217.25,74 L 217.25,73 L 197.25,53 L 196.25,53 L 180.25,69 L 180.25,70 L 190.25,80 L 191.25,80 L 196.25,75 L 196.25,74 L 191.25,70 L 191.25,69 L 196.25,64 L 197.25,64 L 206.25,73 L 206.25,74 L 189.25,91 L 188.25,91 C 178.961,77.8131 163.437,62.289 150.25,53 L 150.25,52 L 167.25,35 L 168.25,35 L 177.25,44 L 177.25,45 L 172.25,50 L 171.25,50 L 167.25,45 L 166.25,45 L 161.25,50 L 161.25,51 L 171.25,61 L 172.25,61 L 188.25,45 L 188.25,44 L 168.25,24 L 167.25,24 L 145.25,47 L 144.25,47 L 121.25,24 z"
+       style="fill:#000000;stroke:none" />
+    <path
+       id="path12"
+       d="M 144.25,60 L 135.25,69 L 135.25,70 L 144.25,79 L 145.25,79 L 154.25,70 L 154.25,69 L 144.25,60 M 132.25,72 L 120.25,85 L 133.25,85 L 132.25,72 M 156.25,72 L 156.25,85 L 169.25,85 L 156.25,72 z"
+       style="fill:#ff0000;stroke:none" />
+    <path
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+       id="path16"
+       d="M 117.25,87 L 108.25,96 L 108.25,97 L 117.25,106 L 118.25,106 L 127.25,97 L 127.25,96 L 117.25,87 M 144.25,87 L 143.25,92 L 140.25,91 L 139.25,92 L 140.25,95 L 135.25,96 L 135.25,97 L 140.25,98 L 139.25,101 L 140.25,102 L 143.25,101 L 144.25,106 L 145.25,106 L 146.25,101 L 149.25,102 L 150.25,101 L 149.25,98 L 154.25,97 L 154.25,96 L 149.25,95 L 150.25,92 L 149.25,91 L 146.25,92 L 144.25,87 M 171.25,87 L 162.25,96 L 162.25,97 L 171.25,106 L 172.25,106 L 181.25,97 L 181.25,96 L 171.25,87 M 120.25,108 L 133.25,121 L 133.25,108 L 120.25,108 M 156.25,108 L 156.25,121 L 169.25,108 L 156.25,108 M 144.25,114 L 135.25,123 L 135.25,124 L 144.25,133 L 145.25,133 L 154.25,124 L 154.25,123 L 144.25,114 z"
+       style="fill:#ff0000;stroke:none" />
+  </g>
+</svg>

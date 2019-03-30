@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg551"
+   sodipodi:version="0.32"
+   width="1200"
+   height="800">
+  <rect
+     fill="#cc0000"
+     width="1200"
+     height="800" />
+  <g
+     id="g3163"
+     transform="matrix(1.1665327,0,0,1.1665242,-14.809452,-26.530762)">
+    <path
+       sodipodi:nodetypes="ccccccccccc"
+       id="path589"
+       d="m 171.21881,47.372544 -8.71448,22.578013 -26.68878,0.433749 20.15261,16.064908 -6.53617,23.879746 22.33155,-13.459464 23.41978,13.025224 -7.08029,-23.880237 19.06316,-15.196428 -26.68817,-0.43424 -9.25921,-23.011271 z"
+       style="font-size:12px;fill:none;stroke:#ffd700;stroke-width:6.39583015;stroke-opacity:1" />
+    <g
+       transform="matrix(0.9854185,0,0,0.9442732,14.02646,22.421158)"
+       id="g840">
+      <path
+         transform="matrix(0.757037,0,0,0.770366,-45.00377,-93.99085)"
+         sodipodi:nodetypes="csccccccsscccc"
+         id="path566"
+         d="m 285.563,244.585 c 130.452,120.548 10.201,210.77 -38.687,163.246 -5.201,-5.57 -11.068,-10.742 -17.625,-17.792 l -10.613,5.52 -7.969,-1.356 -0.794,8.705 -5.552,5.003 -4.229,3.66 c -14.971,7.391 -16.964,6.611 -25.16,17.841 -7.151,10.259 3.119,20.401 15.222,12.752 11.637,-7.354 8.573,-4.728 17.869,-19.799 l 8.234,-9.787 7.704,-1.326 c 87.233,109.67 242.728,-61.961 61.6,-166.667 z"
+         style="font-size:12px;fill:#ffd700;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt" />
+      <path
+         transform="matrix(0.755308,-0.05112918,0.05202941,0.768607,-63.48462,-77.14349)"
+         sodipodi:nodetypes="ccccccccc"
+         id="path558"
+         d="M 342.261,443.325 362.24,426.938 272.236,317.2 l 26.789,-26.11 -36.398,-5.016 -53.011,42.82 22.573,20.805 25.158,-20.33 84.914,113.956 z"
+         style="font-size:12px;fill:#ffd700;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt" />
+    </g>
+  </g>
+  <rect
+     fill="#00a651"
+     width="1200"
+     height="200"
+     y="300" />
+</svg>

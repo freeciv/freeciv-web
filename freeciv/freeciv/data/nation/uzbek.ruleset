@@ -1,0 +1,79 @@
+[nation_uzbek]
+
+name=_("Uzbek")
+plural=_("?plural:Uzbeks")
+groups="Modern", "Asian"
+legend=_("The Central Asian nation of Uzbekistan has been the site of many\
+ ancient states such as Khwarezm, the Khanate of Bukhara, and the Khanate of\
+ Kokand. The Uzbeks regard themselves as descendants of Timur, founder of\
+ the Timurid dynasty, who ruled from his capital at Samarkand.")
+
+leaders = {
+ "name",                        "sex"
+ "Shohruh",                     "Male" ; Khan of Kokand
+ "Shayboniy",                   "Male" ; a.k.a. Muhammad Shaybani
+ "Temur",                       "Male" ; Founder of Timurid dynasty
+ "Ulug'bek",                    "Male" ; Timurid ruler
+ "Abdulla II",                  "Male" ; Khan of Bukhara
+ "Ilbars I",                    "Male" ; Founder of Khanate of Kiva
+}
+
+ruler_titles = {
+ "government",  "male_title",              "female_title"
+ "Despotism",   _("%s Khan"),              _("%s Khatan")
+ "Monarchy",    _("Emir %s"),              _("Emira %s")
+ "Communism",   _("General Secretary %s"), _("?female:General Secretary %s")
+}
+
+flag="uzbekistan"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Timurid" ; Uzbeks considers Timur their founding father
+civilwar_nations="Turkmen", "Kazakh", "Kyrgyz", "Uyghur"
+
+cities =
+ "Buxoro", ; Bukhara
+ "Samarqand", ; Samarkand
+ "Qo'qon", ; Kokand
+ "Xiva", ; Khiva
+ "Toshkent", ; Tashkent
+ "Namangan",
+ "Andijon", ; Andijan
+ "Nukus",
+ "Farg'ona", ; Fergana
+ "Qarshi",
+ "Chirchiq", ; Chirchik
+ "Marg'ilon", ; Margilan
+ "Urganch", ; Urgench
+ "Jizzax", ; Jizzakh
+ "Olmaliq", ; Almalyk
+ "Angren",
+ "Navoiy",
+ "Kattaqo'rg'on", ; Kattakurgan
+ "Bekobod", ; Bekabad
+ "Juma",
+ "Zarafshon", ; Zarafshan
+ "Yangiyo'l", ; Yangiyul
+ "Guliston",
+ "Shahrisabz",
+ "To'rtko'l", ; Turtkul
+ "Urgut",
+ "Kosonsoy", ; Kasansay
+ "Asaka",
+ "Termiz", ; Termez
+ "Chimboy",
+ "Beruniy",
+ "Nurota", ; Nurata
+ "Yangiyer",
+ "Uchquduq", ; Uchkuduk
+ "Rishton",
+ "To'ytepa", ; Toytepa
+ "G'ijduvon", ; Gijduvan
+ "Vobkent", ; Vabkent
+ "Qo'ng'irot", ; Kungrad
+ "Mo'ynoq" ; Muynak

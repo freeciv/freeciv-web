@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Notepad -->
+<!-- (PD) December 16, 2005 - _Crotalus horridus_  -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="262.5"
+   height="175"
+   id="Confederate Battle Flag"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="southern_cross.svg"
+   sodipodi:docbase="C:\Documents and Settings\다니엘\바탕 화면">
+  <metadata
+     id="metadata42">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="807"
+     inkscape:window-width="1052"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="262.5px"
+     inkscape:zoom="2.1542857"
+     inkscape:cx="137.5"
+     inkscape:cy="87.5"
+     inkscape:window-x="66"
+     inkscape:window-y="87"
+     inkscape:current-layer="Confederate Battle Flag" />
+  <rect
+     style="fill:#002366"
+     x="0"
+     y="0"
+     width="262.5"
+     height="175"
+     id="Blue Saltire" />
+  <path
+     style="fill:white"
+     d="M 19.090909,0 L 243.40909,0 L 131.25,70 L 19.090909,0 z "
+     id="White Saltire Border - Top" />
+  <path
+     style="fill:white"
+     d="M 19.090909,175 L 243.40909,175 L 131.25,105 L 19.090909,175 z "
+     id="White Saltire Border - Bottom" />
+  <path
+     style="fill:white"
+     d="M 0,20 L 0,155 L 105,87.5 L 0,20 z "
+     id="White Saltire Border - Left" />
+  <path
+     style="fill:white"
+     d="M 262.5,20 L 262.5,155 L 157.5,87.5 L 262.5,20 z "
+     id="White Saltire Border - Right" />
+  <path
+     style="fill:#bc113d"
+     d="M 28.636364,0 L 233.86364,0 L 131.25,65 L 28.636364,0 z "
+     id="Red Field - Top" />
+  <path
+     style="fill:#bc113d"
+     d="M 28.636364,175 L 233.86364,175 L 131.25,110 L 28.636364,175 z "
+     id="Red Field - Bottom" />
+  <path
+     style="fill:#bc113d"
+     d="M 0,25 L 0,150 L 95.454545,87.5 L 0,25 z "
+     id="Red Field - Left" />
+  <path
+     style="fill:#bc113d"
+     d="M 262.5,25 L 262.5,150 L 167.04545,87.5 L 262.5,25 z "
+     id="Red Field - Right" />
+  <defs
+     id="defs12">
+    <path
+       style="fill:white"
+       d="M 10,0 L 12.33,7.66 L 20,7.66 L 13.83,12.33 L 16.16,20 L 10,15.33 L 3.83,20 L 6.16,12.33 L 0,7.66 L 7.66,7.66 L 10,0 z "
+       id="Star" />
+  </defs>
+  <use
+     x="127.5"
+     y="77.5"
+     xlink:href="#Star"
+     id="use15"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="90"
+     y="54"
+     xlink:href="#Star"
+     id="use17"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="90"
+     y="101"
+     xlink:href="#Star"
+     id="use19"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="165"
+     y="54"
+     xlink:href="#Star"
+     id="use21"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="165"
+     y="101"
+     xlink:href="#Star"
+     id="use23"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="51"
+     y="30"
+     xlink:href="#Star"
+     id="use25"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="51"
+     y="125"
+     xlink:href="#Star"
+     id="use27"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="204"
+     y="30"
+     xlink:href="#Star"
+     id="use29"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="204"
+     y="125"
+     xlink:href="#Star"
+     id="use31"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="13"
+     y="8"
+     xlink:href="#Star"
+     id="use33"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="13"
+     y="147"
+     xlink:href="#Star"
+     id="use35"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="242"
+     y="8"
+     xlink:href="#Star"
+     id="use37"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+  <use
+     x="242"
+     y="147"
+     xlink:href="#Star"
+     id="use39"
+     width="275"
+     height="175"
+     transform="scale(0.954545,1)" />
+</svg>

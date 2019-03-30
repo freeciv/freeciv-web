@@ -1,0 +1,124 @@
+
+===============================
+Alien World ruleset for Freeciv
+===============================
+
+Design Philosophy:
+------------------
+
+Alien ruleset is very different from standard rules - it
+has been one of the design goals of the ruleset that it
+should provide users with "second game" to play with
+Freeciv. We hope you can enjoy both more standard rulesets
+and Alien ruleset, not selecting just one of them to play.
+
+
+More info:
+----------
+
+Before Alien World was made part of official Freeciv
+distribution, it was developet independently and was
+available from cazfi.net. Documentation of the last
+cazfi.net version is available from
+http://www.cazfi.net/freeciv/alien/dev/
+Though some bits are outdated, it's still the most
+comprehensive documentation of the Alien World ruleset.
+
+
+Changes since last cazfi.net document version
+---------------------------------------------
+
+This list is incomplete
+
+- Citizens convert to city owning nationality over time
+
+- Population is measered in hundreds in reports
+
+- Road type "Tunnel" can be built to radiating tiles only
+
+- Techs cannot be stolen from Lunatics or Madmen
+
+- Intercontinental traderoutes give same trade than routes
+  within one continent. International routes give three
+  times as much trade as national ones
+
+- Once player knows "Ocean Cities" tech, borders extend
+  to oceanic tiles just like land tiles
+
+- Players are guaranteed to start from a Earthly units
+  reachable area of at least 15 tiles
+
+- Explorer cost reduced to 20 shields
+
+- Road type "Tunnel" provides 35% defense bonus for units
+  inside
+
+- Burrow Tubes can be built only to connect existing burrow tubes, first
+  one needs to be adjacent to a land tile
+
+- Amphibious and Antigravity units kill citizens after succesfull
+  attack against a city, Burrowing units do not
+
+- There's two river types. Earthly units do not gain movement
+  bonus from them. Both give trade bonus. Green River gives also
+  food bonus, and Brown River production bonus. Both give
+  defense bonus counted on natural defense layer.
+
+- There can never be civil war
+
+- Each movement point is divided to 4 fragments. IgTer movement
+  costs 2 fragments, river movement 2, road 2, highway 1.
+
+- Specialists have been renamed, but their effects remain the same
+  Elvis     -> Culturists
+  Scientist -> Scientists
+  Taxman    -> Government Merchants
+
+- Governments production and trade adjustments have been changed to be
+  always positive. Old negative values have turned to 0, and old 0 and
+  positive values have been increased accordingly.
+
+  Gov: prod/trade
+  Despotism:       0  /  0
+  Communism:      20% /  0
+  Democracy:       0  / 20%
+  Dual Communism: 40% / 20%
+  Dual Democracy: 20% / 40%
+
+- Math Club gets only 30% bonus to science
+
+- There's third veterancy level, "Superb", that is available only for
+  units built by Team Gladiators in a city with Training Facility
+
+- Cities cannot be built on Boiling Ocean tiles.
+
+- Cities of Adventurers can grow one size bigger than cities of other
+  factions in lack of Basic Infrastructure or radiation fighting methods
+
+- Increased unit move rates:
+  Ship:         3
+  Destroyer:    4
+  Light Saucer: 3
+  Bomb Saucer:  2
+
+- Thick Mountains cannot be mined at all until Burrowing is known, but then
+  it requires just 17 movement points, road building time reduced to 12 movement
+  points
+
+- Empire size causes additional unhappiness only once every 15 bases (was 10),
+  and knowledge of Communication eases it so that the step is 20 bases
+
+- Added tech "Controlled Biomass" that provides new unit "Biomass" that can
+  transport Earthly and Amphibious units through Radiating tiles
+
+- Water Engineer build_cost increased to 40, like other City Founding units
+
+- Hex topology is used by default. On hex maps Transportation building
+  increases city radius to 2 tiles.
+
+- Stealth Spies cannot establish embassies. They are already granted by
+  "Communication" tech
+
+- Limited possible startunits to one weak unit type for each startunit role
+
+- Each turn is quarter of a year

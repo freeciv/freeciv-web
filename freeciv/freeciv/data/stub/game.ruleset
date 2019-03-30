@@ -1,0 +1,535 @@
+; This is minimal game ruleset. Replace <modpack> with your module name in
+; description.
+
+[datafile]
+description="<modpack> game rules for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; This section contains meta information for freeciv-ruledit to recreate the ruleset
+; file in a form wanted. These have no in-game effect whatsoever
+[ruledit]
+
+; Which file to read description in from.
+;description_file = ""
+
+[about]
+; Ruleset name
+name = _("Stub")
+
+; Versioning of the ruleset
+;version = ""
+
+; Summary of the ruleset
+summary = _("\
+This ruleset is meant to be used as starting point for \
+real rulesets, not playable ruleset in itself.\
+")
+
+; Detailed description
+; When updating this, update also desciption_file in [ruledit] section to match
+; description = ""
+
+; What capabilities ruleset provides for the scenarios.
+capabilities = ""
+
+[options]
+global_init_techs=""
+global_init_buildings=""
+
+[civstyle]
+; Value added to city pollution
+base_pollution   = -20
+
+; Cost in luxuries of making one citizen happier
+happy_cost       = 2
+
+; Cost in food of upkeeping a single citizen
+food_cost        = 2
+
+; Parameters used to generalize the calculation of city granary size:
+;   if city_size <= num_inis:
+;     city_granary_size = (granary_food_ini[city_size] * foodbox / 100)
+;   if city_size > num_inis;
+;     city_granary_size = (granary_food_ini[num_inis] +
+;        granary_food_inc * (city_size - num_inis)) * foodbox / 100
+granary_food_ini	= 20
+granary_food_inc	= 10
+
+; City center minimum outputs
+min_city_center_food	= 1
+min_city_center_shield	= 1
+min_city_center_trade	= 0
+
+; Square of initial city radius
+init_city_radius_sq     = 5
+
+; Square of initially visible radius (true distance).
+init_vis_radius_sq	= 5
+
+; A base bribe cost, modified heavily by other factors
+base_bribe_cost  = 750
+
+; Barbarian leader ransom in gold
+ransom_gold      = 100
+
+; Number of veteran levels lost when upgrading a unit
+upgrade_veteran_loss     = 0
+
+; Number of veteran levels lost when auto-upgrading a unit
+autoupgrade_veteran_loss = 0
+
+; Whether player gets to select which terrain improvement to pillage.
+pillage_select           = TRUE
+
+; Whether one can steal a tech for which prereqs are not known
+tech_steal_allow_holes    = TRUE
+; Whether one can get a tech for which prereqs are not known via
+; diplomatic trading
+tech_trade_allow_holes    = TRUE
+; ...and whether one can lose a tech which is prereq for another known
+; tech via trade, if techlost_donor is nonzero
+tech_trade_loss_allow_holes = TRUE
+; Whether one can get a tech for which prereqs are not known via
+; parasite effect (Great Library)
+tech_parasite_allow_holes = TRUE
+; Whether one can lose a tech which is prereq for another known tech
+; due to negative bulbs, if techlossforgiveness allows loss
+tech_loss_allow_holes     = TRUE
+
+; Whether civil war is possible at all
+civil_war_enabled        = TRUE
+
+; Comma separated list of things to happen, in addition to death
+; of owner, when gameloss unit dies
+; "CivilWar"   - Part of the empire remains, controlled by a new player
+; "Barbarians" - Depending on if there`s also "CivilWar", all or part
+;                or half of the dead players empire gets under barbarian
+;                control.
+; "Loot"       - Player who killed the gameloss unit gets loot:
+;                Partial map, gold, techs, cities
+gameloss_style           = ""
+
+; Whether units may safely paradrop to transport on non-native terrain
+paradrop_to_transport    = FALSE
+
+;Method of paying unit and improvement gold upkeep
+; "City" - The player`s total gold must be non-negative after paying upkeep
+;          costs associated with each city. If for any city the player`s
+;          gold is negative, random buildings in the city are sold off. If
+;          the gold is still negative, then supported units with gold upkeep
+;          are disbanded.
+; "Mixed" - In the first step, the player`s total gold must be non-negative
+;           after paying upkeep for all buildings within a city. If for any
+;           city the player`s gold is negative, random buildings in the city
+;           are sold off.
+;           In the second step, gold upkeep for all units is paid in a lump
+;           sum. If the player does not have enough gold, random units with
+;           gold upkeep are disbanded.
+; "Nation" - Gold upkeep for all buildings and units is paid in a lump sum
+;            after all cities have been processed. If the player does not
+;            have enough gold, random buildings from random cities are sold.
+;            If still more gold is needed, then random units with gold
+;            upkeep are disbanded.
+gold_upkeep_style = "City"
+
+[illness]
+; Whether plagues (illness) are possible
+illness_on = FALSE
+
+; the base factor for illness (of percent)
+illness_base_factor = 25
+
+; minimum city size for illness
+illness_min_size = 3
+
+; factor for how much trading with a plagued city increases our city`s
+; chance for plague (in percent)
+illness_trade_infection = 50
+
+; factor for how much pollution within a city increases its chance for
+; plague (in percent)
+illness_pollution_factor = 50
+
+[incite_cost]
+; city_incite_cost = 
+; total_factor * (city_size) *
+; (base_incite_cost + (units_cost) * unit_factor + 
+;   (improvements_cost) * improvement_factor) 
+;  / (distance * 100)
+; See city_incite_cost() for more details
+base_incite_cost = 1000
+improvement_factor = 1
+unit_factor = 2
+total_factor = 100
+
+[global_unit_options]
+; Shore landing style
+;  FALSE - normal movement
+;  TRUE  - (default) slow invasions by removing all
+;      movement points from ground units moving
+;      from ocean tile to land
+slow_invasions = TRUE
+
+[combat_rules]
+; If tired_attack is set to TRUE, units that attack with less than a single
+; move point (per move_fragments in terrain.ruleset) will have their attack
+; power reduced accordingly. For instance, if move_fragments=3, a unit with
+; 2/3 move points will have attack power 2/3 of normal.
+; If this is set to FALSE units will attack with full strength even if they
+; have only fractional moves left.
+tired_attack = FALSE
+
+[auto_attack]
+; An auto attack may be triggered when another unit moves to an adjacent
+; tile and the autoattack server setting is enabled. The following details
+; are ruleset controlled.
+;   will_never - units with this unit type flag will never auto attack.
+
+; Not a good idea to nuke our own area.
+;will_never = "Nuclear"
+
+[actions]
+; If force_trade_route is set to TRUE it is illegal for an actor unit to
+; enter the marketplace of a city if it can establish a trade route to it
+; in stead.
+force_trade_route = FALSE
+
+; If force_capture_units is set to TRUE it is illegal for an actor unit to
+; bombard, explode nuclear or perform a regular attack against a tile if
+; it can capture units on it in stead.
+force_capture_units = FALSE
+
+; If force_bombard is set to TRUE it is illegal for an actor unit to
+; explode nuclear or perform a regular attack against a tile if it can
+; bombard it in stead.
+force_bombard = FALSE
+
+; If force_explode_nuclear is set to TRUE it is illegal for an actor unit
+; to perform a regular attack against a tile if it can do explode nuclear
+; in stead.
+force_explode_nuclear = FALSE
+
+; If poison_empties_food_stock is set to TRUE a successful "Poison City"
+; or "Poison City Escape" will empty the food stock.
+;poison_empties_food_stock = FALSE
+
+; The maximum distance from the actor unit to the target of the "Bombard"
+; action. The value 1 means that the targets must be on a tile adjacent to
+; the actor unit. The special value "unlimited" lifts the maximum distance
+; restriction. The maximum distance can`t be smaller than the minimum
+; distance.
+bombard_max_range = 1
+
+; What each action should be called when showing them to the player.
+; The first %s should be before the mnemonic of the action. A Freeciv client
+; that supports mnemonics will replace it with the in-band signal that marks
+; the following character as a mnemonic in its graphical toolkit.
+; The second %s marks where extra details should be inserted.
+
+; ui_name_xxx = _("%s%s")
+
+; /* <-- avoid gettext warnings
+;
+; Action enablers:
+;
+; action               = the action to enable.
+; actor_reqs           = requirements that apply to the actor.
+; target_reqs          = requirements that apply to the target.
+;
+; README.actions lists the possible actions and their hard coded
+; requirements.
+;
+; An action enabler is active when its actor_reqs AND its target_reqs are
+; satisfied.
+;
+; */ <-- avoid gettext warnings
+
+; No enabled actions
+; [actionenabler_embassy]
+; action = "Establish Embassy"
+
+; Suppress automatic help text generation about what enables and/or
+; disables the following actions.
+;
+; Can make the help text less redundant when you document it your self.
+;quiet_actions = "Targeted Sabotage City", "Targeted Steal Tech"
+
+[borders]
+; Base border radius from city.
+radius_sq_city = 0
+
+; Border radius square increased by this amount / point of city size
+size_effect    = 0
+
+; Difference between city workable area and area permanently claimed by
+; city (these tiles cannot be stolen by stronger border sources).
+; 0 means exactly city workable area is immune to border stealing.
+; Negative value means outer workable tiles can be stolen; highly negative
+; value (more than max city radius_sq) means any workable tile can be stolen.
+; If City_Radius_Sq is variable, so is the set of locked tiles; this is
+; a squared value, so the radius of the ring of tiles which are workable
+; but not locked (or vice versa) varies but the area is constant.
+radius_sq_city_permanent = 0
+
+[research]
+; Method of calculating technology costs
+;   "Civ I|II"      - Civ (I|II) style. Every new tech add base_tech_cost to
+;                     cost of next tech.
+;   "Classic"       - Cost of technology is:
+;                       base_tech_cost * (1 + reqs) * sqrt(1 + reqs) / 2
+;                     where reqs == number of requirement for tech, counted
+;                     recursively.
+;   "Classic+"      - Cost are read from tech.ruleset. Missing costs are
+;                     generated by style "Classic".
+;   "Experimental"  - Cost of technology is:
+;                       base_tech_cost * (reqs^2 / (1 + sqrt(sqrt(reqs + 1)))
+;                                         - 0.5)
+;                     where reqs == number of requirement for tech, counted
+;                     recursively. Initial techs` cost will be base_tech_cost.
+;   "Experimental+" - Cost are read from tech.ruleset. Missing costs are
+;                     generated by style "Experimental".
+;   "Linear"        - Cost of technology is:
+;                     base_tech_cost * reqs
+;                     where reqs == number of requirement for tech, counted
+;                     recursively.
+tech_cost_style = "Classic"
+
+; Base research cost. Used in tech cost styles where tech cost is generated.
+; In other words: used everywhere unless the cost of *all* techs are
+; specified and the tech cost style is "Experimental+" or "Classic+".
+base_tech_cost   = 20
+
+; Technology leak from other civilizations
+; "None"           - No reduction of the technology cost.
+; "Embassies"      - Technology cost is reduced depending on the number of
+;                    players which already know the tech and you have an
+;                    embassy with.
+; "All Players"    - Technology cost is reduced depending on the number of
+;                    all players (human, AI and barbarians) which already
+;                    know the tech.
+; "Normal Players" - Technology cost is reduced depending on the number of
+;                    normal players (human and AI) which already know the
+;                    tech.
+tech_leakage = "None"
+
+; Method of paying tech upkeep
+; "None"   - no upkeep
+; "Basic"  - upkeep is calculated as:
+;     <Cost of technology> / tech_upkeep_divider - tech_upkeep_free
+; "Cities" - upkeep is calculated like "Basic", but multiplied by number of cities
+tech_upkeep_style = "None"
+
+; upkeep cost is divided by this value
+tech_upkeep_divider = 2000
+
+; Method of selecting techs given for free
+; "Goal"     - Towards player`s goal, random if no goal
+; "Random"   - Random researchable tech
+; "Cheapest" - Cheapest researchable tech, random among equal cost ones
+free_tech_method = "Goal"
+
+[culture]
+; Minimum culture points for cultural domination victory
+victory_min_points = 1000
+
+; How big lead relative to second best player is needed for victory
+victory_lead_pct   = 200
+
+; How much each culture point affects the migration
+; from/to the city. Each culture point count as this many permilles
+; of a migration point.
+migration_pml = 50
+
+[calendar]
+; Year in the beginning of the game
+start_year = 0
+
+; Year 1 instead of 0.
+skip_year_0 = FALSE
+
+; How many fragments each year has. In addition to this, "Turn_Fragments" effects are
+; needed to control fragment accumulation.
+; Value 0 here disables year advancement by fragment accumulation.
+fragments = 0
+
+; Calendar fragment names. If name is missing, only a fragment number +1 (so human readable
+; numbers begin from 1 and not 0) is shown.
+
+;fragment_name0 = "Jan"
+;fragment_name1 = "Feb"
+; ...
+
+; What labels are used for positive and negative years.
+; /* TRANS: year label (Common Era) */
+positive_label = _("CE")
+; /* TRANS: year label (Before Common Era) */
+negative_label = _("BCE")
+
+; /* <-- avoid gettext warnings
+;
+; Disaster types:
+;
+; name                    = translatable name as seen by user
+; reqs                    = requirements for disaster to happen (see effects.ruleset
+;                           and README.effects for help on requirements)
+; frequency               = how likely disaster is to occur
+; effects
+;   - "DestroyBuilding"   = Random building is destroyed
+;   - "ReducePopulation"  = Reduce city size by one unless it's already 1
+;   - "ReducePopDestroy"  = Reduce city size by one, possibly destroying the city
+;   - "EmptyFoodStock"    = Remove all food from food stock
+;   - "EmptyProdStock"    = Destroy current production
+;   - "Pollution"         = One tile surrounding city polluted
+;   - "Fallout"           = One tile surrounding city polluted with fallout
+;
+; */ <-- avoid gettext warnings
+
+; No disasters
+; [disaster_earthquake]
+; name = _("Earthquake")
+; frequency = 10
+; effects = "DestroyBuilding"
+
+
+; /* <-- avoid gettext warnings
+;
+; Achievement types:
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; type                    = What event grants the achievement to player.
+;                           See README.achievements for list of these types.
+; unique                  = If TRUE, only first one reaching the achievement will
+;                           get it. Defaults to TRUE.
+; value                   = Value to reach. Exact meaning of this depends on
+;                           achievement type.
+; culture                 = Amount of culture granted to player who gets achievement
+;                           granted.
+; first_msg               = Message shown to first player gaining the achievement
+; cons_msg                = Message shown to consecutive players gaining the achievement
+;
+; */ <-- avoid gettext warnings
+
+; No achievements
+; [achievement_entire_map]
+; name  = "Entire Map Known"
+; type  = "Map_Known"
+; value = 100
+
+;
+; Trade settings
+;
+; IN = international, IC = intercontinental.
+; For each of the trade route types:
+; "pct"        - Trade income %. If this is 0, trade route cannot be
+;                established at all
+; "cancelling" - What to do to previously established traderoutes when they
+;                turn illegal
+;                "Active"   - Keep them active (although they will only
+;                             provide nonzero income if illegal due to
+;                             trademindist rather than pct==0)
+;                "Inactive" - Keep them inactive
+;                "Cancel"   - Cancel them altogether
+; "bonus"      - One-time bonuses granted when traderoute established
+;                "None"     - No one-time bonus
+;                "Gold"     - Bonus to gold
+;                "Science"  - Bonus to research
+;                "Both"     - Bonus to gold and research
+;
+[trade]
+settings =
+  { "type", "pct", "cancelling", "bonus"
+    "National",   0, "Cancel", "None"
+    "NationalIC", 0, "Cancel", "None"
+    "IN",         0, "Cancel", "None"
+    "INIC",       0, "Cancel", "None"
+    "Ally",       0, "Cancel", "None"
+    "AllyIC",     0, "Cancel", "None"
+    "Enemy",      0, "Cancel", "None"
+    "EnemyIC",    0, "Cancel", "None"
+    "Team",       0, "Cancel", "None"
+    "TeamIC",     0, "Cancel", "None"
+  }
+
+; When are goods for the trade route chosen.
+; "Leaving" - Goods to carry are assigned to unit when it`s built, or it changes homecity
+; "Arrival" - Goods are chosen when trade route is established, when unit arrives to destination
+goods_selection = "Leaving"
+
+; /* <-- avoid gettext warnings
+;
+; Goods types:
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; reqs                    = requirements for a city to provide goods (see effects.ruleset
+;                           and README.effects for help on requirements)
+; from_pct                = Income for the sending end of the trade route. Default is 100%
+;                           This value is applied to both ends of bidirectional routes.
+; to_pct                  = Income for the receiving end of the trade route. Default is 100%
+;                           This value is not used at all in case of bidirectional routes.
+; onetime_pct             = Onetime bonuses when traderoute is established. Default is 100%
+; flags
+;   - "Bidirectional"     = Trade route carrying the goods does not have "from" and "to"
+;                           ends, but both ends are considered the same.
+;   - "Depletes"          = Trade route gets cancelled when the source city cannot provide
+;                           goods any more. Bidirectional routes gets cancelled if either
+;                           one of the involved cities cannot provide goods.
+; helptext                = Optional help text string; should escape all raw
+;                           newlines so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+[goods_good]
+name = _("Goods")
+
+
+; /* <-- avoid gettext warnings
+;
+; Clause types
+;
+; Clause types that are not listed here, are not enabled at all.
+;
+; type                   = Type of the clause, one of "Advance", "Gold", "Map", "Seamap",
+;                          "City", "Ceasefire", "Peace", "Alliance", "Vision", "Embassy"
+;
+; */ <-- avoid gettext warnings
+
+
+[playercolors]
+background.r = 86
+background.g = 86
+background.b = 86
+
+colorlist =
+    { "r", "g", "b"
+      255,   0,   0
+    }
+
+[teams]
+; freeciv optional team names definition.
+;
+; names =
+; _("Team 1"),
+; _("Team 2"),
+; _("Team 3"),
+; _("Team 4"),
+; etc...
+
+[settings]
+
+set =
+    { "name", "value", "lock"
+      "startunits", "c", TRUE
+    }

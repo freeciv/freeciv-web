@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   baseProfile="tiny"
+   viewBox="0 0 300 200"
+   width="300"
+   height="200"
+   preserveAspectRatio="xMidYMid"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="jbonai.svg"
+   sodipodi:docbase="C:\freeciv">
+  <metadata
+     id="metadata25">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="579"
+     inkscape:window-width="847"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.885"
+     inkscape:cx="150"
+     inkscape:cy="100"
+     inkscape:window-x="110"
+     inkscape:window-y="145"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4">
+    <circle
+       id="circle"
+       r="60"
+       stroke="blue"
+       stroke-width="10"
+       fill="none" />
+    <g
+       id="arrow">
+      <rect
+         fill="red"
+         width="120"
+         height="10"
+         id="rect8" />
+      <path
+         d="M 0,0 L -16,10 L 0,20 L -4,10 z"
+         transform="translate(10,-10) scale(1.5)"
+         fill="red"
+         id="path10" />
+    </g>
+  </defs>
+  <rect
+     style="opacity:1;fill:white;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect1889"
+     width="300"
+     height="200"
+     x="0"
+     y="0" />
+  <use
+     xlink:href="#circle"
+     transform="translate(110, 100)"
+     id="use12" />
+  <use
+     xlink:href="#circle"
+     transform="translate(190, 100)"
+     id="use14" />
+  <use
+     xlink:href="#arrow"
+     transform="translate(270, 105) rotate(180)"
+     id="use16" />
+  <use
+     xlink:href="#arrow"
+     transform="translate(30, 95)"
+     id="use18" />
+  <use
+     xlink:href="#arrow"
+     transform="translate(155, 20) rotate(90)"
+     id="use20" />
+  <use
+     xlink:href="#arrow"
+     transform="translate(145, 180) rotate(-90)"
+     id="use22" />
+</svg>

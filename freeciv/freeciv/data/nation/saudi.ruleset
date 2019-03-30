@@ -1,0 +1,99 @@
+[nation_saudi]
+
+name=_("Saudi")
+plural=_("?plural:Saudis")
+groups="Asian", "Early Modern", "Modern"
+legend=_("Saudi Arabia is located on the Arabian Peninsula and includes\
+ Mecca and Medina, the holiest sites of Islam. The First Saudi state was\
+ established in 1744. Current Saudi Arabia dates from the union of Hejaz\
+ and Nejd in 1925. Named after its ruling dynasty, the house of Saud,\
+ Saudi Arabia is one of the last countries retaining an absolute\
+ monarchy. It has the largest proven oil reserves of the world.")
+
+leaders = {
+ "name",                        "sex"
+ "Muhammad ibn Saud",           "Male"
+ "Turki ibn Abdallah",          "Male"
+ "Abdul Rahman ibn Faisal",     "Male"
+ "Ibn Saud",                    "Male"
+ "Faisal",                      "Male"
+ "Fahd",                        "Male"
+ "Abdullah",                    "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+ "Republic",        _("Vizier %s"),    _("?female:Vizier %s")
+}
+
+flag="saudi_arabia"
+flag_alt = "arab"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "emirati", "bahraini"
+cities =
+ "Ar-Riyadh",	;Riyadh
+ "Makka",	;Mecca
+ "Al-Madina",	;Medina
+ "Jidda",	;Jeddah
+ "Ad-Dammam",
+ "At-Ta'if",
+ "Tabuk",
+ "Hamis Mushayt",
+ "Burayda",
+ "Al-Hufuf",
+ "Al-Mubarraz",
+ "Najran",
+ "Hail",
+ "Al-Jubayl",
+ "Hafar al-Batin",
+ "Yanbu",
+ "Abha",
+ "Al-Harj",
+ "Taqbah",
+ "Al-Hubar",
+ "Araar",
+ "Sakakah",
+ "Al-Hawiya",
+ "Unayzah",
+ "Jizan",
+ "Al-Qurayyat",
+ "Az-Zahran",
+ "Tarut",
+ "Al-Baha",
+ "Al-Qatif",
+ "Bishah",
+ "Ar-Rass",
+ "Wadi ad-Dawasir",
+ "Sharura",
+ "Sayhat",
+ "Bahra",
+ "Sabya",
+ "Ad-Dawadimi",
+ "Az-Zulfi",
+ "Al-Hafji",
+ "Ahad Rafida",
+ "Abu Aris",
+ "Muhail",
+ "Rafha",
+ "Safwa",
+ "Afif",
+ "Rabig",
+ "Al-Majma'a",
+ "Turayf",
+ "Tubarjal",
+ "Baljurshi",
+ "Al-Badai",
+ "Rahima",
+ "Ad-Diriya",
+ "Ad-Dilam",
+ "Umm Lajj",
+ "Al-Ula",
+ "Al-Laila",
+ "Al-Uyun",
+ "Tayma"

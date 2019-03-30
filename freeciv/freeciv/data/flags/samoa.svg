@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="300"
+   height="200">
+  <rect width="300" height="200" fill="#ce1126" />
+  <rect width="150" height="100" fill="#002b7f" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(14.603642,0,0,14.603642,74.999661,84.018742)"
+     id="polygon1441"
+     style="fill:#ffffff" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(11.682911,0,0,11.516383,44.444109,40.683056)"
+     id="polygon1449"
+     style="fill:#ffffff" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(10.95273,0,0,10.748625,106.24966,35.748625)"
+     id="polygon1451"
+     style="fill:#ffffff" />
+  <use
+     transform="translate(30.555556,-25)"
+     id="use2402"
+     x="0"
+     y="0"
+     width="288"
+     height="144"
+     xlink:href="#polygon1449" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(7.3018188,0,0,7.3018188,90.277441,57.981568)"
+     id="polygon1455"
+     style="fill:#ffffff" />
+</svg>

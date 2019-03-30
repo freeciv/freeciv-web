@@ -1,0 +1,117 @@
+; This is minimal techs ruleset. Replace <modpack> with your module name in
+; description.
+
+[datafile]
+description="<modpack> technology data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+[control]
+; Names for custom tech flags. There can be up to 8 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for advances with this flag (optional)
+;flags =
+;  { "name", "helptxt"
+;  }
+
+; /* <-- avoid gettext warnings
+;
+; Tech classes:
+;
+; First one is the default one.
+; If there is none, tech classes feature is disabled
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; cost_pct                = how much techs of the class cost compared
+;                           to normal. Default is 100%.
+;
+; */ <-- avoid gettext warnings
+
+;[techclass_default]
+;name =
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual advances, one per section.
+; The number can be variable, up to 250.
+;
+; The actual tag used (the * in [advance_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; Notes:
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; class         = tech class this tech belongs to, if they have been defined.
+;                 Default is first one defined above.
+; req1, req2    = advances required before researching this one
+; root_req      = tech required before acquiring this tech, by any means.
+;                 All techs with any direct or indirect dependency on this
+;                 one will *also* have this root_req, as well as their own
+;                 and any others they inherit.
+;                 Giving "None" explicitly here prevents a tech from
+;                 inheriting root_reqs in this way, and stops root_req
+;                 inheritance through that tech.
+;                 Specifying a tech's root_req as itself means that the tech
+;                 can only be acquired by special means (nation's init_techs,
+;                 scripting, etc).
+; research_reqs = requirements before researching this one. Can have non
+;                 tech requirements because it is a requirement vector.
+;                 See doc/README.effects to learn more about requirement
+;                 vectors.
+;                 Requireing a tech here in stead of in req1, req2 or
+;                 root_req is not supported yet.
+;                 Requirements that may become fulfilled during the game
+;                 when they weren't at the start of the game is not
+;                 supported yet.
+; flags         = special flag strings
+; graphic       = icon for technology
+; graphic_alt   = alternate icon
+; helptext      = optional help text string (set units ruleset for examples)
+; bonus_message = text seen when a player is the first to discover
+;                 an bonus tech. Must contain '%s' to mark place of the tech
+;                 gained.
+; cost          = if tech_cost_style is set to "Classic+" or "Experimental+",
+;                 this field is read for information on how much a tech
+;                 costs.
+;
+; Special values for req1 and req2 are "None" (first section below)
+; and "Never" (never available).  If only one tech is required,
+; it should be listed as req1.
+;
+; As well as custom flags defined above, the following flag strings are
+; possible:
+;
+; "Bonus_Tech"          = player gets extra tech if reached first
+; "Bridge"              = "Settler" unit types can build roads with
+;                         "RequiresBridge" flag over roads with
+;                         "PreventsOtherRoads" flag (rivers)
+; "Build_Airborne"      = from now on can build air units (for use by AI)
+; "Claim_Ocean"         = Player claims ocean tiles even if they are not
+;                         adjacent to border source
+; "Claim_Ocean_Limited" = Oceanic border sources claim ocean tiles even if
+;                         they are not adjacent to border source
+;
+; */ <-- avoid gettext warnings
+
+[advance_generic]
+name        = _("Generic Tech");
+req1        = "None"
+req2        = "None"
+flags       = ""
+graphic     = "a.alphabet"
+graphic_alt = "-"
+helptext    = _("This is the only technology you can research.");

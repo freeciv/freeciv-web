@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="200"
+   id="svg1350"
+   sodipodi:docname="elam.svg"
+   sodipodi:version="0.32"
+   width="300"
+   inkscape:version="0.46"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Patricia Fidi</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Patricia Fidi</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Patricia Fidi</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1352">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 108.07086 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="359.64566 : 108.07086 : 1"
+       inkscape:persp3d-origin="179.82283 : 72.047241 : 1"
+       id="perspective29" />
+    <defs
+       id="defs5117" />
+    <sodipodi:namedview
+       id="namedview5116" />
+  </defs>
+  <sodipodi:namedview
+     bordercolor="#000000"
+     borderlayer="top"
+     borderopacity="1"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="1.5125999"
+     inkscape:cx="179.82283"
+     inkscape:cy="108.07086"
+     inkscape:window-width="1280"
+     inkscape:window-height="729"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg1350" />
+  <rect
+     y="-1.086544e-14"
+     x="0"
+     width="300"
+     style="font-size:12px;fill:#800080;fill-rule:evenodd"
+     id="rect625"
+     height="200" />
+  <g
+     transform="matrix(1.7303838,0,0,1.3797972,-164.26596,-87.516097)"
+     id="g909"
+     style="fill:#ffffff">
+    <path
+       transform="translate(-1.875,-6.09e-6)"
+       style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.28750002"
+       sodipodi:nodetypes="cssccssccccc"
+       id="path619"
+       d="M 208.8044,151.695 C 220.002,147.263 225.5145,140.5545 226.1064,131.0839 C 226.486,125.3905 220.8032,118.7126 214.7195,118.5583 C 195.7141,118.0443 189.3601,149.0304 189.4747,156.5936 C 190.2771,156.5913 194.2306,156.5124 195.2114,156.5504 C 196.0776,151.774 195.3337,145.9226 201.4067,140.9882 C 207.4797,136.0539 210.1647,139.8139 210.9239,142.8504 C 211.6831,145.8869 208.1208,152.0037 208.8044,151.695 L 208.8044,151.695 L 208.8044,151.695 L 208.8044,151.695 L 208.8044,151.695 L 208.8044,151.695 z" />
+    <path
+       transform="translate(-1.875,-6.09e-6)"
+       style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.28750002"
+       sodipodi:nodetypes="cssccssccccc"
+       id="path620"
+       d="M 158.0432,151.695 C 146.8456,147.2629 141.3331,140.5545 140.7412,131.0839 C 140.3616,125.3904 146.0444,118.7125 152.1281,118.5583 C 171.1335,118.0442 177.4875,149.0304 177.3729,156.5936 C 176.5705,156.5912 172.617,156.5123 171.6362,156.5503 C 170.77,151.7739 171.5139,145.9225 165.4409,140.9882 C 159.3679,136.0539 156.6829,139.8138 155.9237,142.8504 C 155.1645,145.8868 158.7268,152.0037 158.0432,151.695 L 158.0432,151.695 L 158.0432,151.695 L 158.0432,151.695 L 158.0432,151.695 L 158.0432,151.695 z" />
+    <path
+       transform="translate(-1.875,-6.09e-6)"
+       style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.28750002"
+       sodipodi:nodetypes="cccccccc"
+       id="path621"
+       d="M 183.5818,82.41585 C 196.4959,95.84421 199.9637,109.5017 191.3534,131.3796 C 188.3998,138.687 187.1498,147.4553 187.2711,156.5693 C 186.0211,156.5982 180.6995,156.5375 179.439,156.448 C 179.5497,147.4447 178.057,137.9696 175.114,130.5408 C 165.1429,108.1988 172.329,93.04373 183.239,82.41585 L 183.4104,82.41585 L 183.5818,82.41585 L 183.5818,82.41585 z" />
+    <path
+       transform="translate(-1.875,-6.09e-6)"
+       style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.28750002"
+       sodipodi:nodetypes="cccccccccccccc"
+       id="path622"
+       d="M 190.3665,161.7291 C 193.0105,168.7859 197.6772,171.453 201.4918,173.3219 C 195.6777,176.0746 188.9578,173.085 187.6932,171.6617 C 187.847,173.6515 188.0045,179.0285 187.2782,182.6601 C 186.7863,185.5885 185.5412,187.2755 183.4391,189.6119 C 181.2602,187.3292 179.9126,185.4897 179.1863,182.8957 C 178.3038,179.1299 179.2376,173.7882 179.1595,171.7936 C 178.1512,173.0338 170.1093,176.0184 164.8177,173.4244 C 169.7443,171.2772 174.5184,168.7772 176.0724,161.5972 C 176.6485,161.6327 188.9139,161.6253 190.3665,161.6253 L 190.3665,161.7291 L 190.3665,161.7291 L 190.3665,161.7291 L 190.3665,161.7291 L 190.3665,161.7291 z" />
+    <rect
+       y="156.78056"
+       x="167.96109"
+       width="30.59967"
+       transform="translate(-1.875,-6.09e-6)"
+       style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.17855096"
+       id="rect623"
+       height="4.5517678" />
+  </g>
+</svg>

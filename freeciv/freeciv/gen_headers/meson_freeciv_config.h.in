@@ -1,0 +1,82 @@
+/**********************************************************************
+ Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+***********************************************************************/
+
+/* This header is generated from gen_headers/meson_freeciv_config.h.in.
+ * It contains values to specific freeciv build, but only such
+ * values that should not conflict with configuration headers from
+ * other autotools projects. This is meant to be usable for external
+ * projects building against some freeciv components. */
+
+#ifndef FC__FREECIV_CONFIG_H
+#define FC__FREECIV_CONFIG_H
+
+/* Use pthreads as thread implementation */
+#define FREECIV_HAVE_PTHREAD
+
+/* Has thread condition variable implementation */
+#define FREECIV_HAVE_THREAD_COND
+
+/* Max number of AI modules */
+#define FREECIV_AI_MOD_LAST @FREECIV_AI_MOD_LAST@
+
+/* Have socklen_t type defined */
+#define FREECIV_HAVE_SOCKLEN_T
+
+/* Location for freeciv to store its information */
+#define FREECIV_STORAGE_DIR "@FREECIV_STORAGE_DIR@"
+
+#define FREECIV_META_URL "http://meta.freeciv.org/metaserver.php"
+
+/* IPv6 Support built in */
+#define FREECIV_IPV6_SUPPORT
+
+/* locale.h available */
+#mesondefine FREECIV_HAVE_LOCALE_H
+
+/* libintl.h available */
+#mesondefine FREECIV_HAVE_LIBINTL_H
+
+/* inttypes.h available */
+#mesondefine FREECIV_HAVE_INTTYPES_H
+
+/* stdint.h available */
+#mesondefine FREECIV_HAVE_STDINT_H
+
+/* ws2tcpip.h available */
+#mesondefine FREECIV_HAVE_WS2TCPIP_H
+
+/* sys/types.h available */
+#mesondefine FREECIV_HAVE_SYS_TYPES_H
+
+/* unistd.h available */
+#mesondefine FREECIV_HAVE_UNISTD_H
+
+/* sys/time.h available */
+#mesondefine FREECIV_HAVE_SYS_TIME_H
+
+/* sys/socket.h available */
+#mesondefine FREECIV_HAVE_SYS_SOCKET_H
+
+/* sys/select.h available */
+#mesondefine FREECIV_HAVE_SYS_SELECT_H
+
+/* netinet/in.h available */
+#mesondefine FREECIV_HAVE_NETINET_IN_H
+
+/* dirent.h available */
+#mesondefine FREECIV_HAVE_DIRENT_H
+
+/* stdbool.h available */
+#mesondefine FREECIV_HAVE_STDBOOL_H
+
+#endif /* FC__FREECIV_CONFIG_H */

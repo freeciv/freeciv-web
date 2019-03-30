@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="500">
+  <rect
+     width="750"
+     height="500"
+     fill="#ffffff"
+     x="0"
+     y="0" />
+  <rect
+     width="750"
+     height="150"
+     fill="#078930"
+     x="0"
+     y="350" />
+  <rect
+     width="750"
+     height="150"
+     fill="#da121a;"
+     x="0"
+     y="175" />
+  <rect
+     width="750"
+     height="150"
+     fill="#000000"
+     x="0"
+     y="0" />
+  <path
+     d="M 0,0 0,500 312,250 0,0 z"
+     fill="#0f47af" />
+  <g
+     transform="matrix(0,0.333135,0.33455333,0,-1.4194696,71.2595)"
+     fill="#fcdd09">
+    <path
+       transform="matrix(11.9122,0,0,12.4579,-2509.82,-6130.71)"
+       d="m 266.186,534.45 -10.408,-7.432 -10.357,7.505 3.852,-12.196 -10.338,-7.531 12.79,-0.105 3.967,-12.159 4.052,12.131 12.79,0.016 -10.285,7.602 3.937,12.169 z"
+       fill="#fcdd09" />
+  </g>
+</svg>

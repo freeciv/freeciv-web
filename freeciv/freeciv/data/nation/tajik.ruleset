@@ -1,0 +1,80 @@
+[nation_tajik]
+
+name=_("Tajik")
+plural=_("?plural:Tajiks")
+groups="Modern", "Asian"
+legend=_("Tajikistan is a nation in Central Asia. The Tajiks trace the\
+ foundation of their nation back to the Samanid Empire, one of the first\
+ Persian states to appear after the Arab conquest.")
+
+leaders = {
+ "name",                "sex"
+ "Bobojon Ghafurov",    "Male"
+ "Abulqosim Lohuti",    "Male" ; Political activist and poet.
+ "Nuh I",               "Male" ; Samanid ruler.
+ "Nasri II",            "Male" ; Samanid ruler.
+ "Ismoili Somoni",      "Male" ; Samanid ruler.
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Emir %s"),            _("Emira %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
+flag="tajikistan"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Hungarian" ;similar-looking flag
+civilwar_nations="Iranian", "Pakistani", "Afghani"
+
+cities =
+ "Dushanbe",
+ "Khujand",
+ "Kulob",
+ "Qurghonteppa",
+ "Istaravshan",
+ "Konibodom",
+ "Vakhdat",
+ "Isfara",
+ "Panjakent",
+ "Tursunzoda",
+ "Khorugh",
+ "Hisor",
+ "Farkhor",
+ "Chkalov",
+ "Vose'",
+ "Maskav",
+ "Danghara",
+ "Norak",
+ "Somoniyon",
+ "Ghafurov",
+ "Kolkhozobod",
+ "Zafarobod",
+ "Nov",
+ "Proletar",
+ "Jirgatol",
+ "Shahrtuz",
+ "Asht",
+ "Sarband",
+ "Taboshar",
+ "Qayroqqum",
+ "Leningrad",
+ "Ayni",
+ "Vakhsh",
+ "Dusti",
+ "Buston",
+ "Gharm",
+ "Kuybyshev",
+ "Roghun",
+ "Faizobod",
+ "Panj",
+ "Ishkoshim",
+ "Murghob",
+ "Qal'ai Khumb",
+ "Darband"

@@ -1,0 +1,7 @@
+# See freeciv.project for the documentation of the fields.
+
+# Load freeciv defaults
+. ${srcdir}/bootstrap/freeciv.project
+
+# Snapshot build specific storage dir
+FREECIV_STORAGE_DIR="~/.freeciv.snapshot"

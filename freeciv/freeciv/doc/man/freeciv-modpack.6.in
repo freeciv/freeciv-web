@@ -1,0 +1,146 @@
+.\" Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+.\"   This program is free software; you can redistribute it and/or modify
+.\"   it under the terms of the GNU General Public License as published by
+.\"   the Free Software Foundation; either version 2, or (at your option)
+.\"   any later version.
+.\"
+.\"   This program is distributed in the hope that it will be useful,
+.\"   but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\"   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\"   GNU General Public License for more details.
+.\"
+.TH FREECIV 6 "May 24th 2014"
+.SH NAME
+freeciv-mp-gtk3, freeciv-mp-qt, freeciv-mp-cli \
+\- Custom content installers for the Freeciv game
+.SH SYNOPSIS
+.B freeciv-modpack \
+[ \-d|\-\-debug \fIlevel_number\fP ] \
+[ \-h|\-\-help ] \
+[ \-i|\-\-install \fIURL\fP ] \
+[ \-L|\-\-List \fIURL\fP ] \
+[ \-p|\-\-prefix \fIdirectory\fP ] \
+[ \-v|\-\-version ] \
+
+.SH DESCRIPTION
+Freeciv is a free turn-based multiplayer strategy game, in which each player
+becomes the leader of a civilization, fighting to obtain the ultimate goal:
+To become the greatest civilization.
+
+Players of Civilization II\*R by Microprose\*R should feel at home, since one
+aim of Freeciv is to have compatible rules.
+
+Freeciv is maintained by an international team of coders and enthusiasts, and is
+easily one of the most fun and addictive network games out there!
+
+This is the custom content installer program - see also
+.IR freeciv-server (6)
+.IR freeciv-client (6)
+\&.
+
+This program allows users to select and download add-on content
+("modpacks") for Freeciv from the Internet, either from a list
+maintained by the Freeciv team, or by using a URL obtained by other
+means. It takes care of installing the files in the correct place
+under the user's home directory for this version of Freeciv; it does
+not install anything for system-wide use.
+
+This manual page only lists the command line arguments. For details
+regarding the options when using
+.B freeciv-modpack
+see the documentation at
+.UR @WIKI_URL@
+the Freeciv website
+.UE
+as well as the documentation which is part of the Freeciv distribution.
+.SH OPTIONS
+All options have a short
+form (single hyphen and single letter) and a long form (double hyphen
+and a complete word); their effects are identical.
+.TP
+.BI "\-d \fIlevel_number\fP, \-\-debug \fIlevel_number\fP"
+Sets the amount of debugging information to be logged.
+Acceptable values for the \fIlevel_number\fP are:
+
+\fB0\fP    for fatal messages only.
+
+\fB1\fP    for fatal and error messages.
+
+\fB2\fP    for fatal, error and warning messages
+
+\fB3\fP    for fatal, error, warning and normal messages (default).
+
+\fB4\fP    for fatal, error, warning, normal, and verbose messages.
+
+.TP
+.BI "\-h, \-\-help"
+Prints a short summary of the command line options.
+.TP
+.BI "\-i \fIURL\fP, \-\-install \fIURL\fP"
+Automatically install modpack from a given URL.
+.TP
+.BI "\-L \fIURL\fP, \-\-List \fIURL\fP"
+Gets modpack list from given URL, rather than the standard location on the
+Freeciv team's servers.
+.TP
+.BI "\-p \fIdirectory\fP, \-\-prefix \fIdirectory\fP"
+Installs modpacks under given directory hierarchy. 
+.TP
+.BI "\-v, \-\-version"
+Prints the version number and exits.
+.SH FILES
+.B freeciv modpack installer
+installs files to the following subdirectories of the user's home directory
+(or another directory specified with \fI\-\-prefix\fP), as appropriate:
+
+\(bu
+.I .freeciv/scenarios/
+
+\(bu
+.I .freeciv/@DATASUBDIR@/
+
+.B freeciv-mp-cli
+is version of the modpack installer usable from command line. By default
+it lists modpacks from the default list or from list specified with
+\fI\-\-List\fP. One can then run it again by giving appropriate
+URL from the list for \fI\-\-install\fP parameter.
+
+.SH ENVIRONMENT
+.B freeciv modpack installer
+accepts these environment variables:
+.TP
+.BI HOME
+Specifies the user's home directory.
+.TP
+.BI http_proxy
+Set this variable accordingly when using a proxy.
+.TP
+\fBLANG\fP  or  \fBLANGUAGE\fP
+Sets the language and locale on some platforms.
+.TP
+\fBLC_ALL\fP  or  \fBLC_CTYPE\fP
+Similar to LANG (see documentation for your system).
+.TP
+.BI USER
+Specifies the username of the current user.
+.SH BUGS
+Please report bugs to
+.UR @BUG_URL@
+the Freeciv bug tracker
+.UE
+\&.
+
+.SH "MORE INFO"
+See the
+.UR @WIKI_URL@
+Freeciv homepage
+.UE
+\&.
+
+Updates and new info is first posted there.
+.SH AUTHORS
+The Freeciv Team <@MAIL_ADDRESS@>.
+
+.SH "SEE ALSO"
+.IR freeciv-server (6)
+.IR freeciv-client (6)

@@ -1,0 +1,37 @@
+#!/bin/sh
+#/***********************************************************************
+# Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+# script by Rene Schalburg
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2, or (at your option)
+#   any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#***********************************************************************/
+
+BUILDDIR=`dirname $0`
+PROGNAME=freeciv-ruledit
+EXENAME=${PROGNAME}@EXEEXT@
+
+if test -x "$BUILDDIR/tools/ruledit/$EXENAME" ; then
+  EXE=$BUILDDIR/tools/ruledit/$EXENAME
+elif test -x "$BUILDDIR/$EXENAME" ; then
+  EXE=$BUILDDIR/$EXENAME
+else
+  echo "Unable to find rule editor executable: $EXENAME"
+  exit 1
+fi
+
+if test "x$FREECIV_DATA_PATH" = "x" ; then
+  FREECIV_DATA_PATH=".@HOST_PATH_SEPARATOR@data@HOST_PATH_SEPARATOR@@FREECIV_STORAGE_DIR@@HOST_DIR_SEPARATOR@@DATASUBDIR@"
+fi
+FREECIV_DATA_PATH="${FREECIV_DATA_PATH}@HOST_PATH_SEPARATOR@@top_builddir@@HOST_DIR_SEPARATOR@data@HOST_PATH_SEPARATOR@@top_srcdir@@HOST_DIR_SEPARATOR@data"
+export FREECIV_DATA_PATH
+
+echo "Running $EXE"
+exec "$EXE" ${1+"$@"}

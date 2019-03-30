@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <name>Freeciv SDL2 client</name>
+    <id type="desktop">freeciv-sdl2.desktop</id>
+    <metadata_license>CC0</metadata_license>
+    <summary>SDL2 based client for the Freeciv game</summary>
+    <description>
+        <p>
+            Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your
+            mission is to lead your tribe from the Stone Age to the Space Age...
+        </p>
+        <p>
+            This client for connecting to network games, or to launch local single-player games, is based on SDL2.
+        </p>
+    </description>
+    <url type="homepage">http://www.freeciv.org/</url>
+    <screenshots>
+      <screenshot type="default">
+        <image>http://images1.wikia.nocookie.net/__cb20120308234702/freeciv/images/thumb/4/43/Hex2.3.png/1000px-Hex2.3.png</image>
+      </screenshot>
+    </screenshots>
+    <update_contact>freeciv-dev@freelists.org</update_contact>
+</component>

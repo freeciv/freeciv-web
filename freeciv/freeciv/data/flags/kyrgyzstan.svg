@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="1062.9921"
+   height="708.66138"
+   viewBox="0 0 500 300"
+   id="Kyrgyzstan_svg"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docname="Flag_of_Kyrgyzstan.svg"
+   sodipodi:docbase="/home/divanov"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <metadata
+     id="metadata3007">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="755"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="300mm"
+     height="200mm"
+     units="mm"
+     inkscape:zoom="0.67833333"
+     inkscape:cx="500"
+     inkscape:cy="358.96806"
+     inkscape:window-x="-5"
+     inkscape:window-y="-5"
+     inkscape:current-layer="Kyrgyzstan_svg" />
+  <desc
+     id="desc2954">Flag of Kyrgyzstan</desc>
+  <defs
+     id="defs2956">
+    <clipPath
+       id="clip">
+      <circle
+         cy="-39"
+         r="46"
+         id="circle2959"
+         cx="0"
+         sodipodi:cx="0"
+         sodipodi:cy="-39"
+         sodipodi:rx="46"
+         sodipodi:ry="46" />
+    </clipPath>
+  </defs>
+  <rect
+     width="500"
+     height="333.97763"
+     id="rect2961"
+     x="0"
+     y="-16.666666"
+     style="fill:#e8112d" />
+  <g
+     transform="matrix(1.1194225,0,0,1.1194225,250,150.00001)"
+     id="g2963">
+    <g
+       id="quarter"
+       style="fill:#f9d616">
+      <path
+         id="b"
+         d="M 4.2,-54 C 0,-65 9,-82 0,-90 C 3,-78 -7,-65 -4.2,-54 C -1.4,-43 8.4,-43 4.2,-54 z " />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.9876883,0.1564345,-0.1564345,0.9876883,0,0)"
+         id="use2967"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.9510565,0.309017,-0.309017,0.9510565,0,0)"
+         id="use2969"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.8910065,0.4539905,-0.4539905,0.8910065,0,0)"
+         id="use2971"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.809017,0.5877853,-0.5877853,0.809017,0,0)"
+         id="use2973"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.7071068,0.7071068,-0.7071068,0.7071068,0,0)"
+         id="use2975"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.5877853,0.809017,-0.809017,0.5877853,0,0)"
+         id="use2977"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.4539905,0.8910065,-0.8910065,0.4539905,0,0)"
+         id="use2979"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.309017,0.9510565,-0.9510565,0.309017,0,0)"
+         id="use2981"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+      <use
+         xlink:href="#b"
+         transform="matrix(0.1564345,0.9876883,-0.9876883,0.1564345,0,0)"
+         id="use2983"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+    </g>
+    <use
+       xlink:href="#quarter"
+       transform="matrix(0,1,-1,0,0,0)"
+       id="use2985"
+       x="0"
+       y="0"
+       width="500"
+       height="300" />
+    <use
+       xlink:href="#quarter"
+       transform="scale(-1,-1)"
+       id="use2987"
+       x="0"
+       y="0"
+       width="500"
+       height="300" />
+    <use
+       xlink:href="#quarter"
+       transform="matrix(0,-1,1,0,0,0)"
+       id="use2989"
+       x="0"
+       y="0"
+       width="500"
+       height="300" />
+    <circle
+       r="54"
+       id="circle2991"
+       cx="0"
+       cy="0"
+       sodipodi:cx="0"
+       sodipodi:cy="0"
+       sodipodi:rx="54"
+       sodipodi:ry="54"
+       style="fill:#e8112d" />
+    <circle
+       cy="-3"
+       r="45"
+       id="circle2993"
+       cx="0"
+       sodipodi:cx="0"
+       sodipodi:cy="-3"
+       sodipodi:rx="45"
+       sodipodi:ry="45"
+       style="fill:#f9d616" />
+    <g
+       transform="translate(0,36)"
+       clip-path="url(#clip)"
+       id="g2995">
+      <g
+         id="arches"
+         style="fill:#e8112d">
+        <path
+           d="M 45,-63.63961 C 9.8528139,-63.63961 -18.63961,-35.147186 -18.63961,-7.7936045e-15 C -18.63961,35.147186 9.8528139,63.63961 45,63.63961 L 41.4,66.10471 C 4.8913768,66.10471 -24.70471,36.508623 -24.70471,8.0954922e-15 C -24.70471,-36.508623 4.8913768,-66.10471 41.4,-66.10471 L 45,-63.63961 z "
+           id="path2998" />
+        <path
+           d="M 39,-67.84916 C 1.5279436,-67.84916 -28.84916,-37.472056 -28.84916,-8.3091257e-15 C -28.84916,37.472056 1.5279436,67.84916 39,67.84916 L 35.4,70.60241 C -3.5926343,70.60241 -35.20241,38.992634 -35.20241,8.6463015e-15 C -35.20241,-38.992634 -3.5926343,-70.60241 35.4,-70.60241 L 39,-67.84916 z "
+           id="path3000" />
+        <path
+           d="M 33,-72.5209 C -7.0521871,-72.5209 -39.5209,-40.052187 -39.5209,-8.8812488e-15 C -39.5209,40.052187 -7.0521871,72.5209 33,72.5209 L 29.4,75.51047 C -12.303281,75.510469 -46.110469,41.703281 -46.110469,9.2473655e-15 C -46.110469,-41.703281 -12.303281,-75.510469 29.4,-75.51047 L 33,-72.5209 z "
+           id="path3002" />
+      </g>
+      <use
+         xlink:href="#arches"
+         transform="scale(-1,1)"
+         id="use3004"
+         x="0"
+         y="0"
+         width="500"
+         height="300" />
+    </g>
+  </g>
+</svg>

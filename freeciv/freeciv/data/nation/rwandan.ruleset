@@ -1,0 +1,45 @@
+[nation_rwandan]
+
+name=_("Rwandan")
+plural=_("?plural:Rwandans")
+groups="Modern", "African"
+legend=_("Rwanda is a hilly and very fertile country in the Great Lakes\
+ region of eastern Africa. It supports the densest population of\
+ the continent.")
+
+leaders = {
+ "name",                "sex"
+ "Juvénal Habyarimana", "Male"
+ "Grégoire Kayibanda",  "Male"
+ "Kigeli V",            "Male"
+ "Mutara III",          "Male"
+ "Yuhi IV",             "Male"
+}
+
+flag="rwanda"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "burundian", "congolese"
+
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Ruanda
+cities =
+ "Kigali",
+ "Butare",
+ "Gitarama",
+ "Ruhengeri",
+ "Gisenyi",
+ "Byumba",
+ "Cyangugu",
+ "Nyanza",
+ "Kabuga",
+ "Ruhango",
+ "Rwamagana",
+ "Kibuye",
+ "Kibungo",
+ "Gikongoro",
+ "Umutara"

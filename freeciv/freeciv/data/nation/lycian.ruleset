@@ -1,0 +1,58 @@
+[nation_lycian]
+
+name=_("Lycian")
+plural=_("?plural:Lycians")
+groups="Ancient", "Asian"
+legend=_("Lycia was an ancient Southwest Anatolian state which existed\
+ from the 15th to the 6th century BCE. Lycians were allies of Troy\
+ during the Trojan War, when they were led by the legendary heroes\
+ Sarpedon and Glaucus. Their state was subordinated to the Persian Empire\
+ in the 6th century BCE.")
+leaders = {
+ "name",                "sex"
+ "Sarpedon",            "Male"
+ "Glaukos",             "Male"
+ "Iobates",             "Male"
+ "Bellerophon",         "Male"
+ "Skulakeos",           "Male"
+ "Gergis",              "Male"
+ "Megaryon",            "Male"
+ "Pandaros",            "Male"
+}
+
+flag="lycian"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Turkish", "Ottoman", "Byzantine"
+civilwar_nations = "Luwian", "Hittite", "Greek" ;Lydian, carian
+
+cities =
+"Pttara", ;Patara
+"Telebehi",
+"Arñna", ;Xanthos
+"Tlãñna",  
+"Aprll",
+"Zẽmuri",
+"Araththi",
+"Arikanda",
+"Isñta",
+"Khadawãti",
+"Khãkbi",
+"Wehñta",
+"Khbide",
+"Pilleñni",
+"Doliciste",
+"Surezi",
+"Trm̃mis",
+"Tuminehi",
+"Wiyanawanda",
+;Greek names:
+"Antiphellos",
+"Andriaka",
+"Olympos",
+"Phaselis"

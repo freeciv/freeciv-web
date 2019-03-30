@@ -1,0 +1,67 @@
+[nation_welsh]
+
+name=_("Welsh")
+plural=_("?plural:Welsh")
+groups= "Medieval", "European"
+legend=_("The Welsh at one time controlled all of what is now England\
+ until being driven into the mountainous western reaches by invading\
+ Saxons.")
+
+leaders = {
+ "name",                        "sex"
+ "Llywelyn ap Gruffudd",        "Male"
+ "Hywel Dda",                   "Male"
+ "Owain Glyndwr",               "Male"
+ "Gwenllian ferch Gruffudd",    "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Despotism",       _("Chieftain %s"),      _("?female:Chieftain %s")
+}
+
+flag="wales"
+flag_alt = "united_kingdom"
+style = "Celtic"
+
+;names = "Yr Ymerodreath Gymreig"          "empire"            (depotism)
+;      = "Y Twysysogaeth Cymru"            "principality"      (monarchy)
+;      = "Y Gwerinaeth Pobl Cymru"         "people's republic" (communism)
+;    = "Yr Ymerodrath Scantaidd Cymreig" "holy welsh empire" (fundamentalism)
+;      = "Y Gweriniaeth Cymru"           "republic"     (republic, democracy)
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Breton", "Irish", "Cornish"
+
+cities =
+ "Caerdydd",		; Cardiff
+ "Abertawe",		; Swansea
+ "Casnewydd",		; Newport
+ "Y Barri",		; Barry
+ "Aberafan",		; Port Talbot
+ "Caerfyrddin",		; Carmarthen
+ "Caerffili",		; Caerphilly
+ "Merthyr Tudful",	; Merthyr Tydfil
+ "Penfro",		; Pembroke
+ "Abergwaun",		; Fishguard
+ "Aberystwyth",
+ "Llambed",		; Lampeter
+ "Llanymddyfri",	; Llandovery
+ "Aberhonddu",		; Brecon
+ "Y Fflint",		; Flint
+ "Caernarfon",
+ "Llanfyllin",
+ "Caergybi",		; Holyhead
+ "Tywyn",
+ "Llandeilo",
+ "Cwmbrân",		; Cwmbran
+ "Y Rhondda",		; Rhondda
+ "Llanelli",
+ "Castell Nedd",	;Neath
+ "Wrecsam",		;Wrexham
+ "Llanfairpwllgwyngyll"
+
+

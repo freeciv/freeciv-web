@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg551"
+   sodipodi:version="0.32"
+   width="744.09000px"
+   height="140mm"
+   sodipodi:docbase="/Users/daniel/Desktop"
+   sodipodi:docname="soviet.svg"
+   inkscape:version="0.46"
+   inkscape:export-filename="/Users/daniel/Desktop/soviet.png"
+   inkscape:export-xdpi="16.860001"
+   inkscape:export-ydpi="16.860001"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata7430">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs553">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 248.03149 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09003 : 248.03149 : 1"
+       inkscape:persp3d-origin="372.04501 : 165.35433 : 1"
+       id="perspective16" />
+    <linearGradient
+       id="linearGradient567">
+      <stop
+         style="stop-color:#000;stop-opacity:1;"
+         offset="0"
+         id="stop568" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="1"
+         id="stop569" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient567"
+       id="linearGradient570" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.92458711"
+     inkscape:cx="63.696645"
+     inkscape:cy="248.03149"
+     inkscape:window-width="1280"
+     inkscape:window-height="729"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg551"
+     showgrid="false" />
+  <rect
+     style="font-size:12px;fill:#cc0000;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     id="rect590"
+     width="744.09003"
+     height="496.06299"
+     x="0.0000000"
+     y="-7.5999997e-05" />
+  <g
+     id="g3163">
+    <path
+       sodipodi:nodetypes="ccccccccccc"
+       id="path589"
+       d="M 171.21881,47.372544 L 162.50433,69.950557 L 135.81555,70.384306 L 155.96816,86.449214 L 149.43199,110.32896 L 171.76354,96.869496 L 195.18332,109.89472 L 188.10303,86.014483 L 207.16619,70.818055 L 180.47802,70.383815 L 171.21881,47.372544 z"
+       style="font-size:12px;fill:none;fill-rule:evenodd;stroke:#ffd700;stroke-width:6.39583015000000010;stroke-opacity:1" />
+    <g
+       transform="matrix(0.9854185,0,0,0.9442732,14.02646,22.421158)"
+       id="g840">
+      <path
+         transform="matrix(0.757037,0,0,0.770366,-45.00377,-93.99085)"
+         sodipodi:nodetypes="csccccccsscccc"
+         id="path566"
+         d="M 285.563,244.585 C 416.015,365.133 295.764,455.355 246.876,407.831 C 241.675,402.261 235.808,397.089 229.251,390.039 L 218.638,395.559 L 210.669,394.203 L 209.875,402.908 L 204.323,407.911 L 200.094,411.571 C 185.123,418.962 183.13,418.182 174.934,429.412 C 167.783,439.671 178.053,449.813 190.156,442.164 C 201.793,434.81 198.729,437.436 208.025,422.365 L 216.259,412.578 L 223.963,411.252 C 311.196,520.922 466.691,349.291 285.563,244.585 z"
+         style="font-size:12px;fill:#ffd700;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1" />
+      <path
+         transform="matrix(0.755308,-5.112918e-2,5.202941e-2,0.768607,-63.48462,-77.14349)"
+         sodipodi:nodetypes="ccccccccc"
+         id="path558"
+         d="M 342.261,443.325 L 362.24,426.938 L 272.236,317.2 L 299.025,291.09 L 262.627,286.074 L 209.616,328.894 L 232.189,349.699 L 257.347,329.369 L 342.261,443.325 z"
+         style="font-size:12px;fill:#ffd700;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt" />
+    </g>
+  </g>
+</svg>

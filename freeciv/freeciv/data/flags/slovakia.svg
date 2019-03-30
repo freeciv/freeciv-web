@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="1062.99"
+   height="708.661"
+   id="svg378"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="slovakia.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="729"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="0.51176399"
+     inkscape:cx="918.39209"
+     inkscape:cy="354.33051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg378" />
+  <defs
+     id="defs380">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 354.33051 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1062.99 : 354.33051 : 1"
+       inkscape:persp3d-origin="531.495 : 236.22034 : 1"
+       id="perspective14" />
+  </defs>
+  <rect
+     width="1062.99"
+     height="708.661"
+     x="0"
+     y="0"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect171" />
+  <rect
+     width="1062.99"
+     height="472.441"
+     x="0"
+     y="236.22"
+     style="font-size:12;fill:#0b4ea2;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="rect403" />
+  <rect
+     width="1062.99"
+     height="236.22"
+     x="0"
+     y="472.441"
+     style="font-size:12;fill:#ee1c25;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="rect135" />
+  <path
+     d="M 185.105 160.833 L 185.105 359.548 C 198.715 437.129 234.784 516.071 356.599 556.222 C 477.734 516.071 516.524 440.531 530.815 358.187 L 530.815 160.833 L 185.105 160.833 z "
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="path150" />
+  <path
+     d="M 198.715 176.485 L 198.715 350.021 C 210.964 413.31 234.784 499.738 356.599 539.889 C 477.734 499.738 505.636 413.31 516.524 350.021 L 516.524 176.485 L 198.715 176.485 z "
+     style="font-size:12;fill:#ee1c25;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="path140" />
+  <path
+     d="M 375.654 281.287 L 375.654 309.189 L 431.458 309.189 C 438.94 309.189 445.976 305.559 453.235 303.744 L 453.235 356.145 C 453.235 356.145 453.235 356.145 453.235 356.145 C 445.749 354.557 438.43 351.382 430.777 351.382 L 376.335 351.382 L 376.335 415.352 L 338.905 413.991 L 338.905 351.382 L 285.824 351.382 C 277.846 351.382 270.399 355.465 262.686 357.506 L 262.686 301.703 C 269.945 303.971 276.858 308.508 284.463 308.508 L 338.905 308.508 L 338.905 280.606 L 298.754 280.606 C 291.718 280.606 285.597 285.597 279.018 288.092 L 279.018 235.011 C 286.504 238.187 293.344 244.538 301.476 244.538 L 339.586 244.538 L 339.586 220.719 C 339.586 209.594 333.234 199.396 330.058 188.734 L 383.82 188.734 C 381.098 199.623 375.654 210.176 375.654 221.4 L 375.654 244.538 L 411.722 244.538 C 421.133 244.538 429.87 239.548 438.944 237.053 L 438.944 289.454 C 430.777 286.732 423.052 281.287 414.444 281.287 L 375.654 281.287 z "
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="path153" />
+  <path
+     d="M 306.92 422.838 C 274.934 406.845 244.38 415.776 229.764 441.382 C 252.477 484.766 295.691 519.813 356.599 539.889 C 417.167 519.813 461.231 484.766 485.39 443.424 C 466.57 407.521 430.777 412.289 407.639 423.519 C 391.306 383.367 324.614 385.409 306.92 422.838 z "
+     style="font-size:12;fill:#0b4ea2;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     id="path152" />
+</svg>

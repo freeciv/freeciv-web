@@ -1,0 +1,88 @@
+[nation_marshallese]
+
+name = _("Marshallese")
+plural = _("?plural:Marshallese")
+groups="Oceanian", "Modern"
+legend=_("The Marshall Islands is a country in the Western Pacific, just\
+ north of the Equator, consisting of a large number of islands and\
+ atolls. Populated primarily by Micronesians, the islands became an\
+ independent republic in free association with the United States in 1986.\
+ In the mid-20th the United States carried out numerous nuclear tests on\
+ the islands.")
+
+leaders = {
+ "name",              "sex"
+ "John Marshall",     "Male"
+ "Atama Zedkaia ",    "Female"
+ "Amata Kabua",       "Male"
+ "Kessai Note",       "Male"
+}
+
+ruler_titles = {
+ "government", "male_title",            "female_title"
+ "Democracy",  _("Speaker %s"),         _("?female:Speaker %s")
+ "Monarchy",   _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
+
+flag="marshall_islands"
+flag_alt="-"
+style = "tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="micronesian", "kiribati"
+
+cities =
+ "Majuro",
+ "Ebeye",
+ "Laura",
+ "Ajeltake",
+ "Enewetak",
+ "Kili",
+ "Namdrik",
+ "Wotje",
+ "Enubirr",
+ "Jabwor",
+ "Woja",
+ "Ailuk",
+ "Ujae",
+ "Utrik",
+ "Mejit",
+ "Mejatto",
+ "Mili",
+ "Likiep",
+ "Aerok",
+ "Woja",
+ "Majkin",
+ "Toka",
+ "Lae",
+ "Jeh",
+ "Jaluit",
+ "Aur",
+ "Ine",
+ "Arno",
+ "Kaben",
+ "Buoj",
+ "Namu",
+ "Tabal",
+ "Arrak",
+ "Jittaken",
+ "Ejit",
+ "Nallu",
+ "Ulien",
+ "Jittoen",
+ "Tarawa",
+ "Bikini",
+ "Bikarej",
+ "Langor",
+ "Tinak",
+ "Airok",
+ "Imiej",
+ "Loen",
+ "Enajek",
+ "Lib",
+ "Wotho",
+ "Gugeegue",
+ "Matolen"

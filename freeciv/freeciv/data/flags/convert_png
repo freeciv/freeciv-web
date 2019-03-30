@@ -1,0 +1,132 @@
+#!/bin/bash
+
+# Using absolute paths due to bug in Inkscape on macOS
+files="$(pwd)/$@"
+
+if test "x$1" = "x-h" || test "x$1" = "x--help" ; then
+    echo "Usage: $(basename $0) [list of svg-files]"
+    exit 0
+fi
+
+# Renderer: inkscape or sodipodi.  Inkscape seems slightly better.
+#SODIPODI="sodipodi"
+RENDERER="inkscape"
+
+# Target width: 29px is regular, 44px is large (height is then calculated
+# automatically).
+TARGET_WIDTH=29
+TARGET_WIDTH_LARGE=44
+
+SHIELD_WIDTH=14
+SHIELD_HEIGHT=14
+SHIELD_WIDTH_LARGE=19
+SHIELD_HEIGHT_LARGE=19
+
+which $RENDERER >/dev/null \
+  || (echo "You need $RENDERER to render the SVG files.")
+(which convert >/dev/null && which composite >/dev/null) \
+  || (echo "You need ImageMagick to manipulate the images."; err=yes)
+
+for file0 in $files; do
+  # Generate the regular images
+  filebase=`echo $file0 | sed 's/.[Ss][Vv][Gg]$//'`
+
+  file1="$filebase-1.png"
+  file2="$filebase-2.png"
+  file3="$filebase-3.png"
+  file4="$filebase.png"
+  echo "Converting $file0 to $file4"
+
+  # This is actually necessary for rendering
+  rm -f $file1 $file2 $file3 $file4
+
+  $RENDERER -f "$file0" -w $(($TARGET_WIDTH - 2)) -e "$file1" >/dev/null
+
+  # Ugly way to determine width and height.  There must be a better way!
+  SIZE=`identify "$file1" | sed "s/^.*PNG //" | sed "s/ .*\$//"`
+  WIDTH=`echo $SIZE | sed "s/x.*\$//"`
+  HEIGHT=`echo $SIZE | sed "s/^.*x//"`
+
+  # This complicated code puts a 1-pixel black border around the image.
+  convert -resize $((2*$WIDTH))x$((2*$HEIGHT)) -fill black -draw "rectangle 0,0 $((2*$WIDTH)),$((2*$HEIGHT))" $file1 $file2
+  convert -crop $((2+$WIDTH))x$((2+$HEIGHT))+0x0 $file2 $file3
+  composite -gravity center -compose src-over $file1 $file3 $file4
+
+  rm -f $file1 $file2 $file3 "$filebase-4-fs8.png"
+
+  file1="$filebase-1.png"
+  file2="$filebase-2.png"
+  file3="$filebase-3.png"
+  file4="$filebase-shield.png"
+
+  WIDTH=$(($SHIELD_WIDTH-2))
+  HEIGHT=$(($SHIELD_HEIGHT-2))
+
+  # The following assumes that the drawing has the same dimensions as the page
+  DRAWING_WIDTH=$($RENDERER -f $file0 -W)
+  DRAWING_HEIGHT=$($RENDERER -f $file0 -H)
+  X0=$(awk -v drawing_width=${DRAWING_WIDTH} 'BEGIN { print int((drawing_width / 6) + 0.5) }')
+  X1=$(awk -v x0=${X0} 'BEGIN{ print int((x0 * 5) + 0.5) }')
+  Y0=0
+  Y1=$(awk -v drawing_height=${DRAWING_HEIGHT} 'BEGIN { print int(drawing_height + 0.5) }')
+  AREA=$X0":"$Y0":"$X1":"$Y1
+
+  $RENDERER -f $file0 -w $WIDTH -h $HEIGHT -e $file1 -a=$AREA > /dev/null
+
+  composite -gravity center -compose src-over $file1 mask.png $file2
+  composite -gravity center -compose src-over mask.png $file2 $file3
+  convert -transparent magenta $file3 $file4
+
+  rm -f $file1 $file2 $file3 "$filebase-4-fs8.png"
+
+  # Generate the large images
+  filebase=`echo $file0 | sed 's/.[Ss][Vv][Gg]$//'`
+
+  file1="$filebase-1.png"
+  file2="$filebase-2.png"
+  file3="$filebase-3.png"
+  file4="$filebase-large.png"
+  echo "Converting $file0 to $file4"
+
+  # This is actually necessary for rendering
+  rm -f $file1 $file2 $file3 $file4
+
+  $RENDERER -f "$file0" -w $(($TARGET_WIDTH_LARGE - 2)) -e "$file1" >/dev/null
+
+  # Ugly way to determine width and height.  There must be a better way!
+  SIZE=`identify "$file1" | sed "s/^.*PNG //" | sed "s/ .*\$//"`
+  WIDTH=`echo $SIZE | sed "s/x.*\$//"`
+  HEIGHT=`echo $SIZE | sed "s/^.*x//"`
+
+  # This complicated code puts a 1-pixel black border around the image.
+  convert -resize $((2*$WIDTH))x$((2*$HEIGHT)) -fill black -draw "rectangle 0,0 $((2*$WIDTH)),$((2*$HEIGHT))" $file1 $file2
+  convert -crop $((2+$WIDTH))x$((2+$HEIGHT))+0x0 $file2 $file3
+  composite -gravity center -compose src-over $file1 $file3 $file4
+
+  rm -f $file1 $file2 $file3 "$filebase-4-fs8.png"
+
+  file1="$filebase-1.png"
+  file2="$filebase-2.png"
+  file3="$filebase-3.png"
+  file4="$filebase-shield-large.png"
+
+  WIDTH=$(($SHIELD_WIDTH_LARGE-2))
+  HEIGHT=$(($SHIELD_HEIGHT_LARGE-2))
+
+  # The following assumes that the drawing has the same dimensions as the page
+  DRAWING_WIDTH=$($RENDERER -f $file0 -W)
+  DRAWING_HEIGHT=$($RENDERER -f $file0 -H)
+  X0=$(awk -v drawing_width=${DRAWING_WIDTH} 'BEGIN { print int((drawing_width / 6) + 0.5) }')
+  X1=$(awk -v x0=${X0} 'BEGIN{ print int((x0 * 5) + 0.5) }')
+  Y0=0
+  Y1=$(awk -v drawing_height=${DRAWING_HEIGHT} 'BEGIN { print int(drawing_height + 0.5) }')
+  AREA=$X0":"$Y0":"$X1":"$Y1
+
+  $RENDERER -f $file0 -w $WIDTH -h $HEIGHT -e $file1 -a=$AREA > /dev/null
+
+  composite -gravity center -compose src-over $file1 mask-large.png $file2
+  composite -gravity center -compose src-over mask-large.png $file2 $file3
+  convert -transparent magenta $file3 $file4
+
+  rm -f $file1 $file2 $file3 "$filebase-4-fs8.png"
+done

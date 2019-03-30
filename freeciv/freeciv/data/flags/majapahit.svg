@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="900"
+   height="600"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   version="1.0"
+   sodipodi:docbase="C:\freeciv"
+   sodipodi:docname="majapahit.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.62833333"
+     inkscape:cx="450"
+     inkscape:cy="300"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="900px"
+     height="600px"
+     inkscape:window-width="847"
+     inkscape:window-height="579"
+     inkscape:window-x="371"
+     inkscape:window-y="234" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#d80309;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1884"
+       width="450"
+       height="600"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#ffde00;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1886"
+       width="450"
+       height="600"
+       x="450"
+       y="0" />
+    <path
+       style="fill:#fbfaff;fill-opacity:1"
+       d="M 305.09634,534.31536 C 213.67752,480.01471 223.12779,363.66253 325.14242,338.19174 L 587.33866,336.54916 C 586.40137,361.70994 585.27798,399.81227 622.86765,400.07285 C 660.45735,400.33343 657.87074,363.46419 661.52525,334.01707 C 694.62468,351.48763 759.16243,349.10038 758.85557,302.90661 C 758.54871,256.71283 694.91852,261.4261 660.35343,274.97254 C 657.31244,239.2606 663.00096,205.37755 623.9245,205.09559 C 584.83306,204.81354 589.25082,257.68532 591.25116,270.73544 L 326.40386,271.79955 C 228.72472,234.91686 216.95398,123.56926 306.36402,68.988785 C 260.82728,46.285914 144.48755,81.984367 141.23673,179.75764 C 137.98591,276.34367 220.34118,288.92287 272.60117,301.61902 C 220.93949,316.99548 138.37778,328.4596 141.85804,426.05554 C 145.33705,523.61641 259.45713,547.36575 305.09634,534.31536 z "
+       id="path1882"
+       sodipodi:nodetypes="ccczszszscczczc" />
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+Webperimental was based on the classic ruleset (via the deprecated fcweb
+ruleset). It is more like classic than non web Freeciv's experimental
+ruleset.
+
+Differences compared to the classic ruleset are:
+- Diplomat available from Alphabet
+- AI players are created with random trait values
+- Known techs tree cannot have holes in it
+- Diplomats can steal gold from enemy capitals (needs Banking)
+- Spies can steal gold from enemy cities (needs Banking)
+- A higher percentage of a nation's gold can be stolen from its capital
+  (unless it's in Anarchy).
+- An even higher percentage of a nation's gold can be stolen from its
+  capital if it is communist.
+- The killstack server setting is disabled by default.
+  - unit stack blocks bribe/sabotage unit needs killstack.
+- Spies can steal parts of other player's world map.
+- Spies belonging to the owner of the Manhattan Project can nuke cities.
+  - a higher veteran level gives a higher chance of success.
+  - agents and spymasters may even escape before the nuke detonates.
+- Explorers can establish embassies once Writing is discovered.
+  This action consumes the explorer.
+- Cities can be founded within enemy borders during war and
+  before contact.
+- The Zone of Control rules have been turned off.
+- There's only one barbarian nation, attacking from both land and sea.
+- A player that knows Electricity has no fog of war inside his borders.
+- Foot soldiers can peacefully expel foreign civilian units from your
+  terrain.
+- It is possible to establish an embassy while inside a ship.
+- The startunits are by default spread over the map.
+- The Leader unit has been added to the default startunits.
+- The Leader unit can destroy a domestic city. (Be careful when you scorch
+  the earth. If your Leader dies you lose he game.)
+- Killing an enemy Leader gives you a few of his cities, some of his gold
+  and some of his knowledge. Not all his cities will follow you. Some will
+  rather turn barbarian.
+- The Leader can heal light weight units belonging to you or to your allies.
+- The Leader can move on shallow water without being transported by becoming
+  a "Leader Yacht". Conversion back and forth can be done inside a city once
+  Map Making has been discovered.
+- Labels the year using AD/BC.
+- All units can be airlifted:
+  - Light weight units can be airlifted once Flight is known.
+  - Medium weight units can be airlifted once Advanced Flight is known.
+  - Heavy weight units can be airlifted once Fusion Power is known.
+  - To airlift heavy and medium weight units an airport is required both
+  in the source and in the destination city.
+- Cities that know Flight can airlift one (light weight) unit per turn. An
+  Airport allows a city to airlift one more unit per turn.
+- Default minimum distance between cities is 3.
+- Default map generator is `Fair islands`. It generates identical start
+  position islands for all players.
+- The Howitzer and the Battleship can bombard.
+  - bombardment may hurt all units at the target tile.
+  - bombardment can't kill a unit.
+  - bombardment can kill population in a city.
+  - webperimental's bombardment can target unit stacks 3 tiles away.
+  - webperimental's bombardment doesn't replace regular attack.
+- The Battleship is weak against Bomber planes.
+- Moving from a ship to the beach doesn't spend all movement points.
+- Airlifting to and from allied cities is allowed by default.
+- Land units sees further on top of Mountain tiles.
+- Railroads can't be used by enemy units by default. Regular roads can be
+  used by the enemy even if the restrictinfra server setting is enabled.
+  (The restrictinfra server setting is enabled by default.)
+- An alliance has more in game consequences:
+  - Unit ownership can be transferred by moving a unit to an allied city
+    and ordering it to change home city.
+  - Caravan and Freight can help allies to complete wonders.
+  - Sun Tzu's War Academy gives its veteran bonus (combat and production)
+    to both its owner and to all his allies.
+  - J.S. Bach's Cathedral makes two unhappy citizens content in allied
+    cities too.
+  - A. Smith's Trading Co. pays for your allies' 1 upkeep buildings too.

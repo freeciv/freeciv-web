@@ -1,0 +1,112 @@
+[nation_bosnia]
+
+name=_("Bosnian-Herzegovinian")
+plural=_("?plural:Bosnians")
+groups="Modern", "European"
+legend=_("Bosnia and Herzegovina is a country in south-east Europe, and the\
+ home of three constituent peoples: Bosniaks, Serbs, and Croats.")
+
+leaders = {
+ "name",                        "sex"
+ "Kulin",                       "Male"
+ "Tvrtko Kotromanić",           "Male"
+ "Prijezda I",                  "Male"
+ "Stjepan Tomaš",               "Male"
+ "Nikola Filipović",            "Male"
+ "Avdo Humo",                   "Male"
+ "Alija Izetbegović",           "Male"
+ "Husein-beg Gradaščević",      "Male"
+ "Džemal Bijedić",              "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ ; /* TRANS: Ban = Duke */
+ "Despotism",       _("Ban %s"),       _("?female:Ban %s")
+}
+
+flag="bosnia"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="croatian", "serbian"
+
+cities =
+ "Sarajevo",
+ "Banja Luka",
+ "Tuzla",
+ "Bihać",
+ "Travnik",
+ "Zenica",
+ "Jajce",
+ "Doboj",
+ "Mostar",
+ "Maglaj",
+ "Gračanica",
+ "Bosanski Novi",
+ "Bijeljina",
+ "Trebinje",
+ "Goražde",
+ "Livno",
+ "Prijedor",
+ "Cazin",
+ "Derventa",
+ "Konjic",
+ "Modriča",
+ "Bosanska Krupa",
+ "Vitez",
+ "Olovo",
+ "Visoko",
+ "Lukavac",
+ "Gradačac",
+ "Kakanj",
+ "Bosanska Dubica",
+ "Bosanski Brod",
+ "Brčko",
+ "Bugojno",
+ "Gornji Vakuf",
+ "Donji Vakuf",
+ "Ključ",
+ "Jablanica",
+ "Sanski Most",
+ "Srebrenica",
+ "Gradiška",
+ "Bosanski Šamac",
+ "Neum",
+ "Živinice",
+ "Banovići",
+ "Kiseljak",
+ "Fojnica",
+ "Višegrad",
+ "Stolac",
+ "Čitluk",
+ "Široki Brijeg",
+ "Čapljina",
+ "Tešanj",
+ "Teslić",
+ "Soko",
+ "Žepče",
+ "Zavidovići",
+ "Orašje",
+ "Mrkonjić Grad",
+ "Bosanski Petrovac",
+ "Prozor",
+ "Kozarac",
+ "Posusije",
+ "Foča",
+ "Busovača",
+ "Srebrenik",
+ "Titov Drvar",
+ "Otoka",
+ "Pale",
+ "Turbe",
+ "Grude",
+ "Kalesija",
+ "Ljubija",
+ "Crni Lug",
+ "Žepa",
+ "Kulen Vakuf"

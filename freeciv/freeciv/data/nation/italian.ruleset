@@ -1,0 +1,150 @@
+[nation_italian]
+
+translation_domain="freeciv"
+
+name = _("Italian")
+plural = _("?plural:Italians")
+groups="Medieval", "Modern", "European", "Core"
+legend=_("The Italian nation was unified in 1870 CE after decades of\
+ campaigning by indigenous nationalists. It was a monarchy under the\
+ House of Savoy until 1922, then a fascist state until 1945 after which\
+ democracy was restored by the World War II victors.")
+
+leaders = {
+ "name",                        "sex"
+ "Bettino Ricasoli",            "Male"
+ "Marco Minghetti",             "Male"
+ "Luigi Federico Menabrea",     "Male"
+ "Giovanni Lanza",              "Male"
+ "Agostino Depretis",           "Male"
+ "Francesco Crispi",            "Male"
+ "Giovanni Giolitti",           "Male"
+ "Luigi Pelloux",               "Male"
+ "Antonio Salandra",            "Male"
+ "Vittorio Emanuele Orlando",   "Male"
+ "Francesco Saverio Nitti",     "Male"
+ "Luigi Facta",                 "Male"
+ "Benito Mussolini",            "Male"
+ "Pietro Badoglio",             "Male"
+ "Alcide De Gasperi",           "Male"
+ "Vittorio Emanuele II",        "Male"
+ "Umberto I",                   "Male"
+ "Vittorio Emanuele III",       "Male"
+ "Elena del Montenegro",        "Female"
+ "Umberto II",                  "Male"
+ "Giuseppe Garibaldi",          "Male"
+ "Giuseppe Mazzini",            "Male"
+ "Palmiro Togliatti",           "Male"
+ "Giacomo Matteotti",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Duce %s"),            _("Ducezza %s")
+ "Fundamentalism",  _("Archbishop %s"),      _("Mother Superior %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
+flag = "italy"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Florentine", "Friulian", "Genoese", "Milanese", "Neapolitan",
+ "Piedmontese", "Sardinian", "Sicilian", "Venetian"
+civilwar_nations="Florentine", "Friulian", "Genoese", "Milanese", "Neapolitan",
+ "Piedmontese", "Sardinian", "Sicilian", "Venetian", "Papal"
+
+cities =
+  "Roma",
+  "Milano",
+  "Napoli",
+  "Torino",
+  "Palermo",
+  "Genova",
+  "Bologna",
+  "Firenze",
+  "Bari",
+  "Catania",
+  "Venezia",
+  "Verona",
+  "Messina",
+  "Padova",
+  "Trieste",
+  "Taranto",
+  "Brescia",
+  "Prato",
+  "Reggio Calabria",
+  "Parma",
+  "Modena",
+  "Reggio Emilia",
+  "Perugia",
+  "Livorno",
+  "Ravenna",
+  "Cagliari",
+  "Foggia",
+  "Rimini",
+  "Salerno",
+  "Ferrara",
+  "Sassari",
+  "Siracusa",
+  "Pescara",
+  "Monza",
+  "Latina",
+  "Bergamo",
+  "Forlì",
+  "Vicenza",
+  "Trento",
+  "Terni",
+  "Novara",
+  "Bolzano",
+  "Piacenza",
+  "Ancona",
+  "Andria",
+  "Arezzo",
+  "Udine",
+  "La Spezia",
+  "Lecce",
+  "Pesaro",
+  "Alessandria",
+  "Barletta",
+  "Catanzaro",
+  "Pistoia",
+  "Brindisi",
+  "Pisa",
+  "Como",
+  "Lucca",
+  "Treviso",
+  "Varese",
+  "Grosseto",
+  "Caserta",
+  "Asti",
+  "Ragusa",
+  "L'Aquila",
+  "Cremona",
+  "Pavia",
+  "Massa",
+  "Trapani",
+  "Cosenza",
+  "Potenza",
+  "Viterbo",
+  "Savona",
+  "Benevento",
+  "Crotone",
+  "Matera",
+  "Caltanissetta",
+  "Agrigento",
+  "Avellino",
+  "Cuneo",
+  "Teramo",
+  "Olbia",
+  "Siena",
+  "Chieti",
+  "Trani",
+  "Rovigo",
+  "Pordenone",
+  "Ascoli Piceno",
+  "Campobasso"

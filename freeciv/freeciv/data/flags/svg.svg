@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg:svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   x="0.0000000"
+   y="0.0000000"
+   width="450.00000"
+   height="300.00000"
+   id="svg1"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="Flag_of_Saint_Vincent_and_the_Grenadines.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <sodipodi:namedview
+     inkscape:window-height="480"
+     inkscape:window-width="640"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="2.4833333"
+     inkscape:cx="225"
+     inkscape:cy="150"
+     inkscape:current-layer="svg1" />
+  <svg:defs
+     id="defs3">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 150 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="450 : 150 : 1"
+       inkscape:persp3d-origin="225 : 100 : 1"
+       id="perspective2445" />
+  </svg:defs>
+  <svg:metadata
+     id="metadata4">
+    <RDF
+       id="RDF5">
+      <Work
+         about=""
+         id="Work6">
+        <format
+           id="format7">image/svg+xml</format>
+        <type
+           id="type9"
+           resource="http://purl.org/dc/dcmitype/StillImage" />
+      </Work>
+    </RDF>
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </svg:metadata>
+  <svg:rect
+     width="90.000000"
+     height="60.000000"
+     x="125.00000"
+     y="617.36218"
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#0072c6;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="rect908" />
+  <svg:rect
+     width="67.500000"
+     height="60.000000"
+     x="147.50000"
+     y="617.36218"
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#fcd116;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="rect2152" />
+  <svg:rect
+     width="22.500000"
+     height="60.000000"
+     x="192.50000"
+     y="617.36218"
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#009e60;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="rect2774" />
+  <svg:path
+     d="M 165.00000,659.86218 L 170.00000,669.86218 L 175.00000,659.86218 L 170.00000,649.86218 L 165.00000,659.86218 z "
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#009e60;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="path3396" />
+  <svg:path
+     d="M 171.25000,647.36218 L 176.25000,657.36218 L 181.25000,647.36218 L 176.25000,637.36218 L 171.25000,647.36218 z "
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#009e60;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="path4018" />
+  <svg:path
+     d="M 158.75000,647.36218 L 163.75000,657.36218 L 168.75000,647.36218 L 163.75000,637.36218 L 158.75000,647.36218 z "
+     transform="matrix(5.000000,0.000000,0.000000,5.000000,-625.0000,-3086.811)"
+     style="fill:#009e60;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="path4019" />
+</svg:svg>

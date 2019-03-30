@@ -1,0 +1,72 @@
+[nation_venda]
+
+name = _("Venda")
+plural = _("?plural:Vhavenda")
+groups="African", "Early Modern", "Medieval"
+legend=_("The Vhavenda are a Bantu people in South Africa and Zimbabwe.\
+ Once the rulers of the Mapungubwe Kingdom, they now count about one\
+ million members, mostly in the province of Limpopo. During the Apartheid\
+ Era there existed a Bantustan of Venda.")
+
+leaders = {
+ "name",                     "sex"
+ "Shiriyadenga",             "Male"
+ "Thohoyandou",              "Male"
+ "Makhado",                  "Male"
+ "Patrick Mphephu",          "Male"
+ "Gabriel Ramushwana",       "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Monarchy",        _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+
+}
+
+flag = "venda"
+flag_alt = "-"
+style = "babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="sotho", "zulu", "swazi"
+
+cities =
+ "Mapungubwe",
+ "Dzata",
+ "Thulamela",
+ "Sibasa",
+ "Thohoyandou",
+ "Mutale",
+ "Musina",
+ "Malamulele",
+ "Dzanani",
+ "Mbilwi",
+ "Tswime",
+ "Tshiendeulu",
+ "Tshakhuma",
+ "Tshamanyatsha",
+ "Musina",
+ "Tshivuhla",
+ "Lishivha",
+ "Matshete",
+ "Mulambwane",
+ "Madzhie",
+ "Fundudzi",
+ "Makwarela",
+ "Shayandima",
+ "Giyani",
+ "Tshilamba",
+ "Vhutalu",
+ "Elim",
+ "Phalaborwa",
+ "Ngovhela",
+ "Vondwe",
+ "Phiphidi",
+ "Muledane",
+ "Shayandima",
+ "Manlini"
+
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 570 282"
+   id="svg6941"
+   sodipodi:version="0.32"
+   inkscape:version="0.42.2"
+   width="600.00000pt"
+   height="400.00000pt"
+   sodipodi:docname="iraq.svg"
+   sodipodi:docbase="/home/jdorje/src/freeciv/freeciv/data/flags">
+  <defs
+     id="defs6970">
+    <title
+       id="title6949">Vertical Tricolor: black, white, and green</title>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="920"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.5031148"
+     inkscape:cx="374.47371"
+     inkscape:cy="223.20318"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:current-layer="svg6941" />
+  <metadata
+     id="metadata6943">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Iraqi flag 1959-1963 (post-royalist pre-Ba`thist)</dc:title>
+        <dc:description>Flag of Iraq, 1959-1963</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>asia</rdf:li>
+            <rdf:li>historical</rdf:li>
+            <rdf:li>flag</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>AnonMoos</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>AnonMoos</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Modified by Daniel Markstedt</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <title
+     id="title6945">Iraqi flag 1959-1963 (post-royalist pre-Ba`thist): public domain vector graphic</title>
+  <rect
+     style="fill:#ffffff;fill-opacity:1.0000000;stroke:none;stroke-width:0.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000"
+     id="rect7944"
+     width="190.00000"
+     height="380.00000"
+     x="190.00000"
+     y="-49.000000" />
+  <path
+     style="fill:none;stroke:none;stroke-width:1.8202049"
+     id="path6953"
+     d="M 190.00000,-49.000000 L 380.00000,-49.000000 M 190.00000,331.00000 L 380.00000,331.00000" />
+  <g
+     transform="translate(250.3545,57.3584) rotate(22.5)"
+     id="g6959"
+     stroke="none">
+    <title
+       id="title6961">Iraq Kurdish-Arab &quot;Peace Sun&quot; star: red and yellow</title>
+    <path
+       d="M0,90.533H37.5v37.5L64.0165,101.5165L90.533,128.033v-37.5h37.5L101.5165,64.0165L128.033,37.5h-37.5V0L64.0165,26.5165L37.5,0V37.5H0L26.5165,64.0165Z"
+       id="path6963"
+       fill="rgb(204,0,0)" />
+    <circle
+       cx="64.0165"
+       cy="64.0165"
+       r="32.25"
+       id="circle6965"
+       fill="rgb(255,255,255)" />
+    <circle
+       cx="64.0165"
+       cy="64.0165"
+       r="26.25"
+       id="circle6967"
+       fill="rgb(255,255,0)" />
+  </g>
+  <rect
+     style="opacity:1.0000000;fill:#000000;fill-opacity:1.0000000;stroke-width:0.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke:none"
+     id="rect6988"
+     width="190.00000"
+     height="380.00000"
+     x="0.0000000"
+     y="-49.000011" />
+  <rect
+     y="-49.000011"
+     x="380.00000"
+     height="380.00000"
+     width="190.00000"
+     id="rect6990"
+     style="opacity:1.0000000;fill:#009900;fill-opacity:1.0000000;stroke-width:0.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke:none" />
+</svg>

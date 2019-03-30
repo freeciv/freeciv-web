@@ -1,0 +1,121 @@
+[nation_arab]
+
+translation_domain="freeciv"
+
+name=_("Arab")
+plural=_("?plural:Arabs")
+groups="Medieval", "Asian", "African", "Core"
+legend=_("The Arab/Islamic civilization of 622 to 1495 CE.")
+
+leaders = {
+ "name",                "sex"
+ "Mohammad",            "Male"
+ "Fatimah",             "Female"
+ "Umar",                "Male"
+ "Harun al-Rashid",     "Male"
+ "Saladin",             "Male"
+ "Al-Mansur",           "Male"
+ "Al-Hakim",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheikh %s"),    _("Shaykha %s")
+ "Republic",        _("Vizier %s"),    _("?female:Vizier %s")
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+}
+
+flag ="arab"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; Should not appear with other Arabic nations from the beginning but...
+conflicts_with="Iraqi", "Libyan", "Sudanese", "Syrian", "Egyptian Arab",
+ "Moroccan", "Tunisian", "Algerian", "Andalusi", "Saudi", "Palestinian",
+ "Yemeni", "South Yemeni", "Lebanese", "Emirati", "Jordanian", "Omani",
+ "Sahrawi", "Mauritanian", "Kuwaiti", "Qatari", "Bahraini", "Mamluk",
+ "Cyrenaican"
+; ...civil war to them.
+civilwar_nations="Iraqi", "Libyan", "Sudanese", "Syrian", "Egyptian Arab",
+ "Moroccan", "Tunisian", "Algerian", "Andalusi", "Saudi", "Palestinian",
+ "Yemeni", "Lebanese", "Emirati", "Jordanian", "Omani", "Sahrawi",
+ "Mauritanian", "Kuwaiti", "Qatari", "Bahraini"
+
+; Arab Peninsula and Near East.  City names are mostly from the Ummayyad 
+; and Abbasid periods.  These are Arab spellings rather than Anglicized ones;
+; thus, Dimashq = Damascus, Al Qahira = Cairo, etc.
+
+cities =
+
+ "Makka",
+ "Al-Madina",
+ "Ar-Riyadh",
+ "Al-Qahira",
+ "Baghdad",
+ "Dimashq ash-Sham",
+ "Al-Quds",
+ "Jidda",
+ "Eskendereyya",
+ "Sana'a'",
+ "'Adan",
+ "Maskat",
+ "'Amman",
+ "Bayrut",
+ "Qurtuba",
+ "Timbuktu",
+ "Halab",
+ "Hims",
+ "Sijilmasa",
+ "Al-Hufuf",
+ "Burayda",
+ "At-Ta’if", 
+ "Al-Hudayda",
+ "Al-Mukalla",
+ "Ta'izz",
+ "Abu Zabi",
+ "Dubayy",
+ "Gharnata",
+ "Marrakush",
+ "Ad-Dawha",
+ "Al-Jaza'ir",
+ "Al-Basra",
+ "Al-Manama",
+ "Tarabulus",
+ "Al-'Aqaba",
+ "Al-Kufa",
+ "Ad-Dammam",
+ "Madinat al-Kuwayt",
+ "As-Suways",
+ "Wahran",
+ "Al-Jahra",
+ "Ar-Rabat",
+ "Al-Qayrawan",
+ "Sayda",
+ "Fas",
+ "Hama",
+ "Al-'Ayn",
+ "Khorramshar",
+ "Tunis",
+ "Bur Sa'id",
+ "An-Najaf",
+ "Ad-Dar al-Baydha",
+ "Kirkuk",
+ "Sur",
+ "Tulaytula",
+ "Bur Sudan",
+ "Tikrit",
+ "Kaysaria",
+ "Miknas",
+ "Al-Ladhiqiya",
+ "Al-Khartum",
+ "Ishbiliya",
+ "Al-Qatta'i",
+ "Al-Mosul",
+ "Al-Maydiya",
+ "Binzart",
+ "Banghazi",
+ "Ariha"

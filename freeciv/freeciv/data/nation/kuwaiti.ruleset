@@ -1,0 +1,88 @@
+[nation_kuwaiti]
+
+name=_("Kuwaiti")
+plural=_("?plural:Kuwaitis")
+groups="Asian", "Early Modern", "Modern"
+legend=_("Kuwait is an Arab country, bordered by Iraq, Saudi Arabia and\
+ the Persian Gulf. It was founded in 1756 by the Sabah dynasty, who has\
+ ruled the country ever since. In 1990 the country was occupied by Iraqi\
+ forces, who were subsequently ejected after an international military\
+ intervention. Economically, Kuwait is one of the most developed countries\
+ in the Middle East. Despite its relatively small size, the country has\
+ about ten percent of the world's proven oil reserves.")
+
+leaders = {
+ "name",                             "sex"
+ "Sabah I bin Jaber",                "Male"
+ "Abdullah I Al-Sabah",              "Male"
+ "Abdullah II Al-Sabah",             "Male"
+ "Mubarak Al-Sabah",                 "Male"
+ "Salim Al-Mubarak Al-Sabah",        "Male"
+ "Ahmad Al-Jaber Al-Sabah",          "Male"
+ "Abdullah III Al-Salim Al-Sabah",   "Male"
+ "Jaber Al-Ahmad Al-Jaber Al-Sabah", "Male"
+ "Sabah Al-Ahmad Al-Jaber Al-Sabah", "Male"
+}
+ruler_titles = { "government", "male_title",       "female_title"
+                 "Despotism",      _("Sheikh %s"), _("Shaykha %s")
+                 "Fundamentalism", _("Imam %s"),   _("Imama %s")
+                 "Monarchy",       _("Emir %s"),   _("Emira %s")
+                 "Republic",       _("Vizier %s"), _("?female:Vizier %s")
+               }
+
+flag="kuwait"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "iraqi", "saudi"
+
+cities =
+ "Madinat al-Kuwayt",
+ "Al-Jahra",
+ "Hawalli",
+ "Al-Ahmadi",
+ "Al-Farwaniya",
+ "Mubarak al-Kabeer",
+ "As-Salimiya",
+ "Jalib ash-Shuyuh",
+ "Ash-Shuwayh as-Sakaniya",
+ "Subbah-as-Salim",
+ "Al-Qurayn",
+ "As-Sulaybiya",
+ "Al-Fuhayhil",
+ "Tayma'",
+ "Al-Fardaws",
+ "Al-Qasr",
+ "Al-'Ardiya",
+ "Ar-Riqqa",
+ "Abraq Hitan",
+ "Az-Zahar",
+ "Ad-Dawha",
+ "Al-Manqaf",
+ "Jabbar-al-'Ali",
+ "Al-Waha",
+ "Ar-Rabiya",
+ "As-Sulaybihat",
+ "Ar-Rawda",
+ "Salwa'",
+ "Al-Andalus",
+ "Al-'Uyawn",
+ "Kayfan",
+ "Abu Hulayfa",
+ "Banayd-al-Qar",
+ "Al-Wafra",
+ "Az-Zawr",
+ "Amgara",
+ "Al-Jabiriya",
+ "Ar-Rumaytiya",
+ "Bayan",
+ "Al-Fintas",
+ "'Abdulla-as-Salam",
+ "al-Qadisiya",
+ "Al-Fayha",
+ "'Umayriya",
+ "Ad-Dasma"

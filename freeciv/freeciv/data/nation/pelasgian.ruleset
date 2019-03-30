@@ -1,0 +1,61 @@
+[nation_pelasgian]
+
+name=_("Pelasgian")
+plural=_("?plural:Pelasgians")
+groups="Ancient", "European"
+legend=_("Pelasgians or Pelasgoi were an ancient pre-Greek people of Greece.\
+ Much is still unknown about them, but it is probable they were of\
+ pre-Indo-European origin.")
+leaders = {
+ "name",                "sex"
+ "Pelasgos",            "Male"
+ "Minyas",              "Male"
+ "Athamas",             "Male"
+ "Ogyges",              "Male"
+ "Phoroneus",           "Male"
+ "Kekrops",             "Male"
+}
+flag="pelasgian"
+flag_alt = "-"
+style = "Classical"
+
+ruler_titles = {
+ "government",      "male_title",           "female_title"
+ "Anarchy",         _("Usurper %s"),        _("?female:Usurper %s")
+ "Despotism",       _("Despot %s"),         _("?female:Despot %s")
+ "Fundamentalism",  _("Elder %s"),          _("?female:Elder %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="hellenic", "byzantine", "roman", "ottoman", "turkish", "venetian",
+               "italian"
+civilwar_nations = "cretan", "greek" ; carian
+
+cities =
+  "Pharsalos",
+  "Korinthos",
+  "Zakynthos",
+  "Athenai",
+  "Mykenai",  
+  "Amarynthos",
+  "Tirynsos",
+  "Brilettos",
+  "Lykabettos",
+  "Gargettos",
+  "Larissa",
+  "Parnassos",
+  "Kephissos",
+  "Ilissos",
+  "Amnissos",
+  "Tylissos",
+  "Messene",
+  "Kyllene",
+  "Kyrene",
+  "Mytilene",
+  "Thebes",
+  "Delphi",
+  "Lindos",
+  "Rhamnos"

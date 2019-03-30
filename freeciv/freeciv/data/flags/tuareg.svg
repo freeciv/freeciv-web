@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="1500"
+   height="1000">
+  <rect
+     style="fill:#ffcc00;fill-opacity:1;stroke:none"
+     id="rect1960"
+     width="1500"
+     height="1000"
+     x="0"
+     y="0" />
+  <rect
+     width="34.14402"
+     height="817.55701"
+     x="737.52271"
+     id="rect1964"
+     y="91.220993"
+     style="fill:#000000" />
+  <rect
+     width="406.93002"
+     height="34.448864"
+     y="347.58704"
+     id="rect1966"
+     style="fill:#000000"
+     x="548.02728"
+     transform="matrix(0.99997997,-0.00632857,-0.0053519,0.99998568,0,0)" />
+  <rect
+     width="406.92984"
+     height="34.448856"
+     y="641.00189"
+     id="rect1968"
+     style="fill:#000000"
+     x="550.07227"
+     transform="matrix(0.99997997,-0.00632857,-0.0053519,0.99998568,0,0)" />
+  <rect
+     width="185.37598"
+     height="41.387787"
+     y="-585.53027"
+     id="rect1970"
+     style="fill:#000000"
+     x="180.72942"
+     transform="matrix(0.00797937,0.99996816,-0.99999264,-0.00383706,0,0)" />
+  <rect
+     width="186.52963"
+     height="41.387787"
+     y="-950.172"
+     id="rect1972"
+     style="fill:#000000"
+     x="175.27054"
+     transform="matrix(0.00793002,0.99996856,-0.99999255,-0.00386092,0,0)" />
+  <rect
+     width="186.52953"
+     height="41.387756"
+     y="-947.84753"
+     id="rect1974"
+     style="fill:#000000"
+     x="643.16467"
+     transform="matrix(0.00793003,0.99996856,-0.99999255,-0.00386093,0,0)" />
+  <rect
+     width="186.52943"
+     height="41.387733"
+     y="-581.84192"
+     id="rect1976"
+     style="fill:#000000"
+     x="646.8855"
+     transform="matrix(0.00793003,0.99996856,-0.99999255,-0.00386093,0,0)" />
+</svg>

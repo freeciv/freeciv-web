@@ -1,0 +1,84 @@
+[nation_barbadian]
+
+name=_("Barbadian")
+plural=_("?plural:Barbadians")
+groups="Modern", "American"
+legend=_("Barbados is an island country in the Atlantic Ocean, about 100\
+ km east of the Windward Islands in the Caribbean. Originally inhabited by\
+ Arawaks, the island was discovered by the Portuguese around 1500. When\
+ the English first settled Barbados in 1627 they found the island\
+ depopulated. The island has been independent since 1966. Barbados is a\
+ major international tourist destination and one of the most developed\
+ countries of the Caribbean.")
+
+leaders = {
+ "name",                   "sex"
+ "William Courten",        "Male"
+ "Bussa",                  "Male"
+ "Samuel Jackman Prescod", "Male"
+ "Grantley Adams",         "Male"
+ "Errol Barrow",           "Male"
+ "Tom Adams",              "Male"
+ "Nita Barrow",            "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Fundamentalism",  _("Bishop %s"),          _("?female:Bishop %s")
+}
+
+flag="barbados"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "trinidadian and tobagonian", "vincentian"
+
+cities =
+ "Bridgetown",
+ "Speightstown",
+ "Holetown",
+ "Oistins",
+ "Bathsheba",
+ "Bulkeley",
+ "Crane",
+ "Crab Hill",
+ "Blackmans",
+ "Greenland",
+ "Hillaby",
+ "Six Cross Roads",
+ "Belleplaine",
+ "Cave Hill",
+ "The Crane",
+ "Lamberts",
+ "Warrens",
+ "Wildey",
+ "Two Mile Hill",
+ "Woodbourne",
+ "Cherry Tree Hill",
+ "Ragged Point",
+ "Cave Hill",
+ "Bushy Park",
+ "Sunbury",
+ "Prospect",
+ "Charnocks",
+ "Benthams",
+ "Orange Hill",
+ "Golden Grove",
+ "Springfield",
+ "Neils",
+ "Sweet Vale",
+ "Douglas",
+ "Drax Hall Woods",
+ "Applewhaites",
+ "Endeavour",
+ "Hothersal",
+ "Four Roads",
+ "Archers",
+ "Harrismith",
+ "Seaview",
+ "Lead Vale",
+ "Welchman Hall"
+ 

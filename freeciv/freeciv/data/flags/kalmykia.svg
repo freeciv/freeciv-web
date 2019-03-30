@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xml:space="preserve"
+   width="450px"
+   height="300px"
+   viewBox="0 0 450 300"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="Flag_of_Kalmykia.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"><metadata
+   id="metadata31"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs29"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 150 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="450 : 150 : 1"
+     inkscape:persp3d-origin="225 : 100 : 1"
+     id="perspective33" /></defs><sodipodi:namedview
+   inkscape:window-height="729"
+   inkscape:window-width="1280"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   guidetolerance="10.0"
+   gridtolerance="10.0"
+   objecttolerance="10.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   showgrid="false"
+   inkscape:zoom="0.28282563"
+   inkscape:cx="225"
+   inkscape:cy="226.92308"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:current-layer="svg2" />
+<rect
+   fill="#FFD000"
+   width="450"
+   height="300"
+   x="0"
+   y="0"
+   id="rect4" />
+<circle
+   cx="300"
+   cy="150"
+   r="100"
+   id="circle6"
+   sodipodi:cx="300"
+   sodipodi:cy="150"
+   sodipodi:rx="100"
+   sodipodi:ry="100"
+   transform="translate(-75,0)"
+   style="fill:#00b0e0" />
+<g
+   id="g8"
+   transform="translate(-74.5,0)"
+   style="fill:#ffffff;stroke:#000000;stroke-width:1">
+<path
+   d="M 246,198 C 262,200 277,195 287,189 C 301,182 303,163 303,163 C 303,163 278,161 265,175 C 262,177 252,185 246,198 z"
+   id="path10" />
+<path
+   d="M 354,198 C 338,200 323,195 313,189 C 299,182 297,163 297,163 C 297,163 322,161 335,175 C 338,177 348,185 354,198 z"
+   id="path12" />
+<path
+   d="M 248,152 C 245,152 239,151 230,158 C 237,167 244,172 256,172 C 272,172 288,168 288,168 C 288,168 266,152 258,152 L 248,152 z"
+   id="path14" />
+<path
+   d="M 352,152 C 355,152 361,151 370,158 C 363,167 356,172 344,172 C 328,172 312,168 312,168 C 312,168 334,152 352,152 z"
+   id="path16" />
+<path
+   d="M 281,99 C 272,99 264,147 264,147 L 297,147 C 297,147 294,99 281,99 z"
+   id="path18" />
+<path
+   d="M 319,99 C 328,99 336,147 336,147 L 303,147 C 303,147 306,99 319,99 z"
+   id="path20" />
+<path
+   d="M 262,108 C 259,108 256,119 256,130 C 256,143 270,175 297,170 C 290,155 273,108 262,108 z"
+   id="path22" />
+<path
+   d="M 338,108 C 341,108 344,119 344,130 C 344,143 330,175 303,170 C 310,155 327,108 338,108 z"
+   id="path24" />
+<path
+   d="M 300,172 C 313,172 315,158 315,140 C 315,128 307,99 300,99 C 293,99 285,128 285,140 C 285,158 287,172 300,172 z"
+   id="path26" />
+</g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="240" height="160" id="svg2" sodipodi:version="0.32" inkscape:version="0.46" sodipodi:docname="seleucid2.svg" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:export-filename="/home/mixcoatl/da.png" inkscape:export-xdpi="10.125" inkscape:export-ydpi="10.125">
+  <metadata id="metadata19">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs id="defs17">
+    <inkscape:perspective sodipodi:type="inkscape:persp3d" inkscape:vp_x="0 : 80 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="240 : 80 : 1" inkscape:persp3d-origin="120 : 53.333333 : 1" id="perspective21"/>
+  </defs>
+  <sodipodi:namedview inkscape:window-height="729" inkscape:window-width="1280" inkscape:pageshadow="2" inkscape:pageopacity="0.0" guidetolerance="10.0" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base" showgrid="false" inkscape:zoom="1.1360799" inkscape:cx="138.69019" inkscape:cy="80" inkscape:window-x="0" inkscape:window-y="0" inkscape:current-layer="svg2"/>
+  <path style="fill: rgb(255, 255, 0); stroke: none;" d="M0 0L0 160L240 160L240 0L0 0z" id="path4"/>
+  <path style="fill: rgb(26, 26, 26); stroke: none;" d="M109 7C110.295 11.7553 117.211 16.9311 115.959 21.9452C114.423 28.0981 101.105 33.5886 97.2569 40C90.9448 50.5164 93.0765 60.8954 90.0725 72C87.599 81.1439 81.3798 88.3765 74 94L74 95C100.765 92.87 104.096 77.3076 110 55L113 55C116.067 66.587 115.575 75.3062 114 87L126 87C124.425 75.3062 123.933 66.587 127 55L130 55C135.904 77.3076 139.235 92.87 166 95L166 94C158.62 88.3765 152.401 81.1439 149.927 72C146.924 60.8954 149.055 50.5164 142.743 40C138.895 33.5886 125.577 28.0982 124.041 21.9452C122.789 16.9311 129.705 11.7553 131 7L109 7z" id="path6"/>
+  <path style="fill: rgb(77, 77, 77); stroke: none;" d="M 99.323529,94.029412 L 97.323529,104.02941 L 90.323529,101.02941 L 99.323529,115.02941 L 101.32353,115.02941 L 110.32353,101.02941 L 103.32353,104.02941 L 101.32353,94.029412 L 99.323529,94.029412 z" id="path8"/>
+  <path style="fill: rgb(26, 26, 26); stroke: none;" d="M113 87L113 89L127 89L127 87L113 87z" id="path10"/>
+  <path style="fill: rgb(0, 0, 0); stroke: none;" d="M114 89L116 113C109.502 113.208 98.4068 114.53 92.1096 116.318C89.7632 116.984 87.9896 119.244 89.2878 121.687C92.1185 127.013 105.018 122.768 109.91 124.589C118.658 127.845 116 140.73 116 148C113.262 148 94.9254 150.675 105.232 155.397C110.798 157.946 120.936 156.003 127 156C129.778 155.999 142.802 154.223 135.551 149.028C132.726 147.004 127.296 148 124 148C124 140.73 121.342 127.845 130.09 124.589C134.982 122.768 147.881 127.013 150.712 121.687C152.01 119.244 150.237 116.984 147.89 116.318C141.593 114.53 130.498 113.208 124 113L126 89L114 89z" id="path12"/>
+  <path style="fill: rgb(26, 26, 26); stroke: none;" d="M115 118C117.506 123.905 122.494 123.905 125 118L115 118z" id="path14"/>
+</svg>

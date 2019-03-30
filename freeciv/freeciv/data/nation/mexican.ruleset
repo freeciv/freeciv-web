@@ -1,0 +1,192 @@
+[nation_mexican]
+
+name=_("Mexican")
+plural=_("?plural:Mexicans")
+groups="Modern", "American"
+legend=_("Mexico borrows its name from the Mexica people, another name for\
+ the Aztecs. It achieved independence from Spain in 1821. For most of the\
+ 19th century the country was wrecked by rebellions and foreign invasions\
+ losing more than half of its territory to the United States. A liberal\
+ constitution was proclaimed in 1857, leading to ten years of civil war\
+ between liberals and conservatives, in which the latter crowned\
+ Maximilian of Austria as emperor under French occupation. The French and\
+ conservatives were ultimately defeated by the liberals of Benito Juárez\
+ in 1867. Mexico entered the modern era under Porfirio Díaz (1876-1911)\
+ but social inequality and political repression led to the Mexican\
+ Revolution of 1910 which left more than a million dead. The Revolution\
+ led to the establishment of a corporatist one party state in 1929. Only\
+ in 2000 did Mexico see its first democratic transfer of power.")
+
+leaders = {
+ "name",                        "sex"
+ "Miguel Hidalgo",              "Male"
+ "José María Morelos",          "Male"
+ "Vicente Guerrero",            "Male"
+ "Agustín de Iturbide",         "Male"
+ "Guadalupe Victoria",          "Male"
+ "Antonio López de Santa Anna", "Male"
+ "Benito Juárez",               "Male"
+ "Maximiliano",                 "Male"
+ "Carlota",                     "Female"
+ "Porfirio Díaz",               "Male"
+ "Francisco I. Madero",         "Male"
+ "Victoriano Huerta",           "Male"
+ "Emiliano Zapata",             "Male"
+ "Pancho Villa",                "Male"
+ "Venustiano Carranza",         "Male"
+ "Álvaro Obregón",              "Male"
+ "Plutarco Elías Calles",       "Male"
+ "Lázaro Cárdenas",             "Male"
+ "Manuel Ávila Camacho",        "Male"
+ "Miguel Alemán",               "Male"
+ "Adolfo López Mateos",         "Male"
+ "Gustavo Díaz Ordaz",          "Male"
+ "Luis Echeverría",             "Male"
+ "José López Portillo",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",       "female_title"
+ "Communism",       _("Comandante %s"), _("Comandanta %s")
+ "Despotism",       _("General %s"),    _("?female:General %s")
+ "Fundamentalism",  _("Padre %s"),      _("Madre %s")
+ "Monarchy",        _("Emperor %s"),    _("Empress %s")
+}
+
+flag="mexico"
+flag_alt = "-"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="texan", "californian", "yucatecan", "central american", "chiapanec"
+
+cities =
+ "Ciudad de México (mountains, swamp, lake)",
+ "Guadalajara (plains, river)",
+ "Monterrey (hills)",
+ "Puebla (mountains)",
+ "Querétaro (hills)",
+ "Veracruz (ocean)",
+ "Mérida (jungle, forest, plains)",
+ "Morelia (hills, forest)",
+ "Oaxaca (mountains)",
+ "León (grassland, plains)",
+ "Tijuana (desert, ocean)",
+ "Ciudad Juárez (desert, river, plains)",
+ "Toluca (mountains, forest, tundra)",
+ "Torreón (grassland, plains)",
+ "Mexicali (desert, grassland)",
+ "Culiacán (plains, grassland)",
+ "Acapulco (ocean, mountains)",
+ "Chihuahua (desert)",
+ "San Luis Potosí (desert, hills)",
+ "Aguascalientes (hills)",
+ "Hermosillo (desert)",
+ "Saltillo (hills)",
+ "Durango (mountains, forest)",
+ "Jalapa (mountains)",
+ "Cuernavaca (mountains)",
+ "Celaya (plains, hills)",
+ "Colima (mountains)",
+ "Mazatlán (ocean)",
+ "Cancún (ocean, jungle)",
+ "Tampico (river, jungle, ocean)",
+ "Nuevo Laredo (river, desert)",
+ "Reynosa (river, desert)",
+ "Matamoros (river, grassland)",
+ "Campeche (ocean, jungle)", 
+ "Chetumal (ocean, jungle)",
+ "Villahermosa (river, jungle, swamp)",
+ "Tuxtla Gutiérrez (river, mountains)",
+ "Tapachula (jungle, hills, ocean)",
+ "San Cristóbal de Las Casas (mountains, jungle)",
+ "Tehuacán (mountains, river)",
+ "Coatzacoalcos (ocean, river, plains, jungle)",
+ "Minatitlán (river, plains, jungle)",
+ "Orizaba (mountains)",
+ "Córdoba (mountains)",
+ "Chilpancingo (mountains)",
+ "Cuautla (mountains, hills)",
+ "Uruapan (mountains, forest)",
+ "Zamora (hills)",
+ "Lázaro Cárdenas (ocean, river)",
+ "Pachuca (hills, forest)",
+ "Guanajuato (mountains)",
+ "Irapuato (plains)",
+ "Salamanca (plains)",
+ "Puerto Vallarta (ocean, mountains, hills)",
+ "Manzanillo (ocean)",
+ "Zacatecas (mountains, hills, desert)",
+ "Tepic (mountains)",
+ "Guaymas (ocean)",
+ "La Paz (ocean, desert, hills)",
+ "Valladolid (jungle, forest)", 
+ "Acuña (river, desert)",
+ "Monclova (desert, plains)",
+ "Nogales (desert)",
+ "San Juan del Río (hills, grassland, river)",
+ "Agua Prieta (desert)",
+ "Texcoco (swamp, lake)",
+ "Tuxtepec (mountains, plains, river)",
+ "Ensenada (ocean, hills)",
+ "Tehuantepec (plains, ocean)",
+ "Tlaxcala (mountains)",
+ "Arizpe (desert)",
+ "Taxco (mountains)",
+ "Dolores (mountains)",
+ "Parral (desert)",
+ "El Fuerte (grassland, mountains, forest)",
+ "Ciudad Obregón (grassland)",
+ "Ciudad Victoria (hills)",
+ "Poza Rica (hills, jungle)",
+ "Álamos (mountains, hills, desert)",
+ "Ciudad del Carmen (ocean, swamp, jungle, lake)",
+ "Ecatepec (swamp)",
+ "Ciudad Guzmán (mountains)",
+ "Lagos de Moreno (swamp, plains)",
+ "Ciudad Nezahualcóyotl (swamp)",
+ "Pátzcuaro (mountains, hills, forest, lake)",
+ "La Piedad (hills)",
+ "Tlalnepantla (hills)",
+ "Naucalpan (hills)",
+ "Cuautitlán (hills, swamp, forest)",
+ "Chalco (swamp, plains, lake)",
+ "López Mateos (hills)",
+ "Chimalhuacán (swamp)",
+ "Coacalco (plains, swamp)",
+ "Los Reyes (plains, swamp)",
+ "Zapopan (river)",
+ "Tlaquepaque (plains)",
+ "Tonalá (plains)",
+ "Guadalupe (hills, mountains)",
+ "San Pedro Garza García (hills, grassland)",
+ "San Nicolás de los Garza (hills)",
+ "Apodaca (hills)",
+ "Santa Catarina (hills, mountains)",
+ "Ciudad General Escobedo (hills, grassland)",
+ "Gómez Palacio (grassland)",
+ "Cholula (hills)",
+ "Huejotzingo (mountains)",
+ "Atlacomulco (hills, mountains)",
+ "Amecameca (mountains)",
+ "Huamantla (mountains, tundra)",
+ "Piedras Negras (desert, river)",
+ "Apizaco (tundra, mountains)",
+ "San Francisco del Rincón (hills)",
+ "San Martín Texmelucan (mountains, plains)",
+ "San Luis Río Colorado (desert, grassland, river)",
+ "Iguala (hills)",
+ "Ciudad Valles (hills)",
+ "Delicias (desert)",
+ "Fresnillo (desert)",
+ "Jiutepec (hills)",
+ "Los Mochis (plains, grassland, desert)",
+ "Navojoa (plains, grassland)",
+ "Tulancingo (hills)",
+ "Ciudad Cuauhtémoc (grassland)",
+ "Chapala (hills, lake)",
+ "Tlaxiaco (mountains)",
+ "Linares (plains)"
+

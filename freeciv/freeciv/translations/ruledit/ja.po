@@ -1,0 +1,552 @@
+# Japanese translations for Freeciv
+# Copyright (C) 2000-2006 Free Software Foundation, Inc.
+# Copyright (C) 2001 SUENAGA Yasuo
+# Copyright (C) 2002, 2006 MITA Yuusuke
+# Copyright (C) 2003 TAKAHASHI Naoki
+# This translation is covered by the GNU General Public License Version 2.
+# SAWADA Katsuya <ama@petmail.net>, 2000, 2001, 2002, 2003
+# SUENAGA Yasuo <s_keishi@mutt.freemail.ne.jp>, 2001
+# MITA Yuusuke <clefs@mail.goo.ne.jp>, 2002, 2006
+# TAKAHASHI Naoki <taka_radio_wave@yahoo.co.jp>, 2003, 2004
+# Daniel MARKSTEDT <himasaram@spray.se>, 2005
+#
+# For Japanese users:
+# こんなことをわざわざ書くのは恥ずかしいんですが、はっきりいって私の訳は
+# とてもひどいもので、本来他人に公開できるようなレベルではないと思います。
+# しかし、私にとって実際、こんな下手な訳でも役に立っていますし、英語の苦
+# 手な他の人にも役に立つだろうと考えて公開しています。
+#
+# わざわざこの po ファイルを見て下さっているあなた。私のダサイ訳を直した
+# り、未訳のところを訳して送って下さい。継続的にメンテナンスしてくれる方
+# なら喜んで Primary Contacter を譲ります。
+#
+# メールをお待ちしています。(澤田)
+#
+# 2003年11月から主に私が訳すことになりました。
+#
+# GTK2 でビルドすると変なところがあったのですが、なかなか日本語訳の
+# 更新が無かった事から、澤田氏に連絡してみたりしている内に、
+# まあ色々あって私が代わりに訳す事になった次第です。
+#
+# 大分更新しましたが、それでも変な所があると思います。
+# (というか沢山ありそうな気もしますが。)
+# お気付きになられた点がありましたら、気兼ね無く連絡してください。
+# 特に AI diplomacy 関連、各国の伝説(紹介文)関連は、
+# こういう訳の方が良いというのがありましたら、ぜひとも教えて下さい。
+# 変な文章が多いと思われますので。
+#
+# by 高橋
+#
+#
+# ## 以下はclefs==Y.Mitaのメモです。(2006.7)
+#
+# 私はかなり昔にほんの少しお手伝いをしただけなのですが，
+# 現在他に連絡を取れる翻訳者がいないということでお鉢が回ってきました。
+#
+# 今後私自身で積極的な更新をできる見込みは残念ながらありませんが，
+# 次に翻訳をしてみたい，あるいは誤訳を見つけたから直してほしいといった方との
+# 「日本語でokな」架け橋の役だけ務めさせていただこうと思います。
+#
+# 翻訳作業をしてみたい，あるいは1ヶ所だけでも訳してみたという方は
+# <clefs@mail.goo.ne.jp> までメールをください。
+# 訳や訂正を送っていただければ私が反映させておきますし，
+# 自分でバリバリ更新なさりたい方には具体的な作業方法をご説明します。
+# 要はバケツリレーですね（笑）
+#
+#
+# Belgaeです。２ちゃんねる同人ゲーム板のfreecivスレで活動しています。
+# Windows版で%sや%dが変換されないという問題があり，日本語でのプレイが
+# 困難だったのですが，%の前に半角スペースを入れると化けないことが判明
+# しました。その点を処理するだけでなく，バージョンアップによるfuzzyや
+# 新規メッセージを翻訳し，非公式置換ファイルとして公開していました。
+# このたび一通り翻訳し終えたので公式に採用してもらうことにしました。
+# 未訳を翻訳するだけでなく，既訳部分もかなり手を入れており，ユニット名や
+# 建造物名などもいくつか変更しています。これはなるべく本家Civilization
+# の訳語に近づけたものです。今まで慣れていた名称が変わることにご不満の
+# 方も多いかと思いますが，新規プレイヤーにはそのほうが良いかと考えたものです。
+# 2010/08/14
+#
+#
+# # TODO:
+#
+# 各nationの指導者に冠せられる称号は調べがつかなかったり
+# 単純に訳しても意味がないようなものだったりして未訳のものが多いです。
+# たとえば，"Imparator" も "Emporer" も訳せば「皇帝」になってしまいますが，
+# こういうのは無理に訳さないか「インパラトール」などとベタ音訳した方が良いの
+# かも。
+# →称号を未訳のままにしておくと，どこまで称号でどこから元首名かすら
+# わからないので，Daniel MARKSTEDTさんのアドバイスを容れてカタカナ音訳を
+# 多用することにしました。安直と言われればそれまでですが。
+#
+# 指導者称号の女性形は適切な訳語がない場合が多いです。無理に訳し分けることも
+# ないのかなとは思いますが。
+#
+# 怪しい訳には "XXX" のマークをつけてあります。改良してやってください。
+#
+# 最近はAIも外交しますが，この時の台詞にはセンスが要求されるので大変です。
+# とりあえず訳は当ててありますが，雰囲気が出るような訳に改良したいところ。
+#
+# nation選択時に表示されるnationの説明文は突貫工事です。
+# 歴史の知識のある方のチェックを願えると助かります。
+#
+# SDLクライアント関係は未訳が多いです。client/gui-sdl/*
+# MitaはGTK2クライアントでしか試せていませんので。
+# 大半はfuzzyマークを外すだけで大丈夫だとは思うのですが。
+#
+# これはja.poではありませんが，ネット対戦関係の日本語ドキュメントがないのが
+# 日本人のネット対戦参入を妨げているかもしれません。
+# Freecivは生きた人間と外交してこそ面白いゲームなのですが。
+#
+# 開発者も英語のnativeとは限らないので，原文自体がおかしい場合も散見されます。
+# 訳で補うか，本隊にフィードバックするか？
+#
+#
+# # 訳語おぼえがき：
+# （→以降はBelgaeの当てた訳です）
+#
+# "citizen governor" 旧称CMAで，原文もまだ混乱している。
+#                   「市民管理者」「知事」「市長」「地方長官」→「総督府」（ちょっとオーバーかも）
+# "fog of war" 「霧戦」; 「見えない」場所のユニットなどを表示しない機能のこと
+#              「FoW」とでもした方がよほど誤解がないかも→「戦場の霧」（定訳です）
+# "zone of control" 文脈により「ゾーンコントロール」または「コントロールゾーン」
+#                   これも無理せず「ZOC」とでもした方が良いかも→「ZOC」
+# "technology" "tech" "science" 「科学」と「技術」でぶれがある→technology「科学技術」science「科学」
+# "Seafaring"「航海」と "Navigation"「航海術」は紛らわしい
+#             "Sailing"という中間技術も提案されているが，いよいよ訳語が……
+# "worker" 「労働者」だが，ユニットと都市民の両方あるのが困りもの
+#          ユニットの方は「土方」「土木作業員」あたり
+# "Pollution" 「公害」; いくつかの文脈では「汚染」
+# "incident" 「事変」
+# "incite" 「煽動」
+# "revolt" 都市単位の「反逆」「叛乱」だが，
+#          時々revolution「革命」の意味でも使われている
+# "you" 外交の際の"you"は君主か国か？
+# "martial law" 「戦時法」; 「戒厳令」
+# "content" 「普通」／「満足している」→「平静」
+# "unit" 「部隊」と訳しているが，「ユニット」の方が無理がない→「ユニット」
+# "tile" 「マス」→「タイル」
+# "field unit" 「フィールド兵器」苦しまぎれ，訳語募集→「フィールドユニット」
+# "nation" 「民族」「国家」「国」「国民」「ナシオン」「ネイション」「人々」
+#          Freecivに限らぬ厄介な語です。翻訳的にも政治的にも。→基本的には「民族」
+# "airport"「空港」，"airbase"「飛行場」
+#
+# "shield"
+# ntaka
+# 場所によって，シールド，シールド生産物，生産，資源，，，
+# どう訳せばよい? (ここでは，都市の生産)
+# clefs ゲームでの機能を考えると，「鉱工業生産」とかかなあ
+#
+#
+# 句読法の統一が必要です。「!」か「！」か?？
+# 句点は「。」，読点は「，」
+#
+# 訳註は[]で示しています。
+#
+# これはFreecivに限った話でもありませんが，
+# "* " や "- " で始まる箇条書きは，日本語では表示の際に醜く改行されてしまう
+# 傾向にあるようです。(gettextの問題なのかな)
+#
+# Italian「イタリア人」，Italians「イタリア民族」のように訳し分けてありましたが，
+# Cubanを「キューバ人」とは言えてもCubansを「キューバ民族」とは言えない
+# といったケースも多いので，全て「〜人」に統一しました。
+# 日本語の「〜人」は民族・国名を曖昧に包括できるので便利というわけです。
+# 国民国家や民族というフィクションの限界というやつですね。
+# "…さぁ，やつらを地獄へ送ってやろうぜ!"
+msgid ""
+msgstr ""
+"Project-Id-Version: Freeciv 2.0.99-devel\n"
+"Report-Msgid-Bugs-To: http://gna.org/projects/freeciv/\n"
+"POT-Creation-Date: 2017-01-01 22:01+0200\n"
+"PO-Revision-Date: 2015-02-17 22:53+0900\n"
+"Last-Translator: \n"
+"Language-Team: SAWADA Katsuya <ama@petmail.net>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: G:\\Desktop\\freeciv-2.4.3\n"
+
+#: tools/ruledit/requirers_dlg.cpp:43 tools/ruledit/req_edit.cpp:131
+msgid "Close"
+msgstr "閉じる"
+
+#: tools/ruledit/requirers_dlg.cpp:57
+#, c-format
+msgid "Removing %s"
+msgstr ""
+
+#. TRANS: %s could be any of a number of ruleset items (e.g., tech,
+#. * unit type, ...
+#: tools/ruledit/requirers_dlg.cpp:72
+#, c-format
+msgid "Needed by %s"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:108
+msgid "Failed to load comments.txt"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:142
+msgid "Print a summary of the options"
+msgstr "オプションの一覧を表示する"
+
+#: tools/ruledit/ruledit.cpp:144
+msgid "Print the version number"
+msgstr "バージョンを表示する"
+
+#. TRANS: argument (don't translate) VALUE (translate)
+#: tools/ruledit/ruledit.cpp:147
+msgid "ruleset RULESET"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:148
+msgid "Ruleset to use as the starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:161
+msgid "Can only edit one ruleset at a time.\n"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:168
+#, c-format
+msgid "Unrecognized option: \"%s\"\n"
+msgstr "認識できないオプション: \"%s\"\n"
+
+#: tools/ruledit/ruledit_qt.cpp:121
+#, c-format
+msgid ""
+"%s%s\n"
+"commit: %s"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:136
+msgid "Give ruleset to use as starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:148
+#, fuzzy
+msgid "Start editing"
+msgstr "開始位置"
+
+#: tools/ruledit/ruledit_qt.cpp:158
+msgid "Misc"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:160
+#, fuzzy
+msgid "Tech"
+msgstr "技術(_T)"
+
+#: tools/ruledit/ruledit_qt.cpp:162
+msgid "Buildings"
+msgstr "建造物"
+
+#: tools/ruledit/ruledit_qt.cpp:164
+msgid "Units"
+msgstr "ユニット"
+
+#: tools/ruledit/ruledit_qt.cpp:166
+msgid "Goods"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:168
+#, fuzzy
+msgid "Governments"
+msgstr "政治体制"
+
+#: tools/ruledit/ruledit_qt.cpp:170
+msgid "Enablers"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:172
+msgid "Nations"
+msgstr "民族"
+
+#: tools/ruledit/ruledit_qt.cpp:181
+msgid "Welcome to freeciv-ruledit"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:199
+#, fuzzy
+msgid "Ruleset loaded"
+msgstr "ルールセット"
+
+#: tools/ruledit/ruledit_qt.cpp:218
+msgid "Ruleset loading failed!"
+msgstr ""
+
+# Daniel
+#: tools/ruledit/ruledit_qt.cpp:268
+#, fuzzy
+msgid "Freeciv Ruleset Editor"
+msgstr "Freeciv サーバー一覧"
+
+#: tools/ruledit/ruledit_qt.cpp:284
+msgid "Are you sure you want to quit?"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:288
+msgid "Quit?"
+msgstr ""
+
+# Daniel
+#: tools/ruledit/tab_building.cpp:65 tools/ruledit/tab_good.cpp:65
+#: tools/ruledit/tab_tech.cpp:63 tools/ruledit/tab_unit.cpp:65
+#, fuzzy
+msgid "Rule Name"
+msgstr "プレイヤー名 :"
+
+#: tools/ruledit/tab_building.cpp:73 tools/ruledit/tab_good.cpp:73
+#: tools/ruledit/tab_tech.cpp:71 tools/ruledit/tab_unit.cpp:73
+msgid "Name"
+msgstr "名前"
+
+#: tools/ruledit/tab_building.cpp:84 tools/ruledit/tab_good.cpp:84
+msgid "Requirements"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:89
+#, fuzzy
+msgid "Add Building"
+msgstr "建造物"
+
+#: tools/ruledit/tab_building.cpp:94
+#, fuzzy
+msgid "Remove this Building"
+msgstr "このプリセットを削除していいですか?"
+
+#: tools/ruledit/tab_building.cpp:171
+msgid "Building with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:89
+msgid "Add Good"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:94
+#, fuzzy
+msgid "Remove this Good"
+msgstr "このプリセットを削除していいですか?"
+
+# Daniel
+#: tools/ruledit/tab_good.cpp:172
+#, fuzzy
+msgid "Good with that rule name already exist!"
+msgstr "%sと呼ばれる都市は既に存在します。"
+
+#: tools/ruledit/tab_misc.cpp:67
+#, fuzzy
+msgid "Ruleset name"
+msgstr "ルールセット"
+
+#: tools/ruledit/tab_misc.cpp:72
+#, fuzzy
+msgid "Ruleset version"
+msgstr "ルールセット(_V):"
+
+# clefs
+#: tools/ruledit/tab_misc.cpp:77
+#, fuzzy
+msgid "Save to directory"
+msgstr "ディレクトリDIRにゲームを保存する"
+
+#: tools/ruledit/tab_misc.cpp:84
+msgid "Version suffix to directory name"
+msgstr ""
+
+# Daniel
+#: tools/ruledit/tab_misc.cpp:89
+#, fuzzy
+msgid "Save now"
+msgstr "シナリオの保存"
+
+#: tools/ruledit/tab_misc.cpp:96
+#, fuzzy
+msgid "?stat:Terrains"
+msgstr "地形"
+
+#: tools/ruledit/tab_misc.cpp:100
+#, fuzzy
+#| msgid "Resources"
+msgid "?stat:Resources"
+msgstr "資源"
+
+#: tools/ruledit/tab_misc.cpp:104
+#, fuzzy
+msgid "?stat:Tech Classes"
+msgstr "ユニット被撃破数\n"
+
+#: tools/ruledit/tab_misc.cpp:108
+#, fuzzy
+msgid "?stat:Techs"
+msgstr "技術(_T)"
+
+#: tools/ruledit/tab_misc.cpp:112
+#, fuzzy
+msgid "?stat:Unit Classes"
+msgstr "ユニット被撃破数\n"
+
+#: tools/ruledit/tab_misc.cpp:116
+#, fuzzy
+msgid "?stat:Unit Types"
+msgstr "ユニット名"
+
+#: tools/ruledit/tab_misc.cpp:120
+#, fuzzy
+#| msgid "Buildings"
+msgid "?stat:Buildings"
+msgstr "建造物"
+
+#: tools/ruledit/tab_misc.cpp:124
+#, fuzzy
+#| msgid "Nations"
+msgid "?stat:Nations"
+msgstr "民族"
+
+#: tools/ruledit/tab_misc.cpp:128
+#, fuzzy
+msgid "?stat:Styles"
+msgstr "建築様式(_S):"
+
+#: tools/ruledit/tab_misc.cpp:132
+#, fuzzy
+msgid "?stat:Specialists"
+msgstr " 専門家"
+
+#: tools/ruledit/tab_misc.cpp:136
+#, fuzzy
+msgid "?stat:Governments"
+msgstr "政治体制"
+
+#: tools/ruledit/tab_misc.cpp:140
+#, fuzzy
+msgid "?stat:Disasters"
+msgstr "環境災害"
+
+#: tools/ruledit/tab_misc.cpp:144
+msgid "?stat:Achievements"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:148
+msgid "?stat:Extras"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:152
+#, fuzzy
+#| msgid "Bases"
+msgid "?stat:Bases"
+msgstr "基地"
+
+#: tools/ruledit/tab_misc.cpp:156
+#, fuzzy
+msgid "?stat:Roads"
+msgstr "道路"
+
+#: tools/ruledit/tab_misc.cpp:160
+#, fuzzy
+msgid "?stat:Goods"
+msgstr "道路"
+
+#: tools/ruledit/tab_misc.cpp:168
+#, fuzzy
+msgid "Refresh Stats"
+msgstr "再表示"
+
+#: tools/ruledit/tab_misc.cpp:231
+#, fuzzy
+msgid "Ruleset saved"
+msgstr "ルールセット"
+
+#: tools/ruledit/tab_nation.cpp:49
+#, fuzzy
+msgid "Use nationlist"
+msgstr "国際連合"
+
+#: tools/ruledit/tab_nation.cpp:53
+#, fuzzy
+msgid "Nationlist"
+msgstr "民族"
+
+#: tools/ruledit/tab_tech.cpp:82
+msgid "Req1"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:91
+msgid "Req2"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:99
+msgid "Root Req"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:108
+msgid "Add tech"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:113
+#, fuzzy
+msgid "Remove this tech"
+msgstr "このプリセットを削除していいですか?"
+
+#: tools/ruledit/tab_tech.cpp:194
+msgid "Never"
+msgstr "なし"
+
+# Daniel
+#: tools/ruledit/tab_tech.cpp:330
+#, fuzzy
+msgid "Tech with that rule name already exist!"
+msgstr "%sと呼ばれる都市は既に存在します。"
+
+#: tools/ruledit/tab_unit.cpp:84
+#, fuzzy
+msgid "Edit Unit"
+msgstr "積載する"
+
+#: tools/ruledit/tab_unit.cpp:88
+#, fuzzy
+msgid "Add Unit"
+msgstr "積載する"
+
+#: tools/ruledit/tab_unit.cpp:93
+#, fuzzy
+msgid "Remove this Unit"
+msgstr "このプリセットを削除していいですか?"
+
+#: tools/ruledit/tab_unit.cpp:170
+msgid "Unit type with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:62
+msgid "Type:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:80
+msgid "Value:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:96
+msgid "Range:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:121
+msgid "Add Requirement"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:126
+msgid "Delete Requirement"
+msgstr ""
+
+#: tools/ruledit/validity.c:65
+msgid "Effect"
+msgstr ""
+
+#: tools/ruledit/validity.c:134
+msgid "Action Enabler"
+msgstr ""
+
+#: tools/ruledit/validity.c:154
+msgid "Music Style"
+msgstr ""

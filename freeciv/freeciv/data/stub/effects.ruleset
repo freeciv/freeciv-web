@@ -1,0 +1,64 @@
+; This is minimal effects ruleset. Replace <modpack> with your module name in
+; description.
+
+[datafile]
+description="<modpack> effects data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Effects
+;
+; type                    = What the effect does. Values of multiple active effects
+;                           of the same type get summed for the total.
+;                           See README.effects for list of possible types
+; value                   = Value added for the effect type when this effect is active,
+;                           i.e., all requirements are fulfilled
+; multiplier              = Name of the policy that gives a multiplier for effect's value
+; reqs                    = Requirements for the effect to be active.
+;                           See README.effects for help on requirements
+;
+; */ <-- avoid gettext warnings
+
+; Cheating AI effects are in separate file
+;*include "default/ai_effects.ruleset"
+
+; Base vision range - radius of vision is sqrt(5) = 2.24
+[effect_city_vision]
+type    = "City_Vision_Radius_Sq"
+value   = 5
+
+[effect_base_unit_upkeep]
+type	= "Upkeep_Factor"
+value	= 1
+
+[effect_empire_size_base]
+type    = "Empire_Size_Base"
+value   = 1
+
+[effect_empire_size_step_base]
+type    = "Empire_Size_Step"
+value   = 1
+
+[effect_max_rates_base]
+type    = "Max_Rates"
+value   = 40
+
+[effect_base_size]
+type    = "Size_Adj"
+value   = 1
+
+[effect_tech_cost_base]
+type    = "Tech_Cost_Factor"
+value   = 1
+  	 
+; Cities can always work tiles
+[effect_tile_workable]
+type    = "Tile_Workable"
+value   = 1
+
+; each city has at least one slot to build units
+[effect_city_build_slots_basic]
+type    = "City_Build_Slots"
+value   = 1

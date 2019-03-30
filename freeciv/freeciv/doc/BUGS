@@ -1,0 +1,89 @@
+====
+BUGS
+====
+
+Freeciv 3.1 certainly contains some bugs. Please report all
+you find to https://www.hostedredmine.com/projects/freeciv.
+
+
+REPORTING A BUG:
+================
+
+Here's what to do:
+
+ - Check that it is not listed as a known bug! For a continuously
+   updated list, see:
+
+        http://www.freeciv.org/wiki/Known_Bugs
+
+ - Check the Freeciv website, to ensure you're playing the latest
+   version.  (We may have already fixed the problem.)
+
+ - Check the Freeciv Bug Tracking System at:
+
+        https://www.hostedredmine.com/projects/freeciv
+
+   to see if the bug has already been reported.
+
+ - Submit a bug report through our bug tracking system above!
+
+   If you get any GDK/GTK messages, as for example:
+
+     Gtk-CRITICAL **: file gtkobject.c: line 1163 (gtk_object_ref): 
+     assertion object->ref_count > 0' failed.
+
+   please restart your client and append "-- --g-fatal-warnings" to
+   the command line. You will get a core dump this way. Please include
+   the "stack trace" of this core dump in your bug report.
+
+   What to include in your bug report:
+
+   - Describe the problem, including any messages that were displayed.
+
+   - Indicate which client(s) you are using (gtk3, gtk3.22, gtk3x,
+     SDL2, or Qt).
+
+   - Tell us the name and version of:
+
+       - The Operating System you're using.  You may find the
+         "uname -a" command useful.
+
+       - The version number of Freeciv.
+
+       - If you are using the GTK+ client, the version numbers
+         (if you know them) of your GTK+ and GLib libraries.
+         Gtk-clients show those version numbers on 'About Freeciv'
+         dialog found from under 'Help' menu.
+
+       - If you are using Qt client, the version number of Qt libraries.
+         In Qt-client that can be find by opening 'About Freeciv' dialog
+         from under 'Help' menu and clicking 'About Qt' button there.
+
+       - If you are using the SDL2 client, the version numbers (if you
+         know them) of the SDL2, SDL2_image, SDL2_gfx, and SDL2_ttf
+         libraries.
+
+       - If you're compiling from source code, the name
+         and version number of the compiler.
+
+       - If you're installing from a binary package, the name of
+         the package, the distribution it's for, and where you
+         got it from.
+
+   - If Freeciv "dumps core", then we may ask you to use a debugger to
+     give us a "stack trace".  You'll need the "core" file for this as
+     well as the binary which you used, so please backup both.
+
+   - If it is a bug in a translation, it should be reported to the
+     Primary Contact for the language.  For their names and addresses,
+     see:
+
+        http://www.freeciv.org/wiki/Localization
+
+
+FURTHER INFORMATION:
+====================
+
+For more information, as always, see the Freeciv website:
+
+        http://www.freeciv.org/

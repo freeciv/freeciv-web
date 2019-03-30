@@ -1,0 +1,62 @@
+/*****************************************************************************
+ Freeciv - Copyright (C) 2005 - The Freeciv Project
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+*****************************************************************************/
+
+/*****************************************************************************
+  ADVERTISEMENT: do not attempt to change the name of the API functions.
+  They *must* be compatible between the minor Freeciv versions within the
+  same major version. If you really like to change a function name, be sure
+  to keep also the old one running.
+*****************************************************************************/
+
+$#ifdef HAVE_CONFIG_H
+$#include <fc_config.h>
+$#endif
+
+/* common/scriptcore */
+$#include "luascript_types.h"
+
+/* server/scripting */
+$#include "api_fcdb_auth.h"
+$#include "api_fcdb_base.h"
+$#include "script_fcdb.h"
+
+/* Authentication module. */
+module auth {
+  const char *api_auth_get_username
+    @ get_username(lua_State *L, Connection *pconn);
+  const char *api_auth_get_ipaddr
+    @ get_ipaddr(lua_State *L, Connection *pconn);
+}
+
+/* Freeciv database (fcdb) module. */
+module fcdb {
+  const char *api_fcdb_option
+    @ option(lua_State *L, const char *name);
+}
+
+$[
+-- Definitions for backward compatibility with Freeciv 2.4.
+-- Old database.lua scripts might pass fcdb.param.USER etc to fcdb.option(),
+-- but it's deprecated in favour of literal strings, and the strings listed
+-- here are only conventional.
+fcdb["param"] = {
+  HOST       = "host",
+  USER       = "user",
+  PORT       = "port",
+  PASSWORD   = "password",
+  DATABASE   = "database",
+  TABLE_USER = "table_user",
+  TABLE_LOG  = "table_log",
+  BACKEND    = "backend"
+}
+$]

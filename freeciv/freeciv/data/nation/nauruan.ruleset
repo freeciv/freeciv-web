@@ -1,0 +1,74 @@
+[nation_nauruan]
+
+name=_("Nauruan")
+plural=_("?plural:Nauruans")
+groups= "Oceanian", "Modern"
+legend=_("Called Pleasant Island by the European colonizers, Nauru is an\
+ island in the South Pacific. The island was first settled by Austronesian\
+ peoples around 1000 BCE. European contacts led to internecine tribal\
+ warfare which decimated the population. Nauru was annexed by the German\
+ Empire in 1888 but was occupied by Australia during World War I. In 1968,\
+ the Republic of Nauru became independent. Thanks to its enormous\
+ phosphate resources, Nauru was for some time the most developed third\
+ world country and one of the world's richest countries per capita. With\
+ the exhaustion of the phosphate reserves the country has fallen on\
+ economic hard times. Offshore banking, immigrant detention centers and\
+ musicals have proven unsuccessful to replace phosphate as source of\
+ income. Nauru is the world's third smallest country by size, second\
+ smallest by population. It is the smallest country in the Southern\
+ Hemisphere and the world's smallest republic.")
+
+leaders = {
+ "name",             "sex"
+ "Aweida",           "Male"
+ "Timothy Detudamo", "Male"
+ "Hammer DeRoburt",  "Male"
+ "Bernard Dowiyogo", "Male"
+ "Marcus Stephen",   "Male"
+}
+
+ruler_titles = {
+ "government", "male_title",            "female_title"
+ "Democracy",  _("Speaker %s"),         _("?female:Speaker %s")
+ "Monarchy",   _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
+
+flag="nauru"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "micronesian" ; marshallese
+
+cities =
+ "Yaren",
+ "Denigomodu",
+ "Meneng",
+ "Aiwo",
+ "Boe",
+ "Buada",
+ "Baiti",
+ "Anetan",
+ "Anabar",
+ "Nibok",
+ "Uaboe",
+ "Ewa",
+ "Ijuw",
+ "Anibare",
+ "Makwa",
+ "Ibwenape",
+ "Arenibek",
+ "Yangor",
+ "Orro",
+ "Arijejen",
+ "Nibok",
+ "Waboe",
+ "Baiti",
+ "Arubo",
+ "Ronave",
+ "Anabar",
+ "Ganokoro"
+

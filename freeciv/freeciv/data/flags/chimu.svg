@@ -1,0 +1,45 @@
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="300"
+   width="450">
+  <defs
+     id="defs609">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 156.25 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="468.75 : 156.25 : 1"
+       inkscape:persp3d-origin="234.375 : 104.16667 : 1"
+       id="perspective10" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="1.056"
+     inkscape:cx="312.5"
+     inkscape:cy="156.25"
+     inkscape:window-width="887"
+     inkscape:window-height="720"
+     inkscape:window-x="58"
+     inkscape:window-y="5"
+     inkscape:current-layer="svg607"
+     showgrid="false" />
+  <rect
+     height="300"
+     id="rect612"
+     style="font-size:12px;fill:#440055;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="450"
+     x="0"
+     y="4.4408921e-16" />
+  <g
+     id="g3932"
+     transform="matrix(1.2325219,0,0,1.1330803,-176.09468,-26.248979)"
+     style="fill:#cccccc">
+    <path
+       style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cscsc"
+       id="path648"
+       d="M 394.52802,246.02654 C 318.65474,272.36429 261.52524,215.26677 260.53108,156.72725 C 259.53939,98.187712 316.98879,37.82228 394.91436,65.311671 C 350.82454,71.849967 318.44803,110.49162 318.06169,154.18034 C 317.7664,187.21387 337.30254,234.30092 394.52802,246.02654 z" />
+  </g>
+</svg>

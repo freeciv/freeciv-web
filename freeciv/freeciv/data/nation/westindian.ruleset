@@ -1,0 +1,91 @@
+[nation_westindian]
+
+name=_("West Indian")
+plural=_("?plural:West Indians")
+groups="American"
+legend=_("The West Indies, known for pirates, rum, cricket and beaches.\
+ The British West Indies formed the short-lived West Indies Federation in\
+ 1958. The federation failed to consolidate because of tensions between\
+ Trinidad, Jamaica and the smaller members. The federation fell apart in\
+ 1962. Some islands became independent countries, others returned to\
+ the status of a British dependency.")
+
+leaders = {
+ "name",                        "sex"
+ "Patrick Buchan-Hepburn",      "Male"
+ "Grantley Herbert Adams",      "Male"
+ "C.G.D. La Corbiniere",        "Male"
+ "Robert Llewellyn Bradshaw",   "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Democracy",       _("Chief Minister %s"),  _("?female:Chief Minister %s")
+ "Fundamentalism",  _("Bishop %s"),          _("?female:Bishop %s")
+ "Republic",        _("Governor %s"),        _("?female:Governor %s")
+}
+
+flag="west_indies_federation"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+conflicts_with = "antiguan and barbudan", "barbadian", "dominican", "grenadian",
+ "jamaican", "kittitian and nevisian", "saint lucian", "trinidadian and tobagonian",
+ "vincentian"
+civilwar_nations = "antiguan and barbudan", "barbadian", "dominican", "grenadian",
+ "jamaican", "kittitian and nevisian", "saint lucian", "trinidadian and tobagonian",
+ "vincentian"
+
+cities =
+ "Chaguaramas",
+ "Kingston",
+ "Port of Spain (ocean)",
+ "Bridgetown",
+ "Castries",
+ "Kingstown",
+ "Saint George's",
+ "Saint John's",
+ "Roseau",
+ "Basseterre",
+ "George Town",
+ "Cockburn Town",
+ "The Valley (hills)",
+ "Plymouth",
+ "Spanish Town",
+ "San Fernando",
+ "Speightstown",
+ "Dennery",
+ "Georgetown",
+ "Gouyave",
+ "Liberta",
+ "Portsmouth",
+ "Charlestown",
+ "West Bay (ocean)",
+ "Five Cays (ocean)",
+ "North Side",
+ "Brades",
+ "Portmore",
+ "Arima",
+ "Oistins",
+ "Vieux Fort",
+ "Byera",
+ "Grenville",
+ "Bolands",
+ "Canefield",
+ "Saint Paul's",
+ "Bodden Town",
+ "Honda Road",
+ "The Quarter",
+ "Saint Peter's",
+ "Montego Bay (ocean)",
+ "Marabella",
+ "Bathsheba",
+ "Micoud",
+ "Barrouaillie",
+ "Victoria",
+ "Mandeville",
+ "Point Fortin",
+ "May Pen"

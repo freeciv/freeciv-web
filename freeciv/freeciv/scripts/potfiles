@@ -1,0 +1,27 @@
+#!/bin/bash
+
+domains="freeciv nations ruledit"
+
+if test "$1" == "" ; then 
+  echo Usage: $0 '<path to source root directory with trailing slash>'
+  exit 1;
+fi
+
+for domain in $domains ; do
+  if ! test -f $1/translations/$domain/POTFILES.in ; then
+    echo "Cannot find $1/translations/$domain/POTFILES.in" >&2
+    exit 1
+  fi
+  POTLIST="$POTLIST $1/translations/$domain/POTFILES.in"
+done
+
+cat $POTLIST | grep -v "^#" | sed "s,^,$1," | sort > /tmp/potfile
+
+echo Suggestions for addition or removal of files with translatable strings to/from POTFILES.in:
+echo Please check the output manually
+
+find "$1" -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.sav' -o -name '*.lua' -o -name '*.ruleset' -o -name '*.txt' -o -name '*.in' | 
+  xargs grep -l -I '_("' |
+    sort |
+      diff -u /tmp/potfile - |
+        egrep '^[+-]'

@@ -1,0 +1,30 @@
+[nation_animals]
+
+translation_domain="freeciv"
+
+name=_("Animal Kingdom")
+plural=_("?plural:Animals")
+groups="Core", "Barbarian"
+legend=_("Before civilization claimed the lands, ancient man had to \
+survive the wilderness with all kinds of dangerous animals.")
+
+leaders = {
+ "name",        "sex"
+ "Lion",        "Female"
+ "Orca",        "Male"
+}
+
+flag     = "animals"
+flag_alt = "barbarian"
+style    = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+cities = "Wilderness"
+
+is_playable = FALSE
+barbarian_type = "Animal"
+
+; nothing more needed for barbarians

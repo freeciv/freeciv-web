@@ -1,0 +1,3 @@
+# Server commands to start with an experimental ruleset
+# Use this as, eg, "./fcser -r data/experimental.serv" 
+rulesetdir experimental

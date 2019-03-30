@@ -1,0 +1,102 @@
+[nation_sioux]
+
+translation_domain="freeciv"
+
+name=_("Sioux")
+plural=_("?plural:Sioux")
+groups="Medieval", "American", "Core"
+legend=_("The Sioux was a North American nation that fought several\
+ decisive battles against the United States. It consisted of three distinct\
+ groups of tribes: the Lakota, the Dakota and the Nakota.")
+
+leaders = {
+ "name",                "sex"
+ "Sitting Bull",        "Male" ; a.k.a. Tatanka Yotanka
+ "Crazy Horse",         "Male" ; a.k.a. Tasunka Witko
+ "Little Crow",         "Male" ; a.k.a. Taoyateduta
+ "Red Cloud",           "Male" ; a.k.a. Makhpyia-Luta
+ "Big Eagle",           "Male" ; a.k.a. Wamditanka
+ "Crow Dog",            "Male" ; a.k.a. Kangisanka
+ "Wizikute",            "Male" ; literally "Pine Shooter"
+ "Waneta",              "Male" ; literally "The Charger"
+ "Napeshneeduta",       "Male" ; literally "Red man who flees not"
+ "Tasunkakokipapi",     "Male" ; literally "Young Man Afraid of His Horses"
+ "Black Shawl",         "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+ "Fundamentalism",  _("Shaman %s"),          _("?female:Shaman %s")
+}
+
+flag="cheyenne"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "iroquois", "hopi", "cree"
+
+; City names are tribes. List based on data from this page:
+; http://www.accessgenealogy.com/native/tribes/siouan/siouanfamilyhist.htm
+cities =
+ "Mdewakanton",
+ "Wahpekute",
+ "Sisseton",
+ "Wahpeton",
+ "Yankton",
+ "Yanktonai",
+ "Sichangu",
+ "Itazipcho",
+ "Sihasapa",
+ "Miniconjou",
+ "Oohenonpa",
+ "Oglala",
+ "Hunkpapa",
+ "Assiniboin",
+ "Omaha",
+ "Ponca",
+ "Quapaw",
+ "Osage",
+ "Pahatsi",
+ "Utsehta",
+ "Santsukhdhi",
+ "Kansa",
+ "Iowa",
+ "Oto",
+ "Missouri",
+ "Winnebago",
+ "Mandan",
+ "Hidatsa",
+ "Absaroke",
+ "Biloxi",
+ "Ofo",
+ "Monacan",
+ "Meipontsky",
+ "Mohemencho",
+ "Tutelo",
+ "Saponi",
+ "Occaneechi",
+ "Manahoac",
+ "Stegaraki",
+ "Shackaconia",
+ "Tauxitania",
+ "Ontponea",
+ "Tegninateo",
+ "Whonkentia",
+ "Hassinunga",
+ "Catawba",
+ "Woecon",
+ "Sissipahaw",
+ "Adshusheer",
+ "Eno",
+ "Waxhaw",
+ "Sugeree",
+ "Santee",
+ "Catawba",
+ "Cheraw",
+ "Keyauwee"

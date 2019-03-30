@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: CorelDRAW -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xml:space="preserve"
+   width="1350"
+   height="900"
+   style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd"
+   viewBox="0 0 700 700"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="korea_ancient.svg"
+   sodipodi:docbase="C:\freeciv"
+   version="1.0"><metadata
+   id="metadata16"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   inkscape:window-height="968"
+   inkscape:window-width="1280"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   guidetolerance="10.0"
+   gridtolerance="10.0"
+   objecttolerance="10.0"
+   borderopacity="1.0"
+   bordercolor="#666666"
+   pagecolor="#ffffff"
+   id="base"
+   height="900px"
+   width="1350px"
+   inkscape:zoom="0.41888889"
+   inkscape:cx="675"
+   inkscape:cy="430.84934"
+   inkscape:window-x="-4"
+   inkscape:window-y="-4"
+   inkscape:current-layer="svg2" />
+ <defs
+   id="defs4">
+  <style
+   type="text/css"
+   id="style6">
+   
+    .fil2 {fill:#302061}
+    .fil1 {fill:#E54221}
+    .fil0 {fill:#F7D619}
+   
+  </style>
+ </defs>
+ <rect
+   style="opacity:1;fill:white;fill-opacity:1;stroke:none;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1880"
+   width="1050"
+   height="700"
+   x="-175"
+   y="1.3722357e-013" /><g
+   id="Layer 1"
+   transform="matrix(0.708315,0,0,0.708315,102.8011,102.1217)">
+  <path
+   class="fil0"
+   d="M 150,70 C -12,214 175,452 349,350 C 349,148 648,105 691,317 C 675,143 528,6 349,6 C 275,6 206,30 150,70 z "
+   id="path9"
+   style="fill:#f7d619" />
+  <path
+   class="fil1"
+   d="M 691,317 C 648,105 349,148 349,350 C 525,450 412,731 206,663 C 366,736 558,676 647,522 C 684,458 698,386 691,317 z "
+   id="path11"
+   style="fill:#e54221" />
+  <path
+   class="fil2"
+   d="M 206,663 C 412,731 525,450 349,350 C 175,452 -12,214 150,70 C 7,171 -38,367 51,522 C 89,586 143,634 206,663 z "
+   id="path13"
+   style="fill:#302061" />
+ </g>
+</svg>

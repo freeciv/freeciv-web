@@ -1,0 +1,63 @@
+[nation_hephthalite]
+
+name=_("Hephthalite")
+plural=_("?plural:Hephthalites")
+groups="Asian", "Ancient", "Medieval"
+legend=_("The Hephthalites were a Central Asian nomadic confederation of\
+ the 5th and 6th centuries CE. Their precise origins and composition remain\
+ obscure. They may have been of mixed Iranic, Tocharian and Turkic origin,\
+ but their main language is unknown. Although they were also known as the\
+ White Huns, a connection with the Huns is considered unlikely. The\
+ Hephthalites were crushed by the Göktürks and Sassanids in the 6th\
+ century, but on the Indian subcontinent some Hephthalite successor\
+ kingdoms survived until the late 7th century.")
+
+leaders = {
+ "name",                "sex"
+ "Akshuwar",            "Male"
+ "Khingila I",          "Male"
+ "Toramana",            "Male"
+ "Mihrakula",           "Male"
+ "Yudhishthira",        "Male"
+}
+
+flag="hephthalite"
+flag_alt = "-"
+style = "Asian"
+
+ruler_titles = {
+ "government",      "male_title",   "female_title"
+ "Despotism",       _("%s Khan"),   _("%s Khatan")
+ "Monarchy",        _("%s Khagan"), _("?female:%s Khagan")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="afghani", "pakistani", "indian", "sikh", "pashtun",
+ "uzbek", "uyghur", "tajik", "turkmen", "kashmiri",
+ "ghaznavid", "kyrgyz" ; samanid
+civilwar_nations = "tocharian", "saka", "gokturk", "iranian", "pashtun"
+
+cities =
+ "Sakala",           ;Sialkot
+ "Merv",
+ "Herat",
+ "Balkh",
+ "Nakhshab",
+ "Vardana",
+ "Bukhara",
+ "Kabul",
+ "Kandahar",
+ "Samarkand",
+ "Chach",
+ "Yaftal",
+ "Khotan",
+ "Kashgar",
+ "Karashahr",
+ "Peshawar",
+ "Madra",
+ "Nishapur",
+ "Khorog",
+ "Murghab"

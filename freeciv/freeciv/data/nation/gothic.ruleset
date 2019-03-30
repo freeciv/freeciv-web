@@ -1,0 +1,80 @@
+[nation_gothic]
+
+name=_("Gothic")
+plural=_("?plural:Goths")
+groups="Ancient", "European"
+legend = _("The Goths were an East Germanic people who originated in what\
+ is now Poland or possibly in Scandinavia. They dominated Southeastern\
+ Europe in the fourth century CE. The Goths played a major role in the\
+ fall of the Roman Empire, sacking Rome itself in 410 CE. The Visigoths\
+ conquered Roman Iberia while the Ostrogoths founded a kingdom in Italy.")
+leaders= {
+ "name",              "sex"
+ "Amala",             "Male"
+ "Nidad",             "Male"
+ "Owida",             "Male"
+ "Kniwa",             "Male"
+ "Gebereiks",         "Male"
+ "Airmanareiks",      "Male"
+ "Aþanareiks",        "Male"
+ "Wulfila",           "Male"
+ "Friþugairns",       "Male"
+ "Alareiks",          "Male"
+ "Þiudareiks",        "Male"
+ "Amalaswinþa",       "Female"
+ "Liubagilds",        "Male"
+ "Totila",            "Male"
+}
+flag= "gothic" 
+flag_alt = "-" 
+style = "Celtic" 
+
+init_techs="" 
+init_buildings="" 
+init_units="" 
+
+conflicts_with="Ostrogothic", "Visigothic", "Polish", "Lendian", "Ukrainian",
+ "Cossack", "Ruthenian", "Slovakian", "Romanian", "Moldovan", "Russian",
+ "Mazovian", "Crimean Tatar"
+civilwar_nations="Ostrogothic", "Visigothic"
+
+cities =
+ "Skandja",		; Scandza, mythical gothic homeland
+ "Gutiskandja",		; Gothiscandza, mythical first settlement south of the Baltic
+ "Aƕosheims",		; Arheimar, mythical capital
+ "Aujum",		; Oium, area in Scythia of Gothic settlement, possibly Chernyakov
+ "Raidagutland",	; Reidgotaland, land of the Goths in Nordic mythology
+ "Hailigs Þaiudaurus",	; Saint Theodore, Mangup, Crimean Gothic capital
+ "Hrekkaredisbaurgs",	; Reccopolis, Visigothic city in Spain
+ "Aulogeiks",		; Ologite, Olite, Visigothic city in Spain
+ "Wulþus",		; Victoriacum, Vitoria, Visigothic city in Spain
+ "Kalamita",		; Crimean Gothic fortress
+ "Gutiskabaurgs",	; Gothenburg, Sweden
+ "Wisheims",		; Visby, Sweden
+ "Frumamunds",
+ "Wulfharings",
+ "Harjanisheims",
+ "Weinagards",
+ "Skalkings",
+ "Aiwareikisbaurgs",
+ "Þiudabaurgs",
+ "Gutiskabairgs",
+ "Gundisheims",
+ "Sigfridisbairgs",
+ "Rumonjebaurgs",
+ "Þiudareikisheims",
+ "Runisaƕa",
+ "Niujisbaurgs",
+ "Auhmisto",
+ "Walþaushus",
+ "Australand",
+ "Krekiskabaurgs",
+ "Swartisbaurgs",
+ "Gronewinja",
+ "Wiseland",
+ "Mikilisaƕa",
+ "Airmanareigisbaurgs",
+ "Famulings",
+ "Niujismaþl",
+ "Gutiskaweihs",
+ "Malarings"

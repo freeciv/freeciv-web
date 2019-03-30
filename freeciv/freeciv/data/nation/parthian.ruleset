@@ -1,0 +1,81 @@
+[nation_parthian]
+
+name=_("Parthian")
+plural=_("?plural:Parthians")
+groups="Ancient", "Asian"
+legend=_("The Parthians were originally a nomadic people from Central Asia\
+ who inhabited the Parthia region of the Seleucid Empire. Under the\
+ leadership of the satrap Arsakes they drove the Seleucids from Iran, where\
+ they created their own strong empire. Their culture was Hellenistic.")
+leaders = {
+ "name",                "sex"
+ "Andragoras",          "Male"
+ "Arsakes I",           "Male"
+ "Arsakes II",          "Male"
+ "Phriapatios",         "Male"
+ "Phraates I",          "Male"
+ "Artabanos I",         "Male"
+ "Gotarzes I",          "Male"
+ "Sanatrukes",          "Male"
+ "Vonones I",           "Male"
+ "Vologases I",         "Male"
+ "Vologases II",        "Male"
+ "Vologases III",       "Male"
+ "Osroes I",            "Male"
+ "Artabanos IV",        "Male"
+}
+flag="parthia"
+flag_alt = "iran"
+style = "Classical"
+
+ruler_titles = {
+ "government",    "male_title",      "female_title"
+ "Anarchy",       _("Usurper %s"),   _("?female:Usurper %s")
+ "Despotism",     _("Satrap %s"),    _("?female:Satrap %s")
+ "Monarchy",      _("Shah %s"),      _("Shahbanu %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Iranian", "Persian", "Iraqi", "Kurdish", "Turkmen",
+ "Seljuk", "Ghaznavid", "Babylonian", "Assyrian" ; Median
+civilwar_nations = "Saka", "Persian", "Kurdish", "Seleucid", "Armenian"
+
+cities =
+ "Ktesiphon",
+ "Agbatana",
+ "Babylon",
+ "Hatra",
+ "Dara",
+ "Akra",
+ "Babak",
+ "Karrhai",
+ "Nisa",
+ "Behistun",          ;archaeological site
+ "Dura-Europas",
+ "Zenodotium",
+ "Vologasia",
+ "Urfa",
+ "Tambrax",
+ "Traxiane",
+ "Praaspa",
+ "Nihavand",
+ "Zapaortenon",
+ "Spasini",
+ "Tagai",
+ "Nisibis",
+ "Taxila",
+ "Zabdikene",
+ "Tapuria",
+ "Seleukia",
+ "Solake",
+ "Oratha",
+ "Nikephorion",
+ "Nisaia",
+ "Margiane",
+ "Mesene",            ;Charax
+ "Kangavar",
+ "Gordyene",
+ "Edessa"

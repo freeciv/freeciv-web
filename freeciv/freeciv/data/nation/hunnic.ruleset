@@ -1,0 +1,104 @@
+[nation_hunnic]
+
+translation_domain="freeciv"
+
+name=_("Hunnic")
+plural=_("?plural:Huns")
+groups="Ancient", "European", "Asian", "Core"
+legend=_("The European Huns were an ancient tribal confederation who first\
+ appeared in the 4th century. The Huns inhabited the Eurasian steppes and\
+ were known as formidable horse archers. In the fifth century CE they\
+ created a powerful military empire under the leadership of Attila,\
+ famous for his campaigns against the Roman Empire. Attila died in 453, and\
+ the empire fell apart one year later. The origins of the Huns are still\
+ a matter of dispute; they have long been associated with the Xiongnu\
+ mentioned in Chinese sources, but that link has still not been\
+ unequivocally proven. Hunnic ethnic relations and language are likewise\
+ controversial.")
+leaders = {
+ "name",                "sex"
+ "Balamber",            "Male"
+ "Uldin",               "Male"
+ "Charaton",            "Male"
+ "Octar",               "Male"
+ "Rugila",              "Male"
+ "Bleda",               "Male"
+ "Attila",              "Male"
+ "Creca",               "Female"
+ "Ellac",               "Male"
+ "Tuldila",             "Male"
+ "Dengizich",           "Male"
+ "Ernac",               "Male"
+}
+flag="hunnic"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Usurper %s"),   _("?female:Usurper %s")
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),    _("?female:%s Khagan")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="hungarian", "bulgarian", "volga bulgar", "chuvash",
+               "russian", "soviet", "ukrainian", "cossack", "transylvanian"
+civilwar_nations = "avar", "volga bulgar", "slavic", "visigothic", "ostrogothic",
+ "gepid"
+
+cities =
+;late classical settlements on the Pannonian Plain
+ "Aquincum",
+ "Castellum",
+ "Castra Martis",
+ "Gorsium",
+ "Margus",
+ "Scarbantia",
+ "Brigetio",
+ "Intercisa",
+ "Sirmium",
+ "Valcum",
+ "Sopianae",
+ "Iova",
+ "Carnuntum",
+ "Sirmium",
+ "Bassiana",
+ "Savaria",
+ "Partiscum",
+
+;cities pillaged in the Near East
+ "Theodosiopolis",
+ "Edessa",
+
+;cities pillaged on the Balkans
+ "Singidunum",
+ "Viminacium",
+ "Ratiara",
+ "Naissus",
+ "Serdica",
+ "Philippopolis",
+ "Arcadiopolis",
+ "Callipolis",
+ "Nisava",
+ "Serdica",
+
+;cities pillaged in Gaul
+ "Moguntiacum",
+ "Agentorate",
+ "Borbetomagus",
+ "Divodurum",
+ "Rotomagus",
+ "Atuatuca",
+ "Campus Catalaunicus",
+
+;cities pillaged in Italy
+ "Aquileia",
+ "Vicetia",
+ "Verona",
+ "Brixia",
+ "Bergomum",
+ "Mediolanum"

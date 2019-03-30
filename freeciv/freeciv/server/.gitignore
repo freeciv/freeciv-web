@@ -1,0 +1,10 @@
+/Makefile
+/Makefile.in
+/civserver
+/freeciv-server
+/.deps
+/libcivserver.a
+/hand_gen.c
+/hand_gen.h
+/freeciv-server.desktop
+/freeciv-server.appdata.xml

@@ -1,0 +1,40 @@
+[nation_pirate]
+
+translation_domain="freeciv"
+
+name=_("Pirate")
+plural=_("?plural:Pirates")
+groups="Core", "Barbarian"
+legend=_("As long as honest men have sailed the seas, pirates have been a\
+ scourge of them and of all coastal dwelling peoples.")
+
+leaders = {
+ "name",                        "sex"
+ "Anne Bonny",                  "Female"
+ "Calico Jack",                 "Male"
+ "Cofresí",                     "Male"
+ "Blackbeard",                  "Male"
+ "Henry Morgan",                "Male"
+ "François l'Ollonais",         "Male"
+ "Bartolomeo Portugues",        "Male"
+ "Ching Shih",                  "Female"
+}
+
+flag="pirate"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; Various pirate havens
+cities =
+ "New Providence",
+ "Port Royal", 
+ "Tortuga"
+
+is_playable = FALSE
+barbarian_type = "Sea"
+
+; nothing more needed for barbarians

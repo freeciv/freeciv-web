@@ -1,0 +1,89 @@
+[nation_cantonese]
+
+name=_("Cantonese")
+plural=_("?plural:Cantonese")
+groups="Asian", "Ancient"
+legend=_("The Cantonese are a sub-group of the Chinese people originating\
+ from Guangdong Province in Southern China comprising about 70 million\
+ people. The Cantonese are renowned for their music and food and constitute\
+ an important element in Overseas Chinese communities worldwide. They also\
+ form a majority of the population in the Special Autonomous Regions of\
+ Hong Kong and Macao. In the second century BCE, the Cantonese-dominated\
+ kingdom of Nanyue ruled over much of Southern China and dominated Vietnam.\
+ In 111 BCE Nanyue was incorporated into Han Dynasty China. Cantonese\
+ is the second most spoken Chinese language after Mandarin.")
+
+leaders = {
+ "name",           "sex"
+ "Jiu To",         "Male"
+ "Jiu Gindeg",     "Male"
+ "Yun Sung Wun",   "Male"
+ "Jihng Sih",      "Female"
+ "Leung Kai Chiu", "Male"
+ "Can Gwingming",  "Male"
+ "Syun Fo",        "Male" 
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Democracy",       _("Chancellor %s"),      _("?female:Chancellor %s")
+}
+
+flag="cantonese"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Miao", "Vietnamese", "Zhuang"
+
+cities =
+ "Gwongzau", ;Guangzhou
+ "Hoenggong", ;Hong Kong
+ "Samzan", ;Shenzhen
+ "Zungsaan", ;Zhongshan
+ "Fatsaan", ;Foshan
+ "Oumun", ;Macao
+ "Punjyu", ;Panyu
+ "Hoihau", ;Haikou
+ "Ngzau", ; Wuzhou
+ "Toisaan", ;Taishan
+ "Mauming", ;Maoming
+ "Joenggong", ;Yangiang
+ "Siugwaan", ;Shaoguan
+ "Hojyun", ;Heyuan
+ "Hoiping", ;Kaiping
+ "Muizau", ;Meizhou
+ "Ciuzau", ;Chaozhou
+ "Dungun", ;Dongguan
+ "Siuhing", ;Zhaoqing
+ "Wanfau", ;Yunfu
+ "Gongmun", ;Jiangmen
+ "Shanwei", ;Shanwei
+ "Janping", ;Enping
+ "Zyuhoi", ;Zhuhai
+ "Saamaa", ;Sanya
+ "Naamning", ;Nanning
+ "Kitjoeng", ;Jieyang
+ "Saantau", ;Shantou
+ "Zaamgong", ;Zhanjiang
+ "Cingjun", ;Qingyuan
+ "Sanwui", ;Xinhui
+ "Naamhoi", ;Nanhai
+
+; Overseas Cantonese communities
+ "Sangaabo", ;Singapore
+ "Wangowaa", ;Vancouver
+ "Gatlungbo", ;Kuala Lumpur
+ "Doleondo", ;Toronto
+ "Saigung", ;Ho Chi Minh City
+ "Gambin", ;Phnom Penh
+ "Joengwong", ;Yangon
+ "Saamfaansi", ;San Francisco
+ "Maanguk", ;Bangkok
+ "Jegadaat", ;Jakarta
+ "Maaneilaai", ;Manila
+ "Makjibun", ;Melbourne
+ "Honoi" ;Hanoi

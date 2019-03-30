@@ -1,0 +1,3216 @@
+======================
+Welcome to Freeciv x.x
+======================
+
+The most important changes between major releases are shown below.
+Not all changes are shown here. Those who are interested in seeing
+the detailed changes should check the ChangeLog file.
+
+
+MAJOR CHANGES FROM 3.0.x to 3.1.0
+---------------------------------
+
+[TODO]
+
+
+MAJOR CHANGES FROM 2.6.x to 3.0.0
+---------------------------------
+
+[TODO]
+
+
+MAJOR CHANGES FROM 2.5.x to 2.6.0
+---------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-2.6.0>)
+
+   The major changes in Freeciv 2.6 are a redesigned Qt client, an updated
+   civ2civ3 ruleset, and a whole lot of extra flexibility to create custom
+   rulesets.
+
+   As is usual for major releases, 2.6 clients cannot interoperate with
+   pre-2.6 servers, and vice versa. Most pre-2.6 savegames can however be
+   loaded into 2.6, and in most cases, the supplied rulesets have not
+   changed so much as to make it difficult to complete a game started with
+   2.5.x's rules.
+
+Server / General
+
+Changes affecting players (supplied rulesets)
+
+   A new ruleset, "sandbox", is included (as of beta2). This is a place
+   for developers to experiment with and demonstrate new engine features,
+   without regard to game balance or savefile compatibility; sandbox games
+   started in this version may not load into future releases (even minor
+   2.6.x releases). HRM#696004
+
+   Miscellaneous rule changes affecting all or most rulesets:
+     * In most supplied rulesets, non-military units and some air units no
+       longer impose a zone of control (ZoC). GNAPATCH#4818 GNAPATCH#4935
+     * classic, multiplayer, experimental: Mines on Desert and Glacier are
+       now Oil Wells, and can only be built once Construction and Refining
+       are known respectively. If the underlying terrain changes between
+       one supporting regular mine and one supporting oil well, the
+       improvement is lost. (civ2civ3 is different, see below.)
+       GNAPATCH#4391
+     * Buoys no longer claim territory, and so can no longer be used to
+       block travel during peace. GNAPATCH#3878
+     * The size of barbarian uprisings, and the effect of the 'barbarians'
+       setting, have changed. (It's not clear what the old code actually
+       did.) GNAPATCH#5909
+     * When 'autoattack' is enabled, now the best attacker goes first, not
+       the worst. (This makes target-specific strength factors work to the
+       attacker's advantage rather than the defender's, but does make it
+       easier to lure out strong attacking units.) GNAPATCH#7942
+     * (as of RC2) Bribe cost for damaged units has increased. Previously
+       (due to a bug) it was halved if the unit had lost any hitpoints at
+       all. Now it depends on how damaged they are (up to at most a
+       discount of half, as before). HRM#763896
+     * "Industrial Accident" disaster, where a Mfg. Plant can cause
+       population loss and pollution. GNAPATCH#5014
+     * When a Spy sabotages another diplomatic unit, there is no longer a
+       diplomatic battle (which could lead to the elimination of the
+       victim, rather than just a reduction in hit points). GNAPATCH#6103
+     * "SDI Defense" now works against allies' nukes. GNAPATCH#6693
+     * In rulesets where the Great Library grants techs known by other
+       civilizations, it now grants a random tech of the eligible ones,
+       rather than a predictable one. GNAPATCH#5104
+     * Ruins are removed whenever the underlying terrain is changed.
+       GNA#20898
+
+   Rule changes to specific rulesets:
+     * civ2civ3 has had many changes.
+          + Units and combat
+               o 'Tired attack' is enabled: units that attack with less
+                 than one movement point have reduced attack strength.
+                 GNAPATCH#7160
+               o Units which cost population (Settlers, Migrants, and
+                 Fanatics) no longer pay shield or gold upkeep. Instead,
+                 they count towards the per-city food upkeep limit.
+                 (Changed because the AI no longer mishandles this
+                 combination.) HRM#681977
+               o Naval units are now generally cheaper, to make the ratio
+                 of strength to cost more similar to land units.
+                 GNAPATCH#8124
+               o Airplanes (fighters and bombers) can spend an extra turn
+                 in the air, allowing more air-to-air battles. They lose
+                 10% of hitpoints every turn when in the air, like
+                 Helicopters. GNAPATCH#4812
+               o Cruise Missiles have increased range, and can target
+                 aircraft.
+               o All aircraft can use Airports to travel between cities.
+               o Carriers can now transport Land units (non-wheeled, and
+                 non-merchant). (Because Carriers could already transport
+                 Helicopters which can transport Land units. However, not
+                 all land units can freely enter or leave Helicopters
+                 while on board a Carrier.) HRM#681866
+               o Only "Big Land" class units (tanks, artillery etc) kill
+                 citizens when attacking a city; "Land" class units
+                 (infantry etc) no longer do. GNAPATCH#7078 GNA#24616
+               o Triremes are subject to ZoC when traveling on rivers, and
+                 can no longer move diagonally between river tiles.
+               o Explorers can establish embassies and investigate cities,
+                 like Diplomats. They are slightly more expensive, but do
+                 not become obsolete.
+               o The actions Establish Embassy and Investigate City can be
+                 done directly from a boat.
+               o Diplomat and Spy can fortify (this provides no defensive
+                 bonus, but means they don't wake up as they would when
+                 sentried). GNA#25151
+               o Reworked merchant units (Caravan and Freight) and trade.
+                 GNAPATCH#7137
+                    # No longer require river or roads to move.
+                    # Subject to ZoC.
+                    # Cannot establish trade routes or help build wonders
+                      without movement points.
+                    # No one-time trade bonuses when they enter a city.
+                    # When war is declared between two players, existing
+                      trade routes are canceled, and new ones can't be
+                      established while a state of war exists.
+                    # Can help building allies' or team-mates' wonders.
+               o The default start units include a Worker instead of
+                 Migrants. GNAPATCH#6368
+          + Terrain and terrain alterations
+               o Changes to defensive bases:
+                    # New 'Fort' and 'Airstrip' bases, which must be built
+                      before 'Fortress' and 'Airbase' respectively. They
+                      provide some defense; airstrips provide a refuel
+                      point.
+                    # Fortresses and Airbases no longer prevent a whole
+                      unit stack from being lost when one defender dies
+                      GNAPATCH#5998; but they now provide some defense
+                      bonus against all kinds of attacking unit.
+                    # Airbases provide extra vision, like Fortresses after
+                      Astronomy; and provide more hitpoint regeneration
+                      (equivalent to a city without an Airport).
+               o City centers once again always get automatic roads, even
+                 on rivers without knowledge of Bridge Building.
+                 HRM#676162
+               o City center tiles are no longer guaranteed a minimum of 1
+                 food. The only effect is that city center desert tiles no
+                 longer give any food if a mine is built on them.
+                 HRM#681856
+               o Mountains now get an extra production point from mining
+                 (changed from +1 to +2).
+               o Desert and Glacier tiles can now have an oil well built
+                 on top of a mine once Refining is known, for an extra
+                 production point. The mines available from the start of
+                 the game are drawn with the same sprites as on other
+                 terrains. GNAPATCH#5915
+               o In order to get a bonus with Offshore Platform, deep
+                 ocean tiles now require the new extra Oil Platform,
+                 rather than Buoy. Offshore Platforms now give a bonus
+                 from lake tiles too.
+               o Added Maglevs (with Superconductors), which supplement
+                 Railroads and give infinite movement to certain units.
+               o Forest, Jungle, and Swamp tiles now give the advertised
+                 defense bonus of 25% (in 2.5 it was rounded down to 20%).
+               o Forest and Jungle tiles can now suffer pollution and
+                 fallout, like most other tiles. HRM#681860
+               o Adjusted terrain transformations (that can be done once
+                 Fusion Power is known). Designed so that all useful
+                 alterations can be finished in 1 or 2 steps, and all
+                 global warming effects can be reversed with Transform.
+                 GNAPATCH#5596
+               o Adjusted effects of climate change. Ocean can no longer
+                 become Deep Ocean. GNAPATCH#5475
+          + Buildings and wonders
+               o Great Wonders are now only obsoleted when the owner
+                 learns a certain technology, not when any player does.
+                 GNAPATCH#5542
+               o A new building, the Ecclesiastical Palace (available with
+                 Theology), acts as a second center of government.
+                 GNAPATCH#7159
+               o Spaceship part cost approximately doubled. GNAPATCH#5996
+               o It's no longer possible to build a Harbor next to a lake
+                 (since it gives no benefit to lake tiles). GNA#25070
+               o Conversely, Lighthouse and Magellan's Expedition can be
+                 built next to deep ocean. GNAPATCH#7742
+               o The suppression of Super Highways trade benefits by a
+                 farmland bonus no longer applies to city center tiles.
+                 HRM#695978
+          + Technology
+               o 'Holes' in the tech tree (knowing a tech without knowing
+                 its prerequisites) are no longer allowed (previously they
+                 could arise through tech trading, tech loss, and so on).
+                 GNAPATCH#4967
+               o Construction now requires Iron Working, rather than
+                 Currency (so that Iron Working is a prerequisite for
+                 Frigates and Ironclads). GNAPATCH#5999
+               o Population pollution can now occur even without knowledge
+                 of Industrialization. (This was a corner case that would
+                 likely never have been encountered.) GNAPATCH#5015
+          + Government
+               o The Tribal government gives one content citizen per city
+                 instead of martial law.
+               o Tribal governments get an extra unhappy citizen at a
+                 slightly smaller empire size, and Monarchies at a
+                 slightly larger.
+               o Each city in a Federation gets 2 extra luxury points.
+               o The 50% science loss from Fundamentalism is now additive
+                 with other science bonuses, rather than multiplicative.
+                 (It's equivalent to losing a building such as a Library.)
+               o Similarly, the luxury loss from Anarchy is now additive
+                 rather than multiplicative.
+          + Other
+               o Certain buildings (and all wonders) generate culture
+                 points every turn, which accumulate in a city (and change
+                 hands with it); each nation can also get one-time culture
+                 boosts from achievements such as mapping the entire world
+                 or launching a spaceship. Culture affects score, and city
+                 culture drives migration, if enabled. A cultural victory
+                 is also possible (but not enabled by default, as these
+                 effects have not yet been tested and balanced); a player
+                 must have culture above a certain threshold, and a
+                 convincing lead over other players, to win. GNAPATCH#5997
+               o The outer ring of tiles worked by a city can be stolen by
+                 an enemy border source. (The inner ring is permanently
+                 owned by the city owner.) GNAPATCH#7096 HRM#651450
+               o Adjustments to AI bonuses: HRM#681976 GNAPATCH#6006
+                    # Hard AIs are no longer favored by other AI players,
+                      but Cheating AIs are favored more.
+                    # Cheating AIs no longer get any bonus to defense
+                      (they used to get one against land attacks); but
+                      their units do now cost more to bribe, they don't
+                      pay unit food upkeep, they get a bonus to population
+                      pollution, and their existing bonuses to veteran
+                      chance and city incite cost are increased.
+               o Tweaked the startup defaults. (These are almost all
+                 server settings that can be customized to taste.)
+                 HRM#650801
+                    # Grant a diplomat start unit ('startunits').
+                    # 6 players by default, not 12 (and a smaller map).
+                    # Tweaked map generation: smaller poles, less shallow
+                      ocean.
+                    # Revolutions tend to become quicker the more times
+                      any player has used the target government type
+                      ('revolentype').
+                    # Halved the chance of building destruction when a
+                      city is conquered ('razechance').
+     * multiplayer ruleset:
+          + 'Tired attack' is enabled: units that attack with less than
+            one movement point have reduced attack strength. GNA#22395
+          + Darwin's Voyage now only gives one free tech, not two.
+            HRM#692110
+          + Buoys have been restored, now that they no longer claim
+            territory. GNAPATCH#3874
+          + Borders are now enabled by default; the 'foggedborders' option
+            has been set so that you can't deduce enemy movements through
+            their border changes; you can always see your own territory.
+            GNA#17304
+     * experimental ruleset:
+          + One player policy, 'Personal Freedom', which allows trading
+            off science against military unhappiness.
+          + Culture sources (fewer than civ2civ3: Palace, Colosseum,
+            Library, University). Cultural victory is enabled by default.
+          + Explorers can establish embassies once Writing is known.
+            GNAPATCH#5132
+          + Spies can bribe and sabotage units which are not alone on
+            their tiles. GNAPATCH#5295
+          + Caravans and Freight can opt to not to establish (or displace)
+            a trade route when arriving at a destination city, instead
+            receiving just the one-time bonus ("Sell Goods").
+          + Workers and Engineers can fortify.
+          + Various achievements. They are only available to the first
+            player to reach them, and have no gameplay effect.
+          + AI traits are somewhat randomized. GNAPATCH#5226
+          + The fourth city radius on square topologies is slightly
+            larger. GNAPATCH#5983
+     * civ1 and civ2 rulesets (to improve their fidelity):
+          + A tile with both a river and a fortress now has a higher
+            defensive bonus, as the bonuses are now multiplied rather than
+            added (restoring the 2.4 behavior). GNA#23143
+          + In the civ2 ruleset, Diplomats and Spies can now perform their
+            actions directly from a ship on the ocean. GNA#23604
+          + Player colors are by default tied to specific nations.
+            GNAPATCH#3927
+          + The civ1 ruleset no longer has Farmland (previously it existed
+            despite being impossible to build, due to engine limitations).
+            GNAPATCH#4342
+
+   New/changed game settings:
+     * A new option 'revolentype' controls how the period of anarchy
+       during a revolution is determined. New options include a random
+       period with a maximum other than 5 turns, and a period that
+       decreases the more times anyone has switched to the target
+       government. GNAPATCH#4700 GNAPATCH#5338
+     * The 'diplcost' setting has been split into 'diplbulbcost' and
+       'diplgoldcost'. GNAPATCH#5386
+     * The 'huts' setting is now relative to map size (it was a count).
+       Old scenarios will retain their behavior, but old server scripts
+       will not. GNAPATCH#6669
+     * The 'happyborders' setting has a new value which allows your units
+       to be inside allies' borders without causing unhappiness.
+       GNAPATCH#5001
+     * The 'spacerace' and 'alliedvictory' options have been replaced by a
+       new bitwise option 'victories'. A third flag has been added to this
+       option to enable 'cultural victory' in rulesets which support it
+       (currently 'civ2civ3' and 'experimental'). GNAPATCH#4017
+       GNAPATCH#4018
+     * 'citymindist' now goes up to 11. GNAPATCH#5572
+     * The settings 'sciencebox' and 'killstack' can now be changed in the
+       pregame of scenarios which have players defined (such as Europe
+       1901).
+     * 'startunits' can now include a ferryboat unit ('f'). GNAPATCH#4861
+       Also, this setting can now be empty if 'startcity' is set.
+       GNAPATCH#5887
+     * Map generation:
+          + The previous hard-coded behavior that non-wrapping maps had
+            only a single pole has been replaced by a new setting
+            'singlepole' which controls this behavior. GNA#23261
+          + The previously hardcoded suppression of relief at the poles is
+            now controlled by a new setting 'flatpoles'. GNAPATCH#6919
+          + Narrower borders around edged maps (restoring 2.2.x behavior).
+            GNAPATCH#6917
+          + Map generation now tries a bit harder before giving up.
+            GNAPATCH#4900
+
+   Game limits:
+     * The maximum number of regular players has increased from 126 to 150
+       (160 including barbarians). GNAPATCH#4254
+     * The maximum number of cities and units in a game (added together)
+       has increased from 65535 to 250000. GNA#21950
+
+   Supplied scenarios:
+     * A new scenario, "Europe 1900 WWI", is included. This is a Europe
+       map with the cities and units of the Great Powers prior to the
+       outbreak of the First World War. (A previous version was available
+       for 2.5 via the modpack installer, as "Europe 1901".) GNAPATCH#6434
+     * The large Earth scenario now has 52 more start positions (for a
+       total of 91), and players start with their first city built. Thanks
+       to Rhue. HRM#688280 HRM#702265
+
+Changes affecting other rulesets / modders
+
+   We've tried to make it a bit easier for people not experienced with
+   modding to add new nations to their local installation, with the
+   'override' directory. How to use this is documented in
+   doc/README.nations. GNAPATCH#3926
+
+   Both client and server have a new command-line option --warnings,
+   designed for modders, which warns about deprecated modpack constructs
+   that may disappear in future releases. If you port a modpack to 2.6,
+   it's a good idea to run with this option to check for old constructs.
+
+   Ruleset authors can control much more of the game behavior. Comments in
+   supplied ruleset files give some documentation and usage examples of
+   new features; you can also browse the forum thread where most features
+   were announced as they were added.
+   <http://forum.freeciv.org/f/viewtopic.php?f=11&t=122>
+
+   Existing rulesets need changes to work with 2.6; see
+   <http://www.freeciv.org/wiki/How_to_update_a_ruleset_from_2.5_to_2.6>
+   for a minimal recipe (not all required changes are listed below). Once
+   you've updated to 2.6 format, the next major version after that is
+   planned to contain a tool to upgrade rulesets automatically.
+     * Extras
+          + Most additions to base terrain -- roads, bases, and specials
+            -- are now unified as "extras"; only resources remain
+            separate. The properties and graphic representations of extras
+            are now somewhat less tied to their category, although roads
+            and bases continue to exist as subclasses with unique
+            properties.
+          + The previously hardcoded set of terrain specials -- mine,
+            irrigation, farmland, pollution, fallout, hut -- is now fully
+            under ruleset control.
+          + Production bonuses and penalties formerly caused by terrain
+            specials are now governed by new effects (Irrigation_Pct,
+            Mining_Pct, Output_Tile_Punish_Pct), so can depend on more and
+            different requirements. GNAPATCH#3965 GNAPATCH#3967
+            GNAPATCH#3974
+          + The set of events that can cause extras to appear and
+            disappear (for instance user actions like "mine", "irrigate",
+            and "clean fallout") is still fixed, although their mapping to
+            extras is not. If the ruleset allows the same cause to create
+            or remove multiple extras, the player can choose.
+          + Any kind of extra (including roads and bases) can fall into
+            any of the new extra categories (Infra, Natural, Bonus, or
+            Nuisance). (This mainly affects how they are presented in the
+            help and user interface.) For instance, it would be possible
+            to have a base generated at game start like a hut (Bonus
+            category).
+          + The total limit on extras of any kind is now 64 (previously
+            there were limits of 32 base types and 8 road types).
+          + New features:
+               o Bases on a tile in unclaimed territory can now have an
+                 owner distinct from the border owner of the tile they are
+                 on. This only has an effect for bases providing vision.
+                 For example, this allows buoys to provide vision to a
+                 player without also providing territory (and blocking
+                 peaceful units). Unlike territory-providing bases, such
+                 bases do not change hands, unless another base is built
+                 on the same tile. GNAPATCH#3630
+               o Extra removal (cleaning and pillaging) can now have
+                 additional requirements (rmreqs).
+               o The time taken to remove an extra can be extra-specific
+                 (removal_time) or terrain-specific (via existing
+                 clean_fallout/pollution_time or new pillage_time).
+               o Extra build/removal time can now also depend on both
+                 extra and terrain to some extent (build_time_factor,
+                 removal_time_factor).
+               o Extras can optionally disappear when the underlying
+                 terrain changes even if they would be valid on the new
+                 terrain -- 'TerrChangeRemoves' extra flag. GNA#20898
+               o Optional defense layers -- 'Natural' and 'Fortification'
+                 -- with multiplicative defense bonuses. Allows rulesets
+                 to fix a regression in 2.5 when rivers were turned into
+                 road types. GNA#23143
+               o The move_mode of roads can now affect whether a move is
+                 legal, not just its cost. For instance, a river-native
+                 unit can be prevented from moving between two rivers on
+                 diagonally adjacent tiles. GNA#16383
+               o Integrating roads, allowing move bonus / legality between
+                 two tiles with different types of roads. Graphics are
+                 drawn appropriately. GNAPATCH#3829
+               o Roads can have additional requirements on where they are
+                 started (building road on a tile where no adjacent tiles
+                 have the same or an integrating road) -- 'first_reqs'.
+                 GNAPATCH#4688
+               o Extras can now be native to units without also being
+                 refuel points for them ('Refuel' extra flag).
+                 GNAPATCH#4106
+               o The names of menu options for building the two categories
+                 of base with their own keystrokes are now under ruleset
+                 control, rather than being fixed as "Type A / B base".
+                 GNAPATCH#2721
+               o The extras used for pollution, fallout, and huts can be
+                 terrain-dependent and/or chosen randomly from a set.
+
+     * Actions
+          + Some actions performed by units -- in 2.6, just the special
+            diplomat/spy/caravan actions -- can now be configured by the
+            ruleset. The consequences of actions are still largely
+            hardcoded, but the circumstances in which units can perform
+            these actions are now specified with the requirements system
+            using 'action enablers'. Many previously hard-coded rules are
+            now under ruleset control. See doc/README.actions.
+            Some examples of newly possible things (this is not an
+            exhaustive list):
+               o Helping to build a wonder in a foreign city.
+               o Sabotaging a unit with 1 hitpoint can kill it.
+               o Poisoning a size 1 city can destroy it.
+               o Acting against units not alone on a tile (the player is
+                 prompted to choose a target unit).
+               o Acting against units inside cities (but you must be able
+                 to see inside the city, implying at least Alliance).
+               o Hostile actions against players you're not at war with,
+                 or yourself.
+               o Establishing embassies with No_Diplomacy nations.
+               o Units don't have to have a Diplomat/Spy flag to perform
+                 what have traditionally been diplomatic actions.
+                 (However, these flags do still control the ability to
+                 survive actions, defense against such actions, and city
+                 resistance to tech stealing.)
+          + One new spy-type action, "Steal Gold", which steals a random
+            amount from the target player's treasury. New effects control
+            the maximum amount stolen ("Max_Stolen_Gold_Pm") and how much
+            is lost to both players ("Thiefs_Share_Pm"). GNAPATCH#5274
+          + "Enter Marketplace" (one-time revenue from caravans, now
+            called "Sell Goods" in most rulesets) can now be an
+            independent action from "Establish Trade Route", with its own
+            rules.
+          + It's now possible to allow only targeted sabotage and tech
+            stealing, without offering the option of a randomly chosen
+            target.
+          + Many new requirements have been added to express conditions
+            that were previously hard-coded in these actions. See
+            "requirements" below.
+          + A Lua signal 'action_started_*' is emitted when an action is
+            about to take place, allowing additional behavior to be added.
+          + Since it's now possible to construct a ruleset where an action
+            is illegal due to some restriction that is unknown to the
+            player, a new effect "Illegal_Action_Move_Cost" allows
+            movement points to be deducted if such an action is attempted.
+            This is intended to avoid the information leak from such
+            attempts being entirely without penalty (which would reward
+            tedious action scrubbing by players).
+
+     * Culture
+          + New feature: the ruleset can award culture points points that
+            accumulate over time ("history") or points that only last as
+            long as a condition holds ("performance"); each can be accrued
+            on a per-city or per-nation basis.
+               o Rulesets control the numeric criteria for cultural
+                 victory (which is optionally enabled with the 'victories'
+                 setting).
+               o Requirements can test the total culture of cities or
+                 players.
+               o Lua scripts can test or modify culture.
+          + City culture can boost migration.
+          + See the civ2civ3 description above for an example of what can
+            be achieved.
+
+     * Achievements
+          + The game can track track whether players meet certain
+            conditions (see doc/README.achievements), and award
+            'achievements' either to the first or to each player that
+            meets the requirements. Achievements can simply be trophies
+            with no further effect, or can affect gameplay by granting
+            culture points, through the effects system, or through Lua
+            scripting.
+
+     * Policies
+          + Rulesets can define a set of 'policies', sliders which the
+            player can adjust once per turn and which affect the game via
+            'multipliers' in the effects system. These can be used to
+            implement custom trade-offs similar to the built-in tax rates.
+
+     * Disasters
+          + A new disaster effect "ReducePopDestroy"; this is like
+            "ReducePopulation" except that it can destroy a city of size
+            1.
+          + A new Lua signal 'disaster_occurred' (replacing 'disaster')
+            tells a script whether the disaster had some effect inside the
+            game engine. The default script does not implement any
+            additional effects, so prints a message if there was no net
+            effect from a disaster. GNA#22082
+
+     * Terrain
+          + Terrain defense bonuses that aren't a multiple of 10% now work
+            as expected (previously they were rounded down to the nearest
+            10%). GNA#25432
+          + Map generation:
+               o A new 'Frozen' terrain flag, which can apply to land and
+                 water. Frozen terrain is generated near the poles;
+                 terrain changes will try to preserve frozenness; and
+                 rulesets can specify that freezing/thawing terrain
+                 transformations require a certain threshold of
+                 surrounding frozenness. These changes are intended to
+                 allow rulesets to define 'sea ice' terrains.
+               o Better support for multiple lake terrains: each lake
+                 picks a consistent terrain type (rather than a
+                 patchwork), and the NotGenerated flag is now honored for
+                 lake terrains. GNAPATCH#6918
+
+     * Units and movement
+          + There have been a lot of engine changes, particularly in
+            path-finding and AI, to support units with complex or unusual
+            movement restrictions. If you tried to create an unusual type
+            of unit or terrain restriction in a previous version and it
+            didn't work very well, it's worth trying again. There are too
+            many changes to list individually, but here are some of the
+            more notable ones:
+               o The 'shore bombardment' combat rule, where both attacker
+                 and defender firepower are reduced to 1, now applies to
+                 any situation where each unit couldn't move to the
+                 other's tile. GNAPATCH#3830
+               o Path-finding through unknown terrain makes different
+                 decisions. GNAPATCH#3903
+               o Auto-explore works better with units other than pure
+                 land/sea units. GNAPATCH#4853
+               o Unreachable target units are handled better by
+                 path-finding. GNAPATCH#4985
+               o As part of this, the old 'move_type' ruleset parameter
+                 has been completely retired; the engine infers what it
+                 needs from other unit properties. GNAPATCH#4865
+          + Units no longer have to impose zones of control (ZoC); this
+            can be disabled with the 'HasNoZoc' unit type flag. GNA#21507
+          + The hardcoded rule that units may only impose a zone of
+            control (ZoC) on land has been replaced by the 'NoZoc' terrain
+            flag. GNAPATCH#4597
+          + Ability to airlift a unit is now controlled by a unit class
+            flag 'Airliftable', rather than being hardcoded to units the
+            game thought were land units. GNAPATCH#3871
+          + The hardcoded rule that units may fortify on land but not
+            water has been replaced by the 'NoFortify' terrain flag.
+            GNAPATCH#5075
+          + A unit type may now both fortify (F) and build fortress-type
+            bases (Shift+F). The new unit type flag 'Cant_Fortify'
+            replaces the previous hardcoded rule that 'Settlers' type
+            units could not fortify. GNAPATCH#5072
+          + A new ruleset option 'pythagorean_diagonal' allows diagonal
+            moves in square topologies to cost more than orthogonal moves.
+            GNAPATCH#4819
+          + The maximum paradrop range has been increased from 255 to
+            effectively unlimited. GNA#24349
+          + Rulesets now have better control over which unit types can be
+            granted via 'startunits', with the '*StartUnit' role flags.
+            GNAPATCH#4625
+          + The maximum number of ruleset-defined unit type flags has
+            increased from 16 to 32. GNAPATCH#4904
+
+     * Cities
+          + Rulesets can now control how many of the tiles initially
+            claimed by a city are immune from later border stealing, via
+            'radius_sq_city_permanent'. GNAPATCH#6036
+          + A new tech flag 'Claim_Ocean_Limited' which allows cities and
+            bases to claim water tiles only if they themselves are in
+            water (unlike 'Claim_Ocean', which also allowed land cities to
+            extend claims over water). GNAPATCH#4629
+          + The effect where city disorder spills over into national
+            revolution now works at city resolution, as does the number of
+            turns of sustained disorder required, which is now under
+            ruleset control (new 'Revolution_Unhappiness' effect replacing
+            'Revolution_When_Unhappy'). GNAPATCH#4021
+          + Building obsolescence is now defined with a list of any
+            requirements (rather than restricting buildings to being made
+            obsolete by tech and replaced by other buildings), with any
+            fulfilled requirement making the building obsolete.
+            GNAPATCH#3941 GNAPATCH#1341
+          + The "Visible_Walls" effect is no longer boolean; with the
+            cooperation of the tileset, it allows up to 7 different wall
+            graphics to be selected (which don't actually have to be
+            wall-related). GNAPATCH#4393
+
+     * Trade
+          + Trade route legality / bonus can now differ depending on
+            whether foreign trade routes are with an enemy, ally, or team
+            member. GNAPATCH#4499
+          + Whether trade routes give a one-time bonus to gold and/or
+            science is now configurable. GNAPATCH#5248
+          + The new 'Traderoute_Pct' effect allows ongoing trade route
+            revenue to be adjusted. GNAPATCH#3249
+
+     * Technology
+          + Rulesets can control whether 'holes' in the tech tree (techs
+            without their prerequisites) can ever appear due to various
+            causes (tech trading, tech loss, etc). GNAPATCH#4415
+            GNAPATCH#4789
+          + The "Tech_Parasite" effect (traditionally used for the Great
+            Library) now grants a random tech from those eligible, rather
+            than the one defined first in the ruleset. GNAPATCH#5104
+
+     * Nation styles
+          + The 'city styles' that players selected when picking a nation
+            have been replaced with 'nation styles'.
+          + The graphics used for cities can still depend on these (via
+            the new "Style" requirement), but don't have to; the sprite
+            used for the city can depend on other properties of the city.
+            (For instance, this can be used for ocean cities, so
+            oceanic_graphic definitions have been removed.)
+          + Music styles (see "Sound" later) can also be influenced by
+            nation styles.
+
+     * Barbarians
+          + A new barbarian type, "Animal", is available for use by
+            rulesets.
+               o One Animal Kingdom AI "barbarian" player is created at
+                 game start to manage the animals.
+               o Each terrain type has just one characteristic animal (or
+                 none); so for any given terrain there's one kind of
+                 animal that'll spawn there, but a given animal can call
+                 multiple terrains home (so if both Hills and Mountains
+                 have animal="Mountain Lion", then wild lions will roam
+                 inside any contiguous region of uplands, but will never
+                 step/attack outside). Animals cannot conquer cities.
+               o Animals' movement restriction to terrain is a property of
+                 the owner, not the unit; so if an animal-type unit can be
+                 captured it can then be moved anywhere, subject to the
+                 usual rules.
+               o The map is randomly populated with animal units according
+                 to map size and terrain availability at game start
+                 (controlled by the new 'animals' setting).
+               o Animals do not respawn, and once they're all gone,
+                 they're gone (as is the animal player).
+          + The behavior of barbarian units -- when they 'retire'
+            (disappear) -- is now more under ruleset control. A new
+            effect, 'Retire_Pct', influences this.
+          + The 'barbarians' setting is automatically adjusted and locked
+            if the ruleset does not define any barbarian nations.
+            GNAPATCH#7192
+
+     * Effects and requirements
+          + New requirements:
+               o Requirements that depend on properties of a specific
+                 unit, not just the unit type and location. These were
+                 introduced mainly for use in action enablers, but can be
+                 used in other situations (e.g. 'Veteran_Combat' effect).
+                    # Whether a unit is currently being transported
+                      (UnitState = Transported) or can exist independently
+                      at its current location (OnLivableTile).
+                      GNAPATCH#4983, GNAPATCH#4894
+                    # The unit's veteran level (MinVeteran). GNAPATCH#4902
+                    # The unit's remaining movement points (MinMoveFrags).
+                      GNAPATCH#5033
+                    # The unit's remaining hit points (MinHitPoints).
+                      GNAPATCH#5135
+               o 'DiplRel' requirement, allowing testing relationships
+                 between the two players in some effects. Includes regular
+                 diplomatic states (war, peace, alliance, team etc) as
+                 well as shared vision, embassies, casus belli (reason to
+                 cancel treaty), and whether they are in fact different
+                 players. GNAPATCH#4051
+               o The 'MaxUnitsOnTile' requirement allows testing the total
+                 number of units currently on the tile. GNAPATCH#4224
+               o New requirement 'Age' allows testing how many turns a
+                 unit, city, or player has existed. GNAPATCH#5305
+                 GNAPATCH#5380
+               o 'NationGroup' allows testing whether a player is one of a
+                 particular subset of nations. Rulesets can define nation
+                 groups which don't appear in the nation selection UI, for
+                 use with this requirement. The supplied rulesets define a
+                 'Barbarian' nation group for this purpose. GNAPATCH#5383
+               o 'Topology' tests properties of the game's map topology
+                 ('WrapX', 'WrapY', 'Iso', or 'Hex'). GNAPATCH#6193
+               o A new value 'Claimed' for the 'CityTile' requirement
+                 allows testing whether a tile is inside any player's
+                 borders. GNAPATCH#5929
+               o 'BaseFlag', 'RoadFlag', and 'ExtraFlag', allowing testing
+                 whether extra has certain properties rather than just its
+                 type. GNAPATCH#3832 GNA#24445
+               o The new requirement 'Extra' replaces 'Special', 'Base',
+                 and 'Road'.
+          + New requirement ranges:
+               o 'Alliance' and 'Team' allow testing whether any player in
+                 these sets has a particular property. GNAPATCH#4231
+                 GNAPATCH#4388
+               o 'Traderoute' allows testing whether any city with which
+                 this one has a trade route has a particular property.
+                 GNAPATCH#4459
+          + The maximum number of requirements has increased from 10 to 20
+            (to allow room for nreqs to be converted to present="FALSE"
+            reqs; nreqs are now deprecated).
+          + Effect changes not listed elsewhere:
+               o The new 'Victory' effect allows the ruleset to add any
+                 win conditions that can be expressed with the
+                 requirements system. GNAPATCH#4151
+               o 'Unit_Bribe_Cost_Pct' allows bribe cost to be adjusted.
+                 Bribe cost reduction for settler-like units is now under
+                 ruleset control. GNAPATCH#3412 GNAPATCH#4121
+               o The 'Nuke_Proof' effect can now depend on diplomatic
+                 relationship. GNAPATCH#6693
+               o 'Pollu_Pop_Pct_2' replaces the tech flag
+                 'Population_Pollution_Inc' for adjusting the pollution
+                 caused by city population, so that population pollution
+                 can be entirely independent of technology. GNAPATCH#5015
+
+     * Calendar
+          + Rulesets can now define sub-year divisions in their calendar.
+            The new 'Turn_Fragment' effect controls how many fragments
+            pass each turn. GNAPATCH#5249
+
+     * Documentation
+          + A long description file can be included in a ruleset, and is
+            displayed in the client help.
+          + Ruleset authors now have more control over when autogenerated
+            help is displayed, via the 'quiet' attribute on requirements,
+            actions, and combat bonuses. This allows suppression of
+            autogenerated help text where it's inaccurate or misleading or
+            the author would prefer handwritten text. GNAPATCH#4723
+            GNAPATCH#7046
+          + Unit classes can have custom help text. GNAPATCH#5834
+          + Rulesets can contain a version number field, which is reported
+            in help, on the metaserver, saved in savegames, etc.
+            GNAPATCH#4734 GNAPATCH#4761
+
+     * Lua scripting
+       While old scripts should mostly continue to work, see
+       <http://www.freeciv.org/wiki/How_to_update_a_lua_script_from_2.5_to_2.6>
+       to avoid deprecated constructs. See the Events Reference Manual
+       <http://www.freeciv.org/wiki/Events_Reference_Manual> for full
+       documentation.
+       Below are additions which are not covered in other sections:
+          + Updated scripting engine from Lua 5.2 to 5.3.
+          + Lua access to AI trait values. GNAPATCH#6557
+          + (Terrain):class_name() ("Land" or "Oceanic") GNAPATCH#4746
+          + (Direction):next_cw(), next_ccw(), opposite() GNAPATCH#5415
+          + (Unit):kill()
+          + give_tech(), giving control of penalty and notification; old
+            give_technology() is deprecated.
+          + New "pulse" signal, which is called every so often during a
+            game. GNAPATCH#6286
+          + Utilities for team pooled research: notify.research() /
+            notify.research_embassies(), for notifications involving every
+            one of a group of players that share research (possibly a
+            team) GNAPATCH#6545 GNA#24056; and
+            (Player):research_name_translation()/research_rule_name(), to
+            name that group GNAPATCH#6603.
+          + New 'city_transferred' signal, which is triggered whenever a
+            city changes hands for any reason. 'city_lost' is deprecated
+            in favor of this one. GNAPATCH#6673
+          + New 'city_size_change' signal, superseding 'city_growth' and
+            allowing script reaction to famine, etc. GNA#24115
+          + Methods to test some city properties: (City):is_happy(),
+            is_celebrating(), is_unhappy(), is_gov_center(), and
+            is_capital(). GNAPATCH#6804
+          + Methods to navigate unit transport stacks:
+            (Unit):transporter(), (Unit):cargo_iterate(). GNAPATCH#6845
+          + (as of RC2) find.role_unit_type() can now find a unit with a
+            given flag, as well as a given role. HRM#700906
+
+   Sound has had some major changes.
+     * Musicsets are now separate from soundsets, which now just cover
+       sound effects. Clients can select and disable the two
+       independently.
+     * Musicsets can specify soundtracks for pregame, victory, defeat, and
+       in-game according to 'music styles' defined by the ruleset. In-game
+       music is further divided by mood (currently 'peaceful' or
+       'combat'). Ruleset Lua scripts can also cause specific music to be
+       played. Supplied rulesets define music styles corresponding roughly
+       to city styles ('Babylonian', 'Renaissance', 'Industrial', etc).
+
+   Tileset authors have a few new facilities. Existing tilesets need
+   changes to work with 2.6 at all; see
+   <http://www.freeciv.org/wiki/How_to_update_a_tileset_from_2.5_to_2.6>
+   for a minimal recipe.
+     * As noted in the ruleset section, with the ruleset's cooperation, a
+       tileset can have different graphics for different cities in a
+       nation, and several different kinds of city-wall-like variants.
+     * Can have different mine/irrigate activity icons for transforming
+       terrain (unit.plant, unit.irrigate) and building extras
+       (conventionally unit.mine, unit.irrigation). GNA#24329
+     * Activity icons for removal of pollution/fallout type extras can be
+       specific to the extra type. GNAPATCH#4235
+     * Can specify an alternative layout for unit upkeep sprites
+       ('unit_upkeep_small_offset_y'), for better display in the SDL
+       clients. GNAPATCH#6564
+     * Various elements now have configurable offsets, allowing more
+       condensed graphics files.
+     * Can specify seperate pixel_border_x/y. GNAPATCH#5786
+     * Tilesets can have a summary and description, which are displayed in
+       the client in "About Current Tileset". GNAPATCH#6350
+
+   Scenario creators also have a few new features available. (Scenarios
+   created with previous versions should continue to work in 2.6.)
+     * Scenario property "Prevent New Cities"; players cannot build cities
+       in such scenarios. Ruleset authors can give certain units a flag
+       'NewCityGamesOnly', which prevents those units from being built in
+       such scenarios, if that wouldn't make sense. (However, none of the
+       supplied rulesets set this flag; in principle Settlers can be used
+       for other things, although they cannot build cities in these
+       scenarios.) GNAPATCH#5678 GNAPATCH#6424
+     * Saltwater ocean flooding freshwater lakes can be disabled for
+       specific scenarios. GNAPATCH#6994
+     * There's an optional 'authors' property. GNAPATCH#6450
+     * Scenarios can be marked as 'handmade', causing a warning about data
+       loss when modifying them in the built-in editor. GNAPATCH#5608
+     * It's now possible to set a player's government type in the editor.
+       GNAPATCH#3300
+     * Scenarios saved from the editor tended to be saved with fixed
+       game/map random seeds which affected play. This no longer happens.
+       GNA#24319
+     * Scenarios are now saved with the version number of Freeciv that
+       created them. When several scenario files with the same name are on
+       the path, the client shows only the newest one that is still
+       compatible with the client version.
+     * A new server command '/scensave' is included as standard, to create
+       a savegame suitable for use as a scenario. Previously this was only
+       included in debug builds; it does the same as "Save Scenario" in
+       the editor GUI. GNAPATCH#5755
+
+Changes affecting server operators
+
+     * It's now possible to /create an AI player with specified AI type
+       but random name/nation. GNAPATCH#5259
+     * New/changed server settings:
+          + 'persistentready' allows control of whether a new player
+            joining in pregame resets everyone else's "Ready" status
+            (previously it always did). With the new setting 'connected',
+            a player's "Ready" status will persist as long as they remain
+            connected to the server. GNAPATCH#5978
+          + The 'autosaves' option now has a value 'TIMER', allowing a
+            periodic backup even if the turn has not changed. Frequency is
+            controlled by a new setting 'savefrequency'. GNAPATCH#4379
+          + 'scoreloglevel' controls whether AI players are included in
+            the scorelog. GNAPATCH#5727
+     * The server now tracks whether a setting has been explicitly set
+       (even if to the same value as the default). This status can be
+       reset with the new '/default' command. Its main effect is that
+       savegames do not include default settings, allowing changes in
+       engine defaults to affect existing games.
+
+General
+
+     * The implementation of research has been substantially reworked.
+       This should have little visible effect, but may have fixed bugs,
+       particularly with team pooled research.
+     * There have been a lot of changes to path-finding to support more
+       complex unit movement rules. There are quite likely to be behavior
+       changes but, again, hopefully these only make things better.
+     * Improvements to persistence across network disconnection and
+       save/load cycles:
+          + Open treaties still under discussion are now saved in
+            savegames. GNA#22712
+          + Demographic/score information from the start of a turn is now
+            saved, so that it does not change after a save/load cycle
+            mid-turn. GNA#22710
+          + The history report is now saved, and sent to players who join
+            mid-turn. GNAPATCH#6195
+          + Whether a player has ended their turn is saved; this can avoid
+            an extra turn delay when 'turnblock' is disabled, players
+            disconnect between turns, and the game is reloaded.
+            GNAPATCH#6192
+     * Various dotfiles that lived directly under the user's home
+       directory now live under the ~/.freeciv/ directory -- notably
+       client settings (.freeciv-client-rc-*) GNAPATCH#4387 and server
+       command-line history (.freeciv-server_history) GNAPATCH#5413.
+     * The FREECIV_PATH environment variable is now deprecated; it will
+       stop working entirely in the next major version. Use more specific
+       variables like FREECIV_DATA_PATH instead. GNAPATCH#6279
+     * Loading saved games from Freeciv before 2.0.x is no longer
+       supported. GNAPATCH#3858
+
+AI
+
+   There is a new AI level, 'Handicapped'; this has the same inherent
+   behavior as 'Novice', but is intended to suffer from additional
+   ruleset-defined penalties. In most of the supplied rulesets it suffers
+   penalties to science, defense, unit and city bribe cost, migration, and
+   trade routes (but in civ2civ3 it instead only suffers trade and shield
+   penalties). GNAPATCH#4599 GNAPATCH#4605
+
+   Known issue: unfortunately, the current AI doesn't handle Fighter-type
+   units (non-missile units with a single turn of fuel) at all well, so in
+   this version it has been inhibited from ever building them. (Note
+   however that civ2civ3 Fighters no longer fall in this category.)
+   GNAPATCH#4927 HRM#658896
+
+   As part of the path-finding rework, the AI is generally less restricted
+   to use units with certain movement types for certain roles.
+
+   There have been many other improvements to the standard AI's behavior:
+     * Defense
+          + The AI is now more likely to build defender units for
+            undefended cities. GNAPATCH#6534
+          + The AI was not building defender units when it wanted a
+            defense building but was frustrated. GNAPATCH#5471
+          + The AI was overoptimistic about defense strength when choosing
+            what defender to build. GNAPATCH#5470
+          + The AI has a more nuanced understanding of which buildings
+            defend against particular unit types. GNAPATCH#4797
+          + The AI no longer considers harmless units (such as civilians
+            and those that can't attack) a danger. GNAPATCH#4821
+          + If an AI diplomatic unit can't bribe a nearby unit in
+            self-defense, it will consider sabotaging it instead.
+            GNAPATCH#4153
+
+     * Attack
+          + The AI is more willing to build attacker units. GNAPATCH#6307
+          + The AI now prioritizes particular cities for conquering.
+            GNAPATCH#6430
+          + If the AI has some bonus causing it to build veteran units,
+            and the units thereby get a movement bonus, the AI is more
+            likely to take this into account in its planning.
+            GNAPATCH#4971
+
+     * Economy
+          + Autosettlers (for both AI and human players) now evaluate
+            improvements on unworked tiles differently from tiles already
+            being worked by cities. This fixes a pathology where
+            autosettlers would prefer improving hills without coal to
+            those with, and generally makes them less obsessed with
+            mining. GNA#21437
+          + If a city's food store is full and it is blocked from growing,
+            the AI will prioritize production rather than food.
+            GNAPATCH#3697
+          + The AI will now build military units purely for their martial
+            law effects. GNAPATCH#3989
+          + The AI likes to build great (unique) wonders more than it used
+            to. HRM#661176 Once it's started, it's less likely to stop.
+            HRM#662556
+          + The AI is willing to build workers and city founders in its
+            designated 'wonder city', easing a pathology when that is the
+            only city capable of building such units. HRM#660089
+          + The AI tended not to switch from building units to buildings,
+            even though it suffers no penalty for doing so. GNAPATCH#7312
+          + General improvements in AI's evaluation of building
+            usefulness. GNAPATCH#4885
+          + AI players will now consider establishing trade routes with
+            peaceful nations, not just allies (although allies are still
+            preferred). GNAPATCH#6418
+          + AI cities will not build endless caravans if already built
+            ones are piling up. GNAPATCH#7570
+          + The AI's selection of ferries for settler units is improved.
+            GNAPATCH#4862
+
+     * Research
+          + The AI considers researching technologies for effects that
+            they grant directly. GNAPATCH#4944
+
+     * Government
+          + AI now evaluates governments' effects directly, relying less
+            on ruleset hints to choose a government. GNAPATCH#5331
+
+     * Misc
+          + Hard and Cheating AI players no longer automatically offer
+            cease-fire at first contact (although they may well offer one
+            shortly afterwards, or accept one, this is not automatic).
+            GNAPATCH#6203
+
+   There has been some work on the 'threaded' AI variant. One change is
+   that cities only request tasks that current units can do. This improves
+   performance, but no longer drives acquisition of new kinds of units.
+   GNAPATCH#5496
+
+   The stub AI can now be linked in statically. This makes it easier to
+   set up a game where effective AI players are prohibited. GNAPATCH#7388
+
+   AI behavior is also now somewhat more configurable by rulesets:
+     * AI traits can now be specified as ranges; a value for each trait
+       will be picked randomly at game start, if enabled by the new
+       'traitdistribution' server setting. This is possible for the
+       classic and civ2civ3 rulesets, and enabled by default for the
+       experimental ruleset.
+
+   The following changes are mainly relevant to AI developers:
+     * Various new methods have been added to the AI callback interface.
+       See the change log in doc/README.AI_modules for more information.
+     * AIs now explicitly signal when they have finished their turn. As a
+       result, the threaded AI can be used in autogames (timeout -1).
+       GNAPATCH#4171
+     * A new player created by civil war gets the same AI type as the
+       victim. GNAPATCH#4828
+     * The 'experimental' skill level, which is a hook for AI developers
+       that in our distributed code does nothing different from hard AI,
+       is now only included in --enable-debug builds. GNAPATCH#5466
+     * There's a new autogenerated header freeciv_config.h, designed
+       (unlike fc_config.h) as a 'public' header that's safe to include in
+       external projects that build against Freeciv source (such as AI
+       modules). It contains selected facts about how Freeciv was built,
+       while trying not to cause namespace clashes / pollution.
+       GNAPATCH#5419
+
+Clients
+
+   The Qt client has been more or less entirely rewritten; see below.
+
+   Other client changes:
+     * The Gtk3 client is now the default. Some new features have not been
+       backported to the Gtk2 client.
+     * New versions of clients with no user-visible differences, just to
+       keep up with new library versions (these are not promoted for
+       Windows for now):
+          + There is a new "Gtk3.22" client. This has feature parity with
+            the regular Gtk3 client (which supports Gtk as old as 3.8),
+            but benefits from not having to be backward compatible. If you
+            have Gtk 3.22, consider using this instead of Gtk3. (Gtk 3.22
+            is a long-term stable release in the new Gtk+ versioning
+            scheme.)
+          + There is a new SDL2 client. This is a straight port of the
+            existing SDL client from the SDL1.2 API with no new
+            functionality. The SDL2 library has better support for
+            hardware acceleration and new platforms. SDL1.2 support will
+            be removed in the next major release.
+     * Some clients have support for scaling the map graphics. This is
+       implemented in a couple of ways; in both cases it is accessed via
+       the +/- keys.
+          + The Gtk3 client has (still somewhat experimental) render-time
+            zoom. For now this is restricted to 2x magnification.
+          + The Qt and Gtk2 clients have a simpler implementation where
+            every time the zoom level is changed, the tileset is reloaded,
+            so changing zoom level is slower, but all further redraws are
+            without any delays; all other parts of the game UI are scaled
+            too (so the city map area doesn't look as good).
+     * The client now chooses a tileset automatically based on the map
+       topology. Different preferred tilesets can be set for each
+       topology. It should now be much harder to end up with a mismatched
+       tileset and map topology by accident. GNA#16668
+     * It's now possible to specify work for autosettlers to do ('worker
+       tasks') by right-clicking on the city dialog map. Only supported in
+       Gtk3 and Qt clients.
+     * Units that pop up a menu of actions (such as diplomats and
+       caravans) now only do so when focus reaches them, and the menu can
+       be temporarily dismissed and will return.
+     * When there are multiple possible transports for a unit, it's now
+       possible to choose which one the unit is loaded onto. Currently
+       this is only supported in the Gtk3 and Qt clients.
+     * Goto path drawing has been reworked. The goto path now shows turn
+       boundaries, waypoints, and whether the unit will have movement
+       points at the end of the journey. GNAPATCH#5233 For patrol orders,
+       the return path is shown. GNA#22692
+     * Some action keys have changed, as a result of generalization of the
+       game engine:
+          + The shortcut for building fortresses and similar bases has
+            changed from F to Shift+F, to allow a single unit type to do
+            both. Similarly the key for building an airbase has changed to
+            Shift+E.
+          + The "Diplomat/Spy Actions" menu item has been renamed to
+            "Do...", and now prompts for a target. (The associated key is
+            still 'D', and pressing 'D' twice in succession specifies an
+            action against the unit's current tile, as 'D' did in previous
+            versions.)
+     * Some actions have been renamed in the user interface, although
+       their effects have not changed:
+          + The "Enter Marketplace" action has been renamed to "Sell
+            Goods" in most rulesets, to make it clearer that the
+            Marketplace building is not relevant. GNA#24463
+          + The act of a Spy stealing technology (where the technology can
+            be chosen) is now known as "Industrial Espionage", to
+            distinguish it from "Steal Technology" (which now refers to
+            untargeted stealing).
+          + The action of transforming terrain by pressing the 'Mine' key
+            (for instance, turning Grassland into Forest) is now referred
+            to as 'Plant'. GNAPATCH#4382
+     * A new option to suppress autocentering and animation for automated
+       units (such as autosettlers). GNAPATCH#7474
+     * The Gtk and Qt clients now show icons with event messages.
+     * When a city has negative production, its production text on the
+       main map becomes red. GNAPATCH#8053
+     * When loading a savegame, sounds are no longer played for events
+       whose messages are displayed from the cache but took place in
+       previous turns. GNA#24152
+     * The full-screen preference is now saved separately for each
+       different client type. GNAPATCH#5490
+     * The city report now has a "continent number" column, mainly to
+       allow sorting such that cities on the same continent are grouped
+       together. GNA#23624
+     * Player colors are now shown in the pregame screen (Gtk and Qt
+       clients).
+     * The client now sends periodic 'heartbeat' packets to the server, to
+       make it more obvious when a connection has failed if there is no
+       other activity. GNA#19561
+     * A new option to remember the last server connected to. GNA#21752
+     * When the server is unresponsive for a long time during turn change,
+       clients now show an estimate as to when it will finish. (This is
+       simply based on how long the previous turn took, so can be wrong.)
+       GNA#14585
+     * Client settings (such as tileset and menu music) are now available
+       from a button on the start screen of the Gtk and Qt clients.
+       GNAPATCH#4764
+     * (Gtk3) The allowed ranges for the city governor can now be
+       adjusted. GNAPATCH#6352
+     * (Gtk3) On a completely fresh installation, the Gtk3 client adjusts
+       some of its default settings ("arrange widgets for small displays"
+       and fullscreen) to be suitable for the display size at the time it
+       is first run. (Thereafter, the settings must be changed manually if
+       desired, even if a different size display is used.) GNAPATCH#5459
+       GNA#23988 There is a new '-- --resolution' option to influence the
+       display size assumed for this and other display-size related
+       adjustments (mainly for debugging).
+
+Qt client
+
+   The rewritten Qt client, which has a focus on fast-paced multiplayer
+   games, has a completely redesigned user interface. There are too many
+   changes to list individually, but here are some highlights:
+     * Configurable keyboard and mouse shortcuts.
+     * An optional popup window showing the outcome of unit battles.
+     * Can pre-select action for spies, diplomats, etc to take.
+     * "Units Filter" menus replaced with "Advanced unit selection"
+       dialog.
+     * Can quickly cycle map viewpoint over units/cities/capitals by mouse
+       wheel over Units/Cities/Nations button respectively (wheel up =
+       foreign, wheel down = yours).
+     * Shortcut to buy city production by clicking on map.
+     * Easy viewpoint switching for observers (right-click Nations
+       button).
+     * More integrated help. Ruleset help is shown throughout the game UI.
+     * Savegame preview.
+     * Can save the whole client map view as an image.
+     * Improved keyboardless goto - units can be ordered to goto even when
+       in a city.
+     * Buttons with icons for unit orders on the main map view (similar to
+       the SDL client).
+     * Replaced tax rates dialog with a single bar with two sliders.
+     * Three UI themes.
+     * Fonts are automatically configured the first time the new client is
+       launched, depending on screen resolution and DPI.
+     * Requires at least Qt 5.2.
+     * Features oriented to multiplayer games (on the 'Multiplayer' menu).
+       (These are currently client-side features, so their state is not
+       saved over a disconnect/reconnect or in savegames.)
+          + Delayed goto: a set of unit goto/attack orders can be set up
+            on the client, which will be sent to the server in one go.
+            GNAPATCH#6743
+          + Quick airlift: with a single click, airlift as many units of a
+            specific type as possible from other cities to the target
+            city. GNAPATCH#7472
+          + Rally points: can specify that newly built units go to a
+            particular tile. GNAPATCH#7465
+          + Trade planning: suggest trade routes between a set of cities
+            (including those not yet built), and automatically send
+            caravans to implement the plan. GNAPATCH#6775
+          + "Wake up": the client can play a sound on receiving a specific
+            string. GNAPATCH#6648
+
+Tools
+
+   This version includes the beginnings of a graphical ruleset editor,
+   "freeciv-ruledit"; however, it doesn't yet allow much editing. It can
+   rearrange the order of technologies in an existing tech tree, rename
+   units, buildings, and techs, and save a working ruleset; it can also be
+   used to check statistics of a ruleset, showing how many techs, units,
+   buildings, extras, etc a ruleset has.
+
+Modpack installer
+
+     * Modpacks may now depend on other modpacks, which are automatically
+       installed if necessary. GNAPATCH#4479
+     * Modpack specifications may now contain relative URLs, allowing them
+       to be copied from one server to another without modification.
+       GNAPATCH#4618 GNAPATCH#7376
+     * The modpack installer can easily be built pointing to a different
+       modpack list server (--with-modlist). GNAPATCH#4735
+
+Tilesets, Art, etc
+
+     * New large hex tilesets: Hexemplio (essentially the Ampliohexbig
+       modpack, based on Amplio2) and Toonhex (like Hexemplio but with
+       oriented units from Cimpletoon).
+     * The game ships with the 'stdmusic' musicset, which contains the
+       menu music previously in the 'freesounds' soundset. (It does not
+       include any in-game soundtrack.) GNAPATCH#4753
+
+Translations
+
+     * Updated Polish, French, Catalan, Finnish, Russian, Spanish,
+       Japanese, and British English localizations.
+
+Build/portability
+
+     * Clients now build against SDL2_mixer by default (apart from the
+       SDL1.2 client). GNAPATCH#5119
+     * It's now possible to use a preinstalled 'tolua', making
+       cross-compiling easier. Preinstalled 'tolua' and Lua installations
+       are used by default where available.
+     * The standard Windows builds now require at least Windows Vista.
+       GNAPATCH#6818
+     * The Windows version can now build against the newer MSYS2
+       environment instead of the obsolescent MSYS1. This will allow us to
+       ship much newer (more featureful and hopefully less buggy) versions
+       of the libraries we depend on, enable IPv6, create 64-bit builds,
+       etc, but will only run on Windows 7 or later. For now, the standard
+       Windows packages remain built with MSYS1, although experimental
+       MSYS2 builds are available.
+     * It's now possible to disable use of bz2/xz libraries even if they
+       are found (--disable-libbz2, --disable-liblzma). GNAPATCH#7023
+     * Work toward being able to compile with tcc. The server has been
+       seen to compile; the client does not yet.
+     * GGZ Gaming Zone support, which had been rotting for some time, has
+       been removed. GNAPATCH#4680
+
+   See doc/README.packaging for more information.
+
+Known issues
+
+   Here are some of the notable outstanding issues that we already know
+   exist as of 2.6.0:
+     * As noted above, the AI currently doesn't build Fighter-type units
+       in classic rulesets. This is not currently expected to be fixed in
+       2.6.
+     * Turn change in AI games has got slower; we suspect this is a result
+       of action generalization.
+     * There's some evidence that autosettlers have got less effective.
+     * Some bugs in the goto UI, particularly with fueled units like
+       airplanes. Sometimes it is necessary to move units manually with
+       the direction keys. e.g. HRM#765380, HRM#765079
+     * The new tileset selection arrangements can still be a little
+       confused/confusing. HRM#685235
+     * The Gtk3 clients' theming has bugs with recent versions of Gtk3.
+       HRM#693382
+     * The Gtk3 clients' zoom function still has some glitches. HRM#696027
+     * The Gtk3 clients currently don't have animation for moving the map
+       view. HRM#735217
+     * The SDL2 client is still more flakey than SDL in various ways.
+     * The SDL clients have no UI for manipulating policies. HRM#657404
+     * We suspect there are still some bugs lurking in the music
+       soundtrack system.
+
+
+MAJOR CHANGES FROM 2.4.x to 2.5.0
+---------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-2.5.0>)
+
+   The main changes in Freeciv 2.5 are the inclusion of the 'civ2civ3'
+   ruleset, a new Qt client, and much more flexibility for those creating
+   their own rulesets. The AI has also had some improvements.
+
+   As is usual for major releases, 2.5 clients cannot interoperate with
+   pre-2.5 servers, and vice versa. Pre-2.5 savegames can however be
+   loaded into 2.5, and in most cases, the supplied rulesets have not
+   changed so much as to make it difficult to complete a game started with
+   2.4.x's rules.
+
+Server / General
+
+Changes affecting players (supplied rulesets)
+
+   A new ruleset civ2civ3 is included, an evolution of the civ2_3 ruleset
+   by David Fernandez (bardo). This has some elements from Civ3, and is
+   also designed to reduce the gap between inexperienced and optimal play,
+   and for the AI to play well. It is suitable for single-player and
+   multiplayer games. See doc/README.ruleset_civ2civ3 for more
+   information. GNAPATCH#3366
+     * This version of the ruleset is similar to previous versions
+       available as modpacks, but does have some changes, including taking
+       advantage of new facilities in the game engine. civ2civ3 or civ2_3
+       games started in previous versions of Freeciv cannot be continued
+       with this version.
+     * civ2civ3 is planned to become the default ruleset in a future
+       release. The current default ruleset has been renamed to 'classic'
+       and will continue to be available. From now on the name 'default'
+       will refer to whatever ruleset the running version of Freeciv
+       defaults to. GNAPATCH#3216
+
+   Rules changes affecting all or most rulesets:
+     * (not civ1/civ2) City tiles are no longer an exception to the rule
+       that the 'Bridge Building' technology is required to build roads
+       over rivers. Cities on river tiles no longer automatically get
+       roads until the technology is acquired. GNAPATCH#3007
+     * (not civ2/multiplayer) Cities suffer random disasters such as loss
+       of population or buildings. A new server setting 'disasters'
+       controls their frequency, or disables them entirely.
+     * (not civ1/civ2) 'Barracks' buildings and 'Sun Tzu's War Academy'
+       are now cumulative: if you have both, new units are created at the
+       Hardened veteran level. GNAPATCH#3062
+     * Bombarder units (such as bombers and helicopters in civ2civ3) no
+       longer gain veterancy from bombardment. GNAPATCH#5835
+     * The maximum number of trade routes per city is now
+       ruleset-dependent. In the classic and (of as RC1) experimental
+       rulesets, the limit on trade routes now depends on what technology
+       you have. You start with 2 per city, and can add one more with each
+       of 'Magnetism' and 'The Corporation'.
+     * In rulesets with nationality tracking (classic, experimental,
+       civ2civ3):
+          + Citizens now gradually convert to the nationality of the city
+            owner over time, at a ruleset-defined rate. GNAPATCH#2365
+          + Units now have their own nationality, which remains the same
+            even if they are bribed or captured. Settler units add
+            citizens of their own nationality when founding or adding to
+            cities. GNAPATCH#3625 GNAPATCH#3635
+     * Changes to what happens if research points go negative (due to
+       transfer costs or tech upkeep):
+          + A new server setting 'techlossforgiveness' controls whether
+            technologies can be lost at all, and if so, how much debt
+            triggers tech loss. Previously this was controlled by the
+            ruleset; of the supplied rulesets, only the experimental
+            ruleset had this behavior. GNAPATCH#3193
+          + When technology is lost, half the bulb cost of the lost
+            technology is now added on to the current bulb balance (this
+            may not be sufficient to make it positive). The proportion is
+            controlled by the new server setting 'techlossrestore'. The
+            old behavior, where any bulb debt was completely cancelled,
+            can be restored by setting this to -1. GNA#21623
+     * A tile with both a river and a fortress now has a lower defensive
+       bonus, as the bonuses are now added rather than multiplied.
+     * When a freshwater terrain (lake) and an oceanic terrain type become
+       adjacent due to terrain change, the ocean now floods the whole
+       lake. GNAPATCH#3478 In rulesets with lakes, transforming a swamp
+       bordering a lake now results in lake, not ocean. GNA#20043
+     * In games where 'startunits' includes a k)ing unit, such units are
+       also given to new players created as a result of civil war.
+       GNAPATCH#3812
+
+   Rule changes to specific rulesets:
+     * classic:
+          + Tracking of citizen nationality is now enabled. See the help
+            for what this means. GNAPATCH#3624
+     * experimental:
+          + New road type 'Maglev', requiring 'Superconductors' and giving
+            unlimited movement to 'Land' units. Regular railroads now give
+            fast but limited movement (each tile takes 1/9 of a movement
+            point). GNAPATCH#3295 GNAPATCH#4008
+          + Citizens of your enemies in your own cities cause unhappiness,
+            with the amount depending on your government type.
+            GNAPATCH#3628
+          + Partisan appearance now depends on how many of the conquered
+            city's citizens had the nationality of the defeated player,
+            rather than the original city owner. GNAPATCH#3762
+          + Paratroopers can now paradrop directly to a transport in the
+            ocean. GNAPATCH#3805
+          + (as of RC1) Caravans are no longer obsoleted by Freight, since
+            they can travel on more terrain. GNAPATCH#5791
+          + Most technologies now have 'root_req' requirements, preventing
+            acquisition of the technology by any means (such as trading)
+            unless some key earlier technology is known.
+          + By default, it is possible to sustain a small research point
+            debt without losing a technology. However, if a technology is
+            lost, the debt may not be completely cancelled.
+     * civ1 and civ2 (to improve their fidelity):
+          + Maximum number of trade routes per city reduced from 4 to 3.
+          + When a free tech is granted, it's now chosen randomly, rather
+            than being whatever the player was researching.
+
+   New game options:
+     * 'killstack', which controls whether all units on a tile die
+       simultaneously, is now a server setting (previously it was
+       controlled by the ruleset). GNA#18698
+     * 'killcitizen' is now a boolean setting rather than a bitfield;
+       exactly which units can reduce city population is now controlled by
+       the ruleset. GNAPATCH#3613
+     * Two new values for the 'diplomacy' setting: "NOAI" which allows
+       diplomacy except between AIs, and "NOMIXED" which only prevents
+       human/AI diplomacy. GNAPATCH#4213
+     * A new setting 'startcity' causes players to start with their first
+       city already founded. GNAPATCH#3495
+     * (as of beta2) New map generation features ported from warserver: a
+       'fair' island map generator ('generator=fair'), which creates an
+       identical island for each player or team, and 'teamplacement',
+       allowing control of whether team-mates start near each other on the
+       map. GNAPATCH#5146 GNAPATCH#5145
+
+   Other changes:
+     * Nations:
+          + Added 16 new playable nations to standard rulesets, bringing
+            the total to 555.
+          + The set of 50 'core' nations introduced in 2.4 are now by
+            default the only nations that will appear in games. To play
+            with the full ('extended') set of nations (which might not be
+            translated into your language), change the nation set in the
+            'pick nation' dialog, or with the server 'nationset' option.
+            GNAPATCH#3448
+          + The pirate and barbarian flags be swapped, so that pirates now
+            have the Jolly Roger, as they should. GNA#22236
+     * In the classic and civ2civ3 rulesets, maps are now generated with
+       scenic tile labels on a few random tiles. These have no effect on
+       gameplay. GNAPATCH#3147
+     * Minor changes to transport units:
+          + Units may now load onto and unload from transports that are
+            themselves inside another transport. GNA#22050 GNA#22190
+          + While there is still no way to choose which transport is used
+            if there are several on a tile, cargo units will now prefer
+            the transport with more move points. GNA#22189
+     * Goto / pathfinding:
+          + You can now set waypoints for groups of units starting on
+            different tiles. GNAPATCH#4418
+          + Improved route planning across 'pontoon bridges' (units
+            bridging water). GNA#21871
+          + Multiple units working on overlapping connect-with-road or
+            similar projects no longer interrupt each other's work.
+            GNAPATCH#2206
+
+Changes affecting other rulesets / modders
+
+   Ruleset authors can control much more of the game behavior. Existing
+   rulesets need changes to work with 2.5; see
+   <http://www.freeciv.org/wiki/How_to_update_a_ruleset_from_2.4_to_2.5>
+   for a minimal recipe, and comments in supplied ruleset files for
+   documentation and usage examples of new features.
+     * Movement
+          + Rulesets can now define new types of paths, replacing
+            hard-coded road, railroad, and river behavior. Up to 8
+            distinct road and/or river types can be defined. Many
+            previously hardcoded behaviors are now configurable.
+            GNAPATCH#2521
+          + Granularity of movement points ('move_fragments') is now
+            specified by the ruleset, rather than being hardcoded at 1/3.
+            Move rate of 'IgTer' units is also configurable. GNAPATCH#3990
+          + The 'Relaxed' orthogonal move mode for rivers (now also
+            available for roads) no longer gives a movement bonus for
+            diagonal moves unless the path actually links the two tiles.
+            GNA#20472
+          + Rulesets can allow units to paradrop directly onto transport
+            units. GNAPATCH#3805
+          + Rulesets have more control over when units can enter and leave
+            'unreachable' transports (usually air transports). By default,
+            cargo of such transports can no longer embark/disembark unless
+            in a city or a base native to the transport, but exceptions
+            can be made for individual units. GNAPATCH#3804
+          + The game now enforces that no transport unit may contain a
+            unit which could transport it, and that units can be nested no
+            more than six deep, even if the ruleset would allow these
+            situations. This may simplify defining complex transport
+            relations in rulesets without defining many unit classes.
+            GNA#22050
+            (Some versions of 2.4.x had attempts to enforce this, but they
+            merely caused error messages rather than preventing the
+            situation from occurring.)
+     * Terrain and alterations
+          + More flexible bases:
+               o Rulesets can now define bases which are allowed on city
+                 tiles, or automatically added to cities. GNAPATCH#3826
+               o Ability and time to build bases can now be
+                 terrain-dependent. GNAPATCH#3152
+               o Owned bases can now display their owner's flag.
+                 GNAPATCH#3450
+          + Rulesets can now use effects to change when any of the
+            built-in terrain alterations and transformations can be
+            performed by units (in 2.4, it was only possible to affect
+            irrigation). The full set is:
+               o Irrig_Possible: is building irrigation possible?
+               o Mining_Possible: is building a mine possible?
+               o Irrig_TF_Possible: is changing terrain type with
+                 "irrigation" action possible?
+               o Mining_TF_Possible: is changing terrain type with "mine"
+                 action possible?
+               o Transform_Possible: is "transform" action possible?
+          + Terrains can now be marked with the 'NotGenerated' flag, so
+            that the map generator will not use them (for use in
+            scenarios, etc). GNAPATCH#4158
+     * Units
+          + The unit 'convert' action is no longer instant; it takes a
+            ruleset-defined time (at least one turn) for suitable units to
+            convert into another type. GNAPATCH#3110
+          + The 'Veteran_Build' effect (used for 'Barracks', etc) can now
+            cause units to gain multiple veteran levels. GNAPATCH#3062
+          + Rulesets are now permitted to contain no city-founding units.
+            GNAPATCH#3352
+     * Combat
+          + Added a general framework for combat value modification based
+            on unit type. The old hardcoded 'AEGIS', 'AirUnit', 'Horse',
+            'Pikemen', 'Helicopter', and 'Fighter' flags are gone; it's
+            now possible to add similar bonuses with different numeric
+            values, and more of them. GNAPATCH#3548
+          + Whether conquering units reduce city population is now defined
+            by the ruleset, per unit class ('KillCitizen'). GNAPATCH#3613
+          + Units defending while on non-native terrain (that is, ships in
+            harbor) can have a defense penalty applied in this situation,
+            via the unit class flag 'non_native_def_pct'. (This is
+            distinct from the existing 'BadCityDefender' unit flag, which
+            affects firepower.) GNA#20544
+          + Sea units' ability to attack neighboring land is generalized
+            as ability to attack non-native terrain, and controllable at
+            unit class and type level ('AttackNonNative' and
+            'Only_Native_Attack' respectively). GNAPATCH#3264
+          + Sea units' ability to attack from harbor is generalized as
+            unit class ability to attack from city or transport in
+            non-native terrain ('AttFromNonNative'). GNAPATCH#3333
+     * Cities
+          + Cities can suffer ruleset-defined random disasters, whose
+            effects can be mediated by the requirements system, and whose
+            effects can be implemented by Lua script.
+          + The limit on trade routes per city can now vary during
+            gameplay (up to a maximum of 5). GNAPATCH#3178 Bonuses,
+            ability to establish based on whether route is international
+            and/or intercontinental, and what happens if a trade route
+            becomes invalid are all now ruleset configurable.
+            GNAPATCH#3444
+          + As well as the changes to nationality listed in the gameplay
+            section:
+               o Rulesets can use the "Nationality" requirement in effects
+                 to test whether cities contain citizens of a specific
+                 nationality. GNAPATCH#3623
+               o Rulesets can control whether and how much enemy citizens
+                 cause unhappiness with the "Enemy_Citizen_Unhappy_Pct"
+                 effect. GNAPATCH#3684
+               o Rulesets can choose whether partisan appearance depends
+                 on the original city owner or the current nationality of
+                 the citizens, and if so what proportion is required for
+                 partisans. GNAPATCH#3762
+          + The 'Inspire_Partisans' effect can now depend on properties of
+            a specific city, not just player-wide requirements.
+            GNAPATCH#3763
+          + Specialists can now define a fallback graphics tag, so that
+            rulesets with custom specialists can be played without tileset
+            support. GNAPATCH#4239
+          + The image to display for a city (City_Image) is now calculated
+            on the server side, allowing ruleset authors to use
+            requirements for it that the client may not have reliable
+            access to. GNA#19952
+          + The way city size is converted into a (cosmetic) population
+            number is now more configurable. GNAPATCH#3406
+     * Technology
+          + New effect 'Not_Tech_Source' prevents players from having
+            technology stolen from them. GNAPATCH#3546
+          + When a player gets a free technology, the method used to
+            choose it is defined in the ruleset in 'free_tech_method'.
+            Instead of the previous behavior of giving the player their
+            currently researched technology, the ruleset can now specify
+            the cheapest or a random technology. GNAPATCH#3552
+            GNAPATCH#3553
+          + New tech_upkeep_style 'Cities', where tech upkeep scales with
+            number of cities.
+          + A player will no longer lose a technology (due to tech upkeep,
+            etc) if it's a root_req for another technology the player
+            knows. GNA#19176
+          + The ruleset can request that technology help be popped up in
+            the client when a new technology is acquired, via
+            'popup_tech_help'. (This can be overridden by the user.)
+            GNAPATCH#3480
+     * Nations
+          + Nations can have an associated color; if the server setting
+            'plrcolormode' is set to the new value 'NATION_ORDER',
+            players' colors will depend on their nation. GNAPATCH#3443
+          + Rulesets can now define playable subsets of their nations
+            ('nation sets'), one of which can be picked by players during
+            game setup. This could be used for instance to define a number
+            of different balanced sets of nations which have unique
+            traits, perhaps tailored to different numbers of players.
+            GNAPATCH#3448
+          + The list of supplied nations has been split out to a new
+            'nationlist.ruleset', so that rulesets can use these nations
+            while changing other aspects of 'nations.ruleset'.
+            nationlist.ruleset has its own lists of governments, terrains,
+            etc, so that it can be used by rulesets that are slightly
+            different without errors.
+     * Effects and requirements
+          + 'Resource' added as requirement to effects system.
+            GNAPATCH#3322
+          + City effects can now depend on the presence of terrain with
+            certain properties within the city's workable radius, by
+            specifying 'Terrain', 'Resource', etc with 'City' range.
+            GNAPATCH#3740
+          + City effects can now place requirements on the city's own
+            tile. GNA#19874
+          + Expanded the ability to group ruleset objects into sets for
+            requirement purposes with custom flags:
+               o Terrains and technologies now have custom flags, as well
+                 as units, enabling limited disjunctive ("or") requirement
+                 definitions for these types. GNAPATCH#3487 GNAPATCH#4074
+               o Requirements can test these flags. GNAPATCH#3395
+                 GNAPATCH#4069
+               o User flags now have ruleset-defined help text.
+               o The maximum number of user flags for unit types has
+                 increased from 4 to 16 (as these are used for the combat
+                 bonuses framework). GNAPATCH#3393
+          + For boolean effects, negative values are now evaluated as
+            'false', to ease ruleset development. GNAPATCH#3396
+     * Lua scripting
+          + Updated scripting engine to Lua 5.2. GNAPATCH#3230
+          + Scripts can now set tile labels. GNAPATCH#3136
+          + Scripts can now run on a new 'map_generated' signal.
+            GNAPATCH#3135
+     * Misc
+          + It's now possible to have multiple centers of government for
+            the purposes of calculating waste and corruption, through the
+            'Gov_Center' effect. The distance to the nearest determines
+            waste. GNAPATCH#3342
+          + When a 'GameLoss' unit is killed, instead of the player's
+            assets (units, cities, etc) just disappearing, the ruleset can
+            cause some of them to be transferred to the conqueror,
+            barbarians, and/or a new AI player ('gameloss_style').
+            GNA#20577
+          + Rulesets can specify that start positions must be surrounded
+            by a minimum area whose terrain is native to starting units
+            ('min_start_native_area'). GNAPATCH#3614
+          + Rulesets can completely disable civil war
+            ('civil_war_enabled'). GNAPATCH#3818
+          + Technologies with the 'Claim_Ocean' flag lift the normal
+            restrictions on borders claiming ocean tiles. GNAPATCH#3355
+          + The ruleset can define a 'preferred_soundset' which will be
+            suggested to clients. (Only Gtk2/3 clients can ask the user;
+            with other clients the user has to have enabled auto-accept
+            for this to take effect.) GNAPATCH#3226
+
+   Tileset authors have a few new facilities. Existing tilesets need
+   changes to work with 2.5 at all; see
+   <http://www.freeciv.org/wiki/How_to_update_a_tileset_from_2.4_to_2.5>
+   for a minimal recipe.
+     * When a unit is building a base or road, tilesets can now display an
+       icon specific to that base/road. GNAPATCH#3305
+     * The layer that darkness is drawn at is now configurable
+       ('darkness_layer'). GNAPATCH#4461
+     * Tilesets can now supply icons for unit upkeep greater than 2 to be
+       displayed in the city dialog. GNAPATCH#3824
+     * In the supplied tilesets, government and specialist icons have been
+       split to separate files, so custom tilesets can replace them while
+       continuing to use other graphics from the standard small.spec.
+       GNAPATCH#4076 GNAPATCH#4422
+
+   Scenario creators have a couple of new features available. (Scenarios
+   created with previous versions should continue to work in 2.5.)
+     * Most of the supplied rulesets now include an 'Inaccessible' terrain
+       type, for use by scenario authors to shape the map area. See the
+       France scenario for an example of its use. GNAPATCH#4159
+       GNAPATCH#4158
+     * Scenarios can now restrict the set of available nations (to those
+       with start positions). GNA#21268
+
+Changes affecting server operators
+
+     * Failure to load a ruleset no longer causes the server to quit; it
+       now reverts to the previously loaded ruleset, or failing that the
+       default ruleset. GNAPATCH#1449
+     * On Windows, the server no longer sets the socket option
+       SO_REUSEADDR on its listening socket. This may fix some issues with
+       clients connecting to the wrong server. GNA#21583
+     * The default database backend for authentication has changed from
+       MySQL to SQLite. GNA#19909
+     * There's no longer support for attempting to save games in formats
+       compatible with previous major releases of Freeciv. The
+       'saveversion' server option has been removed. GNAPATCH#3188
+       GNAPATCH#3026
+
+AI
+
+   There have been some improvements to the standard AI's behavior:
+     * Defense
+          + Autosettlers are smarter about spotting danger: GNAPATCH#3854
+               o Sea and air units are now considered threats, not just
+                 land units.
+               o Military units which can't attack are no longer
+                 considered threats.
+          + Cities needing defense are less prone to building walls before
+            units. GNAPATCH#4798
+          + The AI now considers non-land units that can conquer cities
+            (such as Helicopters) a threat to continents it controls.
+            GNA#22225
+          + The AI should more correctly account for travel time when
+            assessing danger to cities from enemy units; previously it
+            treated them as its own, which could be wrong for ZoC,
+            restrictinfra etc. GNAPATCH#3729
+          + (as of RC1) The city the AI has nominated to build wonders is
+            now permitted to build defensive units instead if necessary.
+            GNAPATCH#5588
+          + (as of RC1) The AI now treats players it has never met as
+            potentially hostile; this should make it harder for human
+            players to sneak forces into place before first diplomatic
+            contact. GNAPATCH#5441
+     * Unit handling
+          + Some fixes to AI's handling of boats as transports.
+     * Terrain improvement
+          + The AI and autosettlers' relative weightings have been tweaked
+            to give slightly better behavior with typical rulesets. In
+            particular, production is now valued less compared to other
+            outputs. GNAPATCH#3692
+          + The AI and autosettlers can now decide to build bases, if they
+            provide any direct output bonus to a nearby city, or enable
+            another base which does so. (Bases are still not built for
+            purely strategic purposes.) GNAPATCH#3341 GNAPATCH#3833
+     * Economy
+          + When the AI is on a war footing, it now prefers diverting
+            taxes to science rather than luxury. GNA#21640
+          + The AI now considers keeping units in cities for their martial
+            law effect, although it will not yet build units specially for
+            this. GNAPATCH#3959
+          + The AI values coinage less, to balance it compared to
+            gold-producing buildings. GNA#21796
+          + The AI may now create trade routes between continents.
+            GNAPATCH#2963
+     * Research
+          + The AI now considers more combat bonuses when deciding what
+            technology to research. For instance, it may now work harder
+            towards AEGIS Cruiser when defending against air units.
+            GNAPATCH#3555 GNAPATCH#3563
+          + The AI no longer chases technologies to gain units that are
+            already obsolete. GNAPATCH#4013
+          + The AI no longer remembers its past desire for long-obsolete
+            technologies indefinitely. GNA#22260
+     * Ruleset tolerance
+          + In rulesets which support ocean cities, the AI now considers
+            building them. GNAPATCH#3533
+          + The AI no longer builds sea-only worker units if the ruleset
+            has them. This is a temporary solution to a previous issue
+            where AI would build only sea worker units when they became
+            available, and not land ones. GNAPATCH#4610
+
+   AI behavior is also now somewhat more configurable by rulesets:
+     * The new traits framework allows AI behavior to be parameterized
+       (current traits are Expansionist/Trader/Aggressive). Traits can be
+       set in rulesets (globally or for specific nations), or by Lua
+       script. GNAPATCH#3001
+     * The 'Cheating' level AI no longer intrinsically ignores tax rate
+       limitations. This is instead left up to the ruleset. The supplied
+       rulesets give cheating AIs this bonus, so there is no functional
+       change. GNA#18232
+
+   The following changes are only relevant to AI developers:
+     * 'Default' AI logic, which was previously tied to the 'classic' AI
+       type, can now be used selectively by custom AI modules, each with
+       their own instance data.
+     * The default AI type can be chosen at configure time. GNAPATCH#3666
+     * Some progress has been made on the 'threaded' AI variant. It is now
+       functional, but does not yet offer much advantage over the
+       'classic' AI. The only difference is that cities can make specific
+       requests of worker units. The 'threaded' AI is not included in
+       standard builds.
+
+Clients
+
+     * (as of beta2) The Qt client is now substantially complete, and a
+       Windows build is available. A Qt version of the modpack installer
+       is also available.
+     * The city map size in the city dialog now adapts to the ruleset.
+       This means that the city dialog in the SDL client is no longer
+       unusably small with the classic and similar rulesets. GNAPATCH#4389
+     * The client now only lists scenarios for "Start Scenario Game";
+       previously it could include ordinary save files that happened to be
+       on the scenario path. GNA#22209
+     * Client options to control whether tileset and soundset suggestions
+       made by the ruleset are automatically accepted. This allows clients
+       other than the Gtk clients to make use of these suggestions.
+       GNAPATCH#3599 GNAPATCH#3605
+     * (Gtk) The pregame nation selection dialog has been rewritten,
+       fixing many small bugs. GNAPATCH#4347
+     * (Gtk) The client can now optionally pop up help for a new
+       technology when it's acquired. GNAPATCH#3608
+
+Modpack installer
+
+     * The modpack installer now keeps track of versions of packages it
+       has previously installed. (It does not track changes made
+       manually.) GNAPATCH#3163
+     * A command-line tool for downloading modpacks, freeciv-mp-cli, has
+       been created for use on headless servers. GNAPATCH#4436
+     * The modpack installer can be built into multiple GUI flavored
+       executables simultaneously. As a result, the executables have been
+       renamed.
+     * Modpacks can now have descriptions GNAPATCH#3645 and a 'subtype'
+       field (e.g. to distinguish iso/hex tilesets) GNAPATCH#4394.
+
+Tilesets / Art
+
+     * The activity icons shown near units building roads and bases in
+       Cimpletoon, Amplio2, and Trident are now small versions of the
+       extras themselves. GNAPATCH#4059 GNA#20032 GNAPATCH#5856
+     * (as of RC2) The Trident tileset has been updated for various
+       recently added game elements, including lake and maglev.
+       GNAPATCH#5856 GNAPATCH#5877
+     * Improve colors for global warming / nuclear winter progress
+       indicators. GNAPATCH#4827
+     * The icons for entertainers, scientists, and tax collectors now have
+       both male and female versions. GNAPATCH#4506
+     * Made a few specialist icons available for custom rulesets (worker,
+       farmer, merchant) for use by modpacks. These are not used in the
+       supplied rulesets. GNAPATCH#4467
+     * The Cimpletoon and Amplio2 (as of RC1) and Trident (as of RC2)
+       tilesets have 'outpost' and 'airstrip' graphics for use by
+       modpacks. GNAPATCH#5027
+
+Translations
+
+     * Updated French, Polish, Catalan, Russian, Korean, Scottish Gaelic,
+       British English, traditional Chinese, Spanish, German, Japanese,
+       Finnish, and Irish localizations.
+
+Build/portability
+
+     * A real thread implementation is now a hard requirement.
+       GNAPATCH#2996
+     * The SDL client now requires SDL_gfx and SDL_ttf libraries. Copies
+       are no longer included with the Freeciv source. GNAPATCH#4088
+       GNAPATCH#4386
+     * Clients other than the SDL client can now be built against
+       SDL2_mixer. GNAPATCH#4189
+     * (as of beta2) The build is now Clang-clean (with 3.3, 3.4, and
+       3.5).
+
+   See doc/README.packaging for more information.
+
+
+MAJOR CHANGES FROM 2.3.x to 2.4.0
+---------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-2.4.0>)
+
+   As is usual for major releases, 2.4 clients cannot interoperate with
+   pre-2.4 servers, and vice versa. Pre-2.4 savegames can however be
+   loaded into 2.4, and in most cases, the supplied rulesets have not
+   changed so much as to make it difficult to complete a game started with
+   2.3.x's rules.
+
+Server / General
+
+Gameplay
+
+     * The maximum theoretical map size has increased from 128,000 to
+       2,048,000 tiles; the maximum linear map dimension has increased
+       from 512 to 32,768. GNA#18087
+     * If map generation fails (for instance the common failure to
+       allocate start positions), it is now retried with a different
+       random seed. GNAPATCH#2402
+     * A couple of new server settings have been added to customise
+       gameplay:
+          + 'revealmap' allows the map to be shown to all players at game
+            start, or to dead players. GNAPATCH#2379
+          + 'first_timeout' allows the first turn to have a different
+            timeout from subsequent turns. GNAPATCH#1967
+
+Clerical
+
+     * Player authentication has been revamped. Database access is now
+       mediated by a Lua script that can be customised by server
+       operators, and uses Luasql, enabling a variety of backends: MySQL
+       (the only backend supported previously), SQLite, and PostgreSQL.
+       See doc/README.fcdb for details. GNA#13643
+          + Support is included 'out of the box' for SQLite and MySQL
+            databases. SQLite uses a simple file as a database, and is
+            recommended as being entirely adequate for Freeciv
+            authentication and much less hassle to set up than MySQL.
+          + The Windows packages include SQLite support, so for the first
+            time, it's possible to use player authentication on Windows
+            without building the server yourself.
+     * The server now supports a 'delegation' feature similar to that in
+       Longturn, where one user can nominate another to temporarily take
+       over control of the game. This is controlled by the '/delegate'
+       server command. GNAPATCH#2121
+     * There is a new "map image" feature to save an overview map as an
+       image. This is a much expanded version of the previous --Ppm server
+       feature, which has been removed. Compared to --Ppm, the new feature
+       can distinguish units, cities, borders, terrain colors, hex tiles,
+       and more. Saving images can be triggered automatically (turn-based)
+       on the server, or on demand on the server or client. See the
+       '/mapimg' server command. GNAPATCH#1391
+          + A series of these images can be assembled into an animation to
+            replay the progress of the game. A shell script 'mapimg2anim'
+            is provided to help with this.
+          + PNG/GIF/JPEG output is only available if built against the
+            ImageMagick library; this is included in the Windows packages
+            as of 2.4.0-RC1.
+     * Player colors are now assigned centrally, and can be changed with
+       the '/playercolor' server command. There is a new server setting
+       'plrcolormode' that controls how colors are assigned, including a
+       mode where all players on a team have the same color. GNAPATCH#2062
+          + The set of default player colors in the supplied rulesets has
+            been reworked to enhance visibility of borders against
+            terrain, etc. GNA#19778
+     * The colors used to represent different terrain types on the minimap
+       have been reworked. GNAPATCH#2069
+     * The 'autosaves' setting gives finer control over when savegames are
+       generated. GNAPATCH#2536
+          + To disable autosaves entirely, instead of '/set saveturns 0',
+            it's now necessary to use a command like '/set autosaves ""'.
+     * The scripts 'ser' and 'civ' have been renamed to 'fcser' and
+       'fcgui' respectively. GNAPATCH#2830
+     * A Lua script can be read from a file with the '/lua file' command.
+       Direct Lua input is now via the '/lua cmd' command. GNAPATCH#2338
+       GNAPATCH#2869
+     * New server option --Bind-meta to control which network interface
+       the metaserver connection is made from. GNA#14106
+     * The server can be built with support for .xz (LZMA) compression for
+       saved games, etc. See the 'compresstype' option. GNAPATCH#1810
+     * The freeciv-modpack utility supports more modpack types, more
+       options (see --help), and uses the Curl library for network access
+       so should be more robust.
+     * (as of beta2) The ranklog format has changed; it now includes
+       individual players' scores, and can be parsed more unambiguously.
+       GNAPATCH#3346
+
+Clients
+
+     * There is a new client, freeciv-gtk3, based on version 3 of the Gtk+
+       toolkit. This is fully playable and has largely identical UI and
+       functionality to freeciv-gtk2. Currently it is experimental;
+       however, it is expected that it will become the default client in
+       the next major release.
+          + The first time you run this client, it will copy any Gtk2
+            client settings you have set. Thereafter, Gtk2 and Gtk3
+            settings will remain separate.
+          + Known issue in beta1/beta2: when compiled against some
+            versions of Gtk3, there are assertion failures and crashes
+            associated with the unit selection dialog. This is believed
+            due to a Gtk bug (671939); however, it's been worked around in
+            the Freeciv code as of RC1. GNA#19846
+     * (In the code there is also the start of a Qt client. However, at
+       this point it is just a stub and is unlikely to be of interest.
+       Development will continue in 2.5.)
+     * A server spawned by the client now only listens on the local
+       network interface, so clients on other machines cannot connect to
+       it. This improves security for single-player games, but means that
+       a multiplayer game can no longer be hosted by the client; you must
+       start a separate server instead (see the FAQ). GNA#18530
+     * It's now possible to display a map overlay indicating which tiles
+       the currently selected unit can enter ("native" tiles), with the
+       Shift-Ctrl-N keyboard shortcut. GNA#13620
+     * The research speed in bulbs per turn is now available with other
+       research information from popups/tooltips on the main window.
+       GNA#17685 GNA#16481
+     * For rulesets where different nations have unique gameplay
+       attributes (different initial governments, techs, units, or
+       buildings), this information is now available when picking a nation
+       in the pregame, and in the online help. GNAPATCH#3066
+     * The client now displays the current stable version of Freeciv and
+       whether that's newer than the running version (this information
+       comes from the metaserver). GNAPATCH#2735
+     * (Gtk) The client now has a Lua scripting console. GNAPATCH#2515
+          + This is currently something of a proof of concept rather than
+            a finished feature, as a comprehensive API suitable for the
+            client-side has not been provided. Notably, there are not yet
+            any signals from which client-side scripts can be triggered.
+          + However, client scripts do have access to the client's view of
+            most of the same game data that server-side ruleset scripts do
+            (map, units, cities etc); see the Lua reference manual. This
+            should be sufficient for some useful work. For example, it
+            should in principle be possible to implement an on-demand
+            optimal trade route calculator with these facilities (although
+            we haven't tried).
+     * (Gtk) The unit selection dialog has been revamped to allow browsing
+       and selecting units by combinations of location and activity,
+       anywhere in the world. GNA#17236
+     * (Gtk) A bribe cost is now shown in the popup for units (for enemy
+       units, this is estimated). GNA#17489
+
+Tilesets / Art
+
+     * The orientation of units is now tracked, so tilesets can provide
+       different graphics for different unit orientations. GNAPATCH#2719
+          + A tileset making use of this, Cimpletoon, is included. It is
+            based on Amplio2 but has a full set of oriented unit sprites
+            for the default ruleset. GNAPATCH#2739
+          + Known issue in beta1: Cimpletoon did not have sprites for all
+            Fundamentalist units (it lacked Elephants and Crusaders), so
+            for rulesets with these units, it would use fallback sprites
+            (Chariot and Knights respectively). As of beta2, the tileset
+            is complete. GNA#19998
+
+Gameplay / Rules
+
+Changes affecting supplied rulesets
+
+     * Nations:
+          + The number of playable nations has increased from 385 to 539.
+          + Out of these, a subset of 50 "core" nations has been defined,
+            based mostly on nations that have appeared in the Civilization
+            series of games. For localised versions of Freeciv, these
+            nations are more likely to be translated than the remainder.
+            Players are initially presented with the core set, and it will
+            be used for random nation selection if no nations are
+            specifically selected; but players can still select nations
+            outside the core set, and if some do, then the full range of
+            supplied nations will be used for random selection of
+            remaining players. GNAPATCH#3449 GNAPATCH#3432
+          + The civ1 and civ2 rulesets now have their own separate nation
+            sets, more closely matching the original games. GNAPATCH#2243
+     * City center tiles now lose their automatic irrigation bonus if a
+       mine is built on them, since mines and irrigation cannot coexist on
+       a tile. GNA#20932
+          + Similarly, in the supplied rulesets, cities on a tile with a
+            mine can no longer get a farmland bonus.
+     * The effect of veterancy on the cost of bribing a unit now depends
+       on veteran bonuses, not numeric veteran level; bribe costs for
+       veteran units have thus changed. GNA#19253
+     * When the 'barbarians' server setting is disabled, huts no longer
+       spawn barbarians.
+     * When migration is enabled, citizens now consider the risk of plague
+       when deciding whether to migrate. GNA#17740
+     * In rulesets without tech upkeep enabled, if the bulb count goes
+       negative (for instance due to 'conquercost'), technologies are no
+       longer lost. This restores the behavior of previous versions of
+       Freeciv. GNA#19487
+     * Diplomats and Spies now have special names for their veteran
+       levels, but behavior is unchanged from 2.3. GNA#19850
+     * In the default, multiplayer, and experimental rulesets, years are
+       displayed with CE/BCE rather than BC/AD notation. GNA#15090
+     * (as of beta2) The default map topology for new games has been
+       changed to isometric, to match the default Amplio2 tileset.
+       GNAPATCH#3764
+     * (as of beta2) In the 'multiplayer' ruleset, the ability to build
+       buoys has been removed, as they do not work well with national
+       borders disabled (the default for this ruleset). It is expected
+       that they'll be re-enabled in a future major release. GNAPATCH#3541
+     * Changes to the 'experimental' ruleset:
+          + Citizen nationality is enabled; see below.
+          + Workers and Engineers can now gain veteran levels by working
+            the land; this in turn allows them to work faster.
+            GNAPATCH#2370 GNA#19818
+          + A Mech. Inf. unit can now carry up to three Missile units.
+            GNAPATCH#2481
+          + Galleons can now carry Big Land units, and Frigates no longer
+            can. Old savegames are handled gracefully. GNAPATCH#2643
+
+Changes and new features for rulesets/modpacks/scenarios
+
+     * New feature: optionally, the nationality of citizens can be
+       tracked. For instance, when you conquer a city, its citizens retain
+       their original nationality. Currently this affects the cost of
+       inciting cities and the chance of migration (if enabled); more
+       effects are planned for future versions. GNAPATCH#2265
+     * The veteran system has been reworked:
+          + Per-unit veteran levels have been generalised; all veteran
+            properties can now be set on a per-unit basis; previously, the
+            chances of moving between levels could not. This means that
+            different units can now usefully have different numbers of
+            veteran levels for the first time. GNAPATCH#2346
+          + Diplomatic combat and spy mission survival chances are now
+            derived directly from the 'power_fact' property of the veteran
+            level, rather than being based purely on the numeric veteran
+            level. GNA#19850
+          + As noted above, the effect of veterancy on unit bribe costs
+            has changed.
+          + The maximum number of veteran levels has doubled from 10 to
+            20.
+          + Units with only a single veteran level, or which can't become
+            veteran, now do not have a veteran level displayed.
+          + Information about veteran levels is now included in the
+            on-line help. GNA#19851
+     * Recursive transports are now supported (up to a depth of 5).
+       GNAPATCH#2270
+     * Two new tech_cost_styles: 3 with a new formula (early techs
+       slightly easier, later techs much harder), and 4 which is similar
+       to 2 (read from ruleset) but with the gaps filled with the new
+       formula. GNAPATCH#2396
+     * A new effect 'Irrig_Possible' and requirement range 'CAdjacent'
+       (cardinally adjacent) have been added. The requirement for oceans
+       or rivers for irrigation is thus no longer hardcoded and can be
+       modified. GNAPATCH#2450
+     * The 'CityTile' requirement now supports 'Adjacent' and 'CAdjacent'
+       ranges, so effects can be triggered for tiles next to a city.
+       GNA#18551
+     * 'Surviving' requirements for wonders are now supported at Player
+       range as well as at World range. GNA#17463
+     * In ruleset definitions, specifying 'move_type' for a unit is now
+       optional; if not specified it will be inferred from the native
+       terrains/specials of the unit. GNA#13630 GNAPATCH#2991
+     * A ruleset can now specify a 'default_government' for all its
+       nations in nations.ruleset, rather than each nation being required
+       to specify its initial government individually. GNAPATCH#3031
+          + The supplied nations no longer include
+            init_government="Despotism", so they can be used in rulesets
+            which require a different initial government. GNAPATCH#3032
+     * The image used for a city in the client is now set by the effects
+       system (effect 'City_Image'), so it's no longer constrained to be a
+       simple function of city size. GNA#17110
+          + The experimental ruleset uses this to align city graphics with
+            the city map radius.
+     * Tile labels are supported. These are text labels that are displayed
+       by all clients when they display a particular map tile. They can be
+       added to scenarios in the editor. GNAPATCH#2408
+     * The colors used for players, and for terrains on the minimap and
+       map images, are now specified by the ruleset on the server side,
+       rather than the tileset on the client side. GNAPATCH#2060
+       GNAPATCH#2061
+     * In rulesets with tech_leakage enabled, dead players are no longer
+       taken into account in the calculation; so you cannot gain from
+       their knowledge, but equally a dead, ignorant player no longer
+       pushes up research costs. GNAPATCH#2956
+     * The behavior where the senate of representative governments is
+       bypassed has moved from the Any_Government to the No_Anarchy
+       effect. GNA#19107
+     * The 'min_dist_bw_cities' ruleset item has been retired; use the
+       'citymindist' option instead. GNAPATCH#2537
+     * Many changes to ruleset Lua scripting -- for full details see the
+       Lua reference manual. These are all backward compatible.
+       Highlights:
+          + Script-triggered climate change (GNAPATCH#2624) and civil war
+            (GNAPATCH#2627).
+          + Scripts can now move existing units.
+          + A script can test whether tiles have a particular base.
+            GNAPATCH#2672
+          + Script facilities for reading and manipulating unit
+            orientation. GNAPATCH#2823 GNAPATCH#2836
+          + Scripts can now read server settings. GNAPATCH#2955
+     * (as of beta2) An internal 64kbyte limit on string length has been
+       removed. Among other things, this allows longer Lua scripts in
+       scenarios. GNA#20086
+
+AI
+
+     * (as of beta2) The city governor logic has been reworked, fixing
+       various issues such as unexpected tax collectors in cities with
+       many buildings, and a need to set minimal gold surplus to a lower
+       target than expected. GNAPATCH#3620
+     * (as of beta2) The AI's workers/settlers, and human players'
+       autosettlers, will now automatically stop what they are doing and
+       go elsewhere if threatened by an enemy unit and there is no
+       defender on their tile. (Currently only threats from land units are
+       considered.) GNAPATCH#3384
+     * (as of beta2) Improvements to AI settler management:
+          + The AI now considers worker units' food consumption (e.g.
+            Settlers) to be less of a factor when deciding whether to
+            build such units, to encourage it to do so. GNAPATCH#3693
+          + Fix poor handling of rulesets containing boats which can only
+            carry a single unit. Previously, the AI would generate
+            settlers with the intention of sending them out on such boats,
+            but then refuse to do so due to lack of room for a bodyguard,
+            regardless of whether one was needed, often hurting expansion
+            and leaving useless settlers. Now it only insists on room for
+            a bodyguard if one is actually needed. GNA#19815
+     * Improvements to AI city defense:
+          + (as of beta2) Reduced the tendency of AI city defenders to be
+            lured out of their city by nearby targets even in the presence
+            of threats. GNA#20504
+          + (as of beta2) Cities in grave danger of invasion with no
+            defending units were tending to build City Walls, uselessly.
+            They will now prioritise acquiring a defender. GNA#20559
+          + (as of RC1) Reduced the weighting of the AI's assessment of
+            defence strength, so that it defends its own cities more
+            convincingly. (part of GNAPATCH#3960)
+          + (as of RC1) The AI now tends to keep a unit constantly
+            defending each of its cities even in the absence of an obvious
+            threat, rather than relying on being able to acquire one when
+            a threat appears. GNAPATCH#3958
+     * (as of beta2) Improvements to AI caravan management:
+          + Caravans in transit are now taken into account when a city is
+            deciding whether to build more caravans. Previously, a city
+            could end up building endless caravans if existing ones did
+            not complete their trade route. GNAPATCH#3529
+     * (as of RC1) The AI's new weighting of defence strength assessment
+       means that it is less fearful of its enemy's defenders when
+       attacking their cities. (part of GNAPATCH#3960)
+     * The AI's management of its tax rates has been reworked to be more
+       sophisticated; notably, it now takes tech upkeep into account. It
+       also considers tech upkeep when determining the value of a tech.
+       GNAPATCH#2251
+     * AI planning for new cities has been improved slightly. GNA#19449
+     * Autosettler planning for building railroads (GNAPATCH#2885,
+       GNA#19560) and farmland (GNAPATCH#2889) has been improved. (Note
+       that the latter is still only triggered by the existence of a
+       Supermarket, so the AI still does not benefit, due to a
+       chicken-and-egg situation.)
+     * The extensive reworking of the AI code (see #Development), while
+       not intended to introduce any functional changes (and extensively
+       tested for this), may have changed behavior in some rare cases.
+
+Translations
+
+     * New Indonesian translation.
+     * (as of beta2) New Traditional Chinese translation.
+     * Updated translations: Bulgarian, Catalan, Spanish, Scottish Gaelic,
+       Korean, Polish, Dutch, Irish, French, German, Finnish, and British
+       English.
+
+Development
+
+     * The AI code has been heavily refactored, with a view to making it
+       easier for people to start their own projects to write better
+       Freeciv AI.
+          + There's now a concept of AI type; different players can have
+            different AIs. The type can be specified to the server /create
+            command and the Lua function edit.create_player().
+          + The server can be built to accept dynamically loadable AI
+            modules with the --enable-aimodules option to configure. A
+            module is loaded by starting the server with the --LoadAI
+            option.
+          + Alternatively, a fixed set of modules can be compiled in with
+            --enable-ai-static.
+          + In addition to the 'classic' AI, the standard Freeciv package
+            ships with the 'stub' and 'threaded' AIs. These are both dummy
+            templates for development and do not work as shipped. They are
+            enabled with the configure option
+            --enable-aimodules=experimental.
+          + See doc/README.AI_modules for some more information.
+
+Build/portability
+
+     * There is now a hard dependency on libcurl for HTTP access. This is
+       used for metaserver communication and for freeciv-modpack.
+       GNAPATCH#2320 GNAPATCH#2376
+     * Efforts have been made to make the codebase compile without
+       warnings with GCC 4.6 and (as of beta2) 4.7.
+     * Use of some GNU make extensions has been removed from the build
+       system, so it may now be possible to build with a POSIX 'make'.
+       GNAPATCH#3378
+     * freeciv-modpack can be built against either gtk2 or gtk3.
+       GNAPATCH#2762
+     * The configure option --enable-sys-lua allows use of a system-wide
+       copy of Lua instead of the one shipped with Freeciv. GNAPATCH#2747
+
+   See doc/README.packaging for more information.
+
+
+MAJOR CHANGES FROM 2.2.x to 2.3.0
+---------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-2.3.0>)
+
+   As well as many new features, many features from Longturn and some from
+   Warclient have been merged into the main codebase for this release.
+
+   A new program has been added to the Freeciv suite: 'freeciv-modpack'.
+   This makes it easier to download and install add-ons ('modpacks':
+   rulesets, tilesets, etc) to the right place; you can enter a URL,
+   choose an add-on from the list, and the tool will install it to the
+   correct place for this version of Freeciv to use it. Modpack authors
+   should see this page for details of how to publish modpacks for
+   installation by this program. GNAPATCH#1822
+
+   As is usual for major releases, 2.3 clients cannot interoperate with
+   pre-2.3 servers, and vice versa. Pre-2.3 savegames can however be
+   loaded into 2.3, and in most cases, the supplied rulesets have not
+   changed so much as to make it difficult to complete a game started with
+   2.2.x's rules.
+
+Server / General
+
+Gameplay
+
+     * Various limits have been lifted, including:
+          + Maximum number of simultaneous players increased from 30 to
+            126 GNAPATCH#1731
+          + Map size
+               o Maximum map size increased from 30,000 to 128,000 tiles;
+                 maximum linear map dimensions increased from 254 to 512
+                 GNAPATCH#1733
+               o Minimum map size reduced to 16x16(!) GNA#17031
+          + Allow goto paths that take more than 99 turns GNA#16792
+     * There are now more ways of specifying the map size. Instead of
+       specifying the size in thousands of tiles (via the 'size' option),
+       you can specify the number of tiles per player ('tilesperplayer'),
+       or the exact X and Y sizes ('xsize' and 'ysize'). The method is
+       selected with the 'mapsize' option. GNAPATCH#1720
+     * A number of new server settings have been added to customise
+       gameplay:
+          + 'killunhomed': units without a home city (such as starting
+            units) can be configured to lose hitpoints each turn until
+            they die. GNAPATCH#1501
+          + 'unreachableprotects' controls whether 'unreachable' units
+            (such as Bombers) protect the whole stack on their tile as in
+            previous versions. If this is unset, a mixed stack is
+            vulnerable to attack (including normally-unreachable units).
+            GNAPATCH#1850
+          + 'unitwaittime' allows a minimum time to be enforced between
+            actions of a given unit on successive turns, to mitigate the
+            'double-move problem'. GNAPATCH#1500
+          + 'restrictinfra' allows enemy use of infrastructure such as
+            roads and rails to be restricted. GNAPATCH#1266
+          + 'airliftingstyle' allows airlifts between allied cities, and
+            unlimited airlifts per turn. GNAPATCH#1189
+          + 'techlost_recv'/'techlost_donor' allow introduction of a risk
+            of technology loss when technologies are transferred between
+            civilizations (via diplomacy, espionage, conquest etc).
+            GNAPATCH#1263
+          + 'trading_tech'/'trading_gold'/'trading_city' allow certain
+            types of diplomatic agreements to be selectively disabled.
+            GNAPATCH#1504, GNAPATCH#1506
+          + 'globalwarming'/'nuclearwinter' allow these global
+            catastrophes to be disabled. GNAPATCH#1505
+          + 'team_pooled_research' allows pooled research to be disabled.
+            GNAPATCH#1868
+          + 'alliedvictory': all players in an alliance can share victory.
+            This new behaviour is enabled by default. GNA#14278
+     * (as of rc1) Changes to the 'timeout' setting now always have
+       immediate effect, as in 2.0.x; previously, changes between non-zero
+       values would not take effect until the next turn. GNA#18079
+     * Improvements to observing:
+          + The demographic report is now available to global observers.
+            GNA#16486
+          + Global observers can now view the city report (it shows cities
+            from all nations). GNA#16699 GNAPATCH#2571
+          + Global observers can now access the buildable target list in
+            the city dialog. GNA#16487
+     * The number of units built, killed, etc now contributes to the final
+       score, and appears in the endgame report. GNAPATCH#1870
+     * Changing a unit's activity is now more forgiving: if you
+       accidentally stop an activity such as irrigation, but restart it
+       without doing anything else, progress is no longer lost. GNA#15510
+
+Clerical
+
+     * Settings configuration on the client and server has been reworked.
+       The most notable change is that enumerated and bitwise options are
+       now set with strings instead of numbers (for instance, '/set
+       barbarians hordes' instead of 4, '/set topology wrapx|wrapy'
+       instead of 3). GNAPATCH#1301
+     * The FREECIV_PATH environment variable can be overridden by three
+       new variables: FREECIV_DATA_PATH, FREECIV_SAVE_PATH, and
+       FREECIV_SCENARIO_PATH. GNA#14624
+     * Add-ons are now loaded from a sub-path ~/.freeciv/<version>/ (e.g.,
+       ~/.freeciv/2.3/), since they tend to be specific to a version of
+       Freeciv. GNA#14624
+     * Servers send more information to the metaserver:
+          + The 'timeout' and 'aifill' options (GNAPATCH#2092);
+          + (as of beta2) the number of human players (as opposed to AIs)
+            (GNAPATCH#2312); as of beta3 this is displayed in the client
+            (GNAPATCH#2411)
+     * New server command '/kick' and associated option 'kicktime' to lock
+       out troublesome users. GNA#16933
+     * New server commands '/ignore', '/unignore', and '/list ignored
+       users', allowing players to suppress chat messages from specific
+       users. GNAPATCH#1910
+     * The '/create' command can now create a new player even in a running
+       game. GNAPATCH#1574
+     * New command '/lua' to execute a line of Lua script on the server
+       command line. GNA#15644
+     * More options have been added to the '/reset' command. GNAPATCH#1284
+     * The name of the scorelog file is configurable with the new
+       'scorefile' option. GNAPATCH#1750
+     * The current ruleset can be shown by '/show rulesetdir' instead of
+       '/rulesetdir' (this allows less privileged users to do so).
+       GNA#16636
+     * Observers can see the current votes in progress with the new
+       command '/list votes'. GNA#16635
+     * The server uses a new format for savegames. It can load savegames
+       generated by old versions of Freeciv, but old versions will not be
+       able to load new savegames. GNAPATCH#1541
+          + Support has been added for future versions of Freeciv to save
+            backward-compatible savegames (back to 2.3.0) via the
+            'saveversion' server option.
+
+Clients
+
+     * Various report screens have been reworked so as not to redraw and
+       lose their selections after a few seconds. GNA#16439
+     * The total revenue from trade routes is now visible in the city
+       report. GNA#16812
+     * The chat log file name is now configurable. GNAPATCH#1749
+     * (GTK) Some rework of the pregame connection screen and menus
+       (GNA#16685). Buttons on this screen now adapt to selected
+       player/user (GNA#15300).
+     * (GTK) Tab completion of user and player names on the chatline.
+       GNAPATCH#1867
+     * (GTK) The goto/airlift dialog now shows which nation each city
+       belongs to, and more detail on airlift capacity. GNA#15313
+       GNAPATCH#2588
+     * The research report is now updated when tax rates or city science
+       output change. GNA#16776
+     * (as of beta2) Improve handling of (non-default) rulesets which
+       restrict reachability of technologies (via root_req in the ruleset)
+       in the science report. You can now choose whether unreachable
+       technologies are displayed. GNA#16852, GNA#16855, etc
+     * (as of beta2) (Xaw) The Take Player command is implemented.
+       GNAPATCH#2253
+     * (as of rc1) In 2.2.x, the "Sell Obsolete" button in the Economy
+       report could never be pressed. It has been renamed to "Sell
+       Redundant", and now lets 'redundant' buildings be sold en masse
+       (redundant buildings are those whose effects are entirely
+       superseded by another, for which you may still be paying upkeep --
+       for instance, Power Plants are redundant in cities with a
+       Hydro/Nuclear/Solar Plants). In the Gtk client, the "Obsolete"
+       column in the Economy report has been replaced with a "Redundant"
+       column showing how many of each building in your empire are
+       redundant. GNA#17937
+
+Gameplay / Rules
+
+Changes affecting supplied rulesets
+
+     * Two new rulesets are included in the distribution:
+          + multiplayer: a ruleset based on the default but tuned for
+            multiplayer games, based on Madeline Book's "rewonder" ruleset
+            for 2.1.
+          + experimental: a ruleset showcasing new features of the Freeciv
+            "engine", without strict regard for game balance and
+            playability. It enables some of the new features mentioned
+            below, such as variable city radii.
+     * More than doubled the number of playable nations (from 185 to 385).
+       Many improvements to existing nations, such as using native
+       spellings for cities and leaders.
+     * The interaction of promotions and diplomat-vs-diplomat contests has
+       changed:
+          + Attacking diplomats can now gain experience; previously, only
+            defending diplomats gained experience. GNA#17265
+          + The effect of veterancy on the outcome of these contests has
+            been reduced; it can change the odds by at most 20%
+            (previously, elite diplomats could become practically
+            invincible). GNA#17264
+     * The terrain effects of global warming and nuclear winter are now
+       more severe: land can be lost to ocean (and vice versa), and
+       glaciers can melt. GNA#17105
+     * If migration occurs, citizens take half the food in the granary
+       with them. GNAPATCH#1232
+     * (as of rc1) In rulesets with Fundamentalism, it now has a happiness
+       penalty for empire size (as it did in 2.0.x). GNA#18133
+     * (as of rc2) The civ2 ruleset now uses a restricted set of 25
+       nations, to better resemble the original game. Loading civ2
+       savegames from older versions of Freeciv may cause nations to be
+       reassigned; it will not be possible to load a civ2 savegame with
+       more than 23 (non-barbarian) players. GNA#18419
+
+New features for ruleset/modpack/scenario authors
+
+   These features have been added to the Freeciv "engine", but aren't
+   enabled in standard rulesets (except the experimental ruleset, in some
+   cases).
+     * Variable city radius: the circle of tiles able to be worked by a
+       city is no longer fixed but can vary (radii from 1 to 5 possible)
+       depending on requirements defined by the ruleset. GNAPATCH#1235
+          + Accordingly, the maximum value for the 'citymindist' server
+            option has been increased from 5 to 9. GNAPATCH#2262
+     * Build slots: in ruleset-defined circumstances, cities with large
+       production surpluses can now produce more than one of a given type
+       of unit per turn. GNAPATCH#1234
+     * Tech upkeep: rulesets can cause some research output to be diverted
+       to maintaining expertise in existing technology rather than
+       discovering new technology, with the risk of losing advances if the
+       upkeep is not met (similar to gold upkeep for city improvements).
+       GNAPATCH#1264
+     * Rulesets can define units that can be converted into another type
+       of unit on the player's command. GNA#13890
+     * Rulesets can define "Capturable" units that can be captured by
+       certain other "Capturer" units. (There is an associated server
+       option 'homecaughtunits'.) GNAPATCH#1851
+     * Rulesets can suggest or mandate server settings. GNA#13873,
+       GNAPATCH#1200
+     * A start position in a scenario can now be restricted to a set of
+       nations rather than a single nation. The built-in editor now
+       supports editing this set. GNA#13803
+     * Various improvements to Lua scripting. See Events Reference Manual
+       for some more detail.
+
+Tilesets / Art
+
+     * New default tileset with redrawn terrain graphics: "Amplio 2". The
+       original Amplio tileset is available for 2.3 as an add-on (it can
+       be found with the freeciv-modpack utility). GNAPATCH#1777
+     * Larger versions of flags and shields are now included in the
+       Freeciv distribution for use by larger tilesets; they are used in
+       Amplio2 (as of beta4). GNAPATCH#2202
+
+Translations
+
+     * (as of rc2) New Scottish Gaelic localization (complete).
+     * (as of beta3) New Irish Gaelic localization (not yet complete:
+       55%).
+     * Updated translations:
+          + Complete translations: Polish, French, Spanish, Catalan, and
+            British English.
+          + Incomplete translations: Danish (95.8%), Finnish (85%),
+            Ukrainian (81%), Italian (74%), Japanese (70%), Brazilian
+            Portuguese (70%), Russian (69%), Swedish (60%), Lithuanian
+            (43%), and Simplified Chinese (40%).
+
+KNOWN ISSUES
+
+     * There are some regressions in the SDL client relative to 2.2.x:
+          + The city dialog has not been redesigned to accommodate the
+            larger city map required by variable city radius support. As a
+            result, the city map display is scaled down and difficult to
+            read. GNA#15804
+          + Not all setting types can now be modified; bitwise and color
+            settings are not yet supported. GNAPATCH#1631 GNAPATCH#1957
+
+
+MAJOR CHANGES from 2.1.x to 2.2.0
+---------------------------------
+
+  (from <http://www.freeciv.org/wiki/NEWS-2.2.0>)
+
+     * Built-in editor
+     * Expanded ruleset format:
+
+          + Unit classes
+          + Movement restrictions
+
+               o Can limit which terrains a unit can enter
+               o River-boats
+               o Wheeled units
+               o Which units another unit can transport
+
+          + Migration
+          + Plague
+          + Bases
+          + Calendar effects
+
+     * Changes to gameplay with default ruleset:
+
+          + New terrains:
+               o Deep Ocean (as Ocean but no specials and cannot be
+                 transformed)
+               o Lake (as Ocean but no Whales special; inland water below
+                 a certain size is generated as Lake)
+          + Triremes are not restricted to tiles next to land, but to
+            (shallow) Ocean tiles; they now cannot even attempt to enter
+            unsafe tiles
+          + Triremes no longer get the +1 movement bonus from Nuclear
+            Power that other sea units get
+          + Triremes and Carriers can no longer attack land units
+          + Submarine attack strength reduced from 15 to 12 (to make it
+            easier to defend against them with escorts)
+          + New base type buoy, which can be built by Engineers on water
+            tiles with the Radio advance, and gives vision.
+          + Ruins (left behind by destroyed cities, no effect on gameplay
+            currently)
+          + New advance Environmentalism and Solar Plant improvement,
+            which can eliminate pollution from production
+          + Trade route value now depends on size of cities, not on trade
+            generated in them
+          + New national borders system
+          + Coastal Defense now available earlier (requires Gunpowder
+            instead of Metallurgy)
+          + No restrictions on specialists in small cities
+          + Terrain within working range of a city can no longer remain
+            unknown
+          + Units in fortresses now regain 25% HP per turn (as in 2.0.x)
+            instead of 100%
+          + New nations
+
+     * AI difficulty level: Cheating
+     * New server options:
+
+          + foggedborders: visibility of borders is subject to fog of war
+          + borders gains new modes where player can see all tiles inside
+            borders, and borders extend to unknown tiles revealing them
+          + endspaceship controls whether spaceship reaching Alpha Cen
+            ends the game
+          + trademindist controls the minimum distance for trade routes
+            between your cities
+          + Times now specified in turns instead of years (endyear becomes
+            endturn, onsetbarbs expressed in turns)
+          + simultaneousphases renamed to phasemode and gains new options
+
+     * Client interface changes:
+
+          + Menus and shortcut keys revamped; notable changes include:
+               o Connect with Road/Rail/Irrigation changes from
+                 Ctrl+Shift+R/L/I to Shift+R/L/I
+               o City Report: F1 to F4
+               o Go/Airlift to City: Shift+L to T
+               o Wake up Others (Shift+W) becomes Unsentry all on tile
+                 (Shift+S)
+               o Orders menu split into Select, Unit, Work, and Combat;
+                 Reports becomes Civilization
+
+     * Scripting improvements
+     * Event cache: messages from the last few turns can be replayed to
+       clients on connection and saved in savegames
+     * Featured text in Gtk client, including colour coding and clickable
+       links to mentioned cities/units/tiles
+
+
+OLDER CHANGES
+-------------
+
+WHAT'S CHANGED SINCE 2.0.7
+ - Significantly improved features for modmakers.
+ - New default tileset: Amplio.
+ - New city tab on main map.
+ - City outlines.
+ - Added lua as scripting language. New tutorial scenario.
+ - Many new nations, flags and nation information and options.
+ - New /surrender command to yield in multiplayer games.
+ - Score now shown in player dialog.
+ - Reputation removed from the game.
+ - New borders rules. Borders are static, fortresses expand borders
+   and cities expand more borders with city size growth.
+ - New diplomacy rules. Neutral state replaced with Armistice. You
+   now start in War state, and cannot cross borders with military
+   units except in War or Alliance states.
+ - GTK+ 1.2 client removed.
+ - Votes need over 50% of votes to pass. Voting is now only during game.
+ - First player to join becomes game organizer and sets all options.
+ - Many AI changes. Improved AI diplomacy.
+ - Palace has a production bonus of +75% under Despotism and +50%
+   under Monarchy.
+ - New animated cursors.
+ - Support for GGZ Gaming Zone.
+ - Multiple units may be moved at once as a battlegroup.
+ - As usual, tons of changes under the hood.
+
+WHAT'S CHANGED SINCE 1.14.2
+ - Research cost has doubled, effects of science buildings doubled. SETI
+   now improves Research Labs instead of giving free Research Labs to every
+   city. Isaac Newton's College now improves all the player's universities.
+ - New units: AWACS and Workers.
+ - New option: national borders.  Units inside your borders do not cause
+   unhappiness under Republic and Democracy.
+ - It is no longer possible for one player to be in alliance with a player
+   who is at war with another player you are allied with.
+ - The Civ2 ruleset now has waste.  Default ruleset does not.
+ - Incite costs changed, now cities closer to capital, with units and with
+   buildings have much higher incite cost.
+ - Killing a defending diplomat now costs you 1 movement point.
+ - Units now have multiple, configurable veteran levels.
+ - Team mates now pool their research. You may opt out and research
+   individually by cancelling the 'Team' treaty.
+ - Server has voting on commands and options. You need over 50% of votes.
+ - When moving a unit from a transport on an ocean tile to a land tile,
+   you lose all movement points.
+ - You can specify a list of players that you would like to share victory
+   with, using the 'endgame' command.
+ - Nations added: Swiss, Afghanistan, Ethiopian, Assyrian, Columbian,
+   Elvish, Galician, Hobbits, Indonesian, Kampuchean, Malaysian, Martian,
+   Nigerian, Quebecois, Sumerian, Taiwanese, Austrian, Belgian, Phoenician
+   and Mexican.
+ - New wonder: The Eiffel Tower. Makes AIs love you and improves reputation.
+ - The building requirements of several buildings have been changed.
+ - The whale special is reduced to 2 food, 1 shield and 2 trade.
+ - Settlers / Workers / Engineers can never get veterancy.
+ - Trireme's high sea loss now considers veterancy level (green 50%,
+   veteran 25%, hardened 5%, elite 0%) before being divided by 2 if you
+   have Seafaring or 4 when you reach Navigation (previously only fixed
+   at 50% before being divided).
+ - Glacier terrain is now unsafe for land units (15% chance per turn of
+   being lost). Also doesn't count as coastline for Trireme safety or Fish
+   and Whale generation. Roads/railroads can be built but all units (worker
+   too) get 15% chance per turn of being lost any way!
+ - King Richard's Crusade is now made obsolete by Robotics (previously
+   Industrialization).
+ - Fixed tech costs based on the number of prerequisites of the tech
+   in the tech tree.
+ - Nations have preferred nations to fork off when civil war occurs.
+ - AI is much improved, and does not use 'double-move' any more.
+ - AI now conducts diplomacy with you (and against you).
+ - New difficulty level: Novice.  It severely handicaps the AI players.
+ - Smarter autoexplorer and autosettler code.
+ - Modpack options vastly improved: You can customize buildings,
+   add buildings as requirements to units, restrict technologies to certain
+   nations, have split technology trees, gold upkeep for units, new units
+   and terrain flags and lots of other options.  (This is still done by
+   editing configuration files with a text editor.)
+ - Fewer popups (eg choose the new government from the menu directly)
+ - Alternative map topologies, e.g., real support for isometric and
+   hexagonal maps and "donut" map wrapping.
+ - Incomplete support for drawing civ3 graphics.  See the civ3gfx tileset.
+ - Global observer can observe the entire game.
+ - New method of settings map dimensions: Just use 'size'.
+ - Modified map generators.
+ - Initial units can be selected with a server option.
+ - 'Home' key centers on your capital.
+ - Drag and drop goto.
+ - Player authentication with optional passwords.
+ - You can start the server and set server options from the client.
+ - You can meet with other players for 20 turns after your units have last
+   met, and you can exchange embassies when meeting.
+ - You can bind the server to a given IP on multihomed hosts.
+ - New client dialog which uses multicast to find servers on your LAN.
+ - Compress network traffic and send only a delta (diff) of the data.
+ - GTK2 client can now run in fullscreen mode.
+ - GTK2 is now the default client (the code base also features fully
+   functional GTK1, Xaw and native Win32 clients).
+ - Convert charsets as they are sent between client and server.  All data
+   files are now in UTF-8.
+ - New (and incompatible) metaserver.
+ - New ALSA sound plugin.
+ - The s(entry) command no longer doubles as a means to put units on
+   boats - use the new l(oad) command instead. 
+ - Many more (smaller) changes, and massive changes under the hood.
+
+WHAT'S CHANGED SINCE 1.13.0
+ - Unique city names, you no longer can name your cities the same,
+   and you can enforce unique city names globally (optional).
+ - A new map generator (generator 5) which creates pretty fractal
+   maps.
+ - You can load savegames from the server prompt.
+ - You can save client commandline defaults.
+ - Specialists are taken from content citizens first, instead of from
+   unhappy citizens first. This makes it more difficult to quell unrest
+   using taxmen and scientists.
+ - You now start with no technologies by default, and angry citizens 
+   are enabled by default, although they will rarely make an apperance.
+ - The algorithm used for calculating the effects of tax settings has
+   been changed. It is now no longer possible to get 100% effect from 
+   60% choice of tax goal.
+ - A new, historically more correct version of the rulesets included.
+ - There is an option to require several turns of rapture/celebration 
+   before it takes effect. See "show rapturedelay" in server.
+ - The sequence of some end of turn activities have been regrouped.
+ - Several AI improvements. It should now build and buy units and 
+   buildings slightly more intelligently.
+ - Many internal code improvements that will lead to more features
+   later.
+ - /fix and /unfix commands to stop modifications after game has
+   started.
+ - The server commands "rulesout", "log", "freestyle" and "crash" 
+   have been removed, while "rfcstyle" now toggles between rfcstyle
+   and freestyle.
+ - civ2 ruleset now more accurately reflects civ2 deity level defaults.
+ - A truly massive amount of bugfixes.
+
+WHAT'S CHANGED SINCE 1.12.0
+
+ - Citizen Management Agent (CMA) allows you to automate workers
+   and specialists in cities.
+ - Sound support has been added.
+ - The new "isotrident" tileset has been made the default. The
+   "hires" and "engels" tilesets have been taken out of the
+   distribution but can be downloaded from the web page.
+ - New city dialog in the gtk client.
+ - Windows version of the client. It has improved connection
+   dialog and supports loading and saving from the client.
+ - GTK 2.0 version of the client.
+ - The client will try to suggest names for your cities that 
+   correspond with what they mean.
+ - Improved players dialog shows sortable and colored information,
+   including the players' flags.
+ - Server no longer takes the --server command line option,
+   instead you can use the --info option to set the metaserver
+   announcement text to whatever you like. The -a option when given
+   to the client skips the connection dialog entirely.
+ - A "wall" server command added which gives message to all players.
+ - A new flexible timeout set through "timeoutinc" server option.
+ - Leftover research bulbs will carry over to next advance.
+ - Trade routes are more effective.
+ - Units attacking ships in cities double their firepower, while 
+   defenders get only 1 firepower.
+ - Helicopters defending against air units get 50% penalty, and
+   have their firepower reduced to 1 against fighter units.
+ - You can build city walls even though you have Great Wall wonder.
+ - The Communism government's food cost in default ruleset has
+   been changed to 1, while it has been changed to 2 for the Civ2
+   ruleset. 
+ - Stealth fighter and bomber now really are stealthy, and are
+   partially invisible just like subs. Also, stealth bombers have
+   increased their attack strength from 14 to 18.
+ - Civ2 ruleset now has Fundamentalism.
+ - Improved modpack abilities: The caravan ability has been split.
+   New ways to calculate technology costs. Better documentation.
+   Rulesets can specify starting techs. You can have more than one
+   bonus tech. Split settler abilities. Buildings ruleset syntax
+   has been significantly extended, but effects do not work yet.
+ - Server option "tinyisles" allow 1x1 size islands and 
+   "separatepoles" allow continents connected to the poles
+ - "citymindist" specify minimum distance between cities, while 
+   "notradesize" and "fulltradesize" regulate the trade generated 
+   by smaller cities.
+ - You can turn on angry citizens with "angrycitizens" option.
+ - Fortresses may give you extended vision. See watchtower options.
+ - If you lose your palace, you get a new one for free in a 
+   randomly chosen city. This behaviour can be turned off with the
+   server option "savepalace".
+ - Rulesets are now loaded from inside the server through the
+   "rulesetdir" command.
+ - The limit on the number of nations that can be included with 
+   Freeciv has been removed.
+ - The format of the isometric tileset spec-files has changed.
+ - The map and ai code has been cleaned up significantly.
+ - Translations improved. Added better support for plural forms.
+ - Several bugs squished and a lot of work done under the hood.
+ - For an overview of the remaining bugs please visit doc/BUGS.
+
+WHAT'S CHANGED SINCE 1.11.4
+
+ - Internationalization extended.  Still needs improvement.
+   Current localizations: de en_GB es fr hu it ja nl no pl pt pt_BR
+   ro ru sv.
+ - Isometric view in gtk and amiga clients using the mostly civ2-
+   compatible HiRes tileset. This is on by default, but the old non-
+   isometric tiles are still available by giving a --tiles argument to
+   the client, fx "civclient --tiles trident".
+ - While planning a goto (after hitting "g") a line will be displayed
+   showing the route from the selected unit to the mouse pointer.
+   Hitting "g" will insert a waypoint at the mouse pointer.
+ - The server now has readline completion. This works at all levels,
+   fx "cu<TAB>" completes to "cut", and if there exist a player named
+   "paulz" "cut pau<TAB>" will complete to "cut paulz".
+ - Players can agree to give shared vision, which means that you
+   automatically see everything the other player sees.
+ - Layer view menu items allow you to only display some map info on the
+   main map. Fx you can choose to not show roads.
+ - The server will ping all connected clients and cut off those too slow
+   to respond.
+ - Smarter placing of partisans.
+ - The server no longer automatically starts when the maximum number of
+   players have been reached.
+ - If commandlevels are used and the controlling player disconnects a
+   connected player can assume the "first" level with the "/firstlevel"
+   command.
+ - "Restrictions and Limitations" section added to the README.ruleset
+ - Caravans, diplomats and spies can move into allied cities.
+ - Elephants, Crusaders and Fanatics activated in civ 2 ruleset.
+ - The size of the city foodbox is now controlled by the ruleset
+   variables "granary_food_ini" and "granary_food_inc".
+ - Limit on number of improvement types in rulesets removed.
+ - Capitalization is available from the start of the game in the default
+   ruleset. (renamed coinage)
+ - Cities can have 0 trade. (used to be at least 1)
+ - Settlers can only be added to cities less than size 8, as in civ 2.
+ - If you paradrop a unit into unknown terrain and the terrain contains
+   an enemy unit the paradropping unit is lost. If you drop into terrain
+   you thought was land, but which has changed to water, the unit is
+   also lost.
+ - diplomats/spies can't take action from a ship.
+ - Refueling air units at turn update will refuel units with only 1 fuel
+   first. Secundary criteria is unit cost.
+ - Trireme loss percentage depends upon known technologies.
+ - Leonardo's workshop will upgrade a random unit each turn, and not
+   just the next one.
+ - Allied cities count as friendly when determining whether a unit is
+   being agressive. (gives unhappyness under some govs.)
+ - Deserts are created primarily 15 to 35 degrees off the equator.
+ - Only arctic tiles generated at poles.
+ - The server will report when a new government becomes available.
+ - Changed wording of message "famine feared" to "famine occurred". New
+  "famine feared" message just before food runs out.
+ - "wonder soon build" message when another player is about to complete
+   a wonder.
+ - Players are notified when one of their wonders has become obsolete.
+ - In the players dialog it is now reported which nations have an
+   embassy with you. Your embassies are also listed.
+ - Wonders being built are listed in the "wonders of the world" popup.
+ - Server "save" command saves to <auto-save name prefix><year>m.sav[.gz]
+   if it is not given any arguments.
+ - "quitidle" server commandline option makes server quit if there has
+   been no connected players for the specified amount of time.
+ - When turning on the autotoggle option existing human nations without
+   a connected player will be put on AI.
+ - Server doesn't block as long when writing to a slow host, controlled
+   by variables "tcptimeout" and "netwait".
+ - "savename" server variable controls the prefix of autosaves.
+ - "allowconnect" server variable lets you control which types of
+   players (new players; human players; AI players; dead players;
+   barbarian players) can connect.
+ - More nations added.
+ - New maps in data/scenario: british-isles-80x76-v2.51.sav,
+   iberian-peninsula-136x100-v0.9.sav,
+   hagworld-120x60-v1.2.sav (earth map).
+ - Amiga internationalization/localization.
+ - Amiga client: history added to chatline.
+ - Lots of bug fixes and code cleanups.
+
+WHAT'S CHANGED SINCE 1.11.0:
+
+ - Readline support added to the server.
+ - May now disperse initial units over specified area.  See "dispersion"
+   server option.
+ - May now arrange for first client to connect to have a higher cmdlevel
+   than the following clients.  See "cmdlevel" server option.
+ - Save files now transparently (un)compressed when (loaded) saved.
+ - Now requires a minimum number of ocean tiles to be adjacent to a land
+   tile wished to be transformed into ocean.  Default is 1.
+ - Added Nuclear Fallout.  Industrialization and population still
+   generate Pollution.  Dropping a Nuke generates Nuclear Fallout, which
+   is distinct from Pollution.  There is a new command to clean Fallout
+   vs. cleaning Pollution.  Fallout contributes to Nuclear Winter --
+   which also changes terrain, but tends to Desert, Tundra and Glacier.
+   Added a new "cooling" icon to the info area to indicate the progress
+   towards Nuclear Winter, and also an icon for Fallout on the main map.
+   AIs are now more aggressive at cleaning up Pollution, but not Fallout.
+ - Ported to OpenVMS.
+ - Moved most of the dependencies on the "civstyle" server option to
+   separate values in game.ruleset files.
+ - Fixed bugs in "turns to build" displays.
+ - Fixed bug whereby Diplomat/Spy investigations of cities did not
+   reveal the correct supported and present unit lists.
+ - Fixed multiple bugs in go-to code.
+ - Fixed bug where starting a revolution, saving the game and restarting
+   the server would allow switching governments without anarchy.
+ - Fix bug that you could paradrop into cities you were at war with even
+   if they contained enemy units.
+
+WHAT'S CHANGED SINCE 1.10.0:
+
+ - Internationalization extended.  Still needs improvement.
+   Current localizations: de en_GB es fr hu ja nl no pl pt pt_BR ru.
+ - Added full Fog of War.  Controlled by "fogofwar" server option.
+ - Added explicit Diplomatic States between civilizations: war, neutral,
+   no-contact, cease-fire peace and alliance.
+ - Allow terrain changes to/from land/ocean.  Default ruleset allows
+   Engineers to Transform Swamp to Ocean and Ocean to Swamp.  Also
+   allows Forest to be Mined into Swamp.
+ - Increased maximum number of players to 30.
+ - Fortifying now takes a turn to complete (like Civ1/2).
+ - Added correct Civ2 style of Apollo wonder (shows entire map, rather
+   than just cities).  Selected by "civstyle" server option.
+ - Aggressive sea units no longer cause unhappiness when in a city.
+ - Added Civ2 rule that firepower is reduced to 1 for both the defender
+   and the attacker when a ship bombards a land unit.
+ - When changing current research, if user changes back to what was being
+   researched, the penalty is not applied (you keep all your bulbs).
+ - Added pop-up of more details when clicking on info box in GTK+ client.
+ - Improved the global warming danger indicator.
+ - Added warning of incipient city growth.
+ - The server "remove <player>" command is no longer available after the
+   game has started.
+ - Added "fixedlength" server option to make all turns exactly "timeout"
+   duration.
+ - The "timeout" time may be much longer (up to a day).
+ - Added goto for air units.  If destination is beyond range, they will
+   stop in cities/airfields/etc. to get there.
+ - May now select a unit by clicking on the unit pile display on the left.
+ - Diplomats/Spies moving by goto now do pop-up the Diplomat/Spy command
+   dialog when they reach a city.
+ - Improved goto algorithm and implementation.
+ - Help dialog displays which buildings an advance will obsolete.
+ - Optionally show city food/shields/trade productions on main map.
+ - Added server option "autotoggle", which toggles AI status on and off
+   as players connect and disconnect.
+ - Allow Hoover Dam to be built anywhere, to conform to Civ2.
+ - Show turns per advance in Science Advisor dialog.
+ - Improved map and unit movement drawing code.
+ - Added "End Turn when done moving" local option.
+ - City production penalties now applied more correctly.
+ - Added Sentry and Fortify to Present Units' City Dialog pop-up.
+ - More nations added.
+ - Added a resource file for the GTK+ client.
+ - Improved network code for more reliable connections.
+ - Split nations.ruleset into individual <nation>.ruleset files.
+ - Extended registry file format to allow including files and overriding
+   entries.
+ - Added --with-xaw and --enable-client=xaw3d options to ./configure
+   script.
+ - Lots of bug fixes and code cleanups.
+
+WHAT'S CHANGED SINCE 1.9.0:
+
+ - Internationalization extended.  Still needs improvement.
+   New ./doc directory for localized versions of README and INSTALL.
+   Current localizations: de en_GB es fr hu no pl pt pt_BR ru.
+ - Added Civ1/2-like Barbarians.  Controlled by two server options.
+ - Many more nations added.
+ - Worklists -- Players can now specify a list of things to be built in
+   a city.
+ - The AI now utilizes diplomats/spies aggressively.
+ - Added a variant (1) of Michelangelo's Chapel.
+ - Initial rates after Revolution will try to maximize Science.
+ - Rapture-triggered city growth will no longer empty the foodbox.
+ - Map generator improvements:
+   - Gen 1 hills more uniform north/south.
+   - Gen 2+ will tend to make fewer length-one rivers.
+ - Added unit-death explosion animation.
+ - No longer will cities with exactly 0 (zero) production surplus be given
+   a "free" shield every turn.
+ - Command-line arguments made more consistent between server and client.
+ - Caravans now provide a research benefit when initially establishing a
+   trade route, equal to the monetary benefit.
+ - Diplomat/Spy changes:
+   - Changed all actions to more closely conform to Civ2 rules.
+   - Changed "diplchance" to be %-chance of success.  Used in many ways.
+   - Diplomat/Spy may attempt action with any movement left.
+   - Added "At Spy's Discretion" selection to steal and sabotage dialogs.
+   - Allow Spies to steal tech from a city more than once (gets harder).
+   - May only poison towns of size greater than 1 (one).
+   - May only sabotage units that are alone on a square.
+   - When a city is subverted, only nearby units change sides.
+   - Veteran status improves defense against other Diplomats/Spies.
+ - Added production display of number of turns remaining to build.
+ - Small, shield-like flags tilesets (trident_shields, engels_shields).
+ - Airbase changes (for Civ2 compliance):
+   - Ground units can attack Air units when they are parked on an Airbase.
+   - Units are defeated only singly when on an Airbase (like a Fortress).
+ - Revised and improved the server 'help' command.
+ - New intro graphics.
+ - Ships may now have their movement reduced after a combat in which they
+   are damaged.
+ - Added display of production values to main map "city tiles" display.
+ - Increased the Add-To City size limit to 9 to conform to Civ2.
+ - Settler's "Connect" feature -- Automatically connect two points with
+   Road, Railroad, Irrigate or Fortress.
+ - Several AI improvements.
+ - New ruleset support for CITIES, most notably cities are now drawn in
+   different sizes and styles.
+ - Allow specifying unambiguous player name prefix, instead of full 
+   player name, for server commands taking a player name argument.
+ - Added multi-client configuration support.
+ - Added 'read' and 'write' server commands.
+ - Added "best nation" column to Demographics report.
+ - Changed Fighters and Stealth Fighters to not cause unhappiness (Civ2).
+ - Cities on mountains will produce an extra food (Civ2).
+ - Fixed bug where Lighthouse was not producing veteran sea units.
+ - Ported to Amiga.  (This is not included with a "distribution"; get it
+   directly from the CVS <http://www.freeciv.org/contribute.html#SetupCVS>,
+   or from a CVS Snapshot <http://www.freeciv.org/latest.html>.)
+ - Lots of bug fixes, code cleanups, and help-text improvements.
+
+WHAT'S CHANGED SINCE 1.8.1:
+
+ - Internationalization added.  Some aspects still need improvement,
+   and in particular currently only works well if client and server
+   both use the same language.  Initial (partial) translations
+   included are: de es fr hu pl pt pt_BR.
+ - Improvements to "trident" tileset, and this set is now the default.
+ - New ruleset support for NATIONS, and many new nations added --
+   there are now 32 nations in the default nations file.  Also allow
+   multiple leaders choices for each nation, allow longer player
+   names, and allow specifying/choosing sex of leader.
+ - New ruleset support for TERRAIN, and changes to allow Civ2 style
+   terrain with more specials, multi-terrain rivers, and new farmland
+   infrastructure.  Moved some server options into terrain ruleset,
+   and added new rule option regarding movement along rivers.
+ - New ruleset support for GOVERNMENTS, and more general unit upkeep.
+ - The contents and layout of the graphics files is now described in
+   user-editable 'spec' files, instead of being hardwired into the
+   code; see README.graphics for details.
+ - Changes to city graphics: can now see cities grow.  Also, code
+   support for different city styles for different nations, and for
+   technology dependent styles, but lacking good graphics except for
+   the default style.  Cities show a small flag when occupied by one
+   or more units.
+ - From Civ2, added Paratroopers unit and Airbase infrastructure.
+ - Initial window size of Gtk+ client is smaller, to fit better on
+   smaller screens, and can now resize detached chat/output window.
+ - City report enhancements: New "Change All" dialog to convert all
+   production of a given item to some other item (both clients); can
+   select multiple cities and issue commands (Gtk+ client only); can
+   sort by different columns (Gtk+ client only).  Can also select
+   multiple items in the Trade Report (Gtk+ client only).
+ - In Civ2 style, can select which infrastructure item to pillage, and
+   multiple units can pillage together.  Can now pillage fortresses,
+   as well as new farmland and airbase infrastructure items.
+ - More fields added to Demographics Report, and now configurable from
+   a server option.
+ - Added more information to "Active Units Report", and renamed to
+   "Military Report".
+ - New cursors added for Goto, Nuke and Paradrop modes; <Escape> key
+   cancels Go-To/Paradrop/nuke mode; pollution on city squares is now
+   always clearly visible; improvements to refresh method for pixmaps
+   in Gtk+ client; various other improvements to both clients.
+ - Autosettlers no longer convert Plains/Grasslands to Forests, but
+   will now Transform terrain.
+ - AI can build spaceships, although does not do so very aggressively
+   or intelligently yet.
+ - Server and client may specify a different metaserver to use.  There
+   is now a metaserver running on www.freeciv.org, and that is now the
+   default metaserver (http://www.freeciv.org/metaserver).
+ - New server option for "turn blocking" mode, in which players will
+   never miss a turn even if sometimes disconnected.
+ - More flexible rulesets for units and techs (advances) allowing
+   variable number of items in each (up to 200) and no longer any
+   techs with hardwired effects depending on position in ruleset file.
+ - Appropriate helptext now appears in ruleset files, allowing
+   modpacks to give modified help to correspond to modified items.
+ - Format of ruleset files is changed, no longer compatible with
+   those for 1.8.0 and 1.8.1.
+ - Removed science bonus of +1 per city per turn.
+ - In Civ2 mode, overflight of a hut causes it to disappear, and can't
+   build cities next to each other.
+ - Rapture_size now 3, to conform to Civ2.
+ - Settlers and Engineers now cost shield upkeep as well as food
+   upkeep (depending on government type) as in both Civ1 and Civ2.
+ - Helicopters do not lose hitpoints when over an airbase.
+ - The amount of food required for a city grow is now ((citysize+1) *
+   foodbox), instead of (citysize * foodbox); new behavior matches
+   both Civ1 and Civ2.
+ - Some re-organization of data directory, in adding data/scenario,
+   and graphics now in data/trident, data/engels and data/misc.
+ - Preliminary support for compiling the server on Mac (but networking
+   code not yet ported).
+ - Progressively moving code out of client gui-dependent directories.
+ - Lots of bug fixes, code cleanups, and help-text improvements.
+
+WHAT'S CHANGED SINCE 1.8.0:
+
+ - The biggest change is a new client which uses the popular Gtk+
+   toolkit.  The old Xaw client is still included as well.
+ - A new alternate (30x30) tileset: the "trident" tileset.
+   Start the client with "--tiles trident" to try it out.
+   (This replaces the "classic/brunus" tileset, which is still
+   available separately from the Freeciv ftp site.)
+ - In the Gtk+ client, parts of the main window can be detached.
+   Detaching them all allows a full-screen map window!
+ - The data directory can now be specified as a "path" ($FREECIV_PATH),
+   instead of a single directory.  By default, ~/.freeciv is now in
+   the path, so if you download new tiles, modpacks, etc, you can now
+   simply put them in ~/.freeciv
+ - Server console improvements: can abbreviate server command names,
+   and server option names.  Better prompt handling - eg, server no
+   longer prints an unnecessary prompt each turn.
+ - Server commands can now be issued from the client chatline.
+   There is a new server command "cmdlevel", to control access to
+   this feature on a per-player basis.
+ - Some of the "small" graphics have been improved.
+ - Added a nice cursor for selecting the destination for "goto".
+ - New column "corruption" in the city report.
+ - Implemented Marco Polo's Embassy wonder.
+ - New command to explode Nuclear units at an empty square.
+ - Improved behavior of Caravans and "goto": the Caravan dialog will
+   now popup when the Caravan arrives, whether moving by goto or by
+   the keyboard.
+ - Allow connecting to metaserver (in client) via $http_proxy.
+ - Minor "Zone of Control" (ZOC) rules changes to better match Civ2.
+ - Improved debug logging.
+ - Server will refuse to run as root, as a security measure.
+ - As always: lots of bug fixes, code cleanups, and help-text
+   improvements.
+
+WHAT'S CHANGED SINCE 1.7.2:
+
+ - Space race!  Be the first player to build a space ship and colonize
+   Alpha Centauri.
+ - Civil war!  Capturing the enemy capital may split his empire.  Half
+   of his towns will join a new AI leader!
+ - Two tile sets in this release! The "big" ones are from Ralph Engels.
+   I hope you will enjoy them.  The second set is an enhancement of the
+   classic ones.  The server option -tiles allows to choose a subdirectory
+   of the data directory to use different tiles.  (The data directory can
+   be set with the DATADIR environment variable.)  Also, diagonal roads
+   and railroads are now drawn.  Changed some of the national flags
+   (especially changed Soviet flag to the Russian flag for Russians).
+ - Rulesets can be used to customise units, advances, wonders, and
+   improvements without recompiling -- see README.rulesets.
+ - Units in a town can be put in auto-attack mode.  In this mode, they
+   will attack any enemy units which come nearby.
+ - New city options for each city, controlling whether new citizens are
+   workers or specialists, whether to allow disbanding a size 1 city by
+   building a settler, and options for units on auto-attack mode in the
+   city.
+ - Mapgen 4 (selected with the server command "set generator 4") is a new
+   map generator which generates a map with 2 players on each island.
+ - Cities can be a traded in diplomatic treaties.  This effectively
+   allows you to exchange, sell or buy cities.
+ - The AI now builds diplomats to defend against enemy diplomats.
+ - Settlers and engineers can do teamwork.  With enough manpower, all
+   terrain improvements can be done fast!
+ - With engineers, the terrain type can be changed using the new Transform
+   command ('O').  For example, hills can be turned into plains.
+ - Units only regenerate hit points if they have not moved at all for a
+   full turn.
+ - Gamelog option.  The whole history of a game can be stored in the
+   gamelog file.
+ - One can select a unit with 0 moves left from the main map.
+ - City workers can be adjusted from the main map, with shift+button1.
+ - Changed the order of libraries to fix problems on IRIX and Cygwin.
+ - Changed the client-server protocol to use network byte order.
+ - Other bug fixes and code and help text cleanups.
+
+WHAT'S CHANGED SINCE 1.7.1:
+
+ - Improvements to the configure script, so it should now work
+   properly on all systems.
+ - Ability to configure to use Xaw3d instead of the normal Xaw.
+ - New "easy" AI mode, which is now the default.
+ - Improved "City Report" dialog, with configurable columns.
+ - Improved "Message Options" dialog, with customizable filtering and
+   selection for the different message types.
+ - Improved "Messages" dialog, with a scrollbar, and a "Popup City"
+   button.
+ - Improved multi-column "Unit Select" dialog when there are lots of
+   units.
+ - In city dialog, middle-click unit icons to "activate and close".
+ - New client command "t" to show tiles used by city under mouse.
+ - New metaserver dialog to make connecting to metaserver games easier.
+ - Ability to save and re-load client settings.
+ - Clearer Yes/No toggle buttons in various places in the client.
+ - Reduced color usage (but looks almost identical), so the client should
+   now work fine on systems with 8 bit color displays.
+ - Ability to use "scenarios", that is, pre-designed maps.  Scenarios
+   for Earth and Europe games are included in the data directory.
+   (Use them with the server command-line option -f, like savegames.)
+ - More city names, so you're less likely to see "City 41" etc.
+ - Saving large games is now much faster, and the savefile is smaller.
+ - Improvements to the documentation and online help system, including
+   a new help section on the "Zones of Control" game concept.
+ - Detect repeated log messages and print repeat counts.
+ - New server options randseed and aqueductloss.
+ - Many other enhancements and bug fixes.
+
+WHAT'S CHANGED SINCE 1.7.0:
+
+ - Removed two C++-style comments, the most reported problem with 1.7.0!
+ - Tweaks to the configure script for Solaris, although it's still not
+   perfect.
+ - Spy and diplomat improvements.
+ - Added the "W" command, which Wakes up sentried units.
+ - Added the "scorelog" command, which can be read by a script to generate
+   power graphs after the game.
+ - Loading games is now MUCH faster.
+ - AI improvements from John Stonebraker.
+ - Visual improvements to dialogs and the map screen.
+ - Settlers may not fortify.
+ - Numerous bug fixes.
+
+WHAT'S CHANGED SINCE 1.6.3:
+
+ - Massive AI changes. It plays smarter, and the AI uses seagoing vessels.
+ - The contents of the help system have been improved substantially.
+ - Many bugs fixed.
+ - We now recommend you use "configure" instead of Imake.
+ - Settlers have a new "e"xplore mode.
+ - The makefiles now contain auto-generated dependency information.
+ - Units within the radius of the city to which they belong no longer
+   cause unhappiness.  This will allow much more realistic defense
+   scenarios.
+ - The tax/lux/sci rates are now limited by your government type.
+   Also, they can modified by clicking on the rate status icons.
+ - The behaviour of spies and diplomats has been greatly improved.
+ - Freeciv now needs to transmit a lot less data (<25%!) when playing
+   over the Internet.  This will greatly speed up games.
+ - Preliminary support for compiling Freeciv under Windows and OS/2,
+   when used in conjunction with the GNU tools.
+ - From now on, it will be possible for different Freeciv versions to
+   talk to each other if they're able.
+ - Tracy Reed (who provides www.freeciv.org) reports that our site is
+   getting over 6,000 hits per month.  He was quoted as saying "Cool!
+   Now my computer is doing something!"
+ - Lots, and Lots, and Lots of donated patches. Thanks guys, keep 'em
+   coming!

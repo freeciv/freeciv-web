@@ -1,0 +1,45 @@
+[nation_team_gladiators]
+
+translation_domain="freeciv"
+
+name = _("Team Gladiators")
+plural = _("?plural:Athletes")
+legend = _("Spaceball is sport of massive teams. Team Gladiators ship contained \
+enough players to start entire planetary faction.\n\n\
+* Builds elite units, superb units in cities with Training Facility\n\
+* Each city receives free unit upkeep worth one shield")
+
+leaders = {
+ "name", "sex"
+ "Defense Coach", "male"
+ "Attack Coach", "female"
+}
+
+flag = "teamgladiators"
+flag_alt = "france"
+style = "Human"
+
+color.r = 255
+color.g =   0
+color.b =   0
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+trait_trader_min       = 35
+trait_trader_max       = 35
+trait_expansionist_min = 40
+trait_expansionist_max = 40
+
+; /* <-- avoid gettext warnings
+;
+; */
+
+cities =
+  "Spaceball", "Diving", "Tennis", "Hunting", "Racing",
+  "Soccer", "Gliding", "Civing", "Riding", "Springing",
+  "Running", "Hockey", "Powerbiting", "Orienteering",
+  "Boxing", "Marathon", "Rolling", "Cheerleading",
+  "Tracking", "Asteroid Jumping", "Climbing", "Dancing",
+  "Plasma Wrestling"

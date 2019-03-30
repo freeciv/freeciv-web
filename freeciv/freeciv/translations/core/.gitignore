@@ -1,0 +1,11 @@
+/Makefile
+/Makefile.in
+/stamp-po
+/remove-potcdate.sed
+/POTFILES
+/freeciv-core.pot
+/*.mo
+/*.gmo
+/*.pox
+/nb.po
+/messages

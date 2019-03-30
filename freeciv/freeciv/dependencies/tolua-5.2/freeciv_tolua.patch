@@ -1,0 +1,44 @@
+diff -Nurd tolua-5.2/src/bin/tolua.c tolua-5.2/src/bin/tolua.c
+--- tolua-5.2/src/bin/tolua.c	2016-01-06 01:19:24.984940138 +0200
++++ tolua-5.2/src/bin/tolua.c	2016-01-06 01:22:44.160507862 +0200
+@@ -22,6 +22,9 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++#ifndef LUA_SOURCE
++int tolua_tolua_open(lua_State *L);
++#endif
+ 
+ static void help (void)
+ {
+@@ -106,7 +109,6 @@
+ 
+ #ifndef LUA_SOURCE
+  {
+-  int tolua_tolua_open (lua_State* L);
+   tolua_tolua_open(L);
+  }
+ #else
+diff -Nurd tolua-5.2/src/lib/tolua_event.c tolua-5.2/src/lib/tolua_event.c
+--- tolua-5.2/src/lib/tolua_event.c	2016-01-06 01:19:24.980940147 +0200
++++ tolua-5.2/src/lib/tolua_event.c	2016-01-06 01:20:07.884846927 +0200
+@@ -18,6 +18,8 @@
+ 
+ #include "tolua.h"
+ 
++#include "tolua_event.h"
++
+ /* Store at peer
+ 	* It stores, creating the corresponding table if needed,
+ 	* the pair key/value in the corresponding peer table
+diff -Nurd tolua-5.2/src/lib/tolua_map.c tolua-5.2/src/lib/tolua_map.c
+--- tolua-5.2/src/lib/tolua_map.c	2016-01-06 01:19:24.980940147 +0200
++++ tolua-5.2/src/lib/tolua_map.c	2016-01-06 01:20:48.972757711 +0200
+@@ -21,6 +21,7 @@
+ #include <stdlib.h>
+ #include <math.h>
+ 
++int tolua_bnd_takeownership(lua_State *L);
+ 
+ static char toluaname[128] = "tolua.";
+ static const char* TOLUANAME (const char* n)  

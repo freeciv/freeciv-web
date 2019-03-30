@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:odm="http://product.corel.com/CGS/11/cddns/" xml:space="preserve" width="600px" height="400px" style="shape-rendering: geometricprecision; text-rendering: geometricprecision; fill-rule: evenodd;" viewBox="0 0 600 400">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#C40026}
+    .fil1 {fill:#FFD203}
+   ]]>
+  </style>
+ </defs>
+ <path class="fil0" d="M0 0l600 0 0 400 -600 0 0 -400z"/>
+ <g id="Layer 1">
+  <path class="fil1" d="M298 42l-6 0c-13,19 -52,33 -55,34 -3,4 -3,8 -2,12 23,24 33,55 37,86 -31,-3 -62,-14 -87,-36 -4,-2 -7,-2 -11,1 -1,3 -16,42 -34,55l0 7 0 7c18,13 33,52 34,55 4,3 7,3 11,1 25,-22 56,-33 87,-37 -4,31 -14,62 -37,87 -1,4 -1,8 2,11 3,1 42,16 55,34l7 0 7 0c12,-18 52,-33 54,-34 4,-3 4,-7 2,-11 -22,-25 -33,-56 -36,-87 31,4 62,15 86,37 4,2 8,2 12,-1 1,-3 15,-42 34,-55l0 -7 0 -7c-19,-13 -33,-52 -34,-55 -4,-3 -8,-3 -12,-1 -24,22 -55,33 -86,36 3,-31 14,-62 36,-86 2,-4 2,-8 -2,-12 -2,-1 -42,-15 -54,-34l-8 0z"/>
+  <path class="fil0" d="M298 42m1 18c-13,10 -26,19 -43,25 23,31 31,68 33,107 -38,-2 -75,-11 -106,-33 -6,16 -15,30 -26,42 11,13 20,26 26,42 31,-22 68,-31 106,-33 -2,38 -10,75 -33,106 17,6 30,15 43,26 12,-11 26,-20 42,-26 -23,-31 -31,-68 -33,-106 38,2 75,11 107,33 6,-16 14,-29 25,-42 -11,-12 -19,-26 -25,-42 -32,22 -69,31 -107,33 2,-39 10,-76 33,-107 -16,-6 -30,-15 -43,-25"/>
+  <circle class="fil1" cx="123" cy="200" r="13"/>
+  <circle class="fil1" cx="172" cy="280" r="13"/>
+  <circle class="fil1" cx="172" cy="120" r="13"/>
+  <circle class="fil1" cx="219" cy="73" r="13"/>
+  <circle class="fil1" cx="219" cy="328" r="13"/>
+  <circle class="fil1" cx="299" cy="24" r="13"/>
+  <circle class="fil1" cx="299" cy="376" r="13"/>
+  <circle class="fil1" cx="379" cy="73" r="13"/>
+  <circle class="fil1" cx="379" cy="328" r="13"/>
+  <circle class="fil1" cx="426" cy="120" r="13"/>
+  <circle class="fil1" cx="426" cy="280" r="13"/>
+  <circle class="fil1" cx="475" cy="200" r="13"/>
+ </g>
+</svg>

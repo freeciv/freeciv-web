@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="900"
+   height="600"
+   viewBox="-35 -30 150 100"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="solomon_islands.svg">
+  <metadata
+     id="metadata38">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs36">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 300 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1200 : 300 : 1"
+       inkscape:persp3d-origin="600 : 200 : 1"
+       id="perspective40" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1024"
+     inkscape:window-height="695"
+     id="namedview34"
+     showgrid="false"
+     inkscape:zoom="0.42666667"
+     inkscape:cx="600"
+     inkscape:cy="300"
+     inkscape:window-x="-3"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <clipPath
+     id="rect">
+    <rect
+       x="-35"
+       y="-30"
+       width="200"
+       height="100"
+       id="rect5" />
+  </clipPath>
+  <rect
+     x="-35"
+     y="-30.00001"
+     width="149.99997"
+     height="100.00001"
+     id="rect7"
+     style="fill:#215b33" />
+  <path
+     d="m -35,69.999998 0,-100.000008 150.00001,0"
+     id="path9"
+     style="fill:#0051ba" />
+  <path
+     d="M 165,-30 -35,70"
+     clip-path="url(#rect)"
+     id="path11"
+     style="stroke:#fcd116;stroke-width:9"
+     transform="matrix(0.74999994,0,0,1.0000001,-8.750002,-7e-6)" />
+  <g
+     id="star"
+     transform="matrix(10,0,0,10,-4.296875,-1.171875)"
+     style="fill:#ffffff">
+    <g
+       id="cone">
+      <polygon
+         id="triangle"
+         points="0,1 0.5,1 0,0 "
+         transform="matrix(0.95105652,0.30901699,-0.30901699,0.95105652,0,-1)" />
+      <use
+         xlink:href="#triangle"
+         transform="scale(-1,1)"
+         id="use16"
+         x="0"
+         y="0"
+         width="200"
+         height="100" />
+    </g>
+    <use
+       xlink:href="#cone"
+       transform="matrix(0.30901699,0.95105652,-0.95105652,0.30901699,0,0)"
+       id="use18"
+       x="0"
+       y="0"
+       width="200"
+       height="100" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(0.30901699,-0.95105652,0.95105652,0.30901699,0,0)"
+       id="use20"
+       x="0"
+       y="0"
+       width="200"
+       height="100" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(-0.80901699,0.58778525,-0.58778525,-0.80901699,0,0)"
+       id="use22"
+       x="0"
+       y="0"
+       width="200"
+       height="100" />
+    <use
+       xlink:href="#cone"
+       transform="matrix(-0.80901699,-0.58778525,0.58778525,-0.80901699,0,0)"
+       id="use24"
+       x="0"
+       y="0"
+       width="200"
+       height="100" />
+  </g>
+  <use
+     xlink:href="#star"
+     transform="translate(19.741054,-16.92013)"
+     id="use26"
+     x="0"
+     y="0"
+     width="200"
+     height="100" />
+  <use
+     xlink:href="#star"
+     transform="translate(19.741054,16.92013)"
+     id="use28"
+     x="0"
+     y="0"
+     width="200"
+     height="100" />
+  <use
+     xlink:href="#star"
+     transform="translate(-19.741054,16.92013)"
+     id="use30"
+     x="0"
+     y="0"
+     width="200"
+     height="100" />
+  <use
+     xlink:href="#star"
+     transform="translate(-19.741054,-16.92013)"
+     id="use32"
+     x="0"
+     y="0"
+     width="200"
+     height="100" />
+</svg>

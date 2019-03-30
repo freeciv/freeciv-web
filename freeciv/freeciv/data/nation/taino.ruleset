@@ -1,0 +1,79 @@
+[nation_taino]
+
+translation_domain="freeciv"
+
+name=_("Taino")
+plural=_("?plural:Taino")
+groups="American", "Core"
+
+legend=_("Native inhabitants of the Bahamas, Cuba, Hispaniola, Puerto Rico,\
+ Jamaica, and other Caribbean islands who gave us the root words for\
+ hurricane, tobacco, potato, canoe, barbeque, hammock, and yucca. They were\
+ a matrilineal people, and the first that Columbus came into contact with in\
+ 1492. Though numbering the hundreds of thousands, if not millions,\
+ throughout the Caribbean, the Taino fell victim to slavery and disease, and\
+ their population declined rapidly as a result. Spanish accounts paint them\
+ as a peaceful people compared to their Carib neighbors to the south. Their\
+ dugout canoes, which were often nearly as long as Columbus' ships, ferried\
+ traders between islands. Recent genetic studies show that roughly half of\
+ Puerto Ricans have Taino maternal descent.")
+
+leaders = {
+ "name",        "sex"
+ "Agüeybana",   "Male"
+ "Jumacao",     "Male"
+ "Canobaná",    "Male"
+ "Hayuya",      "Male"
+ "Loquillo",    "Male"
+ "Hatuey",      "Male"
+}
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+}
+flag         = "taino"
+flag_alt     = "-"
+style        = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with = "cuban", "haitian", "dominicano", "puerto rican"
+civilwar_nations = "tupi", "tairona", "puerto rican"
+
+cities =
+ "Guánica",
+ "Utuado",
+ "Mayagüez",
+ "Caguas",
+ "Humacao",
+ "Guaynabo",
+ "Guayama",
+ "Seyba",
+ "Cayey",
+ "Camuy",
+ "Bayamóngo",
+ "Horomico",
+ "Manatabón",
+ "Coayuco",
+ "Yabucoa",
+ "Aymaco",
+ "Yaguecax",
+ "Guama",
+ "Abeyno",
+ "Guayaney",
+ "Cubuy",
+ "Turabo",
+ "Otoao",
+ "Abacoa",
+ "Bayamon",
+ "Haimanio",
+ "Daguao",
+ "Kiskeya",
+ "Hamaica",
+ "Cubanacan",
+ "Haiti",
+ "Guanaba",
+ "Bahama",
+ "Inagua"

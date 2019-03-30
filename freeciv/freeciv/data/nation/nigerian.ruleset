@@ -1,0 +1,67 @@
+[nation_nigerian]
+
+name=_("Nigerian")
+plural=_("?plural:Nigerians")
+groups="Modern", "African"
+legend=_("Nigeria won full independence from British rule in 1960. It is\
+ the most populous country of Africa.")
+
+leaders = {
+ "name",                        "sex"
+ "Abubakar Tafawa Balewa",      "Male"
+ "Nnamdi Azikiwe",              "Male"
+ "Yakubu Gowon",                "Male"
+ "Sani Abacha",                 "Male"
+}
+
+flag="nigeria"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Kanem-Bornu"
+civilwar_nations="Biafran", "Fulani"
+
+cities =
+ "Abuja",
+ "Lagos",
+ "Ibadan",
+ "Kano",
+ "Oshogbo",
+ "Ilorin",
+ "Abeokuta",
+ "Port Harcourt",
+ "Kaduna",
+ "Maiduguri",
+ "Enugu",
+ "Benin City",
+ "Katsina",
+ "Jos",
+ "Sokoto",
+ "Zaria",
+ "Bauchi",
+ "Makurdi",
+ "Abeokuta",
+ "Gusau",
+ "Gombe",
+ "Damaturu",
+ "Lafia",
+ "Aba",
+ "Warri",
+ "Onitsha",
+ "Akure",
+ "Ife",
+ "Ondo",
+ "Gboko",
+ "Owerri",
+ "Jalingo",
+ "Asaba",
+ "Ijebu Ode",
+ "Oyo",
+ "Ado",
+ "Ilesha",
+ "Minna"
+

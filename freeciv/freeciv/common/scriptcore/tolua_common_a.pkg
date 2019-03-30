@@ -1,0 +1,225 @@
+/*****************************************************************************
+ Freeciv - Copyright (C) 2005 - The Freeciv Project
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+*****************************************************************************/
+
+/*****************************************************************************
+  ADVERTISEMENT: do not attempt to change the name of the API functions.
+  They may be in use in Lua scripts in savefiles, so once released, the
+  name and signature cannot change shape even in new major versions of
+  Freeciv, until the relevant save format version can no longer be loaded.
+  If you really like to change a function name, be sure to keep also the
+  old one running.
+*****************************************************************************/
+
+$#ifdef HAVE_CONFIG_H
+$#include <fc_config.h>
+$#endif
+
+/* common/scriptcore */
+$#include "api_common_intl.h"
+$#include "api_common_utilities.h"
+$#include "luascript.h"
+$#include "luascript_types.h"
+
+/* Classes. */
+struct Nonexistent {
+};
+
+$[
+
+-- Nonexistent methods.
+function Nonexistent:exists()
+  return false
+end
+
+$]
+
+/* Intl module. */
+const char *api_intl__
+  @ _ (lua_State *L, const char *untranslated);
+const char *api_intl_N_
+  @ N_ (lua_State *L, const char *untranslated);
+const char *api_intl_Q_
+  @ Q_ (lua_State *L, const char *untranslated);
+const char *api_intl_PL_
+  @ PL_ (lua_State *L, const char *singular, const char *plural, int n);
+
+/* Log module. */
+module log {
+  module level {
+    enum log_level {
+      LOG_FATAL @ FATAL,
+      LOG_ERROR @ ERROR,
+      LOG_WARN @ WARN,
+      LOG_NORMAL @ NORMAL,
+      LOG_VERBOSE @ VERBOSE,
+      LOG_DEBUG @ DEBUG
+    };
+  }
+
+  void api_utilities_log_base
+    @ base (lua_State *L, int log_level, const char *message);
+
+  void api_utilities_deprecation_warning
+    @ deprecation_warning(lua_State *L, char *method, char *replacement, char *deprecated_since);
+}
+
+$[
+-- Log module implementation.
+
+function log.fatal(fmt, ...)
+  log.base(log.level.FATAL, string.format(fmt, ...))
+end
+
+function log.error(fmt, ...)
+  log.base(log.level.ERROR, string.format(fmt, ...))
+end
+
+function log.warn(fmt, ...)
+  log.base(log.level.WARN, string.format(fmt, ...))
+end
+
+function log.normal(fmt, ...)
+  log.base(log.level.NORMAL, string.format(fmt, ...))
+end
+
+function log.verbose(fmt, ...)
+  log.base(log.level.VERBOSE, string.format(fmt, ...))
+end
+
+function log.debug(fmt, ...)
+  log.base(log.level.DEBUG, string.format(fmt, ...))
+end
+
+-- ***************************************************************************
+-- Old logging functions
+-- Deprecated. New logging functions are listed above.
+-- ***************************************************************************
+function error_log(msg)
+  log.error(msg)
+end
+
+function debug_log(msg)
+  log.debug(msg)
+end
+
+$]
+
+/* Utilities module. */
+int api_utilities_random
+  @ random (lua_State *L, int min, int max);
+
+const char *api_utilities_fc_version
+  @ fc_version (lua_State *L);
+
+$[
+-- ***************************************************************************
+-- Dump the state of user scalar variables to a Lua code string.
+-- ***************************************************************************
+function _freeciv_state_dump()
+  local res = ''
+
+  for k, v in pairs(_G) do
+    if k == '_VERSION' then
+      -- ignore _VERSION variable.
+    elseif type(v) == 'boolean'
+        or type(v) == 'number' then
+      -- FIXME: depending on locale, the number formatting can use a
+      -- comma as radix point, whereas we always want '.'. HRM #722300
+      local rvalue = tostring(v)
+
+      res = res .. k .. '=' .. rvalue .. '\n'
+    elseif type(v) == 'string' then
+      local rvalue = string.format('%q', v)
+
+      res = res .. k .. '=' .. rvalue .. '\n'
+    elseif type(v) == 'userdata' then
+      local method = string.lower(tolua.type(v))
+
+      res = res .. k .. '=find.' .. method
+      if method == 'city' or method == 'unit' then
+        res = res .. '(nil,' .. string.format("%d", v.id) .. ')'
+      elseif v.id then
+        res = res .. '(' .. string.format("%d", v.id) .. ')'
+      else
+        res = res .. '()'
+      end
+      res = res .. '\n'
+    end
+  end
+
+  return res
+end
+
+-- ***************************************************************************
+-- List all defined lua variables (functions, tables)
+-- Source http://www.wellho.net/resources/ex.php4?item=u112/basics
+-- ***************************************************************************
+function listenv()
+  -- helper function for listenv
+  local function _listenv_loop(offset, data)
+    local name
+    local value
+
+    for name,value in pairs(data) do
+      if name ~= "loaded" and name ~= "_G" and name:sub(0,2) ~= "__" then
+        log.normal("%s- %s: %s", offset, type(value), name)
+        if type(value) == "table" then
+          _listenv_loop(offset .. "    ", value)
+        end
+      end
+    end
+  end
+
+  _listenv_loop("", _G)
+end
+
+-- ***************************************************************************
+-- Flexible "constant" implementation
+-- source: http://developer.anscamobile.com/code/\
+--                universal-constants-module-very-easy-usage
+-- written in 2010 by Hans Raaf - use as you wish!
+-- ***************************************************************************
+
+const = {}
+local data = {}
+const_mt = {
+  __newindex = function(a,b,c)
+    if data[b] == nil then
+      if type(c) == 'table' then
+        -- make that table readonly
+        local proxy = {}
+        -- create metatable
+        local mt = {
+          __index = c,
+          __newindex = function (t,k,v)
+            log.error([["Attempt to update read-only table '%s' index '%s' "
+                        "with '%s'."]], b, tostring(k), tostring(v))
+          end
+        }
+        setmetatable(proxy, mt)
+        data[b] = proxy
+      else
+        data[b] = c
+      end
+    else
+      log.error("Illegal assignment to constant '%s'.", tostring(b))
+    end
+  end,
+ 
+  __index = function(a,b)
+    return data[b]
+  end
+}
+setmetatable(const, const_mt)
+
+$]

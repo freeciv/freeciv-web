@@ -1,0 +1,82 @@
+[nation_langobardic]
+
+name=_("Langobardic")
+plural=_("?plural:Langobards")
+groups="Ancient", "Medieval", "European"
+legend=_("The Langobards were an ancient Germanic people. They originated\
+ from Scandinavia but settled in the area on the lower Elbe. In 166 CE\
+ they participated in the attack on the Roman provinces of Pannonia and\
+ Noricum. Their first state was established on the Danube. Having defeated\
+ the Gepids in an alliance with the Avars, the Langobards under king\
+ Alboin invaded Italia in 568. They founded a new kingdom\
+ with its capital in Pavia. The modern region of Lombardy derives its name\
+ from the Lombards.")
+
+leaders = {
+ "name",                "sex"
+ "Sceafa",              "Male"
+ "Agelmund",            "Male"
+ "Gambara",             "Female"
+ "Leþuk",               "Male"
+ "Hildeok",             "Male"
+ "Alboin",              "Male"
+ "Klef",                "Male"
+ "Autaris",             "Male"
+ "Hroþari",             "Male"
+ "Aripert",             "Male"
+ "Garibald",            "Male"
+ "Hildeprand",          "Male"
+ "Aistulf",             "Male"
+}
+flag= "lombardy"
+flag_alt = "italy"
+style = "European"
+
+ruler_titles = {
+ "government",      "male_title",     "female_title"
+ "Despotism",       _("Duke %s"),        _("Duchess %s")
+ "Fundamentalism",  _("Bishop %s"),      _("Mother Superior %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Italian", "Milanese", "Piedmontese", "Venetian", "Neapolitan",
+               "Roman", "Etruscan", "Venetic"
+civilwar_nations = "Western Roman", "Ostrogothic", "Frankish"
+
+cities =
+  "Ticinum",                ;Pavia
+"Mediolanum",               ;Milano
+"Bergomum",                 ;Bergamo
+"Brixia",                   ;Brescia
+"Novum Comum",              ;Como
+"Cremona",
+"Baretium",                 ;Varese
+"Leucum",                   ;Lecco
+"Mantua",                   ;Mantova
+"Sundrium",                 ;Sondrio
+"Laus Nova",
+"Trivilium",                ;Treviglio
+"Dalmen",
+"Carraca",
+"Castra Maxentia",          ;Magenta
+"Gardo",
+"Brugarium",
+"Carvaniatium",
+"Bullatium",
+"Casalis Maior",
+"Glareatum",
+"Stratella",
+"Sameriatium",
+"Travaiadum",
+"Mons Clarium",
+"Solomnum",
+"Luvinum",
+"Seregnium",
+"Aresium",
+"Varedeum",
+"Beneventum",
+"Salernum"
+

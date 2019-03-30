@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="750"
+   height="500">
+  <rect
+     width="750"
+     height="500"
+     fill="#239e46"/>
+  <rect
+     width="750"
+     height="375"
+     fill="#000000"/>
+  <rect
+     width="750"
+     height="125"
+     fill="#e70013"/>
+  <path
+     d="m 424.62689,209.6 a 55.400084,54.5 0 1 0 0,80.8 63.600096,62.5 0 1 1 0,-80.8 z m -4.90001,39.8 76.90012,27.7 -45.90007,-67.6 -2.60001,81.1 51.00008,-63.5"
+     fill="#ffffff"/>
+</svg>

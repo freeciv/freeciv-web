@@ -1,0 +1,73 @@
+[nation_bahraini]
+
+name=_("Bahraini")
+plural=_("?plural:Bahrainis")
+groups="Asian", "Modern"
+legend=_("Bahrain is an island country in the Persian Gulf and the\
+ smallest country of the Middle East. Bahrain has been independent from\
+ Persia since the 18th century, although it was a British protectorate\
+ until 1971. The country became a constitutional monarchy in 2001 but a\
+ pro-democracy uprising in 2011 was violently crushed.")
+
+leaders = {
+ "name",                           "sex"
+ "Al-Ala'a Al-Hadrami",            "Male"
+ "Abu-Tahir Al-Jannabi",           "Male"
+ "Abu al-Bahlul al-Awwam",         "Male"
+ "Muqrin ibn Zamil",               "Male"
+ "Ahmed ibn Muhammad ibn Khalifa", "Male"
+ "Hamad ibn Isa Al Khalifa",       "Male"
+ "Isa bin Salman Al Khalifa",      "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",        "female_title"
+ "Despotism",      _("Sheikh %s"),      _("Shaykha %s")
+ "Fundamentalism", _("Mahdi %s"),       _("?female:Mahdi %s")
+ "Monarchy",       _("Emir %s"),        _("Emira %s")
+ "Republic",       _("Vizier %s"),      _("?female:Vizier %s")
+}
+
+flag="bahrain"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "iranian", "saudi"
+
+cities =
+ "Al-Manama",
+ "Qal'at al-Bahrain",
+ "Ar-Rifa'a",
+ "Al-Muharraq",
+ "Madinat Hamad",
+ "'Ali",
+ "Sitra",
+ "'Isa",
+ "Al-Budayyi'",
+ "Jidhafs",
+ "Al-Malikiya",
+ "Al-Hidd",
+ "Ras Roman",
+ "Hawar (ocean)",
+ "Az-Zallaq",
+ "Salmabad",
+ "Al-Dair",
+ "Barbar",
+ "Al-Eker",
+ "Karzakkan",
+ "Jaww",
+ "Jasra",
+ "Umm an-Na'san",
+ "Al-Dur",
+ "Galali",
+ "Ma'ameer",
+ "Tubli",
+ "Sela",
+ "Sadad",
+ "Sar",
+ "Khawr al-Qulay'a",
+ "Jannusan"

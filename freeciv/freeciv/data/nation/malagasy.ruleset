@@ -1,0 +1,71 @@
+[nation_malagasy]
+
+name=_("Malagasy")
+plural=_("?plural:Malagasies")
+groups="Medieval", "Modern", "African"
+legend=_("The Malagasy are the people of Madagascar. For centuries, tribes\
+ from Indonesia, East Africa and the Arab world have gathered on the\
+ island.")
+
+leaders = {
+ "name",                "sex"
+ "Radama I",            "Male"
+ "Ranavalona I",        "Female"
+ "Rasoherina",          "Female"
+ "Ranavalona II",       "Female"
+ "Rainilaiarivony",     "Male"
+ "Didier Ratsiraka",    "Male"
+}
+
+ruler_titles = {
+ "government", "male_title",              "female_title"
+ "Republic",   _("High Commissioner %s"), _("?female:High Commissioner %s")
+}
+
+flag="madagascar"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="indonesian", "mauritian", "comorian"
+
+; City list based on data from this page:
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Madagaskar
+cities =
+ "Antananarivo (!ocean)",
+ "Toamasina",
+ "Antsirabe",
+ "Fianarantsoa (!ocean)",
+ "Mahajanga",
+ "Toliara",
+ "Antsiranana",
+ "Antanifotsy",
+ "Ambovombe",
+ "Amparafaravola",
+ "Taolagnaro",
+ "Ambatondrazaka",
+ "Mananara Avaratra",
+ "Soavinandriana",
+ "Mahanoro",
+ "Soanierana Ivongo",
+ "Faratsiho",
+ "Nosy Varika",
+ "Vavatenina",
+ "Morondava",
+ "Amboasary",
+ "Manakara",
+ "Antalaha",
+ "Ikongo",
+ "Manjakandriana",
+ "Sambava",
+ "Fandriana",
+ "Marovoay",
+ "Betioky",
+ "Ambanja",
+ "Ambositra",
+ "Antsohimbondrona",
+ "Mananjary",
+ "Tolanaro",
+ "Andoany"

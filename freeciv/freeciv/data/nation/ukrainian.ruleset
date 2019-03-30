@@ -1,0 +1,98 @@
+[nation_ukrainian]
+
+name=_("Ukrainian")
+plural=_("?plural:Ukrainians")
+groups="Modern", "European"
+legend=_("Ukraine is a vast region on the westernmost marches of the\
+ former Soviet Union. It includes some of the most fertile black-soil\
+ cropland on Earth.")
+
+leaders = {
+ "name",                          "sex"
+ "Ryuryk",                        "Male"
+ "Olga Prekrasa",                 "Female"
+ "Svyatoslav Igorovych",          "Male"
+ "Volodymyr Svyatoslavych",       "Male"
+ "Yaroslav Mudry",                "Male"
+ "Volodymyr Monomakh",            "Male"
+ "Yaroslav Osmomysl",             "Male"
+ "Danylo Halytsky",               "Male"
+ "Petro Konashevych-Sahaydachny", "Male"
+ "Bohdan Khmelnytsky",            "Male"
+ "Ivan Sirko",                    "Male"
+ "Petro Doroshenko",              "Male"
+ "Ivan Mazepa",                   "Male"
+ "Pylyp Orlyk",                   "Male"
+ "Mykhaylo Hrushevsky",           "Male"
+ "Yevhen Petrushevych",           "Male"
+ "Symon Petlyura",                "Male"
+ "Nestor Makhno",                 "Male"
+ "Stepan Bandera",                "Male"
+ "Mykyta Khrushchov",             "Male"
+ "Yuliya Tymoshenko",             "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Prince %s"),       _("Princess %s")
+ "Monarchy",        _("Grand Prince %s"), _("Grand Princess %s")
+ "Republic",        _("Hetman %s"),       _("?female:Hetman %s")
+ "Fundamentalism",  _("Patriarch %s"),    _("Matriarch %s")
+}
+
+flag="ukraine"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Cossack", "Ruthenian"
+civilwar_nations="Soviet", "Polish", "Russian", "Rusyn",
+ "Crimean Tatar"
+
+cities =
+ "Kyiv",
+ "Lviv",
+ "Chyhyryn",
+ "Kharkiv",
+ "Zhytomyr (forest)",
+ "Dnipropetrovsk (river)",
+ "Odesa (ocean)",
+ "Kryvyy Rih",
+ "Lutsk",
+ "Donetsk (hills)",
+ "Pereyaslav",
+ "Zaporizhzhia (river)",
+ "Chernihiv",
+ "Bratslav",
+ "Kherson (river, ocean)",
+ "Sumy",
+ "Poltava (plains)",
+ "Cherkasy (river)",
+ "Rivne",
+ "Sevastopol (ocean)",
+ "Chernivtsi (hills)",
+ "Kamyanets",
+ "Bila Tserkva", 
+ "Ternopil",
+ "Ivano-Frankivsk",
+ "Uzhhorod",
+ "Vinnytsya (forest)",
+ "Kirovohrad",
+ "Khmelnytsky",
+ "Yalta (ocean)",
+ "Luhansk",
+ "Mykolayiv",
+ "Baturyn",
+ "Chornobyl",
+ "Mariupol (ocean)",
+ "Simferopol",
+ "Dniprodzerzhynsk (river)",
+ "Kremenchuk",
+ "Kerch (ocean)",
+ "Makiyivka",
+ "Kramatorsk",
+ "Horlyvka",
+ "Melitopol"

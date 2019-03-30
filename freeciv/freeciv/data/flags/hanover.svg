@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="600"
+   height="400">
+
+
+<rect
+   width="600"
+   height="200"
+   x="0"
+   y="200"
+   style="fill:#ffffff"
+   id="Unten" />
+<rect
+   width="600"
+   height="200"
+   x="0"
+   y="0"
+   style="fill:#ffce08"
+   id="Oben" />
+</svg>

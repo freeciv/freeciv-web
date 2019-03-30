@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="400"
+   id="svg3779"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   version="1.0"
+   sodipodi:docbase="C:\freeciv"
+   sodipodi:docname="himyar.svg">
+  <defs
+     id="defs3781" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.9425"
+     inkscape:cx="300"
+     inkscape:cy="200"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     height="400px"
+     width="600px"
+     inkscape:window-width="847"
+     inkscape:window-height="579"
+     inkscape:window-x="154"
+     inkscape:window-y="203" />
+  <metadata
+     id="metadata3784">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:red;fill-opacity:1;stroke:none;stroke-width:7.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3788"
+       width="600"
+       height="400"
+       x="0"
+       y="-3.375078e-014" />
+    <path
+       style="fill:white"
+       d="M 462.30736,273.89009 C 493.62558,268.06429 524.41008,253.57634 541.34146,236.69465 C 554.88423,223.19166 581.09528,185.25378 581.09528,179.15493 C 581.09528,177.35428 574.70436,183.09502 566.89324,191.91222 C 532.92633,230.25404 497.93462,246.03386 441.85729,248.29827 C 410.44199,249.56686 403.36509,248.89676 373.70029,241.84452 C 328.30099,231.05168 318.27763,227.51745 229.45684,190.98422 C 186.69399,173.39528 147.9819,157.52521 143.42999,155.71746 C 137.3003,153.28312 135.15378,150.96516 135.15378,146.7803 C 135.15378,137.7178 143.19895,115.43177 147.63552,112.20445 C 151.1636,109.63801 150.71576,109.217 144.27564,109.04569 C 132.24167,108.72555 120.73617,120.55562 118.54766,135.49944 C 117.87149,140.11657 116.21513,143.89424 114.86691,143.89424 C 113.51867,143.89424 101.99245,139.29441 89.253085,133.67242 C 61.693254,121.51001 47.907134,120.52786 33.670945,129.71268 C 16.72363,140.64661 13.46033,162.564 25.879166,182.04475 C 33.529941,194.04615 47.775772,192.32757 52.425558,178.84231 C 54.013496,174.23697 55.312725,166.46101 55.312725,161.56239 C 55.312725,154.26687 56.105275,152.65947 59.694248,152.67624 C 64.35061,152.698 90.381779,161.63498 107.3981,169.05394 L 117.6277,173.51389 L 117.6277,186.25887 C 117.6277,203.58261 114.81208,213.37454 108.61261,217.61085 L 103.414,221.16318 L 108.08667,223.12488 C 121.91905,228.93192 131.46517,219.52355 135.15668,196.44541 C 136.43979,188.42397 138.13337,181.86098 138.92022,181.86098 C 139.70706,181.86098 179.71059,198.16028 227.81692,218.08164 C 366.54726,275.5314 404.68707,284.60858 462.30736,273.89009 z "
+       id="path3771" />
+  </g>
+</svg>

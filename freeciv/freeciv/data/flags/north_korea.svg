@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="1062.9921"
+   height="708.66138"
+   id="Flag of North Korea"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docname="north_korea.svg"
+   sodipodi:docbase="/home/divanov/tmp/ttt"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <metadata
+     id="metadata2241">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2239" />
+  <sodipodi:namedview
+     inkscape:window-height="755"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="300mm"
+     height="200mm"
+     units="mm"
+     inkscape:zoom="0.5"
+     inkscape:cx="720"
+     inkscape:cy="360"
+     inkscape:window-x="-5"
+     inkscape:window-y="-5"
+     inkscape:current-layer="Flag of North Korea" />
+  <g
+     id="g2271"
+     transform="scale(0.7388889,0.9875)">
+    <rect
+       width="1440"
+       height="120"
+       id="Upper blue field"
+       x="0"
+       y="0"
+       style="fill:#034da2" />
+    <rect
+       width="1440"
+       height="120"
+       y="600"
+       id="Lower blue field"
+       x="0"
+       style="fill:#034da2" />
+    <rect
+       width="1440"
+       height="440"
+       y="140"
+       id="Red field"
+       x="0"
+       style="fill:#ed1d25" />
+    <rect
+       x="0"
+       id="Upper white field"
+       y="120"
+       height="20"
+       width="1440"
+       style="fill:#ffffff" />
+    <rect
+       x="0"
+       id="Lower white field"
+       y="580"
+       height="20"
+       width="1440"
+       style="fill:#ffffff" />
+  </g>
+  <g
+     id="g2265"
+     transform="matrix(0.9875,0,0,0.9875,-136,0)">
+    <circle
+       sodipodi:ry="160"
+       sodipodi:rx="160"
+       sodipodi:cy="360"
+       sodipodi:cx="480"
+       id="White Circle"
+       r="160"
+       cy="360"
+       cx="480"
+       style="fill:#ffffff" />
+    <polygon
+       id="Red star"
+       transform="matrix(155,0,0,155,480,360)"
+       points="0,-1 0.22451399,-0.30901699 0.95105652,-0.30901699 0.36327126,0.11803399 0.58778525,0.80901699 0,0.38196601 -0.58778525,0.80901699 -0.36327126,0.11803399 -0.95105652,-0.30901699 -0.22451399,-0.30901699 0,-1 "
+       style="fill:#ed1d25" />
+  </g>
+</svg>

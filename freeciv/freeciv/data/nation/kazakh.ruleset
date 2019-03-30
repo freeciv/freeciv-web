@@ -1,0 +1,91 @@
+[nation_kazakh]
+
+name=_("Kazakh")
+plural=_("?plural:Kazakhs")
+groups="Early Modern", "Modern", "Asian"
+legend=_("Kazakhs are descendants of Turkic and Mongolian nomadic tribes.\
+ Conquered by Russia in the 18th century, Kazakhstan became independent in\
+ 1991 with the dissolution of the Soviet Union. It is one of the ten largest\
+ states in the world by area.")
+
+leaders = {
+ "name",                "sex"
+ "Kerey",               "Male" ; Kerei, Khan of Kazakh Khanate.
+ "Jänibek",             "Male" ; Janybek, Khan of Kazakh Khanate.
+ "Qasım",               "Male" ; Kasym, Khan of Kazakh Khanate.
+ "Äbilqayır",           "Male" ; Abul Khair, Khan of Little jüz.
+ "Abılay",              "Male" ; Ablai, Khan of Middle jüz.
+ "Kenesarı",            "Male" ; Leader of uprising against Russians.
+ "Dinmuxammed Qonaev",  "Male" ; Soviet time leader.
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("%s Khan"),            _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),          _("?female:%s Khagan")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
+flag="kazakhstan"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Uzbek", "Turkmen", "Kyrgyz", "Russian", "Uyghur"
+
+cities =
+  "Taraz",
+  "Türkistan",
+  "Şımkent",
+  "Oral",
+  "Pavlodar", 
+  "Semey",
+  "Petropavl",
+  "Almatı",
+  "Astana",
+  "Kökşetaw", 
+  "Qızılorda",
+  "Öskemen",
+  "Aqtöbe",
+  "Qostanay",
+  "Atıraw", 
+  "Qarağandı",
+  "Jarkent",
+  "Atbasar",
+  "Temirtaw",
+  "Balqaş", 
+  "Taldıqorğan",
+  "Ayagoz",
+  "Aral",
+  "Ekibastuz",
+  "Jezqazğan",
+  "Rudnıy",
+  "Aqtaw",
+  "Bayqoñır",
+  "Zaysan", 
+  "Arqalıq",
+  "Esil",
+  "Aksay",
+  "Beyneu",
+  "Şw",
+  "Maqat",
+  "Sätpaev",
+  "Kentaw",
+  "Jañaözen",
+  "Şaxtïnsk",
+  "Rïdder",
+  "Şwçïnsk",
+  "Saran",
+  "Stepnogorsk"
+
+; Could not confirm Kazakh spelling of the following cities.
+
+;  "Qapshaghay",
+;  "Zhangatas", 
+;  "Embi",
+;  "Lepsi",
+;  "Shalqar",
+;  "Saryshaghan"

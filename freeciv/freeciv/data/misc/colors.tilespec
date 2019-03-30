@@ -1,0 +1,131 @@
+[colors]
+
+; Mapview
+mapview_unknown = {"r", "g", "b"
+    0,     0,   0
+}
+mapview_citytext = {"r", "g", "b"
+    255, 255, 255
+}
+mapview_citytext_dark = {"r", "g", "b"
+    0,     0,   0
+}
+mapview_cityprod_negative = {"r", "g", "b"
+    255,     0,   0
+}
+mapview_cityblocked = {"r", "g", "b"
+    255,   0,   0
+}
+mapview_goto = {"r", "g", "b"
+    0,   255, 200
+}
+mapview_selection = {"r", "g", "b"
+    255, 255,   0
+}
+mapview_trade_route_line = {"r", "g", "b"
+    0,   255, 127
+}
+mapview_trade_routes_all_built = {"r", "g", "b"
+    0,   255,   0
+}
+mapview_trade_routes_some_built = {"r", "g", "b"
+    255, 255,   0
+}
+mapview_trade_routes_no_built = {"r", "g", "b"
+    255,   0,   0
+}
+mapview_city_link = {"r", "g", "b"
+    0,   255,   0
+}
+mapview_tile_link = {"r", "g", "b"
+    255,   0,   0
+}
+mapview_unit_link = {"r", "g", "b"
+    0,   255, 255
+}
+
+; Spaceship
+spaceship_background = {"r", "g", "b"
+    0,   0,   0
+}
+
+; Overview
+overview_unknown = {"r", "g", "b"
+    0,     0,   0
+}
+overview_mycity = {"r", "g", "b"
+    255, 255, 255
+}
+overview_alliedcity = {"r", "g", "b"
+    255, 255, 255
+}
+overview_enemycity = {"r", "g", "b"
+    0,   255, 200
+}
+overview_myunit = {"r", "g", "b"
+    255, 255,   0
+}
+overview_alliedunit = {"r", "g", "b"
+    255, 255, 255
+}
+overview_enemyunit = {"r", "g", "b"
+    255,   0,   0
+}
+overview_ocean = {"r", "g", "b"
+; Generic ocean, not the same as the Ocean terrain (see "tiles" above)
+    0,     0, 200
+}
+overview_ground = {"r", "g", "b"
+    0,   200,   0
+}
+overview_frozen = {"r", "g", "b"
+; Generic frozen/polar terrain, not specifically Glacier/Arctic
+  192,   192, 192
+}
+overview_viewrect = {"r", "g", "b"
+    255, 255, 255
+}
+
+; Reqtree
+reqtree_known = {"r", "g", "b"
+    255, 255, 255
+}
+reqtree_prereqs_known = {"r", "g", "b"
+    210, 180, 140
+}
+reqtree_unknown = {"r", "g", "b"
+    190, 150, 110
+}
+reqtree_researching = {"r", "g", "b"
+    255, 250, 70
+}
+reqtree_goal_prereqs_known = {"r", "g", "b"
+    95,  160, 190
+}
+reqtree_goal_unknown = {"r", "g", "b"
+    85,  120, 180
+}
+reqtree_unreachable = {"r", "g", "b"
+    220, 145, 105
+}
+reqtree_not_gettable = {"r", "g", "b"
+    245, 175, 135
+}
+reqtree_goal_not_gettable = {"r", "g", "b"
+    70,  120, 135
+}
+reqtree_background = {"r", "g", "b"
+    0,   0,   0
+}
+reqtree_text = {"r", "g", "b"
+    0,   0,   0
+}
+
+reqtree_edge = {"r", "g", "b"
+    127,   127,   127
+}
+  
+; Player dialog
+playerdlg_background = {"r", "g", "b"
+    0,   0,   0
+}

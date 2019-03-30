@@ -1,0 +1,59 @@
+[nation_median]
+
+name=_("Median")
+plural=_("?plural:Medians")
+groups="Ancient", "Asian"
+legend=_("Media was an ancient Iranian state that was created by a\
+ Western Iranic people, the Medes, relatives of the European Scythians.\
+ Their state preceded the Persian Achaemenid Empire, which was formed\
+ as a result of a rebellion of the Persians against the Median ruler\
+ Astyages. It was the first multi-ethnic empire and controlled a\
+ vast area spanning from the Halys river to what is now Afghanistan.")
+leaders = {
+ "name",                  "sex"
+ "Dahiaukka",             "Male"      ;Deioces
+ "Xšaθrita I",            "Male"      ;Phraortes
+ "Madya",                 "Male"      ;Madius, Scythian king who conquered Media
+ "Huvaxšatra",            "Male"      ;Cyaxares
+ "Ištuvigu",              "Male"      ;Astyages
+ "Xšaθrita II",           "Male"
+ "Amuhia",                "Female"    ;Amytis
+ "Mandana",               "Female"    ;Mandane, Median princess and mother of Cyrus the Great of Parsa
+ "Aturpat",               "Male"      ;Atropates
+}
+flag= "median"
+flag_alt = "persia"
+style = "Babylonian"
+ruler_titles = {
+ "government",  "male_title",           "female_title"
+ "Anarchy",     _("Usurper %s"),        _("?female:Usurper %s")
+ "Despotism",   _("Satrap %s"),         _("?female:Satrap %s")
+ "Monarchy",    _("%s Shahanshah"),  _("%s Shahbanu")
+} 
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Iranian", "Kurdish", "Azeri", "Turkish", "Ottoman", "Afghani",
+               "Parthian", "Ghaznavid", "Seleucid"
+civilwar_nations="Persian", "Scythian", "Saka", "Elamite" ; Urartian
+
+cities =
+ "Haŋgmatana",           ;Ecbatana/Hamadan
+ "Rai",                  ;Rey
+ "Hyrba",
+ "Patigrabana",
+ "Hadhaban",             ;Arbil
+ "Paridaiza",
+ "Haraiva",              ;Aria
+ "Tepe Nush-i Jan",
+ "Godin Tepe",
+ "Baba Jan",
+ "Ganzaga",
+ "Anshan",
+ "Pasargad",
+ "Teppe Hassanlu",
+ "Dinkha Tepe",
+ "Nihawand",
+ "Dinawar",
+ "Tus"

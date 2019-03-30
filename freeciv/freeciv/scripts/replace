@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This is a script to replace one regular expression with another.  Call
+# it like `replace "foo bar" "bar foo"` to replace all "foo bar" text with
+# "bar foo".  By default it does replacement in *.[ch] files but this can
+# be edited down below.
+
+files=`find . -name "*.[ch]"`
+#files=pango.diff
+#files=`find . -type f -name "Makefile.am"`
+#files=`find . -type f| grep -v CVS`
+#files=`find . -name "*.ruleset"`
+
+echo Replacing \"$1\" with \"$2\".
+
+for file in $files; do
+    cat $file \
+	| sed "s/$1/$2/g" \
+	> $file.$$
+
+    cmp $file $file.$$ >/dev/null \
+	|| (mv $file.$$ $file && echo "  $file")
+    rm -f $file.$$
+done

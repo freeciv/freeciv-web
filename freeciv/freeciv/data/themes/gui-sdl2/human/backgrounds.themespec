@@ -1,0 +1,38 @@
+[backgrounds]
+
+; These are special because they get freed and reloaded
+; as required:
+
+; Parchment used in backgrounds from Battle for Wesnoth
+; Public Domain Engravings from digitalgallery.nypl.org and
+; www.fromoldbooks.org:
+; option_bg: Sibly, Ebenezer: "Astrology" (1806)
+; City dialog
+;  Catapult: Grose, Francis:"The Antiquities of England and Wales" (1783)
+;  Plant: Tuscher, Marcus, 1705-1751 -- Engraver
+; world: Johnston, Alexander Keith, 1804-1871  -- Engraver
+; intro: James Blewitt <jim@jblewitt.com>
+
+changeresearchdlg   = "themes/gui-sdl2/human/bg"
+choosegovernmentdlg = "themes/gui-sdl2/human/bg"
+citydlg             = "themes/gui-sdl2/human/bg"
+citygovdlg          = "themes/gui-sdl2/human/bg"
+cityrep	            = "themes/gui-sdl2/human/bg"
+connectdlg          = "themes/gui-sdl2/human/bg"
+connlistdlg         = "themes/gui-sdl2/human/world"
+economydlg          = "themes/gui-sdl2/human/bg"
+hlpdlg              = "themes/gui-sdl2/human/bg"
+joingamedlg         = "themes/gui-sdl2/human/bg"
+loadgamedlg         = "themes/gui-sdl2/human/bg"
+mainpage            = "themes/gui-sdl2/human/intro"
+messagewin	    = "themes/gui-sdl2/human/bg2"
+nationdlg           = "themes/gui-sdl2/human/bg"
+newcitydlg          = "themes/gui-sdl2/human/bg"
+optiondlg           = "themes/gui-sdl2/human/options_bg"
+revolutiondlg       = "themes/gui-sdl2/human/bg"
+sciencedlg          = "themes/gui-sdl2/human/bg"
+spystealdlg         = "themes/gui-sdl2/human/bg"
+startmenu           = "themes/gui-sdl2/human/bg"
+unitsrep            = "themes/gui-sdl2/human/bg"
+userpasswddlg       = "themes/gui-sdl2/human/bg"
+wldlg               = "themes/gui-sdl2/human/bg"

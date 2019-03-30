@@ -1,0 +1,11 @@
+/Makefile
+/Makefile.in
+/.deps
+/tolua_common_a_gen.c
+/tolua_common_a_gen.h
+/tolua_common_z_gen.c
+/tolua_common_z_gen.h
+/tolua_game_gen.c
+/tolua_game_gen.h
+/tolua_signal_gen.c
+/tolua_signal_gen.h

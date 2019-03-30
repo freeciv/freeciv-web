@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <name>Freeciv server</name>
+    <id type="desktop">freeciv-server.desktop</id>
+    <metadata_license>CC0</metadata_license>
+    <summary>Server component for the Freeciv game</summary>
+    <description>
+        <p>
+            Freeciv is a Free and Open Source empire-building strategy game inspired by the history of human civilization. The game commences in prehistory and your
+            mission is to lead your tribe from the Stone Age to the Space Age...
+        </p>
+        <p>
+            Server hosts multiplayer games. For single-player games client can launch server for itself automatically.
+        </p>
+    </description>
+    <url type="homepage">http://www.freeciv.org/</url>
+    <screenshots>
+      <screenshot type="default">
+        <image>http://images1.wikia.nocookie.net/__cb20120308234702/freeciv/images/thumb/4/43/Hex2.3.png/1000px-Hex2.3.png</image>
+      </screenshot>
+    </screenshots>
+    <update_contact>freeciv-dev@freelists.org</update_contact>
+</component>

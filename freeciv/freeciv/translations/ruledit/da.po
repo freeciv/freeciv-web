@@ -1,0 +1,412 @@
+# Danish translation of Freeciv.
+# Copyright (C) 1999-2011 The Freeciv Team & nedenstående oversættere.
+# This translation is covered by the GNU General Public License Version 2.
+# Keld Simonsen <keld@dkuug.dk>, 2001-2002, 2004.
+# Ole Laursen <olau@hardworking.dk>, 2004.
+# Joe Hansen <joedalton2@yahoo.dk>, 2006, 2007, 2008, 2009, 2010.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2010, 2011.
+#
+#   For ordlister og konventioner henvises til siden 
+#   http://www.freeciv.org/wiki-da/Overs%C3%A6ttelsesmanual
+#
+#  ' ' -> ' '
+#  " " -> » «
+#
+# AI -> computer (visse steder virker kunstig intelligens/computerspiller bedre)
+# bulb -> forskningspoint
+# citizen -> borger/indbygger
+# disorder [i en by, når der er mange ulykkelige] -> uroligheder
+# farmland -> landbrug
+# governor -> byforvaltning (automatisk arbejdstildeling i byer)
+# hit points -> liv
+# hut -> landsby
+# output -> udbytte
+# preset -> forhåndsvalg
+# revolt [by skifter til en anden civilisation] -> oprør
+# revolution [i forb. med at skifte styreform] -> revolution
+# sentry -> afvent
+# sound set -> lydopsætning
+# unhappiness -> utilfredshed
+#
+#
+#
+# XXX airlift -> lufttransport, flytransport
+# build slots -> ??? (byggepladser)
+#
+# ---
+#
+# Der er mange sætninger af formen "Your %s <...>".  I visse tilfælde
+# kan Din/dit udelades, uden at det gør meddelelsen uforståelig, så vi
+# slipper for 'Din Bombefly'. Dog vil "Din %s" altid fungere i de
+# sammenhænge, hvor %s kun kan være spion eller diplomat, og "Dine %s"
+# når %s er faldskærmstropper
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: da\n"
+"Report-Msgid-Bugs-To: http://gna.org/projects/freeciv/\n"
+"POT-Creation-Date: 2017-01-01 22:01+0200\n"
+"PO-Revision-Date: 2011-01-30 14:56+0100\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+
+#: tools/ruledit/requirers_dlg.cpp:43 tools/ruledit/req_edit.cpp:131
+msgid "Close"
+msgstr ""
+
+#: tools/ruledit/requirers_dlg.cpp:57
+#, c-format
+msgid "Removing %s"
+msgstr ""
+
+#. TRANS: %s could be any of a number of ruleset items (e.g., tech,
+#. * unit type, ...
+#: tools/ruledit/requirers_dlg.cpp:72
+#, c-format
+msgid "Needed by %s"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:108
+msgid "Failed to load comments.txt"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:142
+#, fuzzy
+msgid "Print a summary of the options"
+msgstr "  -h, --help\t\tUdskriv resume af tilvalg\n"
+
+#: tools/ruledit/ruledit.cpp:144
+#, fuzzy
+msgid "Print the version number"
+msgstr "  -v, --version\t\tUdskriv versionsnummeret\n"
+
+#. TRANS: argument (don't translate) VALUE (translate)
+#: tools/ruledit/ruledit.cpp:147
+msgid "ruleset RULESET"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:148
+msgid "Ruleset to use as the starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:161
+msgid "Can only edit one ruleset at a time.\n"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:168
+#, c-format
+msgid "Unrecognized option: \"%s\"\n"
+msgstr "Ukendt indstilling: »%s«\n"
+
+#: tools/ruledit/ruledit_qt.cpp:121
+#, c-format
+msgid ""
+"%s%s\n"
+"commit: %s"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:136
+msgid "Give ruleset to use as starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:148
+#, fuzzy
+msgid "Start editing"
+msgstr "Startposition"
+
+#: tools/ruledit/ruledit_qt.cpp:158
+msgid "Misc"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:160
+#, fuzzy
+msgid "Tech"
+msgstr "_Teknologier"
+
+#: tools/ruledit/ruledit_qt.cpp:162
+msgid "Buildings"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:164
+msgid "Units"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:166
+msgid "Goods"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:168
+msgid "Governments"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:170
+msgid "Enablers"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:172
+msgid "Nations"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:181
+#, fuzzy
+msgid "Welcome to freeciv-ruledit"
+msgstr "Velkommen til Freeciv"
+
+#: tools/ruledit/ruledit_qt.cpp:199
+#, fuzzy
+msgid "Ruleset loaded"
+msgstr "Nulstil"
+
+#: tools/ruledit/ruledit_qt.cpp:218
+msgid "Ruleset loading failed!"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:268
+#, fuzzy
+msgid "Freeciv Ruleset Editor"
+msgstr "Freeciv-serverliste"
+
+#: tools/ruledit/ruledit_qt.cpp:284
+msgid "Are you sure you want to quit?"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:288
+msgid "Quit?"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:65 tools/ruledit/tab_good.cpp:65
+#: tools/ruledit/tab_tech.cpp:63 tools/ruledit/tab_unit.cpp:65
+#, fuzzy
+msgid "Rule Name"
+msgstr "Spillernavn :"
+
+#: tools/ruledit/tab_building.cpp:73 tools/ruledit/tab_good.cpp:73
+#: tools/ruledit/tab_tech.cpp:71 tools/ruledit/tab_unit.cpp:73
+msgid "Name"
+msgstr "Navn"
+
+#: tools/ruledit/tab_building.cpp:84 tools/ruledit/tab_good.cpp:84
+msgid "Requirements"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:89
+msgid "Add Building"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:94
+#, fuzzy
+msgid "Remove this Building"
+msgstr "Fjern dette forhåndsvalg?"
+
+#: tools/ruledit/tab_building.cpp:171
+msgid "Building with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:89
+msgid "Add Good"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:94
+#, fuzzy
+msgid "Remove this Good"
+msgstr "Fjern dette forhåndsvalg?"
+
+#: tools/ruledit/tab_good.cpp:172
+msgid "Good with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:67
+#, fuzzy
+msgid "Ruleset name"
+msgstr "Nulstil"
+
+#: tools/ruledit/tab_misc.cpp:72
+#, fuzzy
+msgid "Ruleset version"
+msgstr "Regelsæt_version:"
+
+#: tools/ruledit/tab_misc.cpp:77
+#, fuzzy
+msgid "Save to directory"
+msgstr "  -s, --saves DIR\tGem spil i biblioteket DIR\n"
+
+#: tools/ruledit/tab_misc.cpp:84
+msgid "Version suffix to directory name"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:89
+#, fuzzy
+msgid "Save now"
+msgstr "Gem scenarie"
+
+#: tools/ruledit/tab_misc.cpp:96
+msgid "?stat:Terrains"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:100
+msgid "?stat:Resources"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:104
+#, fuzzy
+msgid "?stat:Tech Classes"
+msgstr "_Teknologier"
+
+#: tools/ruledit/tab_misc.cpp:108
+#, fuzzy
+msgid "?stat:Techs"
+msgstr "_Teknologier"
+
+#: tools/ruledit/tab_misc.cpp:112
+msgid "?stat:Unit Classes"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:116
+msgid "?stat:Unit Types"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:120
+msgid "?stat:Buildings"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:124
+msgid "?stat:Nations"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:128
+msgid "?stat:Styles"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:132
+msgid "?stat:Specialists"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:136
+msgid "?stat:Governments"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:140
+msgid "?stat:Disasters"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:144
+msgid "?stat:Achievements"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:148
+msgid "?stat:Extras"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:152
+msgid "?stat:Bases"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:156
+msgid "?stat:Roads"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:160
+#, fuzzy
+msgid "?stat:Goods"
+msgstr "_Teknologier"
+
+#: tools/ruledit/tab_misc.cpp:168
+msgid "Refresh Stats"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:231
+#, fuzzy
+msgid "Ruleset saved"
+msgstr "Nulstil"
+
+#: tools/ruledit/tab_nation.cpp:49
+msgid "Use nationlist"
+msgstr ""
+
+#: tools/ruledit/tab_nation.cpp:53
+msgid "Nationlist"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:82
+msgid "Req1"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:91
+msgid "Req2"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:99
+msgid "Root Req"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:108
+msgid "Add tech"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:113
+#, fuzzy
+msgid "Remove this tech"
+msgstr "Fjern dette forhåndsvalg?"
+
+#: tools/ruledit/tab_tech.cpp:194
+msgid "Never"
+msgstr "Aldrig"
+
+#: tools/ruledit/tab_tech.cpp:330
+msgid "Tech with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:84
+msgid "Edit Unit"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:88
+msgid "Add Unit"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:93
+#, fuzzy
+msgid "Remove this Unit"
+msgstr "Fjern dette forhåndsvalg?"
+
+#: tools/ruledit/tab_unit.cpp:170
+msgid "Unit type with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:62
+msgid "Type:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:80
+msgid "Value:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:96
+msgid "Range:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:121
+msgid "Add Requirement"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:126
+msgid "Delete Requirement"
+msgstr ""
+
+#: tools/ruledit/validity.c:65
+msgid "Effect"
+msgstr ""
+
+#: tools/ruledit/validity.c:134
+msgid "Action Enabler"
+msgstr ""
+
+#: tools/ruledit/validity.c:154
+#, fuzzy
+msgid "Music Style"
+msgstr "Bystil:"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:odm="http://product.corel.com/CGS/11/cddns/" xml:space="preserve" width="1023px" height="682px" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd"
+     viewBox="0 0 10230 6820">
+ <path fill="#FFFFFF" d="M0 0l10230 0 0 6820 -10230 0 0 -6820z"/>
+ <g id="Layer 1">
+  <circle fill="#FF0000" cx="5115" cy="3410" r="198"/>
+  <path fill="#FF0000" d="M5115 3410l-114 -584 -113 -584 227 0 227 0 -113 584 -114 584z"/>
+  <path fill="#FF0000" d="M5119 3410l-584 114 -584 113 0 -227 0 -227 584 113 584 114z"/>
+  <path fill="#FF0000" d="M5115 3410l584 114 584 113 0 -227 0 -227 -584 113 -584 114z"/>
+  <path fill="#FF0000" d="M5115 3410l-114 583 -113 584 227 0 227 0 -113 -584 -114 -583z"/>
+  <path fill="#FF0000" d="M5116 3411l-494 -332 -493 -333 161 -160 161 -161 332 493 333 493z"/>
+  <path fill="#FF0000" d="M5118 3409l-332 493 -333 493 -160 -161 -161 -160 493 -333 493 -332z"/>
+  <path fill="#FF0000" d="M5116 3411l493 -332 493 -333 -161 -160 -160 -161 -333 493 -332 493z"/>
+  <path fill="#FF0000" d="M5115 3411l333 493 332 493 161 -160 161 -161 -493 -333 -494 -332z"/>
+  <path fill-rule="evenodd" fill="#FFFFFF" stroke="#FF0000" stroke-width="24" d="M5115 4005c-328,0 -595,-267 -595,-595 0,-328 267,-595 595,-595 328,0 595,267 595,595 0,328 -267,595 -595,595zm0 -59c-295,0 -536,-241 -536,-536 0,-295 241,-536 536,-536 295,0 536,241 536,536 0,295 -241,536 -536,536z"/>
+  <path fill-rule="evenodd" fill="#FFFFFF" stroke="#FF0000" stroke-width="48" d="M5115 4653c-685,0 -1243,-558 -1243,-1243 0,-685 558,-1243 1243,-1243 685,0 1243,558 1243,1243 0,685 -558,1243 -1243,1243zm0 -100c-630,0 -1143,-513 -1143,-1143 0,-630 513,-1143 1143,-1143 630,0 1143,513 1143,1143 0,630 -513,1143 -1143,1143z"/>
+  <rect fill="#0099FF" x="0" y="0" width="10230" height="2093"/>
+  <rect fill="#0000CC" x="0" y="4727" width="10230" height="2093"/>
+ </g>
+</svg>

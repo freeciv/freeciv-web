@@ -1,0 +1,458 @@
+#  Russian translation of Freeciv.
+#  This translation is covered by the GNU General Public License Version 2.
+#
+#  Team mailing list: <freeciv.ru@freelists.org>
+#
+#  Translators:
+#
+#   Dmitriy Genzel <dg@cs.brown.edu>, 2001-2006.
+#   Egor Vyscrebentov <evyscr@murom.net>, 2003-2008.
+#   Alexandr Menovchicov <orders@kypi.ru>, 2003-2006.
+#   Andrej Svininykh <svininykh@gmail.com>, 2009-2011.
+#   Konstantin Vedeneev <konved@gmail.com>, 2011-2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: Freeciv Ruledit\n"
+"Report-Msgid-Bugs-To: https://www.hostedredmine.com/projects/freeciv\n"
+"POT-Creation-Date: 2018-03-18 03:29+0500\n"
+"PO-Revision-Date: 2018-03-18 01:02+0500\n"
+"Last-Translator: Konstantin Vedeneev <konved@gmail.com>\n"
+"Language-Team: Russian <freeciv.ru@freelists.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-Language: Russian\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: tools/ruledit/conversion_log.cpp:41 tools/ruledit/effect_edit.cpp:100
+#: tools/ruledit/requirers_dlg.cpp:43 tools/ruledit/req_edit.cpp:130
+msgid "Close"
+msgstr "Закрыть"
+
+#: tools/ruledit/conversion_log.cpp:46
+msgid "Old ruleset to a new format"
+msgstr "Преобразование набора в новый формат"
+
+#: tools/ruledit/effect_edit.cpp:74 tools/ruledit/req_edit.cpp:63
+msgid "Type:"
+msgstr "Тип:"
+
+#: tools/ruledit/effect_edit.cpp:88 tools/ruledit/req_edit.cpp:81
+msgid "Value:"
+msgstr "Значение:"
+
+#: tools/ruledit/effect_edit.cpp:96 tools/ruledit/tab_building.cpp:84
+#: tools/ruledit/tab_good.cpp:85
+msgid "Requirements"
+msgstr "Требования"
+
+#: tools/ruledit/effect_edit.cpp:172
+#, c-format
+msgid "Effect #%d: %s"
+msgstr "Эффект №%d: %s"
+
+#: tools/ruledit/effect_edit.cpp:265
+#, c-format
+msgid "%s effect #%d"
+msgstr "%s эффект №%d"
+
+#: tools/ruledit/requirers_dlg.cpp:57
+#, c-format
+msgid "Removing %s"
+msgstr "Удаляем %s"
+
+#. TRANS: %s could be any of a number of ruleset items (e.g., tech,
+#. * unit type, ...
+#: tools/ruledit/requirers_dlg.cpp:72
+#, c-format
+msgid "Needed by %s"
+msgstr "Требуется для %s"
+
+#: tools/ruledit/ruledit.cpp:114
+msgid "Failed to load comments.txt"
+msgstr "Ошибка загрузки файла comments.txt"
+
+#: tools/ruledit/ruledit.cpp:148
+msgid "Print a summary of the options"
+msgstr "Выдать список возможных ключей командной строки"
+
+#: tools/ruledit/ruledit.cpp:150
+msgid "Print the version number"
+msgstr "Вывести номер версии"
+
+#. TRANS: argument (don't translate) VALUE (translate)
+#: tools/ruledit/ruledit.cpp:153
+msgid "ruleset RULESET"
+msgstr "ruleset НАБОРПРАВИЛ"
+
+#: tools/ruledit/ruledit.cpp:154
+msgid "Ruleset to use as the starting point."
+msgstr "Набор правил, который будет стартовым."
+
+#: tools/ruledit/ruledit.cpp:167
+msgid "Can only edit one ruleset at a time.\n"
+msgstr "В одно время можно редактировать только один набор правил.\n"
+
+#: tools/ruledit/ruledit.cpp:174
+#, c-format
+msgid "Unrecognized option: \"%s\"\n"
+msgstr "Неопознанный параметр: \"%s\"\n"
+
+#: tools/ruledit/ruledit_qt.cpp:126
+#, c-format
+msgid ""
+"%s%s\n"
+"commit: %s"
+msgstr ""
+"%s%s\n"
+"commit: %s"
+
+#: tools/ruledit/ruledit_qt.cpp:137
+msgid "Give ruleset to use as starting point."
+msgstr "Выберите набор правил, который будет стартовым."
+
+#: tools/ruledit/ruledit_qt.cpp:149
+msgid "Start editing"
+msgstr "Начать редактирование"
+
+#: tools/ruledit/ruledit_qt.cpp:159
+msgid "Misc"
+msgstr "Параметры"
+
+#: tools/ruledit/ruledit_qt.cpp:161
+msgid "Tech"
+msgstr "Открытия"
+
+#: tools/ruledit/ruledit_qt.cpp:163
+msgid "Buildings"
+msgstr "Здания"
+
+#: tools/ruledit/ruledit_qt.cpp:165
+msgid "Units"
+msgstr "Соединения"
+
+#: tools/ruledit/ruledit_qt.cpp:167
+msgid "Goods"
+msgstr "Товары"
+
+#: tools/ruledit/ruledit_qt.cpp:169
+msgid "Governments"
+msgstr "Формы Правления"
+
+#: tools/ruledit/ruledit_qt.cpp:171
+msgid "Enablers"
+msgstr "Действия"
+
+#: tools/ruledit/ruledit_qt.cpp:173
+msgid "Extras"
+msgstr "Сооружения"
+
+#: tools/ruledit/ruledit_qt.cpp:175
+msgid "Terrains"
+msgstr "Рельефы"
+
+#: tools/ruledit/ruledit_qt.cpp:177
+msgid "Nations"
+msgstr "Народы"
+
+#: tools/ruledit/ruledit_qt.cpp:186
+msgid "Welcome to freeciv-ruledit"
+msgstr "Добро пожаловать в редактор наборов правил Freeciv"
+
+#: tools/ruledit/ruledit_qt.cpp:217
+msgid "Ruleset loaded"
+msgstr "Набор правил загружен"
+
+#: tools/ruledit/ruledit_qt.cpp:238
+msgid "Ruleset loading failed!"
+msgstr "Ошибка загрузки набора правил!"
+
+#: tools/ruledit/ruledit_qt.cpp:364
+msgid "Freeciv Ruleset Editor"
+msgstr "Редактор наборов правил Freeciv"
+
+#: tools/ruledit/ruledit_qt.cpp:380
+msgid "Are you sure you want to quit?"
+msgstr "Вы действительно хотите выйти?"
+
+#: tools/ruledit/ruledit_qt.cpp:384
+msgid "Quit?"
+msgstr "Выйти?"
+
+#: tools/ruledit/tab_building.cpp:65 tools/ruledit/tab_good.cpp:66
+#: tools/ruledit/tab_tech.cpp:64 tools/ruledit/tab_unit.cpp:66
+msgid "Rule Name"
+msgstr "Название Правила"
+
+#: tools/ruledit/tab_building.cpp:73 tools/ruledit/tab_good.cpp:74
+#: tools/ruledit/tab_tech.cpp:72 tools/ruledit/tab_unit.cpp:74
+msgid "Name"
+msgstr "Название"
+
+#: tools/ruledit/tab_building.cpp:88 tools/ruledit/tab_good.cpp:89
+#: tools/ruledit/tab_tech.cpp:109 tools/ruledit/tab_unit.cpp:89
+msgid "Effects"
+msgstr "Эффекты"
+
+#: tools/ruledit/tab_building.cpp:93
+msgid "Add Building"
+msgstr "Добавить Здание"
+
+#: tools/ruledit/tab_building.cpp:98
+msgid "Remove this Building"
+msgstr "Удалить это Здание"
+
+#: tools/ruledit/tab_building.cpp:175
+msgid "A building with that rule name already exists!"
+msgstr "Здание с этим названием правила уже существует!"
+
+#: tools/ruledit/tab_enablers.cpp:65
+msgid "Type"
+msgstr "Тип"
+
+#: tools/ruledit/tab_enablers.cpp:86
+msgid "Actor Requirements"
+msgstr "Требования к Деятелю"
+
+#: tools/ruledit/tab_enablers.cpp:90
+msgid "Target Requirements"
+msgstr "Требования к цели"
+
+#: tools/ruledit/tab_enablers.cpp:94
+msgid "Add Enabler"
+msgstr "Добавить Включатель"
+
+#: tools/ruledit/tab_enablers.cpp:99
+msgid "Remove this Enabler"
+msgstr "Удалить этот Включатель"
+
+#: tools/ruledit/tab_enablers.cpp:238
+msgid "Obligatory hard requirements"
+msgstr "Жёсткие обязательные требования"
+
+#: tools/ruledit/tab_enablers.cpp:241
+msgid "Changing action to %1 will modify enabler requirements. Continue?"
+msgstr "Смена действия на %1 изменит требования включателя. Продолжить?"
+
+#: tools/ruledit/tab_enablers.cpp:275
+msgid "Enabler (target)"
+msgstr "Действие (цель)"
+
+#: tools/ruledit/tab_enablers.cpp:286
+msgid "Enabler (actor)"
+msgstr "Деятель"
+
+#: tools/ruledit/tab_good.cpp:94
+msgid "Add Good"
+msgstr "Добавить товар"
+
+#: tools/ruledit/tab_good.cpp:99
+msgid "Remove this Good"
+msgstr "Удалить этот товар"
+
+#: tools/ruledit/tab_good.cpp:177
+msgid "A good with that rule name already exists!"
+msgstr "Товар с этим названием правила уже существует!"
+
+#: tools/ruledit/tab_misc.cpp:69
+msgid "Ruleset name"
+msgstr "Название набора правил"
+
+#: tools/ruledit/tab_misc.cpp:74
+msgid "Ruleset version"
+msgstr "Версия набора правил"
+
+#: tools/ruledit/tab_misc.cpp:79
+msgid "Save to directory"
+msgstr "Сохранить в каталог"
+
+#: tools/ruledit/tab_misc.cpp:86
+msgid "Version suffix to directory name"
+msgstr "Суффикс версии для наименования каталога"
+
+#: tools/ruledit/tab_misc.cpp:91
+msgid "Save now"
+msgstr "Сохранить"
+
+#: tools/ruledit/tab_misc.cpp:94
+msgid "Always active Effects"
+msgstr "Постоянно действующие Эффекты"
+
+#: tools/ruledit/tab_misc.cpp:97
+msgid "All Effects"
+msgstr "Все Эффекты"
+
+#: tools/ruledit/tab_misc.cpp:104
+msgid "?stat:Terrains"
+msgstr "Рельефы"
+
+#: tools/ruledit/tab_misc.cpp:108
+msgid "?stat:Resources"
+msgstr "Ресурсы"
+
+#: tools/ruledit/tab_misc.cpp:112
+msgid "?stat:Tech Classes"
+msgstr "Типы Технологий"
+
+#: tools/ruledit/tab_misc.cpp:116
+msgid "?stat:Techs"
+msgstr "Технологии"
+
+#: tools/ruledit/tab_misc.cpp:120
+msgid "?stat:Unit Classes"
+msgstr "Классы Соединений"
+
+#: tools/ruledit/tab_misc.cpp:124
+msgid "?stat:Unit Types"
+msgstr "Соединения"
+
+#: tools/ruledit/tab_misc.cpp:128
+msgid "?stat:Buildings"
+msgstr "Здания"
+
+#: tools/ruledit/tab_misc.cpp:132
+msgid "?stat:Nations"
+msgstr "Народы"
+
+#: tools/ruledit/tab_misc.cpp:136
+msgid "?stat:Styles"
+msgstr "Стили"
+
+#: tools/ruledit/tab_misc.cpp:140
+msgid "?stat:Specialists"
+msgstr "Специалисты"
+
+#: tools/ruledit/tab_misc.cpp:144
+msgid "?stat:Governments"
+msgstr "Формы Правления"
+
+#: tools/ruledit/tab_misc.cpp:148
+msgid "?stat:Disasters"
+msgstr "Бедствия"
+
+#: tools/ruledit/tab_misc.cpp:152
+msgid "?stat:Achievements"
+msgstr "Достижения"
+
+#: tools/ruledit/tab_misc.cpp:156
+msgid "?stat:Extras"
+msgstr "Сооружения"
+
+#: tools/ruledit/tab_misc.cpp:160
+msgid "?stat:Bases"
+msgstr "Базы"
+
+#: tools/ruledit/tab_misc.cpp:164
+msgid "?stat:Roads"
+msgstr "Дороги"
+
+#: tools/ruledit/tab_misc.cpp:168
+msgid "?stat:Goods"
+msgstr "Товары"
+
+#: tools/ruledit/tab_misc.cpp:172
+msgid "?stat:Multipliers"
+msgstr "Множители"
+
+#: tools/ruledit/tab_misc.cpp:180
+msgid "Refresh Stats"
+msgstr "Обновить статистику"
+
+#: tools/ruledit/tab_misc.cpp:243
+msgid "Ruleset saved"
+msgstr "Набор правил сохранён"
+
+#: tools/ruledit/tab_misc.cpp:363
+msgid "Always active"
+msgstr "Постоянно действующий"
+
+#: tools/ruledit/tab_misc.cpp:372
+msgid "All effects"
+msgstr "Все эффекты"
+
+#: tools/ruledit/tab_nation.cpp:49
+msgid "Use nationlist"
+msgstr "Использовать набор народов"
+
+#: tools/ruledit/tab_nation.cpp:53
+msgid "Nationlist"
+msgstr "Набор Народов"
+
+#: tools/ruledit/tab_tech.cpp:83
+msgid "Req1"
+msgstr "Требует (Req1)"
+
+#: tools/ruledit/tab_tech.cpp:92
+msgid "Req2"
+msgstr "Требует (Req2)"
+
+#: tools/ruledit/tab_tech.cpp:100
+msgid "Root Req"
+msgstr "Базовое требование (Root Req)"
+
+#: tools/ruledit/tab_tech.cpp:114
+msgid "Add tech"
+msgstr "Добавить технологию"
+
+#: tools/ruledit/tab_tech.cpp:119
+msgid "Remove this tech"
+msgstr "Удалить эту технологию"
+
+#: tools/ruledit/tab_tech.cpp:200
+msgid "Never"
+msgstr "Никогда"
+
+#: tools/ruledit/tab_tech.cpp:336
+msgid "A tech with that rule name already exists!"
+msgstr "Технология с этим названием правила уже существует!"
+
+#: tools/ruledit/tab_unit.cpp:85
+msgid "Edit Unit"
+msgstr "Редактировать Соединение"
+
+#: tools/ruledit/tab_unit.cpp:94
+msgid "Add Unit"
+msgstr "Добавить Соединение"
+
+#: tools/ruledit/tab_unit.cpp:99
+msgid "Remove this Unit"
+msgstr "Удалить это Соединение"
+
+#: tools/ruledit/tab_unit.cpp:176
+msgid "A unit type with that rule name already exists!"
+msgstr "Соединение с этим названием правила уже существует!"
+
+#: tools/ruledit/req_edit.cpp:97
+msgid "Range:"
+msgstr "Диапазон:"
+
+#: tools/ruledit/req_edit.cpp:122
+msgid "Add Requirement"
+msgstr "Добавить Требование"
+
+#: tools/ruledit/req_edit.cpp:126
+msgid "Delete Requirement"
+msgstr "Удалить Требование"
+
+#: tools/ruledit/validity.c:65
+msgid "Effect"
+msgstr "Эффект"
+
+#: tools/ruledit/validity.c:134
+msgid "Action Enabler"
+msgstr "Включатель Действия"
+
+#: tools/ruledit/validity.c:154
+msgid "Music Style"
+msgstr "Стиль музыки"
+
+#: tools/ruledit/validity.c:268
+msgid "Conflicting extra"
+msgstr "Конфликтующее сооружение"
+
+#: tools/ruledit/validity.c:271
+msgid "Hidden extra"
+msgstr "Скрытое сооружение"

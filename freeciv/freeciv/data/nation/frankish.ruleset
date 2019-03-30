@@ -1,0 +1,143 @@
+[nation_frankish]
+
+name=_("Frankish")
+plural=_("?plural:Franks")
+groups="European", "Ancient", "Medieval"
+legend=_("The Franks were a Germanic confederation that formed in what is\
+ now Northwest Germany in the 3rd century CE. In the late 5th century their\
+ leader Clovis converted to Christianity, united the Frankish tribes and\
+ conquered much of Gaul. Clovis' successors expanded Frankish rule over much of\
+ Central Europe. The Frankish kingdom mixed Germanic and Roman elements and\
+ would lay the foundation for much of European Medieval culture, society\
+ and politics. After a period of stagnation the Frankish realm was reunited\
+ in the 8th century. In 800 the Frankish king Charlemagne was crowned\
+ emperor by the pope. Upon his death the Frankish Empire was divided once\
+ again. By the 10th century CE the Frankish empire had broken up for good\
+ into West Francia, which later became France, and East Francia, which later\
+ became the Holy Roman Empire or Germany.")
+
+leaders = {
+ "name",                "sex"
+ "Meroveus",            "Male"   ; Merovech
+ "Childericus I",       "Male"   ; Childeric
+ "Chlodovechus",        "Male"   ; Clovis
+ "Fredegunduis",        "Female" ; Fredegund
+ "Chilpericus",         "Male"   ; Chilperic
+ "Brunhilda",           "Female"
+ "Chlotarius II",       "Male"   ; Chlothar II
+ "Dagobertus",          "Male"   ; Dagobert
+ "Pipinus Haristalius", "Male"   ; Peppin of Herstal
+ "Carolus Martellus",   "Male"   ; Charles Martel
+ "Pippinus Brevis",     "Male"   ; Peppin the Short
+ "Carolus Magnus",      "Male"   ; Charlemagne
+ "Ludovicus Pius",      "Male"   ; Louis the Pious
+ "Lotharius",           "Male"   ; Lothair
+}
+
+ruler_titles = {
+ "government",     "male_title",                "female_title"
+ "Anarchy",        _("Usurper %s"),             _("?female:Usurper %s")
+ "Democracy",      _("Chancellor %s"),          _("?female:Chancellor %s")
+ "Despotism",      _("Chieftain %s"),           _("?female:Chieftain %s")
+ "Fundamentalism", _("Pope %s"),                _("Popess %s")
+ "Republic",       _("Mayor of the Palace %s"), _("?female:Mayor of the Palace %s")
+}
+
+flag="france_old"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="French", "Holy Roman", "Lorrain", "Papal"
+
+conflicts_with="Gallic", "French", "Dutch", "Belgian", "Luxembourgish",
+ "Swiss", "German", "Italian", "Andorran", "Holy Roman", "Lorrain", "Franconian"
+
+cities =
+ ; Names in Medieval Latin rather than Classical Latin
+ "Tornacum",			; Tournai
+ "Parisii",			; Paris
+ "Treveris",			; Trier
+ "Aquisgranum", 		; Aachen
+ "Suessonae",			; Soissons
+ "Mettis",			; Metz
+ "Remi",			; Rheims
+ "Aurelianum",			; Orléans
+ "Colonia",			; Cologne
+ "Haristalius",			; Herstal
+ "Camaracum",			; Cambrai
+ "Tungris",			; Tongeren
+ "Ratisbona",			; Regensburg
+ "Tolosa",			; Toulouse
+ "Noviomagus",			; Nijmegen
+ "Wormatia",			; Worms
+ "Vienna",			; Vienne
+ "Lugdunum",			; Lyon
+ "Arelate",			; Arles
+ "Tervana",			; Thérouanne
+ "Traiectum ad Rhenum (river)",	; Utrecht
+ "Pruma",			; Prüm
+ "Verodunum",			; Verdun
+ "Francofurtum ad Moenum  (river)", ; Frankfurt am Main
+ "Sanctus Quintinus", 		; Saint-Quentin
+ "Angulisamum",			; Ingelheim
+ "Turones",			; Tours
+ "Mosae Traiectum (river)",	; Maastricht
+ "Stratisburgum",		; Strasbourg
+ "Pictavium",			; Poitiers
+ "Papia",			; Pavia
+ "Cariciacum",			; Quierzy
+ "Moguntiacum",			; Mainz
+ "Bituriges",			; Bourges
+ "Antunnacum",			; Andernach
+ "Autessiodurum",		; Auxerre
+ "Mediolanum",			; Milan
+ "Brema",			; Bremen
+ "Burdigala",			; Bordeaux
+ "Ravenna",			; Ravenna
+ "Divio",			; Dijon
+ "Narbo",			; Narbonne
+ "Spoletium",			; Spoleto
+ "Roma",			; Rome
+ "Andecavis",			; Angers
+ "Spira",			; Speyer
+ "Rotomagus",			; Rouen
+ "Fulda",			; Fulda
+ "Verona",			; Verona
+ "Genava",			; Geneva
+ "Brixia",			; Brescia
+ "Theudonevilla",		; Thionville
+ "Pisae",			; Pisa
+ "Magdeburgum",			; Magdeburg
+ "Taurinum",			; Turin
+ "Santones",			; Saintes
+ "Barcino",			; Barcelona
+ "Vesontio",			; Besançon
+ "Epternacus",			; Echternach
+ "Massalia",			; Marseille
+ "Bergomum",			; Bergamo
+ "Ebrodunum",			; Embrun
+ "Salisburgum",			; Salzburg
+ "Paderbronna",			; Paderborn
+ "Carnotes",			; Chartres
+ "Genua",			; Genoa
+ "Bonna",			; Bonn
+ "Senones",			; Sens
+ "Valentiana",			; Valenciennes
+ "Auscum",			; Auch
+ "Nemausus",			; Nîmes
+ "Tridentum",			; Trent
+ "Lemovices",			; Limoges
+ "Clarus Mons",			; Clermont-Ferrand
+ "Elusa",			; Éauze
+ "Portus Namnetum (ocean)",	; Nantes
+ "Telo",			; Toulon
+ "Avenio",			; Avignon
+ "Herbipolis",			; Würzburg
+ "Gratianopolis",		; Grenoble
+ "Ambianum",			; Amiens
+ "Gerunda",			; Girona
+ "Cenomanum"			; Le Mans

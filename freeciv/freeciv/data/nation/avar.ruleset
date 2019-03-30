@@ -1,0 +1,73 @@
+[nation_avar]
+
+name=_("Avar")
+plural=_("?plural:Avars")
+groups="Medieval", "European", "Asian"
+legend=_("The Avars or Eurasian Avars were an ancient nomadic\
+ confederation of mixed origin. The dominant language of this group was\
+ presumably Proto-Bulgarian within the Turkic Oghuz language subgroup,\
+ but the true origin of the Avars is unknown. It is possible they were\
+ originally a Rouran or Hephthalite group. After settling in Pannonia they\
+ subjugated the local Slavic tribes. Gradually they lost power and\
+ political importance and eventually the Avars blended with Slavic peoples.")
+leaders = {
+ "name",                "sex"
+ "Lakhana",             "Male"
+ "Kandik",              "Male"
+ "Bayan I",             "Male"
+ "Bayan II",            "Male"
+ "Organa",              "Male"
+ "Bayan III",           "Male"
+ "Surakat",             "Male"
+ "Yugurus",             "Male"
+ "Kajd",                "Male"
+ "Zodan",               "Male"
+}
+flag="avar"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("%s Khan"),         _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),       _("?female:%s Khagan")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with= "hungarian", "romanian", "hunnic"
+civilwar_nations = "hungarian", "volga bulgar", "khazar", "slavic"
+
+cities =
+ "Cibakháza",
+ "Dunanpentele",
+ "Devinská Nova",
+ "Hortobágy-Árkus",
+ "Oravicabánya",
+ "Kunágota",
+ "Széphely",
+ "Szeged-Fehértó",
+ "Szeged-Átokháza",
+ "Zmajevac",
+ "Kaposvár",
+ "Igar",
+ "Kecel",
+ "Fönlak",
+ "Ráckeve",
+ "Gytenesdiás",
+ "Apátfalva",
+ "Ozora",
+ "Temeskenéz",
+ "Németszentpéter",
+ "Nagyszentmiklós",
+ "Óbesenyő",
+ "Bócsa",
+ "Temesság",
+ "Németpereg",
+ "Kiszombor",
+ "Bábony",
+ "Temesremete",
+ "Bp-Népstadion",
+ "Bp-Rákos"

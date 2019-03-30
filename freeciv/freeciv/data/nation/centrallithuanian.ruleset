@@ -1,0 +1,82 @@
+[nation_centrallithuanian]
+
+name=_("Central Lithuanian")
+plural=_("?plural:Central Lithuanians")
+groups="European"
+legend=_("Lithuanian Poles are an ethnic minority in Lithuania, mainly in\
+ the Aukshtota region. They are a remnant of the Polish-Lithuanian\
+ Commonwealth - the Commonwealth of Two Nations, which was founded with\
+ the Union of Lublin in 1569. This state united the Kingdom of Poland with\
+ the Grand Duchy of Lithuania and was founded by the Lithuanian grand duke\
+ Jogaila, who was baptized with the name Władysław. The presence of the first\
+ Polish community in Lithuania dates back to duke Mindaugas of Lithuania.\
+ The first Poles came to Lithuania as prisoners of war taken\
+ during raids on the frontier lands (mainly to Mazovia). After uniting the\
+ two countries there was a very strong Polonization of the Lithuanian\
+ nobility. The Polish-speaking community in Lithuania survived the collapse\
+ and partition of the Polish state, co-existing with Lithuanian-speaking\
+ people. In 1920, the rebellious general Żeligowski announced the creation\
+ of a Republic of Central Lithuania, which was then incorporated into\
+ Poland. After World War II most of the Lithuanian Poles were displaced to\
+ Poland's new western territories.")
+leaders = {
+ "name",                "sex"
+ "Gabriel Narutowicz",  "Male"
+ "Józef Piłsudski",     "Male"
+ "Lucjan Żeligowski",   "Male"
+ "Witold Abramowicz",   "Male"
+ "Mieczysław Engiel",   "Male"
+ "Jerzy Iwanowski",     "Male"
+ "Stefan Mokrzecki",    "Male"
+}
+flag="central_lithuania"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",                "female_title"
+ "Communism",       _("People's Commissar %s"),  _("?female:People's Commissar %s")
+ "Despotism",       _("Leader %s"),              _("?female:Leader %s")
+ "Monarchy",        _("Grand Duke %s"),          _("Grand Duchess %s")
+ "Fundamentalism",  _("Archbishop %s"),          _("Mother Superior %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "Lithuanian", "Polish", "Belarusian", "Lipka Tatar", "Mazovian"
+
+cities =
+ "Wilno",                 ;Vilnius
+ "Olkieniki",             ;Valkininkai
+ "Soleczniki",            ;Šalčininkai
+ "Orany",                 ;Varėna
+ "Druskieniki",           ;Druskininkai
+ "Święciany",             ;Švenčionys
+ "Oszmiana",              ;Ašmena
+ "Jaszuny",               ;Jašiūnai
+ "Szyrwinty",             ;Širvintos
+ "Krewo",                 ;Krėva
+ "Merecz",                ;Merkinė
+ "Zygmunciszki",          ;Žygmantiškės
+ "Karkliny",              ;Karkliniai
+ "Songiniszki",           ;Sanginiškės
+ "Daugieliszki",          ;Daugėliškis
+ "Twerecz",               ;Tverečius
+ "Świr",                  ;Svieriai
+ "Wojstom",
+ "Żodziszki",
+ "Dukszty",               ;Dūkštas
+ "Łyntupy",               ;Lentupis
+ "Komaje",                ;Kamojys
+ "Mielegiany",            ;Mielagėnai
+ "Podbrodzie",            ;Pabradė
+ "Szemetowszczyzna",
+ "Kołtyniany",            ;Kaltanėnai
+ "Hoduciszki",            ;Adutiškis
+ "Holszany",              ;Alšėnai
+ "Giedrojcie",            ;Giedraičiai
+ "Giełwany",              ;Gelvonai
+ "Niemenczyn",            ;Nemenčinė
+ "Turgiele"               ;Turgeliai

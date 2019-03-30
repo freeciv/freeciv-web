@@ -1,0 +1,77 @@
+[nation_carantanian]
+
+name=_("Carantanian")
+plural=_("?plural:Carantanians")
+groups="Medieval", "European"
+legend=_("The Carantanians or Alpine Slavs were an Early Medieval\
+ confederation of South West Slavic tribes who settled in modern-day\
+ Austria. The Duchy of Carantania was one of the earliest Slav states,\
+ existing since the seventh century CE. In the eighth century, it fell\
+ into dependence on the Frankish kingdom, which led to the adoption of\
+ Christianity in the Latin rite by duke Gorazd. In 819 years Carantania\
+ joined the revolt of the Croatian duke Ljudevit Posavski. After its fall\
+ in 822 the state was abolished and incorporated directly into the realm\
+ of the Franks. Slovenians are the modern descendants of the Carantanians.")
+leaders = {
+ "name",                "sex"
+ "Valuk",               "Male"
+ "Boruta",              "Male"
+ "Gorazd",              "Male"
+ "Chotimir",            "Male"
+ "Valtunk",             "Male"
+}
+flag="carantanian"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Duke %s"),         _("Duchess %s")
+ "Monarchy",        _("Grand Duke %s"),   _("Grand Duchess %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Austrian", "Slovenian"
+civilwar_nations = "Chrobatian", "Moravian", "Slovakian", "Slovenian"
+
+cities =
+ "Gospa Sveta",
+ "Krnski Grad",
+ "Celovec",
+ "Grebinj",
+ "Apače",
+ "Djekše",
+ "Osoje",
+ "Globasnica",
+ "Šmohor",
+ "Štalenska Gora",
+ "Vetrinj",
+ "Hodiše",
+ "Velikovec",
+ "Bače",
+ "Sveta Kri",
+ "Beljak",
+ "Rožek",
+ "Podrožca",
+ "Sele",
+ "Pokrče",
+ "Brnca",
+ "Brodi",
+ "Bela",
+ "Komelj",
+ "Tinje",
+ "Dobrač",
+ "Krka",
+ "Kriva Vrba",
+ "Labot",
+ "Straja Vas",
+ "Megvarje",
+ "Kožentavra",
+ "Borovlje",
+ "Radiše",
+ "Žihpolje",
+ "Miklavčevo",
+ "Žrelec"

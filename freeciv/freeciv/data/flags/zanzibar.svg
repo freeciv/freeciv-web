@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:odm="http://product.corel.com/CGS/11/cddns/" xml:space="preserve" width="1023px" height="682px" style="shape-rendering:geometricPrecision; image-rendering:optimizeQuality"
+    viewBox="0 0 1023 682">
+ <defs>
+ </defs>
+ <g id="Layer 1">
+     <rect x="0" y="0" width="1023" height="682" fill="#FCD116"/>
+
+     <rect x="0" y="0" width="1023" height="37" fill="#DA251D"/>
+     <rect x="0" y="37" width="1023" height="37" fill="#FFFFFF"/>
+     <rect x="0" y="74" width="1023" height="37" fill="#009700"/>
+
+     <rect x="0" y="645" width="1023" height="37" fill="#DA251D"/>
+     <rect x="0" y="607" width="1023" height="37" fill="#FFFFFF"/>
+     <rect x="0" y="571" width="1023" height="37" fill="#009700"/>
+
+     <rect x="0" y="215" width="1023" height="37" fill="#DA251D"/>                   <rect x="0" y="252" width="1023" height="37" fill="#009700"/>
+
+     <rect x="0" y="393" width="1023" height="37" fill="#009700"/>                   <rect x="0" y="430" width="1023" height="37" fill="#DA251D"/>
+
+     <circle cx="262" cy="163" r="46" fill="#009700"/>
+      <circle cx="272" cy="163" r="41" fill="#FCD116"/>
+     <circle cx="512" cy="163" r="46" fill="#009700"/>
+      <circle cx="522" cy="163" r="41" fill="#FCD116"/>
+     <circle cx="762" cy="163" r="46" fill="#009700"/>
+     <circle cx="772" cy="163" r="41" fill="#FCD116"/>
+
+     <circle cx="262" cy="519" r="46" fill="#009700"/>
+      <circle cx="272" cy="519" r="41" fill="#FCD116"/>
+     <circle cx="512" cy="519" r="46" fill="#009700"/>
+      <circle cx="522" cy="519" r="41" fill="#FCD116"/>
+     <circle cx="762" cy="519" r="46" fill="#009700"/>
+      <circle cx="772" cy="519" r="41" fill="#FCD116"/>
+
+      <circle cx="387" cy="341" r="46" fill="#009700"/>
+       <circle cx="397" cy="341" r="41" fill="#FCD116"/>
+      <circle cx="637" cy="341" r="46" fill="#009700"/>
+       <circle cx="647" cy="341" r="41" fill="#FCD116"/>
+
+ </g>
+</svg>

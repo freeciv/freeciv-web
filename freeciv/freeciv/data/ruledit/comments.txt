@@ -1,0 +1,1165 @@
+; This file contains standard comments to include to the rulesets
+
+[common]
+
+header = "\
+; Modifying this file:\n\
+; You should not modify this file except to make bugfixes or\n\
+; for other \"maintenance\".  If you want to make custom changes,\n\
+; you should create a new datadir subdirectory and copy this file\n\
+; into that directory, and then modify that copy.  Then use the\n\
+; command \"rulesetdir <mysubdir>\" in the server to have freeciv\n\
+; use your new customized file.\n\
+\n\
+; Note that the freeciv AI may not cope well with anything more\n\
+; than minor changes.\n\
+"
+
+[typedoc]
+; This section contains comments documenting different ruleset object types.
+
+buildings = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Below: The individual buildings, one per section.\n\
+; (Buildings = City Improvements and Wonders)\n\
+;\n\
+; The actual tag used (the * in [building_*]) does not matter, except\n\
+; it must be unique within this file, and it may be used in debug\n\
+; output when reading this file.\n\
+;\n\
+; Notes:\n\
+;\n\
+; name          = translatable name as seen by user\n\
+; rule_name     = (optional) internal name for savegames, rulesets etc; if\n\
+;                 not present, \"name\" is used for this purpose too. Since\n\
+;                 the name used in savegames must not change, if you want\n\
+;                 to rename an item after a ruleset has been released, you\n\
+;                 should set \"rule_name\" to the original value of \"name\".\n\
+; genus         = genus; one of:\n\
+;                 \"GreatWonder\", \"SmallWonder\", \"Improvement\", \"Special\".\n\
+; reqs          = requirements to build the building (see effects.ruleset\n\
+;                 and README.effects for help on requirements)\n\
+; graphic       = icon of improvement (used in city dialog)\n\
+; graphic_alt   = alternate icon of improvement\n\
+; obsolete_by   = requirements for the building to become obsolete\n\
+; build_cost    = production shields required to build\n\
+; upkeep        = monetary upkeep value\n\
+; sabotage      = percent chance of diplomat sabotage being successful\n\
+; flags         = special flag strings\n\
+;\n\
+; ** Building flags **\n\
+; \"VisibleByOthers\"  = Anyone who can see your city knows whether it has\n\
+;                      this improvement. (Great and small wonders are\n\
+;                      always visible.)\n\
+; \"SaveSmallWonder\"  = If you lose the city with this building in, and the\n\
+;                      \"savepalace\" server setting is enabled, another will\n\
+;                      be built for free in a random city.\n\
+;                      Should only be used with genus \"SmallWonder\".\n\
+; \"Gold\"             = Not a real building; production turned into gold\n\
+;                      indefinitely (capitalization/coinage).\n\
+;                      Genus should be \"Special\".\n\
+; \"DisasterProof\"    = Disasters never destroy this building. Is meaningful\n\
+;                      only for genus \"Improvement\" buildings as others are\n\
+;                      automatically disaster proof.\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+tech_classes = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Tech classes:\n\
+;\n\
+; First one is the default one.\n\
+; If there is none, tech classes feature is disabled\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; rule_name               = (optional) internal name for savegames, rulesets\n\
+;                           etc; if not present, \"name\" is used for this\n\
+;                           purpose too. Since the name used in savegames must\n\
+;                           not change, if you want to rename an item after a\n\
+;                           ruleset has been released, you should set\n\
+;                           \"rule_name\" to the original value of \"name\".\n\
+; cost_pct                = how much techs of the class cost compared\n\
+;                           to normal. Default is 100%.\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+techs = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Below: The individual advances, one per section.\n\
+; The number can be variable, up to 250.\n\
+;\n\
+; The actual tag used (the * in [advance_*]) does not matter, except\n\
+; it must be unique within this file, and it may be used in debug\n\
+; output when reading this file.\n\
+;\n\
+; Notes:\n\
+;\n\
+; name          = translatable name as seen by user\n\
+; rule_name     = (optional) internal name for savegames, rulesets etc; if\n\
+;                 not present, \"name\" is used for this purpose too. Since\n\
+;                 the name used in savegames must not change, if you want\n\
+;                 to rename an item after a ruleset has been released, you\n\
+;                 should set \"rule_name\" to the original value of \"name\".\n\
+; class         = tech class this tech belongs to, if they have been defined.\n\
+;                 Default is first one defined above.\n\
+; req1, req2    = advances required before researching this one\n\
+; root_req      = tech required before acquiring this tech, by any means.\n\
+;                 All techs with any direct or indirect dependency on this\n\
+;                 one will *also* have this root_req, as well as their own\n\
+;                 and any others they inherit.\n\
+;                 Giving \"None\" explicitly here prevents a tech from\n\
+;                 inheriting root_reqs in this way, and stops root_req\n\
+;                 inheritance through that tech.\n\
+;                 Specifying a tech's root_req as itself means that the tech\n\
+;                 can only be acquired by special means (nation's init_techs,\n\
+;                 scripting, etc).\n\
+; research_reqs = requirements before researching this one. Can have non\n\
+;                 tech requirements because it is a requirement vector.\n\
+;                 See doc/README.effects to learn more about requirement\n\
+;                 vectors.\n\
+;                 Requireing a tech here in stead of in req1, req2 or\n\
+;                 root_req is not supported yet.\n\
+;                 Requirements that may become fulfilled during the game\n\
+;                 when they weren't at the start of the game is not\n\
+;                 supported yet.\n\
+; flags         = special flag strings\n\
+; graphic       = icon for technology\n\
+; graphic_alt   = alternate icon\n\
+; helptext      = optional help text string (set units ruleset for examples)\n\
+; bonus_message = text seen when a player is the first to discover\n\
+;                 an bonus tech. Must contain '%s' to mark place of the tech\n\
+;                 gained.\n\
+; cost          = if tech_cost_style is set to \"Classic+\" or \"Experimental+\",\n\
+;                 this field is read for information on how much a tech\n\
+;                 costs.\n\
+;\n\
+; Special values for req1 and req2 are \"None\" (first section below)\n\
+; and \"Never\" (never available).  If only one tech is required,\n\
+; it should be listed as req1.\n\
+;\n\
+; As well as custom flags defined above, the following flag strings are\n\
+; possible:\n\
+;\n\
+; \"Bonus_Tech\"          = player gets extra tech if reached first\n\
+; \"Bridge\"              = \"Settler\" unit types can build roads with\n\
+;                         \"RequiresBridge\" flag over roads with\n\
+;                         \"PreventsOtherRoads\" flag (rivers)\n\
+; \"Build_Airborne\"      = from now on can build air units (for use by AI)\n\
+; \"Claim_Ocean\"         = Player claims ocean tiles even if they are not\n\
+;                         adjacent to border source\n\
+; \"Claim_Ocean_Limited\" = Oceanic border sources claim ocean tiles even if\n\
+;                         they are not adjacent to border source\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+governments = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Below: The individual government types, one per section.\n\
+;\n\
+; The actual tag used (the * in [government_*]) does not matter, except\n\
+; it must be unique within this file, and it may be used in debug\n\
+; output when reading this file.\n\
+;\n\
+; For the \"official\" rulesets, the order of these sections should not\n\
+; be changed because that would break backward compatability with\n\
+; savegames.  (In particular, if Fundamentalism is added to default\n\
+; ruleset, should be added at end.)\n\
+;\n\
+; Notes on fields:\n\
+;\n\
+; name         = translatable name as seen by user\n\
+; rule_name    = (optional) internal name for savegames, rulesets etc; if\n\
+;                not present, \"name\" is used for this purpose too. Since\n\
+;                the name used in savegames must not change, if you want\n\
+;                to rename an item after a ruleset has been released, you\n\
+;                should set \"rule_name\" to the original value of \"name\".\n\
+; reqs         = requirements for this government (see README.effects)\n\
+; graphic      = tag specifing preferred graphic\n\
+; graphic_alt  = alternate graphics tag if preferred is not found;\n\
+;                should be a standard tag if preferred is not;\n\
+;                otherwise may be \"-\"\n\
+; ai_better    = AI will not consider this government for use if the\n\
+;                government listed here is available\n\
+; ruler_titles = ruler titles by nation, \"-\" is default, and non-matched\n\
+;	         nations are ignored\n\
+; helptext     = optional help text string; should escape all raw newlines\n\
+;	         so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+policies = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Multipliers (aka policies)\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; rule_name               = (optional) internal name for savegames, rulesets\n\
+;                           etc; if not present, \"name\" is used for this\n\
+;                           purpose too. Since the name used in savegames must\n\
+;                           not change, if you want to rename an item after a\n\
+;                           ruleset has been released, you should set\n\
+;                           \"rule_name\" to the original value of \"name\".\n\
+; default                 = default value (as presented in UI)\n\
+; start                   = minimum value (as presented in UI)\n\
+; stop                    = maximum value (as presented in UI)\n\
+; step                    = minimum increase/decrease (as presented in UI)\n\
+; offset                  = offset/factor control how UI values are turned\n\
+; factor                  = into effect values for use in effects.ruleset.\n\
+;                           effect_value = (ui_value + offset) * (factor/100)\n\
+;                           Optional; by default offset=0, factor=100, so\n\
+;                           that UI values are used as-is.\n\
+; reqs                    = requirements for adjusting this policy (see README.effects)\n\
+; helptext                = optional help text string; should escape all raw\n\
+;                           newlines so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+uclasses = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Unit classes\n\
+; The number can be variable, up to 32\n\
+; When adding new classes, remember to check effects.ruleset also.\n\
+; Eg. if you divide class \'Land\' to two separate classes, you may\n\
+; want add effect giving City Walls defence bonus against new class\n\
+; too.\n\
+;\n\
+; The actual tag used (the * in [unitclass_*]) does not matter, except\n\
+; it must be unique within this file, and it may be used in debug\n\
+; output when reading this file.\n\
+;\n\
+; ** Fields **\n\
+;\n\
+; name                = translatable name as seen by user\n\
+; rule_name           = (optional) internal name for savegames, rulesets etc;\n\
+;                       if not present, \"name\" is used for this purpose too.\n\
+;                       Since the name used in savegames must not change, if\n\
+;                       you want to rename an item after a ruleset has been\n\
+;                       released, you should set \"rule_name\" to the original\n\
+;                       value of \"name\".\n\
+; min_speed           = Minimum speed after damage and effects (whole movement points)\n\
+; hp_loss_pct         = Hitpoints lost each turn if unit not in city or native base\n\
+; non_native_def_pct  = Defense power percentage applying when defending on\n\
+;                       non-native terrain (such as ship in harbour)\n\
+; hut_behavior        = What happens to huts when unit enters tile:\n\
+;                       \"Normal\", \"Nothing\", or \"Frighten\"\n\
+; flags               = List of unit class flags (from the following list; you\n\
+;                       cannot add custom unit class flags)\n\
+; helptext            = optional help text string; should escape all raw newlines\n\
+;                       so that xgettext parsing works\n\
+;\n\
+; ** Unit class Flags **\n\
+;\n\
+; \"TerrainSpeed\"      = Units use terrain specific speed\n\
+; \"TerrainDefense\"    = Units gain defense bonus from terrain\n\
+; \"DamageSlows\"       = Damaged units are slowed down\n\
+; \"CanOccupyCity\"     = Military units of this class can occupy enemy cities\n\
+; \"Missile\"           = Unit is destroyed when it attacks\n\
+; \"BuildAnywhere\"     = Unit can be built even in the middle of non-native terrain\n\
+; \"Unreachable\"       = Unit can be attacked only by units explicitly listing this\n\
+;                       class in its \'targets\', unless on a city or native base.\n\
+;                       For class members which are transports, cargo cannot load/\n\
+;                       unload except in a city or native base, unless that unit\n\
+;                       explicitly lists this class in its \'embarks\'/\'disembarks\'.\n\
+; \"CollectRansom\"     = Unit can collect ransom when killing lone barbarian leader\n\
+; \"ZOC\"               = Unit is subject to ZOC rules. Unit type flag \"IgZOC\" can\n\
+;                       override this\n\
+; \"CanFortify\"        = Unit can fortify at land tiles. Unit type flag\n\
+;                       \"Cant_Fortify\" can override this\n\
+; \"CanPillage\"        = Unit can pillage tile infrastructure\n\
+; \"DoesntOccupyTile\"  = Even if this kind of enemy unit is on tile, cities can\n\
+;                       still work that tile\n\
+; \"AttackNonNative\"   = Unit can attack units on non-native tiles. Unit type\n\
+;                       flag \"Only_Native_Attack\" can override this\n\
+; \"KillCitizen\"       = Upon successful attack against a city, unit kills one\n\
+;                       citizen. The effect \"Unit_No_Lose_Pop\" and the server\n\
+;                       setting \'killcitizen\' can disable this.\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+utypes = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Below: The individual unit types, one per section.\n\
+;\n\
+; The number can be variable, up to 200.\n\
+; However for the \"official\" rulesets, units should not be removed\n\
+; because that would break backward compatability with savegames.\n\
+;\n\
+; The order here matters: later units are considered \"better\" for\n\
+; a given flag or role.\n\
+;\n\
+; The actual tag used (the * in [unit_*]) does not matter, except\n\
+; it must be unique within this file, and it may be used in debug\n\
+; output when reading this file.\n\
+;\n\
+; ** Fields **\n\
+;\n\
+; name          = translatable name as seen by user\n\
+; rule_name     = (optional) internal name for savegames, rulesets etc; if\n\
+;                 not present, \"name\" is used for this purpose too. Since\n\
+;                 the name used in savegames must not change, if you want\n\
+;                 to rename an item after a ruleset has been released, you\n\
+;                 should set \"rule_name\" to the original value of \"name\".\n\
+; graphic       = tag specifying preferred graphic\n\
+; graphic_alt   = tag for alternate graphic if preferred graphic is not\n\
+;                 present; especially if preferred graphic is non-standard,\n\
+;                 this should be a standard tag.  Otherwise can use eg \"-\"\n\
+;                 for no alternate graphic.\n\
+; tech_req      = required advance, names from techs.ruleset, or special:\n\
+;                 \"None\" => available from start\n\
+; impr_req	= required city improvement, names from buildings.ruleset\n\
+; gov_req       = required government, names from governments.ruleset\n\
+; obsolete_by   = can be upgraded to and made obsolete by another unit by name\n\
+; build_cost    = production shields required to build\n\
+; pop_cost      = population removed from city when built; for \'Join City\'\n\
+;                 units this is also the population added to the destination\n\
+; attack        = base attack strength (0 = cannot attack)\n\
+; defense       = base defense strength (0 = cannot defend)\n\
+; hitpoints     = how much damage unit can withstand\n\
+; firepower     = number of hitpoints removed per round of combat; at least 1\n\
+; move_rate     = base move rate (whole movement points)\n\
+; vision_radius_sq = base vision of unit: unit can see tile up to the square\n\
+;                 root of this value away\n\
+; convert_to    = can be converted to another type of unit by name\n\
+; convert_time  = number of movement points it takes to convert to\n\
+;                 another unit type\n\
+; class         = One of the classes listed above\n\
+; transport_cap = Number of units (ground, or air/missiles, depending on flags)\n\
+; fuel          = Number of turns unit can spend outside refuel points.\n\
+;                 If more time passes without unit refueling over turn change,\n\
+;                 they are lost. If this is zero, unit has no need to refuel\n\
+;                 Units with \"Coast\" flag set consider any tile next to coast\n\
+;                 refuel point\n\
+; uk_*          = upkeep costs, these are used as base values in the game\n\
+; cargo         = Unit classes this unit can transport\n\
+; city_slots    = How many of homecity\'s unit maintenance slots unit takes\n\
+; city_size     = Initial size of the cities built by \'Found City\' type units\n\
+;                 (but \'Join City\' uses pop_cost)\n\
+; targets       = list of unit classes this unit can attack against even\n\
+;                 if they have Unreachable unit class flag\n\
+; embarks       = list of unit classes this unit may load into while not in\n\
+;                 native base or city even if transporter has Unreachable unit\n\
+;                 class flag\n\
+; disembarks    = list of unit classes this unit may unload from while not in\n\
+;                 native base or city even if transporter has Unreachable unit\n\
+;                 class flag\n\
+; vision_layer  = At which layer this unit is visible; \"Main\", \"Stealth\",\n\
+;                 or \"Subsurface\"\n\
+; bonuses       = definitions of combat bonuses against specific other units\n\
+; bonuses.flag  = flag of the unit that bonus applies against\n\
+; bonuses.type  = type of the bonus. See below\n\
+; bonuses.value = value of the bonus. Sum of these is used if multiple apply.\n\
+; bonuses.quiet = don\'t auto generate help text for this bonus. Use this if\n\
+;                 the bonus is documented in the unit type\'s help text.\n\
+;                 This is useful when the combination of a unit\'s bonuses\n\
+;                 becomes complex enough to make the auto generated help\n\
+;                 ugly or inaccurate.\n\
+; flags         = special flag strings; list of built-in flags described below\n\
+;                 and/or user flags defined above\n\
+;\n\
+; veteran_names = Special veteran level for this unit. See the definitions in\n\
+;                 game.ruleset. All of the veteran_* entries have to have the\n\
+;                 same length!\n\
+; veteran_raise_chance =\n\
+; veteran_work_raise_chance =\n\
+; veteran_power_fact =\n\
+; veteran_move_bonus =\n\
+;\n\
+; roles         = special role strings\n\
+; sound_move	= optional sound effect when the unit moves\n\
+; sound_move_alt= optional alternative sound effect if above not\n\
+;		  supported in client\n\
+; sound_fight	= optional sound effect when the unit fights\n\
+; sound_fight_alt = optional alternative sound effect if above not\n\
+;		    supported in client\n\
+; helptext        = optional help text string; should escape all raw newlines\n\
+;                   so that xgettext parsing works\n\
+;\n\
+;\n\
+; ** Bonuses **\n\
+;\n\
+; \"DefenseMultiplier\" = Multiply defense value (1 + \'value\') times.\n\
+;                       Value of 1 means multiplication by 2, value 2 by 3...\n\
+;                       Bonus is defined in defenders entry.\n\
+; \"DefenseDivider\"    = Divide defense value with (1 + \'value\').\n\
+;                       Bonus is defined in attackers entry.\n\
+; \"FirePower1\"        = Defender firepower is reduced to value 1 when\n\
+;                       ever this has non-zero value.\n\
+;                       Bonus is defined in attackers entry.\n\
+;\n\
+;\n\
+; ** Flags **\n\
+;\n\
+; \"IgZOC\"       = ignore Zones of Control (ZOC) even if unit class has\n\
+;                 \"ZOC\" flag\n\
+; \"HasNoZOC\"	= unit has no Zone of Control (ZOC), thus any unit can move\n\
+;		  around it freely\n\
+; \"NonMil\"	= a non-military unit: no attacks; no martial law; can enter\n\
+;                 peaceful borders; DoesntOccupyTile\n\
+; \"IgTer\"       = use constant move cost defined in igter_cost (terrain.ruleset)\n\
+;                 rather than terrain/road etc cost, unless terrain cost is\n\
+;                 less\n\
+; \"OneAttack\"	= can only make a single attack, regardless of movement points\n\
+; \"FieldUnit\"	= cause unhappiness even when not being aggressive\n\
+; \"BeachLander\" = won\'t lose all its movement when moving from non-native\n\
+;                 terrain to native terrain even if slow_invasions is on.\n\
+; \"Settlers\"	= can irrigate and build roads\n\
+; \"Diplomat\"	= can defend against diplomat actions (see diplchance\n\
+;                 server option)\n\
+; \"Spy\"       = strong in diplomatic battles. _Must_ be \"Diplomat\" also\n\
+; \"CoastStrict\" = (sea only) cannot leave coast\n\
+; \"Coast\"       = (sea only) can refuel on coast. Set fuel to force unit\n\
+;                 to regularly end turn on coast\n\
+; \"Only_Native_Attack\" = cannot attack targets on non-native tiles even if\n\
+;                 unit class can\n\
+; \"Cant_Fortify\" =  cannot fortify even if unit class has \"CanFortify\" flag\n\
+; \"Fanatic\"   = can only be built by governments that allow them\n\
+;                 (see civ2/governments.ruleset, Fundamentalism government)\n\
+; \"Unique\"    = a player can only have one of these units in the game at\n\
+;		  the same time; barbarians cannot use this at present\n\
+; \"GameLoss\"  = losing one of these units means you lose the game, but it\n\
+;		  is produced without homecity and upkeep\n\
+; \"EvacuateFirst\" = the game will try to rescue units with this flag before\n\
+;                 it tries to rescue units without it when their transport\n\
+;                 is destroyed. Think of the Birkenhead drill (\"women and\n\
+;                 children first\"). Replace \"women and children\" with\n\
+;                 \"units with the EvacuateFirst unit type flag\".\n\
+; \"SuperSpy\"  = this unit always wins diplomatic contests, that is, unless\n\
+;		  it encounters another SuperSpy, in which case defender wins;\n\
+;		  can also be used on non-diplomat units, in which case it can\n\
+;		  protect cities from diplomats; also 100% spy survival chance\n\
+; \"NoHome\"    = this unit has no homecity and will be free of all upkeep, and\n\
+;		  therefore will not revolt along with its city of origin should\n\
+;		  it be incited\n\
+; \"NoVeteran\"   = this unit cannot gain veteran levels through experience\n\
+;                 (as if both raise_chance and work_raise_chance were zero);\n\
+;                 it can still gain veterancy through Veteran_Build, etc\n\
+; \"CityBuster\"  = this unit has double firepower against cities\n\
+; \"NoBuild\"     = this unit cannot be built\n\
+; \"BadWallAttacker\" = the firepower of this unit is set to 1 if\n\
+;                 attacking a city\n\
+;		  defended by a city wall (or other city building defense)\n\
+; \"BadCityDefender\" = if attacked while in a city, firepower is set to 1\n\
+;		  and firepower of attacker is doubled (the Pearl Harbour\n\
+;                 rule)\n\
+; \"BarbarianOnly\" = only barbarians can build this unit\n\
+; \"Shield2Gold\" = Switch from shield upkeep to gold upkeep possible\n\
+; \"NewCityGamesOnly\" = unit can\'t be built on scenarios where founding new cities\n\
+;                 is not allowed. Give this flag to units that would make no sense\n\
+;                 to have in a game with such a scenario\n\
+; \"CanEscape\"   = this unit has, given that certain conditions are\n\
+;                 fulfilled, a 50% chance to escape rather than being\n\
+;                 killed when killstack is enabled and the defender of its\n\
+;                 tile is defeated. The conditions are that it has more move\n\
+;                 points than required to move to an adjacent tile plus the\n\
+;                 attackers move points and that the attacker doesn\'t have\n\
+;                 the \"CanKillEscaping\" unit type flag.\n\
+; \"CanKillEscaping\" = an attack from this unit ignores the \"CanEscape\" unit\n\
+;                 type flag.\n\
+; \"Provoking\" =   a unit considering to auto attack this unit will choose to\n\
+;                 do so even if has better odds when defending against it\n\
+;                 then when attacking it. Applies when the autoattack server\n\
+;                 setting is enabled.\n\
+;\n\
+; Following actions require extra fields:\n\
+;  \"Attack\" and \"Suicide Attack\"\n\
+;   attack = base attack strength\n\
+;  \"Bombard\"\n\
+;   attack       = base attack strength\n\
+;   bombard_rate = the number of shots fired at enemy units when attacking\n\
+;  \"Join City\"\n\
+;   pop_cost = the number of population added to the target city\n\
+;  \"Paradrop Unit\"\n\
+;   paratroopers_range  = the maximal range the unit can be paradropped to.\n\
+;                         Max range is 65534.\n\
+;   paratroopers_mr_req = the move rate which is required at least for\n\
+;                         paradropping (whole movement points)\n\
+;   paratroopers_mr_sub = the move rate which is subtracted after paradropping\n\
+;                         (whole movement points)\n\
+;  \"Upgrade Unit\"\n\
+;   obsolete_by = the unit type upgraded to.\n\
+;  \"Convert Unit\"\n\
+;   convert_to = the unit type converted to.\n\
+;\n\
+; ** Roles **\n\
+;\n\
+; \"FirstBuild\" = first to be built when city founded\n\
+; \"Explorer\"   = unit to use for exploring\n\
+; \"Hut\"        = can be found in a hut\n\
+; \"HutTech\"    = can be found in a hut, but its techs required\n\
+; \"Partisan\"   = can be created as a partisan (only one unit can have this\n\
+;                  flag), see end of this file for its tech requirements option\n\
+; \"DefendOk\"   = AI hint: ok for defending with\n\
+; \"DefendGood\" = AI hint: good for defending with\n\
+; \"Ferryboat\"  = AI hint: useful for ferrying\n\
+; \"Barbarian\"  = can be created as land barbarian\n\
+; \"BarbarianTech\"  = can be created as land barbarian, if someone has\n\
+;                      researched its tech requirements\n\
+; \"BarbarianBoat\"  = can be created as boat for sea barbarian\n\
+; \"BarbarianBuild\" = can be built by barbarians\n\
+; \"BarbarianBuildTech\" = can be built by barbarians if someone has\n\
+;                          researched its tech requirements\n\
+; \"BarbarianLeader\"    = this unit is the barbarian leader (only one)\n\
+; \"BarbarianSea\"       = can be created as a barbarian that disembarks from a barbarian boat\n\
+; \"BarbarianSeaTech\"   = can be created as a barbarian that disembarks from a barbarian boat\n\
+;                        if someone has researched its tech requirements\n\
+; \"Settlers\"              = can irrigate and build roads\n\
+; \"Hunter\"                = AI hint: good for hunting other units\n\
+; \"CitiesStartUnit\"       = Gets granted as \'c\' startunit\n\
+; \"WorkerStartUnit\"       = Gets granted as \'w\' startunit\n\
+; \"ExplorerStartUnit\"     = Gets granted as \'x\' startunit\n\
+; \"KingStartUnit\"         = Gets granted as \'k\' startunit\n\
+; \"DiplomatStartUnit\"     = Gets granted as \'s\' startunit\n\
+; \"FerryStartUnit\"        = Gets granted as \'f\' startunit\n\
+; \"DefendOkStartUnit\"     = Gets granted as \'d\' startunit\n\
+; \"DefendGoodStartUnit\"   = Gets granted as \'D\' startunit\n\
+; \"AttackFastStartUnit\"   = Gets granted as \'a\' startunit\n\
+; \"AttackStrongStartUnit\" = Gets granted as \'A\' startunit\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+terrains = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; The individual terrain types, one per section.\n\
+; Roughly sorted by identifier.\n\
+; The actual tag used (the * in [terrain_*]) must be unique for each terrain,\n\
+; and may be used in debug output when reading this file.\n\
+;\n\
+; Notes:\n\
+;\n\
+; name                 = translatable name as seen by user\n\
+; rule_name            = (optional) internal name for savegames, rulesets etc;\n\
+;                        if not present, \"name\" is used for this purpose too.\n\
+;                        Since the name used in savegames must not change, if\n\
+;                        you want to rename an item after a ruleset has been\n\
+;                        released, you should set \"rule_name\" to the original\n\
+;                        value of \"name\".\n\
+; graphic              = preferred graphic; Tilespec [tile_*] section\n\
+;                        with 'tag' matching this will be used.\n\
+; graphic_alt          = alternate graphic. When no tilespec 'tag' matching\n\
+;                        preferred graphic is not found, this will be used.\n\
+;                        Otherwise may be \"-\"\n\
+; identifier           = single-character identifier used in savegames. This\n\
+;                        must be unique for each terrain.\n\
+; class                = Terrain class terrain belongs to: \"Land\" or \"Oceanic\"\n\
+; movement_cost        = in whole movement points, not move_fragments;\n\
+;                        typically 1 to 3\n\
+; defense_bonus        = percent added to defense; typically 0% to 200%\n\
+; food                 = normal food production\n\
+; shield               = normal shield production\n\
+; trade                = normal trade production\n\
+; resources            = list of possible resources on this terrain\n\
+; road_food_incr_pct   = percent of road food_incr applied to this terrain\n\
+; road_shield_incr_pct = percent of road shield_incr applied to this terrain\n\
+; road_trade_incr_pct  = percent of road trade_incr applied to this terrain\n\
+; base_time            = time to build bases; if 0, cannot build any bases.\n\
+;                        Nonzero values only affect extras with build_time 0.\n\
+; road_time            = time to build roads; if 0, cannot build any roads.\n\
+;                        Nonzero values only affect extras with build_time 0.\n\
+; irrigation_result    = result of 'irrigate' activity; one of:\n\
+;                        \"no\"  -- cannot irrigate\n\
+;                        \"yes\" -- can build extra\n\
+;                        terrain rule_name -- irrigation changes to that\n\
+;                          terrain\n\
+; irrigation_food_incr = increment to food if tile is 100% irrigated\n\
+;                        (actual bonus controlled by Irrigation_Pct effect)\n\
+; irrigation_time      = time for 'irrigate' activity; if 0, cannot irrigate\n\
+;                        Nonzero values only affect extras with build_time 0.\n\
+;                        Such extras can modify time with build_time_factor.\n\
+; mining_result        = result of 'mine' activity; one of:\n\
+;                        \"no\"  -- cannot mine\n\
+;                        \"yes\" -- can build extra\n\
+;                        terrain rule_name -- mining changes to that terrain\n\
+; mining_shield_incr   = increment to shields if tile is 100% mined\n\
+;                        (actual bonus controlled by Mining_Pct effect)\n\
+; mining_time          = time for 'mine' activity; if 0, cannot mine\n\
+;                        Nonzero values only affect extras with build_time 0.\n\
+;                        Such extras can modify time with build_time_factor.\n\
+; transform_result     = result of transformation; one of:\n\
+;                        \"no\"  -- cannot transform\n\
+;                        terrain rule_name -- transformation changes to that\n\
+;                          terrain\n\
+; transform_time       = time to transform; if 0, cannot transform\n\
+; pillage_time         = time to pillage extra from the tile (0 = impossible)\n\
+;                        Nonzero values only affect extras with removal_time 0.\n\
+; clean_pollution_time = time to clean pollution (0 = impossible)\n\
+;                        Nonzero values only affect extras with removal_time 0.\n\
+; clean_fallout_time   = time to clean fallout (0 = impossible)\n\
+;                        Nonzero values only affect extras with removal_time 0.\n\
+; animal               = unit type that can appear as animal on the terrain\n\
+; warmer_wetter_result = result of global warming for wet terrains; one of:\n\
+;                        \"no\"  -- no change; does not count for warming\n\
+;                        \"yes\" -- no change; counts for warming\n\
+;                        terrain rule_name -- warming changes to that terrain\n\
+; warmer_drier_result  = result of global warming for dry terrains;\n\
+;                        see warmer_wetter_result\n\
+; cooler_wetter_result = result of nuclear winter for wet terrains;\n\
+;                        see warmer_wetter_result\n\
+; cooler_drier_result  = result of nuclear winter for dry terrains;\n\
+;                        see warmer_wetter_result\n\
+; native_to            = List of unit classes that can move here\n\
+; flags                = General flags for this terrain. List taken from the\n\
+;                        following, and/or any user flags defined above:\n\
+;   - NoBarbs          = Barbarians will not be spawned here.\n\
+;   - NoCities         = Cities may not be built or found on this terrain.\n\
+;   - Starter          = Players will only be started on \"Starter\" terrain.\n\
+;                        (Currently this cannot be Oceanic terrain.)\n\
+;   - CanHaveRiver     = Set to 1 if this terrain can have river on it (the\n\
+;                        actual chance of river generation is controlled\n\
+;                        separately).\n\
+;   - UnsafeCoast      = This terrain does not provide a safe voyage for\n\
+;                        units with flag \"Trireme\"\n\
+;   - FreshWater       = This terrain is used for small bodies of water.\n\
+;                        If this becomes adjacent to non-FreshWater terrain,\n\
+;                        the whole contiguous FreshWater area will be flooded\n\
+;                        with the non-FreshWater terrain.\n\
+;   - NotGenerated     = Map generator never places this terrain type. It can\n\
+;                        be added from editor only, or by ingame events\n\
+;                        (lua scripting)\n\
+;   - NoZoc            = Units on this terrain are not generating or subject\n\
+;                        to zoc\n\
+;   - NoFortify        = Units cannot fortify on this terrain\n\
+;   - Frozen           = Frozen/polar terrain. For water tiles, Frozen terrain\n\
+;                        is generated near poles. Conversion between frozen\n\
+;                        and unfrozen terrain can be controlled with\n\
+;                        thaw_requirement/freeze_requirement, and Frozen\n\
+;                        terrain is shown differently on the overview map.\n\
+; property_*           = specific property % values used by mapgen. Most\n\
+;                        terrains will have 0 for most values. Properties\n\
+;                        other than ocean_depth are only used for land tiles.\n\
+;  - mountainous       = degree to which this terrain is mountainous\n\
+;  - green             = how much life this terrain has\n\
+;  - foliage           = how much thick undergrowth the terrain has\n\
+;  - tropical          = how \"tropical\" the terrain is (high temperature)\n\
+;  - temperate         = how \"temperate\" the terrain is (med temperature)\n\
+;  - cold              = how \"cold\" the terrain is (low temperature)\n\
+;  - frozen            = how \"frozen\" the terrain is (very low temperature)\n\
+;                        (does not necessarily have to have the \"Frozen\" flag)\n\
+;  - wet               = how \"wet\" the terrain is (moisture)\n\
+;  - dry               = how \"dry\" the terrain is (moisture)\n\
+;  - ocean_depth       = the depth of an ocean, as an average level\n\
+; color.r              = color of the terrain (red value)\n\
+; color.g              = color of the terrain (green value)\n\
+; color.b              = color of the terrain (blue value)\n\
+; helptext             = optional help text string; should escape all raw\n\
+;                        newlines so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+resources = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Resource types:\n\
+;\n\
+; The actual tag used (the * in [resource_*]) must be unique for each resource,\n\
+; and may be used in debug output when reading this file.\n\
+;\n\
+; Notes:\n\
+;\n\
+; extra                = name of the extra this resource section is part of\n\
+;                        (must have \"Resource\" in its causes)\n\
+; identifier           = single-character identifier used in old savegames. This\n\
+;                        must be unique for each resource, and changing it will\n\
+;                        break loading those old savegames.\n\
+; food                 = increased food production\n\
+; shield               = increased shield production\n\
+; trade                = increased trade production\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+extras = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Each extra, including bases, roads, and resource, must have a section here.\n\
+; Bases, roads, and resources have additional sections for their specific features.\n\
+;\n\
+;\n\
+; Extra types:\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; rule_name               = (optional) internal name for savegames, rulesets\n\
+;                           etc; if not present, \"name\" is used for this\n\
+;                           purpose too. Since the name used in savegames must\n\
+;                           not change, if you want to rename an item after a\n\
+;                           ruleset has been released, you should set\n\
+;                           \"rule_name\" to the original value of \"name\".\n\
+; category                = How UI should categorize this extra. One of\n\
+;                           \"Infra\", \"Natural\", \"Nuisance\", \"Resource\",\n\
+;                           or \"Bonus\"\n\
+; causes                  = events that can create extra type.\n\
+;                           \"Irrigation\", \"Mine\", \"Hut\", \"Pollution\", \"Fallout\",\n\
+;                           \"Appear\", \"Resource\", \"Base\", or \"Road\"\n\
+;                           (the last three require a corresponding\n\
+;                           [resource_*] / [base_*] / [road_*] section)\n\
+; rmcauses                = events that can remove extra type.\n\
+;                           \"CleanPollution\", \"CleanFallout\", \"Pillage\", or\n\
+;                           \"Disappear\"\n\
+; graphic                 = tag specifying preferred graphic\n\
+; graphic_alt             = tag for alternate graphic if preferred graphic is\n\
+;                           not present. Can use eg \"-\" for no alternate\n\
+;                           graphic\n\
+; activity_gfx            = tag specifying graphic for unit building extra\n\
+;                           This can be \"None\" to indicate that graphic sprite\n\
+;                           is not needed.\n\
+; act_gfx_alt             = tag for alternative graphic for unit building extra\n\
+; act_gfx_alt2            = tag for second alternative graphic for unit building extra\n\
+; rmact_gfx               = tag specifying graphic for unit removing extra\n\
+;                           This can be \"None\" to indicate that graphic sprite\n\
+;                           is not needed.\n\
+; rmact_gfx_alt           = tag for alternative graphic for unit removing extra\n\
+; reqs                    = requirements to build the extra (see effects.ruleset\n\
+;                           and README.effects for help on requirements)\n\
+; rmreqs                  = requirements to remove the extra\n\
+; appearance_reqs         = spontaneous appearance requirements\n\
+; disappearance_reqs      = spontaneous disappearance requirements\n\
+; visibility_req          = Tech a player needs to have to see the extra\n\
+;                           This affects visibility only, for all the rules\n\
+;                           extra is still there even if player can't see it.\n\
+; buildable               = Can extra be built? Defaults to TRUE if extra has\n\
+;                           any causes indicating it can result from worker\n\
+;                           activity.\n\
+; generated               = Can map generator place the extra? Applicable\n\
+;                           for Hut, Resource, and River extras.\n\
+; build_time              = how long it takes a unit to build this extra.\n\
+;                           Value of 0 (default) means that terrain- and\n\
+;                           build activity specific time is used instead.\n\
+; build_time_factor       = This setting take effect only if build_time is 0.\n\
+;                           Terrain and activity specific build time will be\n\
+;                           multiplied by this value (default 1)\n\
+; removal_time            = how long it takes a unit to remove this extra.\n\
+;                           Value of 0 (default) means that terrain- and\n\
+;                           removal activity specific time is used instead.\n\
+; removal_time_factor     = This setting take effect only if removal_time is 0.\n\
+;                           Terrain and activity specific removal time will be\n\
+;                           multiplied by this value (default 1)\n\
+; defense_bonus           = Percent added to defense when tile has the extra\n\
+;                           (default none)\n\
+; unit_seen               = How opponents see units inside this extra\n\
+;                           \"Normal\" - Units are seen normally (default)\n\
+;                           \"Hidden\" - Units are hidden from opponents\n\
+; appearance_chance       = If extra has cause \"Appear\" and other requirements\n\
+;                           for its appearance are fulfilled, this tells how big\n\
+;                           chance it has to appear each turn. The chance is 1/10000\n\
+;                           times this value.\n\
+; disappearance_chance    = If extra has rmcause \"Disappear\" and other requirements\n\
+;                           for its disappearance are fulfilled, this tells how big\n\
+;                           chance it has to disappear each turn. The chance is 1/10000\n\
+;                           times this value.\n\
+; native_to               = List of unit classes that are considered to\n\
+;                           be inside the extra when they are on same tile\n\
+; conflicts               = List of extras that cannot be on the same tile.\n\
+;                           Bases with non-zero border_sq automatically conflict\n\
+;                           with each other.\n\
+; hidden_by               = List of extra types that will make this extra\n\
+;                           type not to show on UI if both present.\n\
+; bridged_over            = List of extra types that, if present in tile, will prevent\n\
+;                           building this extra if can't be bridged over\n\
+; flags\n\
+;   - \"NativeTile\"        = Native units consider tile native regardless of\n\
+;                           terrain\n\
+;   - \"Refuel\"            = Native units can use tile as refuel point\n\
+;   - \"TerrChangeRemoves\" = Extra gets removed when ever terrain changes even\n\
+;                           if target terrain could support it\n\
+;   - \"AlwaysOnCityCenter\" = City center tiles always have this extra type\n\
+;                           regardless of its other requirements\n\
+;   - \"AutoOnCityCenter\"  = City center tiles will automatically have this\n\
+;                           extra type if the player can build it\n\
+;   - \"ConnectLand\"       = Road style gfx on Oceanic tiles are drawn to\n\
+;                           connect to adjacent Land tiles even if they have\n\
+;                           no extra. This affects appearance only\n\
+;   - \"GlobalWarming\"     = Instances of this extra on map count towards\n\
+;                           Global Warming\n\
+;   - \"NuclearWinter\"     = Instances of this extra on map count towards\n\
+;                           Nuclear Winter\n\
+;   - \"ShowFlag\"          = Draw owner's flag\n\
+;   - \"NaturalDefense\"    = Extra's defense bonus will be counted to \"Natural\"\n\
+;                           defense layer. The defense bonus of all the extras\n\
+;                           located at the tile, native to defending unit,\n\
+;                           is calculated as a 1 + sum of bonuses from the extras\n\
+;                           on the default \"Fortification\" defense layer multiplied\n\
+;                           by the 1 + sum of bonuses from the extras on the\n\
+;                           \"Natural\" layer.\n\
+;   - \"NoStackDeath\"      = Units inside do not die all at once when attacked\n\
+; helptext                = optional help text string; should escape all raw\n\
+;                           newlines so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+bases = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Base types:\n\
+;\n\
+; extra                   = name of the extra this base section is part of\n\
+;                           (must have \"Base\" in its causes)\n\
+; gui_type                = How gui should handle this base.\n\
+;                           Value can be \"Fortress\", \"Airbase\", or \"Other\"\n\
+; border_sq               = Base will claim land ownership up to this radius,\n\
+;                           -1 to disable. If enabled, base cannot exist in\n\
+;                           city tile.\n\
+;                           Base (and border) ownership will change hands if\n\
+;                           an enemy unit occupies the tile.\n\
+; vision_main_sq          = Base will have main layer vision to this radius.\n\
+;                           Vision initially provided to owner of unit that\n\
+;                           built base; base will not then change hands unless\n\
+;                           it also claims territory, or tile has another such\n\
+;                           base or city, or another base is built (tile only\n\
+;                           tracks one owner for all bases).\n\
+; vision_invis_sq         = Base will have invisible layer vision to this radius\n\
+; vision_subs_sq          = Base will have subsurface layer vision to this radius\n\
+; flags\n\
+;   - \"NoAggressive\"      = Units inside are not considered aggressive if\n\
+;                           there`s friendly city within 3 tiles\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+roads = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Road types:\n\
+;\n\
+; extra                   = name of the extra this road section is part of\n\
+;                           (must have \"Road\" in its causes)\n\
+; first_reqs              = additional requirements to build the first part of\n\
+;                           the road, when none of the adjacent tiles have any\n\
+;                           integrating roads (see effects.ruleset and\n\
+;                           README.effects for help on requirements)\n\
+; move_cost               = how much movement it takes to travel\n\
+;                           via this road (in fractional move points, as\n\
+;                           defined by move_fragments).\n\
+;                           -1 means that road provides no speed bonus.\n\
+; move_mode               = how movement costs are applied\n\
+;   - \"Cardinal\"   = Road cost applies only on cardinal moves\n\
+;   - \"Relaxed\"    = Road cost is normal for cardinal, double for diagonal moves\n\
+;   - \"FastAlways\" = Road cost applies always between two tiles with the roads\n\
+;                    (default)\n\
+; food_incr_const         = food production added to tile regardless of terrain\n\
+; shield_incr_const       = shield production added to tile regardless of\n\
+;                           terrain\n\
+; trade_incr_const        = trade production added to tile regardless of\n\
+;                           terrain\n\
+; food_incr               = food production added to tile; multiplied by\n\
+;                           terrain-specific road_food_incr_pct\n\
+; shield_incr             = shield production added to tile; multiplied by\n\
+;                           terrain-specific road_shield_incr_pct\n\
+; trade_incr              = trade production added to tile; multiplied by\n\
+;                           terrain-specific road_trade_incr_pct\n\
+; food_bonus              = percent added to food production\n\
+; shield_bonus            = percent added to shield production\n\
+; trade_bonus             = percent added to trade production\n\
+;   In summary, output bonuses from roads are given by the formula:\n\
+;   (base_prod + roads.incr_const + roads.incr*terrain.incr_pct) * roads.bonus\n\
+; compat_special          = what kind of pre-2.5 special this road corresponds\n\
+;                           to, if any: \"Road\", \"Railroad\", \"River\", or \"None\".\n\
+;                           Used for UI and loading old savegames\n\
+; integrates              = list of road types that are suitable next steps\n\
+;                           for travel from this road type; such steps are\n\
+;                           possible for units native to both roads and don`t\n\
+;                           get cost from underlying terrain; graphics are\n\
+;                           drawn accordingly\n\
+; flags\n\
+;   - \"River\"             = Automatically generated by map generator, always\n\
+;                           flowing from land tiles to ocean\n\
+;   - \"UnrestrictedInfra\" = Use of the enemy owned road is not restricted\n\
+;                           even if server setting 'restrictinfra' is set\n\
+;   - \"JumpFrom\"          = Move to a tile nativity providing \"JumpTo\"\n\
+;                           road is considered native\n\
+;   - \"JumpTo\"            = Move from a tile nativity providing \"JumpFrom\"\n\
+;                           road is considered native\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+styles = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Nation styles\n\
+;\n\
+; name          = translatable name as seen by user\n\
+; rule_name     = (optional) internal name for savegames, rulesets etc; if\n\
+;                 not present, \"name\" is used for this purpose too. Since\n\
+;                 the name used in savegames must not change, if you want\n\
+;                 to rename an item after a ruleset has been released, you\n\
+;                 should set \"rule_name\" to the original value of \"name\".\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+citystyles = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; City styles define the way cities are drawn\n\
+;\n\
+; name             = translatable name as seen by user\n\
+; rule_name        = (optional) internal name for savegames, rulesets etc; if\n\
+;                    not present, \"name\" is used for this purpose too. Since\n\
+;                    the name used in savegames must not change, if you want\n\
+;                    to rename an item after a ruleset has been released, you\n\
+;                    should set \"rule_name\" to the original value of \"name\".\n\
+; graphic          = group of tiles to use, see cities spec for\n\
+;                    more info on city tiles\n\
+; citizens_graphic = group of citizens tiles to use, see citizens/small\n\
+;                    spec for more info on citizens tiles\n\
+;                    FIXME: this and _alt not currently used!\n\
+; reqs             = requirements for this city style (see README.effects)\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+musicstyles = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Music styles\n\
+;\n\
+; Order is important. The last one for which activation requirements\n\
+; are fulfilled is the one that plays.\n\
+;\n\
+; music_peaceful = Music to play when nation in peaceful mood\n\
+; music_combat   = Music to play when nation in combat mood\n\
+; reqs		 = requirements to activate the style (see effects.ruleset\n\
+;		   and README.effects for help on requirements)\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+effects = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Effects\n\
+;\n\
+; type                    = What the effect does. Values of multiple active effects\n\
+;                           of the same type get summed for the total.\n\
+;                           See README.effects for list of possible types\n\
+; value                   = Value added for the effect type when this effect is active,\n\
+;                           i.e., all requirements are fulfilled\n\
+; multiplier              = Name of the policy that gives a multiplier for effect's value\n\
+; reqs                    = Requirements for the effect to be active.\n\
+;                           See README.effects for help on requirements\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+disasters = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Disaster types:\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; reqs                    = requirements for disaster to happen (see effects.ruleset\n\
+;                           and README.effects for help on requirements)\n\
+; frequency               = how likely disaster is to occur\n\
+; effects\n\
+;   - \"DestroyBuilding\"   = Random building is destroyed\n\
+;   - \"ReducePopulation\"  = Reduce city size by one unless it's already 1\n\
+;   - \"ReducePopDestroy\"  = Reduce city size by one, possibly destroying the city\n\
+;   - \"EmptyFoodStock\"    = Remove all food from food stock\n\
+;   - \"EmptyProdStock\"    = Destroy current production\n\
+;   - \"Pollution\"         = One tile surrounding city polluted\n\
+;   - \"Fallout\"           = One tile surrounding city polluted with fallout\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+achievements = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Achievement types:\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; rule_name               = (optional) internal name for savegames, rulesets\n\
+;                           etc; if not present, \"name\" is used for this\n\
+;                           purpose too. Since the name used in savegames must\n\
+;                           not change, if you want to rename an item after a\n\
+;                           ruleset has been released, you should set\n\
+;                           \"rule_name\" to the original value of \"name\".\n\
+; type                    = What event grants the achievement to player.\n\
+;                           See README.achievements for list of these types.\n\
+; unique                  = If TRUE, only first one reaching the achievement will\n\
+;                           get it. Defaults to TRUE.\n\
+; value                   = Value to reach. Exact meaning of this depends on\n\
+;                           achievement type.\n\
+; culture                 = Amount of culture granted to player who gets achievement\n\
+;                           granted.\n\
+; first_msg               = Message shown to first player gaining the achievement\n\
+; cons_msg                = Message shown to consecutive players gaining the achievement\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+goods = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Goods types:\n\
+;\n\
+; name                    = translatable name as seen by user\n\
+; rule_name               = (optional) internal name for savegames, rulesets\n\
+;                           etc; if not present, \"name\" is used for this\n\
+;                           purpose too. Since the name used in savegames must\n\
+;                           not change, if you want to rename an item after a\n\
+;                           ruleset has been released, you should set\n\
+;                           \"rule_name\" to the original value of \"name\".\n\
+; reqs                    = requirements for a city to provide goods (see effects.ruleset\n\
+;                           and README.effects for help on requirements)\n\
+; from_pct                = Income for the sending end of the trade route. Default is 100\%\n\
+;                           This value is applied to both ends of bidirectional routes.\n\
+; to_pct                  = Income for the receiving end of the trade route. Default is 100\%\n\
+;                           This value is not used at all in case of bidirectional routes.\n\
+; onetime_pct             = Onetime bonuses when traderoute is established. Default is 100\%\n\
+; flags\n\
+;   - \"Bidirectional\"     = Trade route carrying the goods does not have \"from\" and \"to\"\n\
+;                           ends, but both ends are considered the same.\n\
+;   - \"Depletes\"          = Trade route gets cancelled when the source city cannot provide\n\
+;                           goods any more. Bidirectional routes gets cancelled if either\n\
+;                           one of the involved cities cannot provide goods.\n\
+; helptext                = Optional help text string; should escape all raw\n\
+;                           newlines so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+enablers = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Action enablers:\n\
+;\n\
+; action               = the action to enable.\n\
+; actor_reqs           = requirements that apply to the actor.\n\
+; target_reqs          = requirements that apply to the target.\n\
+;\n\
+; README.actions lists the possible actions and their hard coded\n\
+; requirements.\n\
+;\n\
+; An action enabler is active when its actor_reqs AND its target_reqs are\n\
+; satisfied.\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+specialists = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; A specialist is a city citizen who is not a tile worker.  Usually the\n\
+; player can control what specialist each citizen is, so long as the\n\
+; requirements for that specialist are met.\n\
+;\n\
+; Below are the entries for the specialists, one per specialist type.\n\
+; The tag name (in [specialist_*]) doesn't matter so long as it's unique.\n\
+; For each specialist the following fields may be set:\n\
+;\n\
+;\n\
+; name          = translatable (plural) name as seen by user\n\
+; rule_name     = (optional) internal name for savegames, rulesets etc; if\n\
+;                 not present, \"name\" is used for this purpose too. Since\n\
+;                 the name used in savegames must not change, if you want\n\
+;                 to rename an item after a ruleset has been released, you\n\
+;                 should set \"rule_name\" to the original value of \"name\".\n\
+; short_name    = one-character \"short name\" used (for instance) in cityrep;\n\
+;                 should be first character/abbrevation of \"name\"\n\
+; graphic       = tag specifying preferred graphic\n\
+;                 Different images based on citizen number are supported.\n\
+;                 If no such images indexed with citizen number are found,\n\
+;                 plain tag is used instead.\n\
+; graphic_alt   = fallback graphic tag in case the specialist graphic isn't\n\
+;                 found.\n\
+; reqs	        = requirements to have the specialist pick (see\n\
+;                 effects.ruleset and README.effects for help on requirements)\n\
+; helptext      = optional help text string; should escape all raw newlines\n\
+;                 so that xgettext parsing works\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"
+
+nations = "\
+\n\
+; See doc/README.nations for information on how to\n\
+; create nation rulesets, including style guidelines.\n\
+"
+
+nationgroups = "\
+\n\
+; Descriptions of nation groups\n\
+; These are more cosmetic than sets; they affect the \"pick nation\" dialog,\n\
+; random nation selection, and possibly ruleset behaviour.\n\
+; It`s OK to not define any nation groups at all.\n\
+; name          = name of the group (used adjectivally)\n\
+; hidden        = TRUE to not include this group in the \"pick nation\" dialog\n\
+;                 (for instance if it`s for use in a NationGroup requirement).\n\
+;                 Default FALSE.\n\
+; match         = How much the AI will try to select a nation in the same\n\
+;                 group\n\
+"
+
+nationsets = "\
+\n\
+; Descriptions of nation sets\n\
+; These are self-contained subsets of the available nations; one of these\n\
+; can be chosen in pregame with the \"nationset\" option. No nations\n\
+; outside the selected subset will be used.\n\
+; The first set defined is the one that is used by default. It is mandatory\n\
+; to have at least one, but if there is only one, it will be kept out of\n\
+; the user`s way.\n\
+; name          = Translatable name of the set presented in the UI.\n\
+; rule_name     = Unique persistent name; this is also visible to users as\n\
+;                 the value of the \"nationset\" server option, and presented\n\
+;                 in \"/list nationsets\". It should thus be short, in lower\n\
+;                 case, and not contain spaces or punctuation.\n\
+;                 The same saved \"nationset\" setting may be used for multiple\n\
+;                 rulesets, so if your custom ruleset has any set which\n\
+;                 contains all of its nations, it is useful to give it a\n\
+;                 rule_name of \"all\" so that users can specify that they\n\
+;                 always want the choice of all available nations by\n\
+;                 default.\n\
+; description   = Optional short user description of this set.\n\
+"
+
+clauses = "\
+\n\
+; /* <-- avoid gettext warnings\n\
+;\n\
+; Clause types\n\
+;\n\
+; Clause types that are not listed here, are not enabled at all.\n\
+;\n\
+; type                   = Type of the clause, one of \"Advance\", \"Gold\", \"Map\", \"Seamap\",\n\
+;                          \"City\", \"Ceasefire\", \"Peace\", \"Alliance\", \"Vision\", \"Embassy\"\n\
+;\n\
+; */ <-- avoid gettext warnings\n\
+"

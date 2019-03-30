@@ -1,0 +1,373 @@
+# Dutch translation of Freeciv 2.0.0's PO file.
+# Copyright (C) 2000 Free Software Foundation, Inc.
+# J.M. Maalderink <josmaalderink@gmail.com>, 2011.
+# Jelle Pelfrene <jelle.pelfrene@student.kuleuven.ac.be>, 2004-2005
+# Pieter J. Kersten <P.J.Kersten@dia.eur.nl>, 2000-2003.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Freeciv 2.0.0\n"
+"Report-Msgid-Bugs-To: http://gna.org/projects/freeciv/\n"
+"POT-Creation-Date: 2017-01-01 22:01+0200\n"
+"PO-Revision-Date: 2013-09-09 09:59+0300\n"
+"Last-Translator: Jos Maalderink <josmaalderink@hotmail.com>\n"
+"Language-Team: Nederlands <nl@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: tools/ruledit/requirers_dlg.cpp:43 tools/ruledit/req_edit.cpp:131
+msgid "Close"
+msgstr ""
+
+#: tools/ruledit/requirers_dlg.cpp:57
+#, c-format
+msgid "Removing %s"
+msgstr ""
+
+#. TRANS: %s could be any of a number of ruleset items (e.g., tech,
+#. * unit type, ...
+#: tools/ruledit/requirers_dlg.cpp:72
+#, c-format
+msgid "Needed by %s"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:108
+msgid "Failed to load comments.txt"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:142
+msgid "Print a summary of the options"
+msgstr "Geef een samenvatting van de opties"
+
+#: tools/ruledit/ruledit.cpp:144
+msgid "Print the version number"
+msgstr "Versienummer Tonen"
+
+#. TRANS: argument (don't translate) VALUE (translate)
+#: tools/ruledit/ruledit.cpp:147
+msgid "ruleset RULESET"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:148
+msgid "Ruleset to use as the starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:161
+msgid "Can only edit one ruleset at a time.\n"
+msgstr ""
+
+#: tools/ruledit/ruledit.cpp:168
+#, c-format
+msgid "Unrecognized option: \"%s\"\n"
+msgstr "Niet-herkende optie: \"%s\"\n"
+
+#: tools/ruledit/ruledit_qt.cpp:121
+#, c-format
+msgid ""
+"%s%s\n"
+"commit: %s"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:136
+msgid "Give ruleset to use as starting point."
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:148
+#, fuzzy
+msgid "Start editing"
+msgstr "Beginpositie"
+
+#: tools/ruledit/ruledit_qt.cpp:158
+msgid "Misc"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:160
+#, fuzzy
+msgid "Tech"
+msgstr "_Technieken"
+
+#: tools/ruledit/ruledit_qt.cpp:162
+msgid "Buildings"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:164
+msgid "Units"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:166
+msgid "Goods"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:168
+msgid "Governments"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:170
+msgid "Enablers"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:172
+msgid "Nations"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:181
+#, fuzzy
+msgid "Welcome to freeciv-ruledit"
+msgstr "Over Freeciv"
+
+#: tools/ruledit/ruledit_qt.cpp:199
+#, fuzzy
+msgid "Ruleset loaded"
+msgstr "Resetten"
+
+#: tools/ruledit/ruledit_qt.cpp:218
+msgid "Ruleset loading failed!"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:268
+#, fuzzy
+msgid "Freeciv Ruleset Editor"
+msgstr "Freeciv Serverlijst"
+
+#: tools/ruledit/ruledit_qt.cpp:284
+msgid "Are you sure you want to quit?"
+msgstr ""
+
+#: tools/ruledit/ruledit_qt.cpp:288
+msgid "Quit?"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:65 tools/ruledit/tab_good.cpp:65
+#: tools/ruledit/tab_tech.cpp:63 tools/ruledit/tab_unit.cpp:65
+#, fuzzy
+msgid "Rule Name"
+msgstr "Spelersnaam :"
+
+#: tools/ruledit/tab_building.cpp:73 tools/ruledit/tab_good.cpp:73
+#: tools/ruledit/tab_tech.cpp:71 tools/ruledit/tab_unit.cpp:73
+msgid "Name"
+msgstr "Naam"
+
+#: tools/ruledit/tab_building.cpp:84 tools/ruledit/tab_good.cpp:84
+msgid "Requirements"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:89
+msgid "Add Building"
+msgstr ""
+
+#: tools/ruledit/tab_building.cpp:94
+#, fuzzy
+msgid "Remove this Building"
+msgstr "Deze snelkeuze verwijderen?"
+
+#: tools/ruledit/tab_building.cpp:171
+msgid "Building with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:89
+msgid "Add Good"
+msgstr ""
+
+#: tools/ruledit/tab_good.cpp:94
+#, fuzzy
+msgid "Remove this Good"
+msgstr "Deze snelkeuze verwijderen?"
+
+#: tools/ruledit/tab_good.cpp:172
+msgid "Good with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:67
+#, fuzzy
+msgid "Ruleset name"
+msgstr "Resetten"
+
+#: tools/ruledit/tab_misc.cpp:72
+#, fuzzy
+msgid "Ruleset version"
+msgstr "Versie Ruleset:"
+
+#: tools/ruledit/tab_misc.cpp:77
+#, fuzzy
+msgid "Save to directory"
+msgstr "  -s,  --saves MAP\tBewaard spelen in map MAP\n"
+
+#: tools/ruledit/tab_misc.cpp:84
+msgid "Version suffix to directory name"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:89
+#, fuzzy
+msgid "Save now"
+msgstr "Scenario Opslaan"
+
+#: tools/ruledit/tab_misc.cpp:96
+msgid "?stat:Terrains"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:100
+msgid "?stat:Resources"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:104
+#, fuzzy
+msgid "?stat:Tech Classes"
+msgstr "_Technieken"
+
+#: tools/ruledit/tab_misc.cpp:108
+#, fuzzy
+msgid "?stat:Techs"
+msgstr "_Technieken"
+
+#: tools/ruledit/tab_misc.cpp:112
+msgid "?stat:Unit Classes"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:116
+msgid "?stat:Unit Types"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:120
+msgid "?stat:Buildings"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:124
+msgid "?stat:Nations"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:128
+msgid "?stat:Styles"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:132
+msgid "?stat:Specialists"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:136
+msgid "?stat:Governments"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:140
+msgid "?stat:Disasters"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:144
+msgid "?stat:Achievements"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:148
+msgid "?stat:Extras"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:152
+msgid "?stat:Bases"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:156
+msgid "?stat:Roads"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:160
+#, fuzzy
+msgid "?stat:Goods"
+msgstr "_Technieken"
+
+#: tools/ruledit/tab_misc.cpp:168
+msgid "Refresh Stats"
+msgstr ""
+
+#: tools/ruledit/tab_misc.cpp:231
+#, fuzzy
+msgid "Ruleset saved"
+msgstr "Resetten"
+
+#: tools/ruledit/tab_nation.cpp:49
+msgid "Use nationlist"
+msgstr ""
+
+#: tools/ruledit/tab_nation.cpp:53
+msgid "Nationlist"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:82
+msgid "Req1"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:91
+msgid "Req2"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:99
+msgid "Root Req"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:108
+msgid "Add tech"
+msgstr ""
+
+#: tools/ruledit/tab_tech.cpp:113
+#, fuzzy
+msgid "Remove this tech"
+msgstr "Deze snelkeuze verwijderen?"
+
+#: tools/ruledit/tab_tech.cpp:194
+msgid "Never"
+msgstr "Nooit"
+
+#: tools/ruledit/tab_tech.cpp:330
+msgid "Tech with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:84
+msgid "Edit Unit"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:88
+msgid "Add Unit"
+msgstr ""
+
+#: tools/ruledit/tab_unit.cpp:93
+#, fuzzy
+msgid "Remove this Unit"
+msgstr "Deze snelkeuze verwijderen?"
+
+#: tools/ruledit/tab_unit.cpp:170
+msgid "Unit type with that rule name already exist!"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:62
+msgid "Type:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:80
+msgid "Value:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:96
+msgid "Range:"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:121
+msgid "Add Requirement"
+msgstr ""
+
+#: tools/ruledit/req_edit.cpp:126
+msgid "Delete Requirement"
+msgstr ""
+
+#: tools/ruledit/validity.c:65
+msgid "Effect"
+msgstr ""
+
+#: tools/ruledit/validity.c:134
+msgid "Action Enabler"
+msgstr ""
+
+#: tools/ruledit/validity.c:154
+msgid "Music Style"
+msgstr ""

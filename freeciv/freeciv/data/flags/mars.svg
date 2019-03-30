@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg676"
+   sodipodi:version="0.34"
+   width="999"
+   height="666"
+   sodipodi:docbase="/home/vasco/dev/HEAD/freeciv/data/flags"
+   sodipodi:docname="/home/vasco/dev/HEAD/freeciv/data/flags/mars.svg">
+  <defs
+     id="defs678" />
+  <sodipodi:namedview
+     id="base" />
+  <g
+     id="g612">
+    <rect
+       style="font-size:12;fill:#ff0000;fill-rule:evenodd;stroke-width:1;"
+       id="rect679"
+       width="40.000000"
+       height="80.000000"
+       x="0.000000"
+       y="0.000000"
+       transform="scale(8.325,8.325)" />
+    <rect
+       style="font-size:12;fill:#009933;fill-rule:evenodd;stroke-width:1;fill-opacity:1;"
+       id="rect680"
+       width="40"
+       height="80"
+       x="40"
+       y="0"
+       transform="scale(8.325,8.325)" />
+    <rect
+       style="font-size:12;fill:#0000cc;fill-rule:evenodd;stroke-width:1;fill-opacity:1;"
+       id="rect681"
+       width="40"
+       height="80"
+       x="80"
+       y="0"
+       transform="scale(8.325,8.325)" />
+  </g>
+</svg>

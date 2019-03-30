@@ -1,0 +1,5 @@
+# Server commands for Freeciv stub ruleset
+#
+
+set barbarians DISABLED
+rulesetdir stub

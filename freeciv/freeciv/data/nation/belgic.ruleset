@@ -1,0 +1,75 @@
+[nation_belgic]
+
+name=_("Belgic")
+plural=_("?plural:Belgae")
+groups="Ancient", "European"
+legend=_("The Belgae were an Ancient Celtic tribe that inhabited the area\
+ that would later become the Roman province of Gallia Belgica. Their origin\
+ was perhaps mixed Celtic and Germanic, because they had come to Gaul from\
+ behind the Rhine and included some Germanic elements, but the names\
+ of their chiefs were Gallic. Julius Caesar famously called the Belgae the\
+ bravest amongst the inhabitants of Gaul. They put up stiff resistance\
+ against Caesar's legions but eventually succumbed to the Romans. The\
+ modern country of Belgium derives its name from the Belgae.")
+leaders = {
+ "name",                "sex"
+ "Botiowios",           "Male"
+ "Kaiantolos",          "Male"
+ "Rigatikos",           "Male"
+ "Diwitiakos",          "Male"
+ "Galba",               "Male"
+ "Kogidumnos",          "Male"
+ "Ambiorix",            "Male"
+}
+flag="belgic"
+flag_alt = "belgium"
+style = "Celtic"
+
+ruler_titles = {
+ "government",           "male_title",         "female_title"
+ "Fundamentalism",       _("High Druid %s"),   _("?female:High Druid %s")
+ "Communism",            _("Brother %s"),      _("Sister %s")
+ "Republic",             _("Spokesman %s"),    _("Spokeswoman %s")
+ "Democracy",            _("Speaker %s"),      _("?female:Speaker %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Belgian", "Dutch", "French", "English", "British",
+               "Northumbrian", "Walloon", "Flemish" ; Celtic
+civilwar_nations = "Gallic", "Briton", "Boian", "Helvetian"
+
+cities =
+ "Nowiodunom",
+ "Atuatuka",
+ "Bibrax",
+ "Nemetokenna",
+ "Samarobriwa",
+ "Bratuspantiom",
+ "Durokortorom",
+ "Weromandorom",
+ "Trewerorom",
+ "Bononia",
+ "Diwodorom",
+ "Menapiorom",
+ "Turnakom",
+ "Bagakom",
+
+; British Belgic settlements:
+ "Wenta",
+ "Iskalis",
+ "Klausentom",
+ "Onna",
+ "Abona",
+ "Werlykio",
+ "Sorwiodunom",
+ "Brige",
+ "Windomis",
+ "Kunetio",
+ "Spinis",
+ "Kallewa",
+ "Nowiomagos",
+ "Anderitom",
+ "Menapia"

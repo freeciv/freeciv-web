@@ -1,0 +1,77 @@
+[nation_vietnamese]
+
+name=_("Vietnamese")
+plural=_("?plural:Vietnamese")
+groups="Medieval", "Early Modern", "Modern", "Asian"
+legend=_("The Vietnamese nation was founded in the first century CE by\
+ twin sisters who became the war leaders of a revolt against a Chinese\
+ military governor.")
+
+leaders = {
+ "name",                "sex"
+ "Trưng Trắc",          "Female"
+ "Trưng Nhị",           "Female"
+ "Ly Bon",              "Male"
+ "Gia Long",            "Male"
+ "Bảo Đại",             "Male"
+ "Hồ Chí Minh",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Emperor %s"),   _("Empress %s")
+}
+
+flag="vietnam"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "south vietnamese", "cham"
+
+; City order from:
+; http://de.wikipedia.org/wiki/Liste_der_Städte_in_Vietnam
+; Vietnamese orthography from:
+; http://en.wikipedia.org/wiki/List_of_cities_in_Vietnam
+
+cities =
+  "Hà Nội",
+  "Thành phố Hồ Chí Minh",	; alt. "Sài Gòn"
+  "Hải Phòng",
+  "Đà Nẵng",
+  "Biên Hòa",
+  "Huế",
+  "Nha Trang",
+  "Cần Thơ",
+  "Rạch Giá",
+  "Qui Nhơn",
+  "Vũng Tàu",
+  "Nam Định",
+  "Phan Thiết",
+  "Long Xuyên",
+  "Hạ Long",			; alt. "Hong Gai"
+  "Buôn Mê Thuột",
+  "Cam Ranh",
+  "Cẩm Phả",
+  "Thái Nguyên",
+  "Đà Lạt",
+  "Mỹ Tho",
+  "Sóc Trăng",
+  "Pleiku",
+  "Thanh Hóa",
+  "Cà Mau",
+  "Bạc Liêu",
+  "Vinh",
+  "Hòa Bình",
+  "Vĩnh Long",
+  "Kontum",
+  "An Lộc",
+  "Bến Tre",
+  "Cao Bằng",
+  "Lạng Sơn",
+  "Điện Biên Phủ",
+  "Hội An",
+  "Quảng Ngãi",
+  "Tuyên Quang"

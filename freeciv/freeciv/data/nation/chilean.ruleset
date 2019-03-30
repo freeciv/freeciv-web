@@ -1,0 +1,124 @@
+[nation_chilean]
+
+name=_("Chilean")
+plural=_("?plural:Chileans")
+groups="Modern", "American"
+legend=_("Chile is located on the south-western coast of South America.\
+ Chile declared its independence from Spain in 1810. At the expense of\
+ Bolivia, Peru and the indigenous Mapuche people, Chile more than doubled\
+ its territory in the 19th century. Often having been more stable and\
+ prosperous than its neighbors, Chile currently is the most developed\
+ country of Latin America.")
+
+leaders = {
+ "name",                        "sex"
+ "Pedro de Valdivia",           "Male"
+ "Bernardo O'Higgins",          "Male"
+ "José Miguel Carrera",         "Male"
+ "Manuel Blanco Encalada",      "Male"
+ "Diego Portales",              "Male"
+ "Manuel Montt",                "Male"
+ "Arturo Alessandri",           "Male"
+ "Eduardo Frei Montalva",       "Male"
+ "Salvador Allende",            "Male"
+ "Augusto Pinochet",            "Male"
+ "Michelle Bachelet",           "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Captain General %s"), _("?female:Captain General %s")
+ "Fundamentalism",  _("Archbishop %s"),      _("Mother Superior %s")
+}
+
+flag="chile"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+
+init_units=""
+civilwar_nations = "mapuche", "rapa nui"
+
+cities =
+ "Santiago",
+ "Concepción",
+ "Valparaíso (hills)",
+ "Rancagua",
+ "Talca",
+ "Punta Arenas (ocean)",
+ "Copiapó",
+ "La Serena",
+ "Puerto Montt (ocean)",
+ "Antofagasta",
+ "Iquique",
+ "Coyhaique",
+ "Temuco (forest, river)",
+ "Viña del mar (ocean)",
+ "Coquimbo",
+ "San Antonio",
+ "La Calera (hills)",
+ "Chillán",
+ "Talcahuano",
+ "Osorno",
+ "Valdivia",
+ "Puerto Varas (ocean)",
+ "Llanquihue",
+ "Ancud",
+ "Castro",
+ "Calama",
+ "Arica",
+ "Constitución",
+ "Chañaral",
+ "Cauquenes",
+ "Puente Alto (river, hills)",
+ "Talagante",
+ "Melipilla",
+ "Peumo",
+ "Puerto Natales (ocean)",
+ "Lota",
+ "Ovalle",
+ "Huasco",
+ "Mejillones",
+ "Victoria",
+ "San Felipe",
+ "Frutillar",
+ "Illapel",
+ "Angol",
+ "San Fernando",
+ "Toltén",
+ "Curicó",
+ "Pisagua",
+ "Tocopilla",
+ "Vallenar",
+ "Caldera",
+ "Lebu",
+ "La Ligua",
+ "Villarrica",
+ "Pucón",
+ "Puerto Aisén (ocean)",
+ "Tomé",
+ "Mulchén",
+ "Taltal",
+ "Putre",
+ "Vicuña",
+ "Combarbalá",
+ "Los Andes (hills)",
+ "Quillota",
+ "Molina",
+ "Chanco",
+ "Parral",
+ "Bulnes",
+ "Yungay",
+ "Coronel",
+ "Yumbel",
+ "Traiguén (river)",
+ "Pitrufquén",
+ "Calbuco (ocean)",
+ "Maullín (swamp)",
+ "Pelequén",
+ "Algarrobo",
+ "Puerto Toro (ocean)",
+ "Cachiyuyo",
+ "Pelotillehue"

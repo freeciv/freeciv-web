@@ -1,0 +1,155 @@
+[nation_texan]
+
+name=_("Texan")
+plural=_("?plural:Texans")
+groups="American"
+legend=_("Texas, \"the Lone Star State\" is the second largest and second\
+ most populous state of the USA, famous for its \"larger than life\"\
+ cowboy mentality. During its history, Texas has been ruled in full or in\
+ part by six countries: France, Spain, Mexico, the Texas Republic, the\
+ Confederacy and the USA - as expressed in the slogan \"six flags over\
+ Texas\".")
+
+leaders = {
+ "name",                "sex"
+ "Stephen F. Austin",   "Male"
+ "Juan N. Seguin",      "Male"
+ "Sam Houston",         "Male"
+ "Mirabeau B. Lamar",   "Male"
+ "James P. Henderson",  "Male"
+ "Ma Ferguson",         "Female"
+ "John Connally",       "Male"
+ "Lyndon B. Johnson",   "Male"
+ "George W. Bush",      "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheriff %s"),   _("?female:Sheriff %s")
+ "Fundamentalism",  _("Reverend %s"),  _("?female:Reverend %s")
+}
+
+flag="texas"
+flag_alt = "usa"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="chilean" ; similar flag
+civilwar_nations="american", "mexican", "hasinay", "comanche", "apache"
+
+cities =
+ "Austin (hills, river, grassland, !ocean, !swamp)",
+ "San Antonio (river, plains, hills, !swamp, !ocean)",
+ "Dallas (river, plains, grassland, !hills, !swamp, !ocean, !mountains)",
+ "Houston (ocean, river, swamp, !mountains, !hills)",
+ "Galveston (ocean, !mountains, !hills)",
+ "Fort Worth (plains, river, grassland, !ocean, !mountains)",
+ "Washington-on-the-Brazos (river, !mountains)",
+ "Fredericksburg (hills, grassland, !ocean)",
+ "Beaumont (forest, river, swamp, !mountains, !hills)", 
+ "Corpus Christi (ocean, swamp, !mountains, !hills)",
+ "El Paso (river, hills, !ocean, mountains, !grassland)",
+ "Lubbock (plains, desert, !ocean, !grassland)",
+ "Amarillo (plains, desert, !ocean)",
+ "Wichita Falls (river, !swamp, plains)",
+ "Midland (plains, desert, !ocean, !grassland)",
+ "Odessa (plains, desert, !ocean, !grassland, !forest, !swamp)",
+ "Abilene (plains, desert, !ocean, !forest, !swamp)",
+ "Waco (river, grassland, !ocean, !mountains, !swamp)",
+ "Bastrop (hills, forest, river)",
+ "La Grange (plains, forest, river)",
+ "Burnet (hills, plains, !ocean)",
+ "Pecos (river, !swamp, !grassland)",
+ "Irving (river, grassland, !ocean, !mountains)",
+ "Denton (plains, !ocean, !mountains)",
+ "Arlington (plains, !ocean, !mountains)",
+ "Texarkana (forest, !desert, !ocean)",
+ "Port Arthur (ocean, swamp, !mountains)",
+ "Pasadena (ocean, swamp, !mountains)",
+ "Port Lavaca (ocean, swamp, !mountains)",
+ "Freeport (ocean, swamp)",
+ "Port Isabel (ocean, swamp)",
+ "Aransas Pass (ocean, swamp)",
+ "Brownsville (river, swamp)",
+ "Laredo (plains, !ocean, !swamp)",
+ "Nacogdoches (forest, plains, !mountains)",
+ "Lufkin (forest, !ocean)",
+ "Killeen (!mountains)",
+ "College Station (river, forest, !ocean, !mountains)",
+ "Waxahachie (plains, river, !mountains)",
+ "Bryan (forest, river, plains, !ocean)",
+ "Huntsville (forest, river, !ocean, !mountains)",
+ "Texas City (ocean, swamp, !mountains)",
+ "Tyler (forest, !ocean, !mountains)",
+ "Orange (river, swamp, !mountains)",
+ "Fort Stockton (mountains, desert, !grassland, !ocean)",
+ "Garland (grassland, plains, !ocean, !mountains)",
+ "Carrollton (plains, !ocean, !swamp)",
+ "Mesquite (plains, !ocean, !forest, !swamp, !mountains)",
+ "Stephenville (plains, !ocean)",
+ "New Braunfels (river, plains, !mountains)",
+ "San Marcos (river, plains, !mountains)",
+ "Plainview (plains, desert, !ocean, !swamp, !grassland)",
+ "Childress (plains, desert, !ocean, !swamp)",
+ "Brownwood (plains, !swamp)",
+ "Eagle Pass (river)",
+ "Lake Jackson (!ocean)",
+ "Sherman (!ocean)",
+ "Del Rio (river)",
+ "Baytown (ocean, !mountains)",
+ "Sugar Land (river, grassland)",
+ "Kerrville",
+ "McAllen (river)",
+ "San Angelo (river, plains, !forest, !swamp)",
+ "Round Rock (river)",
+ "Lampasas (river)",
+ "The Woodlands (forest)",
+ "Wharton",
+ "Temple",
+ "Victoria (swamp, river)",
+ "Kingsville",
+ "Weatherford (plains, !ocean)",
+ "Harlingen",
+ "Muleshoe",
+ "Kilgore",
+ "Canyon",
+ "Lamesa",
+ "Big Spring",
+ "Alpine",
+ "Dalhart (!ocean)",
+ "Sweetwater",
+ "Snyder",
+ "Dumas",
+ "Borger",
+ "Pampa",
+ "Perryton",
+ "Tuna",
+ "Velasco",
+ "Columbia",
+ "Pharr",
+ "Plano (plains, !ocean, !mountains)",
+ "Edinburg",
+ "McKinney",
+ "Richmond",
+ "Conroe",
+ "Georgetown",
+ "Angleton",
+ "Belton",
+ "Cleburne",
+ "Uvalde",
+ "Boston",
+ "Seguin",
+ "Greenville",
+ "Gatesville",
+ "Liberty",
+ "Paris",
+ "Canton",
+ "Bay City (ocean)",
+ "Jasper",
+ "Mount Pleasant",
+ "Anahuac (ocean)",
+ "Marshall",
+ "Mentone (desert, plains, mountains)"

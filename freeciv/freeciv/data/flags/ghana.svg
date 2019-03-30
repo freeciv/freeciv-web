@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="300">
+	<rect width="450" height="300" fill="#006b3f"/>
+	<rect width="450" height="200" fill="#fcd116"/>
+  <rect width="450" height="100" fill="#ce1126"/>
+  <g
+     id="g3239"
+     transform="matrix(0.2498513,0,0,0.2509154,90.944649,67.435352)"
+     style="fill:#000000">
+    <path
+       id="path205"
+       style="fill:#000000"
+       transform="matrix(11.9122,0,0,12.4579,-2509.82,-6130.71)"
+       d="M 266.186,534.45 L 255.778,527.018 L 245.421,534.523 L 249.273,522.327 L 238.935,514.796 L 251.725,514.691 L 255.692,502.532 L 259.744,514.663 L 272.534,514.679 L 262.249,522.281 L 266.186,534.45 z" />
+  </g>
+</svg>

@@ -1,0 +1,74 @@
+[nation_norman]
+
+name=_("Norman")
+plural=_("?plural:Normans")
+groups="Medieval", "European"
+legend=_("After several devastating Viking raids on what is today northern\
+ France and a siege of Paris, the Frankish king Charles the Simple granted\
+ the Viking leader Rollo a fiefdom in the area. This fief evolved into the\
+ Duchy of Normandy, of which the most famous duke is William II \"the\
+ Conqueror\" who invaded England in 1066.")
+
+; See http://nrm.wikipedia.org/wiki/Liste_des_dus_de_Normaundie
+leaders = {
+ "name",        "sex"
+ "Rolloun",     "Male" ; English: Rollo
+ "Ricard I",    "Male" ; English: Richard
+ "Robert II",   "Male"
+ "Gllâome II",  "Male" ; English: William the Conqueror
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Democracy",        _("Chancellor %s"),   _("?female:Chancellor %s")
+ "Despotism",        _("Duke %s"),         _("Duchess %s")
+ "Fundamentalism",   _("Bishop %s"),       _("Mother Superior %s")
+}
+
+flag="normandy"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "viking", "french", "english", "sicilian"
+
+cities =
+; Major cities in Normandy
+ "Rouën",
+ "Caën",
+ "Lé Hâvre",
+ "Tchidbouo", ; French: Cherbourg
+; More cities and towns of Normandy in order of 1999 population
+ "Évreux",
+ "Dieppe",
+ "Alençoun", ; French: Alençon
+ "Lisieux",
+ "Saint-Lô",
+ "Bayeus", ; French: Bayeux
+ "Coutanches", ; French: Coutances
+ "Avranches",
+ "Honflieu", ; French: Honfleur
+ "Falaise",
+ "Villers-Bocage",
+ "Doudeville",
+ "Mortain",
+ "Houlgate",
+ "Arromanches",
+; A selection of parishes of the Channel Islands
+ "Saint Hélyi", ; English: Saint Helier
+ "Saint Brélade",
+ "Saint Pierre Port (ocean)", ; English: Saint Peter Port
+ "Sainte-Âone", ; English: Saint Anne
+; Random assortment of Norman place-names with Scandinavian origin
+ "Tournebu",
+ "Cricqueville",
+ "Dieppedale",
+ "Lé Houlme (ocean)",
+ "Drubec",
+ "Carquebu",
+ "Lé Bû-sur-Rouvres",
+ "Barneville",
+ "Oudalle",
+ "Torgistorp"

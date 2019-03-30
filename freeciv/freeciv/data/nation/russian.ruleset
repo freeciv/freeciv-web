@@ -1,0 +1,194 @@
+[nation_russian]
+
+translation_domain="freeciv"
+
+name=_("Russian")
+plural=_("?plural:Russians")
+groups="Early Modern", "Modern", "European", "Asian", "Core"
+legend=_("Russia is the largest country in the world, occupying a huge\
+ part of both Europe and Asia. According to legend, Slavic tribes of\
+ Novgorod invited the Varangian (Viking) king Oleg to bring order to\
+ their land. Oleg established the Kievan Rus' in this realm, the first\
+ Russian state. By the 11th century, the Kievan Rus' had disintegrated\
+ into lesser princedoms, which were once again united into one state by\
+ Ivan III in the 15th century. After a decisive victory over Sweden and\
+ large territorial gains, Peter I pronounced the Russian Empire in 1721.\
+ The Russian Empire lasted until 1917 when a socialist revolution\
+ dethroned the last Russian emperor. After the dissolution of the USSR in\
+ 1991 Russia appeared on the world map again, now as a federal republic.")
+
+leaders = {
+ "name",                        "sex"
+ "Oleg",                        "Male"
+ "Ryurik",                      "Male" ; a.k.a. Rurik the Varangian
+ "Vladimir Krasno Solnyshko",   "Male"
+ "Vladimir Monomakh",           "Male"
+ "Vsevolod Bolshoe Gnezdo",     "Male"
+ "Aleksandr Nevsky",            "Male"
+ "Dmitriy Donskoy",             "Male"
+ "Ivan III",                    "Male" ; "the Great"
+ "Ivan Grozny",                 "Male" ; "the Terrible"
+ "Petr I",                      "Male" ; Peter the Great
+ "Anna Ioannovna",              "Female"
+ "Elizaveta Petrovna",          "Female"
+ "Ekaterina II",                "Female" ; Catherine the Great
+ "Pavel I",                     "Male"
+ "Nikolay I",                   "Male"
+ "Aleksandr II",                "Male"
+ "Aleksandr Kerensky",          "Male"
+ "Vladimir Lenin",              "Male"
+ "Iosif Stalin",                "Male"
+ "Vladimir Putin",              "Male"
+}
+
+; Alternative titles for an 'Imperial' Monarchy is Imperator/Imperatritsa
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Pretender %s"), _("?female:Pretender %s")
+ "Despotism",       _("Prince %s"),    _("Princess %s")
+ "Monarchy",        _("Tsar %s"),      _("Tsaritsa %s")
+ "Fundamentalism",  _("Patriarch %s"), _("Matriarch %s")
+}
+
+flag="russia"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; Chain of similar flags:
+conflicts_with="slovenian", "slovakian",
+; Transitional state
+ "soviet"
+civilwar_nations="Soviet", "Siberian", "Tatar", "Cossack"
+
+cities =
+ "Moskva",
+ "Sankt-Peterburg (ocean)",
+ "Tver (river)",
+ "Velikiy Novgorod (lake, river)",
+ "Yekaterinburg",
+ "Samara",
+ "Pskov",
+ "Ryazan (river)",
+ "Vladimir",
+ "Yaroslavl (river)",
+ "Novosibirsk (river)",
+ "Smolensk (river)",
+ "Bryansk",
+ "Oryol",
+ "Voronezh",
+ "Saransk",
+ "Perm",
+ "Ufa",
+ "Saratov (river)",
+ "Volgograd (river)",
+ "Tomsk",
+ "Petrozavodsk",
+ "Rostov-na-Donu (river)",
+ "Omsk",
+ "Chelyabinsk",
+ "Irkutsk",
+ "Vladivostok (ocean)",
+ "Khabarovsk",
+ "Krasnoyarsk",
+ "Suzdal",
+ "Vologda",
+ "Murmansk (ocean, tundra)",
+ "Arkhangelsk (ocean)",
+ "Krasnodar",
+ "Stavropol",
+ "Murom",
+ "Kaluga",
+ "Tula",
+ "Kursk",
+ "Tambov",
+ "Lipetsk",
+ "Belgorod",
+ "Nizhny Novgorod",
+ "Kostroma",
+ "Izhevsk",
+ "Astrakhan",
+ "Kazan",
+ "Orenburg",
+ "Kurgan",
+ "Tyumen",
+ "Kemerovo",
+ "Yakutsk (tundra)",
+ "Chita",
+ "Magadan (ocean)",
+ "Norilsk (tundra)",
+ "Novokuznetsk",
+ "Barnaul",
+ "Makhachkala",
+ "Kirov",
+ "Penza",
+ "Khanty-Mansiysk",
+ "Ulyanovsk",
+ "Cheboksary",
+ "Ivanovo",
+ "Grozny",
+ "Syktyvkar",
+ "Ulan-Ude",
+ "Kaliningrad",
+ "Blagoveshchensk",
+ "Nalchik",
+ "Yoshkar-Ola",
+ "Vladikavkaz (mountains)",
+ "Yuzno-Sakhalinsk",
+ "Salekhard",
+ "Magas",
+ "Maykop",
+ "Cherkessk",
+ "Petropavlovsk-Kamchatsky (tundra)",
+ "Kyzyl",
+ "Elista",
+ "Gorno-Altaysk",
+ "Birobidzhan",
+ "Anadyr (ocean, tundra)",
+ "Naryan-Mar",
+ "Balashikha",
+ "Gatchina",
+ "Surgut",
+ "Cherepovets",
+ "Novy Urengoy",
+ "Nazran",
+ "Kudymkar",
+ "Dudinka",
+ "Ust-Ordynsky",
+ "Aginskoye",
+ "Tura",
+ "Palana",
+ "Tolyatti",
+ "Naberezhnye Chelny",
+ "Magnitogorsk",
+ "Nizhny Tagil",
+ "Sochi (ocean)",
+ "Sterlitamak",
+ "Komsomolsk-na-Amure (river)",
+ "Taganrog",
+ "Bratsk",
+ "Nizhnevartovsk",
+ "Novorossiysk",
+ "Novocherkassk",
+ "Okhotsk (ocean)",
+ "Derbent",
+ "Elektrostal",
+ "Balakovo",
+ "Tobolsk",
+ "Volzhskiy",
+ "Dzerzhinsk",
+ "Khimki",
+ "Prokopyevsk",
+ "Vyborg",
+ "Engels",
+ "Krasny Bor",
+ "Verkhoyansk (tundra)",
+ "Borodino",
+ "Chernyakhovsk",
+ "Pushkin",
+ "Azov (ocean)",
+ "Podolsk"

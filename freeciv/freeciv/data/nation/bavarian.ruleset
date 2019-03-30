@@ -1,0 +1,85 @@
+[nation_bavarian]
+
+name=_("Bavarian")
+plural=_("?plural:Bavarians")
+groups="Medieval", "Early Modern", "European"
+legend=_("Bavaria, before national unification in 1870 CE, was one of the\
+ largest of the German kingdoms.") 
+
+leaders = {
+ "name",                "sex"
+ "Tassilo III",         "Male"
+ "Welf I",              "Male"
+ "Maximilian",          "Male"
+ "Adelheid",            "Female"
+ "Max II Emanuel",      "Male"
+ "Maximilian I Joseph", "Male"
+ "Ludwig II",           "Male"
+ "Kurt Eisner",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Duke %s"),         _("Duchess %s")
+ "Fundamentalism",  _("Bishop %s"),       _("Mother Superior %s")
+ "Democracy",       _("Minister-President %s"), _("?female:Minister-President %s")
+}
+
+flag="bavarian"
+flag_alt = "-"
+style = "European"
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "franconian", "austrian", "tyrolian", "palatinate"
+
+cities =
+ "München",
+ "Regensburg",
+ "Ingolstadt",
+ "Landshut",
+ "Rosenheim",
+ "Eichstätt",
+ "Passau",
+ "Straubing",
+ "Mühldorf",
+ "Freising",
+ "Deggendorf",
+ "Erding",
+ "Freilassing",
+ "Altötting",
+ "Pfaffenhofen",
+ "Vilshofen",
+ "Plattling",
+ "Traunstein",
+ "Burghausen",
+ "Dingolfing",
+ "Nürnberg",
+ "Augsburg",
+ "Würzburg",
+ "Fürth",
+ "Erlangen",
+ "Bayreuth",
+ "Bamberg",
+ "Aschaffenburg",
+ "Kempten",
+ "Neu-Ulm",
+ "Schweinfurt",
+ "Hof",
+ "Amberg",
+ "Dachau",
+ "Ansbach",
+ "Neumarkt",
+ "Garmisch-Partenkirchen",
+ "Bad Kissingen",
+ "Rothenburg ob der Tauber",
+ "Donauwörth",
+ "Bad Reichenhall",
+ "Marktredwitz",
+ "Füssen",
+ "Berchtesgaden",
+ "Landau an der Isar",
+ "Neustadt an der Aisch"
+
+
+

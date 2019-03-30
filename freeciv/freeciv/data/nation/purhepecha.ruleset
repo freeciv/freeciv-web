@@ -1,0 +1,109 @@
+[nation_purhepecha]
+
+name=_("P'urhepecha")
+plural=_("?plural:P'urhepecha")
+groups="Medieval", "American"
+
+legend=_("The P'urhepecha or Tarascans are a people native to the modern\
+ Mexican state of Michoacán, the heart of a former empire known to them\
+ as Irechikua Ts'intsuntsani, meaning the \"lands of Tzintzuntzan,\" their\
+ capital city. Their kings were the perennial enemy of the Aztec empire,\
+ who attempted an unsuccessful invasion of the P'urhepecha lands. When the\
+ Spanish arrived and began their conquest of Mexico in 1519, the Aztecs\
+ sent an embassy seeking the support of the P'urhepecha, but were rebuffed.\
+ The conquistadores' reputation preceded them and the P'urhepecha offered\
+ to become a subject state of the King of Spain rather than meet the same\
+ fate as their former enemies, the Aztecs. Nevertheless, the transition to\
+ Spanish rule was not smooth and devolved into violence. The empire,\
+ founded around 1450 CE, collapsed in 1530.")
+
+leaders = {
+ "name",                "sex"
+ "Taríakuri",           "Male"
+ "Hiripan",             "Male"
+ "Tangáxuan I",         "Male"
+ "Tsïtsïkipandakuarhe", "Male"
+ "Suangua",             "Male"
+ "Tangáxuan II",        "Male"
+ "Erendirha",           "Female" ; Eréndira
+}
+
+flag="purhepecha"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="aztec", "hopi"
+
+cities =
+ "Ts'intsuntsani",	;Tzintzuntzan
+ "Jiuatsï",		;Ihuatzio
+ "P'atskuarhu",		;Pátzcuaro
+ "Chérani",		;Cheran
+ "Uetamo",		;Huetámo
+ "Uruapani",		;Uruapan
+ "Uaianarhio",		;Morelia/Guayangareo
+ "Kuanajuato",		;Guanajuato
+ "K'eretarhu",		;Querétaro
+ "Purhuandirhu",	;Puruándiro
+ "Parhikutini",		;Paricutín
+ "Kerendarhu",		;Queréndaro
+ "Akambarhu",		;Acámbaro
+ "Tsakapu Takanendam",	;Zacapu
+ "Tsinaparhu",		;Zináparo
+ "Irapuato",		;Irapuato
+ "Janitsïo (lake)",	;Janitzio
+ "Marhabatio",		;Maravatío
+ "Tsitákuarhu",		;Zitácuaro
+ "Takambarhu",		;Tacámbaro
+ "Ts'irauani",		;Zirahuén
+ "Epénjimu",		;Pénjamo
+ "Tingambato",		;Tingabato
+ "Parhanharhikutirimíkuarhu",	;Nuevo San Juan Paranguaricutiro
+ "Tsirio",		;Tzirio
+ "Ts'irondarhu",	;Ziróndaro
+ "Taximarhu",		;Ciudad Hidalgo/Taximaroa
+ "Chupikuarhu",		;Chupícuaro
+ "Iurhirio",		;Yuriria
+ "Kukúpao",		;Quiroga
+ "Urichu",		;Urichu
+ "Ts'inapekuarhu",	;Zinapécuaro
+ "Uandakareo",		;Huandacareo
+ "Chérani Jájtsïkurini",	;Cheranástico
+ "Erokurhinirhu", 	;Erongaricuaro
+ "Akambari",		;Acambay
+ "Akarhinirhu",		;Acariniro
+ "Kamembarhu",		;Valle de Santiago/Camémbaro
+ "Angahuani",		;Angahuán
+ "Karapani",		;Carapan
+ "Ch'amakuerhu",	;Comonfort
+ "Eraxamani",		;La Cañada
+ "Anhamukutirhu",	;Angamacutiro
+ "Samora",		;Zamora
+ "Sïuinio",		;Sevina
+ "Tukurhu",		;Tacuro
+ "Iurhirapundarhu",	;Yurirapúndaro
+ "Uánti",		;Huáncito
+ "Kuaimarhu",		;Huanimaro
+ "Pamenhikuarhu",	;Panindícuaro
+ "Tarhimurhu",		;Tarimoro
+ "T'urhikuarhu",	;Turícuaro
+ "Peribani",		;Peribán
+ "Ichani",		;Ichán
+ "Ichupio",		;Ichupio
+ "Marhuata",		;Maruata
+ "Iauatsini",		;Nahuatzen
+ "Nurhio",		;Nurío
+ "Tirindarhu",		;Tiríndaro
+ "Urhiantato",		;Uriangato
+ "Tsákani",		;Zacán
+ "Tiripitio",		;Tiripetío
+ "Pichatarhu",		;Pichátaro
+ "Kintsio",		;Quinceo
+ "Tarhandakuarhu",	;Tarandácuaro
+ "Urapichu",		;Urapicho
+ "Ts'irakuarhitirhu"	;Ziracuaretiro
+

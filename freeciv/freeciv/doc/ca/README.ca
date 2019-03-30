@@ -1,0 +1,507 @@
+==================
+Freeciv Versió 2.2
+==================
+
+Benvingut a Freeciv!
+
+Aquest arxiu conté Freeciv, un joc lliure semblant al Civilization,
+principalment per X sota Unix. Té suport per jocs en multijugador tant
+en local com per xarxa, i un IA que a la majoria de gent li costa de
+guanyar.
+
+El Freeciv intenta ser bàsicament compatible a nivell de regles amb
+el Civilization II [tm], publicat per Sid Meier i Microprose [tm].
+Algunes regles són diferents on ens sembla que té més sentit, i tenim
+un munt de paràmetres retocables per fer possible la personalització
+del joc.
+
+El Freeciv s'ha implementat de forma totalment independent del
+Civilization; no has de tenir-lo per jugar al Freeciv.
+
+
+Traduccions:
+=============
+
+Pots trobar una versió traduïda d'aquest fitxer, així com d'altres parts
+de la documentació de Freeciv, als següents llocs:
+
+	Anglès			./doc
+	Holandès		./doc/nl
+	Francès			./doc/fr
+	Alemany			./doc/de
+	Italià			./doc/it
+	Japonès			./doc/ja
+	Suec			./doc/sv
+
+Encara que no tinguis traducció per la teva llengua, pot ser que el joc
+la suporti. Mira la traducció "Suport d'idiomes propis", més avall.
+
+
+Pàgina web:
+=========
+
+El web de Freeciv és aquí:
+
+  http://www.freeciv.org/
+
+Et convidem a visitar-lo. Pots obtenir-hi les últimes notícies sobre el
+Freeciv, versions i pegats, informació sobre les llistes de correu de
+Freeciv, i veure el metaservidor de Freeciv, que registra partides que
+es juguen per tot el món.
+
+
+Llicència:
+==========
+
+El Freeciv es distribueix sota la Llicència GPL. En resum, pots copiar
+aquest programa (inclòs el codi font) lliurement, però mira't el fitxer
+COPYING per tots els detalls.
+
+
+Compilar i instal·lar:
+======================
+
+Si us plau, llegeix el fitxer INSTALL amb atenció per instruccions sobre
+la compilació i la instal·lació de Freeciv a la teva màquina.
+
+
+Engegar una partida nova:
+=========================
+
+De fet, el Freeciv són dos programes: un servidor i un client. Quan
+una partida està en progrés, hi haurà un programa servidor en execució,
+i tants programes client com jugadors humans. El servidor no necessita
+X, però els clients sí.
+
+  NOTA:
+  Els exemples següents assumeixen que el Freeciv s'ha instal·lat al
+  teu sistema, i que el directori que conté els programes "civclient"
+  i "civserver" és al teu PATH. Si el Freeciv no està instal·lat, pots
+  fer servir els programes "civ" i "ser", que es poden trobar al directori
+  principal de Freeciv. Es fan servir exactament igual que "civclient" i
+  "civserver".
+
+Executar Freeciv implica engegar el servidor, després el(s) client(s)
+i IA(s), i després dir-li al servidor que comenci la partida. Aquests
+són els passos:
+
+Servidor:
+
+  Per engegar el servidor:
+
+  |  % civserver
+
+  O per una llista d'opcions de línia de comandes:
+
+  |  % civserver --help
+
+  Un cop el servidor està engegat, apareix un '>':
+
+  |  Per ajuda introductòria, escriu 'help'.
+  |  >
+
+  i pots veure aquesta informació amb la comanda help:
+
+  |  > help
+  |  Benvingut - aquesta és l'ajuda d'introducció al servidor Freeciv.
+  |  
+  |  Al servidor hi ha dos conceptes importants, Comandes i Opcions.
+  |  Les Comandes, com 'help', s'usen per a interactuar amb el servidor.
+  |  Hi ha comandes que tenen arguments, separats per espais.
+  |  En molts casos les comandes i els arguments poden ser abreujats.
+  |  Les opcions són valors que controlen el funcionament del servidor.
+  |  
+  |  Per saber com trobar més informació sobre les comandes i les opcions,
+  |  fes 'help help'.
+  |  
+  |  Per als més impacients, les principals comandes per començar són:
+  |    show   - per veure les opcions actuals
+  |    set     - per fixar opcions
+  |    start  - per iniciar la partida un cop els jugadors s'han connectat
+  |    save   - per desar la partida actual
+  |    quit   - per sortir
+  |  >
+
+  Si vols, pots fer servir la comanda 'set' per modificar qualsevol de
+  les diferents opcions de servidor per la partida. Pots obtenir una
+  llista de totes les opcions amb la comanda 'show', i descripcions
+  detallades amb la comanda 'help <nom-d'opció>'.
+
+  Per exemple:
+
+  | > help size
+  |  Opció: size  -  Mida de mapa (en milers de caselles)
+  |  Descripció:
+  |    Aquest valor es fa servir per determinar les dimensions del mapa.
+  |      size = 4 és un mapa normal de 4.000 caselles (per defecte)
+  |      size = 20 és un mapa enorme de 20.000 caselles.
+  |  Estat: canviable
+  |  Valor: 4, Mínim: 1, per Defecte: 4, Màxim: 29
+  |  >
+
+  I:
+
+  |  > set size 8
+
+  Farà que el mapa sigui el doble de gros que el que surt per defecte.
+
+Client:
+
+  Ara s'hi haurien d'afegir tots els jugadors humans, executant el
+  client Freeciv:
+
+  |  % civclient
+
+  Això, suposant que el servidor s'estigui executant a la mateixa màquina.
+  Si no, pots, o bé especificar-lo a la línia de comandes amb l'opció
+  '--server' o bé introduir-lo a la primera caixa de diàleg un cop s'engega
+  el client.
+
+  Per exemple, suposem que el servidor s'està executant en una màquina
+  diferent, anomenada 'timbalet'. Llavors, els jugadors s'hi afegirien
+  amb una comanda com:
+
+  |  % civclient --server timbalet
+
+  Si ets l'únic jugador humà, llavors només cal que s'engegui un client.
+  A la manera estàndard de Unix, pots engegar el client "de fons"
+  afegint-hi un ampersand:
+
+  |  % civclient &
+
+  Una altra opció per al client que pots voler provar és la '--tiles',
+  que es fa servir per seleccionar 'jocs de caselles' diferents (és
+  a dir, gràfics diferents per al terreny del mapa, les unitats, etc.).
+  La distribució ve amb cinc 'jocs de caselles' principals:
+  - amplio: un joc de caselles isomètric amb caselles més grans i més detallades.
+  - isotrident: un joc de caselles isomètric de forma similar al de Civ 2.
+  - trident: un joc de caselles a l'estil de Civ 1 amb caselles de 30x30.
+  - isophex: un joc de caselles isomètric hexagonal.
+  - hex2t: un joc de caselles hexagonal vist des de dalt.
+
+  En aquesta versió, el joc de caselles per defecte és l'amplio.
+  Per provar-ne un altre, per exemple el trident, engega el client amb:
+
+  |  % civclient --tiles trident
+
+  Es poden obtenir altres jocs de caselles a http://www.freeciv.org/wiki/Tilesets
+
+
+  Es pot autoritzar als clients a donar comandes de servidor. Per
+  permetre'ls de fer servir només comandes informatives, escriu al
+  prompt del servidor
+
+  |  > cmdlevel info
+
+  Amb això, els clients ara podran fer servir '/help', '/list',
+  '/show settlers', etc.
+
+Jugadors de l'Ordinador:
+
+  Hi ha dues maneres de crear jugadors IA. La primera és fixar
+  el nombre de jugadors (humans i IA) inicialitzant l'opció de
+  servidor 'aifill'. Per exemple:
+
+  |  > set aifill 7
+
+  Després de donar la comanda 'start' al servidor per engegar la
+  partida, tots els jugadors que no siguin controlats per humans
+  seran jugadors IA. Per l'exemple de dalt, si s'haguessin afegit
+  dos jugadors, es crearien cinc jugadors IA.
+
+  La segona manera és crear explícitament un IA amb la comanda
+  de servidor 'create'. Per exemple:
+
+  |  > create HumanKiller
+
+  Això crearà un jugador controlat per IA anomenat HumanKiller.
+
+  S'assignen nacions als jugadors IA un cop tots els jugadors humans
+  han triat la seva, però pots triar una nació en concret per un
+  jugador IA fent servir el nom normal del líder d'aquella nació.
+  Per exemple, per jugar contra Romans controlats per IA, fes servir
+  aquesta comanda de servidor:
+
+  |  > create Caesar
+
+  Fixa't que això només és una preferència: Si cap més humà no vol
+  jugar amb els Romans, aquest IA ho farà.
+
+Servidor:
+
+  Quan tothom s'hi ha afegit (fes servir la comanda "list" per veure
+  qui hi ha), engega la partida amb la comanda "start":
+
+  |  > start
+
+I la partida està en marxa!
+
+
+Anunciar la partida:
+====================
+
+Si no vols limitar els teus rivals a amics locals o jugadors IA,
+visita el metaservidor de Freeciv:
+
+  http://meta.freeciv.org/
+
+És una llista de servidors de Freeciv. Per fer que el teu servidor s'hi
+anunciï, engega civserver amb l'opció '--meta', o '-m' per abreujar.
+
+Coses a tenir en compte:
+
+ 1) Degut a la inclusió de noves característiques, les versions de
+    client i de servidor són sovint incompatibles. La versió 2.0.0,
+    per exemple, és incompatible amb la 1.14.2 o les anteriors.
+
+ 2) Si el botó de Metaservidor al diàleg de conneixó no funciona,
+    comprova si el teu proveïdor d'Internet té un proxy obligatori i,
+    en aquest cas, fes que civclient el faci servir amb la variable
+    d'entorn $http_proxy. Per exemple, si el proxy és proxy.myisp.com
+    port 8888, fixa $http_proxy a http://proxy.myisp.com:8888/ abans
+    d'engegar el client.
+
+ 3) De vegades no hi ha partides al metaservidor. Passa de vegades.
+    El nombre de jugadors varia amb l'hora del dia. Prova d'engegar-ne
+    un tu!
+
+
+Joc:
+====
+
+La partida es pot desar en qualsevol moment amb la comanda de servidor
+'save', així:
+
+  |  > save partida_meva.sav
+
+(Si el teu servidor està compilat amb suport de compressió, i l'opció
+de servidor 'compress' està a un valor diferent de zero, llavors el
+fitxer escrit pot ser comprimit i anomenat partida_meva.sav.gz').
+
+El client Freeciv funciona com es podria esperar d'un joc estil
+civilization multijugador. És a dir, els jugadors humans es mouen
+tots al mateix temps, després es mouen tots els jugadors IA un cop
+tots els jugadors humans han acabat el seu torn. Hi pot haver un
+temps màxim per acabar el torn, però per defecte es fixa a zero
+(sense temps màxim). L'operador del servidor pot modificar aquest
+valor en qualsevol moment amb la comanda 'set'.
+
+Dóna un cop d'ull al sistema d'ajuda en línia. Es poden fer servir
+tots tres botons de ratolí, i estan documentats allà.
+
+Els jugadors poden prémer 'Majúscules' i la tecla de 'Retorn' per
+anunciar el final del seu torn, o clicar el botó 'Acabar el Torn'.
+
+Amb el diàleg de 'Jugadors' pots veure qui ha anunciat el final
+del seu torn, i a qui estàs esperant. (Ei, mestre, estem adormits
+o què?? ;).
+
+Amb la línia d'entrada a la part inferior de la finestra pots
+enviar missatges als altres jugadors.
+
+Pots enviar un missatge a només un jugador (p.ex., 'pere') així:
+
+  |  pere: treu el tanc d'aquí *ARA MATEIX*!
+
+El servidor és prou llest com per "acabar noms"; per tant, si
+haguessis escrit "per:", trobarà un nom de jugador que concordi
+amb la part del nom que has escrit.
+
+Pots enviar un missatge a tots els teus aliats prefixant-lo amb el
+caràcter '.' (és a dir, un punt).
+
+Pots donar comandes al servidor des de la línia d'entrada del client:
+
+  |  /list
+  |  /set settlers 4
+  |  /save partida.sav
+
+L'operador del servidor segurament només et deixarà donar comandes
+informatives. En part és perquè permetre als clients de fer servir
+totes les comandes del servidor té implicacions de seguretat;
+imagina't que un jugador intenta:
+
+  |  /save /etc/passwd
+
+Evidentment, el servidor no hauria d'executar-se amb privilegis de
+superusuari en cap cas, per reduir aquest tipus de risc.
+
+Si ets un principiant, i t'agradaria fer-te una idea d'una estratègia,
+dóna un cop d'ull a la guia COMESFA, continguda al fitxer HOWTOPLAY
+
+Per molta més informació sobre el client, el servidor, i els
+conceptes i regles del joc, veure el manual de Freeciv, disponible
+a la wiki també en català:
+
+  http://www.freeciv.org/wiki-ca/Manual
+
+
+Final de la partida:
+====================
+
+Hi ha tres maneres d'acabar la partida:
+
+1) Només queda una nació.
+2) S'ha arribat a l'últim any.
+3) Un jugador construeix i llança una nau espacial, que arriba a
+   Alpha Centauri primer.
+
+Es mostrarà un marcador de punts en tots els casos. Pista: l'operador
+del servidor pot fixar l'any final mentre el joc encara dura
+modificant l'opció 'end-year'. Això va bé quan el guanyador està
+dat i beneït, però no vols jugar la 'fase de neteja', que pot ser
+avorrida.
+
+
+Recuperar partides:
+===================
+
+Pots recuperar una partida desada amb l'opció de servidor '-f', p.ex.:
+
+  |  % civserver -f partidanostra2001.sav
+
+o, si la partida l'havia creada un servidor que comprimia:
+
+  |  % civserver -f partidanostra2001.sav.gz
+
+Ara els jugadors poden tornar-s'hi a afegir:
+
+  |  % civclient -n Alexander
+
+Fixa't que el nom del jugador s'especifica amb l'opció -n. És vital
+que el jugador faci servir el mateix nom que tenia quan la partida era
+en marxa, perquè se'l deixi tornar a entrar.
+
+Llavors la partida ja es pot tornar a engegar amb la comanda 'start'
+de forma normal.
+
+
+Suport d'idiomes propis:
+========================
+
+El Freeciv està traduït a molts idiomes.
+
+Pots triar quin idioma vols fer servir especificant la "locale". Cada
+locale té un nom estàndard (p.ex., 'ca' per català). Si has instal·lat
+Freeciv, pots triar una locale assignant a la variable d'entorn LANG
+el nom estàndard de la teva locale abans d'executar civserver i
+civclient.
+
+Per exemple, suposant que vulguis fer servir la traducció al català,
+has de fer:
+
+  export LANG; LANG=ca   (al shell Bourne (sh)),
+o
+  setenv LANG ca         (al shell C (csh)).
+
+(Pots fer-ho al teu fitxer .profile o .login).
+
+
+Registre de missatges:
+======================
+
+Tant el client com el servidor treuen missatges anomenats "de registre"
+o "de log". Hi ha cinc categories de missatges de registre: "fatal", 
+"error", "normal", "verbose", i "debug".
+
+Per defecte, els missatges fatal, error i normal es treuen per la
+sortida estàndard des d'on s'ha engegat el client o el servidor. Pots
+redireccionar els missatges de registre a un fitxer en comptes de la
+pantalla amb les opcions de línia de comanda "--log nom_fitxer", o
+"-l nom_fitxer".
+
+Pots canviar el nivell de missatges de registre que es mostren amb
+"--debug nivell" o "-d nivell" (o "-de nivell" per al client Xaw, ja
+que "-d" és ambigu entre "-debug" i "-display"), on "nivell" pot ser
+0, 1, 2, o 3.  0 vol dir mostrar només els missatges "fatal", 1 vol
+dir mostrar els missatges "fatal" i "error", 2 vol dir missatges
+"fatal", "error" i "normal" (el defecte), i 3 vol dir mostrar els
+missatges "fatal", "error", "normal" i "verbose".
+
+Si has compilat amb DEBUG definit (una manera fàcil de fer-ho és
+amb l'opció --enable-debug en fer configure), llavors pots obtenir
+els missatges de nivell debug posant el nivell a 4. També és possible
+de controlar els missatges de nivell debug (els altres no) per fitxer
+i per línia. Per fer-ho, fes "--debug 4:cad1:cad2" (tantes cadenes com
+vulguis, separades per dos punts) i tots els fitxers el nom dels quals
+contingui aquestes subcadenes tindran els missatges de debug permesos,
+i tots els altres missatges de debug se suprimiran. Per controlar les
+línies, fes: "--debug 4:cad1,min,max" i per fitxers que concordin amb
+cad1 només es permetran els missatges de debug entre les línies mínima
+i màxima que s'hagin especificat. Només es pot aplicar una parella
+(min,max) per cada fitxer.
+
+Exemple:
+
+  |  % civserver -l elmeu.log -d 3
+
+Això enviar tots els missatges de registre del servidor al fitxer
+"elmeu.log", inclosos els de nivell "verbose".
+
+Exemple:
+
+  |  % civclient --debug 0
+
+Això suprimeix tots els missatges de registre no fatals del client.
+
+Exemple:
+
+  |  % civserver -d 4:log:civserver,120,500:autoattack
+
+Això permet tots els missatges fatal, error, normal i verbose per al
+servidor, i els de nivell de debug per alguns mòduls especificats.
+Fixa't que "log" concorda tant amb "gamelog.c" com amb "log.c". Per
+"civserver.c", es mostraran els missatges de debug entre les línies
+120 i 500. Aquest exemple només funciona si el servidor s'ha compilat
+amb DEBUG.
+
+
+Errors de programa:
+===================
+
+Has trobat un error al programa? De veritat que volem que ens ho
+expliquis, i així el podem solucionar. Mira el fitxer BUGS, per
+una llista dels problemes coneguts en aquesta versió, i informació
+sobre com informar de nous errors.
+
+
+Llistes de correu:
+==================
+
+Mantenim 4 llistes de correu:
+
+  freeciv-announce Anuncis d'interès general.
+                   És una llista de "Només Lectura", amb missatges escassos.
+                   En altres paraules, no pots enviar-hi correus, només llegir-la.
+                   (Els anuncis que s'hi envien també s'envien a freeciv).
+  freeciv-i18n     Traducció del Freeciv. 
+                   Totes les discussions relacionades amb la traducció del codi
+                   de Freeciv, la documentació i el web, cap a llenguatges diferents
+                   de l'anglès.
+  freeciv-dev      Desenvolupament del Freeciv.
+  freeciv-commits  Notificacions de canvis al repositori SVN.
+                   És una llista de "Només Lectura", amb missatges automatitzats.
+                   En altres paraules, no pots enviar-hi correus, només llegir-la.
+
+Totes les llistes estan obertes al públic en general i tothom s'hi pot apuntar.
+Només els mantenidors poden enviar correus a les llistes -announce i -commits.
+
+Les llistes viuen a gna.org. Per més informació, per afegir-t'hi, o per
+esborrar-te'n, vés a http://gna.org/mail/?group=freeciv
+
+
+Internet Relay Chat (IRC)
+=========================
+
+Alguns jugadors i desenvolupadors s'estan als canals #freeciv i #freeciv-dev 
+de la xarxa freenode. Prova de connectar-te al servidor
+
+	irc.freenode.net
+
+
+I per acabar:
+=============
+
+Diverteit-te i dona'ls canya!
+
+                                   -- L'equip de Freeciv.

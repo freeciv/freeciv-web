@@ -1,0 +1,32 @@
+[nation_madmen]
+
+translation_domain="freeciv"
+
+name = _("Madmen")
+plural = _("?plural:Madmen")
+groups = "Barbarian"
+legend = _("They have escaped society, and attack it for no sane reason.")
+
+leaders = {
+ "name", "sex"
+ "Brainworm", "male"
+}
+
+flag = "madmen"
+flag_alt = "barbarian"
+style = "Human"
+
+color.r = 153
+color.g =  17
+color.b = 153
+
+init_techs = ""
+init_buildings = ""
+init_units = ""
+
+cities = "Brain"
+
+is_playable = FALSE
+barbarian_type = "Land"
+
+; nothing more needed for barbarians

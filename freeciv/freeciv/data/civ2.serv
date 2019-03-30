@@ -1,0 +1,8 @@
+# Server commands to make rules similar to Civ2.
+#
+# Use this as, eg, "./fcser -r data/civ2.serv" 
+#
+# Civ2 start:
+rulesetdir civ2
+
+# changed game settings are defined in game.ruleset

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="793.70000pt"
+   height="529.13000pt"
+   id="svg378"
+   sodipodi:version="0.32"
+   sodipodi:docname="hungary.svg"
+   sodipodi:docbase="/Users/daniel/Desktop/updated flags"
+   inkscape:version="0.42">
+  <metadata
+     id="metadata1377">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.58812034"
+     inkscape:cx="503.90611"
+     inkscape:cy="285.46974"
+     inkscape:window-width="771"
+     inkscape:window-height="662"
+     inkscape:window-x="40"
+     inkscape:window-y="62"
+     inkscape:current-layer="svg378" />
+  <defs
+     id="defs380" />
+  <g
+     id="g554"
+     transform="matrix(0.933050,0.000000,0.000000,0.888882,-4.903588e-5,2.838618e-4)">
+    <rect
+       width="1062.9900"
+       height="744.09442"
+       x="-1062.9893"
+       y="-744.09448"
+       style="font-size:12.000000px;fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0247000pt"
+       id="rect149"
+       transform="scale(-1.000000,-1.000000)" />
+    <rect
+       width="1062.9900"
+       height="248.03149"
+       x="-1062.9893"
+       y="-744.09448"
+       style="font-size:12.000000px;fill:#388d00;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt"
+       id="rect148"
+       transform="scale(-1.000000,-1.000000)" />
+    <rect
+       width="1062.9900"
+       height="248.03149"
+       x="-1062.9893"
+       y="-248.23230"
+       style="font-size:12.000000px;fill:#d43516;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt"
+       id="rect585"
+       transform="scale(-1.000000,-1.000000)" />
+  </g>
+</svg>

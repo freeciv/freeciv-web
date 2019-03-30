@@ -1,0 +1,79 @@
+[nation_bahamian]
+
+name=_("Bahamian")
+plural=_("?plural:Bahamians")
+groups="Modern", "American"
+legend=_("The Bahamas are an island group in North America. It was\
+ somewhere in the Bahamas that Columbus first set foot on American soil.\
+ The Islands were subsequently depopulated and mostly ignored until they\
+ were settled by British colonists in the 17th century. The Bahamas have\
+ been an independent country within the Commonwealth since 1973. Nowadays\
+ the Bahamas are mostly famous for their beaches but it is also a major\
+ offshore financial center. The Bahamas are the most developed country of\
+ Latin America and the Caribbean as well as the world's wealthiest\
+ black-majority country.")
+
+leaders = {
+ "name",               "sex"
+ "William Sayle",      "Male"
+ "Woodes Rogers",      "Male"
+ "Roland Symonette",   "Male"
+ "Lynden O. Pindling", "Male"
+ "Ivy Dumont",         "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Fundamentalism", _("Bishop %s"),         _("?female:Bishop %s")
+}
+
+flag="bahamas"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "jamaican"
+
+cities =
+ "Nassau",
+ "Freeport (ocean)",
+ "West End",
+ "Coopers Town",
+ "Marsh Harbour (ocean)",
+ "Freetown",
+ "High Rock",
+ "Andros Town",
+ "Spanish Wells",
+ "Clarence Town",
+ "Dunmore Town",
+ "Rock Sound",
+ "Arthur's Town",
+ "Cockburn Town",
+ "George Town",
+ "Alice Town",
+ "Sweeting Cay (ocean)",
+ "Matthew Town",
+ "Snug Corner",
+ "Great Harbour (ocean)",
+ "Nicholls Town",
+ "Colonel Hill",
+ "Pirates Well",
+ "Port Nelson (ocean)",
+ "Duncan Town",
+ "Albert Town",
+ "Kemps Bay",
+ "Spring City",
+ "Treasure Cay (ocean)",
+ "Congo Town",
+ "Mack Town",
+ "Stafford Creek",
+ "Lucaya",
+ "Abraham's Bay (ocean)",
+ "The Bluff",
+ "Sandy Point",
+ "Hunter",
+ "Samana Cay (ocean)",
+ "Plana Cays (ocean)",
+ "Conception"

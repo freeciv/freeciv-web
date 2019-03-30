@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="521.91000px"
+   id="svg589"
+   inkscape:version="0.42"
+   sodipodi:docbase="/Users/daniel/Desktop"
+   sodipodi:docname="sweden.svg"
+   sodipodi:version="0.32"
+   width="782.86249px">
+  <metadata
+     id="metadata2185">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title> sweden</dc:title>
+        <dc:description>HASH(0x85e63e0)</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>flags</rdf:li>
+            <rdf:li>hash(0x853b2b0)</rdf:li>
+            <rdf:li>hash(0x85717b8)</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+            <rdf:li>europe</rdf:li>
+            <rdf:li>hash(0x860a448)</rdf:li>
+            <rdf:li>hash(0x85a0c44)</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title> Richard Torkar</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title> Richard Torkar</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title> Richard Torkar</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs591" />
+  <sodipodi:namedview
+     id="base"
+     inkscape:cx="345.21324"
+     inkscape:cy="265.68494"
+     inkscape:window-height="508"
+     inkscape:window-width="735"
+     inkscape:window-x="11"
+     inkscape:window-y="74"
+     inkscape:zoom="0.61576334"
+     inkscape:current-layer="svg589" />
+  <rect
+     y="0.0000000"
+     x="0.0000000"
+     width="782.86249"
+     style="font-size:12.000000px;fill:#004073;fill-rule:evenodd;stroke-width:1.0000000pt"
+     sodipodi:fill-cmyk="(1 0.5 0.1 0.498039)"
+     id="rect552"
+     height="521.90997" />
+  <rect
+     y="0.13671684"
+     x="245.81952"
+     width="104.31000"
+     style="font-size:12.000000px;fill:#ffcc00;fill-rule:evenodd;stroke-width:1.0000000pt"
+     sodipodi:fill-cmyk="(0 0.2 1 0)"
+     id="rect556"
+     height="521.55786" />
+  <rect
+     y="208.96942"
+     x="0.0000000"
+     width="782.86249"
+     style="font-size:12.000000px;fill:#ffcc00;fill-rule:evenodd;stroke-width:1.0000000pt"
+     sodipodi:fill-cmyk="(0 0.2 1 0)"
+     id="rect557"
+     height="104.31152" />
+</svg>

@@ -1,0 +1,112 @@
+[nation_acrean]
+
+name=_("Acrean")
+plural=_("?plural:Acreans")
+groups="American"
+legend=_("Acre is the westernmost state of Brazil. The region was part\
+ of Bolivia until 1899, when Brazilian settlers revolted and declared an\
+ Independent State of Acre. Bolivia gave up its claims to the territory\
+ in the Treaty of Petropolis of 1903, after which Acre was annexed to\
+ Brazil. Acre is one of the world's most important rubber producing\
+ regions.")
+
+leaders = {
+ "name",                           "sex"
+ "Luis Gálvez Rodríguez de Arias", "Male"
+ "Antônio de Sousa Braga",         "Male"
+ "José Paranhos do Rio Branco",    "Male"
+ "José Plácido de Castro",         "Male"
+ "Oscar Passos",                   "Male"
+ "Francisco Wanderley Dantas",     "Male"
+ "Chico Mendes",                   "Male"
+ "Iolanda Fleming",                "Female"
+}
+
+flag="acre"
+flag_alt = "-"
+style = "Tropical"
+
+ruler_titles = {
+ "government",     "male_title",  "female_title"
+ "Despotism",      _("Baron %s"), _("Baroness %s")
+ "Fundamentalism", _("Padre %s"), _("Madre %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "brazilian", "bolivian"
+
+cities =
+ "Rio Branco",
+ "Porto Acre",
+ "Cruzeiro do Sul",
+ "Sena Madureira",
+ "Tarauacá",
+ "Plácido de Castro",
+ "Senador Guiomard",
+ "Feijó",
+ "Brasiléia",
+ "Epitaciolândia",
+ "Mâncio Lima",
+ "Acrelândia",
+ "Capixaba",
+ "Bujari",
+ "Xapuri",
+ "Jordão",
+ "Assis Brasil",
+ "Rodrigues Alves",
+ "Manoel Urbano",
+ "Santa Rosa do Purus",
+ "Marechal Thaumaturgo",
+ "Porto Walter",
+ "Cidade Nova",
+ "Vitória",
+ "Atenas",
+ "São Vicente",
+ "Maceió",
+ "Nova Aurora",
+ "Vila Alva",
+ "Porto Novo",
+ "Progresso",
+ "Aurora",
+ "Boa Esperança",
+ "Santa Fé",
+ "Arenal",
+ "Barão de Rio Branco",
+ "Germânia",
+ "Paraíso",
+ "Nova Lição",
+ "Chagas",
+ "Merces",
+ "Esperança",
+ "Bom Futuro",
+ "União",
+ "Itamaracá",
+ "Porvir Novo",
+ "Novo Porto",
+ "Bom Distrato",
+ "Glória",
+ "Humaitá",
+ "Jacuípe",
+ "República",
+ "Guanabara",
+ "Acuriá",
+ "Pacuja",
+ "Porto Embira",
+ "Boa Vista",
+ "São Francisco",
+ "Castanheira",
+ "Santa Rita",
+ "Mucuripe",
+ "Lupuna",
+ "Veneza",
+ "Foz do Jordão",
+ "Restauração",
+ "Tabocal",
+ "Acampamento",
+ "Canamari",
+ "São João",
+ "Fronteira",
+ "Liberdade"

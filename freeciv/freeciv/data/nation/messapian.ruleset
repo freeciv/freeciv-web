@@ -1,0 +1,45 @@
+[nation_messapian]
+
+name=_("Messapian")
+plural=_("?plural:Messapians")
+groups="Ancient", "European"
+legend=_("The Messapii were an Indo-European tribe that inhabited, in\
+ ancient times, Apulia, the south-eastern peninsula of Italy, before being\
+ absorbed by the Romans.")
+leaders = {
+ "name",     "sex"
+ "Opis",     "Male"
+ "Artas",    "Male"
+ "Dasius",   "Male"
+}
+flag="messapian"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Italian", "Western Roman", "Ostrogothic", "Neapolitan"
+civilwar_nations = "Samnite", "Illyrian", "Greek", "Roman"
+
+cities =
+ "Oria",
+ "Kailia",
+ "Alytia",
+ "Salapia",
+ "Uzenton",
+ "Rudiai",
+ "Brention",
+ "Hyreton",
+ "Myron",
+ "Idruntum",
+ "Manduria",
+ "Mesania",
+ "Neriton",
+ "Sybar",                   ;Cavallino
+ "Thurria Sallentina",
+ "Barion",
+ "Fovea",                   ;Foglia
+ "Aikai",
+ "Aoxentum"

@@ -1,0 +1,65 @@
+[nation_tuareg]
+
+name=_("Tuareg")
+plural=_("?plural:Tuaregs")
+groups="African"
+legend=_("The Tuareg or Imuhagh are a pastoralist nomadic Berber people\
+ inhabiting the interior of the Sahara Desert, mostly in Algeria, Niger\
+ and Mali. Despite their matrilineal organization they are followers of\
+ Islam. For many centuries they engaged in slave hunting, even influencing\
+ the slave trade to the Americas.")
+leaders = {
+ "name",                           "sex"
+ "Amattaza",                       "Male"
+ "Abou Ag Ajacko",                 "Male"
+ "Afadandan",                      "Male"
+ "Karidanna",                      "Male"
+ "Aljilani Ag Ibrahim",            "Male"
+ "Busari Ag Akhmad",               "Male"
+ "Musa Ag Amastan",                "Male"
+ "Wan Agoda",                      "Male"
+ "Akhanokhan",                     "Male"
+ "Khadakhada",                     "Male"
+ "Alkhurer",                       "Male"
+ "Abdurrakhman Tagama",            "Male"
+ "Fihrun Ag Amansar",              "Male"
+ "Atisi Ag Amellal",               "Male"
+ "Bay Ag Akhamok",                 "Male"
+ "Khamzata Ag Makhammad",          "Male"
+}
+
+flag="tuareg"
+flag_alt = "-"
+style = "Tropical"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Sheikh %s"),       _("Shaykha %s")
+ "Monarchy",        _("Emir %s"),         _("Emira %s")
+ "Fundamentalism",  _("Caliph %s"),       _("Calipha %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="malian", "nigerien", "algerian", "libyan", "burkinabe"
+civilwar_nations = "songhai", "malian", "nigerien", "algerian", "libyan", "burkinabe"
+
+cities =
+ "Agadez",
+ "Kidal",	
+ "Ghadames",
+ "Ghat",
+ "Nalut",
+ "Awbari",
+ "Arouane",
+ "Bourem",
+ "Goundam",
+ "Timbuktu",
+ "Jufra",
+ "Assodé",
+ "Tahoua",
+ "Targa",
+ "Kana",
+ "Tin Zaouatene"

@@ -1,0 +1,410 @@
+#
+# Suppressions to use when debugging freeciv memory problems with valgrind.
+#
+
+
+# Suppressions for ncurses problems (ncurses is used by readline)
+# Some of these work for only one exact ncurses version, as version number
+# is part of .so -file name.
+{
+   ncurses suppression #2
+   Memcheck:Leak
+   fun:malloc
+   fun:strdup
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #3
+   Memcheck:Leak
+   fun:malloc
+   fun:_nc_home_terminfo
+   fun:_nc_next_db
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #4
+   Memcheck:Leak
+   fun:calloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #6
+   Memcheck:Leak
+   fun:calloc
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #7
+   Memcheck:Leak
+   fun:malloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   fun:_nc_read_entry
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #8
+   Memcheck:Leak
+   fun:realloc
+   fun:xrealloc
+   fun:rl_add_funmap_entry
+   fun:rl_initialize_funmap
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #9
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #10
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:tparm
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+   fun:server_sniff_all_input
+   fun:srv_main
+   fun:main
+}
+
+{
+   ncurses suppression #11
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_home_terminfo
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #12
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #13
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #14
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #15
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #16
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_tparm_analyze
+   fun:tparm
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #17
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_first_db
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #18
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   ncurses suppression #19
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_read_termtype
+   obj:/lib/x86_64-linux-gnu/libtinfo.so.5.9
+   fun:_nc_read_entry
+   fun:_nc_setup_tinfo
+   fun:_nc_setupterm
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+
+# Suppression for zlib version 1.2.3.4 problem.
+# This is reportedly fixed in latest zlib versions.
+{
+   zlib suppression
+   Memcheck:Cond
+   fun:inflateReset2
+   fun:inflateInit2_
+}
+
+
+# Suppressions for readline problems. This does not cover ncurses related
+# problems even when it's being called by readline. Ncurses suppressions were above.
+
+{
+   readline suppression #1
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_set_prompt
+   fun:rl_callback_handler_install
+}
+
+{
+   readline suppression #2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_expand_prompt
+   fun:rl_set_prompt
+   fun:rl_callback_handler_install
+}
+
+{
+   readline suppression #3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_nc_trim_sgr0
+   fun:tgetent
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   readline suppression #4
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_initialize
+}
+
+{
+   readline suppression #5
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:rl_initialize
+}
+
+{
+   readline suppression #6
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_parse_and_bind
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_initialize
+}
+
+{
+   readline suppression #7
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_initialize
+}
+
+{
+   readline suppression #8
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_redisplay
+   fun:readline_internal_setup
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+}
+
+{
+   readline suppression #9
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:rl_redisplay
+   fun:readline_internal_setup
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+}
+
+{
+   readline suppression #10
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:alloc_history_entry
+   fun:add_history
+   fun:read_history_range
+}
+
+{
+   readline suppression #11
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:xrealloc
+   fun:add_history
+   fun:read_history_range
+}
+
+{
+   readline suppression #12
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}
+
+{
+   readline suppression #13
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_add_funmap_entry
+   fun:rl_initialize_funmap
+   fun:rl_initialize
+}
+
+{
+   readline suppression #14
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_make_bare_keymap
+   fun:rl_generic_bind
+   obj:/lib/x86_64-linux-gnu/libreadline.so.6.3
+   fun:_rl_init_terminal_io
+   fun:rl_initialize
+}

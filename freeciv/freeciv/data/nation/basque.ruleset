@@ -1,0 +1,209 @@
+[nation_basque]
+
+name=_("Basque")
+plural=_("?plural:Basques")
+groups="Medieval", "European"
+legend=_("The Basques have lived since ancient times by the western\
+ foothills of the Pyrenees. The Kingdom of Navarre was the last\
+ independent Basque state, which fell to Aragon in the 16th century.\
+ Today, the Basque Country, or \"Euskal Herria\", lays right in the\
+ borderlands between Spain and France, divided into seven historical\
+ provinces. Their language, Euskara, has no known relatives and its\
+ origins are unknown.")
+
+leaders = {
+ "name",                        "sex"
+ "Eneko Aritza",                "Male"
+ "Antso III Gartzes Nagusia",   "Male"
+ "Antso VII Indartsua",         "Male"
+ "Katalina I Nafarroakoa",      "Female"
+ "Joana III Albretekoa",        "Female"
+ "Tomas Zumalakarregi",         "Male"
+ "Santa Kruz Apaiza",           "Male"
+ "Sabino Arana",                "Male"
+ "Dolores Ibarruri",            "Female"
+ "Jose Antonio Agirre",         "Male"
+ "Jesus Maria Leizaola",        "Male"
+ "Juan José Ibarretxe",         "Male"
+}
+
+ruler_titles = {
+ "government",     "male_title",          "female_title"
+ "Despotism",      _("Leader %s"),        _("?female:Leader %s")
+ "Republic",       _("Lehendakari %s"),   _("?female:Lehendakari %s")
+}
+
+flag="euskadi"
+flag_alt="-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Spanish", "French"
+
+cities =
+;Spanish or French names in comment
+ "Iruñea",			;Pamplona
+ "Bilbao (ocean, river)",
+ "Gasteiz",			;Vitoria
+ "Donostia (ocean, river)",	;San Sebastián
+ "Baiona (ocean, river)",	;Bayonne
+ "Donibane Garazi",		;Saint-Jean-Pied-de-Port
+ "Maule", 			;Mauléon-Licharre
+ "Barakaldo",			;Baracaldo
+ "Getxo",			;Guecho
+ "Irun",			;Irún
+ "Portugalete",
+ "Santurtzi (ocean)",		;Santurce
+ "Basauri",
+ "Errenteria",			;Rentería
+ "Angelu (ocean)",		;Anglet
+ "Leioa",			;Lejoa
+ "Sestao",
+ "Galdakao",			;Galdácano
+ "Durango",
+ "Eibar",			;Éibar
+ "Biarritz (ocean)",
+ "Erandio",
+ "Zarautz (ocean)",		;Zarauz
+ "Barañain",			;Barañain
+ "Arrasate",			;Mondragón
+ "Hernani",
+ "Burlata",			;Burlada
+ "Gernika",			;Guernica
+ "Lasarte-Oria",
+ "Hondarribia (ocean)",
+ "Bergara",
+ "Andoain",
+ "Azpeitia",
+ "Lizarra",
+ "Hendaia (ocean)",
+ "Donibane Lohizune",
+ "Zizur Nagusia",
+ "Elgoibar",
+ "Donapaleu",
+ "Oñati",
+ "Antsoain",
+ "Zumarraga",
+ "Oiartzun",
+ "Etxebarri",
+ "Zalla",
+ "Urruña",
+ "Altsasu",
+ "Baigorri",
+ "Aretxabaleta",
+ "Kanbo",
+ "Bidarte",
+ "Lazkao",
+ "Bidaxune",
+ "Orio (ocean)",
+ "Arreaga",
+ "Laudio",
+ "Tolosa",
+ "Pasaia",
+ "Beasain",
+ "Atarrabia",
+ "Ansoain",
+ "Amurrio",
+ "Ordizia",
+ "Donazaharre",
+ "Legazpi",
+ "Zumaia (ocean)",
+ "Berriozar",
+ "Baztan",
+ "Urretxu",
+ "Lezo",
+ "Aranguren",
+ "Peralta",
+ "Urnieta",
+ "Ibarra",
+ "Uharte",
+ "Soraluze",
+ "Agurain",
+ "Eskoriatza",
+ "Atharratze-Sorholüze",
+ "Astigarraga",
+ "Azagra",
+ "Plentzia (ocean)",
+ "Urruña",
+ "Bera",
+ "Viana",
+ "Zestoa",
+ "Zizurkil",
+ "Etxarri-Aranatz",
+ "Barkoxe",
+ "Getaria (ocean)",
+ "Irurtzun",
+ "Bokale",
+ "Aiara",
+ "Agoitz",
+ "Gorlitz",
+ "Idiazabal",
+ "Larraga",
+ "Iruña Oka",
+ "Zuia",
+ "Olazagutia",
+ "Anoeta",
+ "Ultzama",
+ "Esteribar",
+ "Ainhoa",
+ "Deierri",
+ "Ataun",
+ "Zaldibia",
+ "Doneztebe",
+ "Sohüta",
+ "Uztaritze",
+ "Aramaio",
+ "Biasteri",
+ "Mendaro",
+ "Liginaga-Astüe",
+ "Ziburu",
+ "Legutiano",
+ "Lumbier",
+ "Galar",
+ "Arnegi",
+ "Ormaiztegi",
+ "Lekunberri",
+ "Irura",
+ "Oibar",
+ "Oteiza",
+ "Olaberria",
+ "Okondo",
+ "Urkabustaiz",
+ "Goizueta",
+ "Etxalar",
+ "Uharte-Arakil",
+ "Erro",
+ "Arraia-Maeztu",
+ "Arrazua-Ubarrundia",
+ "Berbinzana",
+ "Bertizarana",
+ "Errezil",
+ "Igantzi",
+ "Bildoze-Onizepea",
+ "Lizartza",
+ "Bidegoian",
+ "Gabiria",
+ "Imotz",
+ "Donamaria",
+ "Samaniego",
+ "Irisarri",
+ "Larraine",
+ "Iholdi",
+ "Ollo",
+ "Erronkari",
+ "Azkaine",
+ "Zubieta",
+ "Sara",
+ "Elorrio",
+ "Orduña",
+ "Senpere",
+ "Ürrustoi-Larrabile",
+ "Deba (ocean)",
+ "Lekeitio (ocean)",
+ "Ondarroa (ocean)",
+ "Bermeo (ocean)",
+ "Ea (ocean)",
+ "Pasaia (ocean)"

@@ -1,0 +1,137 @@
+; This is Alien World cities ruleset.
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Alien World cities data for Freeciv"
+options="+Freeciv-ruleset-Devel-2017.Jan.02"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; A specialist is a city citizen who is not a tile worker.  Usually the
+; player can control what specialist each citizen is, so long as the
+; requirements for that specialist are met.
+;
+; Below are the entries for the specialists, one per specialist type.
+; The tag name (in [specialist_*]) doesn't matter so long as it's unique.
+; For each specialist the following fields may be set:
+;
+;
+; name          = translatable (plural) name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; short_name    = one-character "short name" used (for instance) in cityrep;
+;                 should be first character/abbrevation of "name"
+; graphic       = tag specifying preferred graphic
+;                 Different images based on citizen number are supported.
+;                 If no such images indexed with citizen number are found,
+;                 plain tag is used instead.
+; graphic_alt   = fallback graphic tag in case the specialist graphic isn't
+;                 found.
+; reqs          = requirements to have the specialist pick (see
+;                 effects.ruleset and README.effects for help on requirements)
+; helptext      = optional help text string; should escape all raw newlines
+;                 so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+[specialist_culturists]
+name            = _("Culturists")
+short_name      = _("?Culturists:C")
+graphic         = "specialist.culturists"
+graphic_alt     = "specialist.entertainer"
+reqs            =
+    { "type", "name", "range"
+; No requirements
+    }
+helptext = _("\
+Culturists create works that keep people satisfied. They create two luxury \
+points per turn, four if Specialist Training tech is known.")
+
+[specialist_scientist]
+name		= _("Scientists")
+short_name	= _("?Scientist:S")
+graphic         = "specialist.scientists"
+graphic_alt     = "specialist.scientist"
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+helptext = _("\
+Scientist reseach two bulbs worth of science each turn, four bulbs \
+when Specialist Training tech is known.")
+
+[specialist_government_merchant]
+name		= _("Government Merchants")
+rule_name       = "Government_Merchants"
+short_name	= _("?Merchant:M")
+graphic         = "specialist.government_merchants"
+graphic_alt     = "specialist.taxman"
+reqs		=
+    { "type", "name", "range"
+; Nothing
+    }
+helptext = _("\
+Government Merchants produce two gold for the government each turn, \
+four once Specialist Training tech is known.")
+
+[parameters]
+add_to_size_limit  = 8		; cities >= this cannot be added to.
+angry_citizens = TRUE           ; set to FALSE to disable angry citizens
+celebrate_size_limit = 3        ; cities >= can celebrate
+
+changable_tax = TRUE            ; set to FALSE to disallow changing of tax rates
+
+;forced_science = 0		; set these fields when changeable_tax is turned off
+;forced_luxury = 100
+;forced_gold = 0
+
+vision_reveal_tiles  = TRUE     ; civ1 & 2 default FALSE
+
+pop_report_zeroes    = 2        ; Population in reports in hundreds
+
+[citizen]
+nationality          = TRUE     ; account for the nationality of the citizens
+convert_speed        = 50       ; base probability 50/1000 -> once every 20 turns
+partisans_pct        = 0        ; percentage of own nationality to inspire partisans
+                                ; if 0, original city owner information is used instead
+conquest_convert_pct = 0        ; percentage which converts to the new nation
+                                ; after a city was conquered. Applied separately for each
+                                ; nationality present in the city, and number of
+                                ; converted people rounded up
+
+[missing_unit_upkeep]
+; Get rid of a unit the city is unable to pay the X upkeep of.
+; X_protected  - never get rid of a unit with any of the listed unit type
+;                flags.
+; X_unit_act   - have the unit perform the listed actions until success,
+;                death or the list ends.
+; X_wipe       - wipe the unit if it survived performing the actions listed
+;                above.
+
+food_protected    = "EvacuateFirst"
+; food_unit_act   =
+food_wipe         = TRUE
+
+; TODO: Should missing gold upkeep really be able to kill units with the
+; EvacuateFirst unit type flag?
+; gold_protected  =
+; gold_unit_act   =
+gold_wipe         = TRUE
+
+shield_protected  = "EvacuateFirst"
+shield_unit_act   = "Help Wonder", "Recycle Unit", "Disband Unit"
+shield_wipe       = FALSE

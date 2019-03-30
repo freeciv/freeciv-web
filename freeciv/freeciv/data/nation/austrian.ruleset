@@ -1,0 +1,136 @@
+[nation_austrian]
+
+translation_domain="freeciv"
+
+name=_("Austrian")
+plural=_("?plural:Austrians")
+groups="Medieval", "Early Modern", "Modern", "European", "Core"
+; /* TRANS: Legend for nation in "core" set */
+legend=_("The origins of Austria date back to the time of the Roman\
+ Empire when a Celtic kingdom was conquered by the Romans in\
+ approximately 15 BCE, and later became Noricum, a Roman province, in the\
+ mid 1st century CE - an area which mostly encloses today's Austria. In\
+ 788 CE, the Frankish king Charlemagne conquered the area, and introduced\
+ Christianity. Under the native Habsburg dynasty, Austria became one\
+ of the great powers of Europe. In 1867, the Austrian Empire was reformed\
+ into Austria-Hungary. The Austro-Hungarian Empire collapsed in 1918 with\
+ the end of World War I. After establishing the First Austrian Republic\
+ in 1919, Austria joined Nazi Germany in the Anschluss in 1938. This\
+ lasted until the end of World War II in 1945, after which Austria was\
+ occupied by the Allies.")
+
+leaders = {
+ "name",                "sex" ; Full name/s in comment
+ "Albrecht II",         "Male"
+ "Ladislaus V",         "Male"
+ "Maximilian II",       "Male"
+ "Rudolf II",           "Male"
+ "Matthias",            "Male"
+ "Ferdinand II",        "Male"
+ "Ferdinand III",       "Male"
+ "Ferdinand IV",        "Male"
+ "Joseph I",            "Male"
+ "Karl VI",             "Male" ; Franz Joseph Wenzel Balthasar Johann Anton Ignaz
+ "Maria Theresia",      "Female"
+ "Joseph II",           "Male" ; Benedikt August Johann Anton Michael Adam
+ "Franz I",             "Male" ; Franz Joseph Karl
+ "Ferdinand V",         "Male" ; Karl Leopold Joseph Franz Marcellin
+ "Franz Joseph I",      "Male" ; Franz Joseph Karl
+ "Karl III",            "Male" ; Karl Franz Joseph Ludwig Hubert Georg Otto Marie
+ "Karl Seitz",          "Male"
+ "Michael Hainisch",    "Male"
+ "Wilhelm Miklas",      "Male"
+ "Karl Renner",         "Male"
+ "Theodor Körner",      "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Despotism",       _("Archduke %s"),        _("Archduchess %s")
+ "Monarchy",        _("Kaiser %s"),          _("Kaiserin %s")
+ "Democracy",       _("Chancellor %s"),      _("?female:Chancellor %s")
+ "Fundamentalism",  _("Archbishop %s"),      _("Mother Superior %s")
+ "Communism",       _("First Secretary %s"), _("?female:First Secretary %s")
+}
+
+flag="austria"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="swiss", "hungarian", "tyrolian"
+
+cities =
+  "Wien",
+  "Graz",
+  "Linz",
+  "Salzburg",
+  "Innsbruck",
+  "Klagenfurt am Wörthersee",
+  "Villach",
+  "Wels",
+  "Sankt Pölten",
+  "Dornbirn",
+  "Wiener Neustadt",
+  "Steyr",
+  "Feldkirch",
+  "Bregenz",
+  "Klosterneuburg",
+  "Wolfsberg",
+  "Baden bei Wien",
+  "Leoben",
+  "Leonding",
+  "Traun",
+  "Krems an der Donau",
+  "Amstetten",
+  "Kapfenberg",
+  "Lustenau",
+  "Mödling",
+  "Hallein",
+  "Traiskirchen",
+  "Kufstein",
+  "Braunau am Inn",
+  "Schwechat",
+  "Spittal an der Drau",
+  "Saalfelden am Steinernen Meer",
+  "Ansfelden",
+  "Stockerau",
+  "Hohenems",
+  "Ternitz",
+  "Perchtoldsdorf",
+  "Tulln an der Donau",
+  "Telfs",
+  "Feldkirchen in Kärnten",
+  "Bad Ischl",
+  "Bludenz",
+  "Gmunden",
+  "Bruck an der Mur",
+  "Schwaz",
+  "Sankt Veit an der Glan",
+  "Eisenstadt",
+  "Hall in Tirol",
+  "Hard",
+  "Neunkirchen",
+  "Korneuburg",
+  "Wörgl",
+  "Marchtrenk",
+  "Lienz",
+  "Vöcklabruck",
+  "Knittelfeld",
+  "Wals-Siezenheim",
+  "Waidhofen an der Ybbs",
+  "Rankweil",
+  "Ried im Innkreis",
+  "Zwettl",
+  "Völkermarkt",
+  "Hollabrunn",
+  "Bad Vöslau",
+  "Enns",
+  "Mistelbach",
+  "Brunn am Gebirge",
+  "Sankt Johann im Pongau",
+  "Götzis",
+  "Sankt Andrä",
+  "Bischofshofen"

@@ -1,0 +1,72 @@
+[nation_ethiopian]
+
+translation_domain="freeciv"
+
+name=_("Ethiopian")
+plural=_("?plural:Ethiopians")
+groups="African", "Modern", "Core"
+legend=_("Ethiopia is the oldest nation in Africa and the only one to\
+ remain independent during European colonialism.")
+
+leaders = {
+ "name",                  "sex"
+ "Yekuno Amlak",          "Male"
+ "Zoskales",              "Male"
+ "Gedara",                "Male"
+ "Lalibela",              "Male"
+ "Zara Yakob",            "Male"
+ "Tewodros II",           "Male"
+ "Menelik II",            "Male"
+ "Haile Selassie",        "Male"
+ "Mengistu Haile Mariam", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",       "female_title"
+ "Fundamentalism",  _("Patriarch %s"),  _("Matriarch %s")
+ "Monarchy",        _("Emperor %s"),    _("Empress %s")
+}
+
+flag="ethiopia"
+flag_alt = "italy"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Sudanese", "Somali", "Eritrean"
+
+cities =
+ "Addis Abeba",
+ "Dire Dawa",
+ "Gonder",
+ "Nazret",
+ "Harer",
+ "Mek'ele",
+ "Jima",
+ "Dese",
+ "Bahir Dar (river)",
+ "Jijiga",
+ "Gambela",
+ "Werder",
+ "Moyale",
+ "Dolo Odo",
+ "Weldiya",
+ "Kelem",
+ "Awasa",
+ "Debre Mark'os",
+ "Nek'ernte",
+ "Asosa",
+ "Gore",
+ "Goba",
+ "Asela",
+ "Arba Minch'",
+ "Debre Zevit",
+ "Geladi",
+ "Imi",
+ "Degeh Bur",
+ "Irgalem",
+ "Metu",
+ "Chencha",
+ "Arba Minch"

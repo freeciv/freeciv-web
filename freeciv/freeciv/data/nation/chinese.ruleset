@@ -1,0 +1,154 @@
+[nation_chinese]
+
+translation_domain="freeciv"
+
+name=_("Chinese")
+plural=_("?plural:Chinese")
+groups="Modern", "Asian", "Core"
+legend=_("China is the oldest major civilization that is still in\
+ existence today, with written records dating back over 3,500 years.\
+ After first being unified by the Qin dynasty in 221 BCE, China alternated\
+ between periods of unity and disunity, and was occasionally conquered by\
+ external ethnicities. Today, the People's Republic of China, established\
+ by the Communists in 1949, occupies the mainland, while the former\
+ Nationalist government of the Republic of China governs the island of\
+ Taiwan.")
+
+leaders = {
+ "name",                "sex"
+ "Deng Xiaoping",       "Male"
+ "Hua Guofeng",         "Male"
+ "Wang Guangmei",       "Female"
+ "Zhou Enlai",          "Male"
+ "Mao Zedong",          "Male"
+ "Chen Duxiu",          "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Emperor %s"),   _("Empress Dowager %s")
+ "Communism",       _("Chairman %s"),  _("Chairwoman %s")
+}
+
+flag="china"
+flag_alt = "-"
+style = "Asian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations=
+; Technically Taiwan (ROC) is the site of government-in-exile of China proper
+ "taiwanese",
+; Nations part of modern PRC
+ "manchu", "miao", "tibetan", "uyghur", "zhuang", "cantonese"
+
+cities =
+ "Beijing",
+ "Shanghai",
+ "Guangzhou",
+ "Tianjin",
+ "Nanjing", 
+ "Xi'an",
+ "Chongqing",
+ "Chengdu",
+ "Jinan",
+ "Shijiazhuang", 
+ "Taiyuan",
+ "Zhengzhou",
+ "Wuhan",
+ "Changsha",
+ "Nanchang", 
+ "Hangzhou",
+ "Fuzhou",
+ "Hefei",
+ "Guiyang",
+ "Lanzhou", 
+ "Kunming",
+ "Xining",
+ "Nanning",
+ "Yinchuan",
+ "Shenyang", 
+ "Changchun",
+ "Harbin",
+ "Luoyang",
+ "Kaifeng",
+ "Qingdao", 
+ "Suzhou",
+ "Wuxi",
+ "Xiamen",
+ "Haikou",
+ "Hong Kong", 
+ "Datong",
+ "Anyang",
+ "Shangqiu",
+ "Nanyang",
+ "Dengfeng", 
+ "Handan",
+ "Baoding",
+ "Chengde",
+ "Tangshan",
+ "Zhangjiakou", 
+ "Yantai",
+ "Zibo",
+ "Jining",
+ "Dezhou",
+ "Qinhuangdao", 
+ "Changshu",
+ "Gaoyou",
+ "Nantong",
+ "Zhenjiang",
+ "Lianyungang", 
+ "Yangzhou",
+ "Xuzhou",
+ "Changzhou",
+ "Wenzhou",
+ "Huzhou", 
+ "Shaoxing",
+ "Jiaxing",
+ "Ningbo",
+ "Zhangzhou",
+ "Quanzhou", 
+ "Shantou",
+ "Foshan",
+ "Shenzhen",
+ "Zhuhai",
+ "Zhongshan", 
+ "Huizhou",
+ "Chaozhou",
+ "Ganzhou",
+ "Jiujiang",
+ "Jingdezhen", 
+ "Zhanjiang",
+ "Liuzhou",
+ "Beihai",
+ "Guilin",
+ "Yichang", 
+ "Xiangtan",
+ "Zhuzhou",
+ "Shaoyang",
+ "Hengyang",
+ "Yueyang", 
+ "Mianyang",
+ "Zigong",
+ "Xianyang",
+ "Baoji",
+ "Gejiu", 
+ "Tianshui",
+ "Jiuquan",
+ "Baiyin",
+ "Dunhuang",
+ "Jiayuguan", 
+ "Dalian",
+ "Anshan",
+ "Fushun",
+ "Jilin",
+ "Mudanjiang", 
+ "Liaoyang",
+ "Dandong",
+ "Baotou",
+ "Heihe", 
+ "Bengbu",
+ "Wuhu",
+ "Anqing",
+ "Ma'anshan"

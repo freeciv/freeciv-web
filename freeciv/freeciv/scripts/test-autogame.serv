@@ -1,0 +1,10 @@
+# Freeciv server script to run a basic autogame test.
+
+set aifill 10
+set endt 100
+set timeout -1
+set minp 0
+set gameseed 42
+set mapseed 42
+start
+

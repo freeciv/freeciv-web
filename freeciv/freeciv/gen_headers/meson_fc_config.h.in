@@ -1,0 +1,99 @@
+
+#include "freeciv_config.h"
+#include "version_gen.h"
+
+#define MESON_BUILD
+
+#define LOCALEDIR "@LOCALEDIR@"
+
+#define BUG_URL "https://www.hostedredmine.com/projects/freeciv"
+#define WIKI_URL "http://www.freeciv.org/"
+
+#define DATASUBDIR "@DATASUBDIR@"
+
+#define AI_MOD_DEFAULT "classic"
+
+#define AI_MOD_STATIC_CLASSIC
+
+#define DEFAULT_SOCK_PORT 5556
+
+#define INIT_BRACE_BEGIN {
+#define INIT_BRACE_END   }
+
+/* arpa/inet.h available */
+#mesondefine HAVE_ARPA_INET_H
+
+/* bzlib.h available */
+#mesondefine HAVE_BZLIB_H
+
+/* direct.h available */
+#mesondefine HAVE_DIRECT_H
+
+/* dlfcn.h available */
+#mesondefine HAVE_DLFCN_H
+
+/* execinfo.h available */
+#mesondefine HAVE_EXECINFO_H
+
+/* fcntl.h available */
+#mesondefine HAVE_FCNTL_H
+
+/* libcharset.h available */
+#mesondefine HAVE_LIBCHARSET_H
+
+/* libgen.h available */
+#mesondefine HAVE_LIBGEN_H
+
+/* lzma.h available */
+#mesondefine HAVE_LZMA_H
+
+/* memory.h available */
+#mesondefine HAVE_MEMORY_H
+
+/* netdb.h available */
+#mesondefine HAVE_NETDB_H
+
+/* pwd.h available */
+#mesondefine HAVE_PWD_H
+
+/* signal.h available */
+#mesondefine HAVE_SIGNAL_H
+
+/* stdlib.h available */
+#mesondefine HAVE_STDLIB_H
+
+/* strings.h available */
+#mesondefine HAVE_STRINGS_H
+
+/* string.h available */
+#mesondefine HAVE_STRING_H
+
+/* sys/file.h available */
+#mesondefine HAVE_SYS_FILE_H
+
+/* sys/ioctl.h available */
+#mesondefine HAVE_SYS_IOCTL_H
+
+/* sys/signal.h available */
+#mesondefine HAVE_SYS_SIGNAL_H
+
+/* sys/stat.h available */
+#mesondefine HAVE_SYS_STAT_H
+
+/* sys/termio.h available */
+#mesondefine HAVE_SYS_TERMIO_H
+
+/* sys/uio.h available */
+#mesondefine HAVE_SYS_UIO_H
+
+/* sys/utsname.h available */
+#mesondefine HAVE_SYS_UTSNAME_H
+
+/* sys/wait.h available */
+#mesondefine HAVE_SYS_WAIT_H
+
+/* termios.h available */
+#mesondefine HAVE_TERMIOS_H
+
+/* vfork.h available */
+#mesondefine HAVE_VFORK_H

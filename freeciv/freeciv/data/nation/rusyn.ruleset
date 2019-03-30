@@ -1,0 +1,102 @@
+[nation_rusyn]
+
+name=_("Rusyn")
+plural=_("?plural:Rusyns")
+groups="Medieval", "Early Modern", "European"
+legend=_("The Rusyns are an ethnic group on the western periphery of\
+ the East Slavic nations. They live mainly in the Polish-Ukrainian-Slovak\
+ borderland and in the Vojvodina. In medieval times the Rusyn homeland\
+ was the site of the Duchy of Galicia-Volhynia and the Kingdom of Rus.\
+ In later times the lands were under Polish and later Austrian rule.\
+ Rusyns formed two ephemeral states after World War I: the Lemko-Rusyn\
+ Republic and the Komancza Republic.")
+leaders = {
+ "name",                      "sex"
+ "Lev Danylovych",            "Male"           ;Lev I of Galicia
+ "Danylo Romanovych",         "Male"           ;first King of Rus
+ "Dmitri Sidor",              "Male"
+ "Kost Levytsky",             "Male"
+ "Jaroslav Kachmarchyk",      "Male"
+ "Pantelejmon Shpylka",       "Male"
+ "Myhajlo Jurchakevych",      "Male"
+ "Dmytro Sobyn",              "Male"
+ "Mykola Gromosiak",          "Male"
+ "Dmytro Chylak",             "Male"
+ "Wasyl Kuryllo",             "Male"
+}
+flag="rusyn"
+flag_alt = "-"
+style = "Celtic"
+
+ruler_titles = {
+ "government",      "male_title",                 "female_title"
+ "Despotism",       _("Prince %s"),               _("Princess %s")
+ "Fundamentalism",  _("Patriarch %s"),            _("Matriarch %s")
+ "Communism",       _("People's Commissar %s"),   _("?female:People's Commissar %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations = "Polish", "Ukrainian", "Slovakian", "Lendian", "Chrobatian"
+
+cities =
+
+;Lemko towns and villages in Poland
+
+"Novyi Targ",
+"Novyi Sants",
+"Komancha",
+"Hrybiv",
+"Horlytsi",
+"Jaslo",
+"Korosno",
+"Sianik", 
+"Losia",
+"Krynytsia",
+"Novytsia",
+"Zhdynia",
+"Gladyshiv",
+"Hanchova",
+"Zyndranova",
+"Ustia Ruske",
+"Bortne",
+"Biltsariova",
+"Bilianka",
+"Mokre",
+"Shchavne",
+"Kuliashne",
+"Repiad",
+"Turynske",
+
+;Boyko
+
+"Dolyna",
+"Rozhniativ",
+"Broshniv-Osada",
+"Bolekhivtsi",
+"Skole",
+"Turka",
+"Perehinske",
+"Modrichi",
+"Sambir",
+"Staryi Sambir",
+
+;Subcarpathian Rusyns
+
+"Berehove",
+"Uzhhorod",
+"Maramorosh",
+"Sevlush",
+"Verkhovyna",
+"Velykyi Bereznyi",
+"Volovets",
+"Mizhhirya",
+"Khust",
+
+;Pannonian Rusyns
+
+"Rusky Kerestur",
+"Kotsur",
+"Bykuts Dol"

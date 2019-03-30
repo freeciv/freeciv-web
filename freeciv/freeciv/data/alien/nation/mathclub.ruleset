@@ -1,0 +1,39 @@
+[nation_math_club]
+
+translation_domain="freeciv"
+
+name = _("Math Club")
+plural = _("?plural:Mathematicians")
+; /* xgettext:no-c-format */
+legend = _("Math Club was traveling home from Math Competition when Deneb 7 \
+got their ship.\n\n\
+* 30% bonus to science output")
+
+leaders = {
+ "name", "sex"
+ "Male", "male"
+ "Female", "female"
+}
+
+flag = "mathclub"
+flag_alt = "finland"
+style = "Human"
+
+color.r =   0
+color.g = 255
+color.b = 255
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; /* <-- avoid gettext warnings
+;
+; */
+
+cities =
+ "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta",
+ "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron",
+ "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega",
+ "Symbol", "Plus", "Minus", "Equal", "Greater", "Lesser", "Dot", "Line",
+ "Triangle", "Square", "Circle", "Cube"

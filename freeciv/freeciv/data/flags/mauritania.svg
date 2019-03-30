@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="900" height="600" viewBox="-72 -28 144 96"
+ xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+ preserveAspectRatio="xMidYMid meet" zoomAndPan="magnify">
+
+   <rect x="-50%" y="-28" width="100%" height="100%" fill="#006233"/>
+   
+
+   <circle r="31" fill="#ffc400" cy="8"/>
+
+   <path d="M -30,0 A 30,30 0 0,0 30,0 V -24 H -30" fill="#006233"/>
+
+
+   <g transform="scale(12, 12)" fill="#ffc400">
+
+   <g id="cone">
+
+     <polygon id="triangle" points="0,0 0,1 0.5,1" transform="translate(0, -1) rotate(18)"/>
+
+     <use xlink:href="#triangle" transform="scale(-1, 1)"/>
+
+   </g>
+
+   <use xlink:href="#cone" transform="rotate(72)"/>
+
+   <use xlink:href="#cone" transform="rotate(-72)"/>
+
+   <use xlink:href="#cone" transform="rotate(144)"/>
+
+   <use xlink:href="#cone" transform="rotate(-144)"/>
+
+</g>
+
+</svg>

@@ -1,0 +1,52 @@
+Achivements are something player can gain in game by reaching
+set goals. Achivements active in the ruleset are defined in
+game.ruleset.
+
+Depending on whether achievement is defined unique or not,
+they are granted only to first player, or all players,
+to reach the goal for the achievement. Goal is defined by
+achievement type and another value specific to that achievement type.
+
+
+Achievement types
+=================
+
+Map_Known
+    Achievement is granted when player has mapped at least
+    <value>% of the world.
+
+Spaceship
+    This achievement is granted when player launches spaceship.
+    <Value> is ignored.
+
+Multicultural
+    Achievement is granted when player has citizens of at least
+    <value> different nationalities.
+
+Cultured_City
+    Achievement is granted when player has a city with at least
+    <value> culture points.
+
+Cultured_Nation
+    Achievement is granted when player has at least <value>
+    culture points.
+
+Lucky
+    Achievement is granted on turn when random number generator
+    gives value less than <value> out of 10000.
+
+Huts
+    Achievement is granted once player has entered <value> huts.
+
+Metropolis
+    Achievement is granted once there's city of at least size
+    <value> in the player's empire.
+
+Literate
+    Achievement is granted when player's literacy percent is at least
+    <value>.
+
+Land_Ahoy
+    Achievement is granted when player has seen <value> different
+    islands/continents. Home continent counts, so to give achievements
+    for finding first other continent, use value 2.

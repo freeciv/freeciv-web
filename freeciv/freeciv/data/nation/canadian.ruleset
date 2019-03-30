@@ -1,0 +1,124 @@
+[nation_canadian]
+
+name=_("Canadian")
+plural=_("?plural:Canadians")
+groups="Modern", "American"
+conflicts_with="quebecois", "inuit", "acadian"
+legend=_("Geographically, Canada is the second largest country in world.\
+ The magnetic north pole currently lies on Canadian territory.")
+
+leaders = {
+ "name",                        "sex"
+ "Laura Secord",                "Female"
+ "John A. MacDonald",           "Male"
+ "Nellie McClung",              "Female"
+ "William Lyon Mackenzie King", "Male"
+ "John Diefenbaker",            "Male"
+ "Tommy Douglas",               "Male"
+ "Lester B. Pearson",           "Male"
+ "Pierre Trudeau",              "Male"
+ "Brian Mulroney",              "Male"
+ "Kim Campbell",                "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",   "female_title"
+ "Fundamentalism",  _("Bishop %s"), _("Mother Superior %s")
+}
+
+flag="canada"
+flag_alt = "canada_old"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations=
+; Sub-national nations
+ "quebecois", "acadian", "newfoundland",
+; First Nations
+ "inuit", "iroquois", "cree", "anishinaabe", "metis"
+
+; Terrains:  desert, plains, grassland, river, forest, hills, mountains, tundra, swamp, jungle, ocean
+; Capitals of provinces and territories are listed first in this list
+cities =
+"Ottawa (river, hills, !jungle, !desert, forest, !mountains, !tundra, !ocean)",
+"Toronto (ocean, forest, !desert, !mountains, !tundra, !jungle)",
+"Quebec (river, hills, plains, !desert, !swamp, !jungle)",
+"Edmonton (mountains, hills, plains, !jungle, !desert, !swamp, !ocean)",
+"Victoria (mountains, ocean, jungle, !desert, !tundra)",
+"Winnipeg (plains, river, !jungle, !tundra, !desert, !forest, !hills, !mountains, !ocean)",
+"Regina (plains, !forest, !desert, !hills, !mountains, !tundra, !jungle, !ocean)",
+"Fredericton (hills, !desert, !mountains, !tundra, !jungle, ocean)",
+"St. John's (ocean, hills, !desert, !jungle)",
+"Charlottetown (ocean, swamp, !desert, !mountains, !tundra, !jungle)",
+"Halifax (ocean, hills, !desert, !mountains, !tundra, !jungle)",
+"Yellowknife (tundra, !hills, !mountains, !jungle, !forest)",
+"Whitehorse (mountains, tundra, !forest, !jungle)",
+"Iqaluit (tundra, ocean, !mountains, !jungle)",
+; Then the largest non-capital cities
+"Vancouver (ocean, river, mountains, jungle, !desert, !tundra)",
+"Montreal (river, mountains, !desert, !tundra, !jungle)",
+"Calgary (mountains, hills, grassland, !tundra, !forest, !desert, !swamp, !jungle, !ocean)",
+"Saskatoon (grassland, plains, !desert, !forest, !hills, !mountains, !tundra, !swamp, !jungle, !ocean)",
+"Hamilton (ocean, hills, !desert, !mountains, !tundra, !jungle)",
+"Moncton (river, hills, !jungle, !tundra, !mountains, !desert)",
+"Sherbrooke (hills, river, !jungle, !desert, !ocean, !tundra)",
+"Kelowna (mountains, river, !desert, !tundra, !jungle, !ocean)",
+"Moose Jaw (!desert, !forest, !hills, !mountains, !tundra, !swamp, !jungle, !ocean)",
+"Brandon (!ocean, !mountains, !hills, !desert, !jungle)",
+"Sudbury (hills, tundra, !jungle, !ocean)",
+"St. John (ocean, hills, !desert, river, !tundra, !jungle)",
+"Sault Ste. Marie (ocean, ocean, !desert, !mountains, !jungle, !tundra)",
+"Thunder Bay (ocean, swamp, !desert, !mountains, !jungle, !tundra)",
+"Niagara Falls (river, hills, !desert, !jungle, !tundra, !mountains)",
+"Red Deer (!mountains, river, hills, !desert, !jungle, !tundra, !swamp, !ocean)",
+"Jasper (mountains, !jungle, !plains, !grassland, !swamp,!ocean)",
+"Gatineau (hills, river, !desert, forest, !tundra, !jungle, !ocean)",
+"Prince Rupert (!desert, !plains, !grassland, mountains, !jungle, ocean, ocean)",
+"Windsor (river, !desert, !jungle, !tundra, !mountains)",
+"Prince George (mountains, river, !desert, !grassland, !tundra, !swamp, !jungle, !ocean)",
+"Kamloops (river, mountains, !desert, forest, !tundra, !jungle)",
+"Lethbridge (river, plains, !mountains, !tundra, !jungle, !swamp, !ocean)",
+"Medicine Hat (river, plains, !mountains, !tundra, !jungle, !swamp, !ocean, !forest)",
+"Prince Albert (river, plains, grassland, !mountains, !hills, !tundra, !desert, !forest, !ocean, !jungle)",
+"Thompson (plains, !mountains, !hills, !desert, !tundra, !jungle, !ocean)",
+"Timmins (tundra, !mountains, !jungle, !ocean)",
+"Sarnia (ocean, !desert, !jungle, !tundra, !mountains)",
+"Guelph (!ocean, !desert, river, forest, !mountains, !tundra, !jungle)",
+"St. Catharines (river, hills, !mountains, !tundra, !jungle, !desert)",
+"Barrie (ocean, !mountains, !tundra, !jungle, !desert)",
+"North Bay (ocean, hills, !mountains, !jungle)",
+"Belleville (ocean, forest, !desert, !jungle, !tundra, !mountains)",
+"Kingston (ocean, hills, forest, !desert, !jungle, !tundra, !mountains)",
+"Cornwall (river, hills, forest, !desert, !jungle, !tundra, !mountains)",
+"Trois-Rivieres (river, river, !desert, !jungle, !tundra, !mountains)",
+"Chicoutimi (river, hills, forest, !desert, !jungle, !tundra, !ocean)",
+"Rimouski (ocean, hills, forest, !desert, !jungle, !tundra)",
+"Dartmouth (ocean, hills, !desert, !jungle, river, !tundra)",
+"Glace Bay (ocean, !desert, !jungle, river, !tundra)",
+"Corner Brook (mountains, ocean, hills, !swamp, !tundra, !jungle)",
+"Gander (hills, forest, !tundra, !jungle, !ocean, !desert, river, !mountains)",
+"Swawinigan (river, hills, plains, !jungle, !ocean, !desert, !tundra)",
+"Saguenay (hills, !jungle, !desert, grassland, !jungle)",
+"Banff (mountains, !desert, !jungle, !plains, !grassland, !ocean)",
+"Dawson (mountains, tundra, !jungle, !plains, !grassland, !ocean)",
+"Truro (ocean, hills, !desert, !tundra, !jungle)",
+; Other Canadian towns
+"Churchhill (ocean, tundra, !jungle, !desert, !mountains, !hills)",
+"Castlegar (mountains, river, !jungle, !desert, !ocean)",
+; Greater Toronto Area communities
+"Mississauga (ocean, !tundra, !jungle, !desert, !mountains)",
+"Brampton (forest, river, !desert, !mountains, !jungle, !tundra)",
+"Oakville (ocean, !tundra, !jungle, !desert, !mountains)",
+"Oshawa (ocean, !tundra, !jungle, !desert, !mountains)",
+"Whitby (ocean, !tundra, !jungle, !desert, !mountains)",
+"Ajax (ocean, !tundra, !jungle, !desert, !mountains)",
+"Pickering (ocean, !tundra, !jungle, !desert, !mountains)",
+"Markham (!ocean, !tundra, !jungle, !desert, !mountains, !river, !swamp)",
+"Newmarket (!ocean, !tundra, !jungle, !desert, !mountains)",
+"Uxbridge (hills, !tundra, !jungle, !desert, !mountains)",
+; Eastern Ontario communities
+"Perth (river, swamp, !tundra, !jungle, !desert, !mountains)",
+"Smith's Falls (river, hills, !tundra, !jungle, !desert, !mountains)",
+"Carlton Place (river, !hills, !tundra, !jungle, !desert, !mountains)"

@@ -1,0 +1,169 @@
+[nation_irish]
+
+name = _("Irish")
+plural = _("?plural:Irish")
+groups="Medieval", "Modern", "European"
+legend=_("Ireland held out against the Romans and Vikings but was\
+ conquered by the Normans in 1171.  It was ruled by the English until 1922\
+ when most of the country was granted limited autonomy, becoming a republic\
+ in 1949.  The North of Ireland was settled in the 17th century by Scottish\
+ and English planters and is now part of the United Kingdom.")
+
+leaders = {
+ "name",                        "sex"
+ "Brian Boru",                  "Male"
+ "Eamon de Valera",             "Male"
+ "Grace O'Malley",              "Female"
+ "Edmund Burke",                "Male"
+ "Daniel O'Connell",            "Male"
+ "Charles Stuart Parnell",      "Male"
+ "Constance Markievicz",        "Female"
+ "Theobald Wolfe Tone",         "Male"
+ "Gormlaith",                   "Female"
+ "Michael Collins",             "Male"
+ "Aoife MacMurrough",           "Female"
+ "Sean Lemass",                 "Male"
+ "W.T. Cosgrave",               "Male"
+ "Turlough O'Connor",           "Male"
+ "Sean MacBride",               "Male"
+ "John Redmond",                "Male"
+ "Henry Grattan",               "Male"
+ "Wellington",                  "Male"
+ "Jack Lynch",                  "Male"
+ "Mary McSwiney",               "Female"
+ "Muircheartach MacLochlainn",  "Male"
+ "Tiernan O'Rourke",            "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Chieftain %s"),    _("?female:Chieftain %s")
+ "Monarchy",        _("High King %s"),    _("High Queen %s")
+ "Fundamentalism",  _("Archbishop %s"),   _("Mother Superior %s")
+ ; /* TRANS: Taoiseach = Prime Minister */
+ "Democracy",       _("Taoiseach %s"),    _("?female:Taoiseach %s")
+}
+
+flag="ireland"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+; Similar flags
+conflicts_with="italian"
+civilwar_nations = "scottish gaelic", "english", "scottish", "gaelic"
+
+cities =
+  "Dublin (river, ocean)",
+  "Tara (hills, !ocean, grassland)",
+  "Cork (river, ocean, swamp)",
+  "Galway (ocean, river, !desert)",
+  "Limerick (river)",
+  "Waterford (river, ocean, !tundra)",
+  "Cashel (mountains, grassland, !ocean)",
+  "Kilkenny (river, !ocean, grassland)",
+  "Kells (grassland, !ocean)",
+  "Drogheda (river, ocean)",
+  "Athlone (river)",
+  "Sligo (ocean, hills)",
+  "Clonmel (river, hills)",
+  "Wexford (ocean, river, swamp)",
+  "Bray (ocean, mountains)",
+  "Dun Laoghaire (ocean)",
+  "Shannon (!hills, river, swamp)",
+  "Carlow (!ocean)",
+  "Cavan (hills, !mountains, !ocean)",
+  "Ennis (river)",
+  "Mallow (river, !ocean)",
+  "Lifford (river)",
+  "Tallaght (!ocean)",
+  "Tuam (!ocean)",
+  "Killarney (forest, hills, !desert)",
+  "Kildare (grassland, !ocean)",
+  "Portlaoise (!ocean)",
+  "Carrick-on-Shannon (river)",
+  "Foynes (ocean)",
+  "Longford (!ocean)",
+  "Dundalk (ocean)",
+  "Castlebar (!ocean)",
+  "Navan (river)",
+  "Monaghan (hills, !mountains, !ocean)",
+  "Tullamore (swamp, !ocean)",
+  "Roscommon (plains, !river)",
+  "Tubbercurry (!ocean)",
+  "Thurles (grassland, !ocean)",
+  "Dungarvan (ocean)",
+  "Mullingar (!hills)",
+  "Enniscorthy (river, !ocean)",
+  "Wicklow (hills, ocean)",
+  "Howth (hills, ocean)",
+  "Letterkenny (ocean)",
+  "Youghal (river, ocean)",
+  "Lisdoonvarna (desert, hills)",
+  "Gweedore (tundra)",
+  "Castlerea (plains)",
+  "Ballyvaughan (desert, ocean)",
+  "Ballina (ocean)",
+  "Durrow (!ocean)",
+  "Dunglow (ocean)",
+  "Kilrush (ocean)",
+  "Ballinasloe (river, !ocean)",
+  "Bantry (ocean, hills)",
+  "Kenmare (ocean, hills)",
+  "Edenderry (swamp, !ocean)",
+  "Ballybunion (ocean)",
+  "Abbeyleix (!ocean)",
+  "Castlecomer (!ocean)",
+  "Banagher (swamp, river)",
+  "Bailieborough (!ocean)",
+  "Glenamaddy (!river, !ocean)",
+  "Leitrim (river)",
+  "Macroom (river, hills)",
+  "Killybegs (ocean, !grassland)",
+  "Bundoran (ocean, hills)",
+  "Athenry (grassland, !ocean)",
+  "Loughrea (grassland, !hills)",
+  "Maynooth (!ocean)",
+  "Athy (!ocean)",
+  "Tralee (ocean)",
+  "Tipperary (hills, grassland, !ocean)",
+  "Thomastown (grassland)",
+  "Manorhamilton (hills)",
+  "Rathkeale (grassland)",
+  "Ballymahon (plains)",
+  "Carrickmacross (hills)",
+  "Slane (river)",
+  "Dunboyne (grassland)",
+  "Knock (!mountains, !ocean)",
+  "Birr (!hills)",
+  "Ballymote (plains)",
+  "Roscrea (grassland)",
+  "Fermoy (river)",
+  "Nenagh (grassland)",
+  "Ferns (grassland)",
+  "New Ross (river)",
+  "Arklow (ocean)",
+  "Glendalough (mountains)",
+  "Portumna (river, forest)",
+  "Clonfert (river)",
+  "Swords (grassland)",
+  "Dunmore (plains, hills)",
+  "Gort (forest, !ocean)",
+  "Clifden (hills, ocean)",
+  "Oranmore (ocean)",
+  "Claremorris (!ocean)",
+  "Ballyhaunis (!ocean)",
+  "Moate (!ocean)",
+  "Ardee (grassland)",
+  "Mellifont (grassland)",
+  "Lismore (river, grassland)",
+  "Kylemore (forest, hills, ocean)",
+  "Sally Gap (mountains, plains)",
+  "Kilmallock (grassland)",
+  "Portarlington (swamp, !ocean)",
+  "Cahir (hills)",
+  "Trim (grassland, river)"
+

@@ -1,0 +1,87 @@
+[nation_mamluk]
+
+name=_("Mamluk")
+plural=_("?plural:Mamluks")
+groups="Medieval", "African", "Asian"
+legend=_("The Mamluks were an Egyptian warrior caste who were recruited\
+ from slaves of Turkish or Caucasian origin. The Mamluks were known as\
+ elite military units. They held important roles in several Muslim\
+ countries. In 1250, they created their own state in Egypt. The Mamluk\
+ Sultanate was ruled by two dynasties Mamluks until it was conquered by\
+ the Ottoman Turks in 1517.")
+leaders = {
+ "name",                             "sex"
+ "Şecer-üd-Dürr",                    "Male"
+ "İzzeddin Aybeg",                   "Male"
+ "Mansur Nureddin Ali",              "Male"
+ "Adil Bedreddin Sülemiş",           "Male"
+ "Eşref Salaheddin Halil",           "Male"
+ "Nasır Bedreddin Ebu Ma'ali Hasan", "Male"
+ "Zahir Seyfeddin Berkuk",           "Male"
+ "Mustain",                          "Male"
+ "Aziz Cemaleddin Yusuf",            "Male"
+ "Seyfeddin Ebu Said Hoşkadem ",     "Male"
+ "Eşref Seyfeddin Kayit Bay",        "Male"
+ "Eşref Kansu Gavri",                "Male"
+}
+flag="mamluk"
+flag_alt = "-"
+style = "Babylonian"
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Pasha"),     _("?female:%s Pasha")
+ "Monarchy",        _("Sultan %s"),    _("Sultana %s")
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="egyptian", "nubian", "egyptian arab"
+civilwar_nations = "egyptian arab", "palestinian", "lebanese", "jordanian",
+ "ottoman", "seljuk"
+
+cities =
+"Kahire",
+"Iskenderiye",
+"Giza",
+"Dendera",
+"Luksor",
+"Ismailiye",
+"Kharga",
+"Süveyş",
+"Sevhac",
+"Asyut",
+"Safaga",
+"Disuk",
+"Feyyum",
+"Siwah",
+"Asvan",
+"Naj Hammadi",
+"El Minye",
+"An Nubariya",
+"Reşid",
+"Şarm El-Şeyh",
+"El Alameyn",
+"Şibin al Kawm",
+"Korn Ombo",
+"Hala'ib",
+"Mansure",
+"El-Mahalla El-Kubra",
+"Şubra El-Khayma",
+"Tanta",
+"Kafr Dawar",
+"Zagazig",
+"Taba",
+"Imbaba",
+"Hurgada",
+"Dimyat",
+"Demenhur",
+"Benha",
+"Beni Süveyf",
+"Ad Dakhila",
+"El Ariş",
+"Ahmim",
+"Mersa Matruh"

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
+[
+ <!ATTLIST svg
+  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
+]>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="720.000000" id="svg166" version="1" width="1080.00000" x="0.00000000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0.00000000">
+  <defs id="defs168"/>
+  <rect height="359.809692" id="rect171" style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;" width="1079.99927" x="0.00071700" y="0.38079500"/>
+  <rect height="359.809692" id="rect172" style="font-size:12;fill:#d30036;fill-rule:evenodd;stroke-width:1pt;" width="1079.99927" x="0.00000000" y="360.190247"/>
+  <rect height="720.000000" id="rect170" style="font-size:12;fill:#0000ad;fill-rule:evenodd;stroke-width:1pt;" width="356.399750" x="0.00062600" y="0.00001100"/>
+  <polygon id="polygon175" points="349.081,386.745 294.269,346.441 238.968,386.072 260.362,321.488 205.582,281.14 273.616,281.53 295.061,216.962 315.714,281.787 383.749,282.23 328.479,321.904 349.081,386.745 " style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;" transform="matrix(1.415990,0.000000,0.000000,1.482060,-239.7710,-99.51200)"/>
+  <metadata>
+    <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <Work rdf:about="">
+        <dc:title>Clipart by Paul B. Joiner - United States - Texas</dc:title>
+        <dc:description></dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>north_america</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+            <rdf:li></rdf:li>
+            <rdf:li>flags</rdf:li>
+            <rdf:li>0xa115960</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>united_states</rdf:li>
+            <rdf:li>america</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <Agent rdf:about="http://www.openclipart.org">
+            <dc:title>Paul B. Joiner</dc:title>
+          </Agent>
+        </dc:publisher>
+        <dc:creator>
+          <Agent rdf:about="">
+            <dc:title>Paul B. Joiner</dc:title>
+          </Agent>
+        </dc:creator>
+        <dc:rights>
+          <Agent rdf:about="">
+            <dc:title>Paul B. Joiner</dc:title>
+          </Agent>
+        </dc:rights>
+        <dc:date></dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <license rdf:resource="http://web.resource.org/cc/PublicDomain">
+          <dc:date></dc:date>
+        </license>
+        <dc:language>en</dc:language>
+      </Work>
+      <License rdf:about="http://web.resource.org/cc/PublicDomain">
+        <permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+      </License>
+    </rdf:RDF>
+  </metadata>
+</svg>

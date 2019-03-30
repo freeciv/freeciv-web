@@ -1,0 +1,114 @@
+[nation_mayan]
+
+translation_domain="freeciv"
+
+name=_("Mayan")
+plural=_("?plural:Mayas")
+groups="Ancient", "Medieval", "Early Modern", "American", "Core"
+legend=_("The Mayans were a Mesoamerican civilization. They are\
+ famous for building great pyramids and palaces in the jungle.")
+
+leaders = {
+ "name",                        "sex"
+ "K'uk B'alam",                 "Male"
+ "Sac K'uk'",                   "Female"
+ "Pakal",                       "Male"
+ "Jasaw Chan K'awiil I",        "Male"
+ "Yuknoom",                     "Male"
+ "Itzamnaaj B'alam II",         "Male"
+ "Tekun Umam",                  "Male"
+ "Kan Ek'",                     "Male"
+ "Crescencio Poot",             "Male"
+ "Rigoberta Menchú Tum",        "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Lord %s"),      _("Lady %s")
+ "Fundamentalism",  _("Elder %s"),     _("?female:Elder %s")
+}
+
+flag = "maya"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "guatemalan", "yucatecan", "chiapanec"
+
+; Oldest names take precedence. Later/alternative names in comment.
+cities =
+ "Kaan",			;Calakmul
+ "Yax Mutal",			;Tikal
+ "Lakam Ja'",			;Palenque
+ "Pa' Chan",			;Yaxchilán
+ "Popo",			;Toniná
+ "Ox Witz Ja'",			;Caracol
+ "Ja'",				;Dos Pilas
+ "Chi'che'en Itsa",		;Chichén Itzá
+ "Oxwitik",			;Copán
+ "Óox Máal",			;Uxmal
+ "Q'umarkaj",			;Gumarcaj, Utatlán
+ "Cob Ja'",			;Cobá
+ "Siaan K'aan", 		;Uaxactun
+ "Lam'an'ain",  		;Lamanai
+ "Kaminaljuyu",			;Kaminaljuyú
+ "Maayapáan",			;Mayapán
+ "Saqik'ajol Nimakaqapek",	;Mixco Viejo
+ "Wak Kab'nal",			;Naranjo
+ "Pa' Chan",			;El Zotz
+ "Zama",			;Tulum
+ "Zac Tz'otz",			;Zaculeu
+ "K'abaaj",			;Kabah
+ "Yo'k'ib'",			;Piedras Negras
+ "Masuul",			;Nachtún
+ "Iximché",			;Iximché
+ "Yax Ja'",			;Yaxhá
+ "Waka'",			;El Perú
+ "Itsnaj",			;Edzná
+ "Ichkantijo'",			;Mérida
+ "Sac Peten",			;Zacpeten
+ "P'ole'",			;Xcaret
+ "Ts'ibilchaltun",		;Dzibilchaltún
+ "Eek' Báalam",			;Ek Balaam
+ "Aj Kosomeen Peten",		;Cozumel
+ "Óox K'iin Tok",		;Oxkintok
+ "Iits Mal",			;Izamal
+ "Kaanpeech",			;Campeche
+ "Noj Peten",			;Tayasal
+ "Ekab K'otoch",		;Ecab
+ "Sayil",			;Sayil
+ "Chaktumen",			;Chetumal
+
+;original names apparently unknown, modern name in Mayan
+
+ "Quirigua",
+ "Chincultic",
+ "Cival",
+ "Altun Ja'",		;Altún Ha
+ "Naak Bej",		;Nakbé
+ "Bonampak",
+ "Lubaantun",
+ "Nim Li Punit",
+ "Xunáan Tuunich",	;Xunantunich
+ "Seibal",
+ "Tak'alik A'baj",	;Takalik Abaj
+ "X-pujil",		;Xpujil
+ "Kaajal Peech",	;Cahal Pech
+ "Bej Kaan",		;Becán
+ "Chuun Chukmil",	;Chunchucmil
+ "X-laabch'e'en",	;Kohunlich
+ "Ix Kun",		;Ixkún
+ "Laab Naj",		;Labná
+
+;original names apparently unknown, modern name in Spanish, English or Nahuatl
+
+ "El Mirador",
+ "El Baúl",
+ "San Bartolo",
+ "Comalcalco",
+ "Chaa Creek",
+ "Joya de Cerén",
+ "Hormiguero",
+ "El Rey"

@@ -1,0 +1,6 @@
+This is tolua-5.2.4 modified for Freeciv usage.
+Not entire tolua distribution directory hierarchy is included here, and
+some files needed for Freeciv usage have been added.
+
+Changes applied to included tolua source files are included in
+freeciv_tolua.patch

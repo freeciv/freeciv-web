@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg611"
+   sodipodi:version="0.33pre"
+   width="600"
+   height="400">
+  <rect
+     fill="#ffffff"
+     width="600"
+     height="400" />
+  <rect
+     fill="#2c5aa0"
+     width="265"
+     height="165"
+     y="235" />
+  <rect
+     fill="#cb2027"
+     width="265"
+     height="165" />
+  <rect
+     fill="#2c5aa0"
+     width="265"
+     height="165"
+     x="335"
+     y="235" />
+  <rect
+     fill="#2c5aa0"
+     width="265"
+     height="165"
+     x="335" />
+  <g
+     id="g3239"
+     transform="matrix(0.24985133,0,0,0.25091538,-1.555361,4.9353623)"
+     fill="#ffffff">
+    <path
+       inkscape:connector-curvature="0"
+       fill="#ffffff"
+       transform="matrix(11.9122,0,0,12.4579,-2509.82,-6130.71)"
+       d="m 266.186,534.45 -10.408,-7.432 -10.357,7.505 3.852,-12.196 -10.338,-7.531 12.79,-0.105 3.967,-12.159 4.052,12.131 12.79,0.016 -10.285,7.602 3.937,12.169 z" />
+  </g>
+</svg>

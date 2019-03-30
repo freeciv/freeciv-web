@@ -1,0 +1,56 @@
+[nation_cree]
+
+name=_("Cree")
+plural=_("?plural:Cree")
+groups="American"
+
+legend=_("The Cree are the largest native group in Canada with over 200,000\
+ members who speak an Algonquian language and often call themselves\
+ \"Iiyiyuu\" or \"Iinuu,\" meaning \"people.\" They originally inhabited\
+ much of Quebec, Labrador, Alberta, Saskatchewan, Ontario and Manitoba.")
+
+leaders = {
+ "name",        "sex"
+ "Awashish",    "Male"
+ "Mukash",      "Male"
+ "Ominayak",    "Male"
+}
+
+flag="innu"
+flag_alt = "-"
+style = "Celtic"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="metis", "inuit", "anishinaabe"
+
+cities =
+ "Chisasibi",
+ "Whapmagoostui",
+ "Mistissini",
+ "Waskaganish",
+ "Nemaska",
+ "Wemindji",
+ "Ouje Bougoumou",
+ "Waswanipi",
+ "Wemotaci",
+ "Opitciwan",
+ "Manawan",
+ "Sheshatshiu",
+ "Natuashish",
+ "Betsiamites",
+ "Essipit",
+ "Kawawachikamach",
+ "Mashteuiatsh",
+ "Matimekosh",
+ "Mingan",
+ "Natashquan",
+ "Pakuashipi",
+ "Uashat-Maliotenam",
+ "Kashechewan",
+ "O-Pipon-Na-Piwin",
+ "Nisichawayasihk",
+ "Opaskwayak",
+ "Wabasca"

@@ -1,0 +1,114 @@
+[nation_nicaraguan]
+
+name = _("Nicaraguan")
+plural = _("?plural:Nicaraguans")
+groups= "Modern", "American"
+legend=_("The largest of the Central American republics, Nicaragua is\
+ known for its turbulent history. The country lived through numerous\
+ civil wars and foreign interventions until Anastasio Somoza established\
+ a notoriously corrupt dictatorship in the 1930s. His family continued\
+ to rule until 1979, when the last Somoza was overthrown by sandinista\
+ revolutionaries, starting 11 years of civil war between the sandinista\
+ government and the contras.")
+
+leaders = {
+ "name",                                "sex"
+ "Francisco Hernández de Córdoba",      "Male"
+ "William Walker",                      "Male"
+ "José Santos Zelaya",                  "Male"
+ "Adolfo Díaz",                         "Male"
+ "José María Moncada",                  "Male"
+ "Augusto César Sandino",               "Male"
+ "Anastasio Somoza García",             "Male"
+ "Luis Somoza Debayle",                 "Male"
+ "Anastasio Somoza Debayle",            "Male"
+ "Daniel Ortega",                       "Male"
+ "Violeta Barrios de Chamorro",         "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",             "female_title"
+ "Communism",       _("Comandante %s"),       _("Comandanta %s")
+ "Despotism",       _("General %s"),          _("?female:General %s")
+ "Fundamentalism",  _("Padre %s"),            _("Madre %s")
+}
+
+flag = "nicaragua"
+flag_alt = ""
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations = "costa rican", "miskito"
+
+cities =
+ "Managua (lake)",
+ "León (mountains)",
+ "Granada (lake)",
+ "Estelí (mountains)",
+ "Chinandega",
+ "Matagalpa (mountains, hills, forest)",
+ "Masaya (hills)",
+ "Puerto Cabezas (ocean, jungle)",
+ "Juigalpa",
+ "Bluefields (ocean, swamp, jungle)",
+ "Jinotega",
+ "Diriamba",
+ "Ocotal",
+ "Jinotepe",
+ "Rivas",
+ "Tipitapa",
+ "El Viejo",
+ "Chichigalpa",
+ "Nueva Guinea (ocean)",
+ "Ciudad Sandino",
+ "Sébaco",
+ "Mateare",
+ "San Carlos (river)",
+ "Nagarote",
+ "San Marcos",
+ "Somoto",
+ "Nindirí",
+ "San Rafael del Sur",
+ "La Paz Centro",
+ "Ciudad Darío (hills)",
+ "Corinto",
+ "Nandaime",
+ "Masatepe (hills)",
+ "El Rama (ocean)",
+ "Camoapa",
+ "La Trinidad",
+ "Jalapa",
+ "Boaco",
+ "San Carlos",
+ "Somotillo",
+ "Río Blanco (river)",
+ "Larreynaga",
+ "Siuna",
+ "Santo Tomás",
+ "Waslala",
+ "Bonanza",
+ "San Isidro",
+ "San Juan de Nicaragua",
+ "Rosita",
+ "Matiguás",
+ "El Tuma-La Dalia",
+ "Acoyapa",
+ "San Juan del Sur",
+ "Waspán",
+ "Belén",
+ "Villa Nueva",
+ "Corn Island (ocean)",
+ "Esquipulas",
+ "La Libertad",
+ "Muy Muy",
+ "El Crucero",
+ "Pearl Lagoon (ocean, lake)",
+ "Pochomil-Masachapa",
+ "Altagracia (lake)",
+ "Ticuantepe",
+ "Diriomo",
+ "Wiwilí",
+ "Prinzapolka",
+ "Niquinohomo"

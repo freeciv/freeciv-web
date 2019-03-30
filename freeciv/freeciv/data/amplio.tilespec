@@ -1,0 +1,329 @@
+
+[tilespec]
+
+; Format and options of this tilespec file:
+options = "+Freeciv-tilespec-Devel-2016-Jun-07"
+
+; A simple name for the tileset specified by this file:
+name = "Amplio"
+priority = 20
+
+; There`s no separate versioning in tilesets part of main freeciv distribution
+;version = ""
+
+; Summary and full description of the tileset.
+summary = _("Older variant of the current default tileset, Amplio2")
+;description = ""
+
+; TODO: add more overall information fields on tiles, 
+; eg, authors, colors, etc.
+
+; What is the primary ruleset this tileset is meant for.
+;for_ruleset = ""
+
+; Basic tile sizes:
+normal_tile_width  = 96
+normal_tile_height = 48
+small_tile_width   = 15
+small_tile_height  = 20
+
+; Basic tile style.
+type = "isometric"
+is_hex = FALSE
+
+; Blended fog
+fog_style      = "Darkness"
+darkness_style = "Corner"
+
+; offset the flags by this amount when drawing units
+unit_flag_offset_x = 25
+unit_flag_offset_y = 16
+city_flag_offset_x = 2
+city_flag_offset_y = 9
+
+; offset the city occupied sprite by this amount
+occupied_offset_x = 0
+occupied_offset_y = 0
+
+; offset the units by this amount
+unit_offset_x = 19
+unit_offset_y = 18
+
+; offset of the normal activity icons
+activity_offset_x = 0
+activity_offset_y = 0
+
+; offset of the selected unit sprites
+select_offset_x = 0
+select_offset_y = 0
+
+; offset the cities by this amount
+city_offset_x = 0
+city_offset_y = 0
+
+; offset the city size number by this amount
+; This is relative to full sprite origin.
+city_size_offset_x = 0
+city_size_offset_y = 0
+
+; offset the city bar text by this amount (from the city tile origin)
+citybar_offset_y = 30
+
+; offset the tile label text by this amount
+tilelabel_offset_y = 15
+
+; offset the upkeep icons by this amount from the top of the unit itself.
+; The default is the normal tile height, which means that the upkeep icons
+; appear below the unit icon if the unit icons are equal to tile height
+; (typical in overhead tileset), or overlay lower part of the unit icon,
+; if unit icon is higher than tiles (typical in iso tilesets)
+;unit_upkeep_offset_y = 0
+
+; Like unit_upkeep_offset_y, but to be used in case there`s only small
+; space for the overall icon produced. Defaults to unit_upkeep_offset_y -
+; not having alternative layout.
+;unit_upkeep_small_offset_y = 0
+
+; For tilesets with oriented units, the directional sprite to use to
+; represent a unit type rather than a specific unit from the map
+; (e.g., in worklists, editor, and online help). Does not have to be a
+; valid direction for the tileset.
+;unit_default_orientation = "s"
+
+; The map is rendered in "layers", just like any decent image editor
+; supports. The setting below allows to change the layer drawing order. The
+; first layer in the list will be drawn below the others; the second on top
+; of it, and so on. No layer can be omitted from the list, nor can new ones
+; be added.
+;layer_order =
+;  "Background", ; Background color (if enabled, the player color where there
+;                ; are units or cities). You probably want to leave this
+;                ; first.
+;  "Terrain1",   ; The three terrain layers. See sections [layerN] below.
+;  "Darkness",   ; Darkness (unseen tiles)
+;  "Terrain2",
+;  "Terrain3",
+;  "Water",      ; All extras with "River" style.
+;  "Roads",      ; All extras with style "RoadAllSeparate",
+;                ; "RoadParityCombined" or "RoadAllCombined".
+;  "Special1",   ; 1st layer for extras with style "3Layers", "Single2" or
+;                ; "Single1".
+;  "Grid1",      ; Grid layer for isometric tilesets.
+;  "City1",      ; City and walls.
+;  "Special2",   ; 2nd layer for extras with "3Layers" and "Single2" styles.
+;  "Fog",        ; Fog of war (on tiles one knows but doesn`t see).
+;  "Unit",       ; Units except the selected one(s).
+;  "Special3",   ; 3rd layer for extras with "3Layers" style, and base flags.
+;  "City2",      ; City size when the city bar is disabled.
+;  "Grid2",      ; Second grid layer (overhead tilesets only).
+;  "Overlays",   ; Tile output sprites.
+;  "TileLabel",  ; Tile labels ("Scorched spot").
+;  "CityBar",    ; The city bar with name, production, food, ...
+;  "FocusUnit",  ; The focused unit(s).
+;  "Goto",       ; Goto turn count and intermediate points, *not* goto lines.
+;  "WorkerTask", ; The unit task indicators ("G", "S", ...).
+;  "Editor"      ; Editor stuff (selected tile and start points).
+
+; This is special because it gets freed and reloaded as required:
+main_intro_file    = "misc/intro"
+
+; Below, the graphics spec files; must be somewhere (anywhere) in 
+; the data path. Order may be important for color allocation on 
+; low-color systems, and if there are any duplicate tags (lattermost
+; tag is used).
+files =
+  "amplio/terrain1.spec",
+  "amplio/maglev.spec",
+  "amplio/terrain2.spec",
+  "amplio/ocean.spec",
+  "amplio/water.spec",
+  "amplio/tiles.spec",
+  "amplio/upkeep.spec",
+  "amplio/fog.spec",
+  "misc/small.spec",
+  "misc/events.spec",
+  "misc/governments.spec",
+  "misc/specialists.spec",
+  "amplio/units.spec",
+  "misc/flags.spec",
+  "misc/buildings-large.spec",
+  "misc/wonders-large.spec",
+  "misc/space.spec",
+  "misc/techs.spec",
+  "misc/treaty.spec",
+  "amplio/nuke.spec",
+  "amplio/explosions.spec",
+  "amplio/ancientcities.spec",
+  "amplio/medievalcities.spec",
+  "amplio/moderncities.spec",
+  "amplio/select.spec",
+  "amplio/grid.spec",
+  "misc/cursors.spec",
+  "misc/overlays.spec",
+  "misc/citybar.spec",
+  "misc/shields.spec",
+  "misc/editor.spec",
+  "misc/icons.spec"
+
+
+; Include color definitions
+*include "misc/colors.tilespec"
+
+; Terrain info - see README.graphics
+
+[layer0]
+match_types = "shallow", "deep", "land"
+
+[layer1]
+match_types = "forest", "hills", "mountains", "water", "ice"
+
+[layer2]
+match_types = "water", "ice"
+
+; Water graphics referenced by terrain.ruleset
+;
+[tile_lake]
+tag = "lake"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "shallow"
+layer0_match_with = "land"
+layer0_sprite_type = "corner"
+
+[tile_coast]
+tag = "coast"
+blend_layer = 1
+num_layers = 2
+layer0_match_type = "shallow"
+layer0_match_with = "deep", "land"
+layer0_sprite_type = "corner"
+layer1_match_type = "water"
+layer1_match_with = "ice"
+layer1_sprite_type = "corner"
+
+[tile_floor]
+tag = "floor"
+blend_layer = 0
+num_layers = 2
+layer0_match_type = "deep"
+layer0_match_with = "shallow", "land"
+layer0_sprite_type = "corner"
+layer1_match_type = "water"
+layer1_match_with = "ice"
+layer1_sprite_type = "corner"
+
+; Land graphics referenced by terrain.ruleset
+;
+[tile_arctic]
+tag = "arctic"
+; treated as water for ice cliffs
+blend_layer = 0
+num_layers = 3
+layer0_match_type = "shallow"
+layer1_match_type = "ice"
+layer2_match_type = "ice"
+
+[tile_desert]
+tag = "desert"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_forest]
+tag = "forest"
+blend_layer = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "forest"
+layer1_match_with = "forest"
+
+[tile_grassland]
+tag = "grassland"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_hills]
+tag = "hills"
+blend_layer = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "hills"
+layer1_match_with = "hills"
+
+[tile_jungle]
+tag = "jungle"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_mountains]
+tag = "mountains"
+blend_layer = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "mountains"
+layer1_match_with = "mountains"
+
+[tile_plains]
+tag = "plains"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_swamp]
+tag = "swamp"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[tile_tundra]
+tag = "tundra"
+blend_layer = 1
+num_layers = 1
+layer0_match_type = "land"
+
+[extras]
+styles =
+    { "name",          "style"
+      "road.road",     "RoadAllSeparate"
+      "road.rail",     "RoadAllSeparate"
+      "road.maglev",   "RoadAllSeparate"
+      "road.river",    "River"
+      "tx.irrigation", "Cardinals"
+      "tx.farmland",   "Cardinals"
+      "tx.mine",       "Single1"
+      "tx.oil_mine",   "Single1"
+      "tx.oil_rig",    "Single1"
+      "tx.pollution",  "Single2"
+      "tx.fallout",    "Single2"
+      "tx.village",    "Single1"
+      "base.outpost",  "3Layer"
+      "base.fortress", "3Layer"
+      "base.airstrip", "3Layer"
+      "base.airbase",  "3Layer"
+      "base.buoy",     "3Layer"
+      "extra.ruins",   "3Layer"
+      "ts.gold",       "Single1"
+      "ts.iron",       "Single1"
+      "ts.tundra_game", "Single1"
+      "ts.furs",       "Single1"
+      "ts.coal",       "Single1"
+      "ts.fish",       "Single1"
+      "ts.fruit",      "Single1"
+      "ts.gems",       "Single1"
+      "ts.buffalo",    "Single1"
+      "ts.wheat",      "Single1"
+      "ts.oasis",      "Single1"
+      "ts.peat",       "Single1"
+      "ts.pheasant",   "Single1"
+      "ts.grassland_resources", "Single1"
+      "ts.arctic_ivory", "Single1"
+      "ts.silk",       "Single1"
+      "ts.spice",      "Single1"
+      "ts.whales",     "Single1"
+      "ts.wine",       "Single1"
+      "ts.oil",        "Single1"
+      "ts.horses",     "Single1"
+      "ts.seals",      "Single1"
+    }

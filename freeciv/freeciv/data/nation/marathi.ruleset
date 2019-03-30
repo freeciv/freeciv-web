@@ -1,0 +1,92 @@
+[nation_marathi]
+
+name=_("Marathi")
+plural=_("?plural:Marathis")
+groups="Asian", "Early Modern"
+legend=_("The Marathi are people who inhabit the state of Maharashtra in\
+ India. In the 17th century, the Marathi prince Shivaji established the\
+ Maratha confederacy, waging war on the Moghul empire and eventually\
+ replacing the Moghuls as the main power on the Indian subcomtinent.")
+leaders = {
+ "name",                         "sex"
+ "Shivaji I",                    "Male"
+ "Sambhaji",                     "Male"
+ "Rajaram",                      "Male"
+ "Tarabai",                      "Female"
+ "Shivaji II",                   "Male"
+ "Ramaraja",                     "Male"
+ "Sonopant Dabir",               "Male"
+ "Shyampant Kulkami-Ranzekar",   "Male"
+ "Moreshwar Pingale",            "Male"
+ "Ramchandrapant Amatya",        "Male"
+ "Balaji Vishwanath",            "Male"
+ "Peshwa Bajirao I",             "Male"
+ "Raghunathrao",                 "Male"
+ "Sawai Madhava Rao II Narayan", "Male"
+ "Amritrao",                     "Male"
+ "Nana Sahib",                   "Male"
+}
+flag="marathi"
+flag_alt = "-"
+style = "Asian"
+
+ruler_titles = {
+ "government",      "male_title",         "female_title"
+ "Despotism",       _("Raja %s"),         _("Rani %s")
+ "Monarchy",        _("Maharaja %s"),     _("Maharani %s")
+ "Fundamentalism",  _("High Brahmin %s"), _("?female:High Brahmin %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="vedic", "gupta", "mughal", "indian", "pakistani",
+               "bangladeshi", "bengali"
+civilwar_nations = "mughal", "sikh", "indian"
+
+cities =
+ "Mumbai",
+ "Pune",
+ "Raigad",
+ "Nagpur",
+ "Thane",
+ "Pimpri-Chinchwad",
+ "Nashik",
+ "Kalyan",
+ "Kalyan-Dombivali",
+ "Navi Mumbai",
+ "Aurangabad",
+ "Kolhapur",
+ "Solapur",
+ "Nanded",
+ "Ahmednagar",
+ "Dhule",
+ "Akola",
+ "Vasai-Virar",
+ "Amravati",
+ "Jalgaon",
+ "Ulhasnagar",
+ "Mira-Bhayandar",
+ "Malegaon",
+ "Bhiwandi",
+ "Sangli-Miraj",
+ "Latur",
+ "Chandrapur",
+ "Parbani",
+ "Ichaikaronji",
+ "Jalna",
+ "Nalasopara",
+ "Busawal",
+ "Bid",
+ "Gondia",
+ "Yavatmul",
+ "Virar",
+ "Navghar",
+ "Palakwadi",
+ "Satara",
+ "Elichpur",
+ "Barsi", 
+ "Badlapur",
+ "Nandurbar"
+

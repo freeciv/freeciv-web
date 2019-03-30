@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+  <rect width="300" height="200" fill="#000000" />
+  <ellipse
+     cx="523.08185"
+     cy="344.04666"
+     rx="194.92863"
+     ry="194.92862"
+     transform="matrix(0.31897621,0,0,0.31897621,-16.850567,-9.7426507)"
+     fill="#fcfc00" />
+</svg>

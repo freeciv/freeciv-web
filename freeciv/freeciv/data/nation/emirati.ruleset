@@ -1,0 +1,120 @@
+[nation_emirati]
+
+name=_("Emirati")
+plural=_("?plural:Emiratis")
+groups="Modern", "Asian"
+legend=_("The history of the United Arab Emirates goes back to the 7th\
+ century. In the 19th century the Emirates became a\
+ dependency of the United Kingdom. In 1971 six\
+ emirates joined in a federative state as the United\
+ Arab Emirates. The following year, the seventh member emirate joined\
+ them.")
+
+leaders = {
+ "name",                                "sex"
+ "Dhiyab bin Isa ibn Nahayan",          "Male"
+ "Saeed II bin Maktoum",                "Male"
+ "Zayed II bin Sultan Al Nahayan",      "Male"
+ "Maktoum bin Rashid Al Maktoum",       "Male"
+ "Rashid bin Saeed Al Maktoum",         "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("Sheikh %s"),    _("Shaykha %s")
+ "Fundamentalism",  _("Imam %s"),      _("Imama %s")
+ "Monarchy",        _("Emir %s"),      _("Emira %s")
+ "Republic",        _("Vizier %s"),    _("?female:Vizier %s")
+}
+
+flag="uae"
+flag_alt = "-"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Saudi", "Omani", "Qatari"
+
+cities =
+ "Abu Zabi",
+ "Dubayy",
+ "Shabaka",
+ "Ajman",
+ "Sharm",
+ "Ash-Shariqa",
+ "Al-Fujayra",
+ "Umm al-Qaywayn",
+ "Ra's al Khayma",
+ "Rafa",
+ "Dayra",
+ "Sa'd",
+ "Sall",
+ "Nawa",
+ "Barr Dubayy",
+ "Khawr Fakkan",
+ "Murra",
+ "Al-Jazira",
+ "Al-Manama",
+ "Al-'Ayn",
+ "Adhan",
+ "Wafd",
+ "Ghayl",
+ "Layya",
+ "Ramla",
+ "Sha",
+ "Asama",
+ "Wasit",
+ "Sa'if",
+ "Ayim",
+ "Al-Awda",
+ "Far'a",
+ "As-Sur",
+ "Kayya",
+ "Al-Ghaba",
+ "Al-Fara",
+ "Dayna",
+ "Bulayda",
+ "Al-Maqta",
+ "Sayh",
+ "Al-Khazna",
+ "Adh-Dhayd",
+ "Jumayra",
+ "Khatt",
+ "Zikt",
+ "Al-Qurayya",
+ "Qabas",
+ "Wamm",
+ "Sur",
+ "Al-Khan",
+ "Qidfa",
+ "Mas'udi",
+ "Al-Mafraq",
+ "Ghubb",
+ "Al-Qawz",
+ "Ma'ali",
+ "Mawsil",
+ "Mazyad",
+ "Suhayla",
+ "Aqqa",
+ "Al-Marfa",
+ "Sinna",
+ "Al-Khis",
+ "Ar-Ruways",
+ "Arada",
+ "Fa'y",
+ "Umm Suqaym",
+ "Al-Quwayz",
+ "Shandagha",
+ "Ad-Duss",
+ "Al-Udayd",
+ "Sabkha",
+ "Uqayr",
+ "As-Sad",
+ "Baqal",
+ "Hayl",
+ "Umm al-Qurayn",
+ "Al-Hayr",
+ "Muzayri",
+ "Al-Wathba"

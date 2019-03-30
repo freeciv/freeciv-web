@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="900" height="600">
+<rect width="900" height="600" fill="#dc241f"/>
+<polygon points="0,0 0,600 600,300" fill="#ffc726"/>
+<polygon points="0,0 0,600 400,300" fill="#000000"/>
+<path style="fill: rgb(255, 255, 255);" d="M 223.01359,223.1172 L 189.69981,290.31452 L 245.51733,340.46762 L 168.90061,332.05945 L 135.31216,399.13494 L 121.27425,326.7414 L 44.698058,318.04394 L 112.63885,281.71027 L 98.900527,209.25898 L 154.92813,259.19704 L 223.01359,223.1172 z "/>
+</svg>

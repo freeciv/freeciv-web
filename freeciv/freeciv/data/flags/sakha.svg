@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="300">
+   <rect id="sky blue stripe" width="450" height="226" fill="#33ccff"/>
+   <rect id="white stripe" width="450" height="18" x="0" y="226" fill="#fff"/>
+   <rect id="red stripe" width="450" height="18" x="0" y="244" fill="#ff0000"/>
+   <rect id="green stripe" width="450" height="38" x="0" y="262" fill="#009900"/>
+   <circle cx="225" cy="113" r="55" fill="#fff"/>
+</svg>

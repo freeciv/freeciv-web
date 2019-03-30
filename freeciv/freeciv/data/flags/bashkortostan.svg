@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="450px" height="300px" viewBox="0 0 450 300">
+<defs>
+<g id="petal">
+<line x1="0" y1="0" x2="25" y2="0" stroke="gold" stroke-width="2"/>
+<circle cx="25" cy="0" r="5" fill="gold"/>
+</g>
+</defs>
+<rect fill="#0070FF" width="450" height="100" x="0" y="0"/>
+<rect fill="white" width="450" height="100" x="0" y="100"/>
+<rect fill="#007000" width="450" height="100" x="0" y="200"/>
+<circle cx="225" cy="150" r="37.5" stroke="gold" stroke-width="5" fill="none"/>
+<circle cx="225" cy="150" r="8" fill="gold"/>
+<use x="225" y="150" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-30)" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-60)" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-90)" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-120)" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-150)" xlink:href="#petal"/> 
+<use transform="translate(225, 150) rotate(-180)" xlink:href="#petal"/> 
+<line x1="225" y1="150" x2="225" y2="175" stroke="gold" stroke-width="2"/>
+</svg>

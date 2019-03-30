@@ -1,0 +1,91 @@
+[nation_fulani]
+
+name=_("Fulani")
+plural=_("?plural:Fulani")
+groups="African", "Early Modern"
+legend=_("The Fulani or Fulbe are an ethnic group in West Africa. Originally\
+ pastoralists, in the 18th and 19th centuries they led the Fulani Jihads,\
+ founding a number of states across the region. The biggest Fulani state was\
+ the Sokoto Caliphate, founded by Usuman dan Fodio during the Fulani Jihad of\
+ 1809. It was one of the most powerful empires in Sub-Saharan Africa prior to\
+ the European conquest and colonization. The caliphate remained extant through\
+ the colonial period and afterwards, though with reduced power.")
+leaders = {
+ "name",                            "sex"
+ "Abdul Kaader",                    "Male"
+ "Usman dan Fodio",                 "Male"
+ "Nana Asma'u",                     "Female"
+ "Muhammed Bello",                  "Male"
+ "Abu Bakr Atiku",                  "Male"
+ "Aliyu Baba dan Bello",            "Male"  
+ "Umar ibn Sa'id Tall",             "Male"
+ "Seku Amadu",                      "Male"
+ "Abu Bakr bin Bello",              "Male"
+ "Hasan dan Mu'azu Ahmadu",         "Male"
+ "Ibrahim Dasuki dan Khaliru",      "Male"
+}
+flag="sokoto"
+flag_alt = "-"
+style = "Tropical"
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Monarchy",        _("Sultan %s"),    _("Sultana %s")
+ "Fundamentalism",  _("Caliph %s"),    _("Calipha %s")
+ "Republic",        _("Vizier %s"),    _("?female:Vizier %s")
+}
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="nigerian", "nigerien"
+civilwar_nations = "nigerian", "nigerien", "kanem-bornu"
+
+cities =
+ "Sokoto",
+ "Timbo",
+ "Bondu",
+ "Orefonde",
+ "Hamdullahi",
+ "Saria",
+ "Dinguiray",
+ "Kano",
+ "Kansala",
+ "Wurno",
+ "Maradi",
+ "Segu",
+ "Gandi",
+ "Sabo",
+ "Birni-n-Gbari",
+ "Djenné",
+ "Gombe",
+ "Katsena",
+ "Daura",
+ "Soma",
+ "Tape",
+ "Macina",
+ "Tangale",
+ "Muri",
+ "Loko",
+ "Shaba",
+ "Abuja",
+ "Keffi",
+ "Wasaba",
+ "Fagam",
+ "Shera",
+ "Darroro",
+ "Wase",
+ "Odeni",
+ "Ushini",
+ "Anoi",
+ "Sokkua",
+ "Gaya",
+ "Gabesawa",
+ "Mussawa",
+ "Katagum",
+ "Gerki",
+ "Kiura",
+ "Surmi",
+ "Augi",
+ "Timbuktu"

@@ -1,0 +1,8 @@
+/Makefile
+/Makefile.in
+/.deps
+/libcivcommon.a
+/packets_gen.c
+/packets_gen.h
+/fc_svnrev_gen.h
+/fc_gitrev_gen.h

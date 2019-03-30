@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+
+<!-- Creative Commons Public Domain -->
+
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <Work rdf:about="">
+    <dc:title>SVG graphic of South African Flag</dc:title>
+                                                                                                 
+    <dc:rights>
+      <Agent>
+        <dc:title>Farrel Lifson</dc:title>
+      </Agent>
+    </dc:rights>
+                                                                                                 
+    <license
+    rdf:resource="http://web.resource.org/cc/PublicDomain" />
+  </Work>
+                                                                                                 
+  <License rdf:about="http://web.resource.org/cc/PublicDomain">
+    <permits
+    rdf:resource="http://web.resource.org/cc/Reproduction" />
+                                                                                                 
+    <permits
+    rdf:resource="http://web.resource.org/cc/Distribution" />
+                                                                                                 
+    <permits
+    rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+  </License>
+</rdf:RDF>
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0.00000000"
+   y="0.00000000"
+   width="749.409424"
+   height="499.606293"
+   id="svg548"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="south_africa.svg">
+  <metadata
+     id="metadata8024">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="913"
+     inkscape:window-height="713"
+     id="namedview8022"
+     showgrid="false"
+     inkscape:zoom="0.47237195"
+     inkscape:cx="374.70471"
+     inkscape:cy="249.80315"
+     inkscape:window-x="421"
+     inkscape:window-y="35"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg548" />
+  <defs
+     id="defs550">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 249.80315 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="749.40942 : 249.80315 : 1"
+       inkscape:persp3d-origin="374.70471 : 166.53543 : 1"
+       id="perspective8026" />
+  </defs>
+  <path
+     id="path581"
+     style="font-size:12px;fill-rule:evenodd;stroke-width:1pt"
+     d="m 9.7926e-6,397.89931 0,-296.07239 L 220.36459,249.78216 9.7926e-6,397.89931 z" />
+  <path
+     id="path597"
+     style="font-size:12px;fill:#002395;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     d="m 150.35734,499.6063 247.40131,-166.51211 351.65086,0 0,166.51211 -599.05217,0 z" />
+  <path
+     id="path598"
+     style="font-size:12px;fill:#de3831;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     d="m 150.35734,0.01198972 599.05217,0 0,166.54010028 -351.65086,0 c 0,0 -244.10417,-168.1871123 -247.40131,-166.54010028 z" />
+  <path
+     id="path599"
+     style="font-size:12px;fill:#ffb612;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     d="m 9.7926e-6,62.474521 c 0,0 0,39.352399 0,39.352399 L 220.36459,249.78216 9.7926e-6,397.89931 l 0,39.3504 L 277.55696,249.78216 9.7925999e-6,62.474521 z" />
+  <path
+     id="path600"
+     style="font-size:12px;fill:#007a4d;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1"
+     d="m 9.7926e-6,62.474521 0,-62.46253128 92.5956502074,0 294.02266,198.94266028 362.79119,0 0,101.73697 -362.79119,0 -294.02266,198.91468 -92.5956502074,0 0,-62.35659 L 277.55696,249.78216 9.7926e-6,62.474521 z" />
+  <path
+     id="path601"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     d="m 92.59566,0.01198972 57.76168,0 247.40131,166.54010028 351.65086,0 0,32.40256 -362.79119,0 L 92.59566,0.01198972 z" />
+  <path
+     id="path602"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     d="m 92.59566,499.6063 57.76168,0 247.40131,-166.51211 351.65086,0 0,-32.40257 -362.79119,0 L 92.59566,499.6063 z" />
+</svg>

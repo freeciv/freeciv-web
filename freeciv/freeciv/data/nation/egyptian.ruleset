@@ -1,0 +1,91 @@
+[nation_egyptian]
+
+translation_domain="freeciv"
+
+name=_("Egyptian")
+plural=_("?plural:Egyptians")
+groups="Ancient", "African", "Core"
+legend=_("Egypt was the second-oldest of the world's civilizations.  Since\
+ ancient times it has been unusually urbanized, supporting a large\
+ population on silt deposited by the annual floodings of the Nile.")
+
+leaders = {
+ "name",                "sex"
+ "Ramesses II",         "Male"
+ "Cleopatra VII",       "Female"
+ "Tutankhamun",         "Male"
+ "Narmer",              "Male"
+ "Thutmose I",          "Male"
+ "Hatshepsut",          "Female"
+ "Nefertiti",           "Female"
+ "Khufu",               "Male" ; a.k.a. "Cheops"
+ "Akhenaten",           "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",          "female_title"
+ "Anarchy",         _("Usurper %s"),       _("?female:Usurper %s")
+ "Democracy",       _("Chancellor %s"),    _("?female:Chancellor %s")
+ "Despotism",       _("Pharaoh %s"),       _("?female:Pharaoh %s")
+ "Monarchy",        _("Great Pharaoh %s"), _("?female:Great Pharaoh %s")
+}
+
+flag="egypt_ancient"
+flag_alt = "egypt"
+style = "Babylonian"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="nubian"
+
+; Source: http://www.narmer.pl/map/nomy_en.htm
+; Alternative names in comment
+cities =
+ "Waset",	; No-Amon, Diospolis Magna, Thebes, Luxor, Karnak
+ "Ineb-Hedj",	; Men-Nefer, Memphis, Mit Rahina
+ "Yunu",	; On, Heliopolis, el-Matariya
+ "Suentet",	; Syene, Asuan
+ "Sheresi",	; Merwer, Shedyt, Crokodilopolis, Arsinoe, Medinet el-Fayum
+ "Per-Bastet",	; Bubastis, Tell Basta
+ "Rakote",	; Alexandria
+ "Behdet",	; Sam-Behutkhet, Pa-khen-em-Amon, Hu, Diospolis Parva etc.
+ "Sa",		; Sais, San el-Hagar
+ "Hardai",	; Cynopolis
+ "This",	; Tjeny, Thinis, Girga
+ "Ipu",		; Ipu-Khent-Min, Khemmis Panopolis, Akhmim
+ "Djeuka",	; Antaeopolis, Kaw el-Kebir
+ "Yuni",	; Hermonthis, Armant
+ "Khem",	; Letopolis, Kom Ausim
+ "Henen-Nesut",	; Heracleopolis, Ehnasije el-Medine
+ "Per-Medjed",	; Oxyrynkhos, el-Bahnasa
+ "Per-Usiri",	; Djedu, Busiris, Taposiris Magna, Abusir Bana
+ "Imu",		; Kom el-Hisn
+ "Itji-Tawi",	; el-Lisht
+ "Sauti",	; Lycopolis, Asyut
+ "Akhet-Aton",	; el-Amarna
+ "Chaswu",	; Xois, Sakha
+ "Pi-Rameses",	; Qantir
+ "Abdju",	; Osiris, Abydos
+ "Djanenet",	; Hut-Waret, Tanis, Awaris, San el-Hagar
+ "Per-Banebdjedet", ; Mendes, Tema el-Amdid
+ "Tjeb-Neter",	; Sebennythos, Samanud
+ "Anpet-Djedet", ; Tmuis
+ "Gebtiu",	; Koptos, Kuft
+ "Taminhor", 	; Hermopolis Parva, Damanhur
+
+; Cities without Old Egyptian name; Probably founded by Greeks or Romans
+ "Pelusium",
+ "Canopus",
+ "Naucratis",
+ "Aphroditopolis",
+ "Ammonium",
+ "Acoris",
+ "Timonepsis",
+ "Nilopolis",
+ "Ibiu",
+ "Andropolis",
+ "Sele",
+ "Antiphrae",
+ "Apis"

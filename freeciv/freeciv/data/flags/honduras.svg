@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="750"
+   height="500"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="honduras.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <rect
+     width="750"
+     height="500"
+     style="fill:#0073cf"
+     id="rect4"/>
+  <rect
+     width="750"
+     height="166.66667"
+     y="166.66667"
+     style="fill:#ffffff"
+     id="rect6"/>
+  <g
+     transform="matrix(13.888889,0,0,13.888889,-124.99986,0)"
+     id="g2485">
+    <g
+       transform="matrix(2,0,0,2,36,18)"
+       id="star"
+       style="fill:#0073cf">
+      <g
+         id="cone">
+        <polygon
+           transform="matrix(0.9510565,0.309017,-0.309017,0.9510565,0,-1)"
+           points="0,0 0,1 0.5,1 0,0 "
+           id="triangle" />
+        <use
+           id="use12"
+           transform="scale(-1,1)"
+           xlink:href="#triangle"
+           x="0"
+           y="0"
+           width="72"
+           height="36" />
+      </g>
+      <use
+         id="use14"
+         transform="matrix(0.309017,0.9510565,-0.9510565,0.309017,0,0)"
+         xlink:href="#cone"
+         x="0"
+         y="0"
+         width="72"
+         height="36" />
+      <use
+         id="use16"
+         transform="matrix(0.309017,-0.9510565,0.9510565,0.309017,0,0)"
+         xlink:href="#cone"
+         x="0"
+         y="0"
+         width="72"
+         height="36" />
+      <use
+         id="use18"
+         transform="matrix(-0.809017,0.5877853,-0.5877853,-0.809017,0,0)"
+         xlink:href="#cone"
+         x="0"
+         y="0"
+         width="72"
+         height="36" />
+      <use
+         id="use20"
+         transform="matrix(-0.809017,-0.5877853,0.5877853,-0.809017,0,0)"
+         xlink:href="#cone"
+         x="0"
+         y="0"
+         width="72"
+         height="36" />
+    </g>
+    <use
+       id="use17"
+       transform="translate(10,-3.2)"
+       xlink:href="#star"
+       x="0"
+       y="0"
+       width="72"
+       height="36" />
+    <use
+       id="use19"
+       transform="translate(10,2.8)"
+       xlink:href="#star"
+       x="0"
+       y="0"
+       width="72"
+       height="36" />
+    <use
+       id="use21"
+       transform="translate(-10,-3.2)"
+       xlink:href="#star"
+       x="0"
+       y="0"
+       width="72"
+       height="36" />
+    <use
+       id="use23"
+       transform="translate(-10,2.8)"
+       xlink:href="#star"
+       x="0"
+       y="0"
+       width="72"
+       height="36" />
+  </g>
+</svg>

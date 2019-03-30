@@ -1,0 +1,130 @@
+[nation_capeverdean]
+
+name = _("Cape Verdean")
+plural = _("?plural:Cape Verdean")
+groups="African", "Modern"
+legend=_("Cape Verde is an archipelago off the coast of West Africa.\
+ Before the islands were settled by the Portuguese in the 15th century\
+ they were probably uninhabited. Cape Verde subsequently became a major\
+ center for the Atlantic slave trade. The islands declared independence\
+ from Portugal in 1975. The Cape Verdean population is of mixed European\
+ and African descent.")
+
+leaders = {
+ "name",              "sex"
+ "Luís Cadamosto",    "Male"
+ "António de Noli",   "Male"
+ "Honório Barreto",   "Male"
+ "Amílcar Cabral",    "Male"
+ "Aristides Pereira", "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",    "female_title"
+ "Despotism",       _("Admiral %s"), _("?female:Admiral %s")
+ "Fundamentalism",  _("Padre %s"),   _("Madre %s")
+}
+
+flag = "cape_verde"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="bissau-guinean"
+
+cities =
+ "Praia",
+ "Cidade Velha",
+ "Mindelo",
+ "Assomada",
+ "Porto Novo",
+ "São Filipe",
+ "Pedra Badejo",
+ "Tarrafal",
+ "Espargos",
+ "Ribeira Brava",
+ "Calheta de São Miguel",
+ "Vila do Maio",
+ "Ribeira Grande",
+ "Sal Rei",
+ "São Domingos",
+ "Vila das Pombas",
+ "Nova Sintra",
+ "Mosteiros",
+ "Cova Figueira",
+ "João Teves",
+ "Picos",
+ "Tarrafal de São Nicolau",
+ "Ponta do Sol",
+ "Santa Maria",
+ "Morro Brás",
+ "Salamansa",
+ "Preguiça",
+ "Água do Gato",
+ "Bangaeira",
+ "Salto",
+ "Janela",
+ "Hortelã",
+ "Campo",
+ "Patim",
+ "Madeiral",
+ "Queimada",
+ "Castilhano",
+ "Cabeçalinho",
+ "São Lourenço",
+ "Juncalinho",
+ "Terra Boa",
+ "Figueira Pavão",
+ "São Pedro",
+ "Achada Banana",
+ "Murdeira",
+ "Atalaia",
+ "Lazareto",
+ "Fajã de Cima",
+ "Eito",
+ "Coxo",
+ "Santo António",
+ "Topim",
+ "Carvoeiro",
+ "Fajãzinha",
+ "Fonsaco",
+ "Lomba de Santo",
+ "Mato Inglês",
+ "Baixo Rocha",
+ "Calejão",
+ "Rui Vaz",
+ "Ribeira da Cruz",
+ "Praia Branca",
+ "Estância Roque",
+ "Eito de Baixo",
+ "Lomba",
+ "Galinheiros",
+ "Furna",
+ "Cachaço",
+ "Curral Grande",
+ "Fajã de Baixo",
+ "Estância de Brás",
+ "São Francisco",
+ "Curral da Russa",
+ "Seixal",
+ "Sinagoga",
+ "Tarrafal de Monte Trigo",
+ "Pedra de Lume",
+ "Fonte Aleixo",
+ "Ponta Verde",
+ "Ribeira Ilhéu",
+ "Carriçal",
+ "Achada Grande",
+ "Calhau",
+ "Baía das Gatas",
+ "Belém",
+ "Chã das Caldeiras",
+ "Covada",
+ "Jalunga",
+ "Fontainhas",
+ "Palmeira",
+ "Coculi",
+ "Vicente Dias"

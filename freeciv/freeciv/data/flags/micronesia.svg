@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2391"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   width="750"
+   height="500"
+   version="1.0"
+   sodipodi:docname="micronesia.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs2394">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective2398" />
+    <inkscape:perspective
+       id="perspective30"
+       inkscape:persp3d-origin="380 : 133.33333 : 1"
+       inkscape:vp_z="760 : 200 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 200 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="729"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="0.44281333"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:current-layer="svg2391" />
+  <g
+     id="g2494"
+     transform="matrix(19.736842,0,0,19.736842,375,250)">
+    <rect
+       style="fill:#75b2dd"
+       id="rect4"
+       height="25.333334"
+       width="38"
+       y="-12.666667"
+       x="-19" />
+    <g
+       transform="scale(1.1875,1.1875)"
+       id="g2403">
+      <g
+         id="star"
+         transform="matrix(2,0,0,2,0,-6)"
+         style="fill:#ffffff">
+        <g
+           id="cone">
+          <polygon
+             id="triangle"
+             points="0,0 0,1 0.5,1 0,0 "
+             transform="matrix(0.9510565,0.309017,-0.309017,0.9510565,0,-1)" />
+          <use
+             xlink:href="#triangle"
+             transform="scale(-1,1)"
+             id="use9"
+             x="0"
+             y="0"
+             width="38"
+             height="20" />
+        </g>
+        <use
+           xlink:href="#cone"
+           transform="matrix(0.309017,0.9510565,-0.9510565,0.309017,0,0)"
+           id="use11"
+           x="0"
+           y="0"
+           width="38"
+           height="20" />
+        <use
+           xlink:href="#cone"
+           transform="matrix(0.309017,-0.9510565,0.9510565,0.309017,0,0)"
+           id="use13"
+           x="0"
+           y="0"
+           width="38"
+           height="20" />
+        <use
+           xlink:href="#cone"
+           transform="matrix(-0.809017,0.5877853,-0.5877853,-0.809017,0,0)"
+           id="use15"
+           x="0"
+           y="0"
+           width="38"
+           height="20" />
+        <use
+           xlink:href="#cone"
+           transform="matrix(-0.809017,-0.5877853,0.5877853,-0.809017,0,0)"
+           id="use17"
+           x="0"
+           y="0"
+           width="38"
+           height="20" />
+      </g>
+      <use
+         xlink:href="#star"
+         transform="matrix(0,1,-1,0,0,0)"
+         id="use19"
+         x="0"
+         y="0"
+         width="38"
+         height="20" />
+      <use
+         xlink:href="#star"
+         transform="matrix(0,-1,1,0,0,0)"
+         id="use21"
+         x="0"
+         y="0"
+         width="38"
+         height="20" />
+      <use
+         xlink:href="#star"
+         transform="scale(-1,-1)"
+         id="use23"
+         x="0"
+         y="0"
+         width="38"
+         height="20" />
+    </g>
+  </g>
+</svg>

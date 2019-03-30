@@ -1,0 +1,89 @@
+[nation_zulu]
+
+translation_domain="freeciv"
+
+name=_("Zulu")
+plural=_("?plural:Zulus")
+groups="African", "Early Modern", "Core"
+legend=_("The Zulus are a warlike Bantu people who migrated from\
+ west-central Africa into southern Africa beginning in the early 1700s,\
+ conquering the native Khoisan peoples and clashing with European settlers.")
+
+leaders = {
+ "name",                        "sex"
+ "Mnguni",                      "Male" ; Legendary first king of the Zulu
+                                       ; and related tribes
+ "Nkosinkulu",                  "Male"
+ "Mdlani",                      "Male"
+ "Malandela kaLuzumana",        "Male"
+ "Ntombhela kaMalandela",       "Male"
+ "Zulu kaNtombela",             "Male" ; Founder of the Zulu clan
+ "Gumede kaZulu",               "Male"
+ "Phunga kaGumede",             "Male"
+ "Mageba kaPhunga",             "Male"
+ "Ndaba kaMageba",              "Male"
+ "Jama kaNdaba",                "Male"
+ "Senzangakhona kaJama",        "Male"
+ "Shaka kaSenzangakhona",       "Male" ; Shaka Zulu
+ "Dingane kaSenzangakhona",     "Male" ; Half-brother of Shaka
+ "Mpande kaSenzangakhona",      "Male" ; Half-brother of Shaka
+ "Cetshwayo kaMpande",          "Male"
+ "Dinizulu kaCetshwayo",        "Male"
+ "Solomon kaDinizulu",          "Male"
+ "Cyprian Bhekuzulu kaSolomon", "Male"
+ "Nandi",                       "Female"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Fundamentalism",  _("Elder %s"),           _("?female:Elder %s")
+ "Monarchy",        _("Great Chief %s"),     _("?female:Great Chief %s")
+ "Republic",        _("Spokesman %s"),       _("Spokeswoman %s")
+ "Democracy",       _("Principal Chief %s"), _("?female:Principal Chief %s")
+}
+
+flag="zulu"
+flag_alt = "rwanda"  ; used previously
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+civilwar_nations="xhosa", "swazi"
+
+cities =
+ "Zimbabwe",
+ "Ulundi",
+ "Ethekwini",	; Boer name: Durban
+ "Tshwane",	; Boer name: Pretoria
+ "Harare",
+ "Maputo",
+ "Bulaweyo",
+ "Mzizima",
+ "Luanda",
+ "Umgungundlovu", ; Boer name: Pietermaitzburg
+ "Matola",
+ "Benoni",
+ "Gabarone",
+ "Beira",
+ "Tembisa",
+ "Nampula",
+ "Chitungwiza",
+ "Mbabane",
+ "Arusha",
+ "Mbeya",
+ "Huambo",
+ "Molepolole",
+ "Epumalanga",
+ "Ladysmtih",
+ "KwaDukuza",
+ "Eshowe",
+ "Hlobane",
+ "Esikhawini",
+ "Empangeni",
+ "Nongoma",
+ "Magudu",
+ "Mondlo",
+ "Endumeni",
+ "Mtunzini",
+ "Tongati"

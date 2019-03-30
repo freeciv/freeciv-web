@@ -1,0 +1,120 @@
+[nation_soviet]
+
+name=_("Soviet")
+plural=_("?plural:Soviets")
+groups="European", "Asian"
+legend=_("The history of the Soviet Union starts in November 1917,\
+ when under Lenin's leadership a Bolshevik revolution occurred.\
+ On December 31 1922, four Soviet republics integrated into one\
+ country. The Soviet Union became one of the most powerful states in\
+ the 20th century, but by the end of 1991 it had disintegrated\
+ into fifteen independent countries due to social and economic\
+ problems.")
+
+leaders = {
+ "name",                "sex"
+ "Vladimir Lenin",      "Male"
+ "Iosif Stalin",        "Male"
+ "Nikita Khruschov",    "Male"
+ "Leonid Brezhnev",     "Male"
+ "Yuriy Andropov",      "Male"
+ "Nadezhda Krupskaya",  "Female"
+ "Alexandra Kollontai", "Female"
+}
+
+ruler_titles = {
+ "government",  "male_title",                "female_title"
+ "Anarchy",     _("Enemy of the People %s"), _("?female:Enemy of the People %s")
+ "Communism",   _("General Secretary %s"),   _("?female:General Secretary %s")
+ "Despotism",   _("Commissar %s"),           _("?female:Commissar %s")
+ "Monarchy",    _("Great Leader %s"),        _("?female:Great Leader %s")
+}
+
+flag="soviet"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with = "Russian", "Moldovan", "Kazakh", "Kyrgyz", "Tajik",
+ "Turkmen", "Uzbek"
+civilwar_nations = "Russian", "Ukrainian", "Belarusian",
+ "Lithuanian", "Latvian", "Estonian",
+ "Moldovan", "Georgian", "Armenian", "Azeri",
+ "Kazakh", "Kyrgyz", "Tajik", "Turkmen", "Uzbek"
+
+cities =
+ "Moskva",
+ "Leningrad",
+ "Tashkent",
+ "Kiev",
+ "Baku",
+ "Gorky",
+ "Minsk",
+ "Stalino",
+ "Kharkov",
+ "Novosibirsk",
+ "Stalingrad",
+ "Alma-Ata",
+ "Kuybyshev",
+ "Dnepropetrovsk",
+ "Yerevan",
+ "Rostov-na-Donu",
+ "Tbilisi",
+ "Sverdlovsk",
+ "Chelyabinsk",
+ "Omsk",
+ "Odessa",
+ "Kazan",
+ "Saratov",
+ "Ufa",
+ "Krasnoyarsk",
+ "Stalinabad",
+ "Molotov",
+ "Voronezh",
+ "Ashkhabad",
+ "Frunze",
+ "Krasnodar",
+ "Stalinsk",
+ "Riga",
+ "Zaporozhye",
+ "Lvov",
+ "Krivoy Rog",
+ "Barnaul",
+ "Tolyatti",
+ "Kishinyov",
+ "Vladivostok",
+ "Namangan",
+ "Ulyanovsk",
+ "Tomsk",
+ "Kramatorsk",
+ "Tula",
+ "Vilnyus",
+ "Kalinin",
+ "Tallin",
+ "Kirov",
+ "Samarkand",
+ "Petrozavodsk",
+ "Chkalov",
+ "Komsomolsk-na-Amure",
+ "Voroshilovgrad",
+ "Leninakan",
+ "Kirovabad",
+ "Leninsk-Kuznetsky",
+ "Dzerzhinsk",
+ "Ivano-Frankovsk",
+ "Engels",
+ "Kotovsk",
+ "Ordzhonikidze",
+ "Ustinov",
+ "Leninabad",
+ "Tselinograd",
+ "Artyom",
+ "Zhdanov",
+ "Dneprodzerzhinsk",
+ "Krasnogvardeysk",
+ "Stalinogorsk",
+ "Chapaevsk",
+ "Voroshilovsk"

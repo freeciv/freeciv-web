@@ -1,0 +1,115 @@
+[nation_papuan]
+
+name=_("Papuan")
+plural=_("?plural:Papuans")
+groups="Asian", "Oceanian"
+legend=_("The Papuans are the indigenous inhabitants of the island of New\
+ Guinea. They are the descendants of the people who first settled the\
+ island 40,000 years ago. Agriculture was developed in the New Guinean\
+ Highlands about 6,000 years ago, though many Papuan tribes, especially\
+ those on the coast, continue to live as hunter-gatherers. Some Papuan\
+ tribes are still uncontacted. The various Papua groups are highly diverse\
+ culturally, ethnically and linguistically; New Guinea harbors no less\
+ than a quarter of the world's languages. The western part of the island\
+ was colonized by the Dutch, the eastern part by the Germans, the British,\
+ the Japanese and finally the Australians. The eastern part has been\
+ independent as Papua New Guinea since 1975. West Papua was occupied by\
+ Indonesia upon the withdrawal of the Dutch in 1963, though indigenous\
+ activists have been struggling for independence ever since.")
+
+leaders = {
+ "name",            "sex"
+ "Theys Eluay",     "Male"
+ "Viktor Kaisiepo", "Male"
+ "Kelly Kwalik",    "Male"
+ "Bill Skate",      "Male"
+ "Benny Wenda",     "Male"
+}
+
+ruler_titles = {
+ "government",      "male_title",            "female_title"
+ "Monarchy",        _("Paramount Chief %s"), _("?female:Paramount Chief %s")
+}
+
+flag = "west_papua"
+flag_alt = "-"
+style = "Tropical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with = "cham" ;similar flag
+civilwar_nations = "papua new guinean", "australian aboriginal"
+
+cities =
+; alternating West Papuan and PNG names
+ "Manokwari",
+ "Lae",
+ "Sorong",
+ "Arawa",
+ "Wamena",
+ "Popondetta",
+ "Timika",
+ "Madang",
+ "Merauke",
+ "Mendi",
+ "Fakfak",
+ "Kimbe",
+ "Agats",
+ "Goroka",
+ "Ilaga",
+ "Wewak",
+ "Biak",
+ "Daru",
+ "Enarotali",
+ "Kavieng",
+ "Koor",
+ "Alotau",
+ "Lobo",
+ "Vanimo",
+ "Muturi",
+ "Kundiawa",
+ "Ranswiki",
+ "Lorengau",
+ "Sailolof",
+ "Kerema",
+ "Waibeem",
+ "Wabag",
+ "Teminabuan",
+ "Rabaul",
+ "Sausapor",
+ "Kokopo",
+ "Saukorem",
+ "Bulolo",
+ "Amamapare",
+ "Wau",
+ "Ilaga",
+ "Kiunga",
+ "Tsinga",
+ "Tari",
+ "Umari",
+ "Kainantu",
+ "Kaimana",
+ "Buka",
+ "Bintuni",
+ "Ialibu",
+ "Greemakolo",
+ "Kokoda",
+ "Bawe",
+ "Aitape",
+ "Uta",
+ "Kieta",
+ "Nabire",
+ "Balimo",
+ "Fef",
+ "Panguna",
+ "Tanahmerah",
+ "Ambunti",
+ "Serui",
+ "Samarai",
+ "Digul",
+ "Angoram",
+ "Porgera",
+ "Namatanai",
+ "Kandrian"

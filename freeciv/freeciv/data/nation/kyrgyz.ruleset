@@ -1,0 +1,97 @@
+[nation_kyrgyz]
+
+name=_("Kyrgyz")
+plural=_("?plural:Kyrgyzs")
+groups="Modern", "Asian"
+legend=_("Nation in Central Asia. Conquered by the Russian Empire\
+ in the 19th century, Kyrgyzstan got independence\
+ from the Soviet Union in 1991.")
+
+leaders = {
+ "name",                "sex"
+ "Gudulu",              "Male" ; Kyrgyz Khagan.
+ "Yshbeg",              "Male" ; Enisey Kyrgyz Khagan.
+ "Bars-beg",            "Male" ; Kyrgyz Khagan.
+ "Tagay-biy",           "Male" ; Kyrgyz Khagan.
+ "Shabdan Dzhantaev",   "Male" ; Kyrgyz field commander.
+ "Kurmanjan Datka",     "Female" ; Kyrgyz stateswoman.
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Despotism",       _("%s Khan"),      _("%s Khatan")
+ "Monarchy",        _("%s Khagan"),    _("?female:%s Khagan")
+ "Communism",       _("Chairman %s"),  _("Chairwoman %s")
+}
+
+flag="kyrgyzstan"
+flag_alt = "-"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+civilwar_nations="Uyghur", "Uzbek", "Kazakh"
+
+cities =
+ "Bishkek",		; Бишкек
+ "Irkeshtam",		; Иркештам
+ "Osh",			; Ош
+ "Karakol",		; Каракол
+ "Jalalabat",		; Жалалабат
+ "Karabalta",		; Карабалта
+ "Tokmok",		; Токмок
+ "Naryn",		; Нарын
+ "Özgön",		; Өзгөн
+ "Balykchy",		; Балыкчы
+ "Talas",		; Талас
+ "Kyzylkyya",		; Кызылкыя
+ "Bazar-Korgon",	; Базар-коргон
+ "Kerben",		; Кербен
+ "Karaköl",		; Каракөл
+ "Gülchö",		; Гүлчө
+ "Tashkömür",		; Ташкөмүр
+ "Isfana",		; Исфана
+ "Mayluu-Suu",		; Майлуу-Суу
+ "Kant",		; Кант
+ "Kochkor-Ata",		; Кочкор-Ата
+ "Kara-Suu",		; Кара-Суу
+ "Toktogul",		; Токтогул
+ "Kyzyl-Suu",		; Кызыл-Суу
+ "At-Bashi",		; Ат-Баши
+ "Kochkor",		; Кочкор
+ "Sülüktü",		; Сүлүктү
+ "Kyzyl-Tuu",		; Кызыл-Туу
+ "Tüp",			; Түп
+ "Batken",		; Баткен
+ "Cholpon-Ata",		; Чолпон-Ата
+ "Aydarken",		; Айдаркен
+ "Kayyngdy",		; Кайыңды
+ "Kemin",		; Кемин
+ "Kökjanggak",		; Көкжаңгак
+ "Shopokov",		; Шопоков
+ "Daroot-Korgon",	; Дароот-коргон
+ "Kyzyl-Adyr",		; Кызыл-адыр
+ "Bökönbaev",		; Бөкөнбаев
+ "Chaek",		; Чаек
+ "Baetov",		; Баетов
+ "Sary-Tash"		; Сары-Таш
+
+; Could not confirm Kyrgyz spelling of the following cities.
+
+; "Kaji-Say",
+; "Kara-Say",
+; "Ak-Shyyrak",
+; "Engil'chek",
+; "Min-Kush",
+; "Chatyr-Tash",
+; "Kök-Aygyr",
+; "Imeni Kalilina",
+; "Kugart", ; the same city as Imeni Kalinina
+; "Kazanman",
+; "Terek-Say",
+; "Ala-Buka",
+; "Bordaba",
+; "Karamyk",
+; "Shürob"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
+   <rect style="fill: rgb(0, 48, 130);" id="blue stripe" width="1200" height="200" x="0" y="0"/>
+   <rect style="fill: rgb(255, 255, 255);" id="white stripe" width="1200" height="200" x="0" y="200"/>
+   <rect style="fill: rgb(40, 151, 40);" id="green stripe" width="1200" height="200" x="0" y="400"/>
+   <rect style="fill: rgb(255, 206, 0);" id="yellow stripe" width="1200" height="200" x="0" y="600"/>
+   <rect style="fill: rgb(210, 16, 52);" id="red stripe" width="200" height="800" x="500" y="0"/>
+   <polygon id="star" transform="translate(200, 108.594) scale(90, 90)" fill="#FFCE00" points="0,-1 0.224514,-0.309017 0.951057,-0.309017 0.363271,0.118034 0.587785,0.809017 0,0.381966 -0.587785,0.809017 -0.363271,0.118034 -0.951057,-0.309017 -0.224514,-0.309017"/>
+</svg>

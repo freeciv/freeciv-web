@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="500"
+   id="svg548"
+   sodipodi:docname="antigua_and_barbuda.svg"
+   sodipodi:version="0.32"
+   width="750"
+   version="1.1"
+   inkscape:version="0.48.1 r9760">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="713"
+     id="namedview17"
+     showgrid="false"
+     inkscape:zoom="0.64"
+     inkscape:cx="375"
+     inkscape:cy="266.40625"
+     inkscape:window-x="-3"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg548" />
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Antigua and Barbuda</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>caribbean</rdf:li>
+            <rdf:li>america</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>sign</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Sigge Kotliar</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Sigge Kotliar</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Sigge Kotliar</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs550" />
+  <rect
+     height="500"
+     fill="#ffffff"
+     width="750"
+     id="rect5" />
+  <rect
+     height="212"
+     fill="#000000"
+     width="750"
+     id="rect7" />
+  <rect
+     height="111.15649"
+     fill="#0061ff"
+     width="500"
+     x="138.84245"
+     y="198.47159"
+     id="rect9" />
+  <path
+     d="m 750,-3e-5 0,500 -375,0 375,-500 z"
+     sodipodi:nodetypes="cccc"
+     inkscape:connector-curvature="0"
+     id="path11"
+     style="fill:#e20000" />
+  <path
+     d="m 0,1e-5 0,500 375,0 L 0,1e-5 z"
+     sodipodi:nodetypes="cccc"
+     inkscape:connector-curvature="0"
+     id="path13"
+     style="fill:#e20000" />
+  <path
+     d="M 550.62766,198.5747 475.6439,179.66591 539.4361,131.83783 461.0952,142.96047 501.38524,75.112502 431.99672,115.15442 444.30732,36.18307 397.303,98.47014 378.27702,26.172592 357.01296,100.69467 310.00755,37.295333 323.4372,118.49196 254.04976,76.224766 l 40.29004,67.847854 -76.10281,-12.23479 62.67316,46.71593 -78.34199,20.02094 348.0595,0 z"
+     sodipodi:nodetypes="cccccccccccccccccc"
+     fill="#ffd600"
+     inkscape:connector-curvature="0"
+     id="path15" />
+</svg>

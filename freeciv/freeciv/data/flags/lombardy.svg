@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44+devel"
+   width="900"
+   height="600"
+   version="1.0"
+   sodipodi:docbase="C:\Documents and Settings\Flanker\Desktop"
+   sodipodi:docname="Lombardy-flag.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="1003"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.46103395"
+     inkscape:cx="375.45549"
+     inkscape:cy="218.52479"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="fill:#00a040;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect4612"
+     width="900"
+     height="600"
+     x="0"
+     y="0" />
+  <path
+     style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.89380002;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 540.68183,85.57411 C 503.25758,69.74719 460.03919,87.27548 444.21228,124.69974 C 435.17078,146.07926 437.06672,169.32434 447.28714,188.29868 C 452.283,198.29608 453.03778,210.35845 448.34661,221.45113 C 439.83592,241.5755 416.59586,251.00109 396.47147,242.49039 C 385.45658,237.83214 377.64897,228.75086 374.23092,218.1934 C 374.20917,218.11593 374.16061,218.04326 374.13864,217.96587 C 368.25183,197.23895 353.41817,179.2319 332.04367,170.19252 C 294.61939,154.3656 251.40103,171.89389 235.57411,209.31815 C 219.74719,246.74243 237.27547,289.96078 274.69975,305.78772 C 296.07422,314.82708 319.32678,312.92692 338.29867,302.71286 C 338.36953,302.67472 338.45547,302.65897 338.52619,302.62058 C 348.48197,297.71897 360.43625,296.99514 371.45114,301.65339 C 391.5755,310.16408 401.00108,333.40414 392.49039,353.52853 C 387.79922,364.62122 378.61886,372.48197 367.96586,375.86136 C 347.23278,381.74531 329.23403,396.5768 320.19253,417.95633 C 304.36558,455.38061 321.89389,498.59897 359.31817,514.42589 C 396.74242,530.2528 439.96078,512.72453 455.78772,475.30025 C 464.82922,453.92072 462.93328,430.67567 452.71286,411.70133 C 447.717,401.70394 446.96222,389.64156 451.65339,378.54886 C 460.16408,358.4245 483.40414,348.99892 503.52853,357.50961 C 514.54342,362.16786 522.35103,371.24914 525.76908,381.80661 C 525.79083,381.88408 525.83939,381.95672 525.86136,382.03414 C 531.74817,402.76106 546.58183,420.76811 567.95633,429.80747 C 605.38061,445.63442 648.59897,428.10611 664.42589,390.68183 C 680.25281,353.25758 662.72453,310.03922 625.30025,294.21228 C 603.92578,285.17292 580.67322,287.07308 561.70133,297.28714 C 561.6305,297.32525 561.54453,297.34105 561.47381,297.37942 C 551.51803,302.281 539.56375,303.00486 528.54886,298.34661 C 508.4245,289.83592 498.99892,266.59585 507.50961,246.47148 C 512.20078,235.3788 521.38114,227.51805 532.03414,224.13863 C 552.76722,218.2547 570.76597,203.42319 579.80747,182.04367 C 595.63439,144.6194 578.10611,101.40104 540.68183,85.57411 z "
+     id="path1873" />
+</svg>

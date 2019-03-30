@@ -1,0 +1,76 @@
+[nation_latvian]
+
+name=_("Latvian")
+plural=_("?plural:Latvians")
+groups="Modern", "European"
+
+legend = _("In the aftermath of World War I Latvia proclaimed its\
+ independence from Russia. In 1940, Latvia was forcibly occupied by the\
+ Soviet Union. After the collapse of Soviet Union in 1991 Latvia restored\
+ its independence.")
+
+leaders = {
+ "name",                "sex"
+ "Namiesis",            "Male"
+ "Viestards",           "Male"
+ "Tālibalds",           "Male"
+ "Visvaldis",           "Male"
+ "Krišjānis Valdemārs", "Male"
+ "Jānis Balodis",       "Male"
+ "Pēteris Radziņš",     "Male"
+ "Jorģis Zemitāns",     "Male"
+ "Jānis Čakste",        "Male"
+ "Kārlis Ulmanis",      "Male"
+ "Vaira Vīķe-Freiberga", "Female"
+}
+
+flag="latvia"
+flag_alt = "-"
+style = "European"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="austrian" ; Similar flags
+civilwar_nations = "estonian", "lithuanian", "curonian"
+
+cities =
+ "Rīga (grassland, river, ocean)",
+ "Daugavpils (grassland, river, !ocean)",
+ "Liepāja (plains, forest, !river, ocean)",
+ "Jelgava (plains, river, !ocean)",
+ "Ventspils (river, ocean)",
+ "Jūrmala (river, ocean)",
+ "Rēzekne (grassland, !ocean)",
+ "Beverīna (hills, !ocean)",
+ "Jersika (grassland, river, !ocean)",
+ "Koknese (forest, river, !ocean)",
+ "Mežotne (forest, !ocean)",
+ "Sēlpils (plains, forest)",
+ "Tērvete (forest, !ocean)",
+ "Durbe (grassland, plains)",
+ "Lielvārde (plains, river)",
+ "Aizkraukle (forest, river)",
+ "Alūksne (grassland, !river)",
+ "Balvi (forest, !ocean)",
+ "Bauska (grassland, river)",
+ "Cēsis (plains, river)",
+ "Dobele (grassland, plains)",
+ "Gulbene (grassland, !river)",
+ "Jēkabpils (river)",
+ "Krāslava (river)",
+ "Kuldīga (grassland, river)",
+ "Limbaži",
+ "Ludza",
+ "Madona (forest, !river)",
+ "Ogre (grassland, river)",
+ "Preiļi",
+ "Saldus",
+ "Talsi",
+ "Tukums (hills, !river)",
+ "Valka (hills)",
+ "Ainaži (ocean)",
+ "Rūjiena",
+ "Sigulda (hills, river)",
+ "Zilupe (river)"

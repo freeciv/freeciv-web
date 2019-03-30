@@ -1,0 +1,265 @@
+[nation_roman]
+
+translation_domain="freeciv"
+
+name=_("Roman")
+plural=_("?plural:Romans")
+groups="Ancient", "European", "Core"
+legend=_("Rome was, in legend, founded by Romulus in 753 BCE. At its\
+ height, Rome controlled much of Europe, northern Africa and the Near\
+ East. Roman culture adopted much of the civilizations it conquered, such\
+ as the Greeks and Etruscans, and forms one of the bases of the Western\
+ culture. Even today, Roman influence in fields such as law, philosophy\
+ and language remains enormous. The Roman civilization spanned more than\
+ a millennium; first as a kingdom, later as a republic and then from 27\
+ BCE onward as an empire. The empire was split in the 4th century CE. The\
+ Western Roman Empire fell in 476 CE, the Eastern Roman or Byzantine\
+ Empire survived almost a thousand years more; its capital Constantinople\
+ fell to the Turks in 1453.")
+
+leaders = {
+ "name",                               "sex"
+ "Romulus",                            "Male"
+ "Lucius Iunius Brutus",               "Male"
+ "Lucius Quinctius Cincinnatus",       "Male"
+ "Publius Cornelius Scipio Africanus", "Male"
+ "Tiberius Sempronius Gracchus",       "Male"
+ "Lucius Cornelius Sulla",             "Male"
+ "Gaius Marius",                       "Male"
+ "Marcus Tullius Cicero",              "Male"
+ "Gnaeus Pompeius",                    "Male"
+ "Gaius Iulius Caesar",                "Male"
+ "Marcus Antonius",                    "Male"
+ "Octavianus",                         "Male" ;Augustus
+ "Livia Drusilla",                     "Female"
+ "Tiberius",                           "Male"
+ "Valeria Messalina",                  "Female"
+ "Nero",                               "Male"
+ "Vespasianus",                        "Male"
+ "Traianus",                           "Male"
+ "Hadrianus",                          "Male"
+ "Marcus Aurelius",                    "Male"
+ "Septimius Severus",                  "Male"
+ "Aquilia Severa",                     "Female"
+ "Constantinus I",                     "Male" ;Constantine the Great
+}
+
+ruler_titles = {
+ "government",      "male_title",      "female_title"
+ "Anarchy",         _("Usurper %s"),   _("?female:Usurper %s")
+ "Democracy",       _("Tribune %s"),   _("?female:Tribune %s")
+ "Despotism",       _("Dictator %s"),  _("Dictatrix %s")
+ "Monarchy",        _("%s Augustus"),  _("%s Augusta")
+ "Republic",        _("Consul %s"),    _("?female:Consul %s")
+}
+
+flag = "rome"
+flag_alt = "italy"
+style = "Classical"
+
+init_techs=""
+init_buildings=""
+init_units=""
+
+conflicts_with="Western Roman", "Byzantine", "Italian", "Spanish", "French",
+ "Portuguese", "Romanian", "Belgian", "Swiss", "Andorran", "Monegasque",
+ "Sammarinese"
+civilwar_nations="Western Roman", "Byzantine", "Palmyrene"
+
+cities =
+; Cities in Italia
+ "Roma",
+ "Capua",
+ "Veii",
+ "Beneventum",
+ "Corfinium",
+ "Ancona",
+ "Tarentum",
+ "Brundisium",
+ "Ravenna",
+ "Pisae",
+ "Genua",
+ "Mediolanum",
+ "Aquileia",
+ "Florentia",
+ "Bononia",
+ "Verona",
+ "Ostia (ocean)",
+ "Neapolis",
+ "Pompeii",
+ "Salernum",
+ "Perusia",
+ "Ariminum",
+ "Patavium",
+ "Pisae",
+ "Cortona",
+ "Arretium",
+ "Placentia",
+ "Rhegium",
+ "Altinum",
+ "Velia",
+ "Asculum Picenum",
+ "Herculaneum",
+ "Tusculum",
+ "Hadria",
+ "Antium",
+ "Paestum",
+ "Tarracina",
+ "Cremona",
+ "Mutina",
+ "Vada Sabatia",
+ "Barium",
+ "Spoletum",
+
+;provincial capitals
+ "Syracusae",
+ "Caralis",
+ "Tarraco",
+ "Corduba",
+ "Salona",
+ "Thessalonica",
+ "Carthago",
+ "Pergamum",
+ "Narbo Martius",
+ "Nicomedia",
+ "Cyrenae",
+ "Tarsus",
+ "Antiochia ad Orontem (river)",
+ "Lugdunum",
+ "Alexandria",
+ "Tomis",
+ "Athenae",
+ "Ancyra",
+ "Mediolanum Santonum",
+ "Durocoturum",
+ "Augusta Vindelicorum",
+ "Emerita Augusta",
+ "Caesarea Maritima (ocean)",
+ "Cemenelum",
+ "Caesarea in Cappadocia",
+ "Sirmium",
+ "Tingis",
+ "Caesarea Iol",
+ "Virunum",
+ "Londinium",
+ "Patara",
+ "Philippopolis",
+ "Augusta Praetoria Salassorum",
+ "Segusio",
+ "Nicopolis",
+ "Moguntiacum",
+ "Colonia Agrippina",
+ "Naissus",
+ "Petra",
+ "Colonia Ulpia Traiana Sarmizegetusa",
+ "Vindobona",
+ "Artaxena",
+ "Nisibis",
+ "Edessa",
+ "Tyrus",
+ "Cirta",
+ "Eburacum",
+ "Utica",
+ "Massalia",
+ "Nicaea",
+ "Augusta Treverorum",
+ "Alalia",
+ "Paphus",
+ "Burdigala",
+ "Curia Raetorum",
+ "Civitas Ebrodunensium",
+ "Gortyna",
+ "Bostrea",
+ "Apulum",
+ "Porolissium",
+ "Samosata",
+ "Lambaesis",
+ "Municipium Stobensium",
+ "Vienna",
+
+; late Roman cities in Italia
+ "Augusta Taurinorum",
+ "Colonia Iulia Aemona",
+ "Rhegium Lepidi",
+ "Tergeste",
+
+; other provincial cities
+ "Colonia Aelia Capitolina Hierosolyma",
+ "Palmyra",
+ "Smyrna",
+ "Agrigentum",
+ "Barcino",
+ "Corinthus",
+ "Ephesus",
+ "Bracara",
+ "Carthago Nova",
+ "Memphis",
+ "Thebae",
+ "Hispalis",
+ "Miletus",
+ "Divodorum Mediomatricorum",
+ "Baiae",
+ "Noviomagus",
+ "Atuatuca Tungrensis",
+ "Trapezus",
+ "Lutetia Parisiorum",
+ "Portus Namnetum (ocean)",
+ "Londinium",
+ "Aquae Sulis",
+ "Camulodunum",
+ "Saguntum",
+ "Dura Europus",
+ "Dubris",
+ "Coriovallum",
+ "Leptis Magna",
+ "Hispalis",
+ "Dyrrachium",
+ "Luni",
+ "Noreia",
+ "Panormus",
+ "Sparta",
+ "Tolosa",
+ "Arelate",
+ "Brigantium",
+ "Berytus",
+ "Berenice",
+ "Sabrata",
+ "Attalea",
+ "Sinope",
+ "Hippo Regius",
+ "Caesaraugusta",
+ "Tripolis",
+ "Gesoriacum",
+ "Verulamium",
+ "Segesta",
+ "Gaza",
+ "Agentoracum",
+ "Thapsus",
+ "Damascus",
+ "Italica",
+ "Augusta Raurica",
+ "Heliopolis",
+ "Buthrotum",
+ "Aquae Sextiae",
+ "Genava",
+ "Tacape",
+ "Toletum",
+ "Thevestis",
+ "Hadrumetum",
+ "Saldae",
+ "Bracara",
+ "Nemausus",
+ "Lixus",
+ "Perinthus",
+ "Gades",
+ "Gerasa",
+ "Patrae",
+ "Volubilis",
+ "Augustodunum",
+ "Napoca",
+ "Valentia",
+ "Heracleopolis",
+ "Felicitas Iulia",
+ "Isca Dumnoniorum",
+ "Spalatum",
+ "Constantinopolis"

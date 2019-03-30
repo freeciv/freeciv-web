@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="600"
+   id="svg548"
+   version="1"
+   width="900"
+   x="0.00000000"
+   y="0.00000000"
+   sodipodi:version="0.32"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="madagascar.svg">
+  <sodipodi:namedview
+     inkscape:window-height="673"
+     inkscape:window-width="1039"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.59714111"
+     inkscape:cx="372.04724"
+     inkscape:cy="315.08884"
+     inkscape:window-x="96"
+     inkscape:window-y="131"
+     inkscape:current-layer="svg548"
+     showgrid="false"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata24999">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title> madagascar</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+            <rdf:li>flags</rdf:li>
+            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+            <rdf:li>africa</rdf:li>
+            <rdf:li>sign</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title> Russell Cloran</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title> Russell Cloran</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title> Russell Cloran</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs550">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 248.03149 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 248.03149 : 1"
+       inkscape:persp3d-origin="372.04724 : 165.35433 : 1"
+       id="perspective5676" />
+  </defs>
+  <rect
+     height="600"
+     id="rect553"
+     style="font-size:12px;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt"
+     width="900"
+     x="0"
+     y="-7.6293945e-06" />
+  <rect
+     height="300"
+     id="rect551"
+     style="font-size:12px;fill:#fc3d32;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="600"
+     x="300"
+     y="-6.906975e-14" />
+  <rect
+     height="300"
+     id="rect552"
+     style="font-size:12px;fill:#007e3a;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="600"
+     x="300"
+     y="300" />
+</svg>

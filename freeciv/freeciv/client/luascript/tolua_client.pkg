@@ -1,0 +1,47 @@
+/*****************************************************************************
+ Freeciv - Copyright (C) 2005 - The Freeciv Project
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+*****************************************************************************/
+
+/*****************************************************************************
+  ADVERTISEMENT: do not attempt to change the name of the API functions.
+  They *must* be compatible between the minor Freeciv versions within the
+  same major version. If you really like to change a function name, be sure
+  to keep also the old one running.
+*****************************************************************************/
+
+$#ifdef HAVE_CONFIG_H
+$#include <fc_config.h>
+$#endif
+
+/* common/scriptcore */
+$#include "luascript_types.h"
+
+/* client/luascript */
+$#include "api_client_base.h"
+$#include "script_client.h"
+
+/* Chat module. */
+
+module chat {
+  void api_client_chat_base
+    @ base (lua_State *L, const char *message);
+}
+
+$[
+
+-- Chat module implementation.
+
+function chat.msg(fmt, ...)
+  chat.base(string.format(fmt, ...))
+end
+
+$]

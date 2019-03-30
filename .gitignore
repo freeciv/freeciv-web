@@ -33,12 +33,6 @@ cat-id-tbl.c
 charset.alias
 fcgui
 .vagrant
-freeciv-gtk2
-freeciv-gtk3
-freeciv-sdl
-freeciv-xaw
-freeciv-qt
-freeciv-server
 config.cache
 config.guess
 fc_config.h

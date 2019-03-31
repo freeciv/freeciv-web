@@ -1916,7 +1916,7 @@ function update_city_screen()
   var citizen_icon_padding_right = 20;
   
   for (var i = 0; i < 3; i++) {
-    sprite = get_specialist_image_sprite("citizen." + citizen_types[i] + "_" + (Math.ceil(i/2)));
+    sprite = get_specialist_image_sprite("citizen." + citizen_types[i] + "_1");
     city_list_citizen_html = "<th style='padding-right:"+citizen_icon_padding_right+"px;'><div style='background: transparent url("+ sprite['image-src'] + ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'></div></th>" + city_list_citizen_html
     citizen_icon_padding_right = 0;
   }

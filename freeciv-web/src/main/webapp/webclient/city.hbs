@@ -10,25 +10,32 @@
   <div id="city_tabs-1">
     <div id="city_overview_tab" class="citydlg_tabs">
     <div id="city_viewport">
-    <div id="specialist_panel">
-    </div>
+    <div id="specialist_panel"></div>
     
     <div class="city_panel">
-      <div id="city_canvas_div">
-            <canvas id="city_canvas" width="350" height="175" moz-opaque="true"></canvas>
-      </div>
+            <div class="city_panel" style='float:left;margin-top:0px'>
+            <div id="city_canvas_div">
+                    <canvas id="city_canvas" width="350" height="175" moz-opaque="true"></canvas>
+            </div>
+        </div>
     </div>
 
     <div class="city_panel">
-      <div id="city_dialog_info">
+      <div class="city_panel" style='float:left;margin-top:0px'>
+      <div id="city_dialog_info" padding-top='10px'>
+      <div style='float:left;'> 
+      <div id="rapture_citizen_panel" style='height:20px;'></div>
 	  <div><b>City information:</b></div>
-	  <div style="float:left;">
+        <div id="city_size_production_info" style="float:left;">
+	  </div>
 	  <span id="city_size"></span>
 	  <div id='city_production_overview'></div>
 	  <div id='city_production_turns_overview'></div>
 	</div>
-	<div style="float: left; margin-top: -20px; padding-left: 20px;"> 
+    <div style='float:left; margin-top: -23px;'> 
+	<div style='float: left; padding-left: 20px;'> 
 	  <table id="city_stats">
+	  <tr style='line-height:17.5px;'><td id="rapture_food" style='padding-bottom:8px;'></td><td id="rapture_status"></td></tr>
 	  <tr><td>Food: </td><td id="city_food"></td></tr>
 	  <tr><td>Prod: </td><td id="city_prod"></td></tr>
 	  <tr><td>Trade: </td><td id="city_trade"></td></tr>
@@ -40,7 +47,9 @@
 	  <tr><td>Pollution: </td><td id="city_pollution"></td></tr>
   	  </table>
         </div>
-      </div>
+     </div>
+     </div>
+     </div>
 
     </div>
     <div id="city_improvements_panel" class="city_panel">

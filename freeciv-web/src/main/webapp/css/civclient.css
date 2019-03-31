@@ -516,7 +516,7 @@ button {
   color: lightgreen;
 }
 
-.nation_row_self td {
+.nation_table_body tr td {
   padding-left:20px;
 }
 

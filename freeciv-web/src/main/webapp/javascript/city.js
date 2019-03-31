@@ -395,9 +395,39 @@ function show_city_dialog(pcity)
 
     }
   }
-  specialist_html += "<div style='clear: both;'></div>";
-  $("#specialist_panel").html(specialist_html);
+  
+  $('#specialist_panel').html(specialist_html);
+  
+  var rapture_citizen_html = "";
+            
+  for (var i = 0; i < 4; i++) {      
+      if (pcity['ppl_' + citizen_types[i]][FEELING_FINAL] > 0) {
+        sprite = get_specialist_image_sprite("citizen." + citizen_types[i] + "_" + (Math.floor(i / 2)));                      
+        rapture_citizen_html += "<div style='margin-right:auto;'><div style='float:left;background: transparent url("
+        + sprite['image-src'] + ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'>"
+        +"</div><div style='float:left;height: "+sprite['height']+"px;margin-left:2px;'>"+pcity['ppl_' + citizen_types[i]][FEELING_FINAL]+"</div></div>";
+      }
+  }
+   
+  $('#rapture_citizen_panel').html(rapture_citizen_html);  
+   
+  var city_surplus_colour = "#000000";
+  var city_surplus_sign = "";
+  
+  if (pcity['surplus'][O_FOOD] > 0) {
+      city_surplus_colour = "#007800";
+      city_surplus_sign = "+";
+  }
 
+  else if (pcity['surplus'][O_FOOD] < 0) {
+      city_surplus_colour = "#FF0000";
+  }
+  
+  var rapture_food_status_html = "<div><div style='float:left;background: transparent url(/images/wheat.png);width:20px;height:20px;'></div><div style='margin-left:4px;float:left;color:"+city_surplus_colour+";'</div>"+city_surplus_sign+pcity['surplus'][O_FOOD]+"</div></div>"
+            
+  $('#rapture_food').html(rapture_food_status_html);
+  $('#rapture_status').html("<div style='font-weight:bold;padding-bottom:9px;'>"+get_city_state(pcity)+"</div>");
+  
   $('#disbandable_city').off();
   $('#disbandable_city').prop('checked',
                               pcity['city_options'] != null && pcity['city_options'].isSet(CITYO_DISBAND));
@@ -425,7 +455,6 @@ function show_city_dialog(pcity)
    $(".ui-tabs-anchor").css("padding", "2px");
   }
 }
-
 
 /**************************************************************************
  Returns the name and sprite of the current city production.
@@ -1877,11 +1906,28 @@ function update_city_screen()
     sortList.push([cell.cellIndex, 1]);
   });
 
+  var happy_citizen_sprite = get_specialist_image_sprite("citizen.happy_1")  
+  var content_citizen_sprite = get_specialist_image_sprite("citizen.content_1")
+  var unhappy_citizen_sprite = get_specialist_image_sprite("citizen.unhappy_0")
+
+  var citizen_types = ["unhappy","content","happy"]
+  var sprite;
+  var city_list_citizen_html = "";
+  var citizen_icon_padding_right = 20;
+  
+  for (var i = 0; i < 3; i++) {
+    sprite = get_specialist_image_sprite("citizen." + citizen_types[i] + "_" + (Math.ceil(i/2)));
+    city_list_citizen_html = "<th style='padding-right:"+citizen_icon_padding_right+"px;'><div style='background: transparent url("+ sprite['image-src'] + ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y'] + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'></div></th>" + city_list_citizen_html
+    citizen_icon_padding_right = 0;
+  }
+  
   var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
-        + "<thead><tr><th>Name</th><th>Population</th><th>Size</th><th>State</th>"
-        + "<th>Granary</th><th>Grows In</th><th>Producing</th>"
-        + "<th>Surplus<br>Food/Prod/Trade</th><th>Economy<br>Gold/Luxury/Science</th></tr></thead><tbody>";
+        + "<thead><tr><th>Name</th><th>Population</th><th>Size</th>"+city_list_citizen_html+"<th style='padding-right:40px'>State</th>"
+        + "<th style='padding-right:0px'>Surplus<br>Food/Prod/Trade</th><th style='padding-right:0px'>Economy<br>Gold/Luxury/Science</th>"
+        + "<th>Grows In</th><th>Granary</th><th>Producing</th></tr></thead><tbody>";
+        
   var count = 0;
+  var unhappy_angry_people;
   for (var city_id in cities){
     var pcity = cities[city_id];
     if (client.conn.playing != null && city_owner(pcity) != null && city_owner(pcity).playerno == client.conn.playing.playerno) {
@@ -1893,14 +1939,17 @@ function update_city_screen()
       } else {
         turns_to_complete_str = get_city_production_time(pcity) + " turns";
       }
+      
+      unhappy_angry_people = pcity['ppl_unhappy'][FEELING_FINAL]+pcity['ppl_angry'][FEELING_FINAL]
 
       city_list_html += "<tr class='cities_row' id='cities_list_" + pcity['id'] + "' onclick='javascript:show_city_dialog_by_id(" + pcity['id'] + ");'><td>"
-              + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) +
-              "</td><td>" + pcity['size'] + "</td><td>" + get_city_state(pcity) + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
-              "</td><td>" + city_turns_to_growth_text(pcity) + "</td>" + 
-              "<td>" + prod_type['name'] + " (" + turns_to_complete_str + ")" +
-              "</td><td>" + pcity['surplus'][O_FOOD] + "/" + pcity['surplus'][O_SHIELD] + "/" + pcity['surplus'][O_TRADE] + "</td>" +
-              "<td>" + pcity['prod'][O_GOLD] + "/" + pcity['prod'][O_LUXURY] + "/" + pcity['prod'][O_SCIENCE] + "<td>"; 
+              + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) + "</td><td>" + pcity['size'] + "</td>"
+              + "</td><td>"+pcity['ppl_happy'][FEELING_FINAL]+"</td><td>"+pcity['ppl_content'][FEELING_FINAL]+"</td>"
+              + "<td>"+unhappy_angry_people+"</td><td>" + get_city_state(pcity) + "</td><td>" + pcity['surplus'][O_FOOD] + "/"              
+              + pcity['surplus'][O_SHIELD] + "/" + pcity['surplus'][O_TRADE] + "</td>" + "<td>" + pcity['prod'][O_GOLD] + "/" 
+              + pcity['prod'][O_LUXURY] + "/" + pcity['prod'][O_SCIENCE] + "<td>" + city_turns_to_growth_text(pcity) + "</td>"
+              + "<td>" + pcity['food_stock'] + "/" + pcity['granary_size'] + "</td><td>" + prod_type['name'] + " (" + turns_to_complete_str + ")</td>"
+
 
       city_list_html += "</tr>";
     }

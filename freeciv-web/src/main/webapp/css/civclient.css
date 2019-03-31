@@ -130,15 +130,14 @@ button {
 #city_canvas_div {
   width: 350px; 
   height: 175px; 
+  float: left;
   margin: 5px;
   border: 1px solid #888888;
-  float: left;
 }
 
 #city_dialog_info {
   float: left;
-  padding: 10px;
-
+  padding: 0 10px 10px 10px;
 }
 
 #city_button_pane {
@@ -146,11 +145,10 @@ button {
   float: left;
 }
 
-
 .city_panel {
   background: url("/images/bg.jpg") repeat scroll 0 0 #222222;
-  float: left; 
   padding-right: 30px;
+  margin-top: 20px;
 }
 
 #city_improvements_panel {
@@ -424,6 +422,17 @@ button {
   float: left;
 }
 
+#specialist_panel {
+  float: left;
+}
+
+#rapture_citizen_panel {
+  margin-top:-20px;
+  padding-bottom:10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .blockUI h1 {
   font-size: 18px;
 }
@@ -505,6 +514,10 @@ button {
 
 .nation_row_self {
   color: lightgreen;
+}
+
+.nation_row_self td {
+  padding-left:20px;
 }
 
 .nation_row_war {
@@ -871,6 +884,10 @@ button {
 .cities_row {
   cursor:pointer; 
   cursor:hand;
+}
+
+.cities_row td {
+    padding-left: 20px
 }
 
 #wiki_dialog {

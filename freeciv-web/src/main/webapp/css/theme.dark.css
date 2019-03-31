@@ -25,10 +25,10 @@
 }
 .tablesorter-dark .header,
 .tablesorter-dark .tablesorter-header {
-	padding: 4px 20px 4px 4px;
+	padding: 4px 20px 4px 20px;
 	cursor: pointer;
 	background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
-	background-position: center right;
+    background-position: -5px;
 	background-repeat: no-repeat;
 }
 .tablesorter-dark thead .headerSortUp,

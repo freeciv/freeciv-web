@@ -334,9 +334,11 @@ function pick_nation(player_id)
                + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
                 
 
-  var buttons = { "1" : { id: "play", text:"Play this nation!", click: function() { $("#pick_nation_dialog").dialog('close');
-                                                    if (!is_ongoing_longturn()) submit_nation_choice();
-                                                    else submit_nation_choice_ongoing_longturn(); } },
+  var buttons = { "1" : { id: "play", text:"Play this nation!", click: function() { if (chosen_nation != -1) {
+                                                                                        $("#pick_nation_dialog").dialog('close');
+                                                                                        if (!is_ongoing_longturn()) submit_nation_choice();
+                                                                                        else submit_nation_choice_ongoing_longturn(); }
+                                                                                  } },
                   "2" : { id: "customize", text:"Customize this nation", click: function() {show_customize_nation_dialog(player_id);} }
                 }
 

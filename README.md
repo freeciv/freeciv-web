@@ -217,7 +217,6 @@ Significant contributors to Freeciv-web:
   [@lmoureaux](https://github.com/lmoureaux) - Lmoureaux   
   [@mchenryc](https://github.com/mchenryc)  
   [@RhueOfL](https://github.com/RhueOfL)  
-  [@RhueOfL](https://github.com/RhueOfL)  
   [@Lexxie9952](https://github.com/Lexxie9952)  
   [@chris1869](https://github.com/chris1869)    
   [@jacobrask](https://github.com/jacobrask)    

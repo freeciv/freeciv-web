@@ -205,13 +205,27 @@ If you want to contibute to Freeciv-web, see the [issues](https://github.com/fre
 some tasks you can work on. Pull requests on Github is welcome! 
   
 
-Contributors to Freeciv-web
+Credits
 ---------------------------
-Andreas Røsdal  [@andreasrosdal](https://github.com/andreasrosdal)  
-Marko Lindqvist [@cazfi](https://github.com/cazfi)  
-Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)  
-Gerik Bonaert [@adaxi](https://github.com/adaxi)  
-Lmoureaux [@lmoureaux](https://github.com/lmoureaux)  
-Máximo Castañeda [@lonemadmax](https://github.com/lonemadmax)  
-and the [Freeciv.org project](http://freeciv.wikia.com/wiki/People)!
+Significant contributors to Freeciv-web:
+
+  [@andreasrosdal](https://github.com/andreasrosdal) - Andreas Røsdal  
+  [@lonemadmax](https://github.com/lonemadmax)  - Máximo Castañeda   
+  [@cazfi](https://github.com/cazfi) - Marko Lindqvist  
+  [@kvilhaugsvik](https://github.com/kvilhaugsvik) - Sveinung Kvilhaugsvik   
+  [@adaxi](https://github.com/adaxi) - Gerik Bonaert   
+  [@lmoureaux](https://github.com/lmoureaux) - Lmoureaux   
+  [@mchenryc](https://github.com/mchenryc)  
+  [@RhueOfL](https://github.com/RhueOfL)  
+  [@RhueOfL](https://github.com/RhueOfL)  
+  [@Lexxie9952](https://github.com/Lexxie9952)  
+  [@chris1869](https://github.com/chris1869)    
+  [@jacobrask](https://github.com/jacobrask)    
+  [@tvon](https://github.com/tvon)    
+  [@QuiqueOlaso](https://github.com/QuiqueOlaso)      
+  [@cpetry](https://github.com/cpetry)        
+
+See also [contributors to Freeciv-web](https://github.com/freeciv/freeciv-web/graphs/contributors).
+
+and thanks to the [Freeciv.org project](http://freeciv.wikia.com/wiki/People) and Sid.
 

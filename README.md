@@ -15,7 +15,7 @@ Currently known servers based on Freeciv-web:
 
 License
 -------
-Freeciv-web is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document. By contributing to the Freeciv-web project, you must accept that your contibutions are also AGPL licensed. Contributions including code, graphics and rulesets are also AGPL.
+Freeciv-web is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document. By contributing to the Freeciv-web project, you must accept that your contributions are also AGPL licensed. Contributions including code, graphics and rulesets are also AGPL.
 
 - [www.gnu.org/licenses/agpl-3.0.en.html](https://www.gnu.org/licenses/agpl-3.0.en.html) - The GNU AGPL license document.
 - [en.wikipedia.org/wiki/Affero_General_Public_License](https://en.wikipedia.org/wiki/Affero_General_Public_License) - Wikipedia on the AGPL license.
@@ -201,7 +201,7 @@ Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and b
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO.md) for 
+If you want to contribute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO.md) for 
 some tasks you can work on. Pull requests on Github is welcome! 
   
 

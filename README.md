@@ -10,8 +10,8 @@ Freeciv-web is an open-source turn-based strategy game. It can be played in any 
 Live servers
 ------------
 Currently known servers based on Freeciv-web:
-- [Freecivweb.org](https://www.freecivweb.org) - Full Freeciv-web - [Git repo](https://github.com/RhueOfL/fcw.org-server/)
-- [moving borders](https://fcw.movingborders.es) (Everything except longturn and real-Earth)
+- [Freecivweb.org](https://www.freecivweb.org) - Full Freeciv-web - [github.com/RhueOfL/fcw.org-server](https://github.com/RhueOfL/fcw.org-server/) *<-- this is the most popular maintained fork of Freeciv-web with the most contributions.*
+- [moving borders](https://fcw.movingborders.es) - [github.com/lonemadmax/freeciv-web](https://github.com/lonemadmax/freeciv-web) (Everything except longturn and real-Earth)
 
 License
 -------

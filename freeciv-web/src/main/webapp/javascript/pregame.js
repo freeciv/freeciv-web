@@ -29,6 +29,7 @@ var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
 var password_reset_count = 0;
 var google_user_token = null;
+var fcw_token = null;
 
 /****************************************************************************
   ...
@@ -1701,15 +1702,14 @@ function google_signin_on_success(googleUser)
   xhr.open('POST', '/token_signin');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
-    if (xhr.responseText == "OK") {
-      google_user_token = id_token;
-      simpleStorage.set("username", username);
-      $("#dialog").dialog('close');
-    } else if (xhr.responseText == "Email not verified") {
-      swal("Login failed. E-mail not verified.");
-    } else {
+    if (xhr.status != 200) {
       swal("Login failed.");
+      return;
     }
+    fcw_token = xhr.responseText;
+    google_user_token = id_token;
+    simpleStorage.set("username", username);
+    $("#dialog").dialog('close');
   };
   xhr.send('idtoken=' + id_token + "&username=" + username);
 

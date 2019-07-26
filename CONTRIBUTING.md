@@ -18,7 +18,7 @@ We will get a better Freeciv-web service if we allow multiple servers to exists 
 ## Pull Request Guidelines
 
 - All changes to Freeciv-web must be done using Pull Requests on GitHub. Don't commit changes directly to the master or develop branch. 
-- Pull requests must be approved by two other Freeciv developers. Minor changes can be approved by one Freeciv developer.
+- Pull requests must be approved by two other Freeciv developers. Minor changes can be approved by one Freeciv developer. If there's no objections within 72h to the pull request, it's ok to merge it.
 - Don't break the build. All tests run by Travis CI must pass successfully.
 - The repository github.com/freeciv/freeciv-web should be generic, not specific to one particular Freeciv-web server instance or Freeciv-web fork.
 - Try not to exceed 200 LOC +- in a single PR. Larger pull-requests are allowed when required.

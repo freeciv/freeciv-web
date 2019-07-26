@@ -606,14 +606,6 @@ function update_client_state(value)
 
 function handle_authentication_req(packet)
 {
-  if (is_longturn()) {
-    var login = {
-      "pid" : packet_authentication_reply,
-      "password" : fcw_token,
-    };
-    send_request(JSON.stringify(login));
-    return;
-  }
   show_auth_dialog(packet);
 }
 

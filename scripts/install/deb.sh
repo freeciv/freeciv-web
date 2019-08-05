@@ -51,9 +51,8 @@ dependencies="\
   zlib1g-dev \
 "
 
-export DEBIAN_FRONTEND=noninteractive
 INSTALLED_TOMCAT=N
-APT_GET='apt-get -y -qq -o=Dpkg::Use-Pty=0'
+APT_GET='DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
 

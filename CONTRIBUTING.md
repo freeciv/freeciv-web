@@ -37,3 +37,11 @@ around it - git blame is used to see why a change was made, understand the
 context, and determine if, and how it can/should be modified. To change
 code simply for the sake of whitespace, or re-arranging lines is frowned
 upon, because it unnecessarily hides/buries history.
+
+If you are hosting a public Freeciv-web server, and have made modifications to the source code
+or graphics, then you must publish the complete source code, in order to be compliant with the
+AGPL and LGPL license. See LICENSE.txt for more info:
+https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt
+
+
+

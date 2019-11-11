@@ -361,6 +361,7 @@ function show_city_dialog(pcity)
     $("#city_corruption").html(pcity['waste'][O_TRADE]);
     $("#city_waste").html(pcity['waste'][O_SHIELD]);
     $("#city_pollution").html(pcity['pollution']);
+    $("#city_steal").html(pcity['steal']);
   }
 
   /* Handle citizens and specialists */

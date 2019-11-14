@@ -11,10 +11,10 @@ index 2dd987d..df88735 100644
     /* TRANS: translate text between <> only */
     N_("save\n"
        "save <file-name>"),
-diff --git a/server/savegame.c b/server/savegame.c
+diff --git a/server/savegame/savemain.c b/server/savegame/savemain.c
 index afbf376..db62262 100644
---- a/server/savegame.c
-+++ b/server/savegame.c
+--- a/server/savegame/savemain.c
++++ b/server/savegame/savemain.c
 @@ -130,8 +130,8 @@ void save_game(const char *orig_filename, const char *save_reason,
    stdata->save_compress_level = game.server.save_compress_level;
  

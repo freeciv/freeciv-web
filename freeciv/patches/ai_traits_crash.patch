@@ -16,10 +16,10 @@ diff -Nurd -X.diff_ignore freeciv/ai/aitraits.c freeciv/ai/aitraits.c
  
    /* Clip so that value is at least 1, and maximum is
     * TRAIT_DEFAULT_VALUE as many times as TRAIT_DEFAULT value is
-diff --git a/server/savegame3.c b/server/savegame3.c
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
 index 82f3228..9fc1fcf 100644
---- a/server/savegame3.c
-+++ b/server/savegame3.c
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
 @@ -3901,10 +3901,12 @@ static void sg_save_player_main(struct savedata *saving,
      int j;
  

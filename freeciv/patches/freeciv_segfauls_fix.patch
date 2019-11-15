@@ -16,14 +16,8 @@ diff -Nurd -X.diff_ignore freeciv/ai/default/aidiplomat.c freeciv/ai/default/aid
 diff -Nurd -X.diff_ignore freeciv/ai/default/aiunit.c freeciv/ai/default/aiunit.c
 --- freeciv/ai/default/aiunit.c	2015-09-17 23:10:14.875926360 +0300
 +++ freeciv/ai/default/aiunit.c	2015-09-20 10:47:39.225177018 +0300
-@@ -2161,13 +2161,20 @@
-     }
-   }
- 
--  if ((unit_data->task == AIUNIT_TRADE
--       || unit_data->task == AIUNIT_WONDER)) {
-+  if (unit_data->task == AIUNIT_TRADE
-+      || unit_data->task == AIUNIT_WONDER) {
+@@ -2161,9 +2161,16 @@
+        || unit_data->task == AIUNIT_WONDER)) {
      /* we are moving to our destination */
      /* we check to see if our current goal is feasible */
 -    struct city *city_dest = tile_city(punit->goto_tile);

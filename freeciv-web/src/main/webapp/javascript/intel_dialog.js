@@ -81,6 +81,7 @@ function show_intelligence_report_embassy(pplayer)
     science: pplayer['science'] + '%',
     luxury: pplayer['luxury'] + '%',
     researching: '(Unknown)',
+    culture: pplayer['culture'],
     dipl: [],
     tech: []
   };

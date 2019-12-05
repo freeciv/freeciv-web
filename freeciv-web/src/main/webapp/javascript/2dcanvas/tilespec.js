@@ -398,9 +398,16 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
         var ctile = city_tile(active_city);
         var d = map_distance_vector(ctile, ptile);
         var idx = get_city_dxy_to_index(d[0], d[1], active_city);
-	var food_output = active_city['food_output'].substring(idx, idx + 1);
-	var shield_output = active_city['shield_output'].substring(idx, idx + 1);
-	var trade_output = active_city['trade_output'].substring(idx, idx + 1);
+
+        var food_output = active_city['food_output'].substring(idx, idx + 1);
+        var shield_output = active_city['shield_output'].substring(idx, idx + 1);
+        var trade_output = active_city['trade_output'].substring(idx, idx + 1);
+
+        /* The ruleset may use large values scaled down to get greater
+         * granularity. */
+        food_output = Math.floor(food_output / game_info.granularity);
+        shield_output = Math.floor(shield_output / game_info.granularity);
+        trade_output = Math.floor(trade_output / game_info.granularity);
 
         sprite_array.push(get_city_food_output_sprite(food_output));
         sprite_array.push(get_city_shields_output_sprite(shield_output));

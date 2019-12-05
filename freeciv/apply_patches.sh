@@ -2,6 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0001-Fix-segfault-at-loading-older-format-savegame is hrm Bug #840623
+#     It was comitted in ab1c8f2a914300783f769819bed37c848c66721a
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -56,6 +58,7 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
+  "0001-Fix-segfault-at-loading-older-format-savegame"
 )
 
 apply_patch() {

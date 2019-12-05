@@ -56,7 +56,7 @@ function EventAggregator(handler, timeout, dataPolicy, latency, maxDelays, delay
   this.dataPolicy = dataPolicy || EventAggregator.DP_NONE;
   this.timer = null;
   this.clear();
-}
+};
 
 EventAggregator.DP_NONE  = 0; // Don't keep data
 EventAggregator.DP_FIRST = 1; // Keep only first
@@ -69,7 +69,7 @@ EventAggregator.DP_ALL   = 4; // Keep all in an array
 EventAggregator.prototype.setTimeout = function (delay) {
   var owner = this;
   return setTimeout(function () { owner.fired(); }, delay);
-}
+};
 
 // Calls the handler with no delay.
 EventAggregator.prototype.fireNow = function () {
@@ -94,7 +94,7 @@ EventAggregator.prototype.fireNow = function () {
       this.timer = this.setTimeout(this.latency);
     }
   }
-}
+};
 
 // Notifies the EventAggregator of an event.
 EventAggregator.prototype.update = function (data) {
@@ -117,7 +117,7 @@ EventAggregator.prototype.update = function (data) {
   } else if (this.count > 1) {
     this.burst = true;
   }
-}
+};
 
 // Timeout handler
 EventAggregator.prototype.fired = function () {
@@ -130,7 +130,7 @@ EventAggregator.prototype.fired = function () {
     this.timer = null;
     this.fireNow();
   }
-}
+};
 
 // Cancels a timeout if there's one. Current data is kept.
 EventAggregator.prototype.cancel = function () {
@@ -138,7 +138,7 @@ EventAggregator.prototype.cancel = function () {
     clearTimeout(this.timer);
     this.timer = null;
   }
-}
+};
 
 // Clears current data and repeating counters.
 EventAggregator.prototype.clear = function () {
@@ -150,5 +150,5 @@ EventAggregator.prototype.clear = function () {
   this.burst = false;
   this.delays = 0;
   this.count = 0;
-}
+};
 

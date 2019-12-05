@@ -334,7 +334,7 @@ Rerun the sync-js-hand.js script.
 								<jsSourceFiles>
 									<!-- order is important: these must be before sources below -->
 									<jsSourceFile>libs/EventAggregator.js</jsSourceFile>
-									<jsSourceFile>libs/handlebars.runtime-v4.0.11.js</jsSourceFile>
+									<jsSourceFile>libs/handlebars.runtime-v4.5.3.js</jsSourceFile>
 									<!-- these must be listed here, jsSourceIncludes doesn't work -->
 									<jsSourceFile>../../../derived/webapp/javascript/fc_events.js</jsSourceFile>
 									<jsSourceFile>../../../derived/webapp/javascript/freeciv-helpdata.js</jsSourceFile>

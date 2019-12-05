@@ -24,7 +24,9 @@ url="http://${TOMCATMANAGER_USER}:${TOMCATMANAGER_PASSWORD}@localhost:8080/manag
 EOF
 fi
 
-sudo rm -f /etc/nginx/sites-enabled/freeciv-web
+if [ ! "${NGINX_DISABLE_ON_SHUTDOW}" = "N" ]; then
+    sudo rm -f /etc/nginx/sites-enabled/freeciv-web
+fi
 
 # Shutdown Freeciv-web's dependency services according to the users
 # configuration.

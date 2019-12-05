@@ -29,6 +29,11 @@ TOMCATMANAGER=N
 TOMCATMANAGER_USER=tomcat-user
 TOMCATMANAGER_PASSWORD=
 
+# If the user running Freeciv-web don't have access to sudo set this to N
+# so shutting down Freeciv-web won't cause stop-freeciv-web.sh to try to
+# disable Freeciv-web in NGINX by deleting it from /etc/nginx/sites-enabled/
+NGINX_DISABLE_ON_SHUTDOW=Y
+
 # Mail server
 # Login and password are used for authentication to the SMTP server, the default
 # is no auth.

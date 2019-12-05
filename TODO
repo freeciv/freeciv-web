@@ -93,6 +93,7 @@ Unimplemented rule variation support:
 - Freeciv-web has no client side effect evaluation.
   - Building_Build_Cost_Pct doesn't work.
   - Unit_Build_Cost_Pct doesn't work.
+- player Extra placing (infrapoints)
 
 Simplify Freeciv server upgrade:
 - get rid of the worst merge conflict causes

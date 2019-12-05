@@ -362,6 +362,7 @@ function show_city_dialog(pcity)
     $("#city_waste").html(pcity['waste'][O_SHIELD]);
     $("#city_pollution").html(pcity['pollution']);
     $("#city_steal").html(pcity['steal']);
+    $("#city_culture").html(pcity['culture']);
   }
 
   /* Handle citizens and specialists */

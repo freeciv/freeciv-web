@@ -26,7 +26,6 @@
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
-# mapimg_bugfix is http://www.hostedredmine.com/issues/707912.
 
 declare -a PATCHLIST=(
   "freeciv_web_packets_def_changes"

@@ -4,6 +4,8 @@
 # ------------------------------------
 # 0001-Fix-segfault-at-loading-older-format-savegame is hrm Bug #840623
 #     It was comitted in ab1c8f2a914300783f769819bed37c848c66721a
+# max_map_size is hrm Feature #847376
+#     It was comitted as f2173409a8e09fea9fecfb79ddf7dcf64fdab425
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -22,11 +24,9 @@
 # webperimental_install make "make install" install webperimental.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
-# max_map_size increases MAP_MAX_SIZE.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
-# mapimg_bugfix is http://www.hostedredmine.com/issues/707912.
 
 declare -a PATCHLIST=(
   "freeciv_web_packets_def_changes"

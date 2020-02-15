@@ -12,13 +12,13 @@ echo "============================================"
 echo "Start testing of Freeciv-web using CasperJS:"
 cd ${basedir}/tests/
 
-xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || (>&2 echo "Freeciv-web CasperJS tests failed!" && exit 1)
+xvfb-run casperjs --engine=phantomjs test freeciv-web-tests.js || { >&2 echo "Freeciv-web CasperJS tests failed with exit code ${?}!" && exit 1; }
 
 echo "Running Freeciv-web server in autogame mode."
 cp ${basedir}/publite2/pubscript_autogame.serv ${basedir}/publite2/pubscript_singleplayer.serv
 killall freeciv-web
 sleep 20
-xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || (>&2 echo "Freeciv-web CasperJS autogame tests failed!" && exit 1)
+xvfb-run casperjs --engine=phantomjs test freeciv-web-autogame.js || { >&2 echo "Freeciv-web CasperJS autogame tests failed with exit code ${?}!" && exit 1; }
 
 echo "running pbem unit tests."
 cd ${basedir}/pbem

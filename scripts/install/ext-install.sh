@@ -61,7 +61,7 @@ ext_install_casperjs () {
   curl -LOsS 'https://github.com/casperjs/casperjs/archive/1.1.4.zip'
   unzip -qo 1.1.4.zip
   rm 1.1.4.zip
-  sudo ln -sf "${basedir}/casperjs-1.1.4/bin/casperjs" /usr/local/bin/casperjs
+  sudo ln -sf "${basedir}/tests/casperjs-1.1.4/bin/casperjs" /usr/local/bin/casperjs
   ext_installed[${#ext_installed[@]}]="casperjs"
 }
 

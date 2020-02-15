@@ -75,7 +75,7 @@ else
 fi
 
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-  dependencies="${dependencies} xvfb"
+  dependencies="${dependencies} xauth xvfb phantomjs"
 fi
 
 echo "==== Installing Updates and Dependencies ===="

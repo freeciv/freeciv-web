@@ -10,7 +10,7 @@ casper.on('remote.message', function(message) {
 });
 
 casper.test.begin('Test of Tomcat8 running on localhost port 8080.', 2, function suite(test) {
-    casper.start("http://localhost:8080/", function() {
+    casper.start("http://localhost:8080/freeciv-web/", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');
     });
@@ -99,10 +99,8 @@ casper.test.begin('Test starting new Freeciv-web game', 10, function suite(test)
     casper.thenEvaluate(function() {
       /* Starting new game automatically from Javascript.*/
       dialog_close_trigger = "button";
-      if (validate_username()) {
-        $("#dialog").dialog('close');
-        setTimeout("pregame_start_game();", 3000);
-      }
+      autostart = true;
+      validate_username_callback();
     });
 
     casper.waitForText("World map", function() {

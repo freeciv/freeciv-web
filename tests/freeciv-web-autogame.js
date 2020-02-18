@@ -26,15 +26,15 @@ casper.test.begin('Test starting new Freeciv-web autogame', 3, function suite(te
     casper.thenEvaluate(function() {
       /* Starting new game automatically from Javascript.*/
       dialog_close_trigger = "button";
-      if (validate_username()) {
-        $("#dialog").dialog('close');
-        setTimeout("send_message('/ai CasperJs');", 4000);
-        setTimeout("send_message('/start');", 4200);
-        setInterval("eval(\"console.log('Running autogame... Current turn: ' + game_info['turn'] + ' - chat messages: ' + get_chatbox_text());\");", 30000);
-      }
+      validate_username_callback();
+      setTimeout("send_message('/ai CasperJs');", 4000);
+      // City dialogs get in the way, hide messages and stop updates
+      show_city_dialog = function() {};
+      setTimeout("send_message('/start');", 4200);
+      setInterval("eval(\"console.log('Running autogame... Current turn: ' + game_info['turn'] + ' - chat messages: ' + get_chatbox_text());\");", 30000);
     });
 
-    casper.waitForText("T200", function() {
+    casper.waitForText("Game ended", function() {
       //this.clickLabel('Ok');
       this.echo("Captured screenshot to be saved as screenshot-autogame.png");
       this.capture('screenshot-autogame.png', undefined, {

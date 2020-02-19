@@ -106,10 +106,6 @@ sudo ${APT_GET} install --no-install-recommends nodejs
 # Populate ~/.config with current user
 npm help > /dev/null
 
-echo "==== Installing Handlebars ===="
-cd "${TMPINSTDIR}"
-sudo -H npm install handlebars -g
-
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
   ext_install_casperjs
 fi

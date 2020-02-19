@@ -287,8 +287,8 @@ Rerun the sync-js-hand.js script.
 								<goal>exec</goal>
 							</goals>
 							<configuration>
-								<executable>handlebars</executable>
-								<commandlineArgs>src/main/webapp/webclient -e hbs -f ${generated-js.dir}/hbs-templates.js --knownOnly</commandlineArgs>
+								<executable>npm</executable>
+								<commandlineArgs>run compile-hb -- ${generated-js.dir}</commandlineArgs>
 							</configuration>
 						</execution>
 					</executions>
@@ -440,7 +440,7 @@ Rerun the sync-js-hand.js script.
 							<exclude>src/main/webapp/javascript/libs/bigscreen.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.0.11.js</exclude>
+							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.5.3.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.contextMenu.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>

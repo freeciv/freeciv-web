@@ -300,6 +300,10 @@ mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
   handle_error 6 "Failed to synchronize freeciv project"
 
 cd "${basedir}"/freeciv-web && \
+  npm ci || \
+  handle_error 8 "Failed to install node dependencies"
+
+cd "${basedir}"/freeciv-web && \
   ./build.sh -B || \
   handle_error 7 "Failed to build freeciv-web server"
 

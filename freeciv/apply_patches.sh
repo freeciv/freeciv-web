@@ -6,6 +6,8 @@
 #     It was comitted in ab1c8f2a914300783f769819bed37c848c66721a
 # max_map_size is hrm Feature #847376
 #     It was comitted as f2173409a8e09fea9fecfb79ddf7dcf64fdab425
+# F3 is hrm Feature #868944
+#     It was comitted as b1c1846a346a873f3690aa171123b493629a6c02
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -34,7 +36,7 @@ declare -a PATCHLIST=(
   "city-naming-change"
   "metachange"
   "text_fixes"
-  "unithand-change2"
+  "F3"
   "freeciv-svn-webclient-changes"
   "goto_fcweb"
   "misc_devversion_sync"

@@ -1,0 +1,30 @@
+From b1c1846a346a873f3690aa171123b493629a6c02 Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Mon, 13 Apr 2020 07:18:08 +0200
+Subject: [PATCH] Don't advice using the F3 shortcut in Freeciv-web
+
+See hrm Feature #868944
+---
+ server/unithand.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/server/unithand.c b/server/unithand.c
+index f2b82f8160..a2daeb9953 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -1566,7 +1566,11 @@ static void explain_why_no_action_enabled(struct unit *punit,
+   case ANEK_NO_WAR:
+     notify_player(pplayer, unit_tile(punit), E_BAD_COMMAND, ftc_server,
+                   _("You must declare war on %s first.  Try using "
+-                    "the Nations report (F3)."),
++                    "the Nations report"
++#ifndef FREECIV_WEB
++                    " (F3)"
++#endif /* FREECIV_WEB */
++                    "."),
+                   player_name(explnat->no_war_with));
+     break;
+   case ANEK_DOMESTIC:
+-- 
+2.20.1
+

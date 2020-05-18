@@ -85,14 +85,6 @@ function webgl_preload()
       jungle_sprite.needsUpdate = true;
   } );
 
-  var waternormals = new THREE.Texture();
-  webgl_textures["waternormals"] = waternormals;
-  textureLoader.load( '/textures/waternormals.jpg', function ( image ) {
-    waternormals.image = image;
-    waternormals.needsUpdate = true;
-    waternormals.wrapS = waternormals.wrapT = THREE.RepeatWrapping;
-  } );
-
   var city_disorder = new THREE.Texture();
   textureLoader.load( '/textures/city_civil_disorder.png', function ( image ) {
     city_disorder.image = image;

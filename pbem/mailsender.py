@@ -59,6 +59,10 @@ class MailSender():
     if not self.testmode:
       smtp = smtplib.SMTP(self.smtp_host, self.smtp_port)
       if self.smtp_auth:
+        smtp.connect(self.smtp_host, self.smtp_port)
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
         smtp.login(self.smtp_login, self.smtp_password);
       smtp.sendmail(from_, to, mime_string)
       smtp.quit()

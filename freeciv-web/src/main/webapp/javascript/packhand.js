@@ -1612,16 +1612,6 @@ function handle_timeout_info(packet)
   seconds_to_phasedone_sync = new Date().getTime();
 }
 
-/************************************************************************//**
-  Shows image with text and play music
-****************************************************************************/
-function handle_show_img_play_sound(packet)
-{
-  /* TODO: Implement */
-  /* Currently (6th Sep 2018) only used in sandbox. The sandbox ruleset
-   * isn't supported by Freeciv-web at the moment. */
-}
-
 function handle_play_music(packet)
 {
   /* TODO: Implement */

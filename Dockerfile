@@ -34,6 +34,7 @@ COPY freeciv-web /docker/freeciv-web
 COPY pbem /docker/pbem
 COPY publite2 /docker/publite2
 COPY LICENSE.txt /docker/LICENSE.txt
+COPY requirements.txt /docker/requirements.txt
 
 COPY scripts /docker/scripts
 COPY tests /docker/tests

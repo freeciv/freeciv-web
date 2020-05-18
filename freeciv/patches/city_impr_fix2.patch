@@ -10,7 +10,7 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
    packet->id=pcity->id;
    packet->owner = player_number(city_owner(pcity));
 @@ -1898,6 +1900,23 @@
-   packet->city_image = get_city_bonus(pcity, EFT_CITY_IMAGE);
+   packet->steal = pcity->steal;
  
 +  improvement_iterate(pimprove) {
 +    can_build_impr_buf[improvement_index(pimprove)] = 

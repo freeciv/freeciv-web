@@ -2,6 +2,12 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0001-Fix-segfault-at-loading-older-format-savegame is hrm Bug #840623
+#     It was comitted in ab1c8f2a914300783f769819bed37c848c66721a
+# max_map_size is hrm Feature #847376
+#     It was comitted as f2173409a8e09fea9fecfb79ddf7dcf64fdab425
+# F3 is hrm Feature #868944
+#     It was comitted as b1c1846a346a873f3690aa171123b493629a6c02
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -20,11 +26,9 @@
 # webperimental_install make "make install" install webperimental.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
-# max_map_size increases MAP_MAX_SIZE.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
-# mapimg_bugfix is http://www.hostedredmine.com/issues/707912.
 
 declare -a PATCHLIST=(
   "freeciv_web_packets_def_changes"
@@ -32,7 +36,7 @@ declare -a PATCHLIST=(
   "city-naming-change"
   "metachange"
   "text_fixes"
-  "unithand-change2"
+  "F3"
   "freeciv-svn-webclient-changes"
   "goto_fcweb"
   "misc_devversion_sync"
@@ -56,6 +60,7 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
+  "0001-Fix-segfault-at-loading-older-format-savegame"
 )
 
 apply_patch() {
@@ -92,12 +97,12 @@ fi
 
 . ./version.txt
 
-CAPSTR_EXPECT="NETWORK_CAPSTRING_MANDATORY=\"${ORIGCAPSTR}\""
+CAPSTR_EXPECT="NETWORK_CAPSTRING=\"${ORIGCAPSTR}\""
 CAPSTR_SRC="freeciv/fc_version"
 echo "Verifying ${CAPSTR_EXPECT}"
 
 if ! grep "$CAPSTR_EXPECT" ${CAPSTR_SRC} 2>/dev/null >/dev/null ; then
-  echo "   Found  $(grep 'NETWORK_CAPSTRING_MANDATORY=' ${CAPSTR_SRC}) in $(pwd)/freeciv/fc_version" >&2
+  echo "   Found  $(grep 'NETWORK_CAPSTRING=' ${CAPSTR_SRC}) in $(pwd)/freeciv/fc_version" >&2
   echo "Capstring to be replaced does not match that given in version.txt" >&2
   exit 1
 fi

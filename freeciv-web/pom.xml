@@ -287,8 +287,8 @@ Rerun the sync-js-hand.js script.
 								<goal>exec</goal>
 							</goals>
 							<configuration>
-								<executable>handlebars</executable>
-								<commandlineArgs>src/main/webapp/webclient -e hbs -f ${generated-js.dir}/hbs-templates.js --knownOnly</commandlineArgs>
+								<executable>npm</executable>
+								<commandlineArgs>run compile-hb -- ${generated-js.dir}</commandlineArgs>
 							</configuration>
 						</execution>
 					</executions>
@@ -334,7 +334,7 @@ Rerun the sync-js-hand.js script.
 								<jsSourceFiles>
 									<!-- order is important: these must be before sources below -->
 									<jsSourceFile>libs/EventAggregator.js</jsSourceFile>
-									<jsSourceFile>libs/handlebars.runtime-v4.0.11.js</jsSourceFile>
+									<jsSourceFile>../../../../node_modules/handlebars/dist/handlebars.runtime.js</jsSourceFile>
 									<!-- these must be listed here, jsSourceIncludes doesn't work -->
 									<jsSourceFile>../../../derived/webapp/javascript/fc_events.js</jsSourceFile>
 									<jsSourceFile>../../../derived/webapp/javascript/freeciv-helpdata.js</jsSourceFile>
@@ -440,7 +440,6 @@ Rerun the sync-js-hand.js script.
 							<exclude>src/main/webapp/javascript/libs/bigscreen.min.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/bmp_lib.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/fg.menu.js</exclude>
-							<exclude>src/main/webapp/javascript/libs/handlebars.runtime-v4.0.11.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.blockUI.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.contextMenu.js</exclude>
 							<exclude>src/main/webapp/javascript/libs/jquery.min.js</exclude>

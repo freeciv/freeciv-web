@@ -51,9 +51,8 @@ dependencies="\
   zlib1g-dev \
 "
 
-export DEBIAN_FRONTEND=noninteractive
 INSTALLED_TOMCAT=N
-APT_GET='apt-get -y -qq -o=Dpkg::Use-Pty=0'
+APT_GET='DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
 
@@ -76,7 +75,7 @@ else
 fi
 
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-  dependencies="${dependencies} xvfb"
+  dependencies="${dependencies} xauth xvfb phantomjs"
 fi
 
 echo "==== Installing Updates and Dependencies ===="
@@ -106,10 +105,6 @@ sudo bash setup_8.x
 sudo ${APT_GET} install --no-install-recommends nodejs
 # Populate ~/.config with current user
 npm help > /dev/null
-
-echo "==== Installing Handlebars ===="
-cd "${TMPINSTDIR}"
-sudo -H npm install handlebars -g
 
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
   ext_install_casperjs

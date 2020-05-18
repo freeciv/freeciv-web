@@ -56,12 +56,13 @@ ext_install_tomcat8 () {
 }
 
 ext_install_casperjs () {
-  echo "==== Installing CasperJS for testing ===="
+  version=1.1.4-2
+  echo "==== Installing CasperJS ${version} for testing ===="
   cd "${basedir}/tests"
-  curl -LOsS 'https://github.com/casperjs/casperjs/archive/1.1.4.zip'
-  unzip -qo 1.1.4.zip
-  rm 1.1.4.zip
-  sudo ln -sf "${basedir}/casperjs-1.1.4/bin/casperjs" /usr/local/bin/casperjs
+  curl -LOsS "https://github.com/casperjs/casperjs/archive/${version}.zip"
+  unzip -qo "${version}".zip
+  rm "${version}".zip
+  sudo ln -sf "${basedir}/tests/casperjs-${version}/bin/casperjs" /usr/local/bin/casperjs
   ext_installed[${#ext_installed[@]}]="casperjs"
 }
 

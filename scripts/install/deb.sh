@@ -67,7 +67,7 @@ if ! apt-cache -qq show openjdk-8-jdk-headless > /dev/null; then
   sudo ${APT_GET} update
 fi
 
-if apt-cache -qq show tomcat8 > /dev/null; then
+if apt-get --simulate install tomcat8 &> /dev/null; then
   dependencies="${dependencies} tomcat8 tomcat8-admin"
   INSTALLED_TOMCAT=Y
 else

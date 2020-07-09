@@ -52,6 +52,7 @@ dependencies="\
 "
 
 INSTALLED_TOMCAT=N
+INSTALLED_NODEJS=N
 APT_GET='DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
@@ -72,6 +73,15 @@ if apt-get --simulate install tomcat8 &> /dev/null; then
   INSTALLED_TOMCAT=Y
 else
   INSTALLED_TOMCAT=N
+fi
+
+debian_nodejs_packages="nodejs npm handlebars"
+if [ $(lsb_release -rs) = "testing" ] && [ $(lsb_release -is) = "Debian" ] \
+   && apt-get --simulate install ${debian_nodejs_packages} &> /dev/null; then
+  dependencies="${dependencies} ${debian_nodejs_packages}"
+  INSTALLED_NODEJS=Y
+else
+  INSTALLED_NODEJS=N
 fi
 
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
@@ -97,10 +107,12 @@ fi
 TMPINSTDIR=$(mktemp -d)
 
 echo "==== Installing Node.js ===="
-cd "${TMPINSTDIR}"
-curl -LOsS 'https://deb.nodesource.com/setup_14.x'
-sudo bash setup_14.x
-sudo ${APT_GET} install --no-install-recommends nodejs
+if [ "${INSTALLED_NODEJS}" = N ]; then
+  cd "${TMPINSTDIR}"
+  curl -LOsS 'https://deb.nodesource.com/setup_14.x'
+  sudo bash setup_14.x
+  sudo ${APT_GET} install --no-install-recommends nodejs
+fi
 # Populate ~/.config with current user
 npm help > /dev/null
 

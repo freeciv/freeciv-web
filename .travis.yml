@@ -5,8 +5,6 @@ language: c
 
 compiler:
   - gcc
-python:
-  - "3.3"
 
 script: ./scripts/install/install.sh --mode=TEST && ./scripts/travis-run.sh
 

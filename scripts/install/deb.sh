@@ -67,7 +67,7 @@ if ! apt-cache -qq show openjdk-8-jdk-headless > /dev/null; then
   sudo ${APT_GET} update
 fi
 
-if apt-cache -qq show tomcat8 > /dev/null; then
+if apt-get --simulate install tomcat8 &> /dev/null; then
   dependencies="${dependencies} tomcat8 tomcat8-admin"
   INSTALLED_TOMCAT=Y
 else
@@ -78,9 +78,7 @@ if [ "${FCW_INSTALL_MODE}" = TEST ]; then
   dependencies="${dependencies} xauth xvfb phantomjs"
 fi
 
-echo "==== Installing Updates and Dependencies ===="
-echo "apt-get upgrade"
-sudo ${APT_GET} upgrade --with-new-pkgs
+echo "==== Installing Dependencies ===="
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASSWORD}"

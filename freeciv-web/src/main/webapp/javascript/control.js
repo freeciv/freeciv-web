@@ -2711,7 +2711,7 @@ function request_unit_build_city()
   }
 }
 
-/**************************************************************************
+/**********************************************************************//**
  * Send a request for an actor unit to do a specific action.
  *
  * @param action_id - action type to be requested

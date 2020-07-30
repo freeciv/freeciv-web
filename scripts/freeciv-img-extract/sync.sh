@@ -34,7 +34,7 @@ echo "converting flag .svg files to .png and .webp ..." &&
 (for svgfile in $(find "${FREECIV_DIR}"/data/flags/*.svg); do
   name="$(basename "$svgfile")"
   pngfile="${FLAG_DEST}/${name/%.svg/-web.png}"
-  convert -density 80 -resize 180 "$svgfile" "${pngfile}" ||
+  timeout 30 convert -density 80 -resize 180 "$svgfile" "${pngfile}" ||
     >&2 echo "  ERROR converting ${svgfile} to ${pngfile}"
   [[ -f "${pngfile}" ]] && cwebp -quiet -lossless "${pngfile}" -o "${pngfile/%.png/.webp}" ||
     >&2 echo "  ERROR packing ${pngfile} to ${pngfile/%.png/.webp}"

@@ -52,10 +52,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     mem = mem / 1024 / 2
     v.customize ["modifyvm", :id, "--memory", mem]
 
+    # Fix so that symlinks can be created in Windows.
+    v.customize ['setextradata', :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant", '1']
+
     # Disable serial port. It is unnecessary, and may cause error on Win10
     #   https://github.com/joelhandwell/ubuntu_vagrant_boxes/issues/1#issuecomment-292370353
     v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
   end
+
+
+  if Vagrant::Util::Platform.windows? then
+    def running_in_admin_mode?
+      (`reg query HKU\\S-1-5-19 2>&1` =~ /ERROR/).nil?
+    end
+ 
+    unless running_in_admin_mode?
+	    puts "Error: Freeciv-web on Vagrant must be run in an Administrative command prompt, because administrator access is required to create SymLinks on Windows. There is a \"Run as Administrator\" option, or just Google how to start a administator command prompt on Windows. It's safe, don't worry. Try vagrant up again from an Administrative command prompt. "
+      exit 1
+    end
+  end
+
 
   config.vm.synced_folder "./", "/vagrant"
 

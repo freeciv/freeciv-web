@@ -81,6 +81,9 @@ but not afterwards. If you touch shared files after installation, please use
 an editor that respect Unix line endings or transform them with a utility
 like dos2unix after saving them.
 
+#### :warning: You must run Command Prompt as administrator in Windows, to get access to create SymLinks on Windows.
+
+
 ### Running Freeciv-web with Vagrant on VirtualBox
 
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
@@ -103,6 +106,8 @@ sudo apt-get install vagrant
  ```bash
  vagrant up
  ```
+
+#### :warning: Windows: You must run Vagrant in a Command Prompt as administrator in Windows, for the install to get access to create SymLinks on Windows.
 
   This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 

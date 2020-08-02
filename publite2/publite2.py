@@ -62,7 +62,7 @@ class metachecker():
       self.server_limit = int(settings.get("Resource usage", "server_limit",
                                            fallback = 250))
       self.savesdir = settings.get("Config", "save_directory",
-                                   fallback = "/var/lib/tomcat8/webapps/data/savegames/")
+                                   fallback = "/var/lib/tomcat9/webapps/data/savegames/")
 
       self.check_count = 0;
       self.total = 0;

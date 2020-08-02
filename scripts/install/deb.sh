@@ -68,8 +68,8 @@ if ! apt-cache -qq show openjdk-8-jdk-headless > /dev/null; then
   sudo ${APT_GET} update
 fi
 
-if apt-get --simulate install tomcat8 &> /dev/null; then
-  dependencies="${dependencies} tomcat8 tomcat8-admin"
+if apt-get --simulate install tomcat9 &> /dev/null; then
+  dependencies="${dependencies} tomcat9 tomcat9-admin"
   INSTALLED_TOMCAT=Y
 else
   INSTALLED_TOMCAT=N
@@ -101,7 +101,7 @@ for n in java javac; do
 done
 
 if [ "${INSTALLED_TOMCAT}" = N ]; then
-  ext_install_tomcat8
+  ext_install_tomcat9
 fi
 
 TMPINSTDIR=$(mktemp -d)

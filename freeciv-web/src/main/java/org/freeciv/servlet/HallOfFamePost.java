@@ -33,9 +33,9 @@ public class HallOfFamePost extends HttpServlet {
     
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
     
-    private static final String mapSrcImgPaths = "/var/lib/tomcat8/webapps/data/savegames/";
+    private static final String mapSrcImgPaths = "/var/lib/tomcat9/webapps/data/savegames/";
     
-    private static final String mapDstImgPaths = "/var/lib/tomcat8/webapps/data/mapimgs/";
+    private static final String mapDstImgPaths = "/var/lib/tomcat9/webapps/data/mapimgs/";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {

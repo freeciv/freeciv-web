@@ -8,7 +8,7 @@
 
 
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
-export CATALINA_HOME=/var/lib/tomcat8
+export CATALINA_HOME=/var/lib/tomcat9
 
 # 0. mysql
 pidof mysqld > /dev/null || sudo service mysql start
@@ -28,10 +28,10 @@ fi
 
 # 2. Tomcat
 echo "Starting up Tomcat" && \
-if service --status-all | grep -Fq 'tomcat8'; then
-   sudo /usr/sbin/service tomcat8 start || echo "unable to start tomcat8 service"
+if service --status-all | grep -Fq 'tomcat9'; then
+   sudo /usr/sbin/service tomcat9 start || echo "unable to start tomcat9 service"
 else
-   sudo -u tomcat8 $CATALINA_HOME/bin/catalina.sh start
+   sudo -u tomcat $CATALINA_HOME/bin/catalina.sh start
 fi
 
 # waiting for Tomcat to start, since it will take some time.

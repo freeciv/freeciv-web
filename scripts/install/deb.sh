@@ -98,8 +98,8 @@ TMPINSTDIR=$(mktemp -d)
 
 echo "==== Installing Node.js ===="
 cd "${TMPINSTDIR}"
-curl -LOsS 'https://deb.nodesource.com/setup_8.x'
-sudo bash setup_8.x
+curl -LOsS 'https://deb.nodesource.com/setup_14.x'
+sudo bash setup_14.x
 sudo ${APT_GET} install --no-install-recommends nodejs
 # Populate ~/.config with current user
 npm help > /dev/null

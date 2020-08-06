@@ -9,7 +9,7 @@ casper.on('remote.message', function(message) {
     this.echo('JavaScript console: ' + message);
 });
 
-casper.test.begin('Test of Tomcat8 running on localhost port 8080.', 2, function suite(test) {
+casper.test.begin('Test of Tomcat 9 running on localhost port 8080.', 2, function suite(test) {
     casper.start("http://localhost:8080/freeciv-web/", function() {
         test.assertHttpStatus(200);
         test.assertTitleMatch(/Freeciv-web/, 'Freeciv-web title is present');

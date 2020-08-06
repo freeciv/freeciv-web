@@ -12,7 +12,7 @@ else
 fi
 
 ${ACCESS_MANAGER} systemctl reload nginx.service || ${ACCESS_MANAGER} systemctl start nginx.service
-for unit in mysql tomcat8; do
+for unit in mysql tomcat9; do
   systemctl is-active --quiet ${unit}.service || ${ACCESS_MANAGER} systemctl start ${unit}.service
 done
 

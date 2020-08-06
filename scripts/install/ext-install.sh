@@ -17,42 +17,42 @@
 
 declare -a ext_installed
 
-ext_install_tomcat8 () {
+ext_install_tomcat9 () {
   local TOMCAT_URL
   local TMPFILE
 
-  echo "==== Installing tomcat8 ===="
+  echo "==== Installing tomcat9 ===="
 
-  TOMCAT_URL=$(curl -LsS 'https://tomcat.apache.org/download-80.cgi' | sed -n 's/^.*href="\([^"]*bin\/apache-tomcat-[0-9.]*tar\.gz\)".*/\1/p' | head -n 1)
+  TOMCAT_URL=$(curl -LsS 'https://tomcat.apache.org/download-90.cgi' | sed -n 's/^.*href="\([^"]*bin\/apache-tomcat-[0-9.]*tar\.gz\)".*/\1/p' | head -n 1)
   if [ -z "${TOMCAT_URL}" ]; then
     echo >&2 "Couldn't fetch download URL"
     exit 1
   fi
 
-  echo "Downloading tomcat8 from ${TOMCAT_URL}"
-  TMPFILE=$(mktemp -t tomcat8.XXXX.tar.gz)
+  echo "Downloading tomcat9 from ${TOMCAT_URL}"
+  TMPFILE=$(mktemp -t tomcat9.XXXX.tar.gz)
   curl -LsS -o "${TMPFILE}" "${TOMCAT_URL}"
 
   cd /var/lib
   sudo tar -xzf "${TMPFILE}"
-  sudo mv apache-tomcat-8.* tomcat8
+  sudo mv apache-tomcat-9.* tomcat9
   rm "${TMPFILE}"
 
-  if ! getent group tomcat8 > /dev/null 2>&1 ; then
-    sudo groupadd --system tomcat8
+  if ! getent group tomcat > /dev/null 2>&1 ; then
+    sudo groupadd --system tomcat
   fi
-  if ! id tomcat8 > /dev/null 2>&1 ; then
-    sudo useradd --system --home /var/lib/tomcat8 -g tomcat8 --shell /bin/false tomcat8
+  if ! id tomcat > /dev/null 2>&1 ; then
+    sudo useradd --system --home /var/lib/tomcat9 -g tomcat --shell /bin/false tomcat
   fi
 
-  sudo chgrp -R tomcat8 /var/lib/tomcat8
-  sudo chmod -R g+r /var/lib/tomcat8/conf
-  sudo chmod g+x /var/lib/tomcat8/conf
-  sudo chown -R tomcat8 /var/lib/tomcat8/{webapps,work,temp,logs}
-  sudo setfacl -m d:g:tomcat8:rwX /var/lib/tomcat8/webapps
+  sudo chgrp -R tomcat /var/lib/tomcat9
+  sudo chmod -R g+r /var/lib/tomcat9/conf
+  sudo chmod g+x /var/lib/tomcat9/conf
+  sudo chown -R tomcat /var/lib/tomcat9/{webapps,work,temp,logs}
+  sudo setfacl -m d:g:tomcat:rwX /var/lib/tomcat9/webapps
 
-  echo "export CATALINA_HOME=\"/var/lib/tomcat8\"" >> ~/.bashrc
-  ext_installed[${#ext_installed[@]}]="tomcat8"
+  echo "export CATALINA_HOME=\"/var/lib/tomcat9\"" >> ~/.bashrc
+  ext_installed[${#ext_installed[@]}]="tomcat9"
 }
 
 ext_install_casperjs () {

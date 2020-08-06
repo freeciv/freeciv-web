@@ -31,7 +31,7 @@ Freeciv-Web consists of these components:
   This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
   Implemented in Javascript, Java, JSP, HTML and CSS. Built with maven and runs 
-  on Tomcat 8 and nginx.
+  on Tomcat 9 and nginx.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
   Git repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
@@ -126,7 +126,7 @@ and 3 Gb of harddisk space.
 
 Install this software if you are not running Freeciv-web with Vagrant:
 
-- Tomcat 8 - https://tomcat.apache.org/ 
+- Tomcat 9 - https://tomcat.apache.org/
 
 - Java 8 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 

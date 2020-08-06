@@ -29,7 +29,7 @@ addArgs --read "pubscript_${6}.serv"
 addArgs --log "../logs/freeciv-web-log-${2}.log"
 
 if [ "$5" = "pbem" ]; then
-  addArgs --Ranklog "/var/lib/tomcat8/webapps/data/ranklogs/rank_${2}.log"
+  addArgs --Ranklog "/var/lib/tomcat9/webapps/data/ranklogs/rank_${2}.log"
 fi
 
 savesdir=${1}
@@ -50,7 +50,7 @@ fi
 addArgs --saves "${savesdir}"
 
 export FREECIV_SAVE_PATH=${savesdir};
-rm -f "/var/lib/tomcat8/webapps/data/scorelogs/score-${2}.log"
+rm -f "/var/lib/tomcat9/webapps/data/scorelogs/score-${2}.log"
 
 python3 ../freeciv-proxy/freeciv-proxy.py "${3}" > "../logs/freeciv-proxy-${3}.log" 2>&1 &
 proxy_pid=$! && 

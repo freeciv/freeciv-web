@@ -8,7 +8,7 @@ import time
 import os
 import sys
 
-rootdir = "/var/lib/tomcat8/webapps/data/savegames/" 
+rootdir = "/var/lib/tomcat9/webapps/data/savegames/" 
 scenario_list = ['british-isles.sav', 'iberian-peninsula.sav',
     'earth-large.sav', 'italy.sav',
     'earth-small.sav','japan.sav',

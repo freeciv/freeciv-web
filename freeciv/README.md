@@ -11,4 +11,5 @@ apply_patches.sh - applies patches against the Freeciv C source code.
 
 version.txt - contains the Git revision of Freeciv to check out from Git.
 
-The Freeciv C server is installed to $HOME/freeciv.
+The Freeciv C server is copied to the /tmp directory, and built there, then installed to $HOME/freeciv.
+Building in /tmp is a workaround for a file permission issue on Vagrant/VirtialBox.

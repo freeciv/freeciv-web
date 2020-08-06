@@ -18,6 +18,7 @@ dependencies="\
   autoconf \
   automake \
   autotools-dev \
+  build-essential \
   curl \
   git \
   gnupg \
@@ -40,6 +41,7 @@ dependencies="\
   pkg-config \
   pngcrush \
   procps \
+  python \
   python3-minimal \
   python3-pip \
   python3-setuptools \

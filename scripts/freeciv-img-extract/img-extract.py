@@ -106,16 +106,16 @@ def expand_spec_files(name, file_names):
 
 files = {k: expand_spec_files(k, v) for k,v in spec_files.items()}
 
-tileset;
-curr_x;
-curr_y;
-max_row_height;
-max_width;
-max_height;
-tileset_inc;
-dither_map;
-dither_mask;
-mask_image;
+tileset = None;
+curr_x = None;
+curr_y = None;
+max_row_height = None;
+max_width = None;
+max_height = None;
+tileset_inc = None;
+dither_map = None;
+dither_mask = None;
+mask_image = None;
 
 coords = {};
 max_width = 0;

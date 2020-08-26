@@ -72,19 +72,19 @@ function update_nation_screen()
 
     nation_list_html += "<td>" + get_embassy_text(player_id) + "</td>";
 
-    nation_list_html += "<td>"
+    nation_list_html += "<td>";
     if (!client_is_observer() && client.conn.playing != null) {
       if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno']) && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
-        nation_list_html += "Both ways"
+        nation_list_html += "Both ways";
       } else if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno'])) {
         nation_list_html += "To you"
       } else if (client.conn.playing['gives_shared_vision'].isSet(player_id)) {
-        nation_list_html += "To them"
+        nation_list_html += "To them";
       } else {
-        nation_list_html += "None"
+        nation_list_html += "None";
       }
     }
-    nation_list_html += "</td>"
+    nation_list_html += "</td>";
 
     nation_list_html += "<td class='nation_team'>" + (pplayer['team'] + 1) + "</td>";
     var pstate = " ";

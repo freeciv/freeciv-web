@@ -102,7 +102,7 @@ function handle_map_image_upload()
     var reader = new FileReader();
     reader.onload = function(e) {
       doImage(reader.result);
-    }
+    };
     reader.readAsDataURL(file);
   } else {
     $.unblockUI();

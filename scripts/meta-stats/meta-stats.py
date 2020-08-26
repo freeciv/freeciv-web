@@ -22,10 +22,7 @@
 # and update the games_played_stats mysql database table.
 
 
-import os
-import sys
 import time
-import datetime
 import mysql.connector
 import configparser
 import http.client
@@ -41,7 +38,6 @@ server_map = {};
 is_first_check = True;
 
 def increment_metaserver_stats():
-  result = None;
   cursor = None;
   cnx = None;
   try:

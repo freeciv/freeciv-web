@@ -523,7 +523,7 @@ function chat_context_dialog_show(recipients) {
     }
     tbody_el.appendChild(row);
     return ctx;
-  }
+  };
 
   for (var i = 0; i < recipients.length; i++) {
     if (recipients[i].id != chat_send_to) {

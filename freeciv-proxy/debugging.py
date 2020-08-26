@@ -14,13 +14,10 @@
 '''
 
 import sys
-from time import gmtime, strftime
-import os
 import platform
 import threading
 import time
 from tornado import version as tornado_version
-import gc
 
 startTime = time.time()
 

@@ -40,7 +40,7 @@ packet_type_names = {};
 # version in between. Please leave it so. In particular use the string
 # module and not the function of the string type.
 
-import re, string, os, sys
+import re, sys
 import logging
 logger = logging.getLogger("freeciv-proxy");
 

@@ -141,7 +141,6 @@ class WSHandler(websocket.WebSocketHandler):
       finally:
         cursor.close()
         cnx.close()
-      return False
 
     # Returns the auth method for this game
     # Right now this is:

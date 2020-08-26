@@ -1,5 +1,5 @@
 from threading import Thread
-from subprocess import call, PIPE
+from subprocess import call
 from shutil import *
 import sys
 from time import gmtime, strftime

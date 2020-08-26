@@ -59,7 +59,7 @@ function save_game()
     dhtml += "<br><br>Warning: You have not logged in using a user account with password. Please "
     + "create a new user account with password next time you want save, so you are sure"
     + " you can load the savegame with a username and password. <a href='/webclient/?action=new&amp;type=singleplayer'>Click here</a> "
-    + "to start a new game, then click on the \"New User Account\" button to create a new account.<br>"
+    + "to start a new game, then click on the \"New User Account\" button to create a new account.<br>";
   }
 
   $("#save_dialog").html(dhtml);

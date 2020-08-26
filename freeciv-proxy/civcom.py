@@ -14,7 +14,6 @@
 '''
 
 import socket
-import select
 from struct import *
 from threading import Thread
 import logging

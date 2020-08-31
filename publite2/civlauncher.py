@@ -25,7 +25,8 @@ class Civlauncher(Thread):
             try:
                 print("Start freeciv-web on port " + str(self.new_port) + 
                       " and freeciv-proxy on port " + str(1000 + self.new_port) + ".");
-                retcode = call(["../publite2/init-freeciv-web.sh"
+                retcode = call(["/usr/bin/bash"
+                               , "../publite2/init-freeciv-web.sh"
                                , self.savesdir
                                , str(self.new_port)
                                , str(1000 + self.new_port)

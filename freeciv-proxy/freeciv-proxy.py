@@ -157,6 +157,16 @@ class WSHandler(websocket.WebSocketHandler):
             return "password"
 
     def check_user_password(self, cursor, username, password):
+        # FIXME: this is a workaround, since ENCRYPT has been removed in MySQL 8, so the next query will fail.
+        query = ("select username from auth where lower(username)=lower(%(usr)s)")
+        cursor.execute(query, {'usr': username, 'pwd': password})
+        result = cursor.fetchall()
+
+        if len(result) == 0:
+            # Unreserved user, no password needed
+            return True
+        
+        # FIXME: ENCRYPT has been removed from MySQL 8.
         query = ("select secure_hashed_password, CAST(ENCRYPT(%(pwd)s, secure_hashed_password) AS CHAR), activated from auth where lower(username)=lower(%(usr)s)")
         cursor.execute(query, {'usr': username, 'pwd': password})
         result = cursor.fetchall()

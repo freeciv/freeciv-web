@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox"
 
-  config.vm.box_url = "https://cloud-images.ubuntu.com/focal/20200804/focal-server-cloudimg-amd64-vagrant.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64-vagrant.box"
 
   if Vagrant::Util::Platform.windows?
 	  config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "127.0.0.1"

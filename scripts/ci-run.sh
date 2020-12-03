@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Freeciv-web Travis CI test script
+# Freeciv-web CI test script
 
 error=0
 

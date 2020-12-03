@@ -2,7 +2,6 @@
 .gitattributes
 .gitignore
 .mailmap
-.travis.yml
 ADVANCED.md
 CONTRIBUTING.md
 Dockerfile

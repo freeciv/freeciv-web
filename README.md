@@ -1,7 +1,7 @@
 THE FREECIV-WEB PROJECT
 -----------------------
 
-[![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
+[![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
 [![Code Quality: Javascript](https://img.shields.io/lgtm/grade/javascript/g/freeciv/freeciv-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/freeciv/freeciv-web/context:javascript)
 [![Total Alerts](https://img.shields.io/lgtm/alerts/g/freeciv/freeciv-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/freeciv/freeciv-web/alerts)
 
@@ -190,11 +190,11 @@ http://localhost/
 Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
 
 
-Freeciv-Web continuous integration on Travis CI 
------------------------------------------------
-Freeciv-Web is built on Travis CI on every commit. This is the current build status: [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
+Freeciv-Web continuous integration on GitHub actions
+----------------------------------------------------
+Freeciv-Web is built on GitHub actions on every commit. This is the current build status: [![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
 
-Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!
+Freeciv-web has CasperJS tests which are run by GitHub actions on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!
 
 Developers interested in Freeciv-web
 ------------------------------------

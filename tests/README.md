@@ -1,7 +1,7 @@
  CasperJS tests for Freeciv-web.
 ===============================
 
- This test is run automatically when setting up Vagrant or TravisCI installation. 
+ This test is run automatically when setting up Vagrant or GitHub actions installation.
 
  Freeciv-web requires CasperJS 1.1.2, PhantomJS 2.0 or SlimerJS version 0.10.0pre, 
  and xvfb (for headless tests). 
@@ -13,6 +13,6 @@
  ```
  Running the tests will also produce two screenshots.
 
- The automatic build by Travis-CI uses PhantomJS.
+ The automatic build by GitHub actions uses PhantomJS.
 
-freeciv-web-autogame.js will start a server autogame for 200 turns. This is run by Travis-CI also.
+freeciv-web-autogame.js will start a server autogame for 200 turns. This is run by GitHub actions also.

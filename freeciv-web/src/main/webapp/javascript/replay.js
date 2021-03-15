@@ -85,7 +85,7 @@ function show_replay_dialog(blob) {
 
   $("#replay_dialog").html(message);
 
-  var replay_image = document.getElementById("replay_result")
+  var replay_image = document.getElementById("replay_result");
   replay_image.src = URL.createObjectURL(blob);
 
   $("#replay_dialog").attr("title", title);

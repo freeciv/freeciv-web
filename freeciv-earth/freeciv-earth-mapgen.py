@@ -23,7 +23,7 @@ import io
 import time
 
 STATUS_PORT = 3999
-savedir = "/var/lib/tomcat8/webapps/data/savegames/";
+savedir = "/var/lib/tomcat9/webapps/data/savegames/";
 savegame_filename = "freeciv-earth-savegame-";
 savecounter = 10000;
 savetemplate = "";

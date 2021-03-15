@@ -523,7 +523,7 @@ function chat_context_dialog_show(recipients) {
     }
     tbody_el.appendChild(row);
     return ctx;
-  }
+  };
 
   for (var i = 0; i < recipients.length; i++) {
     if (recipients[i].id != chat_send_to) {
@@ -2711,7 +2711,7 @@ function request_unit_build_city()
   }
 }
 
-/**************************************************************************
+/**********************************************************************//**
  * Send a request for an actor unit to do a specific action.
  *
  * @param action_id - action type to be requested

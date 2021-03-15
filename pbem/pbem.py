@@ -19,10 +19,8 @@
 ***********************************************************************'''
 
 import os, os.path
-import sys
 import time
 import lzma
-import datetime
 import mysql.connector
 from mailsender import MailSender
 from mailstatus import *
@@ -238,7 +236,6 @@ def handle_ranklog(root, file):
   losers_score = None;
   losers_email = None;  
 
-  turns = None;
   for line in lines:
     if (len(line) > 9 and line[:7]=='winners' and ',' in line):
       winner = line[9:].split(",")[1];  #FIXME: this is not always correct, if there are multiple winners.

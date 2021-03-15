@@ -1,0 +1,26 @@
+name: continuous integration
+
+on:
+  - pull_request
+  - push
+  - workflow_dispatch
+
+jobs:
+  normal:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: check out Freeciv-web
+        uses: actions/checkout@v2
+      - name: prepare
+        run: |
+          sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+          sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+          ip addr # for confirmation. can be skipped
+          sudo apt-get remove ^postgresql 'mysql.*'
+          sudo rm -rf /var/lib/mysql
+      - name: install
+        shell: bash
+        run: ./scripts/install/install.sh --mode=TEST
+      - name: run tests
+        shell: bash
+        run: ./scripts/ci-run.sh

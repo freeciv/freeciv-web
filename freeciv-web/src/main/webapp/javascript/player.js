@@ -182,7 +182,7 @@ function get_embassy_text(player_id)
   } else if (embassy_from) {
     return "They have embassy";
   } else {
-    return "None"
+    return "None";
   }
 
 }

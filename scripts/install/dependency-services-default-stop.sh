@@ -13,9 +13,9 @@ fi
 
 # 2. Tomcat
 if [ "${TOMCATMANAGER}" != "Y" ]; then
-  if service --status-all | grep -Fq 'tomcat8'; then
-    sudo service tomcat8 stop || echo "unable to stop tomcat8 service"
+  if service --status-all | grep -Fq 'tomcat9'; then
+    sudo service tomcat9 stop || echo "unable to stop tomcat9 service"
   else
-    sudo -u tomcat8 /var/lib/tomcat8/bin/catalina.sh stop
+    sudo -u tomcat /var/lib/tomcat9/bin/catalina.sh stop
   fi
 fi

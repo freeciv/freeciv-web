@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 
-from subprocess import call, PIPE
 from os import *
 from shutil import *
-from threading import Thread
 import time
 import os
-import sys
 
-rootdir = "/var/lib/tomcat8/webapps/data/savegames/" 
+rootdir = "/var/lib/tomcat9/webapps/data/savegames/" 
 scenario_list = ['british-isles.sav', 'iberian-peninsula.sav',
     'earth-large.sav', 'italy.sav',
     'earth-small.sav','japan.sav',

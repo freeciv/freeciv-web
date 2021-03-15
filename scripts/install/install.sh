@@ -24,7 +24,7 @@ FCW_INSTALL_REL=
 SHOW_LIST=0
 basedir=
 
-TOMCAT_HOME=/var/lib/tomcat8
+TOMCAT_HOME=/var/lib/tomcat9
 
 show_help () {
   cat << EOF
@@ -274,14 +274,16 @@ echo "==== Preparing Tomcat ===="
 cd "${TOMCAT_HOME}"
 sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
-setfacl -Rm d:u:tomcat8:rwX webapps/data
+setfacl -Rm d:u:tomcat:rwX webapps/data
 
 echo "==== Building freeciv ===="
 echo "Please be patient"
+# Freeciv is copied to /tmp and built there, to overcome a file permission issue on VirtualBox.
 cd "${basedir}"/freeciv && \
   ./prepare_freeciv.sh  && \
-  cd freeciv && make install || \
+  cd /tmp/freeciv && make install || \
   handle_error 5 "Failed to install freeciv"
+
 
 echo "==== Building freeciv-web ===="
 if [ ! -f "${basedir}"/publite2/settings.ini ]; then

@@ -18,6 +18,7 @@ dependencies="\
   autoconf \
   automake \
   autotools-dev \
+  build-essential \
   curl \
   git \
   gnupg \
@@ -40,6 +41,7 @@ dependencies="\
   pkg-config \
   pngcrush \
   procps \
+  python \
   python3-minimal \
   python3-pip \
   python3-setuptools \
@@ -52,6 +54,7 @@ dependencies="\
 "
 
 INSTALLED_TOMCAT=N
+INSTALLED_NODEJS=N
 APT_GET='DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
@@ -67,20 +70,27 @@ if ! apt-cache -qq show openjdk-8-jdk-headless > /dev/null; then
   sudo ${APT_GET} update
 fi
 
-if apt-cache -qq show tomcat8 > /dev/null; then
-  dependencies="${dependencies} tomcat8 tomcat8-admin"
+if apt-get --simulate install tomcat9 &> /dev/null; then
+  dependencies="${dependencies} tomcat9 tomcat9-admin"
   INSTALLED_TOMCAT=Y
 else
   INSTALLED_TOMCAT=N
+fi
+
+debian_nodejs_packages="nodejs npm handlebars"
+if [ $(lsb_release -rs) = "testing" ] && [ $(lsb_release -is) = "Debian" ] \
+   && apt-get --simulate install ${debian_nodejs_packages} &> /dev/null; then
+  dependencies="${dependencies} ${debian_nodejs_packages}"
+  INSTALLED_NODEJS=Y
+else
+  INSTALLED_NODEJS=N
 fi
 
 if [ "${FCW_INSTALL_MODE}" = TEST ]; then
   dependencies="${dependencies} xauth xvfb phantomjs"
 fi
 
-echo "==== Installing Updates and Dependencies ===="
-echo "apt-get upgrade"
-sudo ${APT_GET} upgrade --with-new-pkgs
+echo "==== Installing Dependencies ===="
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASSWORD}"
@@ -93,16 +103,18 @@ for n in java javac; do
 done
 
 if [ "${INSTALLED_TOMCAT}" = N ]; then
-  ext_install_tomcat8
+  ext_install_tomcat9
 fi
 
 TMPINSTDIR=$(mktemp -d)
 
 echo "==== Installing Node.js ===="
-cd "${TMPINSTDIR}"
-curl -LOsS 'https://deb.nodesource.com/setup_8.x'
-sudo bash setup_8.x
-sudo ${APT_GET} install --no-install-recommends nodejs
+if [ "${INSTALLED_NODEJS}" = N ]; then
+  cd "${TMPINSTDIR}"
+  curl -LOsS 'https://deb.nodesource.com/setup_14.x'
+  sudo bash setup_14.x
+  sudo ${APT_GET} install --no-install-recommends nodejs
+fi
 # Populate ~/.config with current user
 npm help > /dev/null
 

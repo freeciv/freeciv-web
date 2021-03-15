@@ -72,7 +72,7 @@ function handle_3d_model_upload()
     var reader = new FileReader();
     reader.onload = function(e) {
       update_3d_model_from_file(reader.result);
-    }
+    };
     reader.readAsArrayBuffer(file);
   } else {
     swal("Image file " + file.name + "  not supported: " + file.type);

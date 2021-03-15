@@ -120,7 +120,6 @@ function webgl_start_renderer()
 ****************************************************************************/
 function init_webgl_mapview() {
   start_webgl = new Date().getTime();
-  var quality = 32;
 
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
 

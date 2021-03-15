@@ -16,9 +16,9 @@ Scripts to generate these files are in `$freeciv-web/scripts` and they
 are generated to `$freeciv-web/freeciv-web/src/derived`. See the
 README.md in those directories for more info.
 
-Tomcat 8 + nginx setup
+Tomcat 9 + nginx setup
 ================================
-Freeciv-web supports the Tomcat 8 application server for hosting the Java web application.
+Freeciv-web supports the Tomcat 9 application server for hosting the Java web application.
 
 The build scripts are updated to build Freeciv-web for Tomcat by default,
 so setting up Freeciv-web with Vagrant will configure this automatically.

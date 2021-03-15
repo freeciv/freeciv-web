@@ -347,7 +347,7 @@ function handle_info_text_message(packet)
     'Terri': /^(Territory of )([^(]*)(\s+\([^,]*)(.*)/,
     'City:': /^(City:[^|]*\|\s+)([^(]*)(\s+\([^,]*)(.*)/,
     'Unit:': /^(Unit:[^|]*\|\s+)([^(]*)(\s+\([^,]*)(.*)/
-  }
+  };
 
   for (var i = 0; i < lines.length; i++) {
     var re = matcher[lines[i].substr(0, 5)];

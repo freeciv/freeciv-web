@@ -1,7 +1,7 @@
 THE FREECIV-WEB PROJECT
 -----------------------
 
-[![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
+[![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
 [![Code Quality: Javascript](https://img.shields.io/lgtm/grade/javascript/g/freeciv/freeciv-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/freeciv/freeciv-web/context:javascript)
 [![Total Alerts](https://img.shields.io/lgtm/alerts/g/freeciv/freeciv-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/freeciv/freeciv-web/alerts)
 
@@ -11,9 +11,9 @@ Freeciv-web is free and open source software. The Freeciv C server is released u
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
 Currently known servers based on Freeciv-web:
-- [freeciv.xyz](https://www.freeciv.xyz)  [https://github.com/zekoz/freeciv-web]
 - [freecivweb.org](https://www.freecivweb.org) [https://github.com/Lexxie9952/fcw.org-server]
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
+- [freeciv.xyz](https://www.freeciv.xyz)  [https://github.com/zekoz/freeciv-web] (currently not working, moving units broken)
 
 Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
@@ -31,7 +31,7 @@ Freeciv-Web consists of these components:
   This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
   Implemented in Javascript, Java, JSP, HTML and CSS. Built with maven and runs 
-  on Tomcat 8 and nginx.
+  on Tomcat 9 and nginx.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
   Git repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
@@ -81,6 +81,9 @@ but not afterwards. If you touch shared files after installation, please use
 an editor that respect Unix line endings or transform them with a utility
 like dos2unix after saving them.
 
+#### :warning: You must run Command Prompt as administrator in Windows, to get access to create SymLinks on Windows.
+
+
 ### Running Freeciv-web with Vagrant on VirtualBox
 
 Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
@@ -104,6 +107,8 @@ sudo apt-get install vagrant
  vagrant up
  ```
 
+#### :warning: Windows: You must run Vagrant in a Command Prompt as administrator in Windows, for the install to get access to create SymLinks on Windows.
+
   This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
 
 4. Test Freeciv-web by pointing your browser to http://localhost if you run Windows or http://localhost:8080 if you run Linux or macOS.
@@ -121,7 +126,7 @@ and 3 Gb of harddisk space.
 
 Install this software if you are not running Freeciv-web with Vagrant:
 
-- Tomcat 8 - https://tomcat.apache.org/ 
+- Tomcat 9 - https://tomcat.apache.org/
 
 - Java 8 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
 
@@ -185,11 +190,11 @@ http://localhost/
 Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
 
 
-Freeciv-Web continuous integration on Travis CI 
------------------------------------------------
-Freeciv-Web is built on Travis CI on every commit. This is the current build status: [![Build Status](https://api.travis-ci.org/freeciv/freeciv-web.png)](https://travis-ci.org/freeciv/freeciv-web)
+Freeciv-Web continuous integration on GitHub actions
+----------------------------------------------------
+Freeciv-Web is built on GitHub actions on every commit. This is the current build status: [![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
 
-Freeciv-web has CasperJS tests which are run by Travis CI on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!
+Freeciv-web has CasperJS tests which are run by GitHub actions on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!
 
 Developers interested in Freeciv-web
 ------------------------------------

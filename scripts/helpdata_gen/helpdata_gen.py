@@ -15,7 +15,6 @@
 
 from os import path
 import argparse
-import sys
 
 import configparser
 import json

@@ -30,6 +30,7 @@ echo "Copying Freeciv to /tmp, and compiling Freeciv in /tmp"
 # autogen.sh can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
 cp freeciv /tmp -rf
 cp freeciv-web.project /tmp
+chmod +x /tmp/freeciv/autogen.sh
 
 ( cd /tmp/freeciv
   ./autogen.sh CFLAGS="-O3" --enable-mapimg=magickwand --with-project-definition=../freeciv-web.project --enable-fcweb --enable-json --disable-delta-protocol --disable-nls --disable-fcmp --enable-freeciv-manual --disable-ruledit --disable-ruleup --disable-fcdb --enable-ai-static=classic,tex --prefix=${HOME}/freeciv/ && make -s -j$(nproc)

@@ -1,7 +1,8 @@
-diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2016-02-24 01:30:52.178367420 +0200
-+++ freeciv/common/networking/packets.def	2016-02-24 02:07:55.184096429 +0200
-@@ -659,9 +662,15 @@
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 3dd3ae4bb4..4de2507e5c 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -729,7 +729,13 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
  
    WORKLIST worklist;
  
@@ -14,6 +15,4 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
 +  STRING trade_output[MAX_LEN_MSG];
    BV_CITY_OPTIONS city_options;
    ESTRING name[MAX_LEN_CITYNAME];
- end
  
- PACKET_CITY_SHORT_INFO = 32; sc, lsend, is-game-info, cancel(PACKET_CITY_INFO)

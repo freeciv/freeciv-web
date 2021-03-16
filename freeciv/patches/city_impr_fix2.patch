@@ -1,19 +1,22 @@
-diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-05-16 21:02:54.000000000 +0300
-+++ freeciv/server/citytools.c	2012-05-16 21:05:39.000000000 +0300
-@@ -1801,5 +1801,7 @@
+diff --git a/server/citytools.c b/server/citytools.c
+index 49e4ce7d69..7c4816b524 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2333,6 +2333,8 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+ {
    int i;
    int ppl = 0;
 +  char can_build_impr_buf[MAX_NUM_ITEMS + 1];
 +  char can_build_unit_buf[MAX_NUM_ITEMS + 1];
  
-   packet->id=pcity->id;
+   packet->id = pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -1898,6 +1900,23 @@
-   packet->steal = pcity->steal;
+@@ -2496,6 +2498,22 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+     }
+   }
  
 +  improvement_iterate(pimprove) {
-+    can_build_impr_buf[improvement_index(pimprove)] = 
++    can_build_impr_buf[improvement_index(pimprove)] =
 +	    can_city_build_improvement_now(pcity, pimprove)
 +      ? '1' : '0';
 +  } improvement_iterate_end;
@@ -21,15 +24,13 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 +  sz_strlcpy(packet->can_build_improvement, can_build_impr_buf);
 +
 +  unit_type_iterate(punittype) {
-+    can_build_unit_buf[utype_index(punittype)] = 
++    can_build_unit_buf[utype_index(punittype)] =
 +	    can_city_build_unit_now(pcity, punittype)
 +      ? '1' : '0';
 +  } unit_type_iterate_end;
 +  can_build_unit_buf[utype_count()] = '\0';
 +  sz_strlcpy(packet->can_build_unit, can_build_unit_buf);
 +
-+
    BV_CLR_ALL(packet->improvements);
    improvement_iterate(pimprove) {
      if (city_has_building(pcity, pimprove)) {
-       BV_SET(packet->improvements, improvement_index(pimprove));

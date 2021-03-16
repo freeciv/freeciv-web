@@ -1,0 +1,83 @@
+From f626d12dc3159fcdb76aa005a963907ef8716594 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 16 Nov 2019 07:09:26 +0200
+Subject: [PATCH 3/3] Switch from python to python3
+
+See hrm Feature #842994
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ autogen.sh                   | 2 +-
+ common/generate_packets.py   | 2 +-
+ meson.build                  | 8 ++++----
+ utility/generate_specenum.py | 2 +-
+ 4 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/autogen.sh b/autogen.sh
+index 11b78c4426..1e73c7f2c1 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -249,7 +249,7 @@ ACLOCAL=$REALPKGNAME
+ real_package_name "libtoolize" "ftp://ftp.gnu.org/pub/gnu/libtool/" 2 2 ||
+ real_package_name "glibtoolize" "ftp://ftp.gnu.org/pub/gnu/libtool/" 2 2 "" "0" || DIE=1
+ LIBTOOLIZE=$REALPKGNAME
+-real_package_name "python" "https://www.python.org/" || DIE=1
++real_package_name "python3" "https://www.python.org/" || DIE=1
+ 
+ if [ "$FC_USE_NLS" = "yes" ]; then
+   DIE2=0
+diff --git a/common/generate_packets.py b/common/generate_packets.py
+index 8502d333a6..8a86ab8aad 100755
+--- a/common/generate_packets.py
++++ b/common/generate_packets.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ #
+ # Freeciv - Copyright (C) 2003 - Raimar Falke
+diff --git a/meson.build b/meson.build
+index 2d218548b9..a2643ecf45 100644
+--- a/meson.build
++++ b/meson.build
+@@ -170,23 +170,23 @@ verhdr = custom_target('verhdr', output: 'version_gen.h',
+               depend_files: files('fc_version'))
+ 
+ specenum = custom_target('specenum_gen.h', output: 'specenum_gen.h',
+-                         command: ['python', files('utility/generate_specenum.py'),
++                         command: ['python3', files('utility/generate_specenum.py'),
+                                    '@OUTPUT@'])
+ 
+ pack_common = custom_target('packets_common', output: ['packets_gen.h',
+                                                        'packets_gen.c'],
+-                            command: ['python', files('common/generate_packets.py'),
++                            command: ['python3', files('common/generate_packets.py'),
+                                       '@OUTPUT0@', '@OUTPUT1@', '', '', '', ''],
+                             depend_files: files('common/networking/packets.def'))
+ 
+ pack_server = custom_target('packets_server', output: ['hand_gen.h', 'hand_gen.c'],
+-                            command: ['python', files('common/generate_packets.py'),
++                            command: ['python3', files('common/generate_packets.py'),
+                                       '', '', '', '', '@OUTPUT0@', '@OUTPUT1@'],
+                             depend_files: files('common/networking/packets.def'))
+ 
+ pack_client = custom_target('packets_client', output: ['packhand_gen.h',
+                                                        'packhand_gen.c'],
+-                            command: ['python', files('common/generate_packets.py'),
++                            command: ['python3', files('common/generate_packets.py'),
+                                       '', '', '@OUTPUT0@', '@OUTPUT1@', '', ''],
+                             depend_files: files('common/networking/packets.def'))
+ 
+diff --git a/utility/generate_specenum.py b/utility/generate_specenum.py
+index c410196b62..b524f38f1d 100755
+--- a/utility/generate_specenum.py
++++ b/utility/generate_specenum.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ #
+ # Freeciv - Copyright (C) 2009
+-- 
+2.24.0
+

@@ -7,7 +7,9 @@
 # max_map_size is hrm Feature #847376
 #     It was comitted as f2173409a8e09fea9fecfb79ddf7dcf64fdab425
 # F3 is hrm Feature #868944
-#     It was comitted as b1c1846a346a873f3690aa171123b493629a6c02
+#     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
+# 0003-Switch-from-python-to-python3.patch is hrm Feature #842994
+#     It was committed as b6e01c4068e364d9f375971d8f4de9a6d7776f47
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -61,6 +63,7 @@ declare -a PATCHLIST=(
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
   "0001-Fix-segfault-at-loading-older-format-savegame"
+  "0003-Switch-from-python-to-python3"
 )
 
 apply_patch() {

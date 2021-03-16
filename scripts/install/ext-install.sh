@@ -49,6 +49,8 @@ ext_install_tomcat9 () {
   sudo chmod -R g+r /var/lib/tomcat9/conf
   sudo chmod g+x /var/lib/tomcat9/conf
   sudo chown -R tomcat /var/lib/tomcat9/{webapps,work,temp,logs}
+  sudo chown tomcat /var/lib/tomcat9/bin/catalina.sh
+  sudo chmod u+s /var/lib/tomcat9/bin/catalina.sh
   sudo setfacl -m d:g:tomcat:rwX /var/lib/tomcat9/webapps
 
   echo "export CATALINA_HOME=\"/var/lib/tomcat9\"" >> ~/.bashrc
@@ -65,4 +67,3 @@ ext_install_casperjs () {
   sudo ln -sf "${basedir}/tests/casperjs-${version}/bin/casperjs" /usr/local/bin/casperjs
   ext_installed[${#ext_installed[@]}]="casperjs"
 }
-

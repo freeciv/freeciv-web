@@ -31,7 +31,8 @@ echo "Starting up Tomcat" && \
 if service --status-all | grep -Fq 'tomcat9'; then
    sudo /usr/sbin/service tomcat9 start || echo "unable to start tomcat9 service"
 else
-   sudo -u tomcat $CATALINA_HOME/bin/catalina.sh start
+   # It's a suid script, so will run as tomcat user
+   sudo $CATALINA_HOME/bin/catalina.sh start
 fi
 
 # waiting for Tomcat to start, since it will take some time.

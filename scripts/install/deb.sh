@@ -70,7 +70,7 @@ if ! apt-cache -qq show openjdk-11-jdk-headless > /dev/null; then
   sudo ${APT_GET} update
 fi
 
-if apt-get --simulate install tomcat9 &> /dev/null; then
+if [ "$DEB_NO_TOMCAT" != "Y" ] && apt-get --simulate install tomcat9 &> /dev/null; then
   dependencies="${dependencies} tomcat9 tomcat9-admin"
   INSTALLED_TOMCAT=Y
 else

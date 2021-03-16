@@ -6,4 +6,4 @@ Ubuntu	trusty	deb.sh
 Ubuntu	artful	deb.sh
 Ubuntu	focal	deb.sh
 Debian	stretch	deb.sh
-
+Debian	buster	deb_no_tomcat.sh

@@ -34,7 +34,7 @@ dependencies="\
   libtool \
   make \
   maven \
-  mysql-server \
+  default-mysql-server \
   nginx \
   openjdk-8-jdk-headless \
   patch \

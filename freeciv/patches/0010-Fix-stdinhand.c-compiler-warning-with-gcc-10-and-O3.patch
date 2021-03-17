@@ -1,0 +1,36 @@
+From 12e5759ea157729422cda79c501a4297ccea939e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 5 Sep 2020 14:41:02 +0300
+Subject: [PATCH 10/10] Fix stdinhand.c compiler warning with gcc-10 and -O3
+
+See hrm Bug #886331
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/stdinhand.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index 59f0b8897f..1f325ea424 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
+@@ -1421,8 +1421,14 @@ static bool cmdlevel_command(struct connection *caller, char *str, bool check)
+               _("Command access levels in effect:"));
+     cmd_reply(CMD_CMDLEVEL, caller, C_COMMENT, horiz_line);
+     conn_list_iterate(game.est_connections, pconn) {
+-      cmd_reply(CMD_CMDLEVEL, caller, C_COMMENT, "cmdlevel %s %s",
+-                cmdlevel_name(conn_get_access(pconn)), pconn->username);
++      const char *lvl_name = cmdlevel_name(conn_get_access(pconn));
++
++      if (lvl_name != NULL) {
++        cmd_reply(CMD_CMDLEVEL, caller, C_COMMENT, "cmdlevel %s %s",
++                  lvl_name, pconn->username);
++      } else {
++        fc_assert(lvl_name != NULL); /* Always fails when reached. */
++      }
+     } conn_list_iterate_end;
+     cmd_reply(CMD_CMDLEVEL, caller, C_COMMENT,
+               _("Command access level for new connections: %s"),
+-- 
+2.28.0
+

@@ -86,10 +86,6 @@ else
   INSTALLED_NODEJS=N
 fi
 
-if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-  dependencies="${dependencies} xauth xvfb phantomjs"
-fi
-
 echo "==== Installing Dependencies ===="
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
@@ -118,7 +114,4 @@ fi
 # Populate ~/.config with current user
 npm help > /dev/null
 
-if [ "${FCW_INSTALL_MODE}" = TEST ]; then
-  ext_install_casperjs
-fi
 

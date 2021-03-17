@@ -57,13 +57,4 @@ ext_install_tomcat9 () {
   ext_installed[${#ext_installed[@]}]="tomcat9"
 }
 
-ext_install_casperjs () {
-  version=1.1.4-2
-  echo "==== Installing CasperJS ${version} for testing ===="
-  cd "${basedir}/tests"
-  curl -LOsS "https://github.com/casperjs/casperjs/archive/${version}.zip"
-  unzip -qo "${version}".zip
-  rm "${version}".zip
-  sudo ln -sf "${basedir}/tests/casperjs-${version}/bin/casperjs" /usr/local/bin/casperjs
-  ext_installed[${#ext_installed[@]}]="casperjs"
-}
+

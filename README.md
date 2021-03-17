@@ -194,7 +194,6 @@ Freeciv-Web continuous integration on GitHub actions
 ----------------------------------------------------
 Freeciv-Web is built on GitHub actions on every commit. This is the current build status: [![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
 
-Freeciv-web has CasperJS tests which are run by GitHub actions on every commit, and by Vagrant when creating a new image. The tests can be found in tests/freeciv-web-tests.js. Please make sure that patches and commits for Freeciv-web don't break the CasperJS tests. Thanks!
 
 Developers interested in Freeciv-web
 ------------------------------------

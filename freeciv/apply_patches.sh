@@ -10,6 +10,28 @@
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
 # 0003-Switch-from-python-to-python3.patch is hrm Feature #842994
 #     It was committed as b6e01c4068e364d9f375971d8f4de9a6d7776f47
+# 0015-savegame3.c-Remove-aifill-players-after-rulesets-loa is hrm Bug #850666
+#     It was committed as 715025fb957d3a0f2c33dfece45e6d6f783f795b
+# 0001-Terminate-format-escapes-list.patch is hrm Bug #851727
+#     It was committed as 17938c639f239381c0d1fcfcce356b49f5e86100
+# 0001-Refactor-code-to-avoid-gcc-10-warning.patch is hrm Bug #851728
+#     It was committed as f2da7a48499b1f5bd7bcccd8fdb33814521da1f2
+# 0023-Fix-sell_random_unit-crash-with-recursive-transports.patch is hrm Bug #852938
+#     It was committed as cb2be38ff30d899e9eced77c8e918d9f879c1e59
+# 0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans.patch is hrm Bug #858214
+#     It was committed as f32a2bae0e88f665021b579af12c346b20e86c6d
+# 0001-Fix-clang-9-warnings.patch is hrm Bug #859248
+#     It was committed as 5fc3a22b3a1681d80c68b9ec0b8f0cf0b78ca239
+# 0001-Fix-division-by-zero-when-transforming-unit-with-zer.patch is hrm Bug #868905
+#     It was committed as d9c010701fda075d083aea600adade73cef45020
+# 0006-debug.m4-Set-always-active-compiler-flags-last-not-f.patch is hrm Bug #868533
+#     It was committed as 72b2b9839aeaff5178470fc9e77926cfeba2dede
+# 0024-mapimg_colortest-Fix-compiler-warning-with-O3.patch is hrm Bug #870481
+#     It was committed as 53d2ac716d188ba068f51b800ebf52f13512b9a7
+# 0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd.patch is hrm Bug #846106
+#     It was committed as 7a57cea0673432472946956d9f8c635e9f165da2
+# 0025-Do-end_phase-research-updates-for-alive-players-only.patch is hrm Bug #873692
+#     It was committed as 833d1fb14c3a5014bc4eeccfe652f5d9dddf3119
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -33,7 +55,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "freeciv_web_packets_def_changes"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"
@@ -64,6 +85,17 @@ declare -a PATCHLIST=(
   "endgame-mapimg"
   "0001-Fix-segfault-at-loading-older-format-savegame"
   "0003-Switch-from-python-to-python3"
+  "0015-savegame3.c-Remove-aifill-players-after-rulesets-loa"
+  "0001-Terminate-format-escapes-list"
+  "0001-Refactor-code-to-avoid-gcc-10-warning"
+  "0023-Fix-sell_random_unit-crash-with-recursive-transports"
+  "0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans"
+  "0001-Fix-clang-9-warnings"
+  "0001-Fix-division-by-zero-when-transforming-unit-with-zer"
+  "0006-debug.m4-Set-always-active-compiler-flags-last-not-f"
+  "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
+  "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"
+  "0025-Do-end_phase-research-updates-for-alive-players-only"
 )
 
 apply_patch() {

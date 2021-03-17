@@ -1,0 +1,46 @@
+From 543ebeb5efc9bbcb011ed91eee65e4eb213d688d Mon Sep 17 00:00:00 2001
+From: Zeko <zeko@freeciv.xyz>
+Date: Tue, 5 May 2020 13:17:06 -0700
+Subject: [PATCH] Set player tile owner whenever tile knowledge is updated
+
+See hrm #846106
+---
+ server/maphand.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/server/maphand.c b/server/maphand.c
+index 004b8db72b..b5bc7a304f 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -1329,16 +1329,11 @@ struct player_tile *map_get_player_tile(const struct tile *ptile,
+ bool update_player_tile_knowledge(struct player *pplayer, struct tile *ptile)
+ {
+   struct player_tile *plrtile = map_get_player_tile(ptile, pplayer);
+-  bool plrtile_owner_valid = game.server.foggedborders
+-                             && !map_is_known_and_seen(ptile, pplayer, V_MAIN);
+-  struct player *owner = plrtile_owner_valid
+-                         ? plrtile->owner
+-                         : tile_owner(ptile);
+ 
+   if (plrtile->terrain != ptile->terrain
+       || !BV_ARE_EQUAL(plrtile->extras, ptile->extras)
+       || plrtile->resource != ptile->resource
+-      || owner != tile_owner(ptile)
++      || plrtile->owner != tile_owner(ptile)
+       || plrtile->extras_owner != extra_owner(ptile)) {
+     plrtile->terrain = ptile->terrain;
+     extra_type_iterate(pextra) {
+@@ -1349,9 +1344,7 @@ bool update_player_tile_knowledge(struct player *pplayer, struct tile *ptile)
+       }
+     } extra_type_iterate_end;
+     plrtile->resource = ptile->resource;
+-    if (plrtile_owner_valid) {
+-      plrtile->owner = tile_owner(ptile);
+-    }
++    plrtile->owner = tile_owner(ptile);
+     plrtile->extras_owner = extra_owner(ptile);
+ 
+     return TRUE;
+-- 
+2.26.2.526.g744177e7f7-goog
+

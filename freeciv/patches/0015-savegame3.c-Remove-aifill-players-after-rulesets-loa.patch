@@ -1,0 +1,46 @@
+From 04e4e5d50841412fceda1bb56153868e1adf636f Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 4 Dec 2019 00:22:39 +0200
+Subject: [PATCH 15/15] savegame3.c: Remove aifill players after rulesets
+ loaded
+
+Remove aifill players created ruleset loading time so that
+later correct number (maxplayers limitations) of them can be
+created with the correct skill level.
+
+See hrm Bug #850666
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savegame3.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index a0edf192ab..ab94b67036 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -1311,6 +1311,10 @@ static void sg_load_savefile(struct loaddata *loading)
+     }
+   }
+ 
++  /* Remove all aifill players. Correct number of them get created later
++   * with correct skill level etc. */
++  (void) aifill(0);
++
+   if (game.scenario.is_scenario && !game.scenario.ruleset_locked) {
+     const char *req_caps;
+ 
+@@ -2408,10 +2412,6 @@ static void sg_load_scenario(struct loaddata *loading)
+                  "players are %s).",
+                  server_states_name(loading->server_state),
+                  game.scenario.players ? "saved" : "not saved");
+-
+-  /* Remove all defined players. They are recreated with the skill level
+-   * defined by the scenario. */
+-  (void) aifill(0);
+ }
+ 
+ /************************************************************************//**
+-- 
+2.24.0
+

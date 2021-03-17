@@ -1,0 +1,54 @@
+From 36397f20c22d57b280430e44450662762f30243a Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 24 Apr 2020 03:58:33 +0300
+Subject: [PATCH 24/24] mapimg_colortest(): Fix compiler warning with -O3
+
+See hrm Bug #870481
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/mapimg.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/common/mapimg.c b/common/mapimg.c
+index 7e2bc6108d..d192d5bbd4 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -1164,6 +1164,7 @@ const struct strvec *mapimg_get_format_list(void)
+            format = imageformat_next(format)) {
+         if (toolkit->formats & format) {
+           char str_format[64];
++
+           fc_snprintf(str_format, sizeof(str_format), "%s|%s",
+                       imagetool_name(tool), imageformat_name(format));
+           strvec_append(format_list, str_format);
+@@ -1422,7 +1423,7 @@ bool mapimg_create(struct mapdef *pmapdef, bool force, const char *savename,
+ /************************************************************************//**
+   Create images which shows all map colors (playercolor, terrain colors). One
+   image is created for each supported toolkit and image format. The filename
+-  will be <basename as used for savegames>-colortest-<tookit>.<format>.
++  will be <basename as used for savegames>-colortest-<toolkit>.<format>.
+ ****************************************************************************/
+ bool mapimg_colortest(const char *savename, const char *path)
+ {
+@@ -1504,11 +1505,16 @@ bool mapimg_colortest(const char *savename, const char *path)
+          format = imageformat_next(format)) {
+       if (toolkit->formats & format) {
+         char buf[128];
++        const char *tname = imagetool_name(tool);
+ 
+         /* Set the image format. */
+         pmapdef->format = format;
+ 
+-        fc_snprintf(buf, sizeof(buf), "colortest-%s", imagetool_name(tool));
++        if (tname != NULL) {
++          fc_snprintf(buf, sizeof(buf), "colortest-%s", tname);
++        } else {
++          fc_snprintf(buf, sizeof(buf), "colortest");
++        }
+         /* filename for color test */
+         generate_save_name(savename, mapimgfile, sizeof(mapimgfile), buf);
+ 
+-- 
+2.26.1
+

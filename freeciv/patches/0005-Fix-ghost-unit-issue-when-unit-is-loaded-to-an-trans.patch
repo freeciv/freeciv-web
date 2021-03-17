@@ -1,0 +1,50 @@
+From b834f87a75909c23c3dc8804697b5e210386333e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 3 Feb 2020 00:27:59 +0200
+Subject: [PATCH 5/5] Fix ghost unit issue when unit is loaded to an transport
+ on the same tile
+
+Reported by Chippo Elder
+
+See hrm Bug #858214
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unittools.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/server/unittools.c b/server/unittools.c
+index 481231308a..9eb377825b 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -2913,11 +2913,27 @@ static bool unit_enter_hut(struct unit *punit)
+ ****************************************************************************/
+ void unit_transport_load_send(struct unit *punit, struct unit *ptrans)
+ {
++  bv_player can_see_unit;
++
+   fc_assert_ret(punit != NULL);
+   fc_assert_ret(ptrans != NULL);
+ 
++  BV_CLR_ALL(can_see_unit);
++  players_iterate(pplayer) {
++    if (can_player_see_unit(pplayer, punit)) {
++      BV_SET(can_see_unit, player_index(pplayer));
++    }
++  } players_iterate_end;
++
+   unit_transport_load(punit, ptrans, FALSE);
+ 
++  players_iterate(pplayer) {
++    if (BV_ISSET(can_see_unit, player_index(pplayer))
++        && !can_player_see_unit(pplayer, punit)) {
++      unit_goes_out_of_sight(pplayer, punit);
++    }
++  } players_iterate_end;
++
+   send_unit_info(NULL, punit);
+   send_unit_info(NULL, ptrans);
+ }
+-- 
+2.24.1
+

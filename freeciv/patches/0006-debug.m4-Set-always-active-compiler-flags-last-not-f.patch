@@ -1,0 +1,58 @@
+From acdd70f63b1444b0ce6a308f122836579176c976 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 22 Apr 2020 06:00:21 +0300
+Subject: [PATCH 6/6] debug.m4: Set always-active compiler flags last, not
+ first
+
+This way they override other flags that might affect same things.
+Especially this makes specific -Wno-xxx flags to override -Wall, and not
+the other way around.
+
+This fixes compile with clang-10
+
+See hrm Bug #868533
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ m4/debug.m4 | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/m4/debug.m4 b/m4/debug.m4
+index 1831274232..47475d4a04 100644
+--- a/m4/debug.m4
++++ b/m4/debug.m4
+@@ -11,15 +11,6 @@ esac], [enable_debug=some])
+ 
+ dnl -g is added by AC_PROG_CC if the compiler understands it
+ 
+-dnl ==========================================================================
+-dnl Always
+-FC_C_FLAGS([-Wno-tautological-compare -Wno-nonnull-compare],
+-           [], [EXTRA_DEBUG_CFLAGS])
+-if test "x$cxx_works" = "xyes" ; then
+-  FC_CXX_FLAGS([-Wno-tautological-compare -Wno-nonnull-compare],
+-               [], [EXTRA_DEBUG_CXXFLAGS])
+-fi
+-
+ dnl ==========================================================================
+ dnl debug level == no
+ if test "x$enable_debug" = "xno"; then
+@@ -79,4 +70,15 @@ if test "x$enable_debug" = "xchecks"; then
+   FC_C_FLAGS([-Wstrict-prototypes], [], [EXTRA_DEBUG_CFLAGS])
+ fi
+ 
++dnl ==========================================================================
++dnl Always
++dnl This must be last so that the specific flags here override likes of
++dnl -Wall set earlier, and not the other way around.
++FC_C_FLAGS([-Wno-tautological-compare -Wno-nonnull-compare],
++           [], [EXTRA_DEBUG_CFLAGS])
++if test "x$cxx_works" = "xyes" ; then
++  FC_CXX_FLAGS([-Wno-tautological-compare -Wno-nonnull-compare],
++               [], [EXTRA_DEBUG_CXXFLAGS])
++fi
++
+ ])
+-- 
+2.26.1
+

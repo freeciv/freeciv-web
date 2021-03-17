@@ -1393,7 +1393,7 @@ function order_wants_direction(order, act_id, ptile) {
 }
 
 /**************************************************************************
- Handles everything when the user clicked a tile
+  Handles everything when the user clicked a tile
 **************************************************************************/
 function do_map_click(ptile, qtype, first_time_called)
 {
@@ -1445,31 +1445,37 @@ function do_map_click(ptile, qtype, first_time_called)
           "dest_tile": ptile['index']
         };
 
+        var order = {
+          "order"      : ORDER_LAST,
+          "activity"   : ACTIVITY_LAST,
+          "sub_target" : 0,
+          "action"     : ACTION_COUNT,
+          "dir"        : -1
+        };
+
         /* Add each individual order. */
         packet['orders'] = [];
-        packet['dir'] = [];
-        packet['activity'] = [];
-        packet['sub_target'] = [];
-        packet['action'] = [];
         for (var i = 0; i < goto_path['length']; i++) {
           /* TODO: Have the server send the full orders in stead of just the
            * dir part. Use that data in stead. */
 
           if (goto_path['dir'][i] == -1) {
             /* Assume that this means refuel. */
-            packet['orders'][i] = ORDER_FULL_MP;
+            order['order'] = ORDER_FULL_MP;
           } else if (i + 1 != goto_path['length']) {
             /* Don't try to do an action in the middle of the path. */
-            packet['orders'][i] = ORDER_MOVE;
+            order['order'] = ORDER_MOVE;
           } else {
             /* It is OK to end the path in an action. */
-            packet['orders'][i] = ORDER_ACTION_MOVE;
+            order['order'] = ORDER_ACTION_MOVE;
           }
 
-          packet['dir'][i] = goto_path['dir'][i];
-          packet['activity'][i] = ACTIVITY_LAST;
-          packet['sub_target'][i] = 0;
-          packet['action'][i] = ACTION_COUNT;
+          order['dir'] = goto_path['dir'][i];
+          order['activity'] = ACTIVITY_LAST;
+          order['sub_target'] = 0;
+          order['action'] = ACTION_COUNT;
+
+          packet['orders'][i] = Object.assign({}, order);
         }
 
         if (goto_last_order != ORDER_LAST) {
@@ -1486,22 +1492,25 @@ function do_map_click(ptile, qtype, first_time_called)
             /* Increase orders length */
             packet['length'] = packet['length'] + 1;
 
-            /* Initialize the order to "empthy" values. */
-            packet['orders'][pos] = ORDER_LAST;
-            packet['dir'][pos] = -1;
-            packet['activity'][pos] = ACTIVITY_LAST;
-            packet['sub_target'][pos] = 0;
-            packet['action'][pos] = ACTION_COUNT;
+            /* Initialize the order to "empty" values. */
+            order['order'] = ORDER_LAST;
+            order['dir'] = -1;
+            order['activity'] = ACTIVITY_LAST;
+            order['sub_target'] = 0;
+            order['action'] = ACTION_COUNT;
+
           } else {
             /* Replace the existing last order with the final order */
             pos = packet['length'] - 1;
           }
 
           /* Set the final order. */
-          packet['orders'][pos] = goto_last_order;
+          order['order'] = goto_last_order;
 
           /* Perform the final action. */
-          packet['action'][pos] = goto_last_action;
+          order['action'] = goto_last_action;
+
+          packet['orders'][pos] = Object.assign({}, order);
         }
 
         /* The last order has now been used. Clear it. */
@@ -2792,6 +2801,14 @@ function key_unit_move(dir)
     }
 
     /* Send the order to move using the orders system. */
+    var order = {
+      "order"      : ORDER_ACTION_MOVE,
+      "dir"        : dir,
+      "activity"   : ACTIVITY_LAST,
+      "sub_target" : 0,
+      "action"     : ACTION_COUNT
+    };
+
     var packet = {
       "pid"      : packet_unit_orders,
       "unit_id"  : punit['id'],
@@ -2799,11 +2816,7 @@ function key_unit_move(dir)
       "length"   : 1,
       "repeat"   : false,
       "vigilant" : false,
-      "orders"   : [ORDER_ACTION_MOVE],
-      "dir"      : [dir],
-      "activity" : [ACTIVITY_LAST],
-      "sub_target": [0],
-      "action"   : [ACTION_COUNT],
+      "orders"   : [order],
       "dest_tile": newtile['index']
     };
 

@@ -1,8 +1,7 @@
-diff --git a/server/maphand.c b/server/maphand.c
-index 372325b..96dcaa9 100644
---- a/server/maphand.c
-+++ b/server/maphand.c
-@@ -446,7 +446,7 @@ void send_all_known_tiles(struct conn_list *dest)
+diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2021-03-17 21:56:31.888810886 +0200
++++ freeciv/server/maphand.c	2021-03-17 21:59:28.318532671 +0200
+@@ -446,7 +446,7 @@
        conn_list_do_buffer(dest);
      }
  
@@ -11,7 +10,7 @@ index 372325b..96dcaa9 100644
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -577,10 +577,12 @@ void send_tile_info(struct conn_list *dest, struct tile *ptile,
+@@ -582,11 +582,13 @@
        info.extras_owner = MAP_TILE_OWNER_NULL;
        info.worked = IDENTITY_NUMBER_ZERO;
  
@@ -20,9 +19,10 @@ index 372325b..96dcaa9 100644
 +                      ? terrain_number(tile_terrain(ptile))
 +                      : terrain_count();
        info.resource = MAX_EXTRA_TYPES;
+       info.placing = -1;
  
 -      BV_CLR_ALL(info.extras);
-+      info.extras = ptile->extras; //WebGL client needs to know which tiles are rivers on game start.
++      info.extras = ptile->extras; // WebGL client needs to know which tiles are rivers on game start.
  
        info.label[0] = '\0';
  

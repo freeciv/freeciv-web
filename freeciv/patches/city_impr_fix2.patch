@@ -1,8 +1,21 @@
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 257adc5165..bc457efe10 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -741,6 +741,8 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+ 
+   WORKLIST worklist;
+ 
++  STRING can_build_unit[MAX_LEN_MSG];
++  STRING can_build_improvement[MAX_LEN_MSG];
+   BV_IMPRS improvements;
+   BV_CITY_OPTIONS city_options;
+   ESTRING name[MAX_LEN_CITYNAME];
 diff --git a/server/citytools.c b/server/citytools.c
-index 49e4ce7d69..7c4816b524 100644
+index 88ea703517..0768b189a9 100644
 --- a/server/citytools.c
 +++ b/server/citytools.c
-@@ -2333,6 +2333,8 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+@@ -2365,6 +2365,8 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
  {
    int i;
    int ppl = 0;
@@ -11,8 +24,8 @@ index 49e4ce7d69..7c4816b524 100644
  
    packet->id = pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -2496,6 +2498,22 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
-     }
+@@ -2530,6 +2532,22 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+     memset(&packet->cm_parameter, 0, sizeof(packet->cm_parameter));
    }
  
 +  improvement_iterate(pimprove) {

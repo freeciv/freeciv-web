@@ -1,7 +1,22 @@
-diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2012-07-16 00:05:33.000000000 +0300
-+++ freeciv/server/citytools.c	2012-07-16 01:09:07.000000000 +0300
-@@ -1887,5 +1887,10 @@
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2021-03-17 04:09:07.261865708 +0200
++++ freeciv/common/networking/packets.def	2021-03-17 04:13:19.408310994 +0200
+@@ -732,6 +732,10 @@
+   STRING can_build_unit[MAX_LEN_MSG];
+   STRING can_build_improvement[MAX_LEN_MSG];
+   BV_IMPRS improvements;
++
++  STRING food_output[MAX_LEN_MSG];
++  STRING shield_output[MAX_LEN_MSG];
++  STRING trade_output[MAX_LEN_MSG];
+   BV_CITY_OPTIONS city_options;
+   ESTRING name[MAX_LEN_CITYNAME];
+ 
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2021-03-17 04:09:07.565868670 +0200
++++ freeciv/server/citytools.c	2021-03-17 04:12:14.659684890 +0200
+@@ -2335,6 +2335,11 @@
+   int ppl = 0;
    char can_build_impr_buf[MAX_NUM_ITEMS + 1];
    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
 +  char food_output_buf[MAX_NUM_ITEMS + 1];
@@ -10,11 +25,11 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 +  struct tile *pcenter = city_tile(pcity);
 +  int c = 0;
  
-   packet->id=pcity->id;
+   packet->id = pcity->id;
    packet->owner = player_number(city_owner(pcity));
-@@ -2007,6 +2013,28 @@
+@@ -2527,6 +2532,28 @@
+   web_packet->granary_size = city_granary_size(city_size_get(pcity));
    web_packet->granary_turns = city_turns_to_grow(pcity);
-   web_packet->buy_gold_cost = city_production_buy_gold_cost(pcity);
  #endif /* FREECIV_WEB */
 +
 +  city_tile_iterate(city_map_radius_sq_get(pcity), pcenter, ptile) {
@@ -40,4 +55,4 @@ diff -Nurd -X.diff_ignore freeciv/server/citytools.c freeciv/server/citytools.c
 +  sz_strlcpy(packet->trade_output, trade_output_buf);
  }
  
- /**************************************************************************
+ /************************************************************************//**

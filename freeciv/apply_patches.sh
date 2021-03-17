@@ -55,7 +55,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "freeciv_web_packets_def_changes"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

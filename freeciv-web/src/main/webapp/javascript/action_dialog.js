@@ -357,6 +357,14 @@ function popup_action_selection(actor_unit, action_probabilities,
         click   : function() {
           var dir = get_direction_for_step(tiles[actor_unit['tile']],
                                            target_tile);
+          var order = {
+            "order"      : ORDER_MOVE,
+            "dir"        : dir,
+            "activity"   : ACTIVITY_LAST,
+            "sub_target" : 0,
+            "action"     : ACTION_COUNT
+          };
+
           var packet = {
             "pid"       : packet_unit_orders,
             "unit_id"   : actor_unit['id'],
@@ -364,17 +372,13 @@ function popup_action_selection(actor_unit, action_probabilities,
             "length"    : 1,
             "repeat"    : false,
             "vigilant"  : false,
-            "orders"    : [ORDER_MOVE],
-            "dir"       : [dir],
-            "activity"  : [ACTIVITY_LAST],
-            "sub_target": [0],
-            "action"    : [ACTION_COUNT],
+            "orders"    : [order],
             "dest_tile" : target_tile['index']
           };
 
           if (dir == -1) {
             /* Non adjacent target tile? */
-            console.log("Action slection move: bad target tile");
+            console.log("Action selection move: bad target tile");
           } else {
             send_request(JSON.stringify(packet));
           }

@@ -21,6 +21,3 @@ jobs:
       - name: install
         shell: bash
         run: ./scripts/install/install.sh --mode=TEST
-      - name: run tests
-        shell: bash
-        run: ./scripts/ci-run.sh

@@ -41,13 +41,13 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.10</version>
+			<version>1.15</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
-			<version>1.1</version>
+			<version>1.9</version>
 		</dependency>
 
 		<dependency>
@@ -60,31 +60,31 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
+			<version>2.8.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.16</version>
+			<version>8.0.23</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.1</version>
+			<version>4.5.13</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>3.2.1</version>
+			<version>6.5.7</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20170516</version>
+			<version>20201115</version>
 		</dependency>
 
 		<dependency>
@@ -111,12 +111,17 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
-			<version>1.20.0</version>
+			<version>1.31.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
 			<artifactId>google-oauth-client</artifactId>
-			<version>1.22.0</version>
+			<version>1.31.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client-jackson2</artifactId>
+			<version>1.31.2</version>
 		</dependency>
 	</dependencies>
 
@@ -127,7 +132,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>3.0.0-M2</version>
+					<version>3.0.0-M3</version>
 					<executions>
 						<execution>
 							<id>enforce-files-exist</id>
@@ -162,7 +167,7 @@ Rerun the sync-js-hand.js script.
 
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5.1</version>
+					<version>3.8.1</version>
 					<configuration>
 						<source>1.7</source>
 						<target>1.7</target>
@@ -172,7 +177,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.4</version>
+					<version>3.3.1</version>
 					<configuration>
 						<recompressZippedFiles>false</recompressZippedFiles>
 						<webResources>
@@ -214,7 +219,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
+					<version>3.2.0</version>
 					<executions>
 						<execution>
 							<id>copy-generated-webapp-resources</id>
@@ -243,7 +248,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.8</version>
+					<version>3.0.0</version>
 					<executions>
 						<execution>
 							<!-- workaround for https://github.com/samaxes/minify-maven-plugin/issues/142 -->
@@ -278,7 +283,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.6.0</version>
+					<version>3.0.0</version>
 					<executions>
 						<execution>
 							<id>Precompile Handlebars templates</id>

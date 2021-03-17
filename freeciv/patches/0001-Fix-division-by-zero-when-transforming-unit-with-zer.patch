@@ -1,0 +1,41 @@
+From 269d9cb4a356cb2f826669bd0c421a8fa5fc3e20 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 12 Apr 2020 17:15:01 +0300
+Subject: [PATCH] Fix division by zero when transforming unit with zero
+ move_rate
+
+Reported by soundnfury
+
+See hrm Bug #868905
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unittools.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/server/unittools.c b/server/unittools.c
+index c84f973239..5cea599cec 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -1538,11 +1538,15 @@ void transform_unit(struct unit *punit, struct unit_type *to_unit,
+                          - game.server.upgrade_veteran_loss, 0);
+   }
+ 
+-  /* Scale HP and MP, rounding down.  Be careful with integer arithmetic,
+-   * and don't kill the unit.  unit_move_rate is used to take into account
++  /* Scale HP and MP, rounding down. Be careful with integer arithmetic,
++   * and don't kill the unit. unit_move_rate() is used to take into account
+    * global effects like Magellan's Expedition. */
+   punit->hp = MAX(punit->hp * unit_type_get(punit)->hp / old_hp, 1);
+-  punit->moves_left = punit->moves_left * unit_move_rate(punit) / old_mr;
++  if (old_mr == 0) {
++    punit->moves_left = unit_move_rate(punit);
++  } else {
++    punit->moves_left = punit->moves_left * unit_move_rate(punit) / old_mr;
++  }
+ 
+   unit_forget_last_activity(punit);
+ 
+-- 
+2.25.1
+

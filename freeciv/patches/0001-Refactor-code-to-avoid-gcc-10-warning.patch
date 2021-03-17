@@ -1,0 +1,79 @@
+From 1f2594e7f9d4e13e569f398467bf04e7d328de7a Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 12 Dec 2019 01:35:58 +0200
+Subject: [PATCH] Refactor code to avoid gcc-10 warning
+
+See hrm Bug #851728
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/research.c | 34 ++++++++++++++++------------------
+ 1 file changed, 16 insertions(+), 18 deletions(-)
+
+diff --git a/common/research.c b/common/research.c
+index a0f887c1c0..c7e12f5fcb 100644
+--- a/common/research.c
++++ b/common/research.c
+@@ -235,22 +235,21 @@ const char *research_advance_rule_name(const struct research *presearch,
+ {
+   if (A_FUTURE == tech && NULL != presearch) {
+     const int no = presearch->future_tech;
+-    char buffer[256];
+     const char *name;
+ 
+     name = strvec_get(future_rule_name, no);
+-    if (name != NULL) {
+-      /* Already stored in string vector. */
+-      return name;
++    if (name == NULL) {
++      char buffer[256];
++
++      /* NB: 'presearch->future_tech == 0' means "Future Tech. 1". */
++      fc_snprintf(buffer, sizeof(buffer), "%s %d",
++                  rule_name_get(&advance_future_name),
++                  no + 1);
++      name = research_future_set_name(future_rule_name, no, buffer);
+     }
+ 
+-    /* NB: 'presearch->future_tech == 0' means "Future Tech. 1". */
+-    fc_snprintf(buffer, sizeof(buffer), "%s %d",
+-                rule_name_get(&advance_future_name),
+-                no + 1);
+-    name = research_future_set_name(future_rule_name, no, buffer);
+     fc_assert(name != NULL);
+-    fc_assert(name != buffer);
++
+     return name;
+   }
+ 
+@@ -269,20 +268,19 @@ research_advance_name_translation(const struct research *presearch,
+ {
+   if (A_FUTURE == tech && NULL != presearch) {
+     const int no = presearch->future_tech;
+-    char buffer[256];
+     const char *name;
+ 
+     name = strvec_get(future_name_translation, no);
+-    if (name != NULL) {
+-      /* Already stored in string vector. */
+-      return name;
++    if (name == NULL) {
++      char buffer[256];
++
++      /* NB: 'presearch->future_tech == 0' means "Future Tech. 1". */
++      fc_snprintf(buffer, sizeof(buffer), _("Future Tech. %d"), no + 1);
++      name = research_future_set_name(future_name_translation, no, buffer);
+     }
+ 
+-    /* NB: 'presearch->future_tech == 0' means "Future Tech. 1". */
+-    fc_snprintf(buffer, sizeof(buffer), _("Future Tech. %d"), no + 1);
+-    name = research_future_set_name(future_name_translation, no, buffer);
+     fc_assert(name != NULL);
+-    fc_assert(name != buffer);
++
+     return name;
+   }
+ 
+-- 
+2.24.0
+

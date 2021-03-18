@@ -47,8 +47,6 @@ Freeciv-Web consists of these components:
 
 * [pbem](pbem) is play-by-email support. 
 
-* [freeciv-earth](freeciv-earth) is code to generate Freeciv savegames from a map captured from mapbox.
-
 Freeciv WebGL
 -------------
 Freeciv WebGL is the 3D version, which uses the Three.js 3D engine. More info about the WebGL 3D version can be found for [developers](https://github.com/freeciv/freeciv-web/tree/develop/freeciv-web/src/main/webapp/javascript/webgl) and [3D artists](https://github.com/freeciv/freeciv-web/wiki/Contributing-Blender-models-for-Freeciv-WebGL).

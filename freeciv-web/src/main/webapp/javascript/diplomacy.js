@@ -48,7 +48,6 @@ function diplomacy_init_meeting_req(counterpart)
 **************************************************************************/
 function show_diplomacy_dialog(counterpart)
 {
- if (cardboard_vr_enabled) return;
  var pplayer = players[counterpart];
  create_diplomacy_dialog(pplayer, Handlebars.templates['diplomacy_meeting']);
 }

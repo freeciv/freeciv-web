@@ -19,4 +19,4 @@ You can then test it in your instance.
 You may use the WebGL interface live at:
 - [moving borders](https://fcw.movingborders.es)
 
-Developer: Andreas R�sdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)
+Developer: Andreas Rosdal [@andreasrosdal](http://www.github.com/andreasrosdal)

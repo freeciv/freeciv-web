@@ -604,11 +604,7 @@ function pregame_settings()
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "<br>"+
-        "<tr id='cardboard_vr_enabled'><td id='cardboard_vr_label' style='min-width: 150px;'></td>" +
-                "<td><input type='checkbox' id='cardboard_vr_setting'>Enable Virtual reality glasses with Google Cardboard. <i class='fa fa-info-circle' aria-hidden='true' "+
-                "title='You can use Google Cardboard glasses with your mobile phone. Use voice recognition to control the game. You must also manually disable screensavers in your device settings. Put your phone in the VR glasses when the game starts. BETA!'></i><br>"+
-                "<button id='show_voice_commands' type='button' class='voice button' style='padding:0px;'>Voice commands</button></td></tr>" +
-        "</table>" +
+           "</table>" +
       "</div>" +
 
       "<div id='pregame_settings_tabs-3'>" +
@@ -728,15 +724,6 @@ function pregame_settings()
     $("#speech_label").prop("innerHTML", "Speech messages:");
     $("#speech_setting").parent().html("Speech Synthesis API is not supported or enabled in your browser.");
   }
-
-  $("#cardboard_vr_label").prop("innerHTML", "3D Cardboard VR glasses:");
-  $('#cardboard_vr_setting').change(function() {
-    cardboard_vr_enabled = !cardboard_vr_enabled;
-    if (cardboard_vr_enabled) {
-      speech_enabled = true;
-      speech_recogntition_enabled = true;
-    }
-  });
 
   $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
   $('#anaglyph_setting').change(function() {
@@ -972,8 +959,6 @@ function pregame_settings()
   }
 
   $("#show_voice_commands").click(function() {
-   var previous_setting = cardboard_vr_enabled;
-   cardboard_vr_enabled = false;
    show_dialog_message("Voice commands",
      "<b>Voice command - Explanation:</b> <br>" +
      "T, Turn - Turn Done<br>" +
@@ -997,7 +982,6 @@ function pregame_settings()
      "W, West  - West<br>" +
      "North West, North East, South East, South West<br>"
       );
-    cardboard_vr_enabled = previous_setting;
   });
 
 

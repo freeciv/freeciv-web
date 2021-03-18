@@ -316,8 +316,6 @@ function show_dialog_message(title, message) {
   speak(title);
   speak(message);
 
-  if (cardboard_vr_enabled) return;
-
   $("#generic_dialog").html(message);
   $("#generic_dialog").attr("title", title);
   $("#generic_dialog").dialog({

@@ -599,7 +599,6 @@ function queue_tech_gained_dialog(tech_gained_id)
 function show_tech_gained_dialog(tech_gained_id)
 {
   if (client_is_observer() || C_S_RUNNING != client_state()) return;
-  if (cardboard_vr_enabled) return;
 
   $("#tech_tab_item").css("color", "#aa0000");
   var pplayer = client.conn.playing;

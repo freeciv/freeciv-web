@@ -381,7 +381,6 @@ Rerun the sync-js-hand.js script.
 								</jsSourceIncludes>
 								<jsSourceExcludes>
 									<jsSourceExclude>three.min.js</jsSourceExclude>
-									<jsSourceExclude>StereoEffect.js</jsSourceExclude>
 								</jsSourceExcludes>
 							</configuration>
 							<goals>

@@ -91,10 +91,6 @@ function webgl_start_renderer()
     camera_dz = 180;
   }
 
-  if (cardboard_vr_enabled) {
-    init_stereo_vr_cardboard(new_mapview_width, new_mapview_height);
-  }
-
   maprenderer.setClearColor(0x000000);
   maprenderer.setPixelRatio(window.devicePixelRatio);
   maprenderer.setSize(new_mapview_width, new_mapview_height);
@@ -273,8 +269,6 @@ function animate() {
 
   if (anaglyph_3d_enabled) {
     anaglyph_effect.render(scene,camera );
-  } else if (cardboard_vr_enabled) {
-    stereoEffect.render(scene, camera);
   } else {
     maprenderer.render(scene,camera );
   }

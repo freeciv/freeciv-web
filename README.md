@@ -126,7 +126,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - Tomcat 9 - https://tomcat.apache.org/
 
-- Java 8 JDK - http://www.oracle.com/technetwork/java/javase/downloads/ 
+- Java 11 JDK - https://adoptopenjdk.net/ 
 
 - Python 3.6 - http://www.python.org/
 
@@ -154,8 +154,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 - Jansson 2.6 - http://www.digip.org/jansson/
 
 - liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.
-
-- cwebp to create .webp files of the tileset.
 
 
 When in a [tested system](scripts/install/systems),

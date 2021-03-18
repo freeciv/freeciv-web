@@ -25,18 +25,12 @@ mkdir -p "${TILESET_DEST}" "${SPEC_DEST}" "${FLAG_DEST}" &&
 python3 "${DIR}"/img-extract.py -f "${FREECIV_DIR}" -o "${TEMP_DIR}" &&
 echo "compressing .png files from ${TEMP_DIR} to ${TILESET_DEST}" &&
 pngcrush -q -d "${TILESET_DEST}" "${TEMP_DIR}"/freeciv-web-tileset*.png &&
-echo "converting tileset .png files to .webp ..." &&
-(for pngfile in "${TILESET_DEST}"/*.png; do
-  cwebp -quiet -lossless "$pngfile" -o "${pngfile/%.png/.webp}"
-done) &&
 cp "${TEMP_DIR}"/tileset_spec_*.js "${SPEC_DEST}" &&
-echo "converting flag .svg files to .png and .webp ..." &&
+echo "converting flag .svg files to .png ..." &&
 (for svgfile in $(find "${FREECIV_DIR}"/data/flags/*.svg); do
   name="$(basename "$svgfile")"
   pngfile="${FLAG_DEST}/${name/%.svg/-web.png}"
   timeout 30 convert -density 80 -resize 180 "$svgfile" "${pngfile}" ||
     >&2 echo "  ERROR converting ${svgfile} to ${pngfile}"
-  [[ -f "${pngfile}" ]] && cwebp -quiet -lossless "${pngfile}" -o "${pngfile/%.png/.webp}" ||
-    >&2 echo "  ERROR packing ${pngfile} to ${pngfile/%.png/.webp}"
 done) &&
 echo "Freeciv-img-extract done." || (>&2 echo "Freeciv-img-extract failed!" && exit 1)

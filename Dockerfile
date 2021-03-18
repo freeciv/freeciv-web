@@ -37,7 +37,6 @@ COPY LICENSE.txt /docker/LICENSE.txt
 COPY requirements.txt /docker/requirements.txt
 
 COPY scripts /docker/scripts
-COPY tests /docker/tests
 COPY music /docker/music
 COPY blender /docker/blender
 COPY nginx /docker/nginx

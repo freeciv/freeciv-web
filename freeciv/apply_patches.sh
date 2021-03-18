@@ -2,14 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-Fix-segfault-at-loading-older-format-savegame is hrm Bug #840623
-#     It was comitted in ab1c8f2a914300783f769819bed37c848c66721a
-# max_map_size is hrm Feature #847376
-#     It was comitted as f2173409a8e09fea9fecfb79ddf7dcf64fdab425
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0003-Switch-from-python-to-python3.patch is hrm Feature #842994
-#     It was committed as b6e01c4068e364d9f375971d8f4de9a6d7776f47
 # 0015-savegame3.c-Remove-aifill-players-after-rulesets-loa is hrm Bug #850666
 #     It was committed as 715025fb957d3a0f2c33dfece45e6d6f783f795b
 # 0001-Terminate-format-escapes-list.patch is hrm Bug #851727
@@ -32,6 +26,10 @@
 #     It was committed as 7a57cea0673432472946956d9f8c635e9f165da2
 # 0025-Do-end_phase-research-updates-for-alive-players-only.patch is hrm Bug #873692
 #     It was committed as 833d1fb14c3a5014bc4eeccfe652f5d9dddf3119
+# 0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886330
+#     It was committed as 7527315835c16179e68080fe8f7244c76152b656
+# 0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886331
+#     It was committed as 71eb308f799fd62920077d68d9109448d47cc7a8
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -55,6 +53,11 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
+  "0001-Terminate-format-escapes-list"
+  "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
+  "0001-Refactor-code-to-avoid-gcc-10-warning"
+  "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"
@@ -78,22 +81,16 @@ declare -a PATCHLIST=(
   "navajo-remove-long-city-names"
   "webperimental_install"
   "longturn"
-  "max_map_size"
   "load_command_confirmation"
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0001-Fix-segfault-at-loading-older-format-savegame"
-  "0003-Switch-from-python-to-python3"
   "0015-savegame3.c-Remove-aifill-players-after-rulesets-loa"
-  "0001-Terminate-format-escapes-list"
-  "0001-Refactor-code-to-avoid-gcc-10-warning"
   "0023-Fix-sell_random_unit-crash-with-recursive-transports"
   "0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans"
   "0001-Fix-clang-9-warnings"
   "0001-Fix-division-by-zero-when-transforming-unit-with-zer"
   "0006-debug.m4-Set-always-active-compiler-flags-last-not-f"
-  "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
   "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"
   "0025-Do-end_phase-research-updates-for-alive-players-only"
 )

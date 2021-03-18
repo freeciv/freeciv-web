@@ -50,10 +50,6 @@ var fcwMinified="<%= fcwMinified %>";
 
 <script type="text/javascript" src="/music/audio.min.js"></script>
 
-<c:if test="${not empty param.webgl_debug}" >
-  <script> var gliEmbedDebug = true; </script> <script src="/javascript/webgl/libs/webgl-inspector/core/embed.js"></script>
-</c:if>
-
 <link rel="shortcut icon" href="/images/freeciv-shortcut-icon.png" />
 <link rel="apple-touch-icon" href="/images/freeciv-splash2.png" />
 

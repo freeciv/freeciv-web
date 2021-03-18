@@ -19,8 +19,4 @@ You can then test it in your instance.
 You may use the WebGL interface live at:
 - [moving borders](https://fcw.movingborders.es)
 
-Debugging
----------
-Add the URL parameter &webgl_debug=true to enable the WebGL-Inspector - https://github.com/benvanik/WebGL-Inspector
-
-Developer: Andreas Røsdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)
+Developer: Andreas Rï¿½sdal [@andreasrosdal](http://www.twitter.com/andreasrosdal)

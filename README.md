@@ -13,7 +13,6 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 Currently known servers based on Freeciv-web:
 - [freecivweb.org](https://www.freecivweb.org) [https://github.com/Lexxie9952/fcw.org-server]
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
-- [freeciv.xyz](https://www.freeciv.xyz)  [https://github.com/zekoz/freeciv-web] (currently not working, moving units broken)
 
 Freeciv WebGL 3D:
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")

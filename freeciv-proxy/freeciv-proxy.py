@@ -35,6 +35,7 @@ import mysql.connector
 import configparser
 import urllib.request
 import urllib.parse
+import hashlib
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
@@ -157,17 +158,7 @@ class WSHandler(websocket.WebSocketHandler):
             return "password"
 
     def check_user_password(self, cursor, username, password):
-        # FIXME: this is a workaround, since ENCRYPT has been removed in MySQL 8, so the next query will fail.
-        query = ("select username from auth where lower(username)=lower(%(usr)s)")
-        cursor.execute(query, {'usr': username, 'pwd': password})
-        result = cursor.fetchall()
-
-        if len(result) == 0:
-            # Unreserved user, no password needed
-            return True
-        
-        # FIXME: ENCRYPT has been removed from MySQL 8.
-        query = ("select secure_hashed_password, CAST(ENCRYPT(%(pwd)s, secure_hashed_password) AS CHAR), activated from auth where lower(username)=lower(%(usr)s)")
+        query = ("select secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
         cursor.execute(query, {'usr': username, 'pwd': password})
         result = cursor.fetchall()
 
@@ -175,9 +166,9 @@ class WSHandler(websocket.WebSocketHandler):
             # Unreserved user, no password needed
             return True
 
-        for db_pass, encrypted_pass, active in result:
+        for secure_shashed_password, active in result:
             if (active == 0): return False
-            if db_pass == encrypted_pass: return True
+            if secure_shashed_password == hashlib.sha256(password.encode('utf-8')).hexdigest(): return True
 
         return False
 

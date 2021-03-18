@@ -29,7 +29,7 @@ import java.util.Properties;
 
 import javax.sql.*;
 
-import org.apache.commons.codec.digest.Crypt;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -133,7 +133,7 @@ public class NewPBEMUser extends HttpServlet {
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);
-			preparedStatement.setString(3, Crypt.crypt(password));
+			preparedStatement.setString(3, DigestUtils.sha256Hex(password));
 			preparedStatement.setInt(4, ACTIVATED);
 			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();

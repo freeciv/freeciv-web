@@ -193,7 +193,7 @@ Freeciv-Web is built on GitHub actions on every commit. This is the current buil
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](TODO) for 
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](doc/TODO) for 
 some tasks you can work on. Pull requests on Github is welcome! 
   
 

@@ -158,12 +158,7 @@
 							</div>
 						</c:if>
 						<a href="/webclient/?action=load&amp;scenario=true&type=singleplayer" class="btn"><i class="fa fa-map-o"></i> <fmt:message key="index-game-launcher-scenario"/></a>
-						<c:if test="${default_lang}">
-							<div class="features">
-								Choose your map from a real earth map.
-							</div>
-						</c:if>
-						<a href="/freeciv-earth/" class="btn"><i class="fa fa-globe"></i> <fmt:message key="index-game-launcher-real-earth"/></a>
+
 					</div>
 				</div>
 				<div class="col-md-6">

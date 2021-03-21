@@ -209,25 +209,7 @@
 		</c:if>
 
 
-		<div id="chrome-web-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<img src="/static/images/chrome-web-store.png" alt="">
-			</a>
-			<a href="https://chrome.google.com/webstore/detail/freeciv/ldhdjhmbapbeafmhdoobnlldhfopfcgh">
-				<fmt:message key="index-chrome-web-store"/>
-			</a>
-		</div>
-		<div id="google-play-store" style="display: none;" class="alert alert-warning top-buffer-3" role="alert">
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<img src="/static/images/google-play-store.png" alt="">
-			</a>
-			<a href="https://play.google.com/store/apps/details?id=org.freeciv.play">
-				<fmt:message key="index-play-store"/>
-			</a>
-		</div>  <!-- end apps/browser plugins -->
-
-
-		<div class="row">
+	    <div class="row">
 			<div class="col-md-6">
 				<div class="panel-freeciv">
 					<h3>Multiplayer and One Turn per Day games:</h3>

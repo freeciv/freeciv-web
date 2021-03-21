@@ -212,7 +212,6 @@ function load_model(filename)
 
   glTFLoader.load( url, function(data) {
     var model = data.scene;
-    // 30% to 100%, 3d models.
     $("#download_progress").html(" 3D models " + Math.floor(30 + (0.7 * 100 * load_count / total_model_count)) + "%");
 
     model.traverse((node) => {

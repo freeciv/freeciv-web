@@ -55,6 +55,11 @@ function webgl_start_renderer()
     new_mapview_height = $(window).height() - height_offset - 40;
   }
 
+  if (!Detector.webgl) {
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    return;
+  }
+
   container = document.getElementById('canvas_div');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 10000 );
   scene = new THREE.Scene();
@@ -65,25 +70,20 @@ function webgl_start_renderer()
   clock = new THREE.Clock();
 
   // Lights
-  var ambientLight = new THREE.AmbientLight( 0x606060, 1.1 );
+  var ambientLight = new THREE.AmbientLight( 0x606060, 3.2 );
   scene.add(ambientLight);
 
-  directionalLight = new THREE.DirectionalLight( 0xffffff, 2.5 );
+  directionalLight = new THREE.DirectionalLight( 0xffffff, 3.6 );
   directionalLight.position.set( 0.5, 0.75, 1.0 ).normalize();
   scene.add( directionalLight );
 
-  if (Detector.webgl) {
-    var enable_antialiasing = graphics_quality >= QUALITY_MEDIUM;
-    var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
-    if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
-      enable_antialiasing = false;
-    }
-
-    maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing } );
-  } else {
-    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
-    return;
+  var enable_antialiasing = graphics_quality >= QUALITY_MEDIUM;
+  var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
+  if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
+    enable_antialiasing = false;
   }
+
+  maprenderer = new THREE.WebGL1Renderer( { antialias: enable_antialiasing } );
 
   if (is_small_screen() || $(window).width() <= 1366) {
     camera_dy = 390;
@@ -119,22 +119,20 @@ function init_webgl_mapview() {
 
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
 
+  var textureLoader = new THREE.TextureLoader();
   var waterGeometry = new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10 );
 
-    var params = {
-  			color: '#ffffff',
-  			scale: 10,
-  			flowX: 0.14,
-  			flowY: -0.14
-    };
-
-    water = new THREE.Water( waterGeometry, {
-      color: params.color,
-      scale: params.scale,
-      flowDirection: new THREE.Vector2( params.flowX, params.flowY ),
+  water = new THREE.Water(waterGeometry, {
+      color: '#bbffff',
+      scale: 8,
+      flowDirection: new THREE.Vector2( 0.1, -0.1),
       textureWidth: 1024,
       textureHeight: 1024,
-      clipBias : 0.7
+      reflectivity : 0.4,
+      clipBias : 0.8,
+      normalMap0 : textureLoader.load( '/textures/Water_1_M_Normal.jpg' ),
+      normalMap1 : textureLoader.load( '/textures/Water_2_M_Normal.jpg' )
+
     } );
 
     water.rotation.x = - Math.PI * 0.5;

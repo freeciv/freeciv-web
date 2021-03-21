@@ -89,12 +89,6 @@ function init_webgl_renderer()
   var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
   if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
     graphics_quality = stored_graphics_quality_setting;
-  } else if (is_small_screen()) {
-    graphics_quality = QUALITY_LOW;  //mobile devices default to low quality.
-  } else if (iOS) {
-    // iOS devices default to low quality, because high quality may crash on some iOS devices. This can
-    // probably be removed in the future when iOS devices get better WebGL performance.
-    graphics_quality = QUALITY_LOW;
   } else if (renderer_name.indexOf("Mesa") != -1 || renderer_name.indexOf("Intel") != -1 || renderer_name.indexOf("DRI") != -1) {
     // These are renderers which are likely to be slow.
     graphics_quality = QUALITY_LOW;

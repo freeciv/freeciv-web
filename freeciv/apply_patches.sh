@@ -30,6 +30,8 @@
 #     It was committed as 7527315835c16179e68080fe8f7244c76152b656
 # 0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886331
 #     It was committed as 71eb308f799fd62920077d68d9109448d47cc7a8
+# 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
+#     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -58,6 +60,7 @@ declare -a PATCHLIST=(
   "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
   "0001-Refactor-code-to-avoid-gcc-10-warning"
   "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
+  "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

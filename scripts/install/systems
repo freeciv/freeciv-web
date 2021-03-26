@@ -7,4 +7,4 @@ Ubuntu	artful	deb.sh
 Ubuntu	focal	deb.sh
 Ubuntu	groovy	deb.sh
 Debian	stretch	deb.sh
-Debian	buster	deb_no_tomcat.sh
+Debian	buster	deb.sh

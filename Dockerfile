@@ -47,7 +47,8 @@ USER docker
 WORKDIR /docker/scripts/
 
 RUN DEBIAN_FRONTEND=noninteractive sudo apt-get update --yes --quiet && \
-    DEBIAN_FRONTEND=noninteractive install/install.sh --mode=TEST && \
+    DEBIAN_FRONTEND=noninteractive DEB_NO_TOMCAT=Y \
+                                   install/install.sh --mode=TEST && \
     DEBIAN_FRONTEND=noninteractive sudo apt-get clean --yes && \
     sudo rm --recursive --force /var/lib/apt/lists/*
 

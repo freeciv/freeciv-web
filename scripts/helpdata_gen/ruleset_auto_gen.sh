@@ -15,19 +15,19 @@
 resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
 while [[ $# -gt 0 ]]; do
   case $1 in
-    -f) FREECIV_DIR=$(resolve "$2"); shift; shift;;
+    -i) INSTALL_DIR=$(resolve "$2"); shift; shift;;
     -o) WEBAPP_DIR=$(resolve "$2"); shift; shift;;
     *) echo "Unrecognized argument: $1"; shift;;
   esac
 done
-: ${FREECIV_DIR:?Must specify (original) freeciv project dir with -f}
+: ${INSTALL_DIR:?Must specify freeciv install dir with -i}
 : ${WEBAPP_DIR:?Must specify existing freeciv-web (webapp) dir with -o}
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
 MAN_DIR="${WEBAPP_DIR}/man"
 
-freeciv_manual="${FREECIV_DIR}/tools/freeciv-manual"
+freeciv_manual="${INSTALL_DIR}/tools/freeciv-manual"
 
 mkdir -p "${MAN_DIR}" && \
 cd "${MAN_DIR}" && \

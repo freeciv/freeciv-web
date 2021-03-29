@@ -41,7 +41,6 @@ dependencies="\
   pkg-config \
   pngcrush \
   procps \
-  python \
   python3-minimal \
   python3-pip \
   python3-setuptools \

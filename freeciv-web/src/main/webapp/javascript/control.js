@@ -2495,7 +2495,8 @@ function key_unit_pillage()
     var tgt = get_what_can_unit_pillage_from(punit, null);
     if (tgt.length > 0) {
       if (tgt.length == 1) {
-        request_new_unit_activity(punit, ACTIVITY_PILLAGE, EXTRA_NONE);
+        request_unit_do_action(ACTION_PILLAGE, punit['id'], punit.tile,
+                               EXTRA_NONE);
       } else {
         popup_pillage_selection_dialog(punit);
       }

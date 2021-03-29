@@ -25,17 +25,22 @@ if ! ./apply_patches.sh ; then
   exit 1
 fi
 
-echo "Copying Freeciv to /tmp, and compiling Freeciv in /tmp"   
-# Copying Freeciv to /tmp, is a workaround for compiling Freeciv in a Vagrant box on VirtualBox, since in this environment
-# autogen.sh can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
-cp freeciv /tmp -rf
-cp freeciv-web.project /tmp
-chmod +x /tmp/freeciv/autogen.sh
+echo "Building Freeciv in /tmp"
+# Building Freeciv in /tmp, is a workaround for compiling Freeciv in a Vagrant box on VirtualBox, since in this environment
+# configure can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
+mkdir -p /tmp/freeciv
+
+# We have to have .project next to build dir, as refence to it does not work with
+# absolute path (one that begins with '/')
+cp freeciv-web.project /tmp/
+
+( cd freeciv
+  ./autogen.sh --no-configure-run --disable-nls
+)
 
 ( cd /tmp/freeciv
-  ./autogen.sh --no-configure-run --disable-nls
-  ./configure CFLAGS="-O3" \
+  ${DIR}/freeciv/configure CFLAGS="-O3" \
               --enable-mapimg=magickwand --with-project-definition=../freeciv-web.project --enable-fcweb --enable-json --disable-delta-protocol --disable-nls --disable-fcmp --enable-freeciv-manual --disable-ruledit --disable-ruleup --disable-fcdb --enable-ai-static=classic,tex --prefix=${HOME}/freeciv/ && make -s -j$(nproc)
 )
 
-cp -rfu /tmp/freeciv .  || echo "done"
+echo "done"

@@ -278,7 +278,7 @@ setfacl -Rm d:u:tomcat:rwX webapps/data
 
 echo "==== Building freeciv ===="
 echo "Please be patient"
-# Freeciv is copied to /tmp and built there, to overcome a file permission issue on VirtualBox.
+# Freeciv is built in /tmp, to overcome a file permission issue on VirtualBox.
 cd "${basedir}"/freeciv && \
   ./prepare_freeciv.sh  && \
   cd /tmp/freeciv && make install || \
@@ -297,6 +297,7 @@ echo "${mig_scripts[-1]}" > checkpoint
 mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
 "${basedir}"/scripts/sync-js-hand.sh \
   -f "${basedir}/freeciv/freeciv" \
+  -i "${HOME}/freeciv" \
   -o "${basedir}/freeciv-web/src/derived/webapp" \
   -d "${TOMCAT_HOME}/webapps/data" || \
   handle_error 6 "Failed to synchronize freeciv project"

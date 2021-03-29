@@ -117,7 +117,9 @@ var ACTION_CONVERT = 51;
 var ACTION_BASE = 52;
 var ACTION_MINE = 53;
 var ACTION_IRRIGATE = 54;
-var ACTION_COUNT = 55;
+var ACTION_TRANSPORT_ALIGHT = 55;
+var ACTION_TRANSPORT_UNLOAD = 56;
+var ACTION_COUNT = 57;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

@@ -27,7 +27,7 @@ fi
 
 echo "Copying Freeciv to /tmp, and compiling Freeciv in /tmp"   
 # Copying Freeciv to /tmp, is a workaround for compiling Freeciv in a Vagrant box on VirtualBox, since in this environment
-# autogen.sh can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
+# configure can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
 cp freeciv /tmp -rf
 cp freeciv-web.project /tmp
 chmod +x /tmp/freeciv/autogen.sh

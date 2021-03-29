@@ -443,7 +443,7 @@ function get_what_can_unit_pillage_from(punit, ptile)
 
   if (terrains[ptile.terrain].pillage_time == 0) return targets;
   var unit_class = unit_classes[unit_types[punit.type].unit_class_id];
-  if (!unit_class.flags.isSet(UCF_CAN_PILLAGE)) return targets;
+  // if (!unit_class.flags.isSet(UCF_CAN_PILLAGE)) return targets;
 
   var available = ptile.extras.toBitSet();
   var cannot_pillage = new BitVector([]);

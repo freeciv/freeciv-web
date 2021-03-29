@@ -2251,13 +2251,14 @@ function key_unit_unload()
 
   for (var i = 0; i < units_on_tile.length; i++) {
     var punit = units_on_tile[i];
-    if (punit['transported'] && punit['transported_by'] > 0 ) {
-      var packet = {
-        "pid"         : packet_unit_unload,
-        "cargo_id"    : punit['id'],
-        "transporter_id"   : punit['transported_by']
-      };
-      send_request(JSON.stringify(packet));
+    if (punit['transported'] && punit['transported_by'] > 0 &&
+        punit['owner'] == client.conn.playing.playerno) {
+      request_unit_do_action(ACTION_TRANSPORT_ALIGHT, punit['id'],
+                             punit['transported_by']);
+    } else {
+      request_unit_do_action(ACTION_TRANSPORT_UNLOAD,
+                             punit['transported_by'],
+                             punit['id']);
     }
   }
   setTimeout(advance_unit_focus, 700);

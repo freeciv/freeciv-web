@@ -27,7 +27,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
 MAN_DIR="${WEBAPP_DIR}/man"
 
-freeciv_manual="${INSTALL_DIR}/tools/freeciv-manual"
+freeciv_manual="${INSTALL_DIR}/bin/freeciv-manual"
 
 mkdir -p "${MAN_DIR}" && \
 cd "${MAN_DIR}" && \

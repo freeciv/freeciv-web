@@ -29,16 +29,14 @@ var UCF_TERRAIN_SPEED = 0;
 var UCF_TERRAIN_DEFENSE = 1;
 var UCF_DAMAGE_SLOWS = 2;
 var UCF_CAN_OCCUPY_CITY = 3;
-var UCF_MISSILE = 4;
-var UCF_BUILD_ANYWHERE = 5;
-var UCF_UNREACHABLE = 6;
-var UCF_COLLECT_RANSOM = 7;
-var UCF_ZOC = 8;
-var UCF_CAN_FORTIFY = 9;
-var UCF_CAN_PILLAGE = 10;
-var UCF_DOESNT_OCCUPY_TILE = 11;
-var UCF_ATTACK_NON_NATIVE = 12;
-var UCF_KILLCITIZEN = 13;
+var UCF_BUILD_ANYWHERE = 4;
+var UCF_UNREACHABLE = 5;
+var UCF_COLLECT_RANSOM = 6;
+var UCF_ZOC = 7;
+var UCF_CAN_FORTIFY = 8;
+var UCF_DOESNT_OCCUPY_TILE = 9;
+var UCF_ATTACK_NON_NATIVE = 10;
+var UCF_KILLCITIZEN = 11;
 
 /**********************************************************************//**
   Return true iff units of the given type can do the specified generalized

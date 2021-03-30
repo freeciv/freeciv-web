@@ -86,7 +86,8 @@ function pillage_target_selected(ev)
   var id = ev.target.id;
   var params = id.match(/pillage_sel_(\d*)_([^_]*)/);
   var extra_id = params[2] == 'ANYTHING' ? EXTRA_NONE : parseInt(params[2], 10);
-  request_new_unit_activity(units[parseInt(params[1], 10)],
-                            ACTIVITY_PILLAGE, extra_id);
+  var punit_id = parseInt(params[1], 10);
+  request_unit_do_action(ACTION_PILLAGE, punit_id, units[punit_id].tile,
+                         extra_id);
   $(this).dialog('close');
 }

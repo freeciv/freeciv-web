@@ -2224,13 +2224,8 @@ function key_unit_load()
     }
 
     if (has_transport_unit && transporter_unit_id > 0 && punit['tile'] > 0) {
-      var packet = {
-        "pid"         : packet_unit_load,
-        "cargo_id"    : punit['id'],
-        "transporter_id"   : transporter_unit_id,
-        "transporter_tile" : punit['tile']
-      };
-      send_request(JSON.stringify(packet));
+      request_unit_do_action(ACTION_TRANSPORT_BOARD, punit['id'],
+                             transporter_unit_id);
     }
   }
   setTimeout(advance_unit_focus, 700);

@@ -121,7 +121,8 @@ var ACTION_IRRIGATE = 55;
 var ACTION_TRANSPORT_ALIGHT = 56;
 var ACTION_TRANSPORT_UNLOAD = 57;
 var ACTION_TRANSPORT_DISEMBARK1 = 58;
-var ACTION_COUNT = 59;
+var ACTION_TRANSPORT_BOARD = 59;
+var ACTION_COUNT = 60;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

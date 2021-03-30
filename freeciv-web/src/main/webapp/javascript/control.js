@@ -2224,13 +2224,8 @@ function key_unit_load()
     }
 
     if (has_transport_unit && transporter_unit_id > 0 && punit['tile'] > 0) {
-      var packet = {
-        "pid"         : packet_unit_load,
-        "cargo_id"    : punit['id'],
-        "transporter_id"   : transporter_unit_id,
-        "transporter_tile" : punit['tile']
-      };
-      send_request(JSON.stringify(packet));
+      request_unit_do_action(ACTION_TRANSPORT_BOARD, punit['id'],
+                             transporter_unit_id);
     }
   }
   setTimeout(advance_unit_focus, 700);
@@ -2253,9 +2248,11 @@ function key_unit_unload()
     var punit = units_on_tile[i];
     if (punit['transported'] && punit['transported_by'] > 0 &&
         punit['owner'] == client.conn.playing.playerno) {
+      request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
       request_unit_do_action(ACTION_TRANSPORT_ALIGHT, punit['id'],
                              punit['transported_by']);
     } else {
+      request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
       request_unit_do_action(ACTION_TRANSPORT_UNLOAD,
                              punit['transported_by'],
                              punit['id']);
@@ -2799,6 +2796,16 @@ function key_unit_move(dir)
 
     var newtile = mapstep(ptile, dir);
     if (newtile == null) {
+      return;
+    }
+
+    if (punit['transported']) {
+      if (unit_can_do_action(punit, ACTION_TRANSPORT_DISEMBARK1)) {
+        request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
+        request_unit_do_action(ACTION_TRANSPORT_DISEMBARK1, punit['id'],
+                               newtile['index']);
+        unit_move_sound_play(punit);
+      }
       return;
     }
 

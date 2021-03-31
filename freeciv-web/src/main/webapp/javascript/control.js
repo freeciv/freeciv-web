@@ -59,6 +59,15 @@ var CHAT_ICON_EVERYBODY = String.fromCharCode(62075);
 var CHAT_ICON_ALLIES = String.fromCharCode(61746);
 var end_turn_info_message_shown = false;
 
+/* The ID of the unit that currently is in the action selection process.
+ *
+ * The action selection process begins when the client asks the server what
+ * actions a unit can take. It ends when the last follow up question is
+ * answered.
+ */
+var action_selection_in_progress_for = 0; /* before IDENTITY_NUMBER_ZERO */
+var is_more_user_input_needed = false;
+
 /****************************************************************************
 ...
 ****************************************************************************/
@@ -725,6 +734,27 @@ function check_text_input(event,chatboxtextarea) {
 }
 
 
+
+/**********************************************************************//**
+  The action selection process is no longer in progres for the specified
+  unit. It is safe to let another unit enter action selection.
+**************************************************************************/
+function action_selection_no_longer_in_progress(old_actor_id)
+{
+  /* IDENTITY_NUMBER_ZERO is accepted for cases where the unit is gone
+   * without a trace. */
+  if (old_actor_id != action_selection_in_progress_for
+      && old_actor_id != IDENTITY_NUMBER_ZERO) {
+    console.log("Decision taken for %d but selection is for %d.",
+                old_actor_id, action_selection_in_progress_for);
+  }
+
+  /* Stop objecting to allowing the next unit to ask. */
+  action_selection_in_progress_for = IDENTITY_NUMBER_ZERO;
+
+  /* Stop assuming the answer to a follow up question will arrive. */
+  is_more_user_input_needed = false;
+}
 
 /****************************************************************************
   Return TRUE iff a unit on this tile is in focus.

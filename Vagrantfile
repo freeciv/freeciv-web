@@ -60,19 +60,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
   end
 
-
-  if Vagrant::Util::Platform.windows? then
-    def running_in_admin_mode?
-      (`reg query HKU\\S-1-5-19 2>&1` =~ /ERROR/).nil?
-    end
- 
-    unless running_in_admin_mode?
-	    puts "Error: Freeciv-web on Vagrant must be run in an Administrative command prompt, because administrator access is required to create SymLinks on Windows. There is a \"Run as Administrator\" option, or just Google how to start a administator command prompt on Windows. It's safe, don't worry. Try vagrant up again from an Administrative command prompt. "
-      exit 1
-    end
-  end
-
-
   config.vm.synced_folder "./", "/vagrant"
 
   # There are problems with the default configuration of a DNS stub in some

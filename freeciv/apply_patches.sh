@@ -4,8 +4,6 @@
 # ------------------------------------
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0015-savegame3.c-Remove-aifill-players-after-rulesets-loa is hrm Bug #850666
-#     It was committed as 715025fb957d3a0f2c33dfece45e6d6f783f795b
 # 0001-Terminate-format-escapes-list.patch is hrm Bug #851727
 #     It was committed as 17938c639f239381c0d1fcfcce356b49f5e86100
 # 0001-Refactor-code-to-avoid-gcc-10-warning.patch is hrm Bug #851728
@@ -88,7 +86,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0015-savegame3.c-Remove-aifill-players-after-rulesets-loa"
   "0023-Fix-sell_random_unit-crash-with-recursive-transports"
   "0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans"
   "0001-Fix-clang-9-warnings"

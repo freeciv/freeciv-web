@@ -3,6 +3,6 @@
     "handlebars": "^4.7.6"
   },
   "scripts": {
-    "compile-hb": "f() { handlebars src/main/webapp/webclient -e hbs -f \"$1\"/hbs-templates.js --knownOnly; }; f"
+    "compile-hb": "f() { ./node_modules/handlebars/bin/handlebars src/main/webapp/webclient -e hbs -f \"$1\"/hbs-templates.js --knownOnly; }; f"
   }
 }

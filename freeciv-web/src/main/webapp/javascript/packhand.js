@@ -557,7 +557,6 @@ function handle_ruleset_control(packet)
    *   handle_ruleset_terrain_flag
    *   handle_ruleset_achievement
    *   handle_ruleset_tech_flag
-   *   handle_ruleset_action_enabler
    *   handle_ruleset_nation_sets
    *   handle_ruleset_style
    *   handle_ruleset_music
@@ -1536,9 +1535,21 @@ function handle_ruleset_road(packet)
   /* TODO: Implement */
 }
 
+/************************************************************************//**
+  Handle a packet about a particular action enabler.
+****************************************************************************/
 function handle_ruleset_action_enabler(packet)
 {
-  /* TODO: Implement */
+  var paction = actions[packet.enabled_action];
+
+  if (paction === undefined) {
+    console.log("Unknown action " + packet.action + " for enabler ");
+    console.log(packet);
+    return;
+  }
+
+  /* Store the enabler in its action. */
+  paction.enablers.push(packet);
 }
 
 function handle_ruleset_nation_sets(packet)
@@ -1621,6 +1632,7 @@ function handle_play_music(packet)
 function handle_ruleset_action(packet)
 {
   actions[packet['id']] = packet;
+  packet["enablers"] = [];
 }
 
 /**************************************************************************

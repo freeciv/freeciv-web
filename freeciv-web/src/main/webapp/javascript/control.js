@@ -756,6 +756,26 @@ function action_selection_no_longer_in_progress(old_actor_id)
   is_more_user_input_needed = false;
 }
 
+/**********************************************************************//**
+  Have the server record that a decision no longer is wanted for the
+  specified unit.
+**************************************************************************/
+function action_decision_clear_want(old_actor_id)
+{
+  var old = game_find_unit_by_number(old_actor_id);
+
+  if (old !== null) {
+    /* Have the server record that a decision no longer is wanted. */
+    var unqueue = {
+      "pid"     : packet_unit_sscs_set,
+      "unit_id" : old_actor_id,
+      "type"    : USSDT_UNQUEUE,
+      "value"   : IDENTITY_NUMBER_ZERO
+    };
+    send_request(JSON.stringify(unqueue));
+  }
+}
+
 /****************************************************************************
   Return TRUE iff a unit on this tile is in focus.
 ****************************************************************************/

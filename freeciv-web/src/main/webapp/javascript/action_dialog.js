@@ -306,6 +306,9 @@ function popup_action_selection(actor_unit, action_probabilities,
     console.log("Looks like unit %d has an action selection dialog open"
                 + " but a dialog for unit %d is about to be opened.",
                 action_selection_in_progress_for, actor_unit['id']);
+    console.log("Closing the action selection dialog for unit %d",
+                action_selection_in_progress_for);
+    action_selection_close();
   }
 
   var actor_homecity = cities[actor_unit['homecity']];

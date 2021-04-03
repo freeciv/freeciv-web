@@ -308,10 +308,16 @@ function get_unit_activity_text(punit)
       return "F";
 
     case ACTIVITY_MINE:
+      return "m";
+
+    case ACTIVITY_PLANT:
       return "M";
 
     case ACTIVITY_IRRIGATE:
-      return " I ";
+      return " i ";
+
+    case ACTIVITY_CULTIVATE:
+      return "I";
 
     case ACTIVITY_FORTIFIED:
       return "F";

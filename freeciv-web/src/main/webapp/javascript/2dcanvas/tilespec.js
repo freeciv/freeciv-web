@@ -906,12 +906,22 @@ function get_unit_activity_sprite(punit)
               "offset_x" : unit_activity_offset_x,
               "offset_y" : - unit_activity_offset_y};
 
+    case ACTIVITY_PLANT:
+      return {"key" : "unit.plant",
+          "offset_x" : unit_activity_offset_x,
+          "offset_y" : - unit_activity_offset_y};
+
     case ACTIVITY_IRRIGATE:
       return {"key" : -1 == act_tgt ?
                         "unit.irrigate" :
                         tileset_extra_id_activity_graphic_tag(act_tgt),
               "offset_x" : unit_activity_offset_x,
               "offset_y" : - unit_activity_offset_y};
+
+    case ACTIVITY_CULTIVATE:
+      return {"key" : "unit.irrigate",
+          "offset_x" : unit_activity_offset_x,
+          "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_FORTIFIED:
       return {"key" : "unit.fortified",

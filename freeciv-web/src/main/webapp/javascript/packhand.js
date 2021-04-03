@@ -1381,6 +1381,16 @@ function handle_vote_resolve(packet)
   /* TODO: implement*/
 }
 
+function handle_edit_startpos(packet)
+{
+  /* edit not supported. */
+}
+
+function handle_edit_startpos_full(packet)
+{
+  /* edit not supported. */
+}
+
 function handle_edit_object_created(packet)
 {
   /* edit not supported. */

@@ -54,6 +54,7 @@ function act_sel_queue_may_be_done(actor_unit_id)
     } else {
       /* An action, or no action at all, was selected. */
       action_decision_clear_want(actor_unit_id);
+      action_selection_next_in_focus(actor_unit_id);
     }
   }
 }

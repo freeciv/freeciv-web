@@ -711,6 +711,9 @@ function handle_unit_remove(packet)
   /* Close the action selection dialog if the actor unit is lost */
   if (action_selection_in_progress_for === punit.id) {
     action_selection_close();
+    /* Open another action selection dialog if there are other actors in the
+     * current selection that want a decision. */
+    action_selection_next_in_focus(punit.id);
   }
 
   /* TODO: Notify agents. */
@@ -774,15 +777,17 @@ function handle_unit_packet_common(packet_unit)
 
   if (units[packet_unit['id']] == null) {
     /* This is a new unit. */
-    unit_actor_wants_input(packet_unit);
+    if (should_ask_server_for_actions(packet_unit)) {
+      action_decision_request(packet_unit);
+    }
     packet_unit['anim_list'] = [];
     units[packet_unit['id']] = packet_unit;
     units[packet_unit['id']]['facing'] = 6;
   } else {
-    if (units[packet_unit['id']]['action_decision_want']
-        != packet_unit['action_decision_want']) {
-      /* The unit's action_decision_want has changed. */
-      unit_actor_wants_input(packet_unit);
+    if (punit['action_decision_want'] != packet_unit['action_decision_want']
+        && should_ask_server_for_actions(packet_unit)) {
+      /* The unit wants the player to decide. */
+      action_decision_request(packet_unit);
     }
 
     update_unit_anim_list(units[packet_unit['id']], packet_unit);
@@ -896,34 +901,6 @@ function handle_unit_action_answer(packet)
 }
 
 /**************************************************************************
-  Handle server request for user input about diplomat action to do.
-**************************************************************************/
-function unit_actor_wants_input(pdiplomat)
-{
-  if (observing || client.conn.playing == null) return;
-
-  if (pdiplomat['action_decision_want'] == null
-      || pdiplomat['owner'] != client.conn.playing['playerno']) {
-    /* No authority to decide for this unit. */
-    return;
-  }
-
-  if (pdiplomat['action_decision_want'] == ACT_DEC_NOTHING) {
-    /* The unit doesn't want a decision. */
-    return;
-  }
-
-  if (pdiplomat['action_decision_want'] == ACT_DEC_PASSIVE
-      && !popup_actor_arrival) {
-    /* The player isn't interested in getting a pop up for a mere
-     * arrival. */
-    return;
-  }
-
-  ask_server_for_actions(pdiplomat);
-}
-
-/**************************************************************************
   Handle server reply about what actions an unit can do.
 **************************************************************************/
 function handle_unit_actions(packet)
@@ -953,16 +930,6 @@ function handle_unit_actions(packet)
     });
   }
 
-  if (disturb_player) {
-    /* Clear the unit's action_decision_want. This was the reply to a
-     * foreground request caused by it. Freeciv-web doesn't save open
-     * action selection dialogs. It doesn't even wait for any other action
-     * selection dialog to be answered before requesting data for the next
-     * one. This lack of a queue allows it to be cleared here. */
-
-    action_decision_clear_want(actor_unit_id);
-  }
-
   if (hasActions && disturb_player) {
     popup_action_selection(pdiplomat, action_probabilities,
                            ptile, target_extra, target_unit, target_city);
@@ -970,6 +937,7 @@ function handle_unit_actions(packet)
     /* Nothing to do. */
     action_selection_no_longer_in_progress(actor_unit_id);
     action_decision_clear_want(actor_unit_id);
+    action_selection_next_in_focus(actor_unit_id);
   } else if (hasActions) {
     /* This was a background request. */
 

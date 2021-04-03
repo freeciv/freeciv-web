@@ -10,14 +10,7 @@ Basically you can help improve Freeciv-web in any way you like, as long at it ac
 Unimplemented Freeciv client features:
 - action selection dialog pops up and down based on unit focus rather than
   opening all at once.
-  - the Freeciv C clients give units that wants an action decision higher
-    priority in the unit focus queue. This keeps player decisions fast.
-  - makes turn change less confusing when many units on a goto reaches their
-    targets.
   - gives the user freedom to delay a response without losing the reminder.
-  - open action selection dialogs are stored in save games.
-  - action selection dialogs are based on more up to date information.
-    (Since it asks right before showing the dialog)
   - Implementation hints:
     - a unit's request for the player to chose an action is stored in its
       fields action_decision_want and action_decision_tile.
@@ -41,14 +34,6 @@ Unimplemented Freeciv client features:
       target_unit_id, target_tile_id, disturb_player) the
       server will respond with the information needed for the action
       selection dialog in a PACKET_UNIT_ACTIONS.
-    - the current situation is that the Freeciv-web client sends a
-      PACKET_UNIT_GET_ACTIONS as soon as a unit's action decision state
-      changes and the new state wants a decision. (See
-      unit_actor_wants_input() and process_diplomat_arrival()) Multiple
-      action selection dialogs will hide behind each other.
-    - the current situation is that the Freeciv-web client clears the action
-      decision as soon as an action selection dialog is received. (See
-      handle_unit_actions())
     - in Freeciv C clients a PACKET_UNIT_GET_ACTIONS is sent when a unit
       gets focus OR when a unit already in focus changes action decision
       state to one that wants a decision.

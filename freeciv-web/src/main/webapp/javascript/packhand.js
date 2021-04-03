@@ -71,9 +71,10 @@ function handle_server_join_reply(packet)
     }
 
     client_info = {
-      "pid"          : packet_client_info,
-      "gui"          : GUI_WEB,
-      "distribution" : ""
+      "pid"           : packet_client_info,
+      "gui"           : GUI_WEB,
+      "emerg_version" : 0,
+      "distribution"  : ""
     };
     send_request(JSON.stringify(client_info));
 

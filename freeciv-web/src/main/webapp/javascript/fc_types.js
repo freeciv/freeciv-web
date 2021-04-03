@@ -49,7 +49,9 @@ var ACTIVITY_FALLOUT = 16;
 var ACTIVITY_BASE = 18;			/* building base */
 var ACTIVITY_GEN_ROAD = 19;
 var ACTIVITY_CONVERT = 20;
-var ACTIVITY_LAST = 21;   /* leave this one last */
+var ACTIVITY_CULTIVATE = 21;
+var ACTIVITY_PLANT = 22;
+var ACTIVITY_LAST = 23;   /* leave this one last */
 
 var IDENTITY_NUMBER_ZERO = 0;
 

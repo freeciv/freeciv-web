@@ -4,8 +4,6 @@
 # ------------------------------------
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0001-Terminate-format-escapes-list.patch is hrm Bug #851727
-#     It was committed as 17938c639f239381c0d1fcfcce356b49f5e86100
 # 0001-Refactor-code-to-avoid-gcc-10-warning.patch is hrm Bug #851728
 #     It was committed as f2da7a48499b1f5bd7bcccd8fdb33814521da1f2
 # 0023-Fix-sell_random_unit-crash-with-recursive-transports.patch is hrm Bug #852938
@@ -54,7 +52,6 @@
 
 declare -a PATCHLIST=(
   "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
-  "0001-Terminate-format-escapes-list"
   "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
   "0001-Refactor-code-to-avoid-gcc-10-warning"
   "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"

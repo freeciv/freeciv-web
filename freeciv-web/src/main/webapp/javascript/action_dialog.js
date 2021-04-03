@@ -955,7 +955,7 @@ function create_select_tgt_extra_button(parent_id, actor_unit_id,
 }
 
 /**************************************************************************
-  Create a dialog where a unit select what other unit to act on.
+  Create a dialog where a unit select what extra to act on.
 **************************************************************************/
 function select_tgt_extra(actor_unit, target_unit,
                           target_tile, potential_tgt_extras)

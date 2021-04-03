@@ -921,7 +921,7 @@ function unit_actor_wants_input(pdiplomat)
     return;
   }
 
-  process_diplomat_arrival(pdiplomat, pdiplomat['action_decision_tile']);
+  ask_server_for_actions(pdiplomat);
 }
 
 /**************************************************************************

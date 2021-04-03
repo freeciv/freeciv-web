@@ -736,6 +736,46 @@ function check_text_input(event,chatboxtextarea) {
 
 
 /**********************************************************************//**
+  Ask the server about what actions punit may be able to perform against
+  it's stored target tile.
+
+  The server's reply will pop up the action selection dialog unless no
+  alternatives exists.
+**************************************************************************/
+function ask_server_for_actions(punit)
+{
+  var ptile;
+
+  if (observing || punit == null) {
+    return false;
+  }
+
+  /* Only one action selection dialog at a time is supported. */
+  if (action_selection_in_progress_for != IDENTITY_NUMBER_ZERO) {
+    console.log("Unit %d started action selection before unit %d was done",
+                action_selection_in_progress_for, punit.id);
+  }
+  action_selection_in_progress_for = punit.id;
+
+  ptile = index_to_tile(punit['action_decision_tile']);
+
+  if (punit != null && ptile != null) {
+    /* Ask the server about what actions punit can do. The server's
+     * reply will pop up an action selection dialog for it. */
+
+    var packet = {
+      "pid" : packet_unit_get_actions,
+      "actor_unit_id" : punit['id'],
+      "target_unit_id" : IDENTITY_NUMBER_ZERO,
+      "target_tile_id": punit['action_decision_tile'],
+      "target_extra_id": EXTRA_NONE,
+      "disturb_player": true
+    };
+    send_request(JSON.stringify(packet));
+  }
+}
+
+/**********************************************************************//**
   The action selection process is no longer in progres for the specified
   unit. It is safe to let another unit enter action selection.
 **************************************************************************/
@@ -2923,41 +2963,6 @@ function key_unit_move(dir)
   }
 
   deactivate_goto(true);
-}
-
-/**************************************************************************
- ...
-**************************************************************************/
-function process_diplomat_arrival(pdiplomat, target_tile_id)
-{
-  var ptile = index_to_tile(target_tile_id);
-
-  /* No queue. An action selection dialog is opened at once. If multiple
-   * action selection dialogs are open at once one will hide all others.
-   * The hidden dialogs are based on information from the time they
-   * were opened. It is therefore more outdated than it would have been if
-   * the server was asked the moment before the action selection dialog
-   * was shown.
-   *
-   * The C client's bundled with Freeciv asks right before showing the
-   * action selection dialog. They used to have a custom queue for it.
-   * Freeciv patch #6601 (SVN r30682) made the desire for an action
-   * decision a part of a unit's data. They used it to drop their custom
-   * queue and move unit action decisions to the unit focus queue. */
-
-  if (pdiplomat != null && ptile != null) {
-    /* Ask the server about what actions pdiplomat can do. The server's
-     * reply will pop up an action selection dialog for it. */
-    var packet = {
-      "pid" : packet_unit_get_actions,
-      "actor_unit_id" : pdiplomat['id'],
-      "target_unit_id" : IDENTITY_NUMBER_ZERO,
-      "target_tile_id": target_tile_id,
-      "target_extra_id": EXTRA_NONE,
-      "disturb_player": true
-    };
-    send_request(JSON.stringify(packet));
-  }
 }
 
 /****************************************************************************

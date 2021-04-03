@@ -560,6 +560,7 @@ function handle_ruleset_control(packet)
    *   handle_ruleset_nation_sets
    *   handle_ruleset_style
    *   handle_ruleset_music
+   *   handle_ruleset_multiplier
    *   handle_ruleset_action_auto
    *
    * Maybe also:
@@ -1568,6 +1569,14 @@ function handle_nation_availability(packet)
 }
 
 function handle_ruleset_music(packet)
+{
+  /* TODO: Implement */
+}
+
+/************************************************************************//**
+  Packet ruleset_multiplier handler.
+****************************************************************************/
+function handle_ruleset_multiplier(packet)
 {
   /* TODO: Implement */
 }

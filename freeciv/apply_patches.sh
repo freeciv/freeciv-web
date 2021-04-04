@@ -4,8 +4,6 @@
 # ------------------------------------
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0023-Fix-sell_random_unit-crash-with-recursive-transports.patch is hrm Bug #852938
-#     It was committed as cb2be38ff30d899e9eced77c8e918d9f879c1e59
 # 0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans.patch is hrm Bug #858214
 #     It was committed as f32a2bae0e88f665021b579af12c346b20e86c6d
 # 0001-Fix-clang-9-warnings.patch is hrm Bug #859248
@@ -80,7 +78,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0023-Fix-sell_random_unit-crash-with-recursive-transports"
   "0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans"
   "0001-Fix-clang-9-warnings"
   "0001-Fix-division-by-zero-when-transforming-unit-with-zer"

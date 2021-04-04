@@ -195,7 +195,7 @@ function act_sel_click_function(parent_id,
     return function() {
       var packet = {
         "pid"         : packet_unit_action_query,
-        "diplomat_id" : actor_unit_id,
+        "actor_id"    : actor_unit_id,
         "target_id"   : tgt_id,
         "action_type" : action_id,
         "disturb_player" : true
@@ -761,7 +761,7 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs, act_id)
     if (city_imprs.isSet(i)
         && improvement['sabotage'] > 0) {
       /* The building is in the city. The probability of successfully
-       * sabotaging it as above zero. */
+       * sabotaging it is above zero. */
       buttons.push(create_sabotage_impr_button(improvement, id,
                                                actor_unit['id'],
                                                target_city['id'],

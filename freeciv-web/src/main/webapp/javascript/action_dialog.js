@@ -195,7 +195,7 @@ function act_sel_click_function(parent_id,
     return function() {
       var packet = {
         "pid"         : packet_unit_action_query,
-        "diplomat_id" : actor_unit_id,
+        "actor_id"    : actor_unit_id,
         "target_id"   : tgt_id,
         "action_type" : action_id,
         "disturb_player" : true

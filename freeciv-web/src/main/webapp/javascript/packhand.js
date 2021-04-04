@@ -65,8 +65,7 @@ function handle_server_join_reply(packet)
     client.conn.id = packet['conn_id'];
 
     if (get_client_page() == PAGE_MAIN
-	|| get_client_page() == PAGE_NETWORK
-	|| get_client_page() == PAGE_GGZ) {
+	|| get_client_page() == PAGE_NETWORK) {
       set_client_page(PAGE_START);
     }
 

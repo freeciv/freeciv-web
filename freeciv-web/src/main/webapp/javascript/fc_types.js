@@ -134,7 +134,10 @@ var ACTION_TRANSPORT_DISEMBARK1 = 66;
 var ACTION_TRANSPORT_DISEMBARK2 = 67;
 var ACTION_TRANSPORT_BOARD = 68;
 var ACTION_TRANSPORT_EMBARK = 69;
-var ACTION_COUNT = 70;
+var ACTION_USER_ACTION1 = 70;
+var ACTION_USER_ACTION2 = 71;
+var ACTION_USER_ACTION3 = 72;
+var ACTION_COUNT = 73;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

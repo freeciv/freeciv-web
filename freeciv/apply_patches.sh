@@ -4,8 +4,6 @@
 # ------------------------------------
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0001-Refactor-code-to-avoid-gcc-10-warning.patch is hrm Bug #851728
-#     It was committed as f2da7a48499b1f5bd7bcccd8fdb33814521da1f2
 # 0023-Fix-sell_random_unit-crash-with-recursive-transports.patch is hrm Bug #852938
 #     It was committed as cb2be38ff30d899e9eced77c8e918d9f879c1e59
 # 0005-Fix-ghost-unit-issue-when-unit-is-loaded-to-an-trans.patch is hrm Bug #858214
@@ -53,7 +51,6 @@
 declare -a PATCHLIST=(
   "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
   "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
-  "0001-Refactor-code-to-avoid-gcc-10-warning"
   "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"

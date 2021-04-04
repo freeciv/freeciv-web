@@ -965,13 +965,7 @@ function handle_unit_actions(packet)
      * selection dialog to be answered before requesting data for the next
      * one. This lack of a queue allows it to be cleared here. */
 
-    var unqueue = {
-      "pid"     : packet_unit_sscs_set,
-      "unit_id" : actor_unit_id,
-      "type"    : USSDT_UNQUEUE,
-      "value"   : IDENTITY_NUMBER_ZERO
-    };
-    send_request(JSON.stringify(unqueue));
+    action_decision_clear_want(actor_unit_id);
   }
 
   if (hasActions && disturb_player) {

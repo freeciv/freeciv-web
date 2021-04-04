@@ -93,17 +93,6 @@ function can_actor_unit_move(actor_unit, target_tile)
   return true;
 }
 
-/**************************************************************************
-  Encode a building ID for transfer in the sub_tgt_id field of
-  packet_unit_do_action for targeted sabotage city.
-**************************************************************************/
-function encode_building_id(building_id)
-{
-  /* Building ID is encoded in the value field by adding one so the
-   * building ID -1 (current production) can be transferred. */
-  return building_id + 1;
-}
-
 /***************************************************************************
   Returns a part of an action probability in a user readable format.
 ***************************************************************************/
@@ -733,7 +722,7 @@ function create_sabotage_impr_button(improvement, parent_id,
     text : improvement['name'],
     click : function() {
       request_unit_do_action(act_id, actor_unit_id, target_city_id,
-        encode_building_id(improvement['id']));
+        improvement['id']);
       $("#" + parent_id).remove();
     }
   };

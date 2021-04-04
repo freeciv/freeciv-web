@@ -26,7 +26,6 @@ var PAGE_LOAD = 3;		/* Load saved game page. */
 var PAGE_NETWORK = 4;		/* Connect to network page.  */
 var PAGE_NATION = 5;		/* Select a nation page.  */
 var PAGE_GAME = 6;		/* In game page. */
-var PAGE_GGZ = 7;		/* In game page.  This one must be last. */
 
 var old_page = -1;
 
@@ -61,8 +60,6 @@ function set_client_page(page)
 
   switch (new_page) {
   case PAGE_MAIN:
-    break;
-  case PAGE_GGZ:
     break;
   case PAGE_START:
     break;

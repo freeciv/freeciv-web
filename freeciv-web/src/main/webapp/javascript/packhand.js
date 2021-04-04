@@ -718,7 +718,11 @@ function handle_unit_remove(packet)
     advance_unit_focus();
   }
 
-  /* TODO: Close diplomat dialog if the diplomat is lost */
+  /* Close the action selection dialog if the actor unit is lost */
+  if (action_selection_in_progress_for === punit.id) {
+    action_selection_close();
+  }
+
   /* TODO: Notify agents. */
 
   clear_tile_unit(punit);

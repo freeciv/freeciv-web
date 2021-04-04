@@ -173,6 +173,7 @@ function act_sel_click_function(parent_id,
                                         action_probabilities,
                                         action_id);
 
+      is_more_user_input_needed = true;
       $(parent_id).remove();
     };
   case ACTION_SPY_TARGETED_SABOTAGE_CITY:
@@ -191,6 +192,7 @@ function act_sel_click_function(parent_id,
       };
       send_request(JSON.stringify(packet));
 
+      is_more_user_input_needed = true;
       $(parent_id).remove();
     };
   case ACTION_FOUND_CITY:
@@ -202,6 +204,7 @@ function act_sel_click_function(parent_id,
       };
       send_request(JSON.stringify(packet));
 
+      is_more_user_input_needed = true;
       $(parent_id).remove();
     };
   case ACTION_PILLAGE:
@@ -212,11 +215,13 @@ function act_sel_click_function(parent_id,
     return function() {
       request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
       $(parent_id).remove();
+      action_selection_no_longer_in_progress(actor_unit_id);
     };
   default:
     return function() {
       request_unit_do_action(action_id, actor_unit_id, tgt_id);
       $(parent_id).remove();
+      action_selection_no_longer_in_progress(actor_unit_id);
     };
   }
 }
@@ -258,6 +263,13 @@ function popup_action_selection(actor_unit, action_probabilities,
   var id = "#act_sel_dialog_" + actor_unit['id'];
   $(id).remove();
   $("<div id='act_sel_dialog_" + actor_unit['id'] + "'></div>").appendTo("div#game_page");
+
+  if (action_selection_in_progress_for != IDENTITY_NUMBER_ZERO
+      && action_selection_in_progress_for != actor_unit['id']) {
+    console.log("Looks like unit %d has an action selection dialog open"
+                + " but a dialog for unit %d is about to be opened.",
+                action_selection_in_progress_for, actor_unit['id']);
+  }
 
   var actor_homecity = cities[actor_unit['homecity']];
 
@@ -373,6 +385,7 @@ function popup_action_selection(actor_unit, action_probabilities,
           }
 
           $(id).remove();
+          action_selection_no_longer_in_progress(actor_unit['id']);
         } });
   }
 
@@ -386,6 +399,7 @@ function popup_action_selection(actor_unit, action_probabilities,
           select_tgt_unit(actor_unit,
                           target_tile, tile_units(target_tile));
 
+          is_more_user_input_needed = true;
           $(id).remove();
         } });
   }
@@ -400,6 +414,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                            list_potential_target_extras(actor_unit,
                                                         target_tile));
 
+          is_more_user_input_needed = true;
           $(id).remove();
         } });
   }
@@ -417,6 +432,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                 actor_unit['id'], target_tile['index']);
               auto_attack = true;
               $(id).remove();
+              action_selection_no_longer_in_progress(actor_unit['id']);
             }
           };
           buttons.push(button);
@@ -433,6 +449,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       text    : 'Cancel',
       click   : function() {
         $(id).remove();
+        action_selection_no_longer_in_progress(actor_unit['id']);
       } });
 
   $(id).attr("title",
@@ -443,9 +460,16 @@ function popup_action_selection(actor_unit, action_probabilities,
       modal: true,
       dialogClass: "act_sel_dialog",
       width: "390",
+      close: function() {
+        if (!is_more_user_input_needed) {
+          action_selection_no_longer_in_progress(actor_unit['id']);
+        }
+      },
       buttons: buttons });
 
   $(id).dialog('open');
+  action_selection_in_progress_for = actor_unit['id'];
+  is_more_user_input_needed = false;
 }
 
 /**************************************************************************
@@ -491,6 +515,9 @@ function popup_bribe_dialog(actor_unit, target_unit, cost, act_id)
 
   $(id).dialog({bgiframe: true,
                 modal: true,
+                close: function() {
+                  action_selection_no_longer_in_progress(actor_unit['id']);
+                },
                 buttons: (bribe_possible ? bribe_close_button : close_button),
                 height: "auto",
                 width: "auto"});
@@ -548,6 +575,9 @@ function popup_incite_dialog(actor_unit, target_city, cost, act_id)
 
   $(id).dialog({bgiframe: true,
                 modal: true,
+                close: function() {
+                  action_selection_no_longer_in_progress(actor_unit['id']);
+                },
                 buttons: (incite_possible ? incite_close_buttons : close_button),
                 height: "auto",
                 width: "auto"});
@@ -597,6 +627,9 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
 
   $(id).dialog({bgiframe: true,
                 modal: true,
+                close: function() {
+                  action_selection_no_longer_in_progress(actor_unit['id']);
+                },
                 buttons: (upgrade_possible ? upgrade_close_buttons
                                            : close_button),
                 height: "auto",
@@ -619,6 +652,7 @@ function create_steal_tech_button(parent_id, tech,
     click : function() {
       request_unit_do_action(action_id, actor_id, city_id, tech['id']);
       $("#" + parent_id).remove();
+      action_selection_no_longer_in_progress(actor_id);
     }
   };
 
@@ -687,6 +721,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                      request_unit_do_action(untargeted_action_id,
                        actor_unit['id'], target_city['id']);
                      $("#" + id).remove();
+                     action_selection_no_longer_in_progress(actor_unit['id']);
                    }
                  });
   }
@@ -696,12 +731,16 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                  text : 'Cancel',
                  click : function() {
                    $("#" + id).remove();
+                   action_selection_no_longer_in_progress(actor_unit['id']);
                  }
                });
 
   /* Create the dialog. */
   $("#" + id).dialog({
                        modal: true,
+                       close: function() {
+                         action_selection_no_longer_in_progress(actor_unit['id']);
+                       },
                        buttons: buttons,
                        width: "90%"});
 
@@ -724,6 +763,7 @@ function create_sabotage_impr_button(improvement, parent_id,
       request_unit_do_action(act_id, actor_unit_id, target_city_id,
         improvement['id']);
       $("#" + parent_id).remove();
+      action_selection_no_longer_in_progress(actor_unit_id);
     }
   };
 }
@@ -763,12 +803,16 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs, act_id)
                  text : 'Cancel',
                  click : function() {
                    $("#" + id).remove();
+                   action_selection_no_longer_in_progress(actor_unit['id']);
                  }
                });
 
   /* Create the dialog. */
   $("#" + id).dialog({
                        modal: true,
+                       close: function() {
+                         action_selection_no_longer_in_progress(actor_unit['id']);
+                       },
                        buttons: buttons,
                        width: "90%"});
 
@@ -852,6 +896,9 @@ function select_tgt_unit(actor_unit, target_tile, potential_tgt_units)
       title    : "Target unit selection",
       bgiframe : true,
       modal    : true,
+      close: function() {
+        action_selection_no_longer_in_progress(actor_unit['id']);
+      },
       buttons  : buttons });
 
   $(id).dialog('open');
@@ -980,7 +1027,48 @@ function select_tgt_extra(actor_unit, target_unit,
       title    : "Target extra selection",
       bgiframe : true,
       modal    : true,
+      close: function() {
+        action_selection_no_longer_in_progress(actor_unit['id']);
+      },
       buttons  : buttons });
 
   $(id).dialog('open');
+}
+
+/***********************************************************************//**
+  Closes the action selection dialog
+***************************************************************************/
+function action_selection_close()
+{
+  var id;
+  var actor_unit_id = action_selection_in_progress_for;
+
+  id = "#act_sel_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "#bribe_unit_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "#incite_city_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "#upgrade_unit_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "stealtech_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "sabotage_impr_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "#" + "sel_tgt_unit_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = "#" + "sel_tgt_extra_dialog_" + actor_unit_id;
+  $(id).remove();
+
+  id = $("#city_name_dialog");
+  $(id).remove();
+
+  action_selection_no_longer_in_progress(actor_unit_id);
 }

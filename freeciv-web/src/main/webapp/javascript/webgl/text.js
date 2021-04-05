@@ -46,7 +46,7 @@ function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, tr
     vertexShader: document.getElementById('labels_vertex_shh').textContent,
     fragmentShader: document.getElementById('tex_fragment_shh').textContent,
     uniforms: {
-      texture: { value: texture },
+      tex: { value: texture },
       u_scale_factor: { value: width_input / canvas.width }
     }
   });

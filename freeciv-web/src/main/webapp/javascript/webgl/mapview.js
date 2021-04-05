@@ -83,7 +83,7 @@ function webgl_start_renderer()
     enable_antialiasing = false;
   }
 
-  maprenderer = new THREE.WebGL1Renderer( { antialias: enable_antialiasing } );
+  maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing } );
 
   if (is_small_screen() || $(window).width() <= 1366) {
     camera_dy = 390;

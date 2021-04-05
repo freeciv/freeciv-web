@@ -38,13 +38,14 @@ function init_webgl_renderer()
   // load Three.js dynamically.
   $.ajax({
       async: false,
-      url: "/javascript/webgl/libs/three.min.js",
+      url: "/javascript/webgl/libs/three.min.js?" + ts ,
       dataType: "script"
   });
+  console.log("Three.js " + THREE.REVISION);
 
   $.ajax({
     async: false,
-    url: "/javascript/webgl/libs/webgl-client.min.js",
+    url: "/javascript/webgl/libs/webgl-client.min.js?" + ts,
     dataType: "script"
   });
 

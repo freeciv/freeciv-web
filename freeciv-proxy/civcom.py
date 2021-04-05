@@ -125,6 +125,10 @@ class CivCom(Thread):
                 "Server connection closed. Removing civcom thread for " +
                 self.username)
 
+        # Flush buffers
+        self.send_packets_to_client()
+        self.send_packets_to_civserver()
+
         if (hasattr(self.civwebserver, "civcoms") and self.key in list(self.civwebserver.civcoms.keys())):
             del self.civwebserver.civcoms[self.key]
 

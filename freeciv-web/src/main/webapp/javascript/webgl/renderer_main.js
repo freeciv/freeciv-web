@@ -75,8 +75,6 @@ function init_webgl_renderer()
 
   init_sprites();
 
-  var iOS = (platform.os.family == "iOS");
-
   var renderer_name = "-";
   var gl = document.createElement('canvas').getContext('webgl');
   if (gl != null) {

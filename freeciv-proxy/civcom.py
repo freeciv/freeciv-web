@@ -58,6 +58,7 @@ class CivCom(Thread):
             self.send_error_to_client(
                 "Proxy unable to connect to civserver. Error: %s" %
                 (reason))
+            self.close_connection()
             return
 
         # send initial login packet to civserver

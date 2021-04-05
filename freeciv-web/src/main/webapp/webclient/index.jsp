@@ -10,7 +10,6 @@ String googleSigninClientKey = null;
 String trackJsToken = null;
 String captchaKey = null;
 boolean fcwDebug = false;
-String fcwMinified = "";
 try {
   Properties prop = new Properties();
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
@@ -21,7 +20,6 @@ try {
 
   String debugParam = request.getParameter("debug");
   fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
-  fcwMinified = fcwDebug ? "" : ".min";
 } catch (IOException e) {
   e.printStackTrace();
 }
@@ -31,7 +29,7 @@ try {
 <head>
 <title>Freeciv-web</title>
 <link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/webclient<%= fcwMinified %>.css?ts=${initParam.buildTimeStamp}" />
+<link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 <meta name="description" content="Freeciv-Web is a Free and Open Source empire-building strategy game inspired by the history of human civilization.">
 <% if (trackJsToken != null) { %>
 <script type="text/javascript">window._trackJs = { token: '<%= trackJsToken %>' };</script>
@@ -40,13 +38,12 @@ try {
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 var fcwDebug=<%= fcwDebug %>;
-var fcwMinified="<%= fcwMinified %>";
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
 <script src="https://apis.google.com/js/platform.js"></script>
 
-<script type="text/javascript" src="/javascript/webclient<%= fcwMinified %>.js?ts=${initParam.buildTimeStamp}"></script>
+<script type="text/javascript" src="/javascript/webclient.min.js?ts=${initParam.buildTimeStamp}"></script>
 
 <script type="text/javascript" src="/music/audio.min.js"></script>
 

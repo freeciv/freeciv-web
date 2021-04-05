@@ -44,7 +44,7 @@ function init_webgl_renderer()
 
   $.ajax({
     async: false,
-    url: "/javascript/webgl/libs/webgl-client" + fcwMinified + ".js",
+    url: "/javascript/webgl/libs/webgl-client.min.js",
     dataType: "script"
   });
 

@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<derived-webapp.dir>${basedir}/src/derived/webapp</derived-webapp.dir>
-		<generated-js.dir>${project.build.directory}/generated-sources/javascript</generated-js.dir>
+		<generated-js.dir>${project.build.directory}/${project.build.finalName}/javascript</generated-js.dir>
 		<skip-minify-js>false</skip-minify-js>
 	</properties>
 
@@ -242,6 +242,28 @@ Rerun the sync-js-hand.js script.
 								</resources>
 							</configuration>
 						</execution>
+						<execution>
+							<!-- I just want to have all the js together -->
+							<id>copy-javascript</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/${project.build.finalName}/javascript</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${basedir}/src/main/webapp/javascript</directory>
+									</resource>
+									<resource>
+										<directory>${basedir}/node_modules/handlebars/dist</directory>
+										<includes>
+											<include>handlebars.runtime.js</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
 					</executions>
 				</plugin>
 
@@ -346,6 +368,7 @@ Rerun the sync-js-hand.js script.
 									<include>libs/*.js</include>
 									<include>2dcanvas/*.js</include>
 									<include>webgl/*.js</include>
+									<include>2dcanvas/tilespec-constants.js</include>
 								</includes>
 								<excludes>
 									<exclude>webclient.js</exclude>

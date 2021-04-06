@@ -1,7 +1,3 @@
-/**
- * @author Slayvin / http://slayvin.net
- */
-
 THREE.Reflector = function ( geometry, options ) {
 
 	THREE.Mesh.call( this, geometry );
@@ -38,8 +34,7 @@ THREE.Reflector = function ( geometry, options ) {
 	var parameters = {
 		minFilter: THREE.LinearFilter,
 		magFilter: THREE.LinearFilter,
-		format: THREE.RGBFormat,
-		stencilBuffer: false
+		format: THREE.RGBFormat
 	};
 
 	var renderTarget = new THREE.WebGLRenderTarget( textureWidth, textureHeight, parameters );
@@ -56,9 +51,9 @@ THREE.Reflector = function ( geometry, options ) {
 		vertexShader: shader.vertexShader
 	} );
 
-	material.uniforms[ "tDiffuse" ].value = renderTarget.texture;
-	material.uniforms[ "color" ].value = color;
-	material.uniforms[ "textureMatrix" ].value = textureMatrix;
+	material.uniforms[ 'tDiffuse' ].value = renderTarget.texture;
+	material.uniforms[ 'color' ].value = color;
+	material.uniforms[ 'textureMatrix' ].value = textureMatrix;
 
 	this.material = material;
 
@@ -243,4 +238,3 @@ THREE.Reflector.ReflectorShader = {
 		'}'
 	].join( '\n' )
 };
-

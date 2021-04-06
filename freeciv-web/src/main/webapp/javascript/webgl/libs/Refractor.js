@@ -1,8 +1,3 @@
-/**
- * @author Mugen87 / https://github.com/Mugen87
- *
- */
-
 THREE.Refractor = function ( geometry, options ) {
 
 	THREE.Mesh.call( this, geometry );
@@ -35,8 +30,7 @@ THREE.Refractor = function ( geometry, options ) {
 	var parameters = {
 		minFilter: THREE.LinearFilter,
 		magFilter: THREE.LinearFilter,
-		format: THREE.RGBFormat,
-		stencilBuffer: false
+		format: THREE.RGBFormat
 	};
 
 	var renderTarget = new THREE.WebGLRenderTarget( textureWidth, textureHeight, parameters );
@@ -56,9 +50,9 @@ THREE.Refractor = function ( geometry, options ) {
 		transparent: true // ensures, refractors are drawn from farthest to closest
 	} );
 
-	this.material.uniforms[ "color" ].value = color;
-	this.material.uniforms[ "tDiffuse" ].value = renderTarget.texture;
-	this.material.uniforms[ "textureMatrix" ].value = textureMatrix;
+	this.material.uniforms[ 'color' ].value = color;
+	this.material.uniforms[ 'tDiffuse' ].value = renderTarget.texture;
+	this.material.uniforms[ 'textureMatrix' ].value = textureMatrix;
 
 	// functions
 
@@ -120,7 +114,7 @@ THREE.Refractor = function ( geometry, options ) {
 		return function updateVirtualCamera( camera ) {
 
 			virtualCamera.matrixWorld.copy( camera.matrixWorld );
-			virtualCamera.matrixWorldInverse.getInverse( virtualCamera.matrixWorld );
+			virtualCamera.matrixWorldInverse.copy( virtualCamera.matrixWorld ).invert();
 			virtualCamera.projectionMatrix.copy( camera.projectionMatrix );
 			virtualCamera.far = camera.far; // used in WebGLBackground
 
@@ -319,4 +313,3 @@ THREE.Refractor.RefractorShader = {
 
 	].join( '\n' )
 };
-

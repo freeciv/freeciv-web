@@ -863,15 +863,6 @@ function city_name_dialog(suggested_name, unit_id) {
   blur_input_on_touchdevice();
   keyboard_input=false;
 
-  if (speech_recogntition_enabled) {
-    var name = $("#city_name_req").val();
-    var actor_unit = game_find_unit_by_number(unit_id);
-    request_unit_do_action(ACTION_FOUND_CITY,
-      unit_id, actor_unit['tile'], 0, encodeURIComponent(name));
-	$("#city_name_dialog").remove();
-    keyboard_input=true;
-    action_selection_no_longer_in_progress(unit_id);
-  }
 }
 
 /**************************************************************************

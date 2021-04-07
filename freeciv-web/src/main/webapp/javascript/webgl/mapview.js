@@ -141,14 +141,11 @@ function init_webgl_mapview() {
     water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
     scene.add( water );
 
-
-  if (graphics_quality > QUALITY_LOW) {
-    var sunGeometry = new THREE.PlaneGeometry( 1000, 1000, 2, 2);
-    sunGeometry.rotateX( Math.PI / 2 );
-    sunGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 800, Math.floor(mapview_model_height / 3));
-    var sunMesh = new THREE.Mesh( sunGeometry, webgl_materials['sun'] );
-    scene.add(sunMesh);
-  }
+  var sunGeometry = new THREE.PlaneGeometry( 1000, 1000, 2, 2);
+  sunGeometry.rotateX( Math.PI / 2 );
+  sunGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 800, Math.floor(mapview_model_height / 3));
+  var sunMesh = new THREE.Mesh( sunGeometry, webgl_materials['sun'] );
+  scene.add(sunMesh);
 
   /* heightmap image */
   create_heightmap();

@@ -85,10 +85,6 @@ function handle_server_join_reply(packet)
     }
 
     if (renderer == RENDERER_WEBGL && !observing) {
-       if (graphics_quality == QUALITY_LOW) {
-         // WebGL renderer on mobile devices needs to use very little RAM.
-         send_message("/set size 2");
-       }
        // Reduce the amount of rivers, it's kind of ugly at the moment.
        send_message("/set wetness 25");
 

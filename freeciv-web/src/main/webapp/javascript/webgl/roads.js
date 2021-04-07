@@ -36,9 +36,8 @@ function init_roads_image()
     roads_texture.needsUpdate = true;
   };
 
-  if (graphics_quality == QUALITY_LOW) setInterval(update_roads_image, 10000);
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_roads_image, 3000);
-  if (graphics_quality == QUALITY_HIGH) setInterval(update_roads_image, 1500);
+  if (graphics_quality == QUALITY_HIGH) setInterval(update_roads_image, 1200);
 
 }
 

@@ -593,7 +593,6 @@ function pregame_settings()
 	    "<table id='settings_table'>" +
 	    "<tr title='Graphics quality level'><td>Graphics quality:</td>" +
         	  "<td><select name='graphics_quality' id='graphics_quality'>" +
-              "<option value='1'>Low</option>" +
               "<option value='2'>Medium</option>" +
               "<option value='3'>High</option>" +
               "</select></td></tr>"+
@@ -704,12 +703,7 @@ function pregame_settings()
   if (stored_antialiasing_setting != null && stored_antialiasing_setting == "false") {
       $("#3d_antialiasing_setting").prop("checked", false);
       antialiasing_setting = false;
-  } else if (graphics_quality == QUALITY_LOW) {
-    antialiasing_setting = false;
-    simpleStorage.set("antialiasing_setting", "false");
-    $("#3d_antialiasing_setting").prop("checked", false);
   }
-
 
   $('#3d_antialiasing_setting').change(function() {
     antialiasing_setting = !antialiasing_setting;
@@ -1029,9 +1023,7 @@ function show_intro_dialog(title, message) {
       console.error(err);
     }
     intro_html += "<span style='color: #800000;'><small>The 3D WebGL version of Freeciv-web requires WebGL 3D hardware. Graphics level: ";
-    if (graphics_quality == QUALITY_LOW) {
-      intro_html += "Low quality.";
-    } else if (graphics_quality == QUALITY_MEDIUM) {
+    if (graphics_quality == QUALITY_MEDIUM) {
       intro_html += "Medium quality.";
     } else {
       intro_html += "High quality.";

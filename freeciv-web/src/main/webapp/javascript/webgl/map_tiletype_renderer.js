@@ -43,7 +43,6 @@ function init_map_tiletype_image()
      map_texture.needsUpdate = true;
   };
 
-  if (graphics_quality == QUALITY_LOW) setInterval(update_tiletypes_image, 120000);
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_tiletypes_image, 80000);
   if (graphics_quality == QUALITY_HIGH) setInterval(update_tiletypes_image, 60000);
 
@@ -57,8 +56,7 @@ function init_map_tiletype_image()
 ****************************************************************************/
 function generate_map_tiletype_grid() {
 
-  if (graphics_quality == QUALITY_LOW) map_tiletype_resolution = 1024;
-  if (graphics_quality == QUALITY_MEDIUM) map_tiletype_resolution = 2048;
+  if (graphics_quality == QUALITY_MEDIUM) map_tiletype_resolution = 4096;
   if (graphics_quality == QUALITY_HIGH) map_tiletype_resolution = 4096;
 
   var row;
@@ -79,14 +77,11 @@ function generate_map_tiletype_grid() {
   // randomize tile edges
   var num_iterations;
   var change_probability = 0.6;
-  if (graphics_quality == QUALITY_LOW) {
-    num_iterations = 0;
-  }
   if (graphics_quality == QUALITY_MEDIUM) {
     num_iterations = 2;
   }
   if (graphics_quality == QUALITY_HIGH) {
-    num_iterations = 3;
+    num_iterations = 4;
   }
   for (var i = 0; i < num_iterations; i++) {
     for (var x = 0; x < map_tiletype_resolution - 2; x++) {

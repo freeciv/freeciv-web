@@ -109,7 +109,6 @@ function initial_benchmark_check()
     }
 
     var quality_string = "";
-    if (graphics_quality == QUALITY_LOW) quality_string = "Low quality";
     if (graphics_quality == QUALITY_MEDIUM) quality_string = "Medium quality";
     if (graphics_quality == QUALITY_HIGH) quality_string = "High quality";
 

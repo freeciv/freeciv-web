@@ -52,8 +52,8 @@ function init_borders_image()
     borders_texture.needsUpdate = true;
   };
 
-  if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 20000);
-  if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 10000);
+  if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 15000);
+  if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 4000);
 }
 
 /****************************************************************************

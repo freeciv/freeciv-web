@@ -18,7 +18,7 @@
 ***********************************************************************/
 
 var texture_cache = {};
-var webgl_mapview_font = 'Bold 21px Georgia, serif';
+var webgl_mapview_font = 'Bold 34px Georgia, serif';
 
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
@@ -63,8 +63,8 @@ function canvas_to_user_facing_mesh(canvas, width_input, width_final, height, tr
 function create_city_label(pcity)
 {
   var canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 32;
+  canvas.width = 512;
+  canvas.height = 64;
   var ctx = canvas.getContext('2d');
   pcity['label_canvas'] = canvas;
 
@@ -134,8 +134,8 @@ function create_city_label(pcity)
     }
   }
 
-  if (width > 256) width = 256;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.6), 13, true, "city_" + pcity['id']);
+  if (width > 512) width = 512;
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 26, true, "city_" + pcity['id']);
 }
 
 /****************************************************************************
@@ -147,8 +147,8 @@ function update_city_label(pcity)
   var canvas = pcity['label_canvas'];
   if (canvas == null) {
     canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 32;
+    canvas.width = 512;
+    canvas.height = 64;
     pcity['label_canvas'] = canvas;
   }
 
@@ -231,8 +231,8 @@ function update_city_label(pcity)
 function create_unit_label(punit)
 {
   var canvas1 = document.createElement('canvas');
-  canvas1.width = 16;
-  canvas1.height = 16;
+  canvas1.width = 32;
+  canvas1.height = 32;
   var context1 = canvas1.getContext('2d');
   context1.font = "Bold 16px Arial";
   context1.fillStyle = "rgba(222,255,0, 1.0)";
@@ -244,7 +244,7 @@ function create_unit_label(punit)
   context1.strokeText(text, 0, 15);
   context1.fillText(text, 0, 15);
 
-  return canvas_to_user_facing_mesh(canvas1, width, 10, 13, true, get_unit_activity_text(punit));
+  return canvas_to_user_facing_mesh(canvas1, width, 10, 26, true, get_unit_activity_text(punit));
 }
 
 /****************************************************************************
@@ -263,8 +263,8 @@ function create_map_tile_label(ptile)
   if (ptile['label'] == null || ptile['label'].length == 0) return null;
 
   var canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 32;
+  canvas.width = 512;
+  canvas.height = 64;
   var ctx = canvas.getContext('2d');
 
 
@@ -274,7 +274,7 @@ function create_map_tile_label(ptile)
 
   // Name and size
   var label = ptile['label'];
-  ctx.font = 'Bold 22px Arial';
+  ctx.font = 'Bold 36px Arial';
   var txt_measure = ctx.measureText(label);
   // Background
   var background_color = "rgba(0,0,0,0.5)";
@@ -287,8 +287,8 @@ function create_map_tile_label(ptile)
 
   width += txt_measure.width + 11 /* padding */;
 
-  if (width > 256) width = 256;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.7), 12, true, "ptile_" + ptile['label']);
+  if (width > 512) width = 512;
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 22, true, "ptile_" + ptile['label']);
 }
 
 /**********************************************************************

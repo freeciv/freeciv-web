@@ -17,7 +17,6 @@
 
 ***********************************************************************/
 
-var QUALITY_LOW = 1;    // low quality, no antialiasing. Default for mobile.
 var QUALITY_MEDIUM = 2; // medium quality.
 var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
 
@@ -90,7 +89,7 @@ function init_webgl_renderer()
     graphics_quality = stored_graphics_quality_setting;
   } else if (renderer_name.indexOf("Mesa") != -1 || renderer_name.indexOf("Intel") != -1 || renderer_name.indexOf("DRI") != -1) {
     // These are renderers which are likely to be slow.
-    graphics_quality = QUALITY_LOW;
+    graphics_quality = QUALITY_MEDIUM;
   } else {
     graphics_quality = QUALITY_HIGH; //default value
   }

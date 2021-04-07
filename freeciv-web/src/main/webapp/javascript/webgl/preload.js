@@ -115,7 +115,6 @@ function webgl_preload()
 
   /* Preload terrain tile textures.  */
   var imgurl;
-  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/terrains.png";
   if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/terrains.png";
   if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/terrains.png";
 
@@ -126,21 +125,14 @@ function webgl_preload()
                 webgl_textures["terrains"].image = image;
                 webgl_textures["terrains"].wrapS = THREE.RepeatWrapping;
                 webgl_textures["terrains"].wrapT = THREE.RepeatWrapping;
-                if (graphics_quality == QUALITY_LOW) {
-                  webgl_textures["terrains"].magFilter = THREE.NearestFilter;
-                  webgl_textures["terrains"].minFilter = THREE.NearestFilter;
-                } else {
-                  webgl_textures["terrains"].magFilter = THREE.LinearFilter;
-                  webgl_textures["terrains"].minFilter = THREE.LinearFilter;
-                }
-
+                webgl_textures["terrains"].magFilter = THREE.LinearFilter;
+                webgl_textures["terrains"].minFilter = THREE.LinearFilter;
                 webgl_textures["terrains"].needsUpdate = true;
             }
     })(imgurl)
   );
 
   /* Preload road textures. */
-  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/roads.png";
   if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/roads.png";
   if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/roads.png";
 
@@ -151,21 +143,14 @@ function webgl_preload()
                 webgl_textures["roads"].image = image;
                 webgl_textures["roads"].wrapS = THREE.RepeatWrapping;
                 webgl_textures["roads"].wrapT = THREE.RepeatWrapping;
-                if (graphics_quality == QUALITY_LOW) {
-                  webgl_textures["roads"].magFilter = THREE.NearestFilter;
-                  webgl_textures["roads"].minFilter = THREE.NearestFilter;
-                } else {
-                  webgl_textures["roads"].magFilter = THREE.LinearFilter;
-                  webgl_textures["roads"].minFilter = THREE.LinearFilter;
-                }
-
+                webgl_textures["roads"].magFilter = THREE.LinearFilter;
+                webgl_textures["roads"].minFilter = THREE.LinearFilter;
                 webgl_textures["roads"].needsUpdate = true;
             }
     })(imgurl)
   );
 
   /* Preload railroads textures. */
-  if (graphics_quality == QUALITY_LOW) imgurl = "/textures/small/railroads.png";
   if (graphics_quality == QUALITY_MEDIUM) imgurl = "/textures/medium/railroads.png";
   if (graphics_quality == QUALITY_HIGH) imgurl = "/textures/large/railroads.png";
 
@@ -176,14 +161,8 @@ function webgl_preload()
                 webgl_textures["railroads"].image = image;
                 webgl_textures["railroads"].wrapS = THREE.RepeatWrapping;
                 webgl_textures["railroads"].wrapT = THREE.RepeatWrapping;
-                if (graphics_quality == QUALITY_LOW) {
-                  webgl_textures["railroads"].magFilter = THREE.NearestFilter;
-                  webgl_textures["railroads"].minFilter = THREE.NearestFilter;
-                } else {
-                  webgl_textures["railroads"].magFilter = THREE.LinearFilter;
-                  webgl_textures["railroads"].minFilter = THREE.LinearFilter;
-                }
-
+                webgl_textures["railroads"].magFilter = THREE.LinearFilter;
+                webgl_textures["railroads"].minFilter = THREE.LinearFilter;
                 webgl_textures["railroads"].needsUpdate = true;
             }
     })(imgurl)

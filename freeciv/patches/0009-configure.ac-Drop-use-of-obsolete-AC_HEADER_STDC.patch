@@ -1,0 +1,30 @@
+From 6dc92a168d44608bea7ede94de7ee7124c22a866 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 30 Sep 2020 11:28:35 +0300
+Subject: [PATCH 9/9] configure.ac: Drop use of obsolete AC_HEADER_STDC
+
+Autoconf-2.70 was giving a warning about it. We didn't use its
+results anyway (with any version of autoconf).
+
+See hrm Feature #889544
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ configure.ac | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index c528cd36c1..7b12d9c454 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1225,7 +1225,6 @@ fi
+ AC_CHECK_LIB(nls,main)
+ 
+ dnl Checks for header files.
+-AC_HEADER_STDC
+ AC_HEADER_SYS_WAIT
+ AC_CHECK_HEADERS([fcntl.h sys/utsname.h \
+                   sys/file.h signal.h strings.h execinfo.h \
+-- 
+2.28.0
+

@@ -1,0 +1,33 @@
+From b6aa51e0722557721a9b474eb75aceeaec4f5f86 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 8 Nov 2020 15:45:42 +0200
+Subject: [PATCH 05/10] Fix gcc-11 stringop-overread error at comparing
+ scenario.authors fields
+
+See hrm Bug #894423
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/edithand.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/server/edithand.c b/server/edithand.c
+index eb8eb0cdb8..973cf6d54c 100644
+--- a/server/edithand.c
++++ b/server/edithand.c
+@@ -1428,8 +1428,11 @@ void handle_edit_game(struct connection *pc,
+     changed = TRUE;
+   }
+ 
++  FC_STATIC_ASSERT(sizeof(packet->scenario_authors) == sizeof(game.scenario.authors),
++                   scen_authors_field_size_mismatch);
++
+   if (0 != strncmp(packet->scenario_authors, game.scenario.authors,
+-                   MAX_LEN_PACKET)) {
++                   sizeof(game.scenario.authors))) {
+     sz_strlcpy(game.scenario.authors, packet->scenario_authors);
+     changed = TRUE;
+   }
+-- 
+2.28.0
+

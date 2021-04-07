@@ -20,6 +20,18 @@
 #     It was committed as 7527315835c16179e68080fe8f7244c76152b656
 # 0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886331
 #     It was committed as 71eb308f799fd62920077d68d9109448d47cc7a8
+# 0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME.patch
+#     is hrm Feature #889543.
+#     It was committed as 20b75101a6d7e98eef27fc49dd2304e6262cc584
+# 0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC.patch
+#     is hrm Feature #889544
+#     It was committed as 54267cb9596570dad2aef2db720789d80b8c6cf7
+# 0025-Don-t-hide-allied-stealth-units-on-seen-tiles.patch
+#     is hrm Bug #764976
+#     It was committed as 9fd4cd5397c25f99a4cba4fc27700d54bf087898
+# 0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen.patch
+#     is hrm Bug #894423
+#     It was committed as f34a882ddf9f7065acb39628fc6cb5b2cf2975dd
 # 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
 #     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
@@ -48,6 +60,10 @@ declare -a PATCHLIST=(
   "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
   "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
   "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
+  "0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME"
+  "0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC"
+  "0025-Don-t-hide-allied-stealth-units-on-seen-tiles"
+  "0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"

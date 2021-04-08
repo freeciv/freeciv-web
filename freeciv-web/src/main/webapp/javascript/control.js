@@ -759,7 +759,7 @@ function ask_server_for_actions(punit)
 
   ptile = index_to_tile(punit['action_decision_tile']);
 
-  if (punit != null && ptile != null) {
+  if (ptile != null) {
     /* Ask the server about what actions punit can do. The server's
      * reply will pop up an action selection dialog for it. */
 

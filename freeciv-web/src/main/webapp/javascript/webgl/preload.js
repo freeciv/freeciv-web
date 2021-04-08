@@ -227,7 +227,7 @@ function webgl_get_model(filename)
 ****************************************************************************/
 function get_flag_shield_mesh(key)
 {
-  if (meshes[key] != null) return meshes[key].clone();
+  if (meshes[key] != null) return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
   if (sprites[key] == null || key.substring(0,8) != "f.shield") {
     console.log("Invalid flag shield key: " + key);
     return null;
@@ -243,7 +243,7 @@ function get_flag_shield_mesh(key)
                 0,0,32,16);
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 12, 13, true);
-  return meshes[key].clone();
+  return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
 }
 
 /****************************************************************************
@@ -251,7 +251,7 @@ function get_flag_shield_mesh(key)
 ****************************************************************************/
 function get_extra_mesh(key)
 {
-  if (meshes[key] != null) return meshes[key].clone();
+  if (meshes[key] != null) return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1);
   if (sprites[key] == null ) {
     console.log("Invalid extra key: " + key);
     return null;
@@ -266,7 +266,7 @@ function get_extra_mesh(key)
                 0,0,64,32);
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 26, 16, true);
-  return meshes[key].clone();
+  return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1);
 }
 
 /****************************************************************************
@@ -275,7 +275,7 @@ function get_extra_mesh(key)
 function get_unit_explosion_mesh(frame)
 {
   var key = 'explode.unit_' + frame;
-  if (meshes[key] != null) return meshes[key].clone();
+  if (meshes[key] != null) return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1);
   if (sprites[key] == null) {
     console.log("Invalid unit explosion key: " + key);
     return null;
@@ -290,7 +290,7 @@ function get_unit_explosion_mesh(frame)
                 0,0,32,32);
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 32, 32, 32, true);
-  return meshes[key].clone();
+  return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1);
 }
 
 /****************************************************************************
@@ -299,7 +299,7 @@ function get_unit_explosion_mesh(frame)
 function get_nuke_explosion_mesh(frame)
 {
   var key = 'explode.nuke';
-  if (meshes[key] != null) return meshes[key].clone();
+  if (meshes[key] != null) return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
   if (sprites[key] == null) {
     console.log("Invalid nuke explosion key: " + key);
     return null;
@@ -314,7 +314,7 @@ function get_nuke_explosion_mesh(frame)
                 0,0,sprites[key].width,sprites[key].height);
 
   meshes[key] = canvas_to_user_facing_mesh(ecanvas, 180, 180, 176, true);
-  return meshes[key].clone();
+  return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ function get_unit_health_mesh(punit)
   var healthpercent = 10 * Math.floor((10 * hp) / max_hp);
   var key = "unit_health_" + healthpercent;
 
-  if (meshes[key] != null) return meshes[key].clone();
+  if (meshes[key] != null) return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
 
   var fcanvas = document.createElement("canvas");
   fcanvas.width = 32;
@@ -340,5 +340,5 @@ function get_unit_health_mesh(punit)
                 0,0,32,16);
 
   meshes[key] = canvas_to_user_facing_mesh(fcanvas, 32, 18, 3, true);
-  return meshes[key].clone();
+  return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1)
 }

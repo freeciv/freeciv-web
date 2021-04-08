@@ -64,7 +64,7 @@ function create_city_label(pcity)
 {
   var canvas = document.createElement('canvas');
   canvas.width = 512;
-  canvas.height = 64;
+  canvas.height = 42;
   var ctx = canvas.getContext('2d');
   pcity['label_canvas'] = canvas;
 
@@ -135,7 +135,7 @@ function create_city_label(pcity)
   }
 
   if (width > 512) width = 512;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 26, true, "city_" + pcity['id']);
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 19, true, "city_" + pcity['id']);
 }
 
 /****************************************************************************
@@ -148,7 +148,7 @@ function update_city_label(pcity)
   if (canvas == null) {
     canvas = document.createElement('canvas');
     canvas.width = 512;
-    canvas.height = 64;
+    canvas.height = 42;
     pcity['label_canvas'] = canvas;
   }
 
@@ -264,7 +264,7 @@ function create_map_tile_label(ptile)
 
   var canvas = document.createElement('canvas');
   canvas.width = 512;
-  canvas.height = 64;
+  canvas.height = 40;
   var ctx = canvas.getContext('2d');
 
 
@@ -288,7 +288,7 @@ function create_map_tile_label(ptile)
   width += txt_measure.width + 11 /* padding */;
 
   if (width > 512) width = 512;
-  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 22, true, "ptile_" + ptile['label']);
+  return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 20, true, "ptile_" + ptile['label']);
 }
 
 /**********************************************************************

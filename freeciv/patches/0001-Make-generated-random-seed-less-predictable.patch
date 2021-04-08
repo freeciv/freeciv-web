@@ -1,6 +1,6 @@
-From 2cd28fe1fb28c63991688caaa92c1f752ea33d3c Mon Sep 17 00:00:00 2001
+From a56144bd28e2a19707cee5c5c3028a12c634d0ff Mon Sep 17 00:00:00 2001
 From: Marko Lindqvist <cazfi74@gmail.com>
-Date: Tue, 16 Mar 2021 22:33:36 +0200
+Date: Mon, 15 Mar 2021 17:13:38 +0200
 Subject: [PATCH] Make generated random seed less predictable
 
 Patch by Ilkka Virta and myself
@@ -9,24 +9,25 @@ See hrm Feature #914184
 
 Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 ---
- configure.ac                  |   6 ++
- meson.build                   |   1 +
- server/srv_main.c             |   3 +-
- translations/core/POTFILES.in |   1 +
- utility/Makefile.am           |   2 +
- utility/randseed.c            | 192 ++++++++++++++++++++++++++++++++++
- utility/randseed.h            |  29 +++++
- 7 files changed, 233 insertions(+), 1 deletion(-)
+ configure.ac                     |   6 +
+ gen_headers/meson_fc_config.h.in |   6 +
+ meson.build                      |   3 +
+ server/srv_main.c                |   3 +-
+ translations/core/POTFILES.in    |   1 +
+ utility/Makefile.am              |   2 +
+ utility/randseed.c               | 192 +++++++++++++++++++++++++++++++
+ utility/randseed.h               |  29 +++++
+ 8 files changed, 241 insertions(+), 1 deletion(-)
  create mode 100644 utility/randseed.c
  create mode 100644 utility/randseed.h
 
 diff --git a/configure.ac b/configure.ac
-index 73476b4175..717389364c 100644
+index 9af987efd0..507f6340a2 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1362,6 +1362,12 @@ AC_CHECK_FUNCS([bind connect fileno flock ftime gethostbyname gethostname \
-                 getline _strcoll stricoll _stricoll strcasecoll \
-                 backtrace setenv putenv])
+@@ -1438,6 +1438,12 @@ AC_CHECK_FUNCS([strerror strstr uname nanosleep usleep])
+ AC_CHECK_FUNCS([getline _strcoll stricoll _stricoll strcasecoll])
+ AC_CHECK_FUNCS([backtrace setenv putenv])
  
 +dnl Possible random sources on Unixen
 +AC_CHECK_FUNCS([getentropy clock_gettime])
@@ -34,23 +35,35 @@ index 73476b4175..717389364c 100644
 +dnl TODO: Reimplement this check, in a cross-compiling friendly way
 +dnl AC_CHECK_FILES([/dev/urandom])
 +
- dnl Possible "-Wmissing-declarations" and "-Werror" will prune out
- dnl cases where we should not use _mkdir() even if it's possible to link against it
- fc_save_CPPFLAGS="$CPPFLAGS"
-diff --git a/meson.build b/meson.build
-index 4cff46daa4..516550bbbc 100644
---- a/meson.build
-+++ b/meson.build
-@@ -243,6 +243,7 @@ common_lib = library('freeciv',
-   'utility/netfile.c',
-   'utility/netintf.c',
-   'utility/rand.c',
-+  'utility/randseed.c',
-   'utility/registry.c',
-   'utility/registry_ini.c',
-   'utility/registry_xml.c',
+ AC_CHECK_FUNCS([_mkdir])
+ 
+ AC_MSG_CHECKING(for working gettimeofday)
+diff --git a/gen_headers/meson_fc_config.h.in b/gen_headers/meson_fc_config.h.in
+index 952ab3968d..6f1a822402 100644
+--- a/gen_headers/meson_fc_config.h.in
++++ b/gen_headers/meson_fc_config.h.in
+@@ -203,6 +203,9 @@
+ /* bind() available */
+ #mesondefine HAVE_BIND
+ 
++/* clock_gettime() available */
++#mesondefine HAVE_CLOCK_GETTIME
++
+ /* connect() available */
+ #mesondefine HAVE_CONNECT
+ 
+@@ -224,6 +227,9 @@
+ /* getaddrinfo() available */
+ #mesondefine HAVE_GETADDRINFO
+ 
++/* getentropy() available */
++#mesondefine HAVE_GETENTROPY
++
+ /* gethostbyname() available */
+ #mesondefine HAVE_GETHOSTBYNAME
+ 
 diff --git a/server/srv_main.c b/server/srv_main.c
-index 7ba6dfd585..9c0923b1da 100644
+index 5624c47f86..2cb045dfba 100644
 --- a/server/srv_main.c
 +++ b/server/srv_main.c
 @@ -54,6 +54,7 @@
@@ -71,10 +84,10 @@ index 7ba6dfd585..9c0923b1da 100644
       /* Log command to reproduce the gameseed */
      log_testmatic("set gameseed %d", game.server.seed);
 diff --git a/translations/core/POTFILES.in b/translations/core/POTFILES.in
-index f697a59f36..7975b65d5c 100644
+index 2df73505a0..bf7c614a82 100644
 --- a/translations/core/POTFILES.in
 +++ b/translations/core/POTFILES.in
-@@ -411,6 +411,7 @@ utility/inputfile.c
+@@ -383,6 +383,7 @@ utility/inputfile.c
  utility/log.c
  utility/netfile.c
  utility/netintf.c

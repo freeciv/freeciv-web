@@ -4,8 +4,6 @@
 # ------------------------------------
 # F3 is hrm Feature #868944
 #     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0001-Fix-clang-9-warnings.patch is hrm Bug #859248
-#     It was committed as 5fc3a22b3a1681d80c68b9ec0b8f0cf0b78ca239
 # 0001-Fix-division-by-zero-when-transforming-unit-with-zer.patch is hrm Bug #868905
 #     It was committed as d9c010701fda075d083aea600adade73cef45020
 # 0006-debug.m4-Set-always-active-compiler-flags-last-not-f.patch is hrm Bug #868533
@@ -92,7 +90,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0001-Fix-clang-9-warnings"
   "0001-Fix-division-by-zero-when-transforming-unit-with-zer"
   "0006-debug.m4-Set-always-active-compiler-flags-last-not-f"
   "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"

@@ -2,10 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# F3 is hrm Feature #868944
-#     It was committed as b1c1846a346a873f3690aa171123b493629a6c02
-# 0001-Fix-division-by-zero-when-transforming-unit-with-zer.patch is hrm Bug #868905
-#     It was committed as d9c010701fda075d083aea600adade73cef45020
 # 0006-debug.m4-Set-always-active-compiler-flags-last-not-f.patch is hrm Bug #868533
 #     It was committed as 72b2b9839aeaff5178470fc9e77926cfeba2dede
 # 0024-mapimg_colortest-Fix-compiler-warning-with-O3.patch is hrm Bug #870481
@@ -67,7 +63,6 @@ declare -a PATCHLIST=(
   "city-naming-change"
   "metachange"
   "text_fixes"
-  "F3"
   "freeciv-svn-webclient-changes"
   "goto_fcweb"
   "misc_devversion_sync"
@@ -90,7 +85,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0001-Fix-division-by-zero-when-transforming-unit-with-zer"
   "0006-debug.m4-Set-always-active-compiler-flags-last-not-f"
   "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"
   "0025-Do-end_phase-research-updates-for-alive-players-only"

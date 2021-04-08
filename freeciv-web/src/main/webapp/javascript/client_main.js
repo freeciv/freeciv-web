@@ -383,12 +383,6 @@ function set_default_mapview_active()
     return;
   }
 
-  if (!is_small_screen() && overview_active) {
-    $("#game_overview_panel").parent().show();
-    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#tabs-map")});
-    if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
-  }
-
   if (unitpanel_active) {
     update_active_units_dialog();
   }
@@ -406,5 +400,12 @@ function set_default_mapview_active()
   keyboard_input = true;
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
+
+  if (!is_small_screen() && overview_active) {
+    $("#game_overview_panel").parent().show();
+    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+    if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
+  }
+
 }
 

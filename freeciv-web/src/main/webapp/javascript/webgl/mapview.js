@@ -225,7 +225,7 @@ function init_webgl_mapview() {
   }
 
 
-  prerender(landGeometry, xquality);
+  add_trees_to_landgeometry(landGeometry, xquality);
 
   add_all_objects_to_scene();
 

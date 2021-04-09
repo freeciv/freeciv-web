@@ -28,7 +28,7 @@ var jungle_geometry = null;
 /****************************************************************************
   Prerender trees and jungle on known tiles.
 ****************************************************************************/
-function prerender(landGeometry, xquality) {
+function add_trees_to_landgeometry(landGeometry, xquality) {
   /* Trees using Three.Points
     TODO: Trees should be implemented using InstancedBufferGeometry with RawShaderMaterial and a billboard shader.
   */

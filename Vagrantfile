@@ -69,5 +69,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "bootstrap", type: "shell", inline: "/vagrant/scripts/install/install.sh --mode=TEST", privileged: false
   # run the Freeciv start script on startup
   config.vm.provision "startup", type: "shell", inline: "/vagrant/scripts/start-freeciv-web.sh", run: "always", privileged: false
+  config.vm.provision "startup", type: "shell", inline: "/vagrant/music/install.sh", run: "always", privileged: false
 
 end

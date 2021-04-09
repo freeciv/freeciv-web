@@ -78,15 +78,6 @@
 </div>
 </td>
 </tr>
-<tr>
-<td>
-<div class="main_menu_buttons">
-  <button id="update_model_button" type="button" class="button setting_button" onClick="update_webgl_model();" title="Update a webgl model" >Update 3D model</button>
-</div>
-</td>
-<td>
-</td>
-</tr>
 </table>
 
 

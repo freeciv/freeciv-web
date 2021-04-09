@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0006-debug.m4-Set-always-active-compiler-flags-last-not-f.patch is hrm Bug #868533
-#     It was committed as 72b2b9839aeaff5178470fc9e77926cfeba2dede
 # 0024-mapimg_colortest-Fix-compiler-warning-with-O3.patch is hrm Bug #870481
 #     It was committed as 53d2ac716d188ba068f51b800ebf52f13512b9a7
 # 0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd.patch is hrm Bug #846106
@@ -85,7 +83,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0006-debug.m4-Set-always-active-compiler-flags-last-not-f"
   "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"
   "0025-Do-end_phase-research-updates-for-alive-players-only"
 )

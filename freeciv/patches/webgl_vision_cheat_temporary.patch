@@ -10,7 +10,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -582,11 +582,13 @@
+@@ -582,12 +582,14 @@
        info.extras_owner = MAP_TILE_OWNER_NULL;
        info.worked = IDENTITY_NUMBER_ZERO;
  
@@ -20,6 +20,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +                      : terrain_count();
        info.resource = MAX_EXTRA_TYPES;
        info.placing = -1;
+       info.place_turn = 0;
  
 -      BV_CLR_ALL(info.extras);
 +      info.extras = ptile->extras; // WebGL client needs to know which tiles are rivers on game start.

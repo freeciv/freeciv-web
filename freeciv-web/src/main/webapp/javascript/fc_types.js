@@ -194,7 +194,8 @@ var VUT_MINTECHS = 39;
 var VUT_EXTRAFLAG = 40;
 var VUT_MINCALFRAG = 41;
 var VUT_SERVERSETTING = 42;
-var VUT_COUNT = 43;             /* Keep this last. */
+var VUT_CITYSTATUS = 43;
+var VUT_COUNT = 44;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* Used for options which do not belong to any gui. */

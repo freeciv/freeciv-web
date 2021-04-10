@@ -64,6 +64,8 @@ function unit_owner(punit)
 ****************************************************************************/
 function client_remove_unit(punit)
 {
+  control_unit_killed(punit);
+
   if (unit_is_in_focus(punit)) {
     current_focus = [];
     if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
@@ -145,6 +147,16 @@ function unit_list_size(unit_list)
 {
   if (unit_list == null) return 0;
   return unit_list.length;
+}
+
+/**************************************************************************
+  Returns the unit list with the specified unit removed.
+**************************************************************************/
+function unit_list_without(unit_list, punit)
+{
+  return unit_list.filter(function(funit, index, c_focus) {
+    return funit['id'] != punit['id'];
+  });
 }
 
 /**************************************************************************

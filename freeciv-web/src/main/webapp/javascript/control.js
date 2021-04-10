@@ -28,6 +28,10 @@ var allow_right_click = false;
 var mapview_mouse_movement = false;
 
 var current_focus = [];
+
+/* The priority unit(s) for unit_focus_advance(). */
+var urgent_focus_queue = [];
+
 var goto_active = false;
 var paradrop_active = false;
 var airlift_active = false;
@@ -73,6 +77,8 @@ var is_more_user_input_needed = false;
 ****************************************************************************/
 function control_init()
 {
+  urgent_focus_queue = [];
+
   if (renderer == RENDERER_2DCANVAS) {
     mapctrl_init_2d();
   } else {
@@ -858,6 +864,41 @@ function get_units_in_focus()
   return current_focus;
 }
 
+/**********************************************************************//**
+  Store a priority focus unit.
+**************************************************************************/
+function unit_focus_urgent(punit)
+{
+  if (punit == null || punit['activity'] == null) {
+    console.log("unit_focus_urgent(): not a unit");
+    console.log(punit);
+    return;
+  }
+
+  urgent_focus_queue.push(punit);
+}
+
+/**********************************************************************//**
+  Called when a unit is killed; this removes it from the control lists.
+**************************************************************************/
+function control_unit_killed(punit)
+{
+  if (unit_is_in_focus(punit)) {
+    current_focus = unit_list_without(current_focus, punit);
+    update_active_units_dialog();
+    update_unit_order_commands();
+  }
+
+  if (urgent_focus_queue != null) {
+    urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
+  }
+
+  if (current_focus != null && current_focus.length < 1) {
+    /* if the unit in focus is removed, then advance the unit focus. */
+    advance_unit_focus();
+  }
+}
+
 /**************************************************************************
  If there is no unit currently in focus, or if the current unit in
  focus should not be in focus, then get a new focus unit.
@@ -898,9 +939,42 @@ function update_unit_focus()
 **************************************************************************/
 function advance_unit_focus()
 {
+  var candidate;
+  var i;
+
   if (client_is_observer()) return;
 
-  var candidate = find_best_focus_candidate(false);
+  if (urgent_focus_queue.length > 0) {
+    var focus_tile = (current_focus != null && current_focus.length > 0
+                      ? current_focus[0]['tile']
+                      : -1);
+
+    for (i = 0; i < urgent_focus_queue.length; i++) {
+      var punit = urgent_focus_queue[i];
+
+      if (ACTIVITY_IDLE != punit.activity
+          || punit.has_orders) {
+        /* We have assigned new orders to this unit since, remove it. */
+        urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
+        i--;
+      } else if (-1 == focus_tile
+                 || focus_tile == punit['tile']) {
+        /* Use the first one found */
+        candidate = punit;
+        break;
+      } else if (null == candidate) {
+        candidate = punit;
+      }
+    }
+
+    if (null != candidate) {
+      urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
+    }
+  }
+
+  if (candidate == null) {
+    candidate = find_best_focus_candidate(false);
+  }
 
   if (candidate == null) {
     candidate = find_best_focus_candidate(true);

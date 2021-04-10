@@ -148,6 +148,16 @@ function unit_list_size(unit_list)
 }
 
 /**************************************************************************
+  Returns the unit list with the specified unit removed.
+**************************************************************************/
+function unit_list_without(unit_list, punit)
+{
+  return unit_list.filter(function(funit, index, c_focus) {
+    return funit['id'] != punit['id'];
+  });
+}
+
+/**************************************************************************
   Returns the type of the unit.
 **************************************************************************/
 function unit_type(unit)

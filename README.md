@@ -101,7 +101,7 @@ sudo apt-get install vagrant
  vagrant up
  ```
 
-  This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs.
+  This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs. If you get an error message about Virtualization (VT) not working, then enable Virtualization in the BIOS.
 
 4. Test Freeciv-web by pointing your browser to http://localhost if you run Windows or http://localhost:8080 if you run Linux or macOS.
 

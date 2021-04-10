@@ -863,8 +863,10 @@ function get_units_in_focus()
 **************************************************************************/
 function control_unit_killed(punit)
 {
-  if (current_focus != null) {
+  if (unit_is_in_focus(punit)) {
     current_focus = unit_list_without(current_focus, punit);
+    update_active_units_dialog();
+    update_unit_order_commands();
   }
 
   if (current_focus != null && current_focus.length < 1) {

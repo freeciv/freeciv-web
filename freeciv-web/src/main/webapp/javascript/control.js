@@ -858,6 +858,20 @@ function get_units_in_focus()
   return current_focus;
 }
 
+/**********************************************************************//**
+  Called when a unit is killed; this removes it from the control lists.
+**************************************************************************/
+function control_unit_killed(punit)
+{
+  var funits = get_units_in_focus();
+
+  if (funits != null && funits.length == 1
+      && funits[0]['id'] == punit['id']) {
+    /* if the unit in focus is removed, then advance the unit focus. */
+    advance_unit_focus();
+  }
+}
+
 /**************************************************************************
  If there is no unit currently in focus, or if the current unit in
  focus should not be in focus, then get a new focus unit.

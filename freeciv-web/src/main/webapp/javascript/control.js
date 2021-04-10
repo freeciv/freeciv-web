@@ -863,10 +863,11 @@ function get_units_in_focus()
 **************************************************************************/
 function control_unit_killed(punit)
 {
-  var funits = get_units_in_focus();
+  if (current_focus != null) {
+    current_focus = unit_list_without(current_focus, punit);
+  }
 
-  if (funits != null && funits.length == 1
-      && funits[0]['id'] == punit['id']) {
+  if (current_focus != null && current_focus.length < 1) {
     /* if the unit in focus is removed, then advance the unit focus. */
     advance_unit_focus();
   }

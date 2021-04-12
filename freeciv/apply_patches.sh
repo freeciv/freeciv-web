@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0024-mapimg_colortest-Fix-compiler-warning-with-O3.patch is hrm Bug #870481
-#     It was committed as 53d2ac716d188ba068f51b800ebf52f13512b9a7
 # 0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd.patch is hrm Bug #846106
 #     It was committed as 7a57cea0673432472946956d9f8c635e9f165da2
 # 0025-Do-end_phase-research-updates-for-alive-players-only.patch is hrm Bug #873692
@@ -50,7 +48,6 @@
 
 declare -a PATCHLIST=(
   "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
-  "0024-mapimg_colortest-Fix-compiler-warning-with-O3"
   "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
   "0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME"
   "0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC"

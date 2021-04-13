@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd.patch is hrm Bug #846106
-#     It was committed as 7a57cea0673432472946956d9f8c635e9f165da2
 # 0025-Do-end_phase-research-updates-for-alive-players-only.patch is hrm Bug #873692
 #     It was committed as 833d1fb14c3a5014bc4eeccfe652f5d9dddf3119
 # 0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886330
@@ -80,7 +78,6 @@ declare -a PATCHLIST=(
   "pragma_pack_city_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  "0001-Set-player-tile-owner-whenever-tile-knowledge-is-upd"
   "0025-Do-end_phase-research-updates-for-alive-players-only"
 )
 

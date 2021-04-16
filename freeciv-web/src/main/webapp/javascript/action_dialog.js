@@ -212,6 +212,8 @@ function act_sel_click_function(parent_id,
   case ACTION_BASE:
   case ACTION_MINE:
   case ACTION_IRRIGATE:
+  case ACTION_CLEAN_POLLUTION:
+  case ACTION_CLEAN_FALLOUT:
     return function() {
       request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
       $(parent_id).remove();
@@ -915,8 +917,12 @@ function list_potential_target_extras(act_unit, target_tile)
 
     if (tile_has_extra(target_tile, pextra.id)) {
       /* This extra is at the tile. Can anything be done to it? */
-      if (is_extra_removed_by(pextra, ERM_PILLAGE)
-          && unit_can_do_action(act_unit, ACTION_PILLAGE)) {
+      if ((is_extra_removed_by(pextra, ERM_PILLAGE)
+           && unit_can_do_action(act_unit, ACTION_PILLAGE))
+          || (is_extra_removed_by(pextra, ERM_CLEANPOLLUTION)
+              && unit_can_do_action(act_unit, ACTION_CLEAN_POLLUTION))
+          || (is_extra_removed_by(pextra, ERM_CLEANFALLOUT)
+              && unit_can_do_action(act_unit, ACTION_CLEAN_FALLOUT))) {
         /* TODO: add more extra removal actions as they appear. */
         potential_targets.push(pextra);
       }

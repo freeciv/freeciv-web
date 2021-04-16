@@ -8,37 +8,6 @@ Current TODO-list in prioritized order here:
 Basically you can help improve Freeciv-web in any way you like, as long at it actually makes the game better! Other things to improve there:
 
 Unimplemented Freeciv client features:
-- action selection dialog pops up and down based on unit focus rather than
-  opening all at once.
-  - gives the user freedom to delay a response without losing the reminder.
-  - Implementation hints:
-    - a unit's request for the player to chose an action is stored in its
-      fields action_decision_want and action_decision_tile.
-    - action_decision_want tells if an action decision is wanted and if it
-      was caused by the unit being moved inside a transport
-      (ACT_DEC_PASSIVE) or by the unit itself moving (ACT_DEC_ACTIVE). It is
-      defined and explained in fc_types.js
-    - action_decision_tile is the tile the unit wonders what to do to.
-    - a unit's request for the player to chose an action can be set by the
-      server based on unit movement or by the client via
-      PACKET_UNIT_SSCS_SET(unit_id, type, value) where type is USSDT_QUEUE
-      like key_unit_action_select() does.
-    - once the player has made a decision (deciding not to act by pressing
-      cancel is a decision too) the client must ask the server to clear the
-      unit's action_decision_want by sending a USSDT_UNQUEUE typed
-      PACKET_UNIT_SSCS_SET(unit_id, type, value).
-    - the action selection dialog lives in action_dialog.js. It has recently
-      become less repetitive. This should make it easier to send
-      PACKET_UNIT_SSCS_SET with USSDT_UNQUEUE on all user choices.
-    - when a client sends a PACKET_UNIT_GET_ACTIONS(actor_unit_id,
-      target_unit_id, target_tile_id, disturb_player) the
-      server will respond with the information needed for the action
-      selection dialog in a PACKET_UNIT_ACTIONS.
-    - in Freeciv C clients a PACKET_UNIT_GET_ACTIONS is sent when a unit
-      gets focus OR when a unit already in focus changes action decision
-      state to one that wants a decision.
-    - Freeciv's common/networking/packets.def has up to date packet field
-      info.
 - the popup_attack_actions client setting (so attack pop up can be avoided)
 - global work lists
 - advanced unit selection

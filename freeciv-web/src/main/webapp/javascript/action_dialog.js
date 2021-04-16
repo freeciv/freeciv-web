@@ -487,6 +487,15 @@ function popup_action_selection(actor_unit, action_probabilities,
   }
 
   buttons.push({
+      id      : "act_sel_wait" + actor_unit['id'],
+      "class" : 'act_sel_button',
+      text    : 'Wait',
+      click   : function() {
+        did_not_decide = true;
+        $(id).dialog("close");
+      } });
+
+  buttons.push({
       id      : "act_sel_cancel" + actor_unit['id'],
       "class" : 'act_sel_button',
       text    : 'Cancel',

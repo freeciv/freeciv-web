@@ -1099,9 +1099,11 @@ function update_unit_order_commands()
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
       $("#order_pollution").show();
-      if (tile_terrain(ptile)['name'] == 'Hills' || tile_terrain(ptile)['name'] == 'Mountains') {
+      if (!tile_has_extra(ptile, EXTRA_MINE) && tile_terrain(ptile)['mining_time'] > 0) {
         $("#order_mine").show();
         unit_actions["mine"] =  {name: "Mine (M)"};
+      } else {
+        $("#order_mine").hide();
       }
 
       if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
@@ -1110,33 +1112,39 @@ function update_unit_order_commands()
 
       if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
         $("#order_pollution").show();
-	    unit_actions["pollution"] = {name: "Remove pollution (P)"};
+	unit_actions["pollution"] = {name: "Remove pollution (P)"};
       } else {
         $("#order_pollution").hide();
       }
 
-      if (tile_terrain(ptile)['name'] == "Forest") {
+      if (tile_terrain(ptile)['cultivate_time'] > 0) {
         $("#order_forest_remove").show();
-        $("#order_irrigate").hide();
-        $("#order_build_farmland").hide();
-	    unit_actions["forest"] = {name: "Cut down forest (I)"};
-      } else if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
-        $("#order_irrigate").show();
-        $("#order_forest_remove").hide();
-        $("#order_build_farmland").hide();
-        unit_actions["irrigation"] = {name: "Irrigation (I)"};
-        if (tile_terrain(ptile)['name'] != 'Hills' && tile_terrain(ptile)['name'] != 'Mountains') {
-          unit_actions["mine"] = {name: "Plant forest (M)"};
-        }
-      } else if (!tile_has_extra(ptile, EXTRA_FARMLAND) && player_invention_state(client.conn.playing, tech_id_by_name('Refrigeration')) == TECH_KNOWN) {
-        $("#order_build_farmland").show();
-        $("#order_irrigate").hide();
-        $("#order_forest_remove").hide();
-        unit_actions["irrigation"] = {name: "Build farmland (I)"};
+        unit_actions["cultivate"] = {name: "Cultivate (I)"};
       } else {
         $("#order_forest_remove").hide();
+      }
+      if (tile_terrain(ptile)['irrigation_time'] > 0) {
+        if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+          $("#order_irrigate").show();
+          $("#order_build_farmland").hide();
+          unit_actions["irrigation"] = {name: "Irrigation (I)"};
+        } else if (!tile_has_extra(ptile, EXTRA_FARMLAND) && player_invention_state(client.conn.playing, tech_id_by_name('Refrigeration')) == TECH_KNOWN) {
+          $("#order_build_farmland").show();
+          $("#order_irrigate").hide();
+          unit_actions["irrigation"] = {name: "Build farmland (I)"};
+        } else {
+          $("#order_irrigate").hide();
+          $("#order_build_farmland").hide();
+        }
+      } else {
         $("#order_irrigate").hide();
         $("#order_build_farmland").hide();
+      }
+      if (tile_terrain(ptile)['plant_time'] > 0) {
+        $("#order_forest_add").show();
+        unit_actions["plant"] = {name: "Plant (M)"};
+      } else {
+        $("#order_forest_add").hide();
       }
       if (player_invention_state(client.conn.playing, tech_id_by_name('Construction')) == TECH_KNOWN) {
         unit_actions["fortress"] = {name: string_unqualify(terrain_control['gui_type_base0']) + " (Shift-F)"};
@@ -2156,8 +2164,12 @@ function handle_context_menu_callback(key)
       key_unit_road();
       break;
 
+    case "plant":
+      key_unit_plant();
+      break;
+
     case "mine":
-      key_unit_mine();  // and plant forest
+      key_unit_mine();
       break;
 
     case "autosettlers":
@@ -2172,8 +2184,8 @@ function handle_context_menu_callback(key)
       key_unit_pollution();
       break;
 
-    case "forest":
-      key_unit_irrigate();
+    case "cultivate":
+      key_unit_cultivate();
       break;
 
     case "irrigation":

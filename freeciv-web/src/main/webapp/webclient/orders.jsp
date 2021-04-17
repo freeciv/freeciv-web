@@ -23,15 +23,15 @@
     <a href="#" onclick="key_unit_auto_settle();"><img src="/images/orders/auto_settlers_default.png" name="auto_settlers_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_irrigate" class="order_button" title="Create irrigation (I)" >
+  <div id="order_irrigate" class="order_button" title="Create irrigation (i)" >
     <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/irrigate_default.png" name="irrigate_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_forest_remove" class="order_button" title="Cut down forest (I)" >
-    <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/forest_remove_default.png" name="forest_remove_button" alt="" border="0" width="30" height="30"></a>
+  <div id="order_forest_remove" class="order_button" title="Cultivate (I)" >
+    <a href="#" onclick="key_unit_cultivate();"><img src="/images/orders/forest_remove_default.png" name="forest_remove_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_build_farmland" class="order_button" title="Build farmland (I)" >
+  <div id="order_build_farmland" class="order_button" title="Build farmland (i)" >
     <a href="#" onclick="key_unit_irrigate();"><img src="/images/orders/irrigate_default.png" name="build_farmland_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
@@ -43,8 +43,11 @@
     <a href="#" onclick="key_unit_road();"><img src="/images/orders/railroad_default.png" name="railroad_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_forest_add" class="order_button" title="Plant (M)" >
+    <a href="#" onclick="key_unit_plant();"><img src="/images/orders/forest_add_default.png" name="forest_add_button" alt="" border="0" width="30" height="30"></a>
+  </div>
 
-  <div id="order_mine" class="order_button" title="Build mine (M)">
+  <div id="order_mine" class="order_button" title="Build mine (m)">
     <a href="#" onclick="key_unit_mine();"><img src="/images/orders/mine_default.png" name="mine_button" alt="" border="0" width="30" height="30"></a>
   </div>
 

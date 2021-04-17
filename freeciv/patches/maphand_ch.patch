@@ -1,7 +1,7 @@
-diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2016-02-24 02:40:28.870661317 +0200
-+++ freeciv/common/networking/packets.def	2016-02-24 02:44:18.405753877 +0200
-@@ -2169,3 +2169,12 @@
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2021-04-18 02:38:54.459716449 +0300
++++ freeciv/common/networking/packets.def	2021-04-18 02:39:03.659797486 +0300
+@@ -2365,3 +2365,12 @@
    TILE dest;
    UINT32 turns;
  end
@@ -14,26 +14,26 @@ diff -Nurd -X.diff_ignore freeciv/common/networking/packets.def freeciv/common/n
 +PACKET_INFO_TEXT_MESSAGE = 290; sc, dsend
 +  STRING message[MAX_LEN_MSG];
 +end
-diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2016-02-24 02:40:28.886661246 +0200
-+++ freeciv/server/maphand.c	2016-02-24 02:44:00.509818898 +0200
-@@ -26,6 +26,7 @@
- /* common */
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2021-04-18 02:38:54.651718140 +0300
++++ freeciv/server/maphand.c	2021-04-18 02:43:21.054089858 +0300
+@@ -27,6 +27,7 @@
+ #include "ai.h"
  #include "base.h"
  #include "borders.h"
 +#include "clientutils.h"
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -37,6 +38,7 @@
+@@ -38,6 +39,7 @@
  #include "unit.h"
  #include "unitlist.h"
  #include "vision.h"
 +#include "astring.h"
  
- /* generator */
- #include "utilities.h"
-@@ -2326,3 +2328,324 @@
+ /* server */
+ #include "citytools.h"
+@@ -2519,3 +2521,324 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -284,7 +284,7 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +  }
 +  if (punit != NULL && pcity == NULL) {
 +    struct player *owner = unit_owner(punit);
-+    struct unit_type *ptype = unit_type_get(punit);
++    const struct unit_type *ptype = unit_type_get(punit);
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);
@@ -358,12 +358,12 @@ diff -Nurd -X.diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
 +    dsend_packet_info_text_message(pconn, info_text);
 +  } conn_list_iterate_end;
 +}
-diff -Nurd -X.diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2016-02-24 02:40:28.882661265 +0200
-+++ freeciv/server/maphand.h	2016-02-24 02:41:05.794503294 +0200
-@@ -140,4 +140,6 @@
- void give_distorted_map(struct player *pfrom, struct player *pto, int good,
-                         int bad, bool reveal_cities);
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
+--- freeciv/server/maphand.h	2021-04-18 02:38:54.651718140 +0300
++++ freeciv/server/maphand.h	2021-04-18 02:39:03.659797486 +0300
+@@ -141,4 +141,6 @@
+ void give_distorted_map(struct player *pfrom, struct player *pto,
+                         int prob, bool reveal_cities);
  
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
 +

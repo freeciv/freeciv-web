@@ -2887,7 +2887,11 @@ function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
     request_unit_cancel_orders(punit);
-    var packet = {"pid" : packet_unit_autosettlers, "unit_id" : punit['id']};
+    var packet = {
+      "pid" : packet_unit_server_side_agent_set,
+      "unit_id" : punit['id'],
+      "agent" : SSA_AUTOSETTLER,
+    };
     send_request(JSON.stringify(packet));
   }
 }

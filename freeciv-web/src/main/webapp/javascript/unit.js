@@ -42,6 +42,11 @@ var USSDT_QUEUE = 0;
 var USSDT_UNQUEUE = 1;
 var USSDT_BATTLE_GROUP = 2;
 
+/* enum server_side_agent */
+var SSA_NONE = 0;
+var SSA_AUTOSETTLER = 1;
+var SSA_COUNT = 2;
+
 /****************************************************************************
  ...
 ****************************************************************************/

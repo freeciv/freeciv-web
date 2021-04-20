@@ -629,6 +629,14 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
     result.push(activities);
   }
 
+  if (should_ask_server_for_actions(punit)) {
+    result.push({
+      "key"      : "unit.action_decision_want",
+      "offset_x" : unit_activity_offset_x + unit_offset['x'],
+      "offset_y" : -unit_activity_offset_y + unit_offset['y'],
+    });
+  }
+
   result.push(get_unit_hp_sprite(punit));
   if (stacked) result.push(get_unit_stack_sprite());
   if (punit['veteran'] > 0) result.push(get_unit_veteran_sprite(punit));

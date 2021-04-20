@@ -742,6 +742,19 @@ function check_text_input(event,chatboxtextarea) {
 
 
 /**********************************************************************//**
+  Returns TRUE iff the client should ask the server about what actions a
+  unit can perform.
+**************************************************************************/
+function should_ask_server_for_actions(punit)
+{
+  return (punit['action_decision_want'] === ACT_DEC_ACTIVE
+          /* The player is interested in getting a pop up for a mere
+           * arrival. */
+          || (punit['action_decision_want'] === ACT_DEC_PASSIVE
+              && popup_actor_arrival));
+}
+
+/**********************************************************************//**
   Ask the server about what actions punit may be able to perform against
   it's stored target tile.
 

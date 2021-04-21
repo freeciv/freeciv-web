@@ -22,6 +22,53 @@
 var actions = {};
 var auto_attack = false;
 
+var action_selection_restart = false;
+var did_not_decide = false;
+
+/**********************************************************************//**
+  Move the queue of units that need user input forward unless the current
+  unit is going to need more input.
+**************************************************************************/
+function act_sel_queue_may_be_done(actor_unit_id)
+{
+  if (!is_more_user_input_needed) {
+    /* The client isn't waiting for information for any unanswered follow
+     * up questions. */
+
+    if (action_selection_restart) {
+      /* The action selection dialog was closed but only so it can be
+       * redrawn with fresh data. */
+
+      action_selection_restart = false;
+    } else {
+      /* The action selection process is over, at least for now. */
+      action_selection_no_longer_in_progress(actor_unit_id);
+    }
+
+    if (did_not_decide) {
+      /* The action selection dialog was closed but the player didn't
+       * decide what the unit should do. */
+
+      /* Reset so the next action selection dialog does the right thing. */
+      did_not_decide = false;
+    } else {
+      /* An action, or no action at all, was selected. */
+      action_decision_clear_want(actor_unit_id);
+    }
+  }
+}
+
+/**********************************************************************//**
+  Move the queue of units that need user input forward since the
+  current unit doesn't require the extra input any more.
+**************************************************************************/
+function act_sel_queue_done(actor_unit_id)
+{
+  /* Stop waiting. Move on to the next queued unit. */
+  is_more_user_input_needed = false;
+  act_sel_queue_may_be_done(actor_unit_id);
+}
+
 /**************************************************************************
   Returns true iff the given action probability belongs to an action that
   may be possible.
@@ -217,13 +264,13 @@ function act_sel_click_function(parent_id,
     return function() {
       request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
       $(parent_id).remove();
-      action_selection_no_longer_in_progress(actor_unit_id);
+      act_sel_queue_may_be_done(actor_unit_id);
     };
   default:
     return function() {
       request_unit_do_action(action_id, actor_unit_id, tgt_id);
       $(parent_id).remove();
-      action_selection_no_longer_in_progress(actor_unit_id);
+      act_sel_queue_may_be_done(actor_unit_id);
     };
   }
 }
@@ -387,7 +434,7 @@ function popup_action_selection(actor_unit, action_probabilities,
           }
 
           $(id).remove();
-          action_selection_no_longer_in_progress(actor_unit['id']);
+          act_sel_queue_may_be_done(actor_unit['id']);
         } });
   }
 
@@ -401,8 +448,8 @@ function popup_action_selection(actor_unit, action_probabilities,
           select_tgt_unit(actor_unit,
                           target_tile, tile_units(target_tile));
 
-          is_more_user_input_needed = true;
-          $(id).remove();
+          action_selection_restart = true;
+          $(id).dialog('close');
         } });
   }
 
@@ -416,8 +463,8 @@ function popup_action_selection(actor_unit, action_probabilities,
                            list_potential_target_extras(actor_unit,
                                                         target_tile));
 
-          is_more_user_input_needed = true;
-          $(id).remove();
+          action_selection_restart = true;
+          $(id).dialog('close');
         } });
   }
 
@@ -434,7 +481,7 @@ function popup_action_selection(actor_unit, action_probabilities,
                 actor_unit['id'], target_tile['index']);
               auto_attack = true;
               $(id).remove();
-              action_selection_no_longer_in_progress(actor_unit['id']);
+              act_sel_queue_may_be_done(actor_unit['id']);
             }
           };
           buttons.push(button);
@@ -451,7 +498,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       text    : 'Cancel',
       click   : function() {
         $(id).remove();
-        action_selection_no_longer_in_progress(actor_unit['id']);
+        act_sel_queue_may_be_done(actor_unit['id']);
       } });
 
   $(id).attr("title",
@@ -463,9 +510,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       dialogClass: "act_sel_dialog",
       width: "390",
       close: function() {
-        if (!is_more_user_input_needed) {
-          action_selection_no_longer_in_progress(actor_unit['id']);
-        }
+        act_sel_queue_may_be_done(actor_unit['id']);
       },
       buttons: buttons });
 
@@ -517,7 +562,7 @@ function popup_bribe_dialog(actor_unit, target_unit, cost, act_id)
   $(id).dialog({bgiframe: true,
                 modal: true,
                 close: function() {
-                  action_selection_no_longer_in_progress(actor_unit['id']);
+                  act_sel_queue_done(actor_unit['id']);
                 },
                 buttons: (bribe_possible ? bribe_close_button : close_button),
                 height: "auto",
@@ -577,7 +622,7 @@ function popup_incite_dialog(actor_unit, target_city, cost, act_id)
   $(id).dialog({bgiframe: true,
                 modal: true,
                 close: function() {
-                  action_selection_no_longer_in_progress(actor_unit['id']);
+                  act_sel_queue_done(actor_unit['id']);
                 },
                 buttons: (incite_possible ? incite_close_buttons : close_button),
                 height: "auto",
@@ -629,7 +674,7 @@ function popup_unit_upgrade_dlg(actor_unit, target_city, cost, act_id)
   $(id).dialog({bgiframe: true,
                 modal: true,
                 close: function() {
-                  action_selection_no_longer_in_progress(actor_unit['id']);
+                  act_sel_queue_done(actor_unit['id']);
                 },
                 buttons: (upgrade_possible ? upgrade_close_buttons
                                            : close_button),
@@ -653,7 +698,7 @@ function create_steal_tech_button(parent_id, tech,
     click : function() {
       request_unit_do_action(action_id, actor_id, city_id, tech['id']);
       $("#" + parent_id).remove();
-      action_selection_no_longer_in_progress(actor_id);
+      act_sel_queue_done(actor_id);
     }
   };
 
@@ -722,7 +767,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                      request_unit_do_action(untargeted_action_id,
                        actor_unit['id'], target_city['id']);
                      $("#" + id).remove();
-                     action_selection_no_longer_in_progress(actor_unit['id']);
+                     act_sel_queue_done(actor_unit['id']);
                    }
                  });
   }
@@ -732,7 +777,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
                  text : 'Cancel',
                  click : function() {
                    $("#" + id).remove();
-                   action_selection_no_longer_in_progress(actor_unit['id']);
+                   act_sel_queue_done(actor_unit['id']);
                  }
                });
 
@@ -740,7 +785,7 @@ function popup_steal_tech_selection_dialog(actor_unit, target_city,
   $("#" + id).dialog({
                        modal: true,
                        close: function() {
-                         action_selection_no_longer_in_progress(actor_unit['id']);
+                         act_sel_queue_done(actor_unit['id']);
                        },
                        buttons: buttons,
                        width: "90%"});
@@ -764,7 +809,7 @@ function create_sabotage_impr_button(improvement, parent_id,
       request_unit_do_action(act_id, actor_unit_id, target_city_id,
         improvement['id']);
       $("#" + parent_id).remove();
-      action_selection_no_longer_in_progress(actor_unit_id);
+      act_sel_queue_done(actor_unit_id);
     }
   };
 }
@@ -804,7 +849,7 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs, act_id)
                  text : 'Cancel',
                  click : function() {
                    $("#" + id).remove();
-                   action_selection_no_longer_in_progress(actor_unit['id']);
+                   act_sel_queue_done(actor_unit['id']);
                  }
                });
 
@@ -812,7 +857,7 @@ function popup_sabotage_dialog(actor_unit, target_city, city_imprs, act_id)
   $("#" + id).dialog({
                        modal: true,
                        close: function() {
-                         action_selection_no_longer_in_progress(actor_unit['id']);
+                         act_sel_queue_done(actor_unit['id']);
                        },
                        buttons: buttons,
                        width: "90%"});
@@ -898,7 +943,7 @@ function select_tgt_unit(actor_unit, target_tile, potential_tgt_units)
       bgiframe : true,
       modal    : true,
       close: function() {
-        action_selection_no_longer_in_progress(actor_unit['id']);
+        act_sel_queue_may_be_done(actor_unit['id']);
       },
       buttons  : buttons });
 
@@ -1033,7 +1078,7 @@ function select_tgt_extra(actor_unit, target_unit,
       bgiframe : true,
       modal    : true,
       close: function() {
-        action_selection_no_longer_in_progress(actor_unit['id']);
+        act_sel_queue_may_be_done(actor_unit['id']);
       },
       buttons  : buttons });
 
@@ -1075,5 +1120,5 @@ function action_selection_close()
   id = $("#city_name_dialog");
   $(id).remove();
 
-  action_selection_no_longer_in_progress(actor_unit_id);
+  act_sel_queue_done(actor_unit_id);
 }

@@ -803,7 +803,8 @@ function action_selection_no_longer_in_progress(old_actor_id)
   /* IDENTITY_NUMBER_ZERO is accepted for cases where the unit is gone
    * without a trace. */
   if (old_actor_id != action_selection_in_progress_for
-      && old_actor_id != IDENTITY_NUMBER_ZERO) {
+      && old_actor_id != IDENTITY_NUMBER_ZERO
+      && action_selection_in_progress_for != IDENTITY_NUMBER_ZERO) {
     console.log("Decision taken for %d but selection is for %d.",
                 old_actor_id, action_selection_in_progress_for);
   }

@@ -847,6 +847,7 @@ function handle_unit_action_answer(packet)
   if (actor_unit == null) {
     console.log("Bad actor unit (" + diplomat_id
                 + ") in unit action answer.");
+    act_sel_queue_done(diplomat_id);
     return;
   }
 
@@ -859,6 +860,7 @@ function handle_unit_action_answer(packet)
     if (target_unit == null) {
       console.log("Bad target unit (" + target_id
                   + ") in unit action answer.");
+      act_sel_queue_done(diplomat_id);
       return;
     } else {
       popup_bribe_dialog(actor_unit, target_unit, cost, action_type);
@@ -869,6 +871,7 @@ function handle_unit_action_answer(packet)
     if (target_city == null) {
       console.log("Bad target city (" + target_id
                   + ") in unit action answer.");
+      act_sel_queue_done(diplomat_id);
       return;
     } else {
       popup_incite_dialog(actor_unit, target_city, cost, action_type);
@@ -878,6 +881,7 @@ function handle_unit_action_answer(packet)
     if (target_city == null) {
       console.log("Bad target city (" + target_id
                   + ") in unit action answer.");
+      act_sel_queue_done(diplomat_id);
       return;
     } else {
       popup_unit_upgrade_dlg(actor_unit, target_city, cost, action_type);
@@ -888,6 +892,7 @@ function handle_unit_action_answer(packet)
   } else {
     console.log("unit_action_answer: Invalid answer.");
   }
+  act_sel_queue_done(diplomat_id);
 }
 
 /**************************************************************************

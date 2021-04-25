@@ -87,9 +87,6 @@ function init_webgl_renderer()
   var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
   if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
     graphics_quality = stored_graphics_quality_setting;
-  } else if (renderer_name.indexOf("Mesa") != -1 || renderer_name.indexOf("Intel") != -1 || renderer_name.indexOf("DRI") != -1) {
-    // These are renderers which are likely to be slow.
-    graphics_quality = QUALITY_MEDIUM;
   } else {
     graphics_quality = QUALITY_HIGH; //default value
   }

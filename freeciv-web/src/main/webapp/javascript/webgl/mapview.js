@@ -128,7 +128,7 @@ function init_webgl_mapview() {
       flowDirection: new THREE.Vector2( 0.1, -0.1),
       textureWidth: 1024,
       textureHeight: 1024,
-      reflectivity : 0.04,
+      reflectivity : 0.02,
       clipBias : 0.1,
       normalMap0 : textureLoader.load( '/textures/Water_1_M_Normal.jpg' ),
       normalMap1 : textureLoader.load( '/textures/Water_2_M_Normal.jpg' )

@@ -2111,7 +2111,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
         let new_camera_dy = camera_dy - 60;
         let new_camera_dx = camera_dx - 45;
         let new_camera_dz = camera_dz - 45;
-        if (new_camera_dy < 350 || new_camera_dy > 1200) {
+        if (new_camera_dy < 250 || new_camera_dy > 1300) {
           return;
         } else {
           camera_dx = new_camera_dx;
@@ -2128,7 +2128,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
         let new_camera_dy = camera_dy + 60;
         let new_camera_dx = camera_dx + 45;
         let new_camera_dz = camera_dz + 45;
-        if (new_camera_dy < 350 || new_camera_dy > 1200) {
+        if (new_camera_dy < 250 || new_camera_dy > 1300) {
           return;
         } else {
           camera_dx = new_camera_dx;

@@ -1634,6 +1634,7 @@ function do_map_click(ptile, qtype, first_time_called)
         var order = {
           "order"      : ORDER_LAST,
           "activity"   : ACTIVITY_LAST,
+          "target"     : 0,
           "sub_target" : 0,
           "action"     : ACTION_COUNT,
           "dir"        : -1
@@ -1658,6 +1659,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
           order['dir'] = goto_path['dir'][i];
           order['activity'] = ACTIVITY_LAST;
+          order['target'] = 0;
           order['sub_target'] = 0;
           order['action'] = ACTION_COUNT;
 
@@ -1682,6 +1684,7 @@ function do_map_click(ptile, qtype, first_time_called)
             order['order'] = ORDER_LAST;
             order['dir'] = -1;
             order['activity'] = ACTIVITY_LAST;
+            order['target'] = 0;
             order['sub_target'] = 0;
             order['action'] = ACTION_COUNT;
 
@@ -1695,6 +1698,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
           /* Perform the final action. */
           order['action'] = goto_last_action;
+          order['target'] = ptile['index']
 
           packet['orders'][pos] = Object.assign({}, order);
         }
@@ -3047,6 +3051,7 @@ function key_unit_move(dir)
       "order"      : ORDER_ACTION_MOVE,
       "dir"        : dir,
       "activity"   : ACTIVITY_LAST,
+      "target"     : 0,
       "sub_target" : 0,
       "action"     : ACTION_COUNT
     };

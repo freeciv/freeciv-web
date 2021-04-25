@@ -401,9 +401,9 @@ function set_default_mapview_active()
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
 
-  if (!is_small_screen() && overview_active) {
+  if (!is_small_screen()) {
     $("#game_overview_panel").parent().show();
-    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
+    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
     if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
   }
 

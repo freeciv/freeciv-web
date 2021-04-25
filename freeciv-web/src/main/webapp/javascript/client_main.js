@@ -403,7 +403,7 @@ function set_default_mapview_active()
 
   if (!is_small_screen()) {
     $("#game_overview_panel").parent().show();
-    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window});
+    $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
     if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
   }
 

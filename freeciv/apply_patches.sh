@@ -25,7 +25,6 @@
 
 # Not in the upstream Freeciv server
 # ----------------------------------
-# activity_null_check is for Freeciv bug #22700.
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
@@ -65,7 +64,6 @@ declare -a PATCHLIST=(
   "ai_traits_crash"
   "server_password"
   "barbarian-names"
-  "activity_null_check"
   "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"

@@ -2896,6 +2896,22 @@ function request_new_unit_activity(punit, activity, target)
   send_request(JSON.stringify(packet));
 }
 
+/**********************************************************************//**
+  Call to request (from the server) that the unit is put under the
+  control of the specified server side agent or - if agent is SSA_NONE -
+  under client control.
+**************************************************************************/
+function request_unit_ssa_set(punit, agent)
+{
+  if (punit != null) {
+    var packet = {
+      "pid"     : packet_unit_server_side_agent_set,
+      "unit_id" : punit['id'],
+      "agent"   : agent,
+    };
+    send_request(JSON.stringify(packet));
+  }
+}
 
 /****************************************************************************
   Call to request (from the server) that the settler unit is put into
@@ -2905,12 +2921,7 @@ function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
     request_unit_cancel_orders(punit);
-    var packet = {
-      "pid" : packet_unit_server_side_agent_set,
-      "unit_id" : punit['id'],
-      "agent" : SSA_AUTOSETTLER,
-    };
-    send_request(JSON.stringify(packet));
+    request_unit_ssa_set(punit, SSA_AUTOSETTLER);
   }
 }
 

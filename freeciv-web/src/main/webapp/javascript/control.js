@@ -934,7 +934,7 @@ function update_unit_focus()
 
     if (punit['movesleft'] > 0
 	  && punit['done_moving'] == false
-	  && punit['ai'] == false
+      && punit['ssa_controller'] == SSA_NONE
 	  && punit['activity'] == ACTIVITY_IDLE) {
       return;
     }
@@ -1256,7 +1256,9 @@ function update_unit_order_commands()
       }
     }
 
-    if (punit.activity != ACTIVITY_IDLE || punit.ai || punit.has_orders) {
+    if (punit.activity != ACTIVITY_IDLE
+        || punit.ssa_controller != SSA_NONE
+        || punit.has_orders) {
       unit_actions["idle"] = {name: "Cancel orders (Shift-J)"};
     } else {
       unit_actions["noorders"] = {name: "No orders (J)"};
@@ -1343,7 +1345,7 @@ function find_best_focus_candidate(accept_current)
        && punit['activity'] == ACTIVITY_IDLE
        && punit['movesleft'] > 0
        && punit['done_moving'] == false
-       && punit['ai'] == false
+       && punit['ssa_controller'] == SSA_NONE
        && waiting_units_list.indexOf(punit['id']) < 0
        && punit['transported'] == false) {
          return punit;
@@ -2396,8 +2398,7 @@ function key_unit_auto_explore()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_EXPLORE, EXTRA_NONE);
+    request_unit_ssa_set(funits[i], SSA_AUTOEXPLORE);
   }
   setTimeout(update_unit_focus, 700);
 }
@@ -2867,8 +2868,9 @@ function key_unit_auto_settle()
 **************************************************************************/
 function request_unit_cancel_orders(punit)
 {
-  if (punit != null && (punit.ai || punit.has_orders)) {
-    punit.ai = false;
+  if (punit != null && (punit.ssa_controller != SSA_NONE
+                        || punit.has_orders)) {
+    punit.ssa_controller = SSA_NONE;
     punit.has_orders = false;
     var packet = {
       pid: packet_unit_orders,

@@ -988,11 +988,17 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y};
   }
 
-  if (punit['ai'] === true
-      && punit['ssa_controller'] === SSA_AUTOSETTLER) {
-      return {"key" : "unit.auto_settler",
+  switch (punit['ssa_controller']) {
+  case SSA_NONE:
+    break;
+  case SSA_AUTOSETTLER:
+    return {"key" : "unit.auto_settler",
           "offset_x" : 20, //FIXME.
           "offset_y" : - unit_activity_offset_y};
+  case SSA_AUTOEXPLORE:
+    return {"key" : "unit.auto_explore",
+          "offset_x" : unit_activity_offset_x,
+          "offset_y" : -unit_activity_offset_y};
   }
 
   return null;

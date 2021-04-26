@@ -33,10 +33,9 @@ var UCF_BUILD_ANYWHERE = 4;
 var UCF_UNREACHABLE = 5;
 var UCF_COLLECT_RANSOM = 6;
 var UCF_ZOC = 7;
-var UCF_CAN_FORTIFY = 8;
-var UCF_DOESNT_OCCUPY_TILE = 9;
-var UCF_ATTACK_NON_NATIVE = 10;
-var UCF_KILLCITIZEN = 11;
+var UCF_DOESNT_OCCUPY_TILE = 8;
+var UCF_ATTACK_NON_NATIVE = 9;
+var UCF_KILLCITIZEN = 10;
 
 /**********************************************************************//**
   Return true iff units of the given type can do the specified generalized

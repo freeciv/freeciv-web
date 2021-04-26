@@ -45,7 +45,8 @@ var USSDT_BATTLE_GROUP = 2;
 /* enum server_side_agent */
 var SSA_NONE = 0;
 var SSA_AUTOSETTLER = 1;
-var SSA_COUNT = 2;
+var SSA_AUTOEXPLORE = 2;
+var SSA_COUNT = 3;
 
 /****************************************************************************
  ...

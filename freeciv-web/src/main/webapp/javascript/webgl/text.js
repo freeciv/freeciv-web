@@ -354,8 +354,13 @@ function get_unit_activity_text(punit)
       return "G";
   }
 
-  if (punit['ai'] == true) {
-      return "A";
+  switch (punit['ssa_controller']) {
+  case SSA_NONE:
+    break;
+  case SSA_AUTOSETTLER:
+    return "A";
+  case SSA_AUTOEXPLORE:
+    return "X";
   }
 
   return null;

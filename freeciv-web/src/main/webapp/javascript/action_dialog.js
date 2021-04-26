@@ -411,6 +411,7 @@ function popup_action_selection(actor_unit, action_probabilities,
             "order"      : ORDER_MOVE,
             "dir"        : dir,
             "activity"   : ACTIVITY_LAST,
+            "target"     : 0,
             "sub_target" : 0,
             "action"     : ACTION_COUNT
           };

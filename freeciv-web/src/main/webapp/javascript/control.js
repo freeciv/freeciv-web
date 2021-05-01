@@ -2881,8 +2881,7 @@ function request_unit_cancel_orders(punit)
       vigilant: false,
       dest_tile: punit.tile
     };
-    packet.orders = packet.dir = packet.activity = packet.sub_target
-                  = packet.action = [];
+    packet.orders = [];
     send_request(JSON.stringify(packet));
   }
 }

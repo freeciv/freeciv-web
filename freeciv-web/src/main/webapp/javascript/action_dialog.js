@@ -254,21 +254,9 @@ function act_sel_click_function(parent_id,
       is_more_user_input_needed = true;
       $(parent_id).remove();
     };
-  case ACTION_PILLAGE:
-  case ACTION_ROAD:
-  case ACTION_BASE:
-  case ACTION_MINE:
-  case ACTION_IRRIGATE:
-  case ACTION_CLEAN_POLLUTION:
-  case ACTION_CLEAN_FALLOUT:
-    return function() {
-      request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
-      $(parent_id).remove();
-      act_sel_queue_may_be_done(actor_unit_id);
-    };
   default:
     return function() {
-      request_unit_do_action(action_id, actor_unit_id, tgt_id);
+      request_unit_do_action(action_id, actor_unit_id, tgt_id, sub_tgt_id);
       $(parent_id).remove();
       act_sel_queue_may_be_done(actor_unit_id);
     };

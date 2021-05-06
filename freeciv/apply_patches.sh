@@ -2,12 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME.patch
-#     is hrm Feature #889543.
-#     It was committed as 20b75101a6d7e98eef27fc49dd2304e6262cc584
-# 0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC.patch
-#     is hrm Feature #889544
-#     It was committed as 54267cb9596570dad2aef2db720789d80b8c6cf7
 # 0025-Don-t-hide-allied-stealth-units-on-seen-tiles.patch
 #     is hrm Bug #764976
 #     It was committed as 9fd4cd5397c25f99a4cba4fc27700d54bf087898
@@ -38,8 +32,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME"
-  "0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC"
   "0025-Don-t-hide-allied-stealth-units-on-seen-tiles"
   "0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen"
   "0001-Make-generated-random-seed-less-predictable"

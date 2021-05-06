@@ -286,7 +286,7 @@ function get_invalid_username_reason(username)
 }
 
 /**************************************************************************
-  Returns the the player's primaty capital city, or undefined
+  Returns the the player's primary capital city, or undefined
 **************************************************************************/
 function player_capital(player)
 {

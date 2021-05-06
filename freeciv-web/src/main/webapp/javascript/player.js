@@ -286,13 +286,13 @@ function get_invalid_username_reason(username)
 }
 
 /**************************************************************************
- returns the the player's capital city, or undefined
- **************************************************************************/
+  Returns the the player's primaty capital city, or undefined
+**************************************************************************/
 function player_capital(player)
 {
   for (const city_id in cities) {
     const city = cities[city_id];
-    if (does_player_own_city(player, city) && is_capital(city)) {
+    if (does_player_own_city(player, city) && is_primary_capital(city)) {
       return city;
     }
   }

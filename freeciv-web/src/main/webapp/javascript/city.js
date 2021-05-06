@@ -122,10 +122,10 @@ function is_free_worked(city, tile) {
 /**************************************************************************
  ...
  **************************************************************************/
-function is_capital(city) {
-  return city_has_building(city, improvement_id_by_name(B_PALACE_NAME));
+function is_primary_capital(city)
+{
+  return city['capital'] == CAPITAL_PRIMARY;
 }
-
 
 /**************************************************************************
  ...

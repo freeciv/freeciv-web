@@ -2,10 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886330
-#     It was committed as 7527315835c16179e68080fe8f7244c76152b656
-# 0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3.patch is hrm Bug #886331
-#     It was committed as 71eb308f799fd62920077d68d9109448d47cc7a8
 # 0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME.patch
 #     is hrm Feature #889543.
 #     It was committed as 20b75101a6d7e98eef27fc49dd2304e6262cc584
@@ -42,8 +38,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0009-Fix-cvercmp-compiler-warning-with-gcc-10-and-O3"
-  "0010-Fix-stdinhand.c-compiler-warning-with-gcc-10-and-O3"
   "0008-configure.ac-Drop-use-of-obsolete-AC_HEADER_TIME"
   "0009-configure.ac-Drop-use-of-obsolete-AC_HEADER_STDC"
   "0025-Don-t-hide-allied-stealth-units-on-seen-tiles"

@@ -21,7 +21,6 @@
 // Remove in favor of [Effects](https://github.com/freeciv/freeciv-web/issues/208) when implemented.
 // IDs are dynamic based on ruleset
 const B_AIRPORT_NAME = 'Airport';
-const B_PALACE_NAME = 'Palace';
 
 var B_LAST = MAX_NUM_BUILDINGS;
 

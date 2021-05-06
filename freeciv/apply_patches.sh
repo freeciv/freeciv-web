@@ -2,9 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0025-Don-t-hide-allied-stealth-units-on-seen-tiles.patch
-#     is hrm Bug #764976
-#     It was committed as 9fd4cd5397c25f99a4cba4fc27700d54bf087898
 # 0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen.patch
 #     is hrm Bug #894423
 #     It was committed as f34a882ddf9f7065acb39628fc6cb5b2cf2975dd
@@ -32,7 +29,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0025-Don-t-hide-allied-stealth-units-on-seen-tiles"
   "0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"

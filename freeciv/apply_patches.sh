@@ -2,9 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen.patch
-#     is hrm Bug #894423
-#     It was committed as f34a882ddf9f7065acb39628fc6cb5b2cf2975dd
 # 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
 #     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
@@ -29,7 +26,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0005-Fix-gcc-11-stringop-overread-error-at-comparing-scen"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"

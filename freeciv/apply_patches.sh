@@ -2,6 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0005-Make-Sentry-pure-server-side-client-state.patch is hrm Feature #918768
+#     It was committed as c391b9903f555ab3beee59a773ed9c159620b5a5
 # 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
 #     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
@@ -26,6 +28,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "0005-Make-Sentry-pure-server-side-client-state"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"

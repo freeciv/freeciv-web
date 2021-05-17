@@ -359,6 +359,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       }
       break;
     case ATK_TILE:
+    case ATK_EXTRAS:
       if (target_tile != null) {
         tgt_id = target_tile['index'];
       }

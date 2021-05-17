@@ -119,8 +119,9 @@ var ATK_CITY  = 0;
 var ATK_UNIT  = 1;
 var ATK_UNITS = 2;
 var ATK_TILE  = 3;
-var ATK_SELF  = 4;
-var ATK_COUNT = 5;
+var ATK_EXTRAS = 4;
+var ATK_SELF  = 5;
+var ATK_COUNT = 6;
 
 /* Actions */
 var ACTION_ESTABLISH_EMBASSY = 0;

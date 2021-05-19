@@ -3,7 +3,7 @@
 
 FROM debian:buster
 
-MAINTAINER The Freeciv Project version: 3.1
+MAINTAINER The Freeciv Project version: 3.2
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet && \
     DEBIAN_FRONTEND=noninteractive apt-get install --yes \

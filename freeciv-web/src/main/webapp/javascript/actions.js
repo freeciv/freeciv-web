@@ -35,3 +35,18 @@ function action_by_number(act_id)
 
   return actions[act_id];
 }
+
+/**********************************************************************//**
+  Returns TRUE iff performing the specified action has the specified
+  result.
+**************************************************************************/
+function action_has_result(paction, result)
+{
+  if (paction == null || paction['result'] == null) {
+    console.log("action_has_result(): bad action");
+    console.log(paction);
+    return null;
+  }
+
+  return paction['result'] == result;
+}

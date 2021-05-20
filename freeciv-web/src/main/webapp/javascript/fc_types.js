@@ -211,7 +211,8 @@ var ACTION_UNIT_MOVE = 80;
 var ACTION_USER_ACTION1 = 81;
 var ACTION_USER_ACTION2 = 82;
 var ACTION_USER_ACTION3 = 83;
-var ACTION_COUNT = 84;
+var ACTION_HEAL_UNIT2 = 84;
+var ACTION_COUNT = 85;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

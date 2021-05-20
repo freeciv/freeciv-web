@@ -54,6 +54,7 @@ function act_sel_queue_may_be_done(actor_unit_id)
     } else {
       /* An action, or no action at all, was selected. */
       action_decision_clear_want(actor_unit_id);
+      action_selection_next_in_focus(actor_unit_id);
     }
   }
 }
@@ -306,6 +307,9 @@ function popup_action_selection(actor_unit, action_probabilities,
     console.log("Looks like unit %d has an action selection dialog open"
                 + " but a dialog for unit %d is about to be opened.",
                 action_selection_in_progress_for, actor_unit['id']);
+    console.log("Closing the action selection dialog for unit %d",
+                action_selection_in_progress_for);
+    action_selection_close();
   }
 
   var actor_homecity = cities[actor_unit['homecity']];
@@ -481,6 +485,15 @@ function popup_action_selection(actor_unit, action_probabilities,
           return;
         }
   }
+
+  buttons.push({
+      id      : "act_sel_wait" + actor_unit['id'],
+      "class" : 'act_sel_button',
+      text    : 'Wait',
+      click   : function() {
+        did_not_decide = true;
+        $(id).dialog("close");
+      } });
 
   buttons.push({
       id      : "act_sel_cancel" + actor_unit['id'],

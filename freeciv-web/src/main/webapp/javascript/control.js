@@ -755,6 +755,16 @@ function should_ask_server_for_actions(punit)
 }
 
 /**********************************************************************//**
+  Returns TRUE iff it is OK to ask the server about what actions a unit
+  can perform.
+**************************************************************************/
+function can_ask_server_for_actions()
+{
+  /* OK as long as no other unit already asked and aren't done yet. */
+  return action_selection_in_progress_for === IDENTITY_NUMBER_ZERO;
+}
+
+/**********************************************************************//**
   Ask the server about what actions punit may be able to perform against
   it's stored target tile.
 
@@ -833,6 +843,44 @@ function action_decision_clear_want(old_actor_id)
       "value"   : IDENTITY_NUMBER_ZERO
     };
     send_request(JSON.stringify(unqueue));
+  }
+}
+
+/**********************************************************************//**
+  Move on to the next unit in focus that needs an action decision.
+**************************************************************************/
+function action_selection_next_in_focus(old_actor_id)
+{
+  /* Go to the next unit in focus that needs a decision. */
+  for (var i = 0; i < current_focus.length; i++) {
+    var funit = current_focus[i];
+    if (old_actor_id != funit['id']
+        && should_ask_server_for_actions(funit)) {
+      ask_server_for_actions(funit);
+      return;
+    }
+  }
+}
+
+/**********************************************************************//**
+  Request that the player makes a decision for the specified unit.
+**************************************************************************/
+function action_decision_request(actor_unit)
+{
+  if (actor_unit == null) {
+    console.log("action_decision_request(): No actor unit");
+    return;
+  }
+
+  if (!unit_is_in_focus(actor_unit)) {
+    /* Getting feed back may be urgent. A unit standing next to an enemy
+     * could be killed while waiting. */
+    unit_focus_urgent(actor_unit);
+  } else if (can_client_issue_orders()
+             && can_ask_server_for_actions()) {
+    /* No need to wait. The actor unit is in focus. No other actor unit
+     * is currently asking about action selection. */
+    ask_server_for_actions(actor_unit);
   }
 }
 
@@ -925,6 +973,17 @@ function update_unit_focus()
 
   if (C_S_RUNNING != client_state()) return;
 
+  if (!can_ask_server_for_actions()) {
+    if (get_units_in_focus().length < 1) {
+      console.log("update_unit_focus(): action selection dialog open for"
+                  + " unit %d but unit not in focus?",
+                  action_selection_in_progress_for);
+    } else {
+      /* An actor unit is asking the player what to do. Don't steal his
+       * focus. */
+      return;
+    }
+  }
 
   /* iterate zero times for no units in focus,
    * otherwise quit for any of the conditions. */
@@ -966,8 +1025,11 @@ function advance_unit_focus()
     for (i = 0; i < urgent_focus_queue.length; i++) {
       var punit = urgent_focus_queue[i];
 
-      if (ACTIVITY_IDLE != punit.activity
-          || punit.has_orders) {
+      if ((ACTIVITY_IDLE != punit.activity
+           || punit.has_orders)
+          /* This isn't an action decision needed because of an
+           * ORDER_ACTION_MOVE located in the middle of an order. */
+          && !should_ask_server_for_actions(punit)) {
         /* We have assigned new orders to this unit since, remove it. */
         urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
         i--;
@@ -1400,6 +1462,7 @@ function set_unit_focus(punit)
     current_focus = [];
   } else {
     current_focus[0] = punit;
+    action_selection_next_in_focus(IDENTITY_NUMBER_ZERO);
     if (renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
   }
   update_active_units_dialog();
@@ -1418,6 +1481,7 @@ function set_unit_focus_and_redraw(punit)
     if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
   } else {
     current_focus[0] = punit;
+    action_selection_next_in_focus(IDENTITY_NUMBER_ZERO);
     if (renderer == RENDERER_WEBGL) update_unit_position(index_to_tile(punit['tile']));
   }
 

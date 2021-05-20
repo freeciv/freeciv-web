@@ -115,6 +115,11 @@ var ACTRES_HUT_FRIGHTEN = 57;
 var ACTRES_UNIT_MOVE = 58;
 var ACTRES_NONE = 59;
 
+/* enum action_sub_result */
+var ACT_SUB_RES_HUT_ENTER = 0;
+var ACT_SUB_RES_HUT_FRIGHTEN = 1;
+var ACT_SUB_RES_COUNT = 2;
+
 var IDENTITY_NUMBER_ZERO = 0;
 
 /* Corresponds to the enum action_target_kind */

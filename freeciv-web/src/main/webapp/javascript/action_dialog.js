@@ -18,8 +18,6 @@
 ***********************************************************************/
 
 
-/* All generalized actions. */
-var actions = {};
 var auto_attack = false;
 
 var action_selection_restart = false;

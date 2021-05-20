@@ -20,3 +20,18 @@
 
 /* All generalized actions. */
 var actions = {};
+
+/**********************************************************************//**
+  Return the action with the given id.
+
+  Returns NULL if no action with the given id exists.
+**************************************************************************/
+function action_by_number(act_id)
+{
+  if (actions[act_id] == undefined) {
+    console.log("Asked for non existing action numbered %d", act_id);
+    return null;
+  }
+
+  return actions[act_id];
+}

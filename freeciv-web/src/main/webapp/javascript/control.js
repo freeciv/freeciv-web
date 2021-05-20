@@ -1261,7 +1261,8 @@ function update_unit_order_commands()
       $("#order_nuke").hide();
     }
 
-    if (utype_can_do_action(ptype, ACTION_PARADROP)) {
+    if (utype_can_do_action_result(ptype, ACTRES_PARADROP)
+        || utype_can_do_action_result(ptype, ACTRES_PARADROP_CONQUER)) {
       $("#order_paradrop").show();
       unit_actions["paradrop"] = {name: "Paradrop"};
     } else {
@@ -1644,6 +1645,49 @@ function order_wants_direction(order, act_id, ptile) {
   }
 }
 
+/**********************************************************************//**
+  Paradrop to a location.
+**************************************************************************/
+function do_unit_paradrop_to(punit, ptile)
+{
+  var act_id;
+  var paradrop_action = null;
+
+  for (act_id = 0; act_id < ACTION_COUNT; act_id++) {
+    var paction = action_by_number(act_id);
+
+    if (!(action_has_result(paction, ACTRES_PARADROP_CONQUER)
+          || action_has_result(paction, ACTRES_PARADROP))) {
+      /* Not relevant. */
+      continue;
+    }
+
+    if (utype_can_do_action(unit_type(punit), act_id)) {
+      if (paradrop_action == null) {
+        /* This is the first possible paradrop action. */
+        paradrop_action = paction;
+      } else {
+        /* More than one paradrop action may be possible. The user must
+         * choose. Have the server record that an action decision is wanted
+         * for this unit so the dialog will be brought up. */
+        var packet = {
+          "pid"     : packet_unit_sscs_set,
+          "unit_id" : punit['id'],
+          "type"    : USSDT_QUEUE,
+          "value"   : ptile['index']
+        };
+        send_request(JSON.stringify(packet));
+        return;
+      }
+    }
+  }
+
+  if (paradrop_action != null) {
+    request_unit_do_action(paradrop_action['id'], punit['id'],
+                           ptile['index']);
+  }
+}
+
 /**************************************************************************
   Handles everything when the user clicked a tile
 **************************************************************************/
@@ -1817,7 +1861,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
   } else if (paradrop_active && current_focus.length > 0) {
     punit = current_focus[0];
-    request_unit_do_action(ACTION_PARADROP, punit['id'], ptile['index']);
+    do_unit_paradrop_to(punit, ptile);
     paradrop_active = false;
 
   } else if (airlift_active && current_focus.length > 0) {

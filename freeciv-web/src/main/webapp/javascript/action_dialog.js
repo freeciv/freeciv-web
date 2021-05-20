@@ -89,58 +89,6 @@ function action_prob_not_impl(probability)
          && probability['max'] == 0;
 }
 
-/**************************************************************************
-  Returns true unless a situation were a regular move always would be
-  impossible is recognized.
-**************************************************************************/
-function can_actor_unit_move(actor_unit, target_tile)
-{
-  var tgt_owner_id;
-
-  if (index_to_tile(actor_unit['tile']) == target_tile) {
-    /* The unit is already on this tile. */
-    return false;
-  }
-
-  if (-1 == get_direction_for_step(tiles[actor_unit['tile']],
-                                   target_tile)) {
-    /* The target tile is too far away. */
-    return FALSE;
-  }
-
-  for (var i = 0; i < tile_units(target_tile).length; i++) {
-    tgt_owner_id = unit_owner(tile_units(target_tile)[i])['playerno'];
-
-    if (tgt_owner_id != unit_owner(actor_unit)['playerno']
-        && diplstates[tgt_owner_id] != DS_ALLIANCE
-        && diplstates[tgt_owner_id] != DS_TEAM) {
-      /* Can't move to a non allied foreign unit's tile. */
-      return false;
-    }
-  }
-
-  if (tile_city(target_tile) != null) {
-    tgt_owner_id = city_owner(tile_city(target_tile))['playerno'];
-
-    if (tgt_owner_id == unit_owner(actor_unit)['playerno']) {
-      /* This city isn't foreign. */
-      return true;
-    }
-
-    if (diplstates[tgt_owner_id] == DS_ALLIANCE
-        || diplstates[tgt_owner_id] == DS_TEAM) {
-      /* This city belongs to an ally. */
-      return true;
-    }
-
-    return false;
-  }
-
-  /* It is better to show the "Keep moving" option one time to much than
-   * one time to little. */
-  return true;
-}
-
 /***************************************************************************
   Returns a part of an action probability in a user readable format.
 ***************************************************************************/
@@ -390,46 +338,6 @@ function popup_action_selection(actor_unit, action_probabilities,
                                            action_probabilities));
       }
     }
-  }
-
-  if (can_actor_unit_move(actor_unit, target_tile)) {
-    buttons.push({
-        id      : "act_sel_move" + actor_unit['id'],
-        "class" : 'act_sel_button',
-        text    : 'Keep moving',
-        click   : function() {
-          var dir = get_direction_for_step(tiles[actor_unit['tile']],
-                                           target_tile);
-          var order = {
-            "order"      : ORDER_MOVE,
-            "dir"        : dir,
-            "activity"   : ACTIVITY_LAST,
-            "target"     : 0,
-            "sub_target" : 0,
-            "action"     : ACTION_COUNT
-          };
-
-          var packet = {
-            "pid"       : packet_unit_orders,
-            "unit_id"   : actor_unit['id'],
-            "src_tile"  : actor_unit['tile'],
-            "length"    : 1,
-            "repeat"    : false,
-            "vigilant"  : false,
-            "orders"    : [order],
-            "dest_tile" : target_tile['index']
-          };
-
-          if (dir == -1) {
-            /* Non adjacent target tile? */
-            console.log("Action selection move: bad target tile");
-          } else {
-            send_request(JSON.stringify(packet));
-          }
-
-          $(id).remove();
-          act_sel_queue_may_be_done(actor_unit['id']);
-        } });
   }
 
   if (target_unit != null

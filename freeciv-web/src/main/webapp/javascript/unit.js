@@ -41,6 +41,7 @@ var ORDER_LAST = 5;
 var USSDT_QUEUE = 0;
 var USSDT_UNQUEUE = 1;
 var USSDT_BATTLE_GROUP = 2;
+var USSDT_SENTRY = 3;
 
 /* enum server_side_agent */
 var SSA_NONE = 0;

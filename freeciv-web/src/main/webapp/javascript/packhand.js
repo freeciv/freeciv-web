@@ -966,6 +966,10 @@ function handle_unit_actions(packet)
   if (hasActions && disturb_player) {
     popup_action_selection(pdiplomat, action_probabilities,
                            ptile, target_extra, target_unit, target_city);
+  } else if (disturb_player) {
+    /* Nothing to do. */
+    action_selection_no_longer_in_progress(actor_unit_id);
+    action_decision_clear_want(actor_unit_id);
   } else if (hasActions) {
     /* This was a background request. */
 

@@ -1,0 +1,216 @@
+From 67383deed6794494fb1937aca661578879c3203c Mon Sep 17 00:00:00 2001
+From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
+Date: Fri, 19 Mar 2021 08:19:20 +0100
+Subject: [PATCH] Correct wrong moves_actor_kind.
+
+The actions "Investigate City" and "Establish Embassy" doesn't do diplomat
+escape. The actor unit stays in place.
+
+Set their moves_actor_kind to MAK_STAYS rather than MAK_ESCAPE. Don't charge
+all movement as the spy escape cost.
+
+See osdn #41811
+---
+ common/actions.c                   |  8 ++++----
+ data/civ2/effects.ruleset          | 10 +---------
+ data/civ2civ3/effects.ruleset      | 10 +---------
+ data/classic/effects.ruleset       | 10 +---------
+ data/goldkeep/effects.ruleset      | 10 +---------
+ data/multiplayer/effects.ruleset   | 10 +---------
+ data/sandbox/effects.ruleset       | 10 +---------
+ data/webperimental/effects.ruleset | 10 +---------
+ 8 files changed, 11 insertions(+), 67 deletions(-)
+
+diff --git a/common/actions.c b/common/actions.c
+index c8fc319f3e..48b3049123 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -942,12 +942,12 @@ static void hard_code_actions(void)
+       unit_action_new(ACTION_ESTABLISH_EMBASSY,
+                       ACTRES_ESTABLISH_EMBASSY,
+                       FALSE, TRUE,
+-                      MAK_ESCAPE, 0, 1, FALSE);
++                      MAK_STAYS, 0, 1, FALSE);
+   actions[ACTION_ESTABLISH_EMBASSY_STAY] =
+       unit_action_new(ACTION_ESTABLISH_EMBASSY_STAY,
+                       ACTRES_ESTABLISH_EMBASSY,
+                       FALSE, TRUE,
+-                      MAK_ESCAPE, 0, 1, TRUE);
++                      MAK_STAYS, 0, 1, TRUE);
+   actions[ACTION_SPY_STEAL_TECH] =
+       unit_action_new(ACTION_SPY_STEAL_TECH,
+                       ACTRES_SPY_STEAL_TECH,
+@@ -972,12 +972,12 @@ static void hard_code_actions(void)
+       unit_action_new(ACTION_SPY_INVESTIGATE_CITY,
+                       ACTRES_SPY_INVESTIGATE_CITY,
+                       FALSE, TRUE,
+-                      MAK_ESCAPE, 0, 1, FALSE);
++                      MAK_STAYS, 0, 1, FALSE);
+   actions[ACTION_INV_CITY_SPEND] =
+       unit_action_new(ACTION_INV_CITY_SPEND,
+                       ACTRES_SPY_INVESTIGATE_CITY,
+                       FALSE, TRUE,
+-                      MAK_ESCAPE, 0, 1, TRUE);
++                      MAK_STAYS, 0, 1, TRUE);
+   actions[ACTION_SPY_STEAL_GOLD] =
+       unit_action_new(ACTION_SPY_STEAL_GOLD,
+                       ACTRES_SPY_STEAL_GOLD,
+diff --git a/data/civ2/effects.ruleset b/data/civ2/effects.ruleset
+index b6b549750e..6e0840533b 100644
+--- a/data/civ2/effects.ruleset
++++ b/data/civ2/effects.ruleset
+@@ -2502,20 +2502,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_action_success_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_action_success_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+diff --git a/data/civ2civ3/effects.ruleset b/data/civ2civ3/effects.ruleset
+index b30b5866e8..0ef8852c5a 100644
+--- a/data/civ2civ3/effects.ruleset
++++ b/data/civ2civ3/effects.ruleset
+@@ -4253,20 +4253,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_action_success_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_action_success_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+diff --git a/data/classic/effects.ruleset b/data/classic/effects.ruleset
+index 7b920c0607..d2f8031ab0 100644
+--- a/data/classic/effects.ruleset
++++ b/data/classic/effects.ruleset
+@@ -2526,20 +2526,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_action_success_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_action_success_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+diff --git a/data/multiplayer/effects.ruleset b/data/multiplayer/effects.ruleset
+index 46efc9f0d3..ee72127a30 100644
+--- a/data/multiplayer/effects.ruleset
++++ b/data/multiplayer/effects.ruleset
+@@ -2647,20 +2647,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_action_success_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_action_success_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+diff --git a/data/sandbox/effects.ruleset b/data/sandbox/effects.ruleset
+index 2773b387c3..68824cb770 100644
+--- a/data/sandbox/effects.ruleset
++++ b/data/sandbox/effects.ruleset
+@@ -4399,20 +4399,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_success_move_cost_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_success_move_cost_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+diff --git a/data/webperimental/effects.ruleset b/data/webperimental/effects.ruleset
+index 1afa028f65..f7d4974fb3 100644
+--- a/data/webperimental/effects.ruleset
++++ b/data/webperimental/effects.ruleset
+@@ -2758,20 +2758,12 @@ reqs    =
+ 
+ [effect_action_establish_embassy_success_move_cost]
+ type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
++value   = 1
+ reqs    =
+     { "type",   "name",              "range", "quiet"
+       "Action", "Establish Embassy", "Local", TRUE
+     }
+ 
+-[effect_action_success_move_cost_investigate_city]
+-type    = "Action_Success_Actor_Move_Cost"
+-value   = 65535
+-reqs    =
+-    { "type",   "name",             "range", "quiet"
+-      "Action", "Investigate City", "Local", TRUE
+-    }
+-
+ [effect_action_success_move_cost_poison_city_escape]
+ type    = "Action_Success_Actor_Move_Cost"
+ value   = 65535
+-- 
+2.30.2
+

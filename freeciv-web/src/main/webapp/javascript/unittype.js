@@ -57,6 +57,33 @@ function utype_can_do_action(putype, action_id)
   return putype['utype_actions'].isSet(action_id);
 }
 
+/**********************************************************************//**
+  Return TRUE iff units of the given type can do any enabler controlled
+  action with the specified action result.
+
+  Note that a specific unit in a specific situation still may be unable to
+  perform the specified action.
+**************************************************************************/
+function utype_can_do_action_result(putype, result)
+{
+  var act_id;
+
+  if (putype == null || putype['utype_actions'] == null) {
+    console.log("utype_can_do_action_result(): bad unit type.");
+    return false;
+  }
+
+  for (act_id = 0; act_id < ACTION_COUNT; act_id++) {
+    var paction = action_by_number(act_id);
+    if (action_has_result(paction, result)
+        && utype_can_do_action(putype, act_id)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 /**************************************************************************
 Whether player can build given unit somewhere,
 ignoring whether unit is obsolete and assuming the

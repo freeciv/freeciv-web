@@ -91,11 +91,6 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again p
 echo "apt-get install dependencies"
 sudo ${APT_GET} install --no-install-recommends ${dependencies}
 
-# Where default-jdk is older version, it may be installed with a higher priority than v11
-for n in java javac; do
-  sudo update-alternatives --set $n $(update-alternatives --query $n | sed -n 's/Alternative: \(.*java-11.*\)/\1/p' | head -n 1)
-done
-
 if [ "${INSTALLED_TOMCAT}" = N ]; then
   ext_install_tomcat9
 fi

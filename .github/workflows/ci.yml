@@ -7,7 +7,7 @@ on:
 
 jobs:
   normal:
-    runs-on: ubuntu-20.10
+    runs-on: ubuntu-latest
     steps:
       - name: check out Freeciv-web
         uses: actions/checkout@v2

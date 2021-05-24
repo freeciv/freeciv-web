@@ -57,17 +57,6 @@ APT_GET='DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o=Dpkg::Use-Pty=0'
 
 sudo ${APT_GET} update
 
-if ! apt-cache -qq show openjdk-11-jdk-headless > /dev/null; then
-  echo "==== Adding openjdk-11 repo ===="
-  if [ "${FCW_INSTALL_VND}" = Ubuntu ]; then
-    sudo ${APT_GET} install --no-install-recommends python3-software-properties software-properties-common
-    sudo add-apt-repository -y ppa:openjdk-r/ppa
-  else
-    echo "deb http://http.debian.net/debian ${FCW_INSTALL_REL}-backports main" | sudo tee --append /etc/apt/sources.list.d/${FCW_INSTALL_REL}-backports.list > /dev/null
-  fi
-  sudo ${APT_GET} update
-fi
-
 if [ "$DEB_NO_TOMCAT" != "Y" ] && apt-get --simulate install tomcat9 &> /dev/null; then
   dependencies="${dependencies} tomcat9 tomcat9-admin"
   INSTALLED_TOMCAT=Y

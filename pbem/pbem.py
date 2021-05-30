@@ -93,9 +93,13 @@ def handle_savegame(root, file):
   filename = os.path.join(root,file)
   print("Handling savegame: " + filename);
   txt = None;
-  with lzma.open(filename,  mode="rt") as f:
-    txt = f.read().split("\n");
-    status.savegames_read += 1;
+  try:
+    with lzma.open(filename,  mode="rt") as f:
+      txt = f.read().split("\n");
+      status.savegames_read += 1;
+  except Exception as inst:
+    print("Error loading savegame: " + str(inst));
+    return;
 
   new_filename = "pbem_processed_" + str(random.randint(0,10000000000)) + ".xz";
   f.close();

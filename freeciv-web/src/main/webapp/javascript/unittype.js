@@ -36,6 +36,7 @@ var UCF_ZOC = 7;
 var UCF_DOESNT_OCCUPY_TILE = 8;
 var UCF_ATTACK_NON_NATIVE = 9;
 var UCF_KILLCITIZEN = 10;
+var UCF_HUT_FRIGHTEN = 11;
 
 /**********************************************************************//**
   Return true iff units of the given type can do the specified generalized

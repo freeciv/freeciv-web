@@ -2,12 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-Improve-Action_Success_Actor_Move_Cost-effect-entrie.patch is osdn #41760
-#     It was committed as 547fb33c2d8c7ef7bddc883488e07460f12da85f
-# 0001-Deduplicate-Establish-Embassy-move-costs.patch is osdn #41765
-#     It was committed as 2ebd37750b7acb494c1118fc8005ce54df0f99df
-# 0001-Correct-wrong-moves_actor_kind.patch is osdn #41811
-#     It was committed as 67383deed6794494fb1937aca661578879c3203c
 # 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
 #     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
@@ -32,9 +26,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0001-Improve-Action_Success_Actor_Move_Cost-effect-entrie"
-  "0001-Deduplicate-Establish-Embassy-move-costs"
-  "0001-Correct-wrong-moves_actor_kind"
   "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"

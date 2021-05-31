@@ -114,12 +114,14 @@ var ACTRES_HUT_ENTER = 56;
 var ACTRES_HUT_FRIGHTEN = 57;
 var ACTRES_UNIT_MOVE = 58;
 var ACTRES_PARADROP_CONQUER = 59;
-var ACTRES_NONE = 60;
+var ACTRES_HOMELESS = 60;
+var ACTRES_NONE = 61;
 
 /* enum action_sub_result */
 var ACT_SUB_RES_HUT_ENTER = 0;
 var ACT_SUB_RES_HUT_FRIGHTEN = 1;
-var ACT_SUB_RES_COUNT = 2;
+var ACT_SUB_RES_MAY_EMBARK = 2;
+var ACT_SUB_RES_COUNT = 3;
 
 var IDENTITY_NUMBER_ZERO = 0;
 
@@ -237,7 +239,8 @@ var ACTION_PARADROP_FRIGHTEN = 100;
 var ACTION_PARADROP_FRIGHTEN_CONQUER = 101;
 var ACTION_PARADROP_ENTER = 102;
 var ACTION_PARADROP_ENTER_CONQUER = 103;
-var ACTION_COUNT = 104;
+var ACTION_HOMELESS = 104;
+var ACTION_COUNT = 105;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

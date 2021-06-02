@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-Make-generated-random-seed-less-predictable.patch is hrm Bug #914184
-#     It was committed as a56144bd28e2a19707cee5c5c3028a12c634d0ff
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -26,7 +24,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0001-Make-generated-random-seed-less-predictable"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

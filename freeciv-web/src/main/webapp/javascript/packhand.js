@@ -792,6 +792,12 @@ function handle_unit_packet_common(packet_unit)
 
     update_unit_anim_list(units[packet_unit['id']], packet_unit);
     units[packet_unit['id']] = $.extend(units[packet_unit['id']], packet_unit);
+
+    for (var i = 0; i < current_focus.length; i++) {
+      if (current_focus[i]['id'] == packet_unit['id']) {
+        $.extend(current_focus[i], packet_unit);
+      }
+    }
   }
 
   update_tile_unit(units[packet_unit['id']]);

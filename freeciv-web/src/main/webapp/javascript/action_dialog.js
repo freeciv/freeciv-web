@@ -65,6 +65,8 @@ function act_sel_queue_done(actor_unit_id)
 {
   /* Stop waiting. Move on to the next queued unit. */
   is_more_user_input_needed = false;
+  action_selection_restart = false;
+  did_not_decide = false;
   act_sel_queue_may_be_done(actor_unit_id);
 }
 

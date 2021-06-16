@@ -1023,7 +1023,7 @@ function advance_unit_focus()
                       : -1);
 
     for (i = 0; i < urgent_focus_queue.length; i++) {
-      var punit = urgent_focus_queue[i];
+      var punit = units[urgent_focus_queue[i]['id']];
 
       if ((ACTIVITY_IDLE != punit.activity
            || punit.has_orders)

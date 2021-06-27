@@ -3000,6 +3000,7 @@ function request_unit_cancel_orders(punit)
 function request_new_unit_activity(punit, activity, target)
 {
   request_unit_cancel_orders(punit);
+  action_decision_clear_want(punit['id']);
   var packet = {"pid" : packet_unit_change_activity, "unit_id" : punit['id'],
                 "activity" : activity, "target" : target };
   send_request(JSON.stringify(packet));
@@ -3030,6 +3031,7 @@ function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
     request_unit_cancel_orders(punit);
+    action_decision_clear_want(punit['id']);
     request_unit_ssa_set(punit, SSA_AUTOSETTLER);
   }
 }
@@ -3094,6 +3096,7 @@ function request_unit_do_action(action_id, actor_id, target_id, sub_tgt_id,
     sub_tgt_id: sub_tgt_id || 0,
     name: name || ""
   }));
+  action_decision_clear_want(actor_id);
 }
 
 /**************************************************************************

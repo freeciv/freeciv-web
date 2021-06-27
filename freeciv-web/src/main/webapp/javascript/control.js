@@ -834,7 +834,7 @@ function action_decision_clear_want(old_actor_id)
 {
   var old = game_find_unit_by_number(old_actor_id);
 
-  if (old !== null) {
+  if (old !== null && old['action_decision_want'] !== ACT_DEC_NOTHING) {
     /* Have the server record that a decision no longer is wanted. */
     var unqueue = {
       "pid"     : packet_unit_sscs_set,

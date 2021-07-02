@@ -2,6 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0001-Map-unit-move-orders-to-dis-embark-actions is osdn #42581
+#     It was committed as a53773bf84bd86ce181ba6f231900026ec1f5d9b
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -25,6 +27,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "0001-Map-unit-move-orders-to-dis-embark-actions"
   "0001-JSON-avoid-integer-underflow-on-orders"
   "city_impr_fix2"
   "city-naming-change"

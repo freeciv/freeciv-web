@@ -834,7 +834,7 @@ function action_decision_clear_want(old_actor_id)
 {
   var old = game_find_unit_by_number(old_actor_id);
 
-  if (old !== null) {
+  if (old != null && old['action_decision_want'] !== ACT_DEC_NOTHING) {
     /* Have the server record that a decision no longer is wanted. */
     var unqueue = {
       "pid"     : packet_unit_sscs_set,
@@ -1023,7 +1023,7 @@ function advance_unit_focus()
                       : -1);
 
     for (i = 0; i < urgent_focus_queue.length; i++) {
-      var punit = urgent_focus_queue[i];
+      var punit = units[urgent_focus_queue[i]['id']];
 
       if ((ACTIVITY_IDLE != punit.activity
            || punit.has_orders)
@@ -3000,6 +3000,7 @@ function request_unit_cancel_orders(punit)
 function request_new_unit_activity(punit, activity, target)
 {
   request_unit_cancel_orders(punit);
+  action_decision_clear_want(punit['id']);
   var packet = {"pid" : packet_unit_change_activity, "unit_id" : punit['id'],
                 "activity" : activity, "target" : target };
   send_request(JSON.stringify(packet));
@@ -3030,6 +3031,7 @@ function request_unit_autosettlers(punit)
 {
   if (punit != null ) {
     request_unit_cancel_orders(punit);
+    action_decision_clear_want(punit['id']);
     request_unit_ssa_set(punit, SSA_AUTOSETTLER);
   }
 }
@@ -3094,6 +3096,7 @@ function request_unit_do_action(action_id, actor_id, target_id, sub_tgt_id,
     sub_tgt_id: sub_tgt_id || 0,
     name: name || ""
   }));
+  action_decision_clear_want(actor_id);
 }
 
 /**************************************************************************

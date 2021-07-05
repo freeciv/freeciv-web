@@ -65,6 +65,23 @@ function tile_resource(tile)
   return null;
 }
 
+/************************************************************************//**
+  Check if tile contains an extra type that claim territory
+****************************************************************************/
+function tile_has_territory_claiming_extra(ptile)
+{
+  var extra;
+
+  for (extra = 0; extra < MAX_EXTRA_TYPES; extra++) {
+    if (tile_has_extra(ptile, extra)
+        && territory_claiming_extra(extra_by_number(extra))) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function tile_owner(tile)
 {
   return tile['owner'];

@@ -1507,14 +1507,46 @@ function handle_ruleset_extra_flag(packet)
   /* TODO: implement */
 }
 
+/************************************************************************//**
+  Handle a packet about a particular base type.
+****************************************************************************/
 function handle_ruleset_base(packet)
 {
-  /* TODO: Implement */
+  var i;
+
+  for (i = 0; i < MAX_EXTRA_TYPES; i++) {
+    if (is_extra_caused_by(extras[i], EC_BASE)
+        && extras[i]['base'] == null) {
+      /* This is the first base without base data */
+      extras[i]['base'] = packet;
+      extras[extras[i]['name']]['base'] = packet;
+      return;
+    }
+  }
+
+  console.log("Didn't find Extra to put Base on");
+  console.log(packet);
 }
 
+/************************************************************************//**
+  Handle a packet about a particular road type.
+****************************************************************************/
 function handle_ruleset_road(packet)
 {
-  /* TODO: Implement */
+  var i;
+
+  for (i = 0; i < MAX_EXTRA_TYPES; i++) {
+    if (is_extra_caused_by(extras[i], EC_ROAD)
+        && extras[i]['road'] == null) {
+      /* This is the first road without road data */
+      extras[i]['road'] = packet;
+      extras[extras[i]['name']]['road'] = packet;
+      return;
+    }
+  }
+
+  console.log("Didn't find Extra to put Road on");
+  console.log(packet);
 }
 
 /************************************************************************//**

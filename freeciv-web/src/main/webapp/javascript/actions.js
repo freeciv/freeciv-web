@@ -50,3 +50,12 @@ function action_has_result(paction, result)
 
   return paction['result'] == result;
 }
+
+/**************************************************************************
+  Returns true iff the given action probability belongs to an action that
+  may be possible.
+**************************************************************************/
+function action_prob_possible(aprob)
+{
+  return 0 < aprob['max'] || action_prob_not_impl(aprob);
+}

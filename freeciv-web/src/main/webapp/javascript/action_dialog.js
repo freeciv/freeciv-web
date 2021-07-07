@@ -71,15 +71,6 @@ function act_sel_queue_done(actor_unit_id)
 }
 
 /**************************************************************************
-  Returns true iff the given action probability belongs to an action that
-  may be possible.
-**************************************************************************/
-function action_prob_possible(aprob)
-{
-  return 0 < aprob['max'] || action_prob_not_impl(aprob);
-}
-
-/**************************************************************************
   Returns TRUE iff the given action probability represents that support
   for finding this action probability currently is missing from Freeciv.
 **************************************************************************/

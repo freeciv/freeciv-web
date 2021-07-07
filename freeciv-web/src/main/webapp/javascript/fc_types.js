@@ -135,6 +135,14 @@ var ATK_EXTRAS = 4;
 var ATK_SELF  = 5;
 var ATK_COUNT = 6;
 
+/* Corresponds to the enum action_sub_target_kind */
+var ASTK_NONE = 0;
+var ASTK_BUILDING = 1;
+var ASTK_TECH = 2;
+var ASTK_EXTRA = 3;
+var ASTK_EXTRA_NOT_THERE = 4;
+var ASTK_COUNT = 5;
+
 /* Actions */
 var ACTION_ESTABLISH_EMBASSY = 0;
 var ACTION_ESTABLISH_EMBASSY_STAY = 1;

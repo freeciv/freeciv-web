@@ -63,3 +63,11 @@ function is_extra_removed_by(pextra, rmcause)
 {
   return pextra.rmcauses.isSet(rmcause);
 }
+
+/************************************************************************//**
+  Does this extra type claim territory?
+****************************************************************************/
+function territory_claiming_extra(pextra)
+{
+  return pextra['base'] && pextra['base']['border_sq'] > -1;
+}

@@ -740,6 +740,47 @@ function handle_unit_short_info(packet)
   handle_unit_packet_common(packet);
 }
 
+/**********************************************************************//**
+  Request that the player makes a decision for the specified unit unless
+  it may be an automatic decision. In that case check if one of the auto
+  actions are enabled.
+**************************************************************************/
+function action_decision_handle(punit)
+{
+  if (utype_can_do_action(unit_type(punit), ACTION_ATTACK) && auto_attack) {
+    /* An auto action like auto attack could be legal. Check for those at
+     * once so they won't have to wait for player focus. */
+    var packet = {
+      "pid" : packet_unit_get_actions,
+      "actor_unit_id" : punit['id'],
+      "target_unit_id" : IDENTITY_NUMBER_ZERO,
+      "target_tile_id": punit['action_decision_tile'],
+      "target_extra_id": EXTRA_NONE,
+      "disturb_player": false
+    };
+    send_request(JSON.stringify(packet));
+  } else {
+    action_decision_request(punit);
+  }
+}
+
+/**********************************************************************//**
+  Do an auto action or request that the player makes a decision for the
+  specified unit.
+**************************************************************************/
+function action_decision_maybe_auto(actor_unit, action_probabilities,
+                                    target_tile, target_extra,
+                                    target_unit, target_city)
+{
+  if (action_prob_possible(action_probabilities[ACTION_ATTACK])
+      && auto_attack) {
+    request_unit_do_action(ACTION_ATTACK,
+        actor_unit['id'], target_tile['index']);
+  } else {
+    action_decision_request(actor_unit);
+  }
+}
+
 /**************************************************************************
   Called to do basic handling for a unit_info or short_unit_info packet.
 
@@ -778,7 +819,7 @@ function handle_unit_packet_common(packet_unit)
   if (units[packet_unit['id']] == null) {
     /* This is a new unit. */
     if (should_ask_server_for_actions(packet_unit)) {
-      action_decision_request(packet_unit);
+      action_decision_handle(packet_unit);
     }
     packet_unit['anim_list'] = [];
     units[packet_unit['id']] = packet_unit;
@@ -787,7 +828,7 @@ function handle_unit_packet_common(packet_unit)
     if (punit['action_decision_want'] != packet_unit['action_decision_want']
         && should_ask_server_for_actions(packet_unit)) {
       /* The unit wants the player to decide. */
-      action_decision_request(packet_unit);
+      action_decision_handle(packet_unit);
     }
 
     update_unit_anim_list(units[packet_unit['id']], packet_unit);
@@ -947,8 +988,9 @@ function handle_unit_actions(packet)
   } else if (hasActions) {
     /* This was a background request. */
 
-    /* No background requests are currently made. */
-    console.log("Received the reply to a background request I didn't do.");
+    action_decision_maybe_auto(pdiplomat, action_probabilities,
+                               ptile, target_extra,
+                               target_unit, target_city);
   }
 }
 

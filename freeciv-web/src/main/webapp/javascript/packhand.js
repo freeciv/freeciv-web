@@ -17,6 +17,10 @@
 
 ***********************************************************************/
 
+const auto_attack_actions = [
+  ACTION_ATTACK, ACTION_SUICIDE_ATTACK,
+  ACTION_NUKE_UNITS,ACTION_NUKE_CITY, ACTION_NUKE
+];
 
 
 /* Freeciv Web Client.
@@ -747,21 +751,27 @@ function handle_unit_short_info(packet)
 **************************************************************************/
 function action_decision_handle(punit)
 {
-  if (utype_can_do_action(unit_type(punit), ACTION_ATTACK) && auto_attack) {
-    /* An auto action like auto attack could be legal. Check for those at
-     * once so they won't have to wait for player focus. */
-    var packet = {
-      "pid" : packet_unit_get_actions,
-      "actor_unit_id" : punit['id'],
-      "target_unit_id" : IDENTITY_NUMBER_ZERO,
-      "target_tile_id": punit['action_decision_tile'],
-      "target_extra_id": EXTRA_NONE,
-      "disturb_player": false
-    };
-    send_request(JSON.stringify(packet));
-  } else {
-    action_decision_request(punit);
+  for (a = 0; a < auto_attack_actions.length; a++) {
+    action = auto_attack_actions[a];
+    if (utype_can_do_action(unit_type(punit), action) && auto_attack) {
+      /* An auto action like auto attack could be legal. Check for those at
+      * once so they won't have to wait for player focus. */
+      var packet = {
+        "pid" : packet_unit_get_actions,
+        "actor_unit_id" : punit['id'],
+        "target_unit_id" : IDENTITY_NUMBER_ZERO,
+        "target_tile_id": punit['action_decision_tile'],
+        "target_extra_id": EXTRA_NONE,
+        "disturb_player": false
+      };
+
+      send_request(JSON.stringify(packet));
+      return; // Exit, don't request other possible actions in the loop.
+    }
   }
+  /* Other auto_action types can be checked here. Also see function below */
+
+  action_decision_request(punit);
 }
 
 /**********************************************************************//**
@@ -772,13 +782,28 @@ function action_decision_maybe_auto(actor_unit, action_probabilities,
                                     target_tile, target_extra,
                                     target_unit, target_city)
 {
-  if (action_prob_possible(action_probabilities[ACTION_ATTACK])
-      && auto_attack) {
-    request_unit_do_action(ACTION_ATTACK,
-        actor_unit['id'], target_tile['index']);
-  } else {
-    action_decision_request(actor_unit);
+  for (a = 0; a < auto_attack_actions.length; a++) {
+    action = auto_attack_actions[a];
+
+    if (action_prob_possible(action_probabilities[action])
+        && auto_attack) {
+
+      var target = target_tile['index'];
+      if (action == ACTION_NUKE_CITY) {
+        target = tile_city(target_tile);
+        if (!target) continue;
+        target = target['id'];
+      }
+
+      request_unit_do_action(action,
+          actor_unit['id'], target);
+
+      return; // Exit, don't request other possible actions in the loop.
+    }
   }
+  /* Other auto_action types can be checked here. Also see function above */
+
+  action_decision_request(actor_unit);
 }
 
 /**************************************************************************

@@ -4,10 +4,11 @@
 # ------------------------------------
 # 0001-Map-unit-move-orders-to-dis-embark-actions is osdn #42581
 #     It was committed as a53773bf84bd86ce181ba6f231900026ec1f5d9b
+# 0001-JSON-avoid-integer-underflow-on-orders is osdn #42595
+#     It was committed as cedd5f7a5af8a10445f01b09bd91794e0126101d
 
 # Not in the upstream Freeciv server
 # ----------------------------------
-# 0001-JSON-avoid-integer-underflow-on-orders is osdn #42595
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.

@@ -378,10 +378,6 @@ function popup_action_selection(actor_unit, action_probabilities,
             }
           };
           buttons.push(button);
-        } else {
-          request_unit_do_action(ACTION_ATTACK,
-            actor_unit['id'], target_tile['index']);
-          return;
         }
   }
 

@@ -19,7 +19,7 @@
 
 const auto_attack_actions = [
   ACTION_ATTACK, ACTION_SUICIDE_ATTACK,
-  ACTION_NUKE_UNITS,ACTION_NUKE_CITY, ACTION_NUKE
+  ACTION_NUKE_UNITS, ACTION_NUKE_CITY, ACTION_NUKE
 ];
 
 
@@ -751,8 +751,10 @@ function handle_unit_short_info(packet)
 **************************************************************************/
 function action_decision_handle(punit)
 {
+  var a;
+
   for (a = 0; a < auto_attack_actions.length; a++) {
-    action = auto_attack_actions[a];
+    let action = auto_attack_actions[a];
     if (utype_can_do_action(unit_type(punit), action) && auto_attack) {
       /* An auto action like auto attack could be legal. Check for those at
       * once so they won't have to wait for player focus. */
@@ -782,8 +784,10 @@ function action_decision_maybe_auto(actor_unit, action_probabilities,
                                     target_tile, target_extra,
                                     target_unit, target_city)
 {
+  var a;
+
   for (a = 0; a < auto_attack_actions.length; a++) {
-    action = auto_attack_actions[a];
+    let action = auto_attack_actions[a];
 
     if (action_prob_possible(action_probabilities[action])
         && auto_attack) {

@@ -780,7 +780,8 @@ function ask_server_for_actions(punit)
   }
 
   /* Only one action selection dialog at a time is supported. */
-  if (action_selection_in_progress_for != IDENTITY_NUMBER_ZERO) {
+  if (action_selection_in_progress_for != IDENTITY_NUMBER_ZERO
+      && action_selection_in_progress_for != punit.id) {
     console.log("Unit %d started action selection before unit %d was done",
                 action_selection_in_progress_for, punit.id);
   }

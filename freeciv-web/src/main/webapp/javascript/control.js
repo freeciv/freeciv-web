@@ -945,19 +945,20 @@ function unit_focus_urgent(punit)
 **************************************************************************/
 function control_unit_killed(punit)
 {
-  if (unit_is_in_focus(punit)) {
-    current_focus = unit_list_without(current_focus, punit);
-    update_active_units_dialog();
-    update_unit_order_commands();
-  }
-
   if (urgent_focus_queue != null) {
     urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
   }
 
-  if (current_focus != null && current_focus.length < 1) {
-    /* if the unit in focus is removed, then advance the unit focus. */
-    advance_unit_focus();
+  if (unit_is_in_focus(punit)) {
+    if (current_focus.length == 1) {
+      /* if the unit in focus is removed, then advance the unit focus. */
+      advance_unit_focus();
+    } else {
+      current_focus = unit_list_without(current_focus, punit);
+    }
+
+    update_active_units_dialog();
+    update_unit_order_commands();
   }
 }
 
@@ -1044,7 +1045,7 @@ function advance_unit_focus()
     }
 
     if (null != candidate) {
-      urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
+      urgent_focus_queue = unit_list_without(urgent_focus_queue, candidate);
     }
   }
 
@@ -1405,9 +1406,10 @@ function find_best_focus_candidate(accept_current)
     if ((!unit_is_in_focus(punit) || accept_current)
        && client.conn.playing != null
        && punit['owner'] == client.conn.playing.playerno
-       && punit['activity'] == ACTIVITY_IDLE
-       && punit['movesleft'] > 0
-       && punit['done_moving'] == false
+       && ((punit['activity'] == ACTIVITY_IDLE
+            && punit['done_moving'] == false
+            && punit['movesleft'] > 0)
+           || should_ask_server_for_actions(punit))
        && punit['ssa_controller'] == SSA_NONE
        && waiting_units_list.indexOf(punit['id']) < 0
        && punit['transported'] == false) {

@@ -1406,9 +1406,10 @@ function find_best_focus_candidate(accept_current)
     if ((!unit_is_in_focus(punit) || accept_current)
        && client.conn.playing != null
        && punit['owner'] == client.conn.playing.playerno
-       && punit['activity'] == ACTIVITY_IDLE
-       && punit['movesleft'] > 0
-       && punit['done_moving'] == false
+       && ((punit['activity'] == ACTIVITY_IDLE
+            && punit['done_moving'] == false
+            && punit['movesleft'] > 0)
+           || should_ask_server_for_actions(punit))
        && punit['ssa_controller'] == SSA_NONE
        && waiting_units_list.indexOf(punit['id']) < 0
        && punit['transported'] == false) {

@@ -1045,7 +1045,7 @@ function advance_unit_focus()
     }
 
     if (null != candidate) {
-      urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
+      urgent_focus_queue = unit_list_without(urgent_focus_queue, candidate);
     }
   }
 

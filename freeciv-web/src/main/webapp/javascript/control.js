@@ -945,19 +945,20 @@ function unit_focus_urgent(punit)
 **************************************************************************/
 function control_unit_killed(punit)
 {
-  if (unit_is_in_focus(punit)) {
-    current_focus = unit_list_without(current_focus, punit);
-    update_active_units_dialog();
-    update_unit_order_commands();
-  }
-
   if (urgent_focus_queue != null) {
     urgent_focus_queue = unit_list_without(urgent_focus_queue, punit);
   }
 
-  if (current_focus != null && current_focus.length < 1) {
-    /* if the unit in focus is removed, then advance the unit focus. */
-    advance_unit_focus();
+  if (unit_is_in_focus(punit)) {
+    if (current_focus.length == 1) {
+      /* if the unit in focus is removed, then advance the unit focus. */
+      advance_unit_focus();
+    } else {
+      current_focus = unit_list_without(current_focus, punit);
+    }
+
+    update_active_units_dialog();
+    update_unit_order_commands();
   }
 }
 

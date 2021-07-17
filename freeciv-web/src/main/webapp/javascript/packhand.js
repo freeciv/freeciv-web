@@ -854,7 +854,8 @@ function handle_unit_packet_common(packet_unit)
     units[packet_unit['id']] = packet_unit;
     units[packet_unit['id']]['facing'] = 6;
   } else {
-    if (punit['action_decision_want'] != packet_unit['action_decision_want']
+    if ((punit['action_decision_want'] != packet_unit['action_decision_want']
+         || punit['action_decision_tile'] != packet_unit['action_decision_tile'])
         && should_ask_server_for_actions(packet_unit)) {
       /* The unit wants the player to decide. */
       action_decision_handle(packet_unit);

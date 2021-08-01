@@ -122,7 +122,8 @@ var ACTRES_NONE = 62;
 var ACT_SUB_RES_HUT_ENTER = 0;
 var ACT_SUB_RES_HUT_FRIGHTEN = 1;
 var ACT_SUB_RES_MAY_EMBARK = 2;
-var ACT_SUB_RES_COUNT = 3;
+var ACT_SUB_RES_NON_LETHAL = 3;
+var ACT_SUB_RES_COUNT = 4;
 
 var IDENTITY_NUMBER_ZERO = 0;
 
@@ -250,7 +251,8 @@ var ACTION_PARADROP_ENTER = 102;
 var ACTION_PARADROP_ENTER_CONQUER = 103;
 var ACTION_HOMELESS = 104;
 var ACTION_WIPE_UNITS = 105;
-var ACTION_COUNT = 106;
+var ACTION_BOMBARD_LETHAL = 106;
+var ACTION_COUNT = 107;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */
@@ -283,32 +285,31 @@ var VUT_CITYTILE = 17;          /* Target tile is used by city. */
 var VUT_GOOD = 18;
 var VUT_TERRFLAG = 19;
 var VUT_NATIONALITY = 20;
-var VUT_BASEFLAG = 21;
-var VUT_ROADFLAG = 22;
-var VUT_EXTRA = 23;
-var VUT_TECHFLAG = 24;
-var VUT_ACHIEVEMENT = 25;
-var VUT_DIPLREL = 26;
-var VUT_MAXTILEUNITS = 27;
-var VUT_STYLE = 28;
-var VUT_MINCULTURE = 29;
-var VUT_UNITSTATE = 30;
-var VUT_MINMOVES = 31;
-var VUT_MINVETERAN = 32;
-var VUT_MINHP = 33;
-var VUT_AGE = 34;
-var VUT_NATIONGROUP = 35;
-var VUT_TOPO = 36;
-var VUT_IMPR_GENUS = 37;
-var VUT_ACTION = 38;
-var VUT_MINTECHS = 39;
-var VUT_EXTRAFLAG = 40;
-var VUT_MINCALFRAG = 41;
-var VUT_SERVERSETTING = 42;
-var VUT_CITYSTATUS = 43;
-var VUT_MINFOREIGNPCT = 44;
-var VUT_ACTIVITY = 45
-var VUT_COUNT = 46;             /* Keep this last. */
+var VUT_ROADFLAG = 21;
+var VUT_EXTRA = 22;
+var VUT_TECHFLAG = 23;
+var VUT_ACHIEVEMENT = 24;
+var VUT_DIPLREL = 25;
+var VUT_MAXTILEUNITS = 26;
+var VUT_STYLE = 27;
+var VUT_MINCULTURE = 28;
+var VUT_UNITSTATE = 29;
+var VUT_MINMOVES = 30;
+var VUT_MINVETERAN = 31;
+var VUT_MINHP = 32;
+var VUT_AGE = 33;
+var VUT_NATIONGROUP = 34;
+var VUT_TOPO = 35;
+var VUT_IMPR_GENUS = 36;
+var VUT_ACTION = 37;
+var VUT_MINTECHS = 38;
+var VUT_EXTRAFLAG = 39;
+var VUT_MINCALFRAG = 40;
+var VUT_SERVERSETTING = 41;
+var VUT_CITYSTATUS = 42;
+var VUT_MINFOREIGNPCT = 43;
+var VUT_ACTIVITY = 44;
+var VUT_COUNT = 45;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* Used for options which do not belong to any gui. */

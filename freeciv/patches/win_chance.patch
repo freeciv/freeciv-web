@@ -41,8 +41,8 @@ index f1f8ba2..adf5c5e 100644
 +
 +      unit_list_iterate(ptile->units, tile_unit) {
 +	if (unit_owner(tile_unit) != unit_owner(funit)) {
-+	  int att = unit_win_chance(funit, tile_unit) * 100;
-+	  int def = (1.0 - unit_win_chance(tile_unit, funit)) * 100;
++	  int att = unit_win_chance(funit, tile_unit, NULL) * 100;
++	  int def = (1.0 - unit_win_chance(tile_unit, funit, NULL)) * 100;
 +
 +	  found = TRUE;
 +

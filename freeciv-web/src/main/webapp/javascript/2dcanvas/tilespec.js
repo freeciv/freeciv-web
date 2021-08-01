@@ -927,7 +927,7 @@ function get_unit_activity_sprite(punit)
               "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_CULTIVATE:
-      return {"key" : "unit.irrigate",
+      return {"key" : "unit.cultivate",
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};
 

@@ -251,7 +251,8 @@ var ACTION_PARADROP_ENTER = 102;
 var ACTION_PARADROP_ENTER_CONQUER = 103;
 var ACTION_HOMELESS = 104;
 var ACTION_WIPE_UNITS = 105;
-var ACTION_COUNT = 106;
+var ACTION_BOMBARD_LETHAL = 106;
+var ACTION_COUNT = 107;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */

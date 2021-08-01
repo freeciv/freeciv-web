@@ -9,3 +9,8 @@ META_URL="http://localhost:8080/meta/metaserver.php"
 # something to the old dir with older version of the project means that those
 # files won't be used any more.
 FREECIV_STORAGE_DIR="~/.freeciv-web"
+
+# Default ports
+FREECIV_DEFAULT_PORT=5556
+# Default + 1000
+FREECIV_JSON_PORT=6556

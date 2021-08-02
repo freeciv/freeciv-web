@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-JSON-avoid-integer-underflow-on-orders is osdn #42595
-#     It was committed as cedd5f7a5af8a10445f01b09bd91794e0126101d
 # 0001-Stop-need_war_player_hlp-from-crashing.patch is osdn #42597
 #     It was committed as b3ac633befa215514040aeecbc3e81125c025ccb
 
@@ -29,7 +27,6 @@
 
 declare -a PATCHLIST=(
   "0001-Stop-need_war_player_hlp-from-crashing"
-  "0001-JSON-avoid-integer-underflow-on-orders"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

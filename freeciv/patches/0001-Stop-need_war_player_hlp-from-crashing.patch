@@ -1,0 +1,35 @@
+From b3ac633befa215514040aeecbc3e81125c025ccb Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 5 Jul 2021 17:59:23 +0300
+Subject: [PATCH] Stop need_war_player_hlp() from crashing
+
+This is an emergency fix to just stop the crashing.
+
+See osdn #42597
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unithand.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/server/unithand.c b/server/unithand.c
+index 4b88012d5f..ebb8b0c5ca 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -1132,9 +1132,10 @@ static struct player *need_war_player_hlp(const struct unit *actor,
+   }
+ 
+   /* Look for DiplRelTileOther war requirements from the action enablers. */
+-  if (need_war_enabler(unit_type_get(actor), paction,
+-                       actor_player, tile_owner(target_tile),
+-                       utype_can_act_if_tgt_diplrel_tile_other)) {
++  if (target_tile != NULL
++      && need_war_enabler(unit_type_get(actor), paction,
++                          actor_player, tile_owner(target_tile),
++                          utype_can_act_if_tgt_diplrel_tile_other)) {
+     return tile_owner(target_tile);
+   }
+ 
+-- 
+2.30.2
+

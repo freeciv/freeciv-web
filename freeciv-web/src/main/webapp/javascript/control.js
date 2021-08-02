@@ -793,12 +793,12 @@ function ask_server_for_actions(punit)
      * reply will pop up an action selection dialog for it. */
 
     var packet = {
-      "pid" : packet_unit_get_actions,
-      "actor_unit_id" : punit['id'],
-      "target_unit_id" : IDENTITY_NUMBER_ZERO,
-      "target_tile_id": punit['action_decision_tile'],
-      "target_extra_id": EXTRA_NONE,
-      "disturb_player": true
+      "pid"             : packet_unit_get_actions,
+      "actor_unit_id"   : punit['id'],
+      "target_unit_id"  : IDENTITY_NUMBER_ZERO,
+      "target_tile_id"  : punit['action_decision_tile'],
+      "target_extra_id" : EXTRA_NONE,
+      "request_kind"    : REQEST_PLAYER_INITIATED,
     };
     send_request(JSON.stringify(packet));
   }

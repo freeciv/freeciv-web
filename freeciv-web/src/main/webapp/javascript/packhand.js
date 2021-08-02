@@ -268,6 +268,10 @@ function handle_early_chat_msg(packet)
 ***************************************************************************/
 function handle_city_info(packet)
 {
+  let shield_stock_changed;
+  let production_changed;
+  let pcity;
+
   /* Decode the city name. */
   packet['name'] = decodeURIComponent(packet['name']);
 
@@ -279,18 +283,44 @@ function handle_city_info(packet)
   packet['unhappy'] = city_unhappy(packet);
 
   if (cities[packet['id']] == null) {
+    pcity = packet;
     cities[packet['id']] = packet;
     if (C_S_RUNNING == client_state() && !observing && benchmark_start == 0
         && client.conn.playing != null && packet['owner'] == client.conn.playing.playerno) {
       show_city_dialog_by_id(packet['id']);
     }
   } else {
+    pcity = cities[packet['id']];
     cities[packet['id']] = $.extend(cities[packet['id']], packet);
+  }
+
+  if (pcity['shield_stock'] != packet['shield_stock']) {
+    shield_stock_changed = true;
+  }
+
+  if (pcity['production_kind'] != packet['production_kind']
+      || pcity['production_value'] != packet['production_value']) {
+    production_changed = true;
   }
 
   /* manually update tile relation.*/
   if (tiles[packet['tile']] != null) {
     tiles[packet['tile']]['worked'] = packet['id'];
+  }
+
+  /* update caravan dialog */
+  if ((production_changed || shield_stock_changed)
+      && action_selection_target_city() == pcity['id']) {
+    let refresh_packet = {
+      "pid"             : packet_unit_get_actions,
+      "actor_unit_id"   : action_selection_actor_unit(),
+      "target_unit_id"  : action_selection_target_unit(),
+      "target_tile_id"  : city_tile(pcity)['index'],
+      "target_extra_id" : action_selection_target_extra(),
+      "request_kind"    : REQEST_BACKGROUND_REFRESH,
+    };
+
+    send_request(JSON.stringify(refresh_packet));
   }
 
   /* Stop the processing here. Wait for the web_city_info_addition packet.

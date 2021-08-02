@@ -22,6 +22,11 @@ const auto_attack_actions = [
   ACTION_NUKE_UNITS, ACTION_NUKE_CITY, ACTION_NUKE
 ];
 
+/* Indicates that the player initiated a request.
+ * Special request number used by the server too. */
+const REQEST_PLAYER_INITIATED = 0;
+/* Get possible actions for fast auto attack. */
+const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 
 /* Freeciv Web Client.
    This file contains the handling-code for packets from the civserver.
@@ -668,7 +673,7 @@ function handle_city_name_suggestion_info(packet)
 **************************************************************************/
 function handle_city_sabotage_list(packet)
 {
-  if (!packet["disturb_player"]) {
+  if (packet["request_kind"] != REQEST_PLAYER_INITIATED) {
     console.log("handle_city_sabotage_list(): was asked to not disturb "
                 + "the player. That is unimplemented.");
   }
@@ -759,12 +764,12 @@ function action_decision_handle(punit)
       /* An auto action like auto attack could be legal. Check for those at
       * once so they won't have to wait for player focus. */
       var packet = {
-        "pid" : packet_unit_get_actions,
-        "actor_unit_id" : punit['id'],
-        "target_unit_id" : IDENTITY_NUMBER_ZERO,
-        "target_tile_id": punit['action_decision_tile'],
-        "target_extra_id": EXTRA_NONE,
-        "disturb_player": false
+        "pid"             : packet_unit_get_actions,
+        "actor_unit_id"   : punit['id'],
+        "target_unit_id"  : IDENTITY_NUMBER_ZERO,
+        "target_tile_id"  : punit['action_decision_tile'],
+        "target_extra_id" : EXTRA_NONE,
+        "request_kind"    : REQEST_BACKGROUND_FAST_AUTO_ATTACK,
       };
 
       send_request(JSON.stringify(packet));
@@ -933,7 +938,7 @@ function handle_unit_action_answer(packet)
     return;
   }
 
-  if (!packet["disturb_player"]) {
+  if (packet["request_kind"] != REQEST_PLAYER_INITIATED) {
     console.log("handle_unit_action_answer(): was asked to not disturb "
                 + "the player. That is unimplemented.");
   }
@@ -988,7 +993,6 @@ function handle_unit_actions(packet)
   var target_tile_id = packet['target_tile_id'];
   var target_extra_id = packet['target_extra_id'];
   var action_probabilities = packet['action_probabilities'];
-  var disturb_player = packet['disturb_player'];
 
   var pdiplomat = game_find_unit_by_number(actor_unit_id);
   var target_unit = game_find_unit_by_number(target_unit_id);
@@ -1007,20 +1011,27 @@ function handle_unit_actions(packet)
     });
   }
 
-  if (hasActions && disturb_player) {
-    popup_action_selection(pdiplomat, action_probabilities,
-                           ptile, target_extra, target_unit, target_city);
-  } else if (disturb_player) {
+  if (hasActions) {
+    switch (packet['request_kind']) {
+    case REQEST_PLAYER_INITIATED:
+      popup_action_selection(pdiplomat, action_probabilities,
+                             ptile, target_extra, target_unit, target_city);
+      break;
+    case REQEST_BACKGROUND_FAST_AUTO_ATTACK:
+      action_decision_maybe_auto(pdiplomat, action_probabilities,
+                                 ptile, target_extra,
+                                 target_unit, target_city);
+      break;
+    default:
+      console.log("handle_unit_actions(): unrecognized request_kind %d",
+                  packet['request_kind']);
+      break;
+    }
+  } else if (packet['request_kind'] == REQEST_PLAYER_INITIATED) {
     /* Nothing to do. */
     action_selection_no_longer_in_progress(actor_unit_id);
     action_decision_clear_want(actor_unit_id);
     action_selection_next_in_focus(actor_unit_id);
-  } else if (hasActions) {
-    /* This was a background request. */
-
-    action_decision_maybe_auto(pdiplomat, action_probabilities,
-                               ptile, target_extra,
-                               target_unit, target_city);
   }
 }
 

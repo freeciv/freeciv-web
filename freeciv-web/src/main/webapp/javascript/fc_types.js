@@ -116,7 +116,9 @@ var ACTRES_UNIT_MOVE = 58;
 var ACTRES_PARADROP_CONQUER = 59;
 var ACTRES_HOMELESS = 60;
 var ACTRES_WIPE_UNITS = 61;
-var ACTRES_NONE = 62;
+var ACTRES_SPY_ESCAPE = 62;
+var ACTRES_TRANSPORT_LOAD = 63;
+var ACTRES_NONE = 64;
 
 /* enum action_sub_result */
 var ACT_SUB_RES_HUT_ENTER = 0;
@@ -252,7 +254,14 @@ var ACTION_PARADROP_ENTER_CONQUER = 103;
 var ACTION_HOMELESS = 104;
 var ACTION_WIPE_UNITS = 105;
 var ACTION_BOMBARD_LETHAL = 106;
-var ACTION_COUNT = 107;
+var ACTION_SPY_ESCAPE = 107;
+var ACTION_TRANSPORT_LOAD = 108;
+var ACTION_TRANSPORT_LOAD2 = 109;
+var ACTION_TRANSPORT_LOAD3 = 110;
+var ACTION_TRANSPORT_BOARD2 = 111;
+var ACTION_TRANSPORT_BOARD3 = 112;
+var ACTION_TRANSPORT_EMBARK4 = 113;
+var ACTION_COUNT = 114;
 
 /* The action_decision enum */
 /* Doesn't need the player to decide what action to take. */
@@ -309,7 +318,11 @@ var VUT_SERVERSETTING = 41;
 var VUT_CITYSTATUS = 42;
 var VUT_MINFOREIGNPCT = 43;
 var VUT_ACTIVITY = 44;
-var VUT_COUNT = 45;             /* Keep this last. */
+var VUT_DIPLREL_TILE = 45;
+var VUT_DIPLREL_TILE_O = 46;
+var VUT_DIPLREL_UNITANY = 47;
+var VUT_DIPLREL_UNITANY_O = 48;
+var VUT_COUNT = 49;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* Used for options which do not belong to any gui. */

@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0001-Stop-need_war_player_hlp-from-crashing.patch is osdn #42597
-#     It was committed as b3ac633befa215514040aeecbc3e81125c025ccb
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -26,7 +24,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0001-Stop-need_war_player_hlp-from-crashing"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

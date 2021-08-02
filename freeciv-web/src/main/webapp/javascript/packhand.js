@@ -1567,7 +1567,18 @@ function handle_server_setting_control(packet)
 
 function handle_player_diplstate(packet)
 {
+  let need_players_dialog_update = false;
+
   if (client == null || client.conn.playing == null) return;
+
+  if (packet['plr2'] == client.conn.playing['playerno']) {
+    let ds = players[packet['plr1']].diplstates;
+
+    if (ds != undefined && ds[packet['plr2']] != undefined
+        && ds[packet['plr2']]['state'] != packet['type']) {
+      need_players_dialog_update = true;
+    }
+  }
 
   if (packet['type'] == DS_WAR && packet['plr2'] == client.conn.playing['playerno']
       && diplstates[packet['plr1']] != DS_WAR && diplstates[packet['plr1']] != DS_NO_CONTACT) {
@@ -1598,6 +1609,41 @@ function handle_player_diplstate(packet)
     turns_left: packet['turns_left'],
     contact_turns_left: packet['contact_turns_left']
   };
+
+  if (need_players_dialog_update
+      && action_selection_actor_unit() != IDENTITY_NUMBER_ZERO) {
+    /* An action selection dialog is open and our diplomatic state just
+     * changed. Find out if the relationship that changed was to a
+     * potential target. */
+    let tgt_tile;
+    let tgt_unit;
+    let tgt_city;
+
+    if ((action_selection_target_unit() != IDENTITY_NUMBER_ZERO
+         && ((tgt_unit
+              = game_find_unit_by_number(action_selection_target_unit())))
+         && tgt_unit['owner'] == packet['plr1'])
+        || (action_selection_target_city() != IDENTITY_NUMBER_ZERO
+            && ((tgt_city
+                 = game_find_city_by_number(action_selection_target_city())))
+            && tgt_city['owner'] == packet['plr1'])
+        || ((tgt_tile = index_to_tile(action_selection_target_tile()))
+            && tile_owner(tgt_tile) == packet['plr1'])) {
+      /* The diplomatic relationship to the target in an open action
+       * selection dialog have changed. This probably changes
+       * the set of available actions. */
+      let refresh_packet = {
+        "pid"             : packet_unit_get_actions,
+        "actor_unit_id"   : action_selection_actor_unit(),
+        "target_unit_id"  : action_selection_target_unit(),
+        "target_tile_id"  : action_selection_target_tile(),
+        "target_extra_id" : action_selection_target_extra(),
+        "request_kind"    : REQEST_BACKGROUND_REFRESH,
+      };
+
+      send_request(JSON.stringify(refresh_packet));
+    }
+  }
 }
 
 /**************************************************************************

@@ -314,7 +314,8 @@ var VUT_ACTIVITY = 44;
 var VUT_DIPLREL_TILE = 45;
 var VUT_DIPLREL_TILE_O = 46;
 var VUT_DIPLREL_UNITANY = 47;
-var VUT_COUNT = 48;             /* Keep this last. */
+var VUT_DIPLREL_UNITANY_O = 48;
+var VUT_COUNT = 49;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* Used for options which do not belong to any gui. */

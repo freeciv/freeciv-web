@@ -25,6 +25,8 @@ const auto_attack_actions = [
 /* Indicates that the player initiated a request.
  * Special request number used by the server too. */
 const REQEST_PLAYER_INITIATED = 0;
+/* Refresh the action selection dialog */
+const REQEST_BACKGROUND_REFRESH = 1;
 /* Get possible actions for fast auto attack. */
 const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 
@@ -266,6 +268,10 @@ function handle_early_chat_msg(packet)
 ***************************************************************************/
 function handle_city_info(packet)
 {
+  let shield_stock_changed;
+  let production_changed;
+  let pcity;
+
   /* Decode the city name. */
   packet['name'] = decodeURIComponent(packet['name']);
 
@@ -277,18 +283,44 @@ function handle_city_info(packet)
   packet['unhappy'] = city_unhappy(packet);
 
   if (cities[packet['id']] == null) {
+    pcity = packet;
     cities[packet['id']] = packet;
     if (C_S_RUNNING == client_state() && !observing && benchmark_start == 0
         && client.conn.playing != null && packet['owner'] == client.conn.playing.playerno) {
       show_city_dialog_by_id(packet['id']);
     }
   } else {
+    pcity = cities[packet['id']];
     cities[packet['id']] = $.extend(cities[packet['id']], packet);
+  }
+
+  if (pcity['shield_stock'] != packet['shield_stock']) {
+    shield_stock_changed = true;
+  }
+
+  if (pcity['production_kind'] != packet['production_kind']
+      || pcity['production_value'] != packet['production_value']) {
+    production_changed = true;
   }
 
   /* manually update tile relation.*/
   if (tiles[packet['tile']] != null) {
     tiles[packet['tile']]['worked'] = packet['id'];
+  }
+
+  /* update caravan dialog */
+  if ((production_changed || shield_stock_changed)
+      && action_selection_target_city() == pcity['id']) {
+    let refresh_packet = {
+      "pid"             : packet_unit_get_actions,
+      "actor_unit_id"   : action_selection_actor_unit(),
+      "target_unit_id"  : action_selection_target_unit(),
+      "target_tile_id"  : city_tile(pcity)['index'],
+      "target_extra_id" : action_selection_target_extra(),
+      "request_kind"    : REQEST_BACKGROUND_REFRESH,
+    };
+
+    send_request(JSON.stringify(refresh_packet));
   }
 
   /* Stop the processing here. Wait for the web_city_info_addition packet.
@@ -1017,6 +1049,12 @@ function handle_unit_actions(packet)
       popup_action_selection(pdiplomat, action_probabilities,
                              ptile, target_extra, target_unit, target_city);
       break;
+    case REQEST_BACKGROUND_REFRESH:
+      action_selection_refresh(pdiplomat,
+                               target_city, target_unit, ptile,
+                               target_extra,
+                               action_probabilities);
+      break;
     case REQEST_BACKGROUND_FAST_AUTO_ATTACK:
       action_decision_maybe_auto(pdiplomat, action_probabilities,
                                  ptile, target_extra,
@@ -1529,7 +1567,18 @@ function handle_server_setting_control(packet)
 
 function handle_player_diplstate(packet)
 {
+  let need_players_dialog_update = false;
+
   if (client == null || client.conn.playing == null) return;
+
+  if (packet['plr2'] == client.conn.playing['playerno']) {
+    let ds = players[packet['plr1']].diplstates;
+
+    if (ds != undefined && ds[packet['plr2']] != undefined
+        && ds[packet['plr2']]['state'] != packet['type']) {
+      need_players_dialog_update = true;
+    }
+  }
 
   if (packet['type'] == DS_WAR && packet['plr2'] == client.conn.playing['playerno']
       && diplstates[packet['plr1']] != DS_WAR && diplstates[packet['plr1']] != DS_NO_CONTACT) {
@@ -1560,6 +1609,41 @@ function handle_player_diplstate(packet)
     turns_left: packet['turns_left'],
     contact_turns_left: packet['contact_turns_left']
   };
+
+  if (need_players_dialog_update
+      && action_selection_actor_unit() != IDENTITY_NUMBER_ZERO) {
+    /* An action selection dialog is open and our diplomatic state just
+     * changed. Find out if the relationship that changed was to a
+     * potential target. */
+    let tgt_tile;
+    let tgt_unit;
+    let tgt_city;
+
+    if ((action_selection_target_unit() != IDENTITY_NUMBER_ZERO
+         && ((tgt_unit
+              = game_find_unit_by_number(action_selection_target_unit())))
+         && tgt_unit['owner'] == packet['plr1'])
+        || (action_selection_target_city() != IDENTITY_NUMBER_ZERO
+            && ((tgt_city
+                 = game_find_city_by_number(action_selection_target_city())))
+            && tgt_city['owner'] == packet['plr1'])
+        || ((tgt_tile = index_to_tile(action_selection_target_tile()))
+            && tile_owner(tgt_tile) == packet['plr1'])) {
+      /* The diplomatic relationship to the target in an open action
+       * selection dialog have changed. This probably changes
+       * the set of available actions. */
+      let refresh_packet = {
+        "pid"             : packet_unit_get_actions,
+        "actor_unit_id"   : action_selection_actor_unit(),
+        "target_unit_id"  : action_selection_target_unit(),
+        "target_tile_id"  : action_selection_target_tile(),
+        "target_extra_id" : action_selection_target_extra(),
+        "request_kind"    : REQEST_BACKGROUND_REFRESH,
+      };
+
+      send_request(JSON.stringify(refresh_packet));
+    }
+  }
 }
 
 /**************************************************************************

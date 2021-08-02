@@ -171,11 +171,11 @@ function act_sel_click_function(parent_id,
   case ACTION_UPGRADE_UNIT:
     return function() {
       var packet = {
-        "pid"         : packet_unit_action_query,
-        "actor_id"    : actor_unit_id,
-        "target_id"   : tgt_id,
-        "action_type" : action_id,
-        "disturb_player" : true
+        "pid"          : packet_unit_action_query,
+        "actor_id"     : actor_unit_id,
+        "target_id"    : tgt_id,
+        "action_type"  : action_id,
+        "request_kind" : REQEST_PLAYER_INITIATED,
       };
       send_request(JSON.stringify(packet));
 
@@ -790,12 +790,12 @@ function create_select_tgt_unit_button(parent_id, actor_unit_id,
     text  : text,
     click : function() {
       var packet = {
-        "pid"            : packet_unit_get_actions,
-        "actor_unit_id"  : actor_unit_id,
-        "target_unit_id" : target_unit_id,
-        "target_tile_id" : target_tile_id,
-        "target_extra_id": EXTRA_NONE,
-        "disturb_player" : true
+        "pid"             : packet_unit_get_actions,
+        "actor_unit_id"   : actor_unit_id,
+        "target_unit_id"  : target_unit_id,
+        "target_tile_id"  : target_tile_id,
+        "target_extra_id" : EXTRA_NONE,
+        "request_kind"    : REQEST_PLAYER_INITIATED,
       };
       send_request(JSON.stringify(packet));
 
@@ -921,12 +921,12 @@ function create_select_tgt_extra_button(parent_id, actor_unit_id,
     text  : text,
     click : function() {
       var packet = {
-        "pid"            : packet_unit_get_actions,
-        "actor_unit_id"  : actor_unit_id,
-        "target_unit_id" : target_unit_id,
-        "target_tile_id" : target_tile_id,
-        "target_extra_id": target_extra_id,
-        "disturb_player" : true
+        "pid"             : packet_unit_get_actions,
+        "actor_unit_id"   : actor_unit_id,
+        "target_unit_id"  : target_unit_id,
+        "target_tile_id"  : target_tile_id,
+        "target_extra_id" : target_extra_id,
+        "request_kind"    : REQEST_PLAYER_INITIATED,
       };
       send_request(JSON.stringify(packet));
 

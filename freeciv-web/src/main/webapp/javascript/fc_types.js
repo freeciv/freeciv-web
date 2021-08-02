@@ -311,7 +311,8 @@ var VUT_SERVERSETTING = 41;
 var VUT_CITYSTATUS = 42;
 var VUT_MINFOREIGNPCT = 43;
 var VUT_ACTIVITY = 44;
-var VUT_COUNT = 45;             /* Keep this last. */
+var VUT_DIPLREL_TILE = 45;
+var VUT_COUNT = 46;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* Used for options which do not belong to any gui. */

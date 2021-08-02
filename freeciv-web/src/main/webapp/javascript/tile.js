@@ -21,6 +21,8 @@
   var TILE_KNOWN_UNSEEN = 1;
   var TILE_KNOWN_SEEN = 2;
 
+const TILE_INDEX_NONE = -1;
+
 
 /****************************************************************************
   Return a known_type enumeration value for the tile.

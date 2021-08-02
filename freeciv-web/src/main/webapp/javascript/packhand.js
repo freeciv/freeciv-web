@@ -25,6 +25,8 @@ const auto_attack_actions = [
 /* Indicates that the player initiated a request.
  * Special request number used by the server too. */
 const REQEST_PLAYER_INITIATED = 0;
+/* Refresh the action selection dialog */
+const REQEST_BACKGROUND_REFRESH = 1;
 /* Get possible actions for fast auto attack. */
 const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 
@@ -1016,6 +1018,12 @@ function handle_unit_actions(packet)
     case REQEST_PLAYER_INITIATED:
       popup_action_selection(pdiplomat, action_probabilities,
                              ptile, target_extra, target_unit, target_city);
+      break;
+    case REQEST_BACKGROUND_REFRESH:
+      action_selection_refresh(pdiplomat,
+                               target_city, target_unit, ptile,
+                               target_extra,
+                               action_probabilities);
       break;
     case REQEST_BACKGROUND_FAST_AUTO_ATTACK:
       action_decision_maybe_auto(pdiplomat, action_probabilities,

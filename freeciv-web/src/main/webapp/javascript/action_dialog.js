@@ -983,6 +983,24 @@ function select_tgt_extra(actor_unit, target_unit,
   $(id).dialog('open');
 }
 
+/**********************************************************************//**
+  Updates the action selection dialog with new information.
+**************************************************************************/
+function action_selection_refresh(actor_unit,
+                                  target_city, target_unit, target_tile,
+                                  target_extra,
+                                  act_probs)
+{
+  var id;
+
+  id = "#act_sel_dialog_" + actor_unit['id'];
+  $(id).remove();
+
+  popup_action_selection(actor_unit, act_probs,
+                         target_tile, target_extra,
+                         target_unit, target_city);
+}
+
 /***********************************************************************//**
   Closes the action selection dialog
 ***************************************************************************/

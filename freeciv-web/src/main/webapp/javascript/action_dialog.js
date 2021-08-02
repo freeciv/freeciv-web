@@ -279,6 +279,18 @@ function popup_action_selection(actor_unit, action_probabilities,
 
   $(id).html(dhtml);
 
+  /* Store actor and target information in the dialog */
+  $(id).attr("actor_unit", actor_unit != null ? actor_unit['id']
+                                              : IDENTITY_NUMBER_ZERO);
+  $(id).attr("target_city", target_city != null ? target_city['id']
+                                                : IDENTITY_NUMBER_ZERO);
+  $(id).attr("target_unit", target_unit != null ? target_unit['id']
+                                                : IDENTITY_NUMBER_ZERO);
+  $(id).attr("target_tile", target_tile != null ? target_tile['index']
+                                                : TILE_INDEX_NONE);
+  $(id).attr("target_extra", target_extra != null ? target_extra['id']
+                                                  : EXTRA_NONE);
+
   /* Show a button for each enabled action. The buttons are sorted by
    * target kind first and then by action id number. */
   for (var tgt_kind = ATK_CITY; tgt_kind < ATK_COUNT; tgt_kind++) {
@@ -981,6 +993,84 @@ function select_tgt_extra(actor_unit, target_unit,
       buttons  : buttons });
 
   $(id).dialog('open');
+}
+
+/**********************************************************************//**
+  Returns the id of the actor unit currently handled in action selection
+  dialog when the action selection dialog is open.
+  Returns IDENTITY_NUMBER_ZERO if no action selection dialog is open.
+**************************************************************************/
+function action_selection_actor_unit()
+{
+  return action_selection_in_progress_for;
+}
+
+/**********************************************************************//**
+  Returns id of the target city of the actions currently handled in action
+  selection dialog when the action selection dialog is open and it has a
+  city target. Returns IDENTITY_NUMBER_ZERO if no action selection dialog
+  is open or no city target is present in the action selection dialog.
+**************************************************************************/
+function action_selection_target_city()
+{
+  var id = "#act_sel_dialog_" + action_selection_in_progress_for;
+
+  if (action_selection_in_progress_for == IDENTITY_NUMBER_ZERO) {
+    return IDENTITY_NUMBER_ZERO;
+  }
+
+  return $(id).attr("target_city");
+}
+
+/**********************************************************************//**
+  Returns id of the target unit of the actions currently handled in action
+  selection dialog when the action selection dialog is open and it has a
+  unit target. Returns IDENTITY_NUMBER_ZERO if no action selection dialog
+  is open or no unit target is present in the action selection dialog.
+**************************************************************************/
+function action_selection_target_unit()
+{
+  var id = "#act_sel_dialog_" + action_selection_in_progress_for;
+
+  if (action_selection_in_progress_for == IDENTITY_NUMBER_ZERO) {
+    return IDENTITY_NUMBER_ZERO;
+  }
+
+  return $(id).attr("target_unit");
+}
+
+/**********************************************************************//**
+  Returns id of the target tile of the actions currently handled in action
+  selection dialog when the action selection dialog is open and it has a
+  tile target. Returns TILE_INDEX_NONE if no action selection dialog is
+  open.
+**************************************************************************/
+function action_selection_target_tile()
+{
+  var id = "#act_sel_dialog_" + action_selection_in_progress_for;
+
+  if (action_selection_in_progress_for == IDENTITY_NUMBER_ZERO) {
+    return TILE_INDEX_NONE;
+  }
+
+  return $(id).attr("target_tile");
+}
+
+/**********************************************************************//**
+  Returns id of the target extra of the actions currently handled in action
+  selection dialog when the action selection dialog is open and it has an
+  extra target. Returns EXTRA_NONE if no action selection dialog is open
+  or no extra target is present in the action selection dialog.
+**************************************************************************/
+function action_selection_target_extra()
+{
+  var id = "#act_sel_dialog_" + action_selection_in_progress_for;
+
+  if (action_selection_in_progress_for == IDENTITY_NUMBER_ZERO) {
+    return EXTRA_NONE;
+  }
+
+  return $(id).attr("target_extra");
 }
 
 /**********************************************************************//**

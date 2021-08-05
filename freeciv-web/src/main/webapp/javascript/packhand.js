@@ -1043,33 +1043,33 @@ function handle_unit_actions(packet)
     });
   }
 
-  if (hasActions) {
-    switch (packet['request_kind']) {
-    case REQEST_PLAYER_INITIATED:
+  switch (packet['request_kind']) {
+  case REQEST_PLAYER_INITIATED:
+    if (hasActions) {
       popup_action_selection(pdiplomat, action_probabilities,
                              ptile, target_extra, target_unit, target_city);
-      break;
-    case REQEST_BACKGROUND_REFRESH:
-      action_selection_refresh(pdiplomat,
-                               target_city, target_unit, ptile,
-                               target_extra,
-                               action_probabilities);
-      break;
-    case REQEST_BACKGROUND_FAST_AUTO_ATTACK:
-      action_decision_maybe_auto(pdiplomat, action_probabilities,
-                                 ptile, target_extra,
-                                 target_unit, target_city);
-      break;
-    default:
-      console.log("handle_unit_actions(): unrecognized request_kind %d",
-                  packet['request_kind']);
-      break;
+    } else if (packet['request_kind'] == REQEST_PLAYER_INITIATED) {
+      /* Nothing to do. */
+      action_selection_no_longer_in_progress(actor_unit_id);
+      action_decision_clear_want(actor_unit_id);
+      action_selection_next_in_focus(actor_unit_id);
     }
-  } else if (packet['request_kind'] == REQEST_PLAYER_INITIATED) {
-    /* Nothing to do. */
-    action_selection_no_longer_in_progress(actor_unit_id);
-    action_decision_clear_want(actor_unit_id);
-    action_selection_next_in_focus(actor_unit_id);
+    break;
+  case REQEST_BACKGROUND_REFRESH:
+    action_selection_refresh(pdiplomat,
+                             target_city, target_unit, ptile,
+                             target_extra,
+                             action_probabilities);
+    break;
+  case REQEST_BACKGROUND_FAST_AUTO_ATTACK:
+    action_decision_maybe_auto(pdiplomat, action_probabilities,
+                               ptile, target_extra,
+                               target_unit, target_city);
+    break;
+  default:
+    console.log("handle_unit_actions(): unrecognized request_kind %d",
+                packet['request_kind']);
+    break;
   }
 }
 

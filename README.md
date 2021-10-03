@@ -11,7 +11,10 @@ Freeciv-web is an open-source turn-based strategy game. It can be played in any 
 Freeciv-web is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
 
-Currently known servers based on Freeciv-web, which are open source in compliance with the AGPL license:
+
+Live servers
+------------
+Currently known servers based on Freeciv-web, which are open source in compliance with the [https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt](AGPL license):
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:

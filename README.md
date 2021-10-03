@@ -14,7 +14,7 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 
 Live servers
 ------------
-Currently known servers based on Freeciv-web, which are open source in compliance with the [https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt](AGPL license):
+Currently known servers based on Freeciv-web, which are open source in compliance with [the AGPL license](https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt):
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
 
 Freeciv WebGL 3D:

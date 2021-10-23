@@ -80,6 +80,14 @@ function is_req_active(target_player,
     result = is_tech_in_range(target_player, req['range'], req['value']);
     break;
   case VUT_GOVERNMENT:
+    /* The requirement is filled if the player is using the government. */
+    if (target_player == null) {
+      result = TRI_MAYBE;
+    } else {
+      result = (target_player['government'] == req['value'] ? TRI_YES
+                                                            : TRI_NO);
+    }
+    break;
   case VUT_IMPROVEMENT:
   case VUT_TERRAIN:
   case VUT_NATION:

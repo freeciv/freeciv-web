@@ -18,6 +18,12 @@
 ***********************************************************************/
 
 
+var citydlg_map_width = 384;      // default values for most rulesets
+var citydlg_map_height = 192;     // default value for most rulesets
+
+const tileset_width = 96;         // amplio2 based tileset
+const tileset_height = 48;
+
 var cities = {};
 var city_rules = {};
 var city_trade_routes = {};
@@ -242,6 +248,7 @@ function show_city_dialog(pcity)
 
   var orig_renderer = renderer;
   renderer = RENDERER_2DCANVAS;
+  set_citydlg_dimensions(pcity);
   set_city_mapview_active();
   center_tile_mapcanvas(city_tile(pcity));
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
@@ -2018,4 +2025,21 @@ function get_citywalls_scale(pcity)
   }
 
   return scale;
+}
+
+/**************************************************************************
+ Set the city canvas size for a city based on its radius
+**************************************************************************/
+function set_citydlg_dimensions(pcity)
+{
+  var city_radius = pcity.city_radius_sq;
+
+  var radius_tiles = Math.ceil(Math.sqrt(city_radius));
+
+  citydlg_map_width = tileset_width + radius_tiles * tileset_width;
+  citydlg_map_height = tileset_height + radius_tiles * tileset_height;
+
+  $("#city_canvas_div").css({"width":citydlg_map_width, "height":citydlg_map_height});
+  $("#city_canvas").attr('width', citydlg_map_width);
+  $("#city_canvas").attr('height', citydlg_map_height);
 }

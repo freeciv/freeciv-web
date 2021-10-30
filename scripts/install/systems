@@ -7,3 +7,4 @@ Ubuntu	groovy	deb.sh
 Ubuntu	hirsute	deb.sh
 Debian	stretch	deb.sh
 Debian	buster	deb.sh
+Debian	bullseye	deb.sh

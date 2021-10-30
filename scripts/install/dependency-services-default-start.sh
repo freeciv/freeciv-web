@@ -11,7 +11,7 @@ export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
 export CATALINA_HOME=/var/lib/tomcat9
 
 # 0. mysql
-pidof mysqld > /dev/null || sudo service mysql start
+pidof mysqld > /dev/null || sudo service mariadb start || sudo service mysql start
 
 # 1. nginx
 echo "Starting nginx first."

@@ -17,6 +17,7 @@ Live servers
 Currently known servers based on Freeciv-web, which are open source in compliance with [the AGPL license](https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt):
 - [Freeciv Tactics & Triumph](https://www.tacticsandtriumph.com)  [https://github.com/Canik05/freeciv-tnt] Freeciv Games & Mods (No PBEM)
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
+- [freecivweb.org](https://www.freecivweb.org) [https://github.com/Lexxie9952/fcw.org-server]
 
 Freeciv-web screenshots:
 ------------------------

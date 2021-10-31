@@ -73,6 +73,12 @@ else
   INSTALLED_NODEJS=N
 fi
 
+# Install lua-5.4, if available. Otherwise it will be built from the copy
+# included with the server.
+if apt-get --simulate install liblua5.4-dev &> /dev/null; then
+  dependencies="${dependencies} liblua5.4-dev"
+fi
+
 echo "==== Installing Dependencies ===="
 echo "mysql setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"

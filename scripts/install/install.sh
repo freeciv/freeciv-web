@@ -256,7 +256,7 @@ echo "==== Filling configuration templates ===="
 "${basedir}/config/gen-from-templates.sh"
 
 echo "==== Setting up DB ===="
-pidof mysqld > /dev/null || start_svc mysql
+pidof mysqld > /dev/null || start_svc mariadb || start_svc mysql
 if [ -z "${DB_ROOT_PASSWORD}" ]; then
   echo "Will need the DB root password twice"
 fi

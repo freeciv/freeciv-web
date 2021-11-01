@@ -12,7 +12,11 @@ else
 fi
 
 ${ACCESS_MANAGER} systemctl reload nginx.service || ${ACCESS_MANAGER} systemctl start nginx.service
-for unit in mysql tomcat9; do
+
+systemctl is-active --quiet mariadb.service || systemctl is-active --quiet mysql.service ||
+    ${ACCESS_MANAGER} systemctl start mariadb.service ||
+    ${ACCESS_MANAGER} systemctl start mysql.service
+
+for unit in tomcat9; do
   systemctl is-active --quiet ${unit}.service || ${ACCESS_MANAGER} systemctl start ${unit}.service
 done
-

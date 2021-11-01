@@ -1,7 +1,7 @@
 # Freeciv-web docker file
 # Dockerfile update based on debian/tomcat package
 
-FROM debian:buster
+FROM debian:bullseye
 
 MAINTAINER The Freeciv Project version: 3.2
 

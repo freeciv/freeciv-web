@@ -1,0 +1,39 @@
+From f46deb1452045a6654b6c67ebf567fc92ba16974 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 1 Nov 2021 07:59:38 +0200
+Subject: [PATCH 6/6] freeciv-web: Pack city structure
+
+See osdn #43150
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/city.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/common/city.h b/common/city.h
+index d61b60d694..857625c5ed 100644
+--- a/common/city.h
++++ b/common/city.h
+@@ -303,6 +303,9 @@ struct adv_city; /* defined in ./server/advisors/infracache.h */
+ 
+ struct cm_parameter; /* defined in ./common/aicore/cm.h */
+ 
++#ifdef FREECIV_WEB
++#pragma pack(push, 1)
++#endif
+ struct city {
+   char name[MAX_LEN_CITYNAME];
+   struct tile *tile; /* May be NULL, should check! */
+@@ -464,6 +467,9 @@ struct city {
+     } client;
+   };
+ };
++#ifdef FREECIV_WEB
++#pragma pack(pop)
++#endif
+ 
+ struct citystyle {
+   struct name_translation name;
+-- 
+2.30.2
+

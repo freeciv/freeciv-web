@@ -4,6 +4,8 @@
 # ------------------------------------
 # 1975-Autosettlers-Pass-action-and-not-activity-to-action_:
 #   osdn #42791 / 441b3c22e3391775993c56cc6731a3bffc59b895
+# 0006-freeciv-web-Pack-city-structure :
+#   osdn #43150 / not yet pushed
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -22,11 +24,12 @@
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
-# pragma_pack_city_length adds pragma pack to city packet. Also sets MAX_LEN_CITYNAME 50 for large longturn games.
+# cityname_length reduces MAX_LEN_CITYNAME to 50 for large longturn games.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
   "1975-Autosettlers-Pass-action-and-not-activity-to-action_"
+  "0006-freeciv-web-Pack-city-structure"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"
@@ -49,7 +52,7 @@ declare -a PATCHLIST=(
   "webperimental_install"
   "longturn"
   "load_command_confirmation"
-  "pragma_pack_city_length"
+  "cityname_length"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
 )

@@ -5,6 +5,7 @@ Ubuntu	xenial	deb.sh
 Ubuntu	focal	deb.sh
 Ubuntu	groovy	deb.sh
 Ubuntu	hirsute	deb.sh
+Ubuntu	impish	deb.sh
 Debian	stretch	deb.sh
 Debian	buster	deb.sh
 Debian	bullseye	deb.sh

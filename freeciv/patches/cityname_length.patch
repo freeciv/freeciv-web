@@ -1,0 +1,13 @@
+diff --git a/common/fc_types.h b/common/fc_types.h
+index afd4dd3171..55dea6f1c9 100644
+--- a/common/fc_types.h
++++ b/common/fc_types.h
+@@ -68,7 +68,7 @@ extern "C" {
+ 
+ /* Changing these will probably break network compatibility. */
+ #define MAX_LEN_NAME       48
+-#define MAX_LEN_CITYNAME   80
++#define MAX_LEN_CITYNAME   50
+ #define MAX_LEN_MAP_LABEL  64
+ #define MAX_LEN_DEMOGRAPHY 16
+ #define MAX_LEN_ALLOW_TAKE 16

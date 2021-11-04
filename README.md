@@ -182,7 +182,7 @@ Freeciv-web can easily be built and run from Docker using `docker-compose`.
 
  3. Connect to docker via host machine using standard browser
 
-http://localhost/
+http://localhost:8080/
 
 Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
 

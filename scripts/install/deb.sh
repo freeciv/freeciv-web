@@ -23,7 +23,6 @@ dependencies="\
   git \
   gnupg \
   imagemagick \
-  libbz2-dev \
   libcurl4-openssl-dev \
   libicu-dev \
   libjansson-dev \

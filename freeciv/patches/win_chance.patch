@@ -1,20 +1,18 @@
-diff --git a/common/networking/packets.def b/common/networking/packets.def
-index 5891d00..e8fdc54 100644
---- a/common/networking/packets.def
-+++ b/common/networking/packets.def
-@@ -2193,6 +2193,7 @@ end
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2021-11-03 20:00:26.101642468 +0200
++++ freeciv/common/networking/packets.def	2021-11-03 20:00:35.693618844 +0200
+@@ -2387,6 +2387,7 @@
  PACKET_INFO_TEXT_REQ = 289; cs, dsend
    TILE loc;
    UNIT visible_unit;
 +  UNIT focus_unit;
  end
  
- PACKET_INFO_TEXT_MESSAGE = 289; sc, dsend
-diff --git a/server/maphand.c b/server/maphand.c
-index f1f8ba2..adf5c5e 100644
---- a/server/maphand.c
-+++ b/server/maphand.c
-@@ -27,6 +27,7 @@
+ # TODO: Rename to contain '_WEB_' in the name.
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2021-11-03 20:00:26.381641780 +0200
++++ freeciv/server/maphand.c	2021-11-03 20:08:00.608324989 +0200
+@@ -29,6 +29,7 @@
  #include "base.h"
  #include "borders.h"
  #include "clientutils.h"
@@ -22,16 +20,16 @@ index f1f8ba2..adf5c5e 100644
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2423,7 +2424,7 @@ static inline void get_full_username(char *buf, int buflen,
+@@ -2632,7 +2633,7 @@
    - copied from /client/text.c
- ****************************************************************************/
+ **************************************************************************/
  static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
--  	 	                   struct unit *punit)
-+  	 	                   struct unit *punit, struct unit *funit)
+-                                   struct unit *punit)
++                                   struct unit *punit, struct unit *funit)
  {
    const char *activity_text;
    struct city *pcity = tile_city(ptile);
-@@ -2616,6 +2617,42 @@ static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
+@@ -2825,6 +2826,43 @@
                        diplo_city_adjectives[ds->type]);
        }
      }
@@ -67,6 +65,7 @@ index f1f8ba2..adf5c5e 100644
 +    {
 +      const char *veteran_name =
 +        utype_veteran_name_translation(ptype, punit->veteran);
++
 +      if (veteran_name) {
 +        astr_add(&str, " (%s)", veteran_name);
 +      }
@@ -74,10 +73,10 @@ index f1f8ba2..adf5c5e 100644
  
      if (unit_owner(punit) == pplayer) {
        /* Show bribe cost for own units. */
-@@ -2640,11 +2677,13 @@ static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
- /****************************************************************************
+@@ -2849,11 +2887,13 @@
+ /**********************************************************************//**
    Handle client request for tile information text.
- ****************************************************************************/
+ **************************************************************************/
 -void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
 +                          int focus_unit_id)
@@ -90,13 +89,12 @@ index f1f8ba2..adf5c5e 100644
  
    conn_list_iterate(pplayer->connections, pconn) {
      dsend_packet_info_text_message(pconn, info_text);
-diff --git a/server/maphand.h b/server/maphand.h
-index d2e242c..b3263cf 100644
---- a/server/maphand.h
-+++ b/server/maphand.h
-@@ -140,6 +140,7 @@ void create_road(struct tile *ptile, struct road_type *proad);
- void give_distorted_map(struct player *pfrom, struct player *pto, int good,
-                         int bad, bool reveal_cities);
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
+--- freeciv/server/maphand.h	2021-11-03 20:00:26.377641791 +0200
++++ freeciv/server/maphand.h	2021-11-03 20:00:35.697618834 +0200
+@@ -141,6 +141,7 @@
+ void give_distorted_map(struct player *pfrom, struct player *pto,
+                         int prob, bool reveal_cities);
  
 -void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,

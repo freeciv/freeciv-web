@@ -1,23 +1,49 @@
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
+--- freeciv/client/packhand.c	2021-11-03 18:58:06.928664128 +0200
++++ freeciv/client/packhand.c	2021-11-03 19:35:11.122886201 +0200
+@@ -5412,3 +5412,12 @@
+                       int dest, int turns)
+ {
+ }
++
++/************************************************************************//**
++  This is a packet that only the web-client needs. The regular client has no
++  use for it.
++  TODO: Do not generate code calling this in the C-client.
++****************************************************************************/
++void handle_info_text_message(const char *message)
++{
++}
 diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2021-04-18 02:38:54.459716449 +0300
-+++ freeciv/common/networking/packets.def	2021-04-18 02:39:03.659797486 +0300
-@@ -2365,3 +2365,12 @@
+--- freeciv/common/networking/packets.def	2021-11-03 18:58:35.480529556 +0200
++++ freeciv/common/networking/packets.def	2021-11-03 19:03:18.931223299 +0200
+@@ -2382,3 +2382,14 @@
    TILE dest;
    UINT32 turns;
  end
 +
++# TODO: Rename to contain '_WEB_' in the name.
 +PACKET_INFO_TEXT_REQ = 289; cs, dsend
 +  TILE loc;
 +  UNIT visible_unit;
 +end
 +
++# TODO: Rename to contain '_WEB_' in the name.
 +PACKET_INFO_TEXT_MESSAGE = 290; sc, dsend
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2021-04-18 02:38:54.651718140 +0300
-+++ freeciv/server/maphand.c	2021-04-18 02:43:21.054089858 +0300
-@@ -27,6 +27,7 @@
+--- freeciv/server/maphand.c	2021-11-03 18:44:06.677153396 +0200
++++ freeciv/server/maphand.c	2021-11-03 19:36:42.478492947 +0200
+@@ -16,6 +16,7 @@
+ #endif
+ 
+ /* utility */
++#include "astring.h"
+ #include "bitvector.h"
+ #include "fcintl.h"
+ #include "log.h"
+@@ -27,6 +28,7 @@
  #include "ai.h"
  #include "base.h"
  #include "borders.h"
@@ -25,24 +51,16 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -38,6 +39,7 @@
- #include "unit.h"
- #include "unitlist.h"
- #include "vision.h"
-+#include "astring.h"
- 
- /* server */
- #include "citytools.h"
-@@ -2519,3 +2521,324 @@
+@@ -2537,3 +2539,322 @@
  
    unbuffer_shared_vision(pto);
  }
 +
-+/****************************************************************************
++/**********************************************************************//**
 +  Return a (static) string with a tile's food/prod/trade
-+****************************************************************************/
++**************************************************************************/
 +static const char *get_tile_output_text(const struct tile *ptile, 
-+		                        struct player *pplayer)
++                                        struct player *pplayer)
 +{
 +  static struct astring str = ASTRING_INIT;
 +  int i;
@@ -74,10 +92,10 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
 +  return astr_str(&str);
 +}
 +
-+/****************************************************************************
++/**********************************************************************//**
 +  Fill the buffer with the player's nation name (in adjective form) and
 +  optionally add the player's team name.
-+****************************************************************************/
++**************************************************************************/
 +static inline void get_full_nation(char *buf, int buflen,
 +                                   const struct player *pplayer)
 +{
@@ -100,11 +118,10 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
 +  }
 +}
 +
-+
-+/****************************************************************************
++/**********************************************************************//**
 +  For AIs, fill the buffer with their player name prefixed with "AI". For
 +  humans, just fill it with their username.
-+****************************************************************************/
++**************************************************************************/
 +static inline void get_full_username(char *buf, int buflen,
 +                                     const struct player *pplayer)
 +{
@@ -125,13 +142,12 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
 +  }
 +}
 +
-+
-+/****************************************************************************
++/**********************************************************************//**
 +  Text to popup on a middle-click in the mapview.
 +  - copied from /client/text.c
-+****************************************************************************/
++**************************************************************************/
 +static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
-+  	 	                   struct unit *punit)
++                                   struct unit *punit)
 +{
 +  const char *activity_text;
 +  struct city *pcity = tile_city(ptile);
@@ -345,9 +361,9 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
 +  return astr_str(&str);
 +}
 +
-+/****************************************************************************
++/**********************************************************************//**
 +  Handle client request for tile information text.
-+****************************************************************************/
++**************************************************************************/
 +void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
 +{
 +  struct tile *ptile = index_to_tile(&(wld.map), loc);
@@ -359,8 +375,8 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
 +  } conn_list_iterate_end;
 +}
 diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2021-04-18 02:38:54.651718140 +0300
-+++ freeciv/server/maphand.h	2021-04-18 02:39:03.659797486 +0300
+--- freeciv/server/maphand.h	2021-11-03 18:44:06.677153396 +0200
++++ freeciv/server/maphand.h	2021-11-03 19:02:57.143322123 +0200
 @@ -141,4 +141,6 @@
  void give_distorted_map(struct player *pfrom, struct player *pto,
                          int prob, bool reveal_cities);

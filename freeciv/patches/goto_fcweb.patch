@@ -1,18 +1,36 @@
-diff --git a/common/networking/packets.def b/common/networking/packets.def
-index c3dc412815..da94aa631c 100644
---- a/common/networking/packets.def
-+++ b/common/networking/packets.def
-@@ -2305,3 +2305,17 @@ PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
+--- freeciv/client/packhand.c	2021-11-03 18:44:06.413154450 +0200
++++ freeciv/client/packhand.c	2021-11-03 18:55:58.745277222 +0200
+@@ -5402,3 +5402,13 @@
+ {
+   play_single_track(tag);
+ }
++
++/************************************************************************//**
++  This is a packet that only the web-client needs. The regular client has no
++  use for it.
++  TODO: Do not generate code calling this in the C-client.
++****************************************************************************/
++void handle_goto_path(int unit_id, int length, const enum direction8 *dir,
++                      int dest, int turns)
++{
++}
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2021-11-03 18:44:06.437154354 +0200
++++ freeciv/common/networking/packets.def	2021-11-03 18:52:00.194468972 +0200
+@@ -2362,3 +2362,19 @@
  
    BV_ACTIONS utype_actions;
  end
 +
 +# used for showing GOTO path in web client.
++# TODO: Rename to contain '_WEB_' in the name.
 +PACKET_GOTO_PATH_REQ = 287; cs, dsend
 +  UNIT unit_id;
 +  TILE goal;
 +end
 +
++# TODO: Rename to contain '_WEB_' in the name.
 +PACKET_GOTO_PATH = 288; sc, dsend
 +  UNIT unit_id;
 +  UINT16 length;
@@ -20,24 +38,23 @@ index c3dc412815..da94aa631c 100644
 +  TILE dest;
 +  UINT32 turns;
 +end
-diff --git a/server/unithand.c b/server/unithand.c
-index 15f63dd55c..d8b7168da6 100644
---- a/server/unithand.c
-+++ b/server/unithand.c
-@@ -70,6 +70,8 @@
- /* server/scripting */
- #include "script_server.h"
+diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2021-11-03 18:44:06.681153381 +0200
++++ freeciv/server/unithand.c	2021-11-03 18:45:35.916620113 +0200
+@@ -45,6 +45,9 @@
+ #include "unit.h"
+ #include "unitlist.h"
  
++/* common/aicore */
 +#include "pf_tools.h"
 +
- #include "unithand.h"
+ /* common/scriptcore */
+ #include "luascript_types.h"
  
- /* An explanation why an action isn't enabled. */
-@@ -3040,6 +3042,88 @@ static bool city_build(struct player *pplayer, struct unit *punit,
-   return TRUE;
+@@ -4087,6 +4090,88 @@
  }
  
-+/**********************************************************************//**
+ /**********************************************************************//**
 +  This function handles GOTO path requests from the client.
 +**************************************************************************/
 +void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
@@ -119,6 +136,7 @@ index 15f63dd55c..d8b7168da6 100644
 +  }
 +}
 +
- /**********************************************************************//**
++/**********************************************************************//**
    Handle change in unit activity.
  **************************************************************************/
+ static void handle_unit_change_activity_real(struct player *pplayer,

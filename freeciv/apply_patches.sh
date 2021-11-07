@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 1975-Autosettlers-Pass-action-and-not-activity-to-action_:
-#   osdn #42791 / 441b3c22e3391775993c56cc6731a3bffc59b895
 # 0006-freeciv-web-Pack-city-structure :
 #   osdn #43150 / not yet pushed
 
@@ -28,7 +26,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "1975-Autosettlers-Pass-action-and-not-activity-to-action_"
   "0006-freeciv-web-Pack-city-structure"
   "city_impr_fix2"
   "city-naming-change"

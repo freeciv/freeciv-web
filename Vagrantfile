@@ -3,7 +3,7 @@
 # vi: set ft=ruby :
 
 # Freeciv-web Vagrant Vagrantfile - play.freeciv.org
-# 2014-02-17 - Andreas Røsdal
+# 2014-02-17 - Andreas RÃ¸sdal
 #
 # Run 'vagrant up' in this directory, which will create a VirtualBox image
 # and install Freeciv-web for you.
@@ -19,11 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu-hirsute"
+  config.vm.box = "ubuntu-impish"
 
   config.vm.provider "virtualbox"
 
-  config.vm.box_url = "https://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64-vagrant.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64-vagrant.box"
 
   if Vagrant::Util::Platform.windows?
 	  config.vm.network :forwarded_port, guest: 80, host: 80, host_ip: "127.0.0.1"

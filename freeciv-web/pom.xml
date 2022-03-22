@@ -61,13 +61,13 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.8.0</version>
+			<version>2.11.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.25</version>
+			<version>8.0.28</version>
 		</dependency>
 
 		<dependency>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20201115</version>
+			<version>20220320</version>
 		</dependency>
 
 		<dependency>
@@ -112,7 +112,7 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
-			<version>1.31.2</version>
+			<version>1.31.5</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-			<version>1.31.2</version>
+			<version>1.33.2</version>
 		</dependency>
 	</dependencies>
 
@@ -341,7 +341,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>com.github.blutorange</groupId>
 					<artifactId>closure-compiler-maven-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>2.22.0</version>
 					<configuration>
 						<closureLanguageIn>ECMASCRIPT_2019</closureLanguageIn>
 						<closureLanguageOut>ECMASCRIPT_2019</closureLanguageOut>

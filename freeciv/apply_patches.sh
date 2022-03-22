@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0006-freeciv-web-Pack-city-structure :
-#   osdn #43150 / not yet pushed
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -26,7 +24,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0006-freeciv-web-Pack-city-structure"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

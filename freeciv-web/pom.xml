@@ -178,7 +178,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>3.3.1</version>
+					<version>3.3.2</version>
 					<configuration>
 						<recompressZippedFiles>false</recompressZippedFiles>
 						<webResources>

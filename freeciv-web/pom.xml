@@ -122,7 +122,7 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-			<version>1.33.2</version>
+			<version>1.31.2</version>
 		</dependency>
 	</dependencies>
 

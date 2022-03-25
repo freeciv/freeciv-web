@@ -12,7 +12,7 @@ Public License</a>. <br>
 
 The HTML5 and 3D WebGL versions of Freeciv-web was initially created by <a href='http://www.twitter.com/andreasrosdal' target='_new'>
 Andreas R&oslash;sdal</a>. A huge list of people have contributed to the Freeciv project, see the full 
-<a href='http://freeciv.wikia.com/wiki/People' target='_new'>credits for
+<a href='http://www.freeciv.org/wiki/People' target='_new'>credits for
 Freeciv</a>. Freeciv-web is always looking for game developers to help improve
 the game!
 
@@ -31,4 +31,4 @@ You can also find more information about Freeciv here:
 <br><a href='http://www.freeciv.org/wiki/' target='_new'>Freeciv Wiki</a><br>
 <a href='http://forum.freeciv.org/' target='_new'>Freeciv Forum</a><br>
 <a href='https://github.com/freeciv/freeciv-web' target='_new'>Freeciv-web on Github</a><br>
-<a href='http://freeciv.wikia.com/wiki/Bug_Reporting' target='_new'>Bug Reporting</a><br>
+<a href='http://www.freeciv.org/wiki/Bug_Reporting' target='_new'>Bug Reporting</a><br>

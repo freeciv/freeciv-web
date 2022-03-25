@@ -9,7 +9,7 @@ Don't expect to be able to understand everything here even after reading the
 # Freeciv-web and Freeciv
 
 Freeciv-web uses a [patched](freeciv/apply_patches.sh) version of Freeciv's
-[master branch](http://freeciv.wikia.com/wiki/Freeciv_source_code_repository).
+[master branch](http://www.freeciv.org/wiki/Freeciv_source_code_repository).
 This makes it easier to get Freeciv-web related changes into Freeciv.
 It also makes it easier for Freeciv-web to take advantage of the newest
 Freeciv features.
@@ -35,9 +35,9 @@ Freeciv-web uses the Freeciv AI.
 Most of it lives in the [ai](http://repo.or.cz/freeciv.git/tree/HEAD:/ai)
 folder of Freeciv.
 More information about the Freeciv AI can be found at the
-[Freeciv wiki](http://freeciv.wikia.com/wiki/Category:AI).
+[Freeciv wiki](http://www.freeciv.org/wiki/Category:AI).
 Freeciv has AI related
-[introduction tasks](http://freeciv.wikia.com/wiki/Introduction_tasks).
+[introduction tasks](http://www.freeciv.org/wiki/Introduction_tasks).
 
 # Freeciv-web LongTurn
 

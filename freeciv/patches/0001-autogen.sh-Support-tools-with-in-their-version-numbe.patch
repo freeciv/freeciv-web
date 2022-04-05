@@ -1,0 +1,30 @@
+From c21069822074762cce7325c1178b5fe9cd348a85 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 17 Mar 2022 05:19:23 +0200
+Subject: [PATCH] autogen.sh: Support tools with '+' in their version number
+
+See osdn #44131
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ autogen.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/autogen.sh b/autogen.sh
+index 5749157dca..6b310c4c68 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -190,8 +190,8 @@ version_check ()
+   pkg_version=`$PACKAGE --version 2>&1|grep -a -v " line " |head -n 1|sed 's/([^)]*)//g;s/^[a-zA-Z\.\ \-]*//;s/ .*$//'`
+   debug "pkg_version $pkg_version"
+   pkg_major=`echo $pkg_version | cut -d. -f1`
+-  pkg_minor=`echo $pkg_version | sed s/[-,a-z,A-Z].*// | cut -d. -f2`
+-  pkg_micro=`echo $pkg_version | sed s/[-,a-z,A-Z].*// | cut -d. -f3`
++  pkg_minor=`echo $pkg_version | sed s/[-,a-z,A-Z+].*// | cut -d. -f2`
++  pkg_micro=`echo $pkg_version | sed s/[-,a-z,A-Z+].*// | cut -d. -f3`
+   [ -z "$pkg_major" ] && pkg_major=0
+   [ -z "$pkg_minor" ] && pkg_minor=0
+   [ -z "$pkg_micro" ] && pkg_micro=0
+-- 
+2.35.1
+

@@ -1,46 +1,29 @@
-From 3ca968c6948555c939dd2dd6f38c05168329f6ed Mon Sep 17 00:00:00 2001
-From: Sveinung Kvilhaugsvik <sveinung84@users.sourceforge.net>
-Date: Sun, 31 Jul 2016 04:29:54 +0200
-Subject: [PATCH] Add webperimental to distribution tarball.
-
----
- configure.ac                   |  1 +
- data/Makefile.am               |  2 +-
- data/webperimental/Makefile.am | 19 +++++++++++++++++++
- translations/core/POTFILES.in  |  9 +++++++++
- 4 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 data/webperimental/Makefile.am
-
-diff --git a/configure.ac b/configure.ac
-index 46458cd..b372531 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -1640,6 +1640,7 @@ AC_CONFIG_FILES([Makefile
-           data/civ2civ3/Makefile
- 	  data/civ1/Makefile
+diff -Nurd freeciv/configure.ac freeciv/configure.ac
+--- freeciv/configure.ac	2022-04-01 21:41:37.043188391 +0300
++++ freeciv/configure.ac	2022-04-01 21:43:11.766676994 +0300
+@@ -1775,6 +1775,7 @@
  	  data/civ2/Makefile
-+	  data/webperimental/Makefile
+           data/stub/Makefile
+           data/stub/nations/Makefile
++          data/webperimental/Makefile
  	  data/scenarios/Makefile
  	  data/nation/Makefile
            data/ruledit/Makefile
-diff --git a/data/Makefile.am b/data/Makefile.am
-index 6415a34..58bb1d5 100644
---- a/data/Makefile.am
-+++ b/data/Makefile.am
-@@ -89,7 +89,7 @@ else
- CLIENTDATADIRS = 
+diff -Nurd freeciv/data/Makefile.am freeciv/data/Makefile.am
+--- freeciv/data/Makefile.am	2022-04-01 21:41:37.043188391 +0300
++++ freeciv/data/Makefile.am	2022-04-01 21:43:43.942505580 +0300
+@@ -79,7 +79,7 @@
  endif
  
--SRV_RE_DATADIRS = default classic civ1 civ2 sandbox multiplayer alien civ2civ3 nation
-+SRV_RE_DATADIRS = default classic civ1 civ2 sandbox multiplayer alien civ2civ3 webperimental nation
+ SRV_RE_DATADIRS = default classic civ1 civ2 sandbox multiplayer \
+-                  alien civ2civ3 stub nation
++                  alien civ2civ3 stub webperimental nation
  if SERVER
  SERVERDATADIRS = $(SRV_RE_DATADIRS) scenarios
  else
-diff --git a/data/webperimental/Makefile.am b/data/webperimental/Makefile.am
-new file mode 100644
-index 0000000..ff5b433
---- /dev/null
-+++ b/data/webperimental/Makefile.am
+diff -Nurd freeciv/data/webperimental/Makefile.am freeciv/data/webperimental/Makefile.am
+--- freeciv/data/webperimental/Makefile.am	1970-01-01 02:00:00.000000000 +0200
++++ freeciv/data/webperimental/Makefile.am	2022-04-01 21:42:23.942933854 +0300
 @@ -0,0 +1,21 @@
 +## Process this file with automake to produce Makefile.in
 +
@@ -63,11 +46,10 @@ index 0000000..ff5b433
 +	units.ruleset
 +
 +EXTRA_DIST = $(pkgdata_DATA)
-diff --git a/translations/core/POTFILES.in b/translations/core/POTFILES.in
-index a80e0de..583e296 100644
---- a/translations/core/POTFILES.in
-+++ b/translations/core/POTFILES.in
-@@ -293,6 +293,15 @@ data/alien/nation/madmen.ruleset
+diff -Nurd freeciv/translations/core/POTFILES.in freeciv/translations/core/POTFILES.in
+--- freeciv/translations/core/POTFILES.in	2022-04-01 21:41:37.815184179 +0300
++++ freeciv/translations/core/POTFILES.in	2022-04-01 21:42:23.942933854 +0300
+@@ -234,6 +234,15 @@
  data/alien/nation/mathclub.ruleset
  data/alien/nation/secretsociety.ruleset
  data/alien/nation/teamgladiators.ruleset
@@ -83,6 +65,3 @@ index a80e0de..583e296 100644
  data/helpdata.txt
  data/multiplayer/buildings.ruleset
  data/multiplayer/cities.ruleset
--- 
-2.1.4
-

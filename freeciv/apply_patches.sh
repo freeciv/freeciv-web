@@ -2,6 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0001-autogen.sh-Support-tools-with-in-their-version-numbe
+#  osdn #44131
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -24,6 +26,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "0001-autogen.sh-Support-tools-with-in-their-version-numbe"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

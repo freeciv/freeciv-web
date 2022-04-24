@@ -5,6 +5,7 @@
 
 # Not in the upstream Freeciv server
 # ----------------------------------
+# meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
@@ -24,6 +25,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

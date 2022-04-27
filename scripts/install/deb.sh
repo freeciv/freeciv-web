@@ -18,6 +18,7 @@ dependencies="\
   autoconf \
   automake \
   autotools-dev \
+  meson \
   build-essential \
   curl \
   git \

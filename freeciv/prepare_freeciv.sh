@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MESON_BUILD=no
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "${DIR}"
 
@@ -25,6 +27,16 @@ if ! ./apply_patches.sh ; then
   exit 1
 fi
 
+if test "$MESON_BUILD" = "yes" ; then
+  mkdir -p build
+
+  ( cd build
+    meson ../freeciv -Dack_experimental=true -Dfreeciv-web=true -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false -Daudio=false -Druledit=false -Dprefix=${HOME}/freeciv
+    ninja
+  )
+
+else
+
 echo "Building Freeciv in /tmp"
 # Building Freeciv in /tmp, is a workaround for compiling Freeciv in a Vagrant box on VirtualBox, since in this environment
 # configure can fail with this error:   "./conftest: Permission denied", which seems to be related to executable file permissions in a VirtualBox file system.
@@ -42,5 +54,7 @@ cp freeciv-web.project /tmp/
   ${DIR}/freeciv/configure CFLAGS="-O3" \
               --enable-mapimg=magickwand --with-project-definition=../freeciv-web.project --enable-fcweb --enable-json --disable-delta-protocol --disable-nls --disable-fcmp --enable-freeciv-manual --disable-ruledit --disable-ruleup --disable-fcdb --enable-ai-static=classic,tex --prefix=${HOME}/freeciv/ && make -s -j$(nproc)
 )
+
+fi
 
 echo "done"

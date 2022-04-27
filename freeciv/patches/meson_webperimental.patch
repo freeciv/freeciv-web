@@ -1,0 +1,34 @@
+diff --git a/meson.build b/meson.build
+index b99b4f292c..127ff48f6c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3048,7 +3048,8 @@ rulesets = [
+   'sandbox',
+   'civ1',
+   'civ2',
+-  'stub'
++  'stub',
++  'webperimental'
+   ]
+ 
+ ruleset_files = [
+@@ -3081,6 +3082,7 @@ endforeach
+ 
+ install_data(
+   'data/stub.serv',
++  'data/webperimental.serv',
+   install_dir : join_paths(get_option('datadir'), 'freeciv')
+   )
+ 
+@@ -3105,6 +3107,11 @@ install_data(
+   install_dir : join_paths(get_option('datadir'), 'freeciv/alien')
+   )
+ 
++install_data(
++  'data/webperimental/README.webperimental',
++  install_dir : join_paths(get_option('datadir'), 'freeciv/webperimental')
++  )
++
+ install_data(
+   'data/alien/nation/adventurers.ruleset',
+   'data/alien/nation/galacticsound.ruleset',

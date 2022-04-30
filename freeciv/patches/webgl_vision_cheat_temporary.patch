@@ -1,7 +1,8 @@
-diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2021-03-17 21:56:31.888810886 +0200
-+++ freeciv/server/maphand.c	2021-03-17 21:59:28.318532671 +0200
-@@ -446,7 +446,7 @@
+diff --git a/server/maphand.c b/server/maphand.c
+index 9862015..86a7eae 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -463,7 +463,7 @@ void send_all_known_tiles(struct conn_list *dest)
        conn_list_do_buffer(dest);
      }
  
@@ -10,7 +11,15 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -582,12 +582,14 @@
+@@ -596,19 +596,21 @@ void send_tile_info(struct conn_list *dest, struct tile *ptile,
+       }
+ 
+       send_packet_tile_info(pconn, &info);
+-    } else if (send_unknown) {
++    } else {
+       info.known = TILE_UNKNOWN;
+       info.continent = 0;
+       info.owner = MAP_TILE_OWNER_NULL;
        info.extras_owner = MAP_TILE_OWNER_NULL;
        info.worked = IDENTITY_NUMBER_ZERO;
  

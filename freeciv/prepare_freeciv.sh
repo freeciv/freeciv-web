@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MESON_BUILD=no
+MESON_VER=0.57.2
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "${DIR}"
@@ -27,7 +27,18 @@ if ! ./apply_patches.sh ; then
   exit 1
 fi
 
-if test "$MESON_BUILD" = "yes" ; then
+if test "$MESON_VER" != "" ; then
+  rm -Rf meson-install && mkdir -p meson-install
+
+  ( cd meson-install
+
+    wget "https://github.com/mesonbuild/meson/releases/download/${MESON_VER}/meson-${MESON_VER}.tar.gz"
+    tar xzf meson-${MESON_VER}.tar.gz
+    ln -s "meson-${MESON_VER}/meson.py" meson
+  )
+
+  export PATH="$(pwd)/meson-install:$PATH"
+
   mkdir -p build
 
   ( cd build

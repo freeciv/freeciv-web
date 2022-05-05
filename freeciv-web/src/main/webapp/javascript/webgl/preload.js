@@ -202,7 +202,7 @@ function load_model(filename)
       }
     });
 
-    model.scale.x = model.scale.y = model.scale.z = 11;
+    model.scale.x = model.scale.y = model.scale.z = 13;
     webgl_models[filename] = model;
     load_count++;
     if (load_count == total_model_count) webgl_preload_complete();

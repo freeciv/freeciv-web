@@ -20,7 +20,7 @@
 var camera;
 
 var camera_dx = 300;
-var camera_dy = 490;
+var camera_dy = 420;
 var camera_dz = 300;
 var camera_current_x = 0;
 var camera_current_y = 0;

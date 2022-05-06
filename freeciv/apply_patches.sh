@@ -2,7 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0025-Meson-Correct-setting-FREECIV_WEB : osdn #44457
 # 0045-Meson-Disable-delta-protocol-from-freeciv-web-builds : osdn #44456
 
 # Not in the upstream Freeciv server
@@ -31,7 +30,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0025-Meson-Correct-setting-FREECIV_WEB"
   "0045-Meson-Disable-delta-protocol-from-freeciv-web-builds"
   "meson_project_replacement"
   "meson_static_freeciv"

@@ -1,0 +1,28 @@
+From 997c0e7261c4c142d55febd9408f958e89411183 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 27 Apr 2022 03:08:14 +0300
+Subject: [PATCH 25/48] Meson: Correct setting FREECIV_WEB
+
+See osdn #44457
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 22839d88ca..063c278ec3 100644
+--- a/meson.build
++++ b/meson.build
+@@ -71,7 +71,7 @@ else
+ endif
+ 
+ if get_option('freeciv-web')
+-  priv_conf_data.set('FREECIV_WEB', 1)
++  pub_conf_data.set('FREECIV_WEB', 1)
+   server_binary_name = 'freeciv-web'
+ else
+   server_binary_name = 'freeciv-server'
+-- 
+2.35.1
+

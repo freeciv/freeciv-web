@@ -278,10 +278,10 @@ setfacl -Rm d:u:tomcat:rwX webapps/data
 
 echo "==== Building freeciv ===="
 echo "Please be patient"
-# Freeciv is built in /tmp, to overcome a file permission issue on VirtualBox.
+
 cd "${basedir}"/freeciv && \
   ./prepare_freeciv.sh  && \
-  cd /tmp/freeciv && make install || \
+  cd build && ninja install || \
   handle_error 5 "Failed to install freeciv"
 
 

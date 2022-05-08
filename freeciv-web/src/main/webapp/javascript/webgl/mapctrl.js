@@ -150,27 +150,58 @@ function webglOnWheel(e) {
   var new_camera_dx;
   var new_camera_dy;
   var new_camera_dz;
+  const min_y = 90;
+  const max_y = 1500;
 
   var wd = e.originalEvent.deltaY;
 
-  if (wd < 0) {
-    // zoom in
-    new_camera_dy = camera_dy - 60;
-    new_camera_dx = camera_dx - 45;
-    new_camera_dz = camera_dz - 45;
-  } else {
-    // zoom out
-    new_camera_dy = camera_dy + 60;
-    new_camera_dx = camera_dx + 45;
-    new_camera_dz = camera_dz + 45;
-  }
+  const dx_adj = 3;
+  var dy_adj = dx_adj * camera_dy_div_dx;
+  const dz_adj = dx_adj;
 
-  if (new_camera_dy < 350 || new_camera_dy > 1500) {
-    return;
-  } else {
-    camera_dx = new_camera_dx;
-    camera_dy = new_camera_dy;
-    camera_dz = new_camera_dz;
+  // Holding alt-key means to adjust camera angle:
+  if (e.altKey) {
+    var new_camera_angle = camera_dy_div_dx;
+    if (wd < 0) {
+      // more bird's eye:
+      new_camera_angle += 0.01;
+    } else {
+      // more worm's eye:
+      new_camera_angle -= 0.01;
+    }
+    // regulate min/max angle:
+    if (new_camera_angle > 3 || new_camera_angle < 0.5) {
+      return;
+    }
+
+    camera_dy_div_dx = new_camera_angle;
+    new_camera_dy = new_camera_angle * camera_dx;
+    if (new_camera_dy < min_y || new_camera_dy > max_y) {
+      return;
+    }
+    else camera_dy = new_camera_dy;
+  }
+  // Not holding alt-key means to adjust zoom:
+  else {
+    if (wd < 0) {
+      // zoom in
+      new_camera_dy = camera_dy - dy_adj;
+      new_camera_dx = camera_dx - dx_adj;
+      new_camera_dz = camera_dz - dz_adj;
+    } else {
+      // zoom out
+      new_camera_dy = camera_dy + dy_adj;
+      new_camera_dx = camera_dx + dx_adj;
+      new_camera_dz = camera_dz + dz_adj;
+    }
+
+    if (new_camera_dy < min_y || new_camera_dy > max_y) {
+      return;
+    } else {
+      camera_dx = new_camera_dx;
+      camera_dy = new_camera_dy;
+      camera_dz = new_camera_dz;
+    }
   }
 
   camera_look_at(camera_current_x, camera_current_y, camera_current_z);
@@ -189,16 +220,16 @@ function webgl_mapview_pinch_zoom(ev)
 
   if(ev.scale > 1) {
     // zoom in
-    new_camera_dy = camera_dy - 8;
-    new_camera_dx = camera_dx - 4;
-    new_camera_dz = camera_dz - 4;
+    new_camera_dy = camera_dy - 16;
+    new_camera_dx = camera_dx - 15;
+    new_camera_dz = camera_dz - 15;
   } else{
     // zoom out
-    new_camera_dy = camera_dy + 8;
-    new_camera_dx = camera_dx + 4;
-    new_camera_dz = camera_dz + 4;
+    new_camera_dy = camera_dy + 16;
+    new_camera_dx = camera_dx + 15;
+    new_camera_dz = camera_dz + 15;
   }
-  if (new_camera_dy < 250 || new_camera_dy > 1100) {
+  if (new_camera_dy < 240 || new_camera_dy > 1500) {
     return;
   } else {
     camera_dx = new_camera_dx;

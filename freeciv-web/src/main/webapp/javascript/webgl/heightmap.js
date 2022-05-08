@@ -63,7 +63,7 @@ function create_heightmap()
     for (var y = 0; y < map.ysize; y++) {
       var ptile = map_pos_to_tile(x, y);
       if (ptile != null) {
-        heightmap_tiles[x][y] = 0.5 + 0.4 * map_tile_height(ptile) + 0.09 * distance_from_coast_map[x][y];
+        heightmap_tiles[x][y] = 0.5 + 0.4 * map_tile_height(ptile) + 0.04 * distance_from_coast_map[x][y];
         if (heightmap_tiles[x][y] > ptile['height']) {
           ptile['height'] = heightmap_tiles[x][y];
         }
@@ -161,11 +161,11 @@ function map_tile_height(ptile)
   if (ptile != null && tile_terrain(ptile) != null) {
       if (tile_has_extra(ptile, EXTRA_RIVER)) return -0.01;
       if (is_ocean_tile(ptile)) return -0.13 + ((Math.random() - 0.5) / 80);
-      if (tile_terrain(ptile)['name'] == "Hills") return 0.25;
-      if (tile_terrain(ptile)['name'] == "Mountains") return 0.65 + ((Math.random() - 0.5) / 10);
+      if (tile_terrain(ptile)['name'] == "Hills") return 0.21;
+      if (tile_terrain(ptile)['name'] == "Mountains") return 0.43 + ((Math.random() - 0.5) / 10);
   }
 
-  return 0.0 + ((Math.random() - 0.5) / 60);
+  return 0.01 + ((Math.random() - 0.5) / 60);
 }
 
 /****************************************************************************

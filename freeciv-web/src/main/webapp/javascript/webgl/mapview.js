@@ -123,7 +123,7 @@ function init_webgl_mapview() {
   var waterGeometry = new THREE.PlaneBufferGeometry( mapview_model_width - 10, mapview_model_height - 10 );
 
   water = new THREE.Water(waterGeometry, {
-      color: '#ccffff',
+      color: '#55c0ff',
       scale: 10,
       flowDirection: new THREE.Vector2( 0.1, -0.1),
       textureWidth: 1024,

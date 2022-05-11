@@ -18,7 +18,7 @@
 ***********************************************************************/
 
 var texture_cache = {};
-var webgl_mapview_font = 'Bold 34px Georgia, serif';
+var webgl_mapview_font = "29px Candara, sans serif"; // with canvas text support
 
 /****************************************************************************
  Convert a canvas to a mesh that will always face the user. The height of
@@ -78,10 +78,10 @@ function create_city_label(pcity)
   // Flag
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx.key],
-                1, 1, // Remove the 1px black border, it's ugly
-                sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
-                0, 0, 28, 32);
-  width += 28;
+                0, 0,
+                sprites[city_gfx.key].width, sprites[city_gfx.key].height,
+                0, 0, 48, 32);
+  width += 48;
 
   // Occupied
   var ptile = city_tile(pcity);
@@ -165,10 +165,10 @@ function update_city_label(pcity)
   // Flag
   var city_gfx = get_city_flag_sprite(pcity);
   ctx.drawImage(sprites[city_gfx.key],
-                1, 1, // Remove the 1px black border, it's ugly
-                sprites[city_gfx.key].width - 2, sprites[city_gfx.key].height - 2,
-                0, 0, 28, 32);
-  width += 28;
+                0, 0,
+                sprites[city_gfx.key].width, sprites[city_gfx.key].height,
+                0, 0, 48, 32);
+  width += 48;
 
   // Occupied
   var ptile = city_tile(pcity);

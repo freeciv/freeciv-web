@@ -16,6 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ***********************************************************************/
+var flag_dy = 0;
+var flag_dx = 13;
+var flag_dz = 15;
 
 // stores unit positions on the map. tile index is key, unit 3d model is value.
 var unit_positions = {};
@@ -186,9 +189,9 @@ function update_unit_position(ptile) {
       new_unit_health_bar = get_unit_health_mesh(visible_unit);
       new_unit_health_bar.matrixAutoUpdate = false;
       unit_health_positions[ptile['index']] = new_unit_health_bar;
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 26);
-      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - flag_dx);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + flag_dz+6);
+      new_unit_health_bar.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - flag_dy);
       new_unit_health_bar.rotation.y = Math.PI / 4;
       new_unit_health_bar.updateMatrix();
       if (scene != null && new_unit_health_bar != null) {
@@ -244,9 +247,9 @@ function update_unit_position(ptile) {
       new_flag = get_flag_shield_mesh(pflag['key']);
       new_flag.matrixAutoUpdate = false;
       unit_flag_positions[ptile['index']] = new_flag;
-      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 20);
-      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+      new_flag.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - flag_dx);
+      new_flag.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + flag_dz);
+      new_flag.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - flag_dy);
       new_flag.rotation.y = Math.PI / 4;
       new_flag.updateMatrix();
       if (scene != null && new_flag != null) {

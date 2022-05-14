@@ -27,7 +27,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   clear_goto_tiles();
   var ptile = start_tile;
 
-  var material = new THREE.MeshBasicMaterial( { color: 0x055dff, side:THREE.DoubleSide} );
+  var material = new THREE.MeshBasicMaterial( { color: 0x051dbb, side:THREE.DoubleSide} );
   var goto_width = 3;
 
   for (var i = 0; i < goto_packet_dir.length; i++) {
@@ -43,7 +43,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
     if (nexttile != null) {
       var currpos = map_to_scene_coords(ptile['x'], ptile['y']);
       var nextpos = map_to_scene_coords(nexttile['x'], nexttile['y']);
-      var height = 5 + ptile['height'] * 100;
+      var height = 5 + ptile['height'] * 70;
       if (ptile['x'] == 0 || ptile['x'] >= map['xsize'] - 1 || nexttile['x'] == 0 || nexttile['x'] >= map['xsize'] - 1) continue;
 
       var gotoLineGemetry = new THREE.PlaneGeometry(60, 5);
@@ -65,9 +65,9 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
       gotoLineGemetry.verticesNeedUpdate = true;
       var gotoline = new THREE.Mesh(gotoLineGemetry, material);
 
-      gotoline.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), currpos['x'] + 10);
+      gotoline.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), currpos['x']);
       gotoline.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 25);
-      gotoline.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), currpos['y'] + 10);
+      gotoline.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), currpos['y']);
       scene.add(gotoline);
       goto_lines.push(gotoline);
     }

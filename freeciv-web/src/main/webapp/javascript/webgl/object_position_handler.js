@@ -132,7 +132,7 @@ function update_unit_position(ptile) {
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingBufferGeometry( 13, 25, 24), selected_unit_material );
         selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
         selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
@@ -172,7 +172,7 @@ function update_unit_position(ptile) {
         if (activity != null) {
           activity.matrixAutoUpdate = false;
           activity.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 8);
-          activity.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 28);
+          activity.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 24);
           activity.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 5);
           activity.rotation.y = Math.PI / 4;
           activity.updateMatrix();
@@ -211,7 +211,7 @@ function update_unit_position(ptile) {
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingBufferGeometry( 13, 24, 20), selected_unit_material );
         selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 10);
+        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
         selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
@@ -417,16 +417,22 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
-    if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales"
-        && (!tile_has_extra(ptile, EXTRA_RIVER)) /* rendering specials on rivers is not supported yet. */) {
+    if (extra_resource['name'] != "Fish" && extra_resource['name'] != "Whales") {
       var key = extra_resource['graphic_str'];
       var extra_mesh = get_extra_mesh(key);
 
+      if (tile_has_extra(ptile, EXTRA_RIVER)) {
+        height += 24;
+      }
+      if (extra_resource['name'] == "Gold" || extra_resource['name'] == "Iron") {
+        height -= 5;
+      }
+
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       extra_mesh.matrixAutoUpdate = false;
-      extra_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 6);
-      extra_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
-      extra_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 6);
+      extra_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
+      extra_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
       extra_mesh.rotation.y = Math.PI / 4;
       extra_mesh.updateMatrix();
 
@@ -516,6 +522,10 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
 {
   if (tile_extra_positions[extra_type + "." + ptile['index']] == null && tile_has_extra(ptile, extra_type)) {
     var height = 5 + ptile['height'] * 100;
+    if ( extra_name == "Fish" || extra_name == "Whales") {
+      height -= 5;
+    }
+
     var model = webgl_get_model(extra_name);
     if (model == null) return;
     tile_extra_positions[extra_type + "." + ptile['index']] = model;

@@ -231,20 +231,17 @@ function update_city_label(pcity)
 function create_unit_label(punit)
 {
   var canvas1 = document.createElement('canvas');
-  canvas1.width = 32;
-  canvas1.height = 32;
+  canvas1.width = 28;
+  canvas1.height = 28;
   var context1 = canvas1.getContext('2d');
-  context1.font = "Bold 16px Arial";
-  context1.fillStyle = "rgba(222,255,0, 1.0)";
-  context1.strokeStyle= "black";
-  context1.lineWidth = 1.5;
 
-  var text = get_unit_activity_text(punit);
-  var width = context1.measureText(text).width;
-  context1.strokeText(text, 0, 15);
-  context1.fillText(text, 0, 15);
+  var activities = get_unit_activity_sprite(punit);
+  context1.drawImage(sprites[activities.key],
+                  0, 0,
+                  28, 28,
+                  0, 0, 28, 28);
 
-  return canvas_to_user_facing_mesh(canvas1, width, 10, 26, true, get_unit_activity_text(punit));
+  return canvas_to_user_facing_mesh(canvas1, 28, 15, 15, true, activities.key);
 }
 
 /****************************************************************************

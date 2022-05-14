@@ -53,7 +53,7 @@ function init_borders_image()
   };
 
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_borders_image, 15000);
-  if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 4000);
+  if (graphics_quality == QUALITY_HIGH) setInterval(update_borders_image, 3000);
 }
 
 /****************************************************************************

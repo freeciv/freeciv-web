@@ -89,44 +89,6 @@ function benchmark_check()
   setTimeout(benchmark_check, 1000);
 }
 
-/****************************************************************************
- Measure the fps for the first 10 seconds of the game, and show an error
- if the fps is too low to play.
-****************************************************************************/
-function initial_benchmark_check()
-{
-  var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
-  var fps = Math.floor(benchmark_frames_count / time_elapsed);
-  initial_benchmark_enabled = false;
-  if (fps < 4) {
-    var renderer_name = "-";
-    var gl = document.createElement('canvas').getContext('webgl');
-    if (gl != null) {
-      var extension = gl.getExtension('WEBGL_debug_renderer_info');
-      if (extension != undefined) {
-        renderer_name = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL);
-      }
-    }
-
-    var quality_string = "";
-    if (graphics_quality == QUALITY_MEDIUM) quality_string = "Medium quality";
-    if (graphics_quality == QUALITY_HIGH) quality_string = "High quality";
-
-    var message = "The game is running too slowly! Please check if the drivers for your graphics driver needs to be updated and that you have a graphics card which supports WebGL 3D. "
-    + "3D WebGL rendering requires updated drivers and a good 3D graphics card with 3D hardware acceleration. The current WebGL renderer is: " + renderer_name + ".<br>";
-    if (renderer_name == "Google SwiftShader") message += "<br>Warning: Google SwiftShader is a software renderer which has very poor performance and will not work with this game. ";
-    message += "<br><b>You can try playing the 2D version instead, or configure lower graphics quality.</b><br><br>";
-    message += "Current graphics level: " + quality_string;
-
-    show_slow_game_warning_message("3D game is running very slowly!", message);
-
-    console.error("WebGL 3D is running slowly. FPS: " + fps + ", Quality:" + quality_string + ", Renderer: " + renderer_name);
-
-  }
-
-}
-
-
 /**************************************************************************
  Shows a generic message dialog.
 **************************************************************************/

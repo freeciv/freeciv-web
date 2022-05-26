@@ -3451,6 +3451,9 @@ function update_active_units_dialog()
     if (game_unit_panel_state == "minimized") $("#game_unit_panel").dialogExtend("minimize");
   } else {
     $("#game_unit_panel").parent().hide();
+    if (renderer == RENDERER_WEBGL) {
+      webgl_clear_unit_focus();
+    }
   }
   $("#active_unit_info").tooltip();
 }

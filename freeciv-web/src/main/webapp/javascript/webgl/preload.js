@@ -265,7 +265,7 @@ function get_extra_mesh(key)
                 sprites[key].width - 36, sprites[key].height - 12,
                 0,0,64,32);
 
-  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 26, 16, true);
+  meshes[key] = canvas_to_user_facing_mesh(ecanvas, 64, 28, 18, true);
   return new THREE.InstancedMesh(meshes[key].geometry, meshes[key].material, 1);
 }
 

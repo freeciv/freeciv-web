@@ -219,7 +219,7 @@ function init_webgl_mapview() {
     landGeometry.faces[i].vertexColors = vertex_colors;
   }
   if (graphics_quality == QUALITY_HIGH) {
-    setInterval(update_tiles_known_vertex_colors, 350);
+    setInterval(update_tiles_known_vertex_colors, 250);
   } else {
     setInterval(update_tiles_known_vertex_colors, 1200);
   }
@@ -239,7 +239,7 @@ function init_webgl_mapview() {
   console.log("init_webgl_mapview took: " + (new Date().getTime() - start_webgl) + " ms.");
 
   benchmark_start = new Date().getTime();
-  setTimeout(initial_benchmark_check, 10000);
+
 }
 
 /****************************************************************************

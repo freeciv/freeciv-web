@@ -15,9 +15,6 @@
 
 dependencies="\
   acl \
-  autoconf \
-  automake \
-  autotools-dev \
   meson \
   build-essential \
   curl \

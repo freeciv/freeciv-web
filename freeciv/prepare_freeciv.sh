@@ -46,7 +46,9 @@ if test "$MESON_VER" != "" ; then
   mkdir -p build
 
   ( cd build
-    meson ../freeciv -Dack_experimental=true -Dfreeciv-web=true -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false -Daudio=false -Druledit=false -Dprefix=${HOME}/freeciv
+    meson ../freeciv -Dack_experimental=true -Dfreeciv-web=true -Dclients=[] -Dfcmp=[] \
+          -Djson-protocol=true -Dnls=false -Daudio=false -Druledit=false \
+          -Ddefault_library=static -Dprefix=${HOME}/freeciv
     ninja
   )
 

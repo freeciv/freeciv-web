@@ -62,7 +62,7 @@ else
   INSTALLED_TOMCAT=N
 fi
 
-debian_nodejs_packages="nodejs npm handlebars"
+debian_nodejs_packages="nodejs npm handlebars node-opener"
 if [ $(lsb_release -rs) = "testing" ] && [ $(lsb_release -is) = "Debian" ] \
    && apt-get --simulate install ${debian_nodejs_packages} &> /dev/null; then
   dependencies="${dependencies} ${debian_nodejs_packages}"
@@ -99,5 +99,3 @@ if [ "${INSTALLED_NODEJS}" = N ]; then
 fi
 # Populate ~/.config with current user
 npm help > /dev/null
-
-

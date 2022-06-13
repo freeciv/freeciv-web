@@ -2,7 +2,8 @@
 
 # Either version number to install, or "yes" to use system meson.
 # Empty to use autotools
-MESON_VER="yes"
+# Minimum requirement is 0.57.0, and Debian Bullseye has only 0.56.2
+MESON_VER="0.57.2"
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "${DIR}"

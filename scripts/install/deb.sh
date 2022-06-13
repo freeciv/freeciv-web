@@ -16,6 +16,7 @@
 dependencies="\
   acl \
   meson \
+  wget \
   build-essential \
   curl \
   git \

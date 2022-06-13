@@ -1,8 +1,8 @@
 diff --git a/meson.build b/meson.build
-index b99b4f292c..127ff48f6c 100644
+index 06ad423591..0db6cc3329 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -3048,7 +3048,8 @@ rulesets = [
+@@ -3079,7 +3079,8 @@ rulesets = [
    'sandbox',
    'civ1',
    'civ2',
@@ -12,15 +12,16 @@ index b99b4f292c..127ff48f6c 100644
    ]
  
  ruleset_files = [
-@@ -3081,6 +3082,7 @@ endforeach
- 
- install_data(
-   'data/stub.serv',
+@@ -3105,6 +3106,8 @@ install_data(
+   'data/sandbox.modpack',
+   'data/civ1.modpack',
+   'data/civ2.modpack',
 +  'data/webperimental.serv',
++  'data/webperimental.modpack',
    install_dir : join_paths(get_option('datadir'), 'freeciv')
    )
  
-@@ -3105,6 +3107,11 @@ install_data(
+@@ -3142,6 +3145,11 @@ install_data(
    install_dir : join_paths(get_option('datadir'), 'freeciv/alien')
    )
  

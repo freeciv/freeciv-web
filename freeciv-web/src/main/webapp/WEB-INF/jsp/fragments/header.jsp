@@ -42,7 +42,7 @@
 					<li><a href="https://www.reddit.com/r/freeciv">reddit.com/freeciv</a></li>
 				</ul>
 			</li>
-			<li><a href="http://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
+			<li><a href="https://www.freeciv.org/donate.html"><fmt:message key="nav-donate"/></a></li>
 			<li><a href="https://github.com/freeciv/freeciv-web">Contribute</a></li>
 			<%--<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="${pageContext.request.locale.language} ${pageContext.request.locale.country}">

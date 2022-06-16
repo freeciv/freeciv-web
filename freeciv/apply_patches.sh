@@ -8,7 +8,6 @@
 # meson_project_replacement hardcodes some values in meson build that in freeciv-web
 #     autotools build used to be defined in the .project file but are not yet configurable
 #     in meson builds
-# meson_static_freeciv makes libfreeciv to be built as a static library
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -30,7 +29,6 @@
 
 declare -a PATCHLIST=(
   "meson_project_replacement"
-  "meson_static_freeciv"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

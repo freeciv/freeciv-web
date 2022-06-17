@@ -207,4 +207,4 @@ Sveinung Kvilhaugsvik [@kvilhaugsvik](https://github.com/kvilhaugsvik)
 Gerik Bonaert [@adaxi](https://github.com/adaxi)  
 Lmoureaux [@lmoureaux](https://github.com/lmoureaux)  
 Máximo Castañeda [@lonemadmax](https://github.com/lonemadmax)  
-and the [Freeciv.org project](http://www.freeciv.org/wiki/People)!
+and the [Freeciv.org project](https://www.freeciv.org/wiki/People)!

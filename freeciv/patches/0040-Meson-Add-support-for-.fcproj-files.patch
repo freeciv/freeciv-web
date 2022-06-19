@@ -1,0 +1,224 @@
+From b6c6a484e191d1db7be49039e80493336f72fa1e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 13 Jun 2022 18:07:55 +0300
+Subject: [PATCH 40/40] Meson: Add support for .fcproj files
+
+These are equivalent to our autotools .project files
+
+See osdn #42935
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ bootstrap/Makefile.am                 |  1 +
+ bootstrap/freeciv.fcproj              | 17 ++++++++
+ doc/INSTALL.meson                     | 18 ++++++++
+ gen_headers/meson_fc_config.h.in      |  2 +-
+ gen_headers/meson_freeciv_config.h.in |  8 +++-
+ meson.build                           | 61 ++++++++++++++++++++++++---
+ meson_options.txt                     |  5 +++
+ 7 files changed, 103 insertions(+), 9 deletions(-)
+ create mode 100644 bootstrap/freeciv.fcproj
+
+diff --git a/bootstrap/Makefile.am b/bootstrap/Makefile.am
+index 6bd1f1348a..5cc201ff2a 100644
+--- a/bootstrap/Makefile.am
++++ b/bootstrap/Makefile.am
+@@ -6,6 +6,7 @@
+ ## It should also install it automatically when running autogen.sh.
+ EXTRA_DIST =	freeciv.project		\
+ 		snapshot.project	\
++		freeciv.fcproj		\
+ 		fcgui.in		\
+ 		fcser.in		\
+ 		fcruledit.in		\
+diff --git a/bootstrap/freeciv.fcproj b/bootstrap/freeciv.fcproj
+new file mode 100644
+index 0000000000..37bb26457a
+--- /dev/null
++++ b/bootstrap/freeciv.fcproj
+@@ -0,0 +1,17 @@
++# Use meson configure option 'project-definition' to a path to this file
++# to use this.
++
++# Default metaserver URL
++META_URL http://meta.freeciv.org/metaserver.php
++
++# We want default MODPACK_LIST_URL constructed compile time, so not giving
++# one here. This is just an example.
++# MODPACK_LIST_URL http://modpack.freeciv.org/3.2/modpack.list
++
++# Where to store user files. Note that changing this after user has already stored
++# something to the old dir with older version of the project means that those
++# files won't be used any more.
++# FREECIV_STORAGE_DIR ~/.freeciv
++
++# Default ports
++FREECIV_DEFAULT_PORT=5556
+diff --git a/doc/INSTALL.meson b/doc/INSTALL.meson
+index 3a8a5193aa..0e69017b20 100644
+--- a/doc/INSTALL.meson
++++ b/doc/INSTALL.meson
+@@ -142,6 +142,24 @@ gen-packets-args (array):
+ qtver ('qt5'/'qt6'):
+   Whether to build Qt5 or Qt6 versions of the binaries.
+ 
++project-definition (string):
++  Filename of the project definition to use. See below for contents of
++  such a file
++
++
++Project definition file
++-----------------------
++Each line of project definition line must have keyword in the beginning,
++separated by a space from the rest of the line containing the value.
++
++There's an example file bootstrap/freeciv.fcproj
++
++Supported keys:
++META_URL            - URL of the default metaserver
++MODPACK_LIST_URL    - URL of the default modpack list
++FREECIV_STORAGE_DIR - Directory where freeciv stores user files
++FREECIV_DEFAULT_POR - Default port of the server
++
+ 
+ run.sh
+ ------
+diff --git a/gen_headers/meson_fc_config.h.in b/gen_headers/meson_fc_config.h.in
+index ea46b3057f..ada2568a3b 100644
+--- a/gen_headers/meson_fc_config.h.in
++++ b/gen_headers/meson_fc_config.h.in
+@@ -20,7 +20,7 @@
+ #define AI_MOD_STATIC_CLASSIC
+ #define AI_MOD_STATIC_TEX
+ 
+-#define DEFAULT_SOCK_PORT 5556
++#mesondefine DEFAULT_SOCK_PORT
+ 
+ #define INIT_BRACE_BEGIN {
+ #define INIT_BRACE_END   }
+diff --git a/gen_headers/meson_freeciv_config.h.in b/gen_headers/meson_freeciv_config.h.in
+index c4cdc9e1f1..5173bcdb8b 100644
+--- a/gen_headers/meson_freeciv_config.h.in
++++ b/gen_headers/meson_freeciv_config.h.in
+@@ -43,9 +43,13 @@
+ #define FREECIV_HAVE_SOCKLEN_T
+ 
+ /* Location for freeciv to store its information */
+-#define FREECIV_STORAGE_DIR "@FREECIV_STORAGE_DIR@"
++#mesondefine FREECIV_STORAGE_DIR
+ 
+-#define FREECIV_META_URL "http://meta.freeciv.org/metaserver.php"
++/* Metaserver URL */
++#mesondefine FREECIV_META_URL
++
++/* Default modpack list URL */
++#mesondefine MODPACK_LIST_URL
+ 
+ /* IPv6 Support built in */
+ #define FREECIV_IPV6_SUPPORT
+diff --git a/meson.build b/meson.build
+index 4e2b91e69a..0409134f9d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -13,10 +13,49 @@ add_global_arguments('-DQT_DISABLE_DEPRECATED_BEFORE=0x050b00', language : 'cpp'
+ 
+ host_system = host_machine.system()
+ 
++meta_url = 'http://meta.freeciv.org/metaserver.php'
++mp_list_url = ''
++storage_dir = ''
++default_port = ''
++
++proj_def = get_option('project-definition')
++if proj_def != ''
++  fs = import('fs')
++  if fs.is_file(proj_def)
++    proj = fs.read(proj_def).strip().split('\n')
++    foreach item : proj
++      if item.startswith('META_URL')
++        meta_url = item.substring(9)
++      elif item.startswith('MODPACK_LIST_URL')
++        mp_list_url = item.substring(17)
++      elif item.startswith('FREECIV_STORAGE_DIR')
++        storage_dir = item.substring(20)
++      elif item.startswith('FREECIV_DEFAULT_PORT')
++        default_port = item.substring(21)
++      elif not item.startswith('#') and item != ''
++        error('Unknown parameter ' + item + ' in project definition')
++      endif
++    endforeach
++  else
++    error('Project definition file ' + proj_def + ' not found!')
++  endif
++endif
++
+ priv_conf_data = configuration_data()
+ pub_conf_data = configuration_data()
+ liblua_conf_data = configuration_data()
+ 
++pub_conf_data.set('FREECIV_META_URL', '"' + meta_url + '"')
++
++if mp_list_url != ''
++  pub_conf_data.set('MODPACK_LIST_URL', '"' + mp_list_url + '"')
++endif
++
++if default_port == ''
++  default_port = 5556
++endif
++priv_conf_data.set('DEFAULT_SOCK_PORT', default_port)
++
+ pub_conf_data.set('FREECIV_AI_MOD_LAST', 3)
+ priv_conf_data.set('BINDIR',
+                    join_paths(get_option('prefix'), get_option('bindir')))
+@@ -42,7 +81,22 @@ else
+ endif
+ 
+ if host_system == 'windows'
+-  pub_conf_data.set('FREECIV_STORAGE_DIR', '~\\\\.freeciv')
++  def_storage_dir = '"~\\\\.freeciv"'
++else
++  if host_system == 'haiku'
++    def_storage_dir = '"~/config/settings/freeciv"'
++  else
++    def_storage_dir = '"~/.freeciv"'
++  endif
++endif
++
++if storage_dir != ''
++  pub_conf_data.set('FREECIV_STORAGE_DIR', '"' + storage_dir + '"')
++else
++  pub_conf_data.set('FREECIV_STORAGE_DIR', def_storage_dir)
++endif
++
++if host_system == 'windows'
+   priv_conf_data.set('LOCALEDIR',
+                      join_paths('.', get_option('datadir'), 'locale'))
+ 
+@@ -53,11 +107,6 @@ if host_system == 'windows'
+   priv_conf_data.set('DEFAULT_SCENARIO_PATH',
+     '".;data/scenarios;@FREECIV_STORAGE_DIR@/@DATASUBDIR@/scenarios;@FREECIV_STORAGE_DIR@/scenarios;@DATADIR@/freeciv/scenarios"')
+ else
+-  if host_system == 'haiku'
+-    pub_conf_data.set('FREECIV_STORAGE_DIR', '~/config/settings/freeciv')
+-  else
+-    pub_conf_data.set('FREECIV_STORAGE_DIR', '~/.freeciv')
+-  endif
+   priv_conf_data.set('LOCALEDIR',
+                      join_paths(get_option('prefix'),
+                                 get_option('datadir'), 'locale'))
+diff --git a/meson_options.txt b/meson_options.txt
+index 7679d7d919..75e0d82429 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -65,3 +65,8 @@ option('qtver',
+        choices: ['qt5', 'qt6'],
+        value: 'qt6',
+        description: 'Whether to build Qt5 or Qt6 versions of the binaries')
++
++option('project-definition',
++       type: 'string',
++       value: '',
++       description: 'File with project defition')
+-- 
+2.35.1
+

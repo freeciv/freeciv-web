@@ -15,6 +15,7 @@ under the GNU Affero General Public License. See [License](LICENSE.txt) for the 
 Live servers
 ------------
 Currently known servers based on Freeciv-web, which are open source in compliance with [the AGPL license](https://github.com/freeciv/freeciv-web/blob/develop/LICENSE.txt):
+- [FCIV.NET](https://www.fciv.net) [https://github.com/fciv-net/fciv-net]
 - [freecivweb.org](https://www.freecivweb.org) [https://github.com/Lexxie9952/fcw.org-server]
 - [moving borders](https://fcw.movingborders.es)  [https://github.com/lonemadmax/freeciv-web] (Everything except longturn and real-Earth)
 - [Freeciv Tactics & Triumph](https://www.tacticsandtriumph.com)  [https://github.com/Canik05/freeciv-tnt] Freeciv Games & Mods (No PBEM)

@@ -186,8 +186,8 @@ function update_tech_tree()
 
     var sx = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale);  //scale in X direction.
     var sy = reqtree[tech_id+'']['y'];
-    for (var i = 0; i < ptech['req'].length; i++) {
-      var rid = ptech['req'][i];
+    for (var i = 0; i < ptech['research_reqs'].length; i++) {
+      var rid = ptech['research_reqs'][i]['value'];
       if (rid == 0 || reqtree[rid+''] == null) continue;
 
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
@@ -210,7 +210,10 @@ function update_tech_tree()
 
   for (var tech_id in techs) {
     var ptech = techs[tech_id];
-    if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) continue;
+    if (!(tech_id+'' in reqtree) || reqtree[tech_id+''] == null) {
+      console.log("tech not found");
+      continue;
+    }
 
     var x = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale)+2;  //scale in X direction.
     var y = reqtree[tech_id+'']['y']+2;
@@ -316,8 +319,8 @@ function is_tech_req_for_goal(check_tech_id, goal_tech_id)
     var goal_tech = techs[goal_tech_id];
     if (goal_tech == null) return false;
 
-    for (var i = 0; i < goal_tech['req'].length; i++) {
-      var rid = goal_tech['req'][i];
+    for (var i = 0; i < goal_tech['research_reqs'].length; i++) {
+      var rid = goal_tech['research_reqs'][i]['value'];
       if (check_tech_id == rid) {
         return true;
       } else if (is_tech_req_for_goal(check_tech_id, rid)) {
@@ -341,8 +344,8 @@ function is_tech_req_for_tech(check_tech_id, next_tech_id)
     var next_tech = techs[next_tech_id];
     if (next_tech == null) return false;
 
-    for (var i = 0; i < next_tech['req'].length; i++) {
-      var rid = next_tech['req'][i];
+    for (var i = 0; i < next_tech['research_reqs'].length; i++) {
+      var rid = next_tech['research_reqs'][i]['value'];
       if (check_tech_id == rid) {
         return true;
       }

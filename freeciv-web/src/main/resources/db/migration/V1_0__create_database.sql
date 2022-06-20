@@ -30,7 +30,7 @@ CREATE TABLE `auth` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -49,7 +49,7 @@ CREATE TABLE `players` (
   `host` varchar(255) DEFAULT 'unknown',
   `flag` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`hostport`,`name`)
-) ENGINE=MEMORY DEFAULT CHARSET=latin1 MAX_ROWS=8192;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 MAX_ROWS=8192;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `savegames` (
   `title` varchar(64) NOT NULL,
   `digest` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `servers` (
   `available` int(11) DEFAULT '0',
   `serverid` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`host`,`port`)
-) ENGINE=MEMORY DEFAULT CHARSET=latin1 MAX_ROWS=256;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 MAX_ROWS=256;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `variables` (
   `name` varchar(64) NOT NULL DEFAULT '',
   `value` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`hostport`,`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

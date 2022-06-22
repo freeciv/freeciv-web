@@ -2,12 +2,11 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0040-Meson-Add-support-for-.fcproj-files.patch
+#   osdn #42935, 4f28e6a194ed6eccc0afe6f17e58d417d09909cf
 
 # Not in the upstream Freeciv server
 # ----------------------------------
-# meson_project_replacement hardcodes some values in meson build that in freeciv-web
-#     autotools build used to be defined in the .project file but are not yet configurable
-#     in meson builds
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -28,7 +27,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "meson_project_replacement"
+  "0040-Meson-Add-support-for-.fcproj-files"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

@@ -26,6 +26,7 @@ dependencies="\
   libicu-dev \
   libjansson-dev \
   liblzma-dev \
+  libzstd-dev \
   libmagickcore.*extra \
   libmagickwand-dev \
   libsqlite3-dev \

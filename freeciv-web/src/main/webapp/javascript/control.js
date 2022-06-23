@@ -2809,7 +2809,7 @@ function key_unit_transform()
 }
 
 /**************************************************************************
- Tell the units in focus to pillage.
+  Tell the units in focus to pillage.
 **************************************************************************/
 function key_unit_pillage()
 {
@@ -2820,7 +2820,7 @@ function key_unit_pillage()
     if (tgt.length > 0) {
       if (tgt.length == 1) {
         request_unit_do_action(ACTION_PILLAGE, punit['id'], punit.tile,
-                               EXTRA_NONE);
+                               tgt[0]);
       } else {
         popup_pillage_selection_dialog(punit);
       }

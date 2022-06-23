@@ -342,6 +342,7 @@ You may want to personalize some things before starting it:
 - Users for tomcat-admin web interface.
 - Point /etc/nginx/snippets/freeciv-web-ssl.conf to your certificate and key,
   or remove SSL support from /etc/nginx/sites-available/freeciv-web.
+- Move MySQL db driver from freeciv-web webapp lib directory to Tomcat libs directory.
 
 Then run scripts/start-freeciv-web.sh and enjoy!
 EOF

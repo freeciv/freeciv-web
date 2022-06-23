@@ -2822,7 +2822,7 @@ function key_unit_pillage()
         request_unit_do_action(ACTION_PILLAGE, punit['id'], punit.tile,
                                tgt[0]);
       } else {
-        popup_pillage_selection_dialog(punit);
+        popup_pillage_selection_dialog(punit, tgt);
       }
     }
   }

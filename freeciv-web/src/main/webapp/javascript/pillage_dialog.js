@@ -25,10 +25,9 @@
 /****************************************************************************
   Ask the player to select a target.
 ****************************************************************************/
-function popup_pillage_selection_dialog(punit)
+function popup_pillage_selection_dialog(punit, tgt)
 {
   if (punit == null) return;
-  var tgt = get_what_can_unit_pillage_from(punit, null);
   if (tgt.length == 0) return;
 
   var id = '#pillage_sel_dialog_' + punit['id'];

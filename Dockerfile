@@ -52,6 +52,10 @@ RUN DEBIAN_FRONTEND=noninteractive sudo apt-get update --yes --quiet && \
     DEBIAN_FRONTEND=noninteractive sudo apt-get clean --yes && \
     sudo rm --recursive --force /var/lib/apt/lists/*
 
+## Give server access to savegames / scenarios directory.
+## TODO: Figure out more targeted solution.
+RUN sudo adduser docker tomcat
+
 COPY docker-entrypoint.sh /docker/docker-entrypoint.sh
 
 EXPOSE 80 8080 4002 6000 6001 6002 7000 7001 7002

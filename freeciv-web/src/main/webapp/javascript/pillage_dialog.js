@@ -25,10 +25,9 @@
 /****************************************************************************
   Ask the player to select a target.
 ****************************************************************************/
-function popup_pillage_selection_dialog(punit)
+function popup_pillage_selection_dialog(punit, tgt)
 {
   if (punit == null) return;
-  var tgt = get_what_can_unit_pillage_from(punit, null);
   if (tgt.length == 0) return;
 
   var id = '#pillage_sel_dialog_' + punit['id'];
@@ -51,12 +50,6 @@ function popup_pillage_selection_dialog(punit)
       click  : pillage_target_selected
     });
   }
-  buttons.push({
-    id     : button_id_prefix + 'ANYTHING',
-    'class': 'act_sel_button',
-    text   : 'Just do something!',
-    click  : pillage_target_selected
-  });
   buttons.push({
     id     : 'pillage_sel_cancel_' + punit['id'],
     'class': 'act_sel_button',
@@ -85,8 +78,9 @@ function pillage_target_selected(ev)
 {
   var id = ev.target.id;
   var params = id.match(/pillage_sel_(\d*)_([^_]*)/);
-  var extra_id = params[2] == 'ANYTHING' ? EXTRA_NONE : parseInt(params[2], 10);
+  var extra_id = parseInt(params[2], 10);
   var punit_id = parseInt(params[1], 10);
+
   request_unit_do_action(ACTION_PILLAGE, punit_id, units[punit_id].tile,
                          extra_id);
   $(this).dialog('close');

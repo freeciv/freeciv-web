@@ -565,13 +565,12 @@ function handle_ruleset_control(packet)
 
   improvements_init();
 
-  /* handle_ruleset_extra defines some variables dinamically */
+  /* handle_ruleset_extra defines some variables dynamically */
   for (var extra in extras) {
-    var ename = extras[extra]['name'];
-    delete window["EXTRA_" + ename.toUpperCase()];
+    var ename = extras[extra]['rule_name'];
     if (ename == "Railroad") delete window["EXTRA_RAIL"];
     else if (ename == "Oil Well") delete window["EXTRA_OIL_WELL"];
-    else if (ename == "Minor Tribe Village") delete window["EXTRA_HUT"];
+    else delete window["EXTRA_" + ename.toUpperCase()];
   }
   extras = {};
 
@@ -1656,14 +1655,13 @@ function handle_ruleset_extra(packet)
   packet['causes'] = new BitVector(packet['causes']);
   packet['rmcauses'] = new BitVector(packet['rmcauses']);
 
+  packet['name'] = string_unqualify(packet['name']);
   extras[packet['id']] = packet;
-  extras[packet['name']] = packet;
+  extras[packet['rule_name']] = packet;
 
-  window["EXTRA_" + packet['name'].toUpperCase()] = packet['id'];
-
-  if (packet['name'] == "Railroad") window["EXTRA_RAIL"] = packet['id'];
-  if (packet['name'] == "Oil Well") window["EXTRA_OIL_WELL"] = packet['id'];
-  if (packet['name'] == "Minor Tribe Village") window["EXTRA_HUT"] = packet['id'];
+  if (packet['rule_name'] == "Railroad") window["EXTRA_RAIL"] = packet['id'];
+  else if (packet['rule_name'] == "Oil Well") window["EXTRA_OIL_WELL"] = packet['id'];
+  else window["EXTRA_" + packet['rule_name'].toUpperCase()] = packet['id'];
 }
 
 /**************************************************************************
@@ -1686,7 +1684,7 @@ function handle_ruleset_base(packet)
         && extras[i]['base'] == null) {
       /* This is the first base without base data */
       extras[i]['base'] = packet;
-      extras[extras[i]['name']]['base'] = packet;
+      extras[extras[i]['rule_name']]['base'] = packet;
       return;
     }
   }
@@ -1707,7 +1705,7 @@ function handle_ruleset_road(packet)
         && extras[i]['road'] == null) {
       /* This is the first road without road data */
       extras[i]['road'] = packet;
-      extras[extras[i]['name']]['road'] = packet;
+      extras[extras[i]['rule_name']]['road'] = packet;
       return;
     }
   }

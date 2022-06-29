@@ -1,40 +1,55 @@
+diff --git a/client/packhand.c b/client/packhand.c
+index 6c56c67582..bf42984f81 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -989,7 +989,9 @@ void handle_city_info(const struct packet_city_info *packet)
+   TODO: Do not generate code calling this in the C-client.
+ ****************************************************************************/
+ void handle_web_city_info_addition(int id, int granary_size,
+-                                   int granary_turns)
++                                   int granary_turns,
++                                   const char *can_build_unit,
++                                   const char *can_build_improvement)
+ {
+ }
+ 
 diff --git a/common/networking/packets.def b/common/networking/packets.def
-index 257adc5165..bc457efe10 100644
+index 9528eb08b7..dceb9f2649 100644
 --- a/common/networking/packets.def
 +++ b/common/networking/packets.def
-@@ -741,6 +741,8 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+@@ -2357,6 +2357,9 @@ PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACK
  
-   WORKLIST worklist;
- 
+   UINT16 granary_size;
+   TURN granary_turns;
++
 +  STRING can_build_unit[MAX_LEN_MSG];
 +  STRING can_build_improvement[MAX_LEN_MSG];
-   BV_IMPRS improvements;
-   BV_CITY_OPTIONS city_options;
-   ESTRING name[MAX_LEN_CITYNAME];
+ end
+ 
+ PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
 diff --git a/server/citytools.c b/server/citytools.c
-index 88ea703517..0768b189a9 100644
+index b7b14e33b8..239f970ca6 100644
 --- a/server/citytools.c
 +++ b/server/citytools.c
-@@ -2365,6 +2365,8 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
- {
-   int i;
-   int ppl = 0;
+@@ -2602,10 +2602,29 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+   } improvement_iterate_end;
+ 
+ #ifdef FREECIV_WEB
 +  char can_build_impr_buf[MAX_NUM_ITEMS + 1];
 +  char can_build_unit_buf[MAX_NUM_ITEMS + 1];
++
+   web_packet->id = pcity->id;
  
-   packet->id = pcity->id;
-   packet->owner = player_number(city_owner(pcity));
-@@ -2530,6 +2532,22 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
-     memset(&packet->cm_parameter, 0, sizeof(packet->cm_parameter));
-   }
- 
+   web_packet->granary_size = city_granary_size(city_size_get(pcity));
+   web_packet->granary_turns = city_turns_to_grow(pcity);
++
 +  improvement_iterate(pimprove) {
 +    can_build_impr_buf[improvement_index(pimprove)] =
 +	    can_city_build_improvement_now(pcity, pimprove)
 +      ? '1' : '0';
 +  } improvement_iterate_end;
 +  can_build_impr_buf[improvement_count()] = '\0';
-+  sz_strlcpy(packet->can_build_improvement, can_build_impr_buf);
++  sz_strlcpy(web_packet->can_build_improvement, can_build_impr_buf);
 +
 +  unit_type_iterate(punittype) {
 +    can_build_unit_buf[utype_index(punittype)] =
@@ -42,8 +57,7 @@ index 88ea703517..0768b189a9 100644
 +      ? '1' : '0';
 +  } unit_type_iterate_end;
 +  can_build_unit_buf[utype_count()] = '\0';
-+  sz_strlcpy(packet->can_build_unit, can_build_unit_buf);
-+
-   BV_CLR_ALL(packet->improvements);
-   improvement_iterate(pimprove) {
-     if (city_has_building(pcity, pimprove)) {
++  sz_strlcpy(web_packet->can_build_unit, can_build_unit_buf);
+ #endif /* FREECIV_WEB */
+ }
+ 

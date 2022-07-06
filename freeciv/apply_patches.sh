@@ -2,10 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0040-Meson-Add-support-for-.fcproj-files.patch
-#   osdn #42935, 4f28e6a194ed6eccc0afe6f17e58d417d09909cf
-# 0003-json-protocol-Make-return-value-of-dio_put_-an-int
-#   osdn #44801, not yet pushed
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -30,8 +26,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0040-Meson-Add-support-for-.fcproj-files"
-  "0003-json-protocol-Make-return-value-of-dio_put_-an-int"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

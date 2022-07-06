@@ -1,0 +1,18 @@
+diff --git a/server/commands.c b/server/commands.c
+index c2282c0359..9344d27e54 100644
+--- a/server/commands.c
++++ b/server/commands.c
+@@ -241,7 +241,12 @@ static struct command commands[] = {
+    NULL,
+    CMD_ECHO_ALL, VCF_NONE, 50
+   },
+-  {"rulesetdir", ALLOW_CTRL,
++  {"rulesetdir",
++#ifdef FREECIV_WEB
++   ALLOW_HACK,
++#else  /* FREECIV_WEB */
++   ALLOW_CTRL,
++#endif /* FREECIV_WEB */
+    /* TRANS: translate text between <> only */
+    N_("rulesetdir <directory>"),
+    N_("Choose new ruleset directory or modpack."),

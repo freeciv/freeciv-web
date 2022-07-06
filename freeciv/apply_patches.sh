@@ -10,6 +10,7 @@
 # Not in the upstream Freeciv server
 # ----------------------------------
 # meson_webperimental installs webperimental ruleset
+# hack-level-rsdircmd disallows user from using /rulesetdir command
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
@@ -32,6 +33,7 @@ declare -a PATCHLIST=(
   "0040-Meson-Add-support-for-.fcproj-files"
   "0003-json-protocol-Make-return-value-of-dio_put_-an-int"
   "meson_webperimental"
+  "hack-level-rsdircmd"
   "city_impr_fix2"
   "city-naming-change"
   "metachange"

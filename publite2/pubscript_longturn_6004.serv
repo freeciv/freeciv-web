@@ -1,7 +1,6 @@
 #LongTurn Web X
 
 cmdlevel ctrl first
-rulesetdir longturn-web-x 
 set topology WRAPX
 set nationset all
 set compresstype xz

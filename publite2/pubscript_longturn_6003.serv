@@ -1,7 +1,6 @@
 #LongTurn game #8
 
 cmdlevel ctrl first
-rulesetdir multiplayer 
 set topology WRAPX
 set nationset all
 set compresstype xz

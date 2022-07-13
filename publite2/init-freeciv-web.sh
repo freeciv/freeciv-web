@@ -32,6 +32,10 @@ if [ "$5" = "pbem" ]; then
   addArgs --Ranklog "/var/lib/tomcat9/webapps/data/ranklogs/rank_${2}.log"
 fi
 
+if [ -f "${6}.ruleset" ] ; then
+  addArgs --ruleset $(cat "${6}.ruleset")
+fi
+
 savesdir=${1}
 if [ "$5" = "longturn" ]; then
   savesdir="${savesdir}/lt/${6}"

@@ -1,0 +1,72 @@
+From ced2f2c456588b7d93da58b62c584109f96f555e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 8 Jul 2022 22:34:29 +0300
+Subject: [PATCH 56/60] Stop assuming that trade partner knows the city
+
+See osdn #45059
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/player.c    | 22 +++++++++++++---------
+ server/citytools.c |  3 +++
+ 2 files changed, 16 insertions(+), 9 deletions(-)
+
+diff --git a/common/player.c b/common/player.c
+index 0d41600a8b..05b8cbf2db 100644
+--- a/common/player.c
++++ b/common/player.c
+@@ -1101,11 +1101,13 @@ bool can_player_see_city_internals(const struct player *pplayer,
+   target_city.
+ 
+   A city's external features are visible to its owner, to players that
+-  currently sees the tile it is located at and to players that has it as
+-  a trade partner.
++  currently sees the tile it is located at.
++  If ruleset has reveal_trade_partner enabled, also anyone trading
++  with the city sees it.
+ ***********************************************************************/
+ bool player_can_see_city_externals(const struct player *pow_player,
+-                                   const struct city *target_city) {
++                                   const struct city *target_city)
++{
+   fc_assert_ret_val(target_city, FALSE);
+   fc_assert_ret_val(pow_player, FALSE);
+ 
+@@ -1121,12 +1123,14 @@ bool player_can_see_city_externals(const struct player *pow_player,
+ 
+   fc_assert_ret_val(target_city->routes, FALSE);
+ 
+-  trade_partners_iterate(target_city, trade_city) {
+-    if (city_owner(trade_city) == pow_player) {
+-      /* Revealed because of the trade route. */
+-      return TRUE;
+-    }
+-  } trade_partners_iterate_end;
++  if (game.info.reveal_trade_partner) {
++    trade_partners_iterate(target_city, trade_city) {
++      if (city_owner(trade_city) == pow_player) {
++        /* Revealed because of the trade route. */
++        return TRUE;
++      }
++    } trade_partners_iterate_end;
++  }
+ 
+   return FALSE;
+ }
+diff --git a/server/citytools.c b/server/citytools.c
+index f906177b63..2e6f4a34fa 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2638,6 +2638,9 @@ bool update_dumb_city(struct player *pplayer, struct city *pcity)
+   int city_image = get_city_bonus(pcity, EFT_CITY_IMAGE);
+   enum capital_type capital = pcity->capital;
+ 
++  /* Only someone knowing the tile should ever know a city on it. */
++  fc_assert(map_is_known(pcenter, pplayer));
++
+   BV_CLR_ALL(improvements);
+   improvement_iterate(pimprove) {
+     if (is_improvement_visible(pimprove)
+-- 
+2.35.1
+

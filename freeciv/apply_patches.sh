@@ -2,6 +2,8 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# 0056-Stop-assuming-that-trade-partner-knows-the-city
+#   Fixes a reggression / completes recent feature
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -26,6 +28,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
+  "0056-Stop-assuming-that-trade-partner-knows-the-city"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

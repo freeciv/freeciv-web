@@ -1,8 +1,8 @@
 diff --git a/server/commands.c b/server/commands.c
-index 2dd987d..df88735 100644
+index c2282c0359..a28df3f27a 100644
 --- a/server/commands.c
 +++ b/server/commands.c
-@@ -549,7 +549,7 @@ static struct command commands[] = {
+@@ -551,7 +551,7 @@ static struct command commands[] = {
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
    },
@@ -12,10 +12,10 @@ index 2dd987d..df88735 100644
     N_("save\n"
        "save <file-name>"),
 diff --git a/server/savegame/savemain.c b/server/savegame/savemain.c
-index afbf376..db62262 100644
+index 8eda2ed9b6..adb8875f9f 100644
 --- a/server/savegame/savemain.c
 +++ b/server/savegame/savemain.c
-@@ -130,8 +130,8 @@ void save_game(const char *orig_filename, const char *save_reason,
+@@ -144,8 +144,8 @@ void save_game(const char *orig_filename, const char *save_reason,
    stdata->save_compress_level = game.server.save_compress_level;
  
    if (!orig_filename) {
@@ -26,7 +26,7 @@ index afbf376..db62262 100644
    } else {
      sz_strlcpy(stdata->filepath, orig_filename);
      if ((filename = strrchr(stdata->filepath, '/'))) {
-@@ -167,13 +167,6 @@ void save_game(const char *orig_filename, const char *save_reason,
+@@ -182,13 +182,6 @@ void save_game(const char *orig_filename, const char *save_reason,
      }
    }
  
@@ -37,12 +37,13 @@ index afbf376..db62262 100644
 -                       sizeof(stdata->filepath) + stdata->filepath - filename, "manual");
 -  }
 -
-   timer_cpu = timer_new(TIMER_CPU, TIMER_ACTIVE);
+   timer_cpu = timer_new(TIMER_CPU, TIMER_ACTIVE, "save cpu");
+   timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
-   timer_user = timer_new(TIMER_USER, TIMER_ACTIVE);
-diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c.orig	2019-02-12 21:23:47.907762931 +0100
-+++ freeciv/server/stdinhand.c	2019-02-12 22:04:18.526114928 +0100
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index ead9c7c769..c8eacd1a60 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
 @@ -19,6 +19,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -51,7 +52,7 @@ diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
  
  #ifdef FREECIV_HAVE_LIBREADLINE
  #include <readline/readline.h>
-@@ -656,11 +657,6 @@ static bool show_serverid(struct connect
+@@ -666,11 +667,6 @@ static bool show_serverid(struct connection *caller, char *arg)
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -63,7 +64,7 @@ diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3652,10 +3648,20 @@ bool load_command(struct connection *cal
+@@ -3745,10 +3741,20 @@ bool load_command(struct connection *caller, const char *filename, bool check,
    }
  
    {
@@ -84,8 +85,8 @@ diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
 +      get_save_dirs(), get_scenario_dirs(), webdirs, NULL
      };
      const char *exts[] = {
-       "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", NULL
-@@ -4205,6 +4211,31 @@ static bool handle_stdin_input_real(stru
+       "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", "sav.zst", NULL
+@@ -4434,6 +4440,31 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
  
    level = command_level(command_by_number(cmd));
  
@@ -117,10 +118,11 @@ diff -u freeciv/server/stdinhand.c.orig freeciv/server/stdinhand.c
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
        && conn_get_access(caller) == ALLOW_BASIC && !check
        && !vote_would_pass_immediately(caller, cmd)) {
-diff -u freeciv/utility/shared.c.orig freeciv/utility/shared.c
---- freeciv/utility/shared.c.orig	2018-07-20 21:00:24.906700718 +0200
-+++ freeciv/utility/shared.c	2018-07-20 21:09:59.219943538 +0200
-@@ -1762,7 +1762,7 @@
+diff --git a/utility/shared.c b/utility/shared.c
+index ea968a0335..c16932fcee 100644
+--- a/utility/shared.c
++++ b/utility/shared.c
+@@ -1766,7 +1766,7 @@ bool make_dir(const char *pathname)
      mkdir(path, 0755);
  #endif /* HAVE__MKDIR */
  #else  /* FREECIV_MSWINDOWS */

@@ -3,7 +3,12 @@
 # Freeciv server version upgrade notes
 # ------------------------------------
 # 0056-Stop-assuming-that-trade-partner-knows-the-city
-#   Fixes a reggression / completes recent feature
+#   Fixes a reggression / completes recent feature, osdn #45059
+# 0003-plocation_write_.-Return-errors
+#   json protocol update, osdn #44986
+# 0008-Prohibit-changing-ruleset-given-from-commandline
+#   Work toward removal of hardcoded restriction to never allow ruleset change in freeciv-web
+#   osdn #45042
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -29,6 +34,8 @@
 
 declare -a PATCHLIST=(
   "0056-Stop-assuming-that-trade-partner-knows-the-city"
+  "0003-plocation_write_.-Return-errors"
+  "0008-Prohibit-changing-ruleset-given-from-commandline"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

@@ -51,7 +51,8 @@ if test "$MESON_VER" != "" ; then
           -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false \
           -Daudio=false -Druledit=false \
           -Dproject-definition=../freeciv-web.fcproj \
-          -Ddefault_library=static -Dprefix=${HOME}/freeciv
+          -Ddefault_library=static -Dprefix=${HOME}/freeciv \
+          -Doptimization=3
     ninja
   )
 

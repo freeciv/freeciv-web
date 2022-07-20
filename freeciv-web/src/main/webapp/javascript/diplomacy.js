@@ -27,7 +27,8 @@ var CLAUSE_PEACE = 6;
 var CLAUSE_ALLIANCE = 7;
 var CLAUSE_VISION = 8;
 var CLAUSE_EMBASSY = 9;
-var SPECENUM_COUNT = 10;
+var CLAUSE_SHARED_TILES = 10;
+var SPECENUM_COUNT = 11;
 
 var clause_infos = {};
 var diplomacy_clause_map = {};
@@ -270,6 +271,8 @@ function client_diplomacy_clause_string(counterpart, giver, type, value)
     return "The " + nation + " give shared vision";
   case CLAUSE_EMBASSY:
     return "The " + nation + " give an embassy";
+  case CLAUSE_SHARED_TILES:
+    return "The " + nation + " share their tiles";
   }
 
   return "";
@@ -533,6 +536,9 @@ function meeting_template_data(giver, taker)
   }
   if (clause_infos[CLAUSE_EMBASSY]['enabled']) {
     all_clauses.push({type: CLAUSE_EMBASSY, value: 1, name: 'Give embassy'});
+  }
+  if (clause_infos[CLAUSE_SHARED_TILES]['enabled']) {
+    all_clauses.push({type: CLAUSE_SHARED_TILES, value: 1, name: 'Share tiles'});
   }
 
   if (giver == client.conn.playing) {

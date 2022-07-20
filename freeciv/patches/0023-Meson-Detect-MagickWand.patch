@@ -1,0 +1,75 @@
+From f06c022f395e69f40dccecce5fabe28a54e9478c Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 8 Jul 2022 06:47:12 +0300
+Subject: [PATCH 23/24] Meson: Detect MagickWand
+
+See osdn #45007
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ gen_headers/meson_fc_config.h.in      |  3 +++
+ gen_headers/meson_freeciv_config.h.in |  3 +++
+ meson.build                           | 12 +++++++++++-
+ 3 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/gen_headers/meson_fc_config.h.in b/gen_headers/meson_fc_config.h.in
+index f524c74b43..787a69405f 100644
+--- a/gen_headers/meson_fc_config.h.in
++++ b/gen_headers/meson_fc_config.h.in
+@@ -76,6 +76,9 @@
+ /* Can run programs as root */
+ #mesondefine ALWAYS_ROOT
+ 
++/* Have magickwand mapimg toolkit */
++#mesondefine HAVE_MAPIMG_MAGICKWAND
++
+ /* struct ip_mreqn available */
+ #mesondefine HAVE_IP_MREQN
+ 
+diff --git a/gen_headers/meson_freeciv_config.h.in b/gen_headers/meson_freeciv_config.h.in
+index 0955be1110..2fcc7a4fc6 100644
+--- a/gen_headers/meson_freeciv_config.h.in
++++ b/gen_headers/meson_freeciv_config.h.in
+@@ -63,6 +63,9 @@
+ /* This is crosser-based build */
+ #mesondefine FREECIV_CROSSER
+ 
++/* MagickWand version 7 API in use */
++#mesondefine FREECIV_MWAND7
++
+ /* Produce debug version */
+ #mesondefine FREECIV_DEBUG
+ 
+diff --git a/meson.build b/meson.build
+index 9f24e04a1d..aeb6a71d38 100644
+--- a/meson.build
++++ b/meson.build
+@@ -394,6 +394,16 @@ if zstd_dep.found()
+   pub_conf_data.set('FREECIV_HAVE_LIBZSTD', 1)
+ endif
+ 
++mw_dep = dependency('MagickWand', version : '>= 7.0', required : false)
++if mw_dep.found()
++  pub_conf_data.set('FREECIV_MWAND7', '1')
++else
++  mw_dep = dependency('MagickWand', version : '>= 6.0', required : false)
++endif
++if mw_dep.found()
++  priv_conf_data.set('HAVE_MAPIMG_MAGICKWAND', '1')
++endif
++
+ syslua = get_option('syslua')
+ lua_dep_tmp = dependency('lua-5.4', required:false)
+ 
+@@ -840,7 +850,7 @@ common_lib = library('freeciv',
+                  m_dep, sqlite3_dep,
+                  net_dep, jansson_dep, lua_dep, lzma_dep, zstd_dep,
+                  bcrypt_lib_dep, iconv_lib_dep,
+-                 gettext_dep, charset_dep,
++                 gettext_dep, charset_dep, mw_dep,
+                  dependency('threads')],
+   install : true
+   )
+-- 
+2.35.1
+

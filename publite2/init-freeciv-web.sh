@@ -34,6 +34,10 @@ fi
 
 if [ -f "${6}.ruleset" ] ; then
   addArgs --ruleset $(cat "${6}.ruleset")
+else
+  # This exist for preventing user from changing the ruleset
+  # TODO: Remove once we can allow changing ruleset
+  addArgs --ruleset classic
 fi
 
 savesdir=${1}

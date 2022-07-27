@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0056-Stop-assuming-that-trade-partner-knows-the-city
-#   Fixes a reggression / completes recent feature, osdn #45059
 # 0003-plocation_write_.-Return-errors
 #   json protocol update, osdn #44986
 # 0008-Prohibit-changing-ruleset-given-from-commandline
@@ -37,7 +35,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0056-Stop-assuming-that-trade-partner-knows-the-city"
   "0003-plocation_write_.-Return-errors"
   "0008-Prohibit-changing-ruleset-given-from-commandline"
   "0023-Meson-Detect-MagickWand"

@@ -38,6 +38,8 @@ declare -a PATCHLIST=(
   "0003-plocation_write_.-Return-errors"
   "0008-Prohibit-changing-ruleset-given-from-commandline"
   "0023-Meson-Detect-MagickWand"
+  "0046-Fix-json-delta-protocol-combination"
+  "0001-Fix-JSON-protocol-regressions-introduced-in-hrm-745593"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

@@ -159,10 +159,10 @@ function normalize_gui_pos(gui_x, gui_y)
   nat_x = t['nat_x'];
   nat_y = t['nat_y'];
 
-  if (topo_has_flag(TF_WRAPX)) {
+  if (wrap_has_flag(WRAP_X)) {
     nat_x = FC_WRAP(nat_x, map['xsize']);
   }
-  if (topo_has_flag(TF_WRAPY)) {
+  if (wrap_has_flag(WRAP_Y)) {
     nat_y = FC_WRAP(nat_y, map['ysize']);
   }
 
@@ -344,7 +344,9 @@ function update_map_canvas(canvas_x, canvas_y, width, height)
           continue;
         }
 
-        if (map['topology_id'] == 0 && (ptile_si <= 0 || ((ptile_si / 4)) > map['xsize'])) continue;  // skip if flat earth without wrapping.
+        if (map['wrap_id'] == 0 && (ptile_si <= 0 || ((ptile_si / 4)) > map['xsize'])) {
+          continue;  // Skip if flat earth without wrapping.
+        }
 
         if (ptile_xi % 2 == 0 && ptile_yi % 2 == 0) {
           if ((ptile_xi + ptile_yi) % 4 == 0) {

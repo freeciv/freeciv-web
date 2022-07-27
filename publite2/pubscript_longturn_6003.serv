@@ -1,7 +1,8 @@
 #LongTurn game #8
 
 cmdlevel ctrl first
-set topology WRAPX
+set topology ""
+set wrap WRAPX
 set nationset all
 set compresstype xz
 set maxplayers 300

@@ -99,8 +99,11 @@ function handle_server_join_reply(packet)
        // Reduce the amount of rivers, it's kind of ugly at the moment.
        send_message("/set wetness 25");
 
-       // Freeciv WebGL doesn't support map wrapping yet.
+       // Freeciv WebGL doesn't support hex or iso yet.
        send_message("/set topology=");
+
+       // Freeciv WebGL doesn't support map wrapping yet.
+       send_message("/set wrap=");
 
        // Less hills will be more user-friendly in 3D mode.
        send_message("/set steepness 12");

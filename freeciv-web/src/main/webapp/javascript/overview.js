@@ -246,7 +246,7 @@ function render_viewrect()
   viewrect_ctx.beginPath();
   add_closed_path(viewrect_ctx, path);
 
-  if (topo_has_flag(TF_WRAPX)) {
+  if (wrap_has_flag(WRAP_X)) {
     viewrect_ctx.save();
     viewrect_ctx.translate(map.xsize, 0);
     add_closed_path(viewrect_ctx, path);
@@ -255,12 +255,12 @@ function render_viewrect()
     viewrect_ctx.restore();
   }
 
-  if (topo_has_flag(TF_WRAPY)) {
+  if (wrap_has_flag(WRAP_Y)) {
     viewrect_ctx.translate(0, map.ysize);
     add_closed_path(viewrect_ctx, path);
     viewrect_ctx.translate(0, -2 * map.ysize);
     add_closed_path(viewrect_ctx, path);
-    if (topo_has_flag(TF_WRAPX)) {
+    if (wrap_has_flag(WRAP_X)) {
       viewrect_ctx.translate(-map.xsize, 0);
       add_closed_path(viewrect_ctx, path);
       viewrect_ctx.translate(0, 2 * map.ysize);

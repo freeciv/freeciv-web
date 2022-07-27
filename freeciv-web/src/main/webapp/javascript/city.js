@@ -1059,8 +1059,8 @@ function build_city_tile_map_with_limits(dx_min, dx_max, dy_min, dy_max)
 **************************************************************************/
 function get_city_tile_map_for_pos(x, y)
 {
-  if (topo_has_flag(TF_WRAPX)) {
-    if (topo_has_flag(TF_WRAPY)) {
+  if (wrap_has_flag(WRAP_X)) {
+    if (wrap_has_flag(WRAP_Y)) {
 
       // Torus
       get_city_tile_map_for_pos = function (x, y) {
@@ -1082,7 +1082,7 @@ function get_city_tile_map_for_pos(x, y)
 
     }
   } else {
-    if (topo_has_flag(TF_WRAPY)) {
+    if (wrap_has_flag(WRAP_Y)) {
 
       // Cylinder with E-W axis
       get_city_tile_map_for_pos = function (x, y) {

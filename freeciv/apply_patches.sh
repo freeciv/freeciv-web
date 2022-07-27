@@ -2,8 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0003-plocation_write_.-Return-errors
-#   json protocol update, osdn #44986
 # 0008-Prohibit-changing-ruleset-given-from-commandline
 #   Work toward removal of hardcoded restriction to never allow ruleset change in freeciv-web
 #   osdn #45042
@@ -38,7 +36,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0003-plocation_write_.-Return-errors"
   "0008-Prohibit-changing-ruleset-given-from-commandline"
   "0023-Meson-Detect-MagickWand"
   "0046-Fix-json-delta-protocol-combination"

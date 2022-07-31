@@ -1,0 +1,83 @@
+From 423bfdeff3a4259cd1bb02fc6e073a16e6e1d5d0 Mon Sep 17 00:00:00 2001
+From: Alina Lenk <alina.v.lenk@gmail.com>
+Date: Sun, 24 Jul 2022 18:56:16 +0200
+Subject: [PATCH] Fix JSON protocol regressions introduced in hrm#745593
+
+Reported by Marko Lindqvist
+
+See osdn#45207
+
+- correctly recurse into arrays when reading
+- wrap array-diff terminator in an array-diff element
+
+Signed-off-by: Alina Lenk <alina.v.lenk@gmail.com>
+---
+ common/generate_packets.py      |  7 +++++++
+ common/networking/dataio_json.c | 32 +++++---------------------------
+ 2 files changed, 12 insertions(+), 27 deletions(-)
+
+diff --git a/common/generate_packets.py b/common/generate_packets.py
+index 2d39d19d23..fdf0b14f87 100755
+--- a/common/generate_packets.py
++++ b/common/generate_packets.py
+@@ -811,6 +811,13 @@ e |= DIO_PUT({self.dataio_type}, &dout, &field_addr, real_packet->{self.name}[i]
+ #ifdef FREECIV_JSON_CONNECTION
+   /* Append diff array element. */
+   field_addr.sub_location->number = -1;
++
++  /* Create the terminating diff array element. */
++  e |= DIO_PUT(farray, &dout, &field_addr, 1);
++
++  /* Enter diff array element (start at the index address). */
++  field_addr.sub_location->number = c;
++  field_addr.sub_location->sub_location = plocation_elem_new(0);
+ #endif /* FREECIV_JSON_CONNECTION */
+   e |= DIO_PUT(uint8, &dout, &field_addr, 255);
+ 
+diff --git a/common/networking/dataio_json.c b/common/networking/dataio_json.c
+index 044f462acb..178d6e698f 100644
+--- a/common/networking/dataio_json.c
++++ b/common/networking/dataio_json.c
+@@ -189,34 +189,12 @@ static json_t *plocation_read_field(json_t *item,
+ static json_t *plocation_read_elem(json_t *item,
+                                    const struct plocation *location)
+ {
+-  // PTZ200719 sanity checks
+-  if (!json_is_array(item)) {
+-    log_error("ERROR:plocation_read_elem of non array :%s",
+-              json_dumps(item, JSON_DECODE_ANY));
+-    return item;
+-  } else if (location->number >= json_array_size(item)) {
+-    log_error("ERROR:plocation_read_elem: number="
+-              SIZE_T_PRINTF " ge array_size=" SIZE_T_PRINTF,
+-              location->number, json_array_size(item));
+-  }
+-
+-  json_t *sub_item = json_array_get(item, location->number);
+-
+-  if (location->sub_location != NULL) {
+-    if (json_is_array(sub_item)) {
+-      // TODO::PTZ200717 not good... location->name loses its meaning here...
+-      // as could be calling another plocation_read_field....
+-      return plocation_read_data(sub_item, location->sub_location);
+-    } else if (sub_item == NULL) {
+-      // TODO::PTZ200717 this could be an error with too many sub_location ....
+-      // occuring when mixed elements in the root array
+-      log_packet("plocation_read_elem too many sub location of non array:"
+-                 "%s @[" SIZE_T_PRINTF "]",
+-                 json_dumps(item, JSON_DECODE_ANY), location->number);
+-    }
++  if (location->sub_location == NULL) {
++    return json_array_get(item, location->number);
++  } else {
++    return plocation_read_data(json_array_get(item, location->number),
++                               location->sub_location);
+   }
+-
+-  return sub_item;
+ }
+ 
+ /**********************************************************************//**
+-- 
+2.34.1
+

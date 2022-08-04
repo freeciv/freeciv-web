@@ -1,0 +1,29 @@
+From 98ce8ce1eb2a1c1717c13d73be52107a2b95eda9 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 24 Jul 2022 20:19:34 +0300
+Subject: [PATCH 26/60] place_unit(): Do not add NoHome units to city's
+ units_supported
+
+See osdn #45196
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unittools.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/unittools.c b/server/unittools.c
+index 4a23edb561..b10617cee1 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -1738,7 +1738,7 @@ bool place_unit(struct unit *punit, struct player *pplayer,
+   unit_list_prepend(pplayer->units, punit);
+   unit_list_prepend(ptile->units, punit);
+   maybe_make_contact(ptile, unit_owner(punit));
+-  if (pcity) {
++  if (pcity && !unit_has_type_flag(punit, UTYF_NOHOME)) {
+     fc_assert(punit->homecity == pcity->id);
+     fc_assert(city_owner(pcity) == pplayer);
+     unit_list_prepend(pcity->units_supported, punit);
+-- 
+2.35.1
+

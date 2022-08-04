@@ -1,0 +1,28 @@
+From 0281d09de3d0f5869901ca27450241adec8b4e5d Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 29 Jul 2022 02:17:21 +0300
+Subject: [PATCH 56/60] establish_new_connection(): Set wrap_id to
+ packet_set_topology
+
+See osdn #45261
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/connecthand.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/server/connecthand.c b/server/connecthand.c
+index 488fbbec16..286815624e 100644
+--- a/server/connecthand.c
++++ b/server/connecthand.c
+@@ -194,6 +194,7 @@ void establish_new_connection(struct connection *pconn)
+   send_scenario_description(dest);
+   send_game_info(dest);
+   topo_packet.topology_id = wld.map.topology_id;
++  topo_packet.wrap_id = wld.map.wrap_id;
+   send_packet_set_topology(pconn, &topo_packet);
+ 
+   /* Do we have a player that a delegate is currently controlling? */
+-- 
+2.35.1
+

@@ -32,10 +32,11 @@ var DIR8_SOUTHEAST = 7;
 var DIR8_LAST = 8;
 var DIR8_COUNT = DIR8_LAST;
 
-var TF_WRAPX = 1;
-var TF_WRAPY = 2;
-var TF_ISO = 4;
-var TF_HEX = 8;
+var WRAP_X = 1;
+var WRAP_Y = 2;
+
+var TF_ISO = 1;
+var TF_HEX = 2;
 
 var T_NONE = 0; /* A special flag meaning no terrain type. */
 var T_UNKNOWN = 0; /* An unknown terrain. */
@@ -68,6 +69,14 @@ var DIR_DY = [ -1, -1, -1, 0, 0, 1, 1, 1 ];
 function topo_has_flag(flag)
 {
   return ((map['topology_id'] & (flag)) != 0);
+}
+
+/****************************************************************************
+  ...
+****************************************************************************/
+function wrap_has_flag(flag)
+{
+  return ((map['wrap_id'] & (flag)) != 0);
 }
 
 /**************************************************************************
@@ -315,12 +324,12 @@ function map_distance_vector(tile0, tile1)
 {
   var half_world;
   var dx = tile1.x - tile0.x;
-  if (topo_has_flag(TF_WRAPX)) {
+  if (wrap_has_flag(WRAP_X)) {
     half_world = Math.floor(map.xsize / 2);
     dx = FC_WRAP(dx + half_world, map.xsize) - half_world;
   }
   var dy = tile1.y - tile0.y;
-  if (topo_has_flag(TF_WRAPY)) {
+  if (wrap_has_flag(WRAP_Y)) {
     half_world = Math.floor(map.ysize / 2);
     dx = FC_WRAP(dy + half_world, map.ysize) - half_world;
   }

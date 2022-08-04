@@ -1,7 +1,8 @@
 #Freeciv-web: One Turn per day game #XIII
 
 cmdlevel ctrl first
-set topology WRAPX
+set topology ""
+set wrap WRAPX
 set nationset all
 set compresstype xz
 set maxplayers 300

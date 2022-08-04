@@ -2,11 +2,12 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0003-plocation_write_.-Return-errors
-#   json protocol update, osdn #44986
 # 0008-Prohibit-changing-ruleset-given-from-commandline
 #   Work toward removal of hardcoded restriction to never allow ruleset change in freeciv-web
 #   osdn #45042
+# 0056-establish_new_connection-Set-wrap_id-to-packet_set_t.patch
+#   Fix regression introduced with the new separate wrap setting
+#   osdn #45261
 
 # 0023-Meson-Detect-MagickWand
 #   Add MagickWand detection to meson configure.
@@ -35,11 +36,11 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0003-plocation_write_.-Return-errors"
   "0008-Prohibit-changing-ruleset-given-from-commandline"
   "0023-Meson-Detect-MagickWand"
   "0046-Fix-json-delta-protocol-combination"
   "0001-Fix-JSON-protocol-regressions-introduced-in-hrm-745593"
+  "0056-establish_new_connection-Set-wrap_id-to-packet_set_t"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

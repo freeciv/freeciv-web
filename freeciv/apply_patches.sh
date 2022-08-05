@@ -8,6 +8,9 @@
 # 0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s
 #   Fix recent regression in creation of NoHome units
 #   osdn #45196
+# 0046-Maintain-list-of-web-client-connections.patch
+#   Web-client compatibility development
+#   osdn #45155
 
 # 0023-Meson-Detect-MagickWand
 #   Add MagickWand detection to meson configure.
@@ -40,6 +43,7 @@ declare -a PATCHLIST=(
   "0001-Fix-JSON-protocol-regressions-introduced-in-hrm-745593"
   "0056-establish_new_connection-Set-wrap_id-to-packet_set_t"
   "0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s"
+  "0046-Maintain-list-of-web-client-connections"
   "meson_webperimental"
   "hack-level-rsdircmd"
   "city_impr_fix2"

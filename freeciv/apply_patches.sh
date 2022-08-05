@@ -8,6 +8,12 @@
 # 0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s
 #   Fix recent regression in creation of NoHome units
 #   osdn #45196
+# 0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs
+#   Fix modpack installer vulnerability
+#   osdn #45299
+# 0045-Apply-fix-to-CVE-2022-33099-in-included-lua
+#   Fix lua vulnerability
+#   osdn #45248
 # 0046-Maintain-list-of-web-client-connections.patch
 #   Web-client compatibility development
 #   osdn #45155
@@ -43,6 +49,8 @@ declare -a PATCHLIST=(
   "0001-Fix-JSON-protocol-regressions-introduced-in-hrm-745593"
   "0056-establish_new_connection-Set-wrap_id-to-packet_set_t"
   "0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s"
+  "0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs"
+  "0045-Apply-fix-to-CVE-2022-33099-in-included-lua"
   "0046-Maintain-list-of-web-client-connections"
   "meson_webperimental"
   "hack-level-rsdircmd"

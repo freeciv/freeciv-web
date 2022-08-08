@@ -1,0 +1,103 @@
+From 5a74670167d4c85f2d081736aa0a98c0bf56a5f8 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 29 Jul 2022 18:22:24 +0300
+Subject: [PATCH 46/46] Maintain list of web-client connections
+
+See osdn #45155
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/game.h        | 1 +
+ server/sanitycheck.c | 8 +++++---
+ server/sernet.c      | 4 ++++
+ server/srv_main.c    | 7 +++++++
+ 4 files changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/common/game.h b/common/game.h
+index 7a157ca666..ad89c81001 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -96,6 +96,7 @@ struct civ_game {
+   struct conn_list *all_connections;   /* including not yet established */
+   struct conn_list *est_connections;   /* all established client conns */
+   struct conn_list *glob_observers;    /* global observers */
++  struct conn_list *web_client_connections; /* Connections from web client */
+ 
+   struct veteran_system *veteran; /* veteran system */
+ 
+diff --git a/server/sanitycheck.c b/server/sanitycheck.c
+index 31272187f0..e7e6ce2d18 100644
+--- a/server/sanitycheck.c
++++ b/server/sanitycheck.c
+@@ -647,9 +647,11 @@ check_researches(const char *file, const char *function, int line)
+ static void check_connections(const char *file, const char *function,
+                               int line)
+ {
+-  /* est_connections is a subset of all_connections */
+-  SANITY_CHECK(conn_list_size(game.all_connections)
+-	       >= conn_list_size(game.est_connections));
++  int all = conn_list_size(game.all_connections);
++
++  /* Other lists are subsets of all_connections */
++  SANITY_CHECK(all >= conn_list_size(game.est_connections));
++  SANITY_CHECK(all >= conn_list_size(game.web_client_connections));
+ }
+ 
+ /**********************************************************************//**
+diff --git a/server/sernet.c b/server/sernet.c
+index 464b785af2..d70d271cdb 100644
+--- a/server/sernet.c
++++ b/server/sernet.c
+@@ -241,6 +241,7 @@ static void close_connection(struct connection *pconn)
+   pconn->server.ignore_list = NULL;
+ 
+   /* safe to do these even if not in lists: */
++  conn_list_remove(game.web_client_connections, pconn);
+   conn_list_remove(game.glob_observers, pconn);
+   conn_list_remove(game.all_connections, pconn);
+   conn_list_remove(game.est_connections, pconn);
+@@ -271,6 +272,7 @@ void close_connections_and_socket(void)
+   }
+ 
+   /* Remove the game connection lists and make sure they are empty. */
++  conn_list_destroy(game.web_client_connections);
+   conn_list_destroy(game.glob_observers);
+   conn_list_destroy(game.all_connections);
+   conn_list_destroy(game.est_connections);
+@@ -320,6 +322,7 @@ static void really_close_connections(void)
+         closing[num++] = pconn;
+         /* Remove closing connections from the lists (hard detach)
+          * to avoid sending to closing connections. */
++        conn_list_remove(game.web_client_connections, pconn);
+         conn_list_remove(game.glob_observers, pconn);
+         conn_list_remove(game.est_connections, pconn);
+         conn_list_remove(game.all_connections, pconn);
+@@ -1369,6 +1372,7 @@ void init_connections(void)
+   game.all_connections = conn_list_new();
+   game.est_connections = conn_list_new();
+   game.glob_observers = conn_list_new();
++  game.web_client_connections = conn_list_new();
+ 
+   for (i = 0; i < MAX_NUM_CONNECTIONS; i++) {
+     struct connection *pconn = &connections[i];
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 957496883e..4fad204291 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -315,6 +315,13 @@ void handle_client_info(struct connection *pc, enum gui_type gui,
+   if (strcmp(distribution, "")) {
+     log_debug("It comes from %s distribution.", distribution);
+   }
++
++  /* In case a modified client sends multiple client_info packets */
++  conn_list_remove(game.web_client_connections, pc);
++
++  if (gui == GUI_WEB) {
++    conn_list_append(game.web_client_connections, pc);
++  }
+ }
+ 
+ /**********************************************************************//**
+-- 
+2.35.1
+

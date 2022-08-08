@@ -1,14 +1,14 @@
+read web.serv
+
 cmdlevel ctrl first
 set topology ""
 set wrap WRAPX
 set nationset all
-set compresstype xz
 set maxplayers 32
 set netwait 15
 set nettimeout 120
 set pingtime 30
 set pingtimeout 120
-set maxconnectionsperhost 256
 set threaded_save enabled
 set scorelog enabled
 set size 3

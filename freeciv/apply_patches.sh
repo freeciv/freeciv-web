@@ -17,6 +17,10 @@
 # 0046-Maintain-list-of-web-client-connections.patch
 #   Web-client compatibility development
 #   osdn #45155
+# 0038-Add-support-for-admin-locked-settings
+#   Make it possible to lock settings so that even ruleset
+#   reset cannot change them.
+#   osdn #45134
 
 # 0023-Meson-Detect-MagickWand
 #   Add MagickWand detection to meson configure.
@@ -51,6 +55,7 @@ declare -a PATCHLIST=(
   "0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs"
   "0045-Apply-fix-to-CVE-2022-33099-in-included-lua"
   "0046-Maintain-list-of-web-client-connections"
+  "0038-Add-support-for-admin-locked-settings"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

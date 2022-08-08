@@ -1,0 +1,510 @@
+From b8d4ac5cefb0c3e7ca58f240ebff57e613a59929 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 7 Aug 2022 14:33:54 +0300
+Subject: [PATCH 38/40] Add support for admin locked settings
+
+See osdn #45134
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/commands.c         |  15 ++++-
+ server/commands.h         |  14 +++--
+ server/rssanity.c         |   4 +-
+ server/settings.c         | 115 ++++++++++++++++++++++++++++----------
+ server/settings.h         |  10 +++-
+ server/stdinhand.c        |  66 +++++++++++++++++++++-
+ tools/civmanual.c         |   4 +-
+ tools/ruleutil/rulesave.c |   6 +-
+ 8 files changed, 189 insertions(+), 45 deletions(-)
+
+diff --git a/server/commands.c b/server/commands.c
+index c2282c0359..454de40989 100644
+--- a/server/commands.c
++++ b/server/commands.c
+@@ -699,6 +699,20 @@ static struct command commands[] = {
+    NULL, mapimg_help,
+    CMD_ECHO_ADMINS, VCF_NONE, 50
+   },
++  {"lock",   ALLOW_HACK,
++   /* TRANS: translate text between <> only */
++   N_("lock <setting>"),
++   N_("Lock setting so that non-admins can't change it."),
++   NULL, NULL,
++   CMD_ECHO_ADMINS, VCF_NONE, 50
++  },
++  {"unlock",   ALLOW_HACK,
++   /* TRANS: translate text between <> only */
++   N_("unlock <setting>"),
++   N_("Unlock setting so that non-admins can change it."),
++   NULL, NULL,
++   CMD_ECHO_ADMINS, VCF_NONE, 50
++  },
+   {"rfcstyle",	ALLOW_HACK,
+    /* no translatable parameters */
+    SYN_ORIG_("rfcstyle"),
+@@ -713,7 +727,6 @@ static struct command commands[] = {
+   }
+ };
+ 
+-
+ /**********************************************************************//**
+   Return command by its number.
+ **************************************************************************/
+diff --git a/server/commands.h b/server/commands.h
+index 9db1dd0515..ad63fae3ff 100644
+--- a/server/commands.h
++++ b/server/commands.h
+@@ -1,4 +1,4 @@
+-/********************************************************************** 
++/***********************************************************************
+  Freeciv - Copyright (C) 1996-2004 - The Freeciv Project
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+@@ -14,6 +14,7 @@
+ #ifndef FC__COMMANDS_H
+ #define FC__COMMANDS_H
+ 
++/* common */
+ #include "connection.h"         /* enum cmdlevel */
+ 
+ enum cmd_echo {
+@@ -97,14 +98,17 @@ enum command_id {
+   CMD_FCDB,
+   CMD_MAPIMG,
+ 
++  CMD_LOCK,
++  CMD_UNLOCK,
++
+   /* undocumented */
+   CMD_RFCSTYLE,
+   CMD_SRVID,
+ 
+   /* pseudo-commands: */
+-  CMD_NUM,		/* the number of commands - for iterations */
+-  CMD_UNRECOGNIZED,	/* used as a possible iteration result */
+-  CMD_AMBIGUOUS		/* used as a possible iteration result */
++  CMD_NUM,              /* the number of commands - for iterations */
++  CMD_UNRECOGNIZED,     /* used as a possible iteration result */
++  CMD_AMBIGUOUS         /* used as a possible iteration result */
+ };
+ 
+ const struct command *command_by_number(int i);
+@@ -120,4 +124,4 @@ enum cmd_echo command_echo(const struct command *pcommand);
+ int command_vote_flags(const struct command *pcommand);
+ int command_vote_percent(const struct command *pcommand);
+ 
+-#endif				/* FC__COMMANDS_H */
++#endif /* FC__COMMANDS_H */
+diff --git a/server/rssanity.c b/server/rssanity.c
+index f6e129a58b..b9cd56acf8 100644
+--- a/server/rssanity.c
++++ b/server/rssanity.c
+@@ -1551,11 +1551,11 @@ bool autolock_settings(void)
+ 
+     log_normal(_("Disabling 'barbarians' setting for lack of suitable "
+                  "unit types."));
+-    setting_lock_set(pset, FALSE);
++    setting_ruleset_lock_clear(pset);
+     if (!setting_enum_set(pset, "DISABLED", NULL, NULL, 0)) {
+       ok = FALSE;
+     }
+-    setting_lock_set(pset, TRUE);
++    setting_ruleset_lock_set(pset);
+   }
+ 
+   return ok;
+diff --git a/server/settings.c b/server/settings.c
+index 7dbd3435c0..1eb1f6fd8d 100644
+--- a/server/settings.c
++++ b/server/settings.c
+@@ -170,8 +170,11 @@ struct setting {
+   /* action function */
+   const action_callback_func_t action;
+ 
+-  /* ruleset lock for game settings */
+-  bool locked;
++  /* Lock for game settings */
++  enum setting_lock_level lock;
++
++  /* Remember if there's also ruleset lock. */
++  bool rslock;
+ 
+   bool ruleset_settable;
+ 
+@@ -3415,12 +3418,21 @@ bool setting_is_changeable(const struct setting *pset,
+     return FALSE;
+   }
+ 
+-  if (setting_locked(pset)) {
+-    /* setting is locked by the ruleset */
++  switch (pset->lock) {
++  case SLOCK_NONE:
++    break;
++  case SLOCK_RULESET:
++    /* Setting is locked by the ruleset */
+     settings_snprintf(reject_msg, reject_msg_len,
+                       _("The setting '%s' is locked by the ruleset."),
+                       setting_name(pset));
+     return FALSE;
++  case SLOCK_ADMIN:
++    /* Setting is locked by admin */
++    settings_snprintf(reject_msg, reject_msg_len,
++                      _("The setting '%s' is locked by admin."),
++                      setting_name(pset));
++    return FALSE;
+   }
+ 
+   return setting_is_free_to_change(pset, reject_msg, reject_msg_len);
+@@ -4321,15 +4333,15 @@ bool settings_ruleset(struct section_file *file, const char *section,
+ 
+   /* Unlock all settings. */
+   settings_iterate(SSET_ALL, pset) {
+-    setting_lock_set(pset, FALSE);
+-    if (pset->ruleset_settable) {
++    setting_ruleset_lock_clear(pset);
++    if (pset->ruleset_settable && !setting_locked(pset)) {
+       setting_set_to_default(pset);
+     }
+   } settings_iterate_end;
+ 
+-  /* settings */
++  /* Settings */
+   if (NULL == secfile_section_by_name(file, section)) {
+-    /* no settings in ruleset file */
++    /* No settings in ruleset file */
+     log_verbose("no [%s] section for game settings in %s", section,
+                 secfile_name(file));
+   } else {
+@@ -4392,11 +4404,12 @@ static bool setting_ruleset_one(struct section_file *file,
+     return FALSE;
+   }
+ 
+-  info.set = pset;
+-  info.compat = compat;
++  if (!setting_locked(pset)) {
++    info.set = pset;
++    info.compat = compat;
+ 
+-  switch (pset->stype) {
+-  case SST_BOOL:
++    switch (pset->stype) {
++    case SST_BOOL:
+     {
+       int ival;
+       bool val;
+@@ -4427,7 +4440,7 @@ static bool setting_ruleset_one(struct section_file *file,
+     }
+     break;
+ 
+-  case SST_INT:
++    case SST_INT:
+     {
+       int val;
+ 
+@@ -4447,7 +4460,7 @@ static bool setting_ruleset_one(struct section_file *file,
+     }
+     break;
+ 
+-  case SST_STRING:
++    case SST_STRING:
+     {
+       const char *val = secfile_lookup_str(file, "%s.value", path);
+ 
+@@ -4467,7 +4480,7 @@ static bool setting_ruleset_one(struct section_file *file,
+     }
+     break;
+ 
+-  case SST_ENUM:
++    case SST_ENUM:
+     {
+       int val;
+ 
+@@ -4491,7 +4504,7 @@ static bool setting_ruleset_one(struct section_file *file,
+     }
+     break;
+ 
+-  case SST_BITWISE:
++    case SST_BITWISE:
+     {
+       int val;
+ 
+@@ -4538,19 +4551,20 @@ static bool setting_ruleset_one(struct section_file *file,
+     }
+     break;
+ 
+-  case SST_COUNT:
+-    fc_assert(pset->stype != SST_COUNT);
+-    break;
+-  }
++    case SST_COUNT:
++      fc_assert(pset->stype != SST_COUNT);
++      break;
++    }
+ 
+-  pset->setdef = SETDEF_RULESET;
++    pset->setdef = SETDEF_RULESET;
++  }
+ 
+   /* set lock */
+   lock = secfile_lookup_bool_default(file, FALSE, "%s.lock", path);
+ 
+   if (lock) {
+-    /* set lock */
+-    setting_lock_set(pset, lock);
++    /* Set lock */
++    setting_ruleset_lock_set(pset);
+     log_normal(_("Ruleset: '%s' has been locked by the ruleset."),
+                setting_name(pset));
+   }
+@@ -4589,15 +4603,59 @@ bool setting_non_default(const struct setting *pset)
+ ****************************************************************************/
+ bool setting_locked(const struct setting *pset)
+ {
+-  return pset->locked;
++  return pset->lock != SLOCK_NONE;
+ }
+ 
+ /************************************************************************//**
+-  Set the value for the lock of a setting.
++  Returns if the setting is locked by the ruleset.
+ ****************************************************************************/
+-void setting_lock_set(struct setting *pset, bool lock)
++bool setting_ruleset_locked(const struct setting *pset)
+ {
+-  pset->locked = lock;
++  return pset->rslock;
++}
++
++/************************************************************************//**
++  Set ruleset level lock for the setting
++****************************************************************************/
++void setting_ruleset_lock_set(struct setting *pset)
++{
++  if (pset->lock < SLOCK_RULESET) {
++    /* No downgrading the lock */
++    pset->lock = SLOCK_RULESET;
++  }
++  pset->rslock = TRUE;
++}
++
++/************************************************************************//**
++  Set admin level lock for the setting
++****************************************************************************/
++void setting_admin_lock_set(struct setting *pset)
++{
++  pset->lock = SLOCK_ADMIN;
++}
++
++/************************************************************************//**
++  Clear ruleset level lock from the setting
++****************************************************************************/
++void setting_ruleset_lock_clear(struct setting *pset)
++{
++  if (pset->lock == SLOCK_RULESET) {
++    /* No clearing upper level locks */
++    pset->lock = SLOCK_RULESET;
++  }
++  pset->rslock = FALSE;
++}
++
++/************************************************************************//**
++  Clear admin level lock from the setting
++****************************************************************************/
++void setting_admin_lock_clear(struct setting *pset)
++{
++  if (pset->rslock) {
++    pset->lock = SLOCK_RULESET;
++  } else {
++    pset->lock = SLOCK_NONE;
++  }
+ }
+ 
+ /************************************************************************//**
+@@ -5104,7 +5162,8 @@ void settings_init(bool act)
+   settings_list_init();
+ 
+   settings_iterate(SSET_ALL, pset) {
+-    setting_lock_set(pset, FALSE);
++    setting_ruleset_lock_clear(pset);
++    setting_admin_lock_clear(pset);
+     setting_set_to_default(pset);
+     setting_game_set(pset, TRUE);
+     if (act) {
+diff --git a/server/settings.h b/server/settings.h
+index 2a9aab431b..53372eaf3d 100644
+--- a/server/settings.h
++++ b/server/settings.h
+@@ -73,7 +73,9 @@ struct sset_val_name {
+ #define SPECENUM_COUNT      OLEVELS_NUM
+ #include "specenum_gen.h"
+ 
+-/* forward declaration */
++enum setting_lock_level { SLOCK_NONE = 0, SLOCK_RULESET, SLOCK_ADMIN };
++
++/* Forward declaration */
+ struct setting;
+ 
+ struct sf_cb_data {
+@@ -165,7 +167,11 @@ void setting_action(const struct setting *pset);
+ 
+ bool setting_non_default(const struct setting *pset);
+ bool setting_locked(const struct setting *pset);
+-void setting_lock_set(struct setting *pset, bool lock);
++bool setting_ruleset_locked(const struct setting *pset);
++void setting_ruleset_lock_set(struct setting *pset);
++void setting_admin_lock_set(struct setting *pset);
++void setting_ruleset_lock_clear(struct setting *pset);
++void setting_admin_lock_clear(struct setting *pset);
+ 
+ /* get 'struct setting_list' and related functions: */
+ #define SPECLIST_TAG setting
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index 1c35d59fed..ce77d50d69 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
+@@ -134,6 +134,8 @@ static void show_ruleset_info(struct connection *caller, enum command_id cmd,
+                               bool check, int read_recursion);
+ static void show_mapimg(struct connection *caller, enum command_id cmd);
+ static bool set_command(struct connection *caller, char *str, bool check);
++static bool lock_command(struct connection *caller, char *str, bool check);
++static bool unlock_command(struct connection *caller, char *str, bool check);
+ 
+ static bool create_command(struct connection *caller, const char *str,
+                            bool check);
+@@ -301,10 +303,10 @@ static bool may_use_nothing(struct connection *caller)
+ static char setting_status(struct connection *caller,
+                            const struct setting *pset)
+ {
+-  /* first check for a ruleset lock as this is included in
++  /* First check for a ruleset lock as this is included in
+    * setting_is_changeable() */
+   if (setting_locked(pset)) {
+-    /* setting is locked by the ruleset */
++    /* Setting is locked */
+     return '!';
+   }
+ 
+@@ -3127,6 +3129,62 @@ static bool set_command(struct connection *caller, char *str, bool check)
+   return ret;
+ }
+ 
++/**********************************************************************//**
++  Handle lock command
++**************************************************************************/
++static bool lock_command(struct connection *caller, char *str, bool check)
++{
++  char *args[1];
++  int nargs;
++
++  nargs = get_tokens(str, args, ARRAY_SIZE(args), TOKEN_DELIMITERS);
++
++  if (nargs < 1) {
++    cmd_reply(CMD_LOCK, caller, C_SYNTAX,
++              _("Undefined argument. Usage:\n%s"),
++              command_synopsis(command_by_number(CMD_LOCK)));
++  } else {
++    struct setting *pset;
++
++    pset = validate_setting_arg(CMD_SET, caller, args[0]);
++
++    if (pset != NULL) {
++      setting_admin_lock_set(pset);
++      return TRUE;
++    }
++  }
++
++  return FALSE;
++}
++
++/**********************************************************************//**
++  Handle unlock command
++**************************************************************************/
++static bool unlock_command(struct connection *caller, char *str, bool check)
++{
++  char *args[1];
++  int nargs;
++
++  nargs = get_tokens(str, args, ARRAY_SIZE(args), TOKEN_DELIMITERS);
++
++  if (nargs < 1) {
++    cmd_reply(CMD_LOCK, caller, C_SYNTAX,
++              _("Undefined argument. Usage:\n%s"),
++              command_synopsis(command_by_number(CMD_LOCK)));
++  } else {
++    struct setting *pset;
++
++    pset = validate_setting_arg(CMD_SET, caller, args[0]);
++
++    if (pset != NULL) {
++      setting_admin_lock_clear(pset);
++      return TRUE;
++    }
++  }
++
++  return FALSE;
++}
++
+ /**********************************************************************//**
+   Check game.allow_take and fcdb if enabled for permission to take or
+   observe a player.
+@@ -4633,6 +4691,10 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
+     return fcdb_command(caller, arg, check);
+   case CMD_MAPIMG:
+     return mapimg_command(caller, arg, check);
++  case CMD_LOCK:
++    return lock_command(caller, arg, check);
++  case CMD_UNLOCK:
++    return unlock_command(caller, arg, check);
+   case CMD_RFCSTYLE:	/* see console.h for an explanation */
+     if (!check) {
+       con_set_style(!con_get_style());
+diff --git a/tools/civmanual.c b/tools/civmanual.c
+index 859f396c6f..f7fe28c66b 100644
+--- a/tools/civmanual.c
++++ b/tools/civmanual.c
+@@ -349,9 +349,9 @@ static bool manual_command(struct tag_types *tag_info)
+         fprintf(doc, _("Category: %s.<br>"),
+                 _(sset_category_name(setting_category(pset))));
+ 
+-        /* first check if the setting is locked because this is included in
++        /* First check if the setting is locked because this is included in
+          * the function setting_is_changeable() */
+-        if (setting_locked(pset)) {
++        if (setting_ruleset_locked(pset)) {
+           fprintf(doc, _("Is locked by the ruleset."));
+         } else if (!setting_is_changeable(pset, &my_conn, NULL, 0)) {
+           fprintf(doc, _("Can only be used in server console."));
+diff --git a/tools/ruleutil/rulesave.c b/tools/ruleutil/rulesave.c
+index 7039f82795..4170d80d97 100644
+--- a/tools/ruleutil/rulesave.c
++++ b/tools/ruleutil/rulesave.c
+@@ -1755,7 +1755,7 @@ static bool save_game_ruleset(const char *filename, const char *name)
+ 
+   locks = FALSE;
+   settings_iterate(SSET_ALL, pset) {
+-    if (setting_locked(pset)) {
++    if (setting_ruleset_locked(pset)) {
+       locks = TRUE;
+       break;
+     }
+@@ -1765,7 +1765,7 @@ static bool save_game_ruleset(const char *filename, const char *name)
+   settings_iterate(SSET_ALL, pset) {
+     struct sf_cb_data info = { pset, FALSE };
+ 
+-    if (setting_get_setdef(pset) == SETDEF_RULESET || setting_locked(pset)) {
++    if (setting_get_setdef(pset) == SETDEF_RULESET || setting_ruleset_locked(pset)) {
+       secfile_insert_str(sfile, setting_name(pset),
+                          "settings.set%d.name", set_count);
+       switch (setting_type(pset)) {
+@@ -1799,7 +1799,7 @@ static bool save_game_ruleset(const char *filename, const char *name)
+       }
+ 
+       if (locks) {
+-        secfile_insert_bool(sfile, setting_locked(pset),
++        secfile_insert_bool(sfile, setting_ruleset_locked(pset),
+                             "settings.set%d.lock", set_count);
+       }
+ 
+-- 
+2.35.1
+

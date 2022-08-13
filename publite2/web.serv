@@ -1,0 +1,4 @@
+set compresstype xz
+lock compresstype
+set maxconnectionsperhost 256
+lock maxconnectionsperhost

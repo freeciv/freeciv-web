@@ -1,10 +1,11 @@
 #LongTurn game #8
 
+read web.serv
+
 cmdlevel ctrl first
 set topology ""
 set wrap WRAPX
 set nationset all
-set compresstype xz
 set maxplayers 300
 set startunits=ccwwwx
 set aifill 300
@@ -16,7 +17,6 @@ set netwait 20
 set nettimeout 120
 set pingtime 30
 set pingtimeout 240
-set maxconnectionsperhost 500
 set threaded_save enabled
 set scorelog enabled
 set mapsize FULLSIZE

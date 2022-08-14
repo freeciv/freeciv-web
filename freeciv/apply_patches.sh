@@ -49,7 +49,6 @@
 
 declare -a PATCHLIST=(
   "0023-Meson-Detect-MagickWand"
-  "0001-Fix-JSON-protocol-regressions-introduced-in-hrm-745593"
   "0056-establish_new_connection-Set-wrap_id-to-packet_set_t"
   "0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s"
   "0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs"

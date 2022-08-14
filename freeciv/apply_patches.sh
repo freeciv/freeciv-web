@@ -21,6 +21,12 @@
 #   Make it possible to lock settings so that even ruleset
 #   reset cannot change them.
 #   osdn #45134
+# 0027-do_attack-Shrink-city-only-after-complete-removal-of
+#   Fix problems when city gets destroyed after an attack
+#   osdn #45240
+# 0053-Fix-conversion-of-topology-setting-from-old-savegame
+#   Fix recent regression in loading older savegames
+#   osdn #45338
 
 # 0023-Meson-Detect-MagickWand
 #   Add MagickWand detection to meson configure.
@@ -55,6 +61,8 @@ declare -a PATCHLIST=(
   "0045-Apply-fix-to-CVE-2022-33099-in-included-lua"
   "0046-Maintain-list-of-web-client-connections"
   "0038-Add-support-for-admin-locked-settings"
+  "0027-do_attack-Shrink-city-only-after-complete-removal-of"
+  "0053-Fix-conversion-of-topology-setting-from-old-savegame"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

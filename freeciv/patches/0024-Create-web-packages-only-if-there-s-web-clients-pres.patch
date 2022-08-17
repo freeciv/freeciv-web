@@ -1,0 +1,313 @@
+From 26016ec4434fabee1450e7cb4c80ac809ac1b27a Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 6 Aug 2022 23:39:18 +0300
+Subject: [PATCH 24/24] Create web packages only if there's web clients present
+
+See osdn #45319
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/game.h               | 18 ++++++++++++++---
+ common/networking/packets.h | 11 +++++++---
+ server/citytools.c          | 40 +++++++++++++++++++++++++++----------
+ server/diplomats.c          | 12 +++++++++--
+ server/plrhand.c            | 31 ++++++++++++++++++----------
+ 5 files changed, 84 insertions(+), 28 deletions(-)
+
+diff --git a/common/game.h b/common/game.h
+index ad89c81001..0e17d95786 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -301,6 +301,9 @@ struct civ_game {
+ 
+ extern bool am_i_server;
+ 
++extern struct civ_game game;
++extern struct world wld;
++
+ /**********************************************************************//**
+   Is the program type server?
+ **************************************************************************/
+@@ -320,6 +323,18 @@ static inline void i_am_tool(void)
+   i_am_server(); /* No difference between a tool and server at the moment */
+ }
+ 
++#ifdef FREECIV_WEB
++/**********************************************************************//**
++  Is there currently any connections from web-client(s)
++**************************************************************************/
++static inline bool any_web_conns(void)
++{
++  return conn_list_size(game.web_client_connections) > 0;
++}
++#else  /* FREECIV_WEB */
++#define any_web_conns() (FALSE)
++#endif /* FREECIV_WEB */
++
+ void game_init(bool keep_ruleset_value);
+ void game_map_init(void);
+ void game_free(void);
+@@ -368,9 +383,6 @@ static inline bool is_ruleset_compat_mode(void)
+   return _ruleset_compat_mode;
+ }
+ 
+-extern struct civ_game game;
+-extern struct world wld;
+-
+ #define GAME_DEFAULT_SEED        0
+ #define GAME_MIN_SEED            0
+ #define GAME_MAX_SEED            (MAX_UINT32 >> 1)
+diff --git a/common/networking/packets.h b/common/networking/packets.h
+index 8ef1d45d95..e11a2e1310 100644
+--- a/common/networking/packets.h
++++ b/common/networking/packets.h
+@@ -50,14 +50,19 @@ do {                                                    \
+     send_packet_web_ ##packetname(pconn, __VA_ARGS__ ); \
+   }                                                     \
+ } while (FALSE)
+-#define web_lsend_packet(packetname, ...) \
+-  lsend_packet_web_ ##packetname( __VA_ARGS__ )
++#define web_lsend_packet(packetname, pconn, pack, ...)  \
++do {                                                    \
++  const struct packet_web_ ##packetname *_pptr_ = pack; \
++  if (_pptr_ != NULL) {                                 \
++    lsend_packet_web_ ##packetname(pconn, _pptr_, ##__VA_ARGS__ );  \
++  }                                                     \
++} while (FALSE);
+ #else  /* FREECIV_WEB */
+ #define web_send_packet(packetname, pconn, ...)
+ #define web_lsend_packet(packetname, ...)
+ #endif /* FREECIV_WEB */
+ 
+-/* The size of opaque (void *) data sent in the network packet.  To avoid
++/* The size of opaque (void *) data sent in the network packet. To avoid
+  * fragmentation issues, this SHOULD NOT be larger than the standard
+  * ethernet or PPP 1500 byte frame size (with room for headers).
+  *
+diff --git a/server/citytools.c b/server/citytools.c
+index 323c23c2fe..d46bfe5a97 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -42,6 +42,7 @@
+ #include "idex.h"
+ #include "map.h"
+ #include "movement.h"
++#include "packets.h"
+ #include "player.h"
+ #include "requirements.h"
+ #include "research.h"
+@@ -2198,6 +2199,7 @@ void broadcast_city_info(struct city *pcity)
+   struct packet_city_short_info sc_pack;
+   struct player *powner = city_owner(pcity);
+   struct traderoute_packet_list *routes;
++  struct packet_web_city_info_addition *webp_ptr;
+ 
+   /* Send to everyone who can see the city. */
+ 
+@@ -2210,15 +2212,22 @@ void broadcast_city_info(struct city *pcity)
+     return;
+   }
+ 
++  if (any_web_conns()) {
++    webp_ptr = &web_packet;
++  } else {
++    webp_ptr = NULL;
++  }
++
+   routes = traderoute_packet_list_new();
+-  package_city(pcity, &packet, &web_packet, routes, FALSE);
++  package_city(pcity, &packet, webp_ptr, routes, FALSE);
+ 
+   players_iterate(pplayer) {
+     if (!send_city_suppressed || pplayer != powner) {
+       if (can_player_see_city_internals(pplayer, pcity)) {
+         update_dumb_city(pplayer, pcity);
+         lsend_packet_city_info(pplayer->connections, &packet, FALSE);
+-        web_lsend_packet(city_info_addition, pplayer->connections, &web_packet, FALSE);
++        web_lsend_packet(city_info_addition, pplayer->connections,
++                         webp_ptr, FALSE);
+         traderoute_packet_list_iterate(routes, route_packet) {
+           lsend_packet_traderoute_info(pplayer->connections, route_packet);
+         } traderoute_packet_list_iterate_end;
+@@ -2235,7 +2244,7 @@ void broadcast_city_info(struct city *pcity)
+   conn_list_iterate(game.est_connections, pconn) {
+     if (conn_is_global_observer(pconn)) {
+       send_packet_city_info(pconn, &packet, FALSE);
+-      web_send_packet(city_info_addition, pconn, &web_packet, FALSE);
++      web_send_packet(city_info_addition, pconn, webp_ptr, FALSE);
+     }
+   } conn_list_iterate_end;
+ 
+@@ -2349,6 +2358,7 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+   struct packet_city_short_info sc_pack;
+   struct player *powner = NULL;
+   struct traderoute_packet_list *routes = NULL;
++  struct packet_web_city_info_addition *webp_ptr;
+ 
+   if (!pcity) {
+     pcity = tile_city(ptile);
+@@ -2361,6 +2371,13 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+   if (pcity) {
+     powner = city_owner(pcity);
+   }
++
++  if (any_web_conns()) {
++    webp_ptr = &web_packet;
++  } else {
++    webp_ptr = NULL;
++  }
++
+   if (powner && powner == pviewer) {
+     /* send info to owner */
+     /* This case implies powner non-NULL which means pcity non-NULL */
+@@ -2372,9 +2389,9 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+ 
+       /* Send all info to the owner */
+       update_dumb_city(powner, pcity);
+-      package_city(pcity, &packet, &web_packet, routes, FALSE);
++      package_city(pcity, &packet, webp_ptr, routes, FALSE);
+       lsend_packet_city_info(dest, &packet, FALSE);
+-      web_lsend_packet(city_info_addition, dest, &web_packet, FALSE);
++      web_lsend_packet(city_info_addition, dest, webp_ptr, FALSE);
+       traderoute_packet_list_iterate(routes, route_packet) {
+         lsend_packet_traderoute_info(dest, route_packet);
+       } traderoute_packet_list_iterate_end;
+@@ -2396,9 +2413,10 @@ void send_city_info_at_tile(struct player *pviewer, struct conn_list *dest,
+       if (pcity) {
+         routes = traderoute_packet_list_new();
+ 
+-        package_city(pcity, &packet, &web_packet, routes, FALSE); /* should be dumb_city info? */
++        /* Should be dumb_city info? */
++        package_city(pcity, &packet, webp_ptr, routes, FALSE);
+         lsend_packet_city_info(dest, &packet, FALSE);
+-        web_lsend_packet(city_info_addition, dest, &web_packet, FALSE);
++        web_lsend_packet(city_info_addition, dest, webp_ptr, FALSE);
+         traderoute_packet_list_iterate(routes, route_packet) {
+           lsend_packet_traderoute_info(dest, route_packet);
+         } traderoute_packet_list_iterate_end;
+@@ -2606,10 +2624,12 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+   } improvement_iterate_end;
+ 
+ #ifdef FREECIV_WEB
+-  web_packet->id = pcity->id;
++  if (web_packet != NULL) {
++    web_packet->id = pcity->id;
+ 
+-  web_packet->granary_size = city_granary_size(city_size_get(pcity));
+-  web_packet->granary_turns = city_turns_to_grow(pcity);
++    web_packet->granary_size = city_granary_size(city_size_get(pcity));
++    web_packet->granary_turns = city_turns_to_grow(pcity);
++  }
+ #endif /* FREECIV_WEB */
+ }
+ 
+diff --git a/server/diplomats.c b/server/diplomats.c
+index 712d04db47..3fa1d64ad0 100644
+--- a/server/diplomats.c
++++ b/server/diplomats.c
+@@ -331,6 +331,7 @@ bool diplomat_investigate(struct player *pplayer, struct unit *pdiplomat,
+   struct packet_web_city_info_addition web_packet;
+   struct traderoute_packet_list *routes;
+   const struct unit_type *act_utype;
++  struct packet_web_city_info_addition *webp_ptr;
+ 
+   /* Fetch target city's player.  Sanity checks. */
+   fc_assert_ret_val(pcity, FALSE);
+@@ -374,12 +375,19 @@ bool diplomat_investigate(struct player *pplayer, struct unit *pdiplomat,
+   } unit_list_iterate_end;
+   /* Send city info to investigator's player.
+      As this is a special case we bypass send_city_info. */
++
++  if (any_web_conns()) {
++    webp_ptr = &web_packet;
++  } else {
++    webp_ptr = NULL;
++  }
++
+   routes = traderoute_packet_list_new();
+-  package_city(pcity, &city_packet, &web_packet, routes, TRUE);
++  package_city(pcity, &city_packet, webp_ptr, routes, TRUE);
+   /* We need to force to send the packet to ensure the client will receive
+    * something and popup the city dialog. */
+   lsend_packet_city_info(pplayer->connections, &city_packet, TRUE);
+-  web_lsend_packet(city_info_addition, pplayer->connections, &web_packet, TRUE);
++  web_lsend_packet(city_info_addition, pplayer->connections, webp_ptr, TRUE);
+   traderoute_packet_list_iterate(routes, route_packet) {
+     lsend_packet_traderoute_info(pplayer->connections, route_packet);
+     FC_FREE(route_packet);
+diff --git a/server/plrhand.c b/server/plrhand.c
+index 82b2ae48be..230aeefff6 100644
+--- a/server/plrhand.c
++++ b/server/plrhand.c
+@@ -1125,6 +1125,7 @@ static void send_player_info_c_real(struct player *src,
+ {
+   struct packet_player_info info;
+   struct packet_web_player_info_addition web_info;
++  struct packet_web_player_info_addition *webp_ptr;
+ 
+   fc_assert_ret(src != NULL);
+ 
+@@ -1132,21 +1133,27 @@ static void send_player_info_c_real(struct player *src,
+     dest = game.est_connections;
+   }
+ 
+-  package_player_common(src, &info, &web_info);
++  if (any_web_conns()) {
++    webp_ptr = &web_info;
++  } else {
++    webp_ptr = NULL;
++  }
++
++  package_player_common(src, &info, webp_ptr);
+ 
+   conn_list_iterate(dest, pconn) {
+     if (NULL == pconn->playing && pconn->observer) {
+       /* Global observer. */
+-      package_player_info(src, &info, &web_info, pconn->playing, INFO_FULL);
++      package_player_info(src, &info, webp_ptr, pconn->playing, INFO_FULL);
+     } else if (NULL != pconn->playing) {
+       /* Players (including regular observers) */
+-      package_player_info(src, &info, &web_info,
++      package_player_info(src, &info, webp_ptr,
+                           pconn->playing, INFO_MINIMUM);
+     } else {
+-      package_player_info(src, &info, &web_info, NULL, INFO_MINIMUM);
++      package_player_info(src, &info, webp_ptr, NULL, INFO_MINIMUM);
+     }
+     send_packet_player_info(pconn, &info);
+-    web_send_packet(player_info_addition, pconn, &web_info);
++    web_send_packet(player_info_addition, pconn, webp_ptr);
+   } conn_list_iterate_end;
+ }
+ 
+@@ -1256,7 +1263,9 @@ static void package_player_common(struct player *plr,
+   packet->science_cost = plr->ai_common.science_cost;
+ 
+ #ifdef FREECIV_WEB
+-  web_packet->playerno = player_number(plr);
++  if (web_packet != NULL) {
++    web_packet->playerno = player_number(plr);
++  }
+ #endif /* FREECIV_WEB */
+ }
+ 
+@@ -1444,10 +1453,12 @@ static void package_player_info(struct player *plr,
+   }
+ 
+ #ifdef FREECIV_WEB
+-  if (info_level >= INFO_FULL) {
+-    web_packet->expected_income = player_get_expected_income(plr);
+-  } else {
+-    web_packet->expected_income = 0;
++  if (web_packet != NULL) {
++    if (info_level >= INFO_FULL) {
++      web_packet->expected_income = player_get_expected_income(plr);
++    } else {
++      web_packet->expected_income = 0;
++    }
+   }
+ #endif /* FREECIV_WEB */
+ }
+-- 
+2.35.1
+

@@ -27,6 +27,12 @@
 # 0053-Fix-conversion-of-topology-setting-from-old-savegame
 #   Fix recent regression in loading older savegames
 #   osdn #45338
+# 0002-generate_packets.py-Correctly-identify-cm_parameter-
+#   Fix recent regression in generating packet handling code for cma
+#   osdn #45267
+# 0024-Create-web-packages-only-if-there-s-web-clients-pres
+#   Web-client compatibility development
+#   osdn #45319
 
 # 0023-Meson-Detect-MagickWand
 #   Add MagickWand detection to meson configure.
@@ -63,6 +69,8 @@ declare -a PATCHLIST=(
   "0038-Add-support-for-admin-locked-settings"
   "0027-do_attack-Shrink-city-only-after-complete-removal-of"
   "0053-Fix-conversion-of-topology-setting-from-old-savegame"
+  "0002-generate_packets.py-Correctly-identify-cm_parameter-"
+  "0024-Create-web-packages-only-if-there-s-web-clients-pres"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

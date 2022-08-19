@@ -3123,10 +3123,10 @@ function(){
     var punit = funits[i];
     var target_city = tile_city(index_to_tile(punit['tile']));
 
-    /* Do Recycle Unit if located inside a city. */
-    /* FIXME: Only rulesets where the player can do Recycle Unit to all
+    /* Do Disband Unit Recover if located inside a city. */
+    /* FIXME: Only rulesets where the player can do Disband Unit Recover to all
      * domestic and allied cities are supported here. */
-    var action_id = target_city ? ACTION_RECYCLE_UNIT : ACTION_DISBAND_UNIT;
+    var action_id = target_city ? ACTION_DISBAND_UNIT_RECOVER : ACTION_DISBAND_UNIT;
     var target_id = target_city ? target_city['id'] : punit['id'];
     request_unit_do_action(action_id, punit['id'], target_id);
   }

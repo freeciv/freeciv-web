@@ -2,15 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0056-establish_new_connection-Set-wrap_id-to-packet_set_t.patch
-#   Fix regression introduced with the new separate wrap setting
-#   osdn #45261
-# 0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s
-#   Fix recent regression in creation of NoHome units
-#   osdn #45196
-# 0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs
-#   Fix modpack installer vulnerability
-#   osdn #45299
 # 0045-Apply-fix-to-CVE-2022-33099-in-included-lua
 #   Fix lua vulnerability
 #   osdn #45248
@@ -27,10 +18,12 @@
 # 0053-Fix-conversion-of-topology-setting-from-old-savegame
 #   Fix recent regression in loading older savegames
 #   osdn #45338
-
-# 0023-Meson-Detect-MagickWand
-#   Add MagickWand detection to meson configure.
-#   Currently on hold on upstream. osdn #45007
+# 0002-generate_packets.py-Correctly-identify-cm_parameter-
+#   Fix recent regression in generating packet handling code for cma
+#   osdn #45267
+# 0024-Create-web-packages-only-if-there-s-web-clients-pres
+#   Web-client compatibility development
+#   osdn #45319
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -54,15 +47,13 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0023-Meson-Detect-MagickWand"
-  "0056-establish_new_connection-Set-wrap_id-to-packet_set_t"
-  "0026-place_unit-Do-not-add-NoHome-units-to-city-s-units_s"
-  "0001-fcmp-Fix-vulnerability-with-crafted-modpack-URLs"
   "0045-Apply-fix-to-CVE-2022-33099-in-included-lua"
   "0046-Maintain-list-of-web-client-connections"
   "0038-Add-support-for-admin-locked-settings"
   "0027-do_attack-Shrink-city-only-after-complete-removal-of"
   "0053-Fix-conversion-of-topology-setting-from-old-savegame"
+  "0002-generate_packets.py-Correctly-identify-cm_parameter-"
+  "0024-Create-web-packages-only-if-there-s-web-clients-pres"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

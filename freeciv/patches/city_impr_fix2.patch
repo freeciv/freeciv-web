@@ -1,8 +1,7 @@
-diff --git a/client/packhand.c b/client/packhand.c
-index 6c56c67582..bf42984f81 100644
---- a/client/packhand.c
-+++ b/client/packhand.c
-@@ -989,7 +989,9 @@ void handle_city_info(const struct packet_city_info *packet)
+diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
+--- freeciv/client/packhand.c	2022-08-16 06:20:26.358011939 +0300
++++ freeciv/client/packhand.c	2022-08-16 06:20:48.233903541 +0300
+@@ -989,7 +989,9 @@
    TODO: Do not generate code calling this in the C-client.
  ****************************************************************************/
  void handle_web_city_info_addition(int id, int granary_size,
@@ -13,11 +12,10 @@ index 6c56c67582..bf42984f81 100644
  {
  }
  
-diff --git a/common/networking/packets.def b/common/networking/packets.def
-index 9528eb08b7..dceb9f2649 100644
---- a/common/networking/packets.def
-+++ b/common/networking/packets.def
-@@ -2357,6 +2357,9 @@ PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACK
+diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2022-08-16 06:20:26.378011839 +0300
++++ freeciv/common/networking/packets.def	2022-08-16 06:20:48.237903522 +0300
+@@ -2359,6 +2359,9 @@
  
    UINT16 granary_size;
    TURN granary_turns;
@@ -27,37 +25,36 @@ index 9528eb08b7..dceb9f2649 100644
  end
  
  PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
-diff --git a/server/citytools.c b/server/citytools.c
-index b7b14e33b8..239f970ca6 100644
---- a/server/citytools.c
-+++ b/server/citytools.c
-@@ -2602,10 +2602,29 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
-   } improvement_iterate_end;
+diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
+--- freeciv/server/citytools.c	2022-08-16 06:20:27.346007025 +0300
++++ freeciv/server/citytools.c	2022-08-16 06:22:48.833319454 +0300
+@@ -2625,10 +2625,29 @@
  
  #ifdef FREECIV_WEB
-+  char can_build_impr_buf[MAX_NUM_ITEMS + 1];
-+  char can_build_unit_buf[MAX_NUM_ITEMS + 1];
+   if (web_packet != NULL) {
++    char can_build_impr_buf[MAX_NUM_ITEMS + 1];
++    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
 +
-   web_packet->id = pcity->id;
+     web_packet->id = pcity->id;
  
-   web_packet->granary_size = city_granary_size(city_size_get(pcity));
-   web_packet->granary_turns = city_turns_to_grow(pcity);
+     web_packet->granary_size = city_granary_size(city_size_get(pcity));
+     web_packet->granary_turns = city_turns_to_grow(pcity);
 +
-+  improvement_iterate(pimprove) {
-+    can_build_impr_buf[improvement_index(pimprove)] =
-+	    can_city_build_improvement_now(pcity, pimprove)
-+      ? '1' : '0';
-+  } improvement_iterate_end;
-+  can_build_impr_buf[improvement_count()] = '\0';
-+  sz_strlcpy(web_packet->can_build_improvement, can_build_impr_buf);
++    improvement_iterate(pimprove) {
++      can_build_impr_buf[improvement_index(pimprove)] =
++        can_city_build_improvement_now(pcity, pimprove)
++        ? '1' : '0';
++    } improvement_iterate_end;
++    can_build_impr_buf[improvement_count()] = '\0';
++    sz_strlcpy(web_packet->can_build_improvement, can_build_impr_buf);
 +
-+  unit_type_iterate(punittype) {
-+    can_build_unit_buf[utype_index(punittype)] =
-+	    can_city_build_unit_now(pcity, punittype)
-+      ? '1' : '0';
-+  } unit_type_iterate_end;
-+  can_build_unit_buf[utype_count()] = '\0';
-+  sz_strlcpy(web_packet->can_build_unit, can_build_unit_buf);
++    unit_type_iterate(punittype) {
++      can_build_unit_buf[utype_index(punittype)] =
++        can_city_build_unit_now(pcity, punittype)
++        ? '1' : '0';
++    } unit_type_iterate_end;
++    can_build_unit_buf[utype_count()] = '\0';
++    sz_strlcpy(web_packet->can_build_unit, can_build_unit_buf);
+   }
  #endif /* FREECIV_WEB */
  }
- 

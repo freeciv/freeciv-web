@@ -47,10 +47,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0045-Apply-fix-to-CVE-2022-33099-in-included-lua"
-  "0046-Maintain-list-of-web-client-connections"
   "0038-Add-support-for-admin-locked-settings"
-  "0027-do_attack-Shrink-city-only-after-complete-removal-of"
   "0053-Fix-conversion-of-topology-setting-from-old-savegame"
   "0002-generate_packets.py-Correctly-identify-cm_parameter-"
   "0024-Create-web-packages-only-if-there-s-web-clients-pres"

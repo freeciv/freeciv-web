@@ -1,10 +1,10 @@
 diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2022-08-16 06:20:26.358011939 +0300
-+++ freeciv/client/packhand.c	2022-08-16 06:20:48.233903541 +0300
-@@ -989,7 +989,9 @@
-   TODO: Do not generate code calling this in the C-client.
- ****************************************************************************/
- void handle_web_city_info_addition(int id, int granary_size,
+--- freeciv/client/packhand.c	2022-08-24 17:33:50.178386086 +0300
++++ freeciv/client/packhand.c	2022-08-24 17:34:52.342214722 +0300
+@@ -991,7 +991,9 @@
+ void handle_web_city_info_addition(int id, bool cma_enabled,
+                                    const struct cm_parameter *cm_parameter,
+                                    int granary_size,
 -                                   int granary_turns)
 +                                   int granary_turns,
 +                                   const char *can_build_unit,
@@ -13,9 +13,9 @@ diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
  }
  
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-08-16 06:20:26.378011839 +0300
-+++ freeciv/common/networking/packets.def	2022-08-16 06:20:48.237903522 +0300
-@@ -2359,6 +2359,9 @@
+--- freeciv/common/networking/packets.def	2022-08-24 17:33:50.202386019 +0300
++++ freeciv/common/networking/packets.def	2022-08-24 17:34:02.374352492 +0300
+@@ -2362,6 +2362,9 @@
  
    UINT16 granary_size;
    TURN granary_turns;
@@ -26,9 +26,9 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
  
  PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
 diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2022-08-16 06:20:27.346007025 +0300
-+++ freeciv/server/citytools.c	2022-08-16 06:22:48.833319454 +0300
-@@ -2625,10 +2625,29 @@
+--- freeciv/server/citytools.c	2022-08-24 17:33:50.858384213 +0300
++++ freeciv/server/citytools.c	2022-08-24 17:36:29.494338193 +0300
+@@ -2625,6 +2625,9 @@
  
  #ifdef FREECIV_WEB
    if (web_packet != NULL) {
@@ -36,6 +36,9 @@ diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
 +    char can_build_unit_buf[MAX_NUM_ITEMS + 1];
 +
      web_packet->id = pcity->id;
+ 
+     if (pcity->cm_parameter != NULL) {
+@@ -2637,6 +2640,22 @@
  
      web_packet->granary_size = city_granary_size(city_size_get(pcity));
      web_packet->granary_turns = city_turns_to_grow(pcity);

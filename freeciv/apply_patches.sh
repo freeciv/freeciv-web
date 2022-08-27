@@ -24,6 +24,15 @@
 # 0024-Create-web-packages-only-if-there-s-web-clients-pres
 #   Web-client compatibility development
 #   osdn #45319
+# 0023-Be-less-spammy-about-fixing-research-count-errors-fr
+#   Dependency of 0034-Cancel-invalid-war-from-old-savegames
+#   osdn #45344
+# 0034-Cancel-invalid-war-from-old-savegames
+#   Complete change to no-contact-war via alliance -rule
+#   osdn #45345
+# 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
+#   Send CMA info to web-client
+#   osdn #45268
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,6 +60,9 @@ declare -a PATCHLIST=(
   "0053-Fix-conversion-of-topology-setting-from-old-savegame"
   "0002-generate_packets.py-Correctly-identify-cm_parameter-"
   "0024-Create-web-packages-only-if-there-s-web-clients-pres"
+  "0023-Be-less-spammy-about-fixing-research-count-errors-fr"
+  "0034-Cancel-invalid-war-from-old-savegames"
+  "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

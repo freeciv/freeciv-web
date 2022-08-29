@@ -36,10 +36,10 @@ index ce49d66436..ce44d9fcfa 100644
    TURN granary_turns;
  end
 diff --git a/server/citytools.c b/server/citytools.c
-index d46bfe5a97..4ae21cd29b 100644
+index 4a96a632de..eb22322eb9 100644
 --- a/server/citytools.c
 +++ b/server/citytools.c
-@@ -2627,6 +2627,14 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+@@ -2629,6 +2629,14 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
    if (web_packet != NULL) {
      web_packet->id = pcity->id;
  
@@ -47,7 +47,7 @@ index d46bfe5a97..4ae21cd29b 100644
 +      web_packet->cma_enabled = TRUE;
 +      cm_copy_parameter(&web_packet->cm_parameter, pcity->cm_parameter);
 +    } else {
-+      web_packet->cma_enabled = TRUE;
++      web_packet->cma_enabled = FALSE;
 +      memset(&web_packet->cm_parameter, 0, sizeof(web_packet->cm_parameter));
 +    }
 +

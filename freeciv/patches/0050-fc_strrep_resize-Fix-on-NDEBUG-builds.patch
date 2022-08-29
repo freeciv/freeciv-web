@@ -1,0 +1,33 @@
+From 5d399e309c12477ba6452824fd2a16e448c85111 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 29 Aug 2022 17:58:30 +0300
+Subject: [PATCH 50/50] fc_strrep_resize(): Fix on NDEBUG builds
+
+See osdn #45508
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ utility/support.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/utility/support.c b/utility/support.c
+index b003d7380f..f13e31626e 100644
+--- a/utility/support.c
++++ b/utility/support.c
+@@ -687,9 +687,11 @@ char *fc_strrep_resize(char *str, size_t *len, const char *search,
+   }
+ 
+ #ifndef FREECIV_NDEBUG
+-  bool success = fc_strrep(str, (*len), search, replace);
++  bool success =
+ #endif
+-  /* should never happen */
++    fc_strrep(str, (*len), search, replace);
++
++  /* Should never happen */
+   fc_assert_ret_val_msg(success, NULL,
+                         "Can't replace '%s' by '%s' in '%s'. To small "
+                         "size after reallocation: %lu.", search, replace,
+-- 
+2.35.1
+

@@ -33,6 +33,9 @@
 # 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
 #   Send CMA info to web-client
 #   osdn #45268
+# 0050-fc_strrep_resize-Fix-on-NDEBUG-builds.patch
+#   Fix recent freeciv-manual regression
+#   osdn #45508
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -63,6 +66,7 @@ declare -a PATCHLIST=(
   "0023-Be-less-spammy-about-fixing-research-count-errors-fr"
   "0034-Cancel-invalid-war-from-old-savegames"
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
+  "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

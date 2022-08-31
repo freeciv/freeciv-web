@@ -31,7 +31,6 @@ dependencies="\
   libmagickwand-dev \
   libsqlite3-dev \
   libtool \
-  make \
   maven \
   default-mysql-server \
   nginx \

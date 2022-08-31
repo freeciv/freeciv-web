@@ -2,22 +2,6 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
-# 0045-Apply-fix-to-CVE-2022-33099-in-included-lua
-#   Fix lua vulnerability
-#   osdn #45248
-# 0046-Maintain-list-of-web-client-connections.patch
-#   Web-client compatibility development
-#   osdn #45155
-# 0038-Add-support-for-admin-locked-settings
-#   Make it possible to lock settings so that even ruleset
-#   reset cannot change them.
-#   osdn #45134
-# 0027-do_attack-Shrink-city-only-after-complete-removal-of
-#   Fix problems when city gets destroyed after an attack
-#   osdn #45240
-# 0053-Fix-conversion-of-topology-setting-from-old-savegame
-#   Fix recent regression in loading older savegames
-#   osdn #45338
 # 0002-generate_packets.py-Correctly-identify-cm_parameter-
 #   Fix recent regression in generating packet handling code for cma
 #   osdn #45267
@@ -56,8 +40,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0038-Add-support-for-admin-locked-settings"
-  "0053-Fix-conversion-of-topology-setting-from-old-savegame"
   "0002-generate_packets.py-Correctly-identify-cm_parameter-"
   "0024-Create-web-packages-only-if-there-s-web-clients-pres"
   "0023-Be-less-spammy-about-fixing-research-count-errors-fr"

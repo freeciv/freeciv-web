@@ -23,6 +23,12 @@
 # 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
 #   Fix build with gcc-12 on high optimization level
 #   osdn #45541
+# 0042-Fix-map_claim_base-memory-leak.patch
+#   Memory leak fix
+#   osdn #45545
+# 0053-Always-free-unit-build-reqs-vector-in-unit_type_free.patch
+#   Make unit requirements to get properly purged before loading another ruleset
+#   osdn #45572
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -52,6 +58,8 @@ declare -a PATCHLIST=(
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
+  "0042-Fix-map_claim_base-memory-leak"
+  "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

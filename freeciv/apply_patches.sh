@@ -20,6 +20,9 @@
 # 0050-fc_strrep_resize-Fix-on-NDEBUG-builds.patch
 #   Fix recent freeciv-manual regression
 #   osdn #45508
+# 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
+#   Fix build with gcc-12 on high optimization level
+#   osdn #45541
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "0034-Cancel-invalid-war-from-old-savegames"
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
+  "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

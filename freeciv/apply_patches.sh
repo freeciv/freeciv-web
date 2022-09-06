@@ -11,9 +11,10 @@
 # 0023-Be-less-spammy-about-fixing-research-count-errors-fr
 #   Dependency of 0034-Cancel-invalid-war-from-old-savegames
 #   osdn #45344
-# 0034-Cancel-invalid-war-from-old-savegames
-#   Complete change to no-contact-war via alliance -rule
-#   osdn #45345
+## TEMPORARILY REMOVED as cause of a regression
+## 0034-Cancel-invalid-war-from-old-savegames
+##   Complete change to no-contact-war via alliance -rule
+##   osdn #45345
 # 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
 #   Send CMA info to web-client
 #   osdn #45268
@@ -48,7 +49,6 @@ declare -a PATCHLIST=(
   "0002-generate_packets.py-Correctly-identify-cm_parameter-"
   "0024-Create-web-packages-only-if-there-s-web-clients-pres"
   "0023-Be-less-spammy-about-fixing-research-count-errors-fr"
-  "0034-Cancel-invalid-war-from-old-savegames"
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"

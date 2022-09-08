@@ -2,6 +2,9 @@
 
 # Freeciv server version upgrade notes
 # ------------------------------------
+# osdn #????? is ticket in freeciv.org tracker:
+# https://osdn.net/projects/freeciv/ticket/?????
+#
 # 0002-generate_packets.py-Correctly-identify-cm_parameter-
 #   Fix recent regression in generating packet handling code for cma
 #   osdn #45267

@@ -29,9 +29,16 @@
 # 0053-Always-free-unit-build-reqs-vector-in-unit_type_free.patch
 #   Make unit requirements to get properly purged before loading another ruleset
 #   osdn #45572
+# 0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN.patch
+#   Fix potocol problems with more than 255 active connections
+#   osdn #45501
 
 # Not in the upstream Freeciv server
 # ----------------------------------
+# tech_req-None-detection.patch
+#   Fix "Tech" "None" requirements from ending to unit's requirement list.
+#   Once we update past upstream 009ca51f541d8da36ca88b50145af96351350783 / hrm #846779,
+#   this is to be replaced by upstream osdn #45497
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -60,6 +67,8 @@ declare -a PATCHLIST=(
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
+  "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
+  "tech_req-None-detection"
   "meson_webperimental"
   "city_impr_fix2"
   "city-naming-change"

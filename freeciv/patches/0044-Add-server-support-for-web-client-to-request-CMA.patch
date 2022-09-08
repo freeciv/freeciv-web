@@ -1,0 +1,78 @@
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 8bdd1a1c1e..6b2c53634e 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -2369,13 +2369,22 @@ PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACK
+   TURN granary_turns;
+ end
+ 
+-PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
++PACKET_WEB_CMA_SET = 257; cs
++  CITY id; key
++  CM_PARAMETER cm_parameter;
++end
++
++PACKET_WEB_CMA_CLEAR = 258; cs
++  CITY id;
++end
++
++PACKET_WEB_PLAYER_INFO_ADDITION = 259; sc, is-info
+   PLAYER playerno; key
+ 
+   UINT32 expected_income;
+ end
+ 
+-PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend
++PACKET_WEB_RULESET_UNIT_ADDITION = 260; sc, lsend
+   UNIT_TYPE id; key
+ 
+   BV_ACTIONS utype_actions;
+diff --git a/server/cityhand.c b/server/cityhand.c
+index cd7723412f..6cd405a895 100644
+--- a/server/cityhand.c
++++ b/server/cityhand.c
+@@ -560,3 +560,44 @@ void handle_city_rally_point(struct player *pplayer,
+ 
+   send_city_info(pplayer, pcity);
+ }
++
++/**********************************************************************//**
++  Handles a request to change city CMA settings.
++**************************************************************************/
++void handle_web_cma_set(struct player *pplayer, int id,
++                        const struct cm_parameter *param)
++{
++  /* Supported only in freeciv-web builds for now -
++   * Let's be cautious for now, and not give any chance
++   * of client requests of server side CMA to overload
++   * server from a standard build. */
++#ifdef FREECIV_WEB
++  struct city *pcity = player_city_by_number(pplayer, id);
++
++  if (pcity != NULL) {
++    if (pcity->cm_parameter == NULL) {
++      pcity->cm_parameter = fc_calloc(1, sizeof(struct cm_parameter));
++    }
++
++    cm_copy_parameter(pcity->cm_parameter, param);
++
++    auto_arrange_workers(pcity);
++
++    sync_cities();
++  }
++#endif /* FREECIV_WEB */
++}
++
++/**********************************************************************//**
++  Handles a request to clear city CMA settings.
++**************************************************************************/
++void handle_web_cma_clear(struct player *pplayer, int id)
++{
++  struct city *pcity = player_city_by_number(pplayer, id);
++
++  if (pcity != NULL) {
++    free(pcity->cm_parameter);
++    pcity->cm_parameter = NULL;
++    send_city_info(pplayer, pcity);
++  }
++}

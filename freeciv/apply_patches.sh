@@ -32,6 +32,9 @@
 # 0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN.patch
 #   Fix potocol problems with more than 255 active connections
 #   osdn #45501
+# 0044-Add-server-support-for-web-client-to-request-CMA.patch
+#   Add client -> server part of CMA protocol
+#   osdn #45485
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -68,6 +71,7 @@ declare -a PATCHLIST=(
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
+  "0044-Add-server-support-for-web-client-to-request-CMA"
   "tech_req-None-detection"
   "meson_webperimental"
   "city_impr_fix2"

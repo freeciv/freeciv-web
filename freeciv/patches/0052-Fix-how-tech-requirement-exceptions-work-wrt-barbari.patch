@@ -1,0 +1,56 @@
+From 0626fd30557e3ae7d50ed318feb9c20c7a210c83 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 10 Sep 2022 04:30:09 +0300
+Subject: [PATCH 52/58] Fix how tech requirement exceptions work wrt barbarian
+ roles
+
+See osdn #45632
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/unittype.c | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
+
+diff --git a/common/unittype.c b/common/unittype.c
+index 818d85d209..cad966221d 100644
+--- a/common/unittype.c
++++ b/common/unittype.c
+@@ -2094,16 +2094,25 @@ bool can_player_build_unit_direct(const struct player *p,
+       continue;
+     }
+ 
+-    if (preq->source.kind == VUT_ADVANCE && barbarian && preq->range < REQ_RANGE_WORLD
+-        && utype_has_role(punittype, L_BARBARIAN_BUILD)) {
+-      /* Barbarians can build L_BARBARIAN_BUILD when anyone has the tech requirements. */
+-      struct requirement copy;
+-
+-      req_copy(&copy, preq);
+-      copy.range = REQ_RANGE_WORLD;
+-
+-      if (!is_req_active(&context, NULL, &copy, RPT_CERTAIN)) {
+-        return FALSE;
++    if (preq->source.kind == VUT_ADVANCE && barbarian) {
++      /* Tech requirements do not apply to Barbarians building
++       * L_BARBARIAN_BUILD units. */
++      if (!utype_has_role(punittype, L_BARBARIAN_BUILD)) {
++        /* For L_BARBARIAN_BUILD_TECH the tech requirement must be met at World range
++         * (i.e. *anyone* must know the tech) */
++        if (preq->range < REQ_RANGE_WORLD /* If range already World, no need to adjust */
++            && utype_has_role(punittype, L_BARBARIAN_BUILD_TECH)) {
++          struct requirement copy;
++
++          req_copy(&copy, preq);
++          copy.range = REQ_RANGE_WORLD;
++
++          if (!is_req_active(&context, NULL, &copy, RPT_CERTAIN)) {
++            return FALSE;
++          }
++        } else if (!is_req_active(&context, NULL, preq, RPT_CERTAIN)) {
++          return FALSE;
++        }
+       }
+     } else if (!is_req_active(&context, NULL, preq, RPT_CERTAIN)) {
+       return FALSE;
+-- 
+2.35.1
+

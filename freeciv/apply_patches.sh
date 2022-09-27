@@ -49,9 +49,18 @@
 # 0004-Fix-memory-leaks-from-req_to_fstring-usage.patch
 #   Memory leak fix
 #   osdn #45544
+# 0028-req_copy-Copy-present.patch
+#   Fix to barbarian unit requirement check depending on uninialized data
+#   osdn #45709
 # 0038-Fix-city_add_improvement_with_gov_notice-memory-leak.patch
 #   Memory leak fix
 #   osdn #45707
+# 0038-Fix-barbarians-exception-to-unit-tech-requirements.patch
+#   Fix to final issue preventing barbarians from building units
+#   osdn #45571
+# 0037-Server-CMA-Try-with-default-parameters-after-cancell.patch
+#   Improve server side CMA
+#   osdn #45727
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -92,7 +101,10 @@ declare -a PATCHLIST=(
   "0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari"
   "0044-Add-server-support-for-web-client-to-request-CMA"
   "0004-Fix-memory-leaks-from-req_to_fstring-usage"
+  "0028-req_copy-Copy-present"
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
+  "0038-Fix-barbarians-exception-to-unit-tech-requirements"
+  "0037-Server-CMA-Try-with-default-parameters-after-cancell"
   "tech_req-None-detection"
   "meson_webperimental"
   "city_impr_fix2"

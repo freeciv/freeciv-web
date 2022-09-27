@@ -1,0 +1,57 @@
+From 11c86aa4f10dd46e16896c4cbaff163af76b7585 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 8 Sep 2022 01:58:17 +0300
+Subject: [PATCH 45/45] Stop cancelling wars on savegame load
+
+See osdn #45605
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savegame2.c | 4 ++++
+ server/savegame/savegame3.c | 3 +++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/server/savegame/savegame2.c b/server/savegame/savegame2.c
+index 5a60abb491..769c538696 100644
+--- a/server/savegame/savegame2.c
++++ b/server/savegame/savegame2.c
+@@ -2928,12 +2928,16 @@ static void sg_load_player_main(struct loaddata *loading,
+ 
+       ds->max_state = DS_WAR;
+     }
++
++    /* FIXME: If either party is barbarian, we cannot enforce below check */
++#if 0
+     if (ds->type == DS_WAR && ds->first_contact_turn <= 0) {
+       sg_regr(03020000,
+               "Player%d: War with player %d who has never been met. "
+               "Reverted to No Contact state.", plrno, i);
+       ds->type = DS_NO_CONTACT;
+     }
++#endif
+ 
+     ds->first_contact_turn =
+       secfile_lookup_int_default(loading->file, 0,
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index 0cb2fd0d4e..0aa7f88573 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -4106,12 +4106,15 @@ static void sg_load_player_main(struct loaddata *loading,
+       secfile_lookup_enum_default(loading->file, DS_WAR,
+                                   diplstate_type, "%s.closest", buf);
+ 
++    /* FIXME: If either party is barbarian, we cannot enforce below check */
++#if 0
+     if (ds->type == DS_WAR && ds->first_contact_turn <= 0) {
+       sg_regr(03020000,
+               "Player%d: War with player %d who has never been met. "
+               "Reverted to No Contact state.", plrno, i);
+       ds->type = DS_NO_CONTACT;
+     }
++#endif
+ 
+     ds->first_contact_turn =
+       secfile_lookup_int_default(loading->file, 0,
+-- 
+2.35.1
+

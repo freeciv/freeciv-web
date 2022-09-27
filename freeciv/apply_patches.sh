@@ -14,10 +14,11 @@
 # 0023-Be-less-spammy-about-fixing-research-count-errors-fr
 #   Dependency of 0034-Cancel-invalid-war-from-old-savegames
 #   osdn #45344
-## TEMPORARILY REMOVED as cause of a regression
-## 0034-Cancel-invalid-war-from-old-savegames
-##   Complete change to no-contact-war via alliance -rule
-##   osdn #45345
+# 0034-Cancel-invalid-war-from-old-savegames
+#   Complete change to no-contact-war via alliance -rule
+#   NOTE: This gets effectively reverted by a later patch,
+#         but is needed for later patches to apply cleanly.
+#   osdn #45345
 # 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
 #   Send CMA info to web-client
 #   osdn #45268
@@ -36,9 +37,21 @@
 # 0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN.patch
 #   Fix potocol problems with more than 255 active connections
 #   osdn #45501
+# 0045-Stop-cancelling-wars-on-savegame-load.patch
+#   Practically revert older patch that was causing a regression
+#   osdn #45605
+# 0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari.patch
+#   Fix to ONE issue preventing barbarians from building units
+#   osdn #45632
 # 0044-Add-server-support-for-web-client-to-request-CMA.patch
 #   Add client -> server part of CMA protocol
 #   osdn #45485
+# 0004-Fix-memory-leaks-from-req_to_fstring-usage.patch
+#   Memory leak fix
+#   osdn #45544
+# 0038-Fix-city_add_improvement_with_gov_notice-memory-leak.patch
+#   Memory leak fix
+#   osdn #45707
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -68,13 +81,18 @@ declare -a PATCHLIST=(
   "0002-generate_packets.py-Correctly-identify-cm_parameter-"
   "0024-Create-web-packages-only-if-there-s-web-clients-pres"
   "0023-Be-less-spammy-about-fixing-research-count-errors-fr"
+  "0034-Cancel-invalid-war-from-old-savegames"
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
+  "0045-Stop-cancelling-wars-on-savegame-load"
+  "0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari"
   "0044-Add-server-support-for-web-client-to-request-CMA"
+  "0004-Fix-memory-leaks-from-req_to_fstring-usage"
+  "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "tech_req-None-detection"
   "meson_webperimental"
   "city_impr_fix2"

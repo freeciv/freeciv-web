@@ -1,0 +1,83 @@
+diff --git a/client/packhand.c b/client/packhand.c
+index 4caba242d5..a967a3a1db 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -992,7 +992,9 @@ void handle_city_info(const struct packet_city_info *packet)
+ void handle_web_city_info_addition(int id, bool cma_enabled,
+                                    const struct cm_parameter *cm_parameter,
+                                    int granary_size,
+-                                   int granary_turns)
++                                   int granary_turns,
++                                   bv_utypes can_build_unit,
++                                   bv_imprs can_build_improvement)
+ {
+ }
+ 
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index d0e42d68cb..b12195f26c 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -292,6 +292,7 @@ type BV_TERRAIN_FLAGS   = bitvector(bv_terrain_flags)
+ type BV_UCLASS_FLAGS    = bitvector(bv_unit_class_flags)
+ type BV_PLR_FLAGS       = bitvector(bv_plr_flags)
+ type BV_UNIT_CLASSES    = bitvector(bv_unit_classes)
++type BV_UTYPES          = bitvector(bv_utypes)
+ type BV_UTYPE_FLAGS     = bitvector(bv_unit_type_flags)
+ type BV_UTYPE_ROLES     = bitvector(bv_unit_type_roles)
+ type BV_DISASTER_EFFECTS = bitvector(bv_disaster_effects)
+@@ -2378,6 +2379,9 @@ PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACK
+ 
+   UINT16 granary_size;
+   TURN granary_turns;
++
++  BV_UTYPES can_build_unit;
++  BV_IMPRS can_build_improvement;
+ end
+ 
+ PACKET_WEB_CMA_SET = 257; cs, handle-via-fields
+diff --git a/common/unittype.h b/common/unittype.h
+index adb427007d..3cb782b957 100644
+--- a/common/unittype.h
++++ b/common/unittype.h
+@@ -38,6 +38,8 @@ struct ai_type;
+  * Used in the network protocol. */
+ #define U_LAST MAX_NUM_UNITS
+ 
++BV_DEFINE(bv_utypes, U_LAST);
++
+ /* The largest distance a ruleset can allow a unit to paradrop.
+  *
+  * Remember to make sure that the field type of PACKET_RULESET_UNIT's
+diff --git a/server/citytools.c b/server/citytools.c
+index 83d5bf48c8..6603518313 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2627,6 +2627,9 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+ 
+ #ifdef FREECIV_WEB
+   if (web_packet != NULL) {
++    BV_CLR_ALL(web_packet->can_build_unit);
++    BV_CLR_ALL(web_packet->can_build_improvement);
++
+     web_packet->id = pcity->id;
+ 
+     if (pcity->cm_parameter != NULL) {
+@@ -2639,6 +2642,18 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+ 
+     web_packet->granary_size = city_granary_size(city_size_get(pcity));
+     web_packet->granary_turns = city_turns_to_grow(pcity);
++
++    improvement_iterate(pimprove) {
++      if (can_city_build_improvement_now(pcity, pimprove)) {
++        BV_SET(web_packet->can_build_improvement, improvement_index(pimprove));
++      }
++    } improvement_iterate_end;
++
++    unit_type_iterate(punittype) {
++      if (can_city_build_unit_now(pcity, punittype)) {
++        BV_SET(web_packet->can_build_unit, utype_index(punittype));
++      }
++    } unit_type_iterate_end;
+   }
+ #endif /* FREECIV_WEB */
+ }

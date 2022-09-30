@@ -50,6 +50,9 @@
 # 0037-Server-CMA-Try-with-default-parameters-after-cancell.patch
 #   Improve server side CMA
 #   osdn #45727
+# 0033-Add-info-about-what-can-be-built-to-city-web-additio.patch
+#   Improve web-client protocol
+#   osdn #45747
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -87,8 +90,8 @@ declare -a PATCHLIST=(
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
+  "0033-Add-info-about-what-can-be-built-to-city-web-additio"
   "meson_webperimental"
-  "city_impr_fix2"
   "city-naming-change"
   "metachange"
   "text_fixes"

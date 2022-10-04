@@ -47,6 +47,11 @@
 # 0033-Add-info-about-what-can-be-built-to-city-web-additio.patch
 #   Improve web-client protocol
 #   osdn #45747
+# 0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN.patch
+#   Make the server use proper vsnprintf() instead of the fallback implementation
+#   Important mainly because of issues in the fallback implementation
+#   (fixes to those issues not backported to freeciv-web as this makes them redundant)
+#   osdn #45706
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -83,6 +88,7 @@ declare -a PATCHLIST=(
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
   "0033-Add-info-about-what-can-be-built-to-city-web-additio"
+  "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

@@ -344,6 +344,9 @@ function handle_web_city_info_addition(packet)
                 + packet['id']);
     return;
   } else {
+    packet['can_build_improvement'] = new BitVector(packet['can_build_improvement']);
+    packet['can_build_unit'] = new BitVector(packet['can_build_unit']);
+
     /* Merge the information from web_city_info_addition into the recently
      * received city_info. */
     $.extend(cities[packet['id']], packet);

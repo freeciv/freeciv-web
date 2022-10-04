@@ -574,17 +574,15 @@ function can_city_build_unit_direct(pcity, punittype)
   return true;
 }
 
-
 /**************************************************************************
   Return whether given city can build given unit; returns FALSE if unit is
   obsolete.
 **************************************************************************/
 function can_city_build_unit_now(pcity, punittype_id)
 {
-  return (pcity != null && pcity['can_build_unit'] != null
-          && pcity['can_build_unit'][punittype_id] == "1");
+  return (pcity != null && typeof pcity['can_build_unit'] != 'undefined'
+          && pcity['can_build_unit'].isSet(punittype_id));
 }
-
 
 /**************************************************************************
   Return whether given city can build given building; returns FALSE if
@@ -592,10 +590,9 @@ function can_city_build_unit_now(pcity, punittype_id)
 **************************************************************************/
 function can_city_build_improvement_now(pcity, pimprove_id)
 {
-  return (pcity != null && pcity['can_build_improvement'] != null
-          && pcity['can_build_improvement'][pimprove_id] == "1");
+  return (pcity != null && typeof pcity['can_build_improvement'] != 'undefined'
+          && pcity['can_build_improvement'].isSet(pimprove_id));
 }
-
 
 /**************************************************************************
   Return whether given city can build given item.

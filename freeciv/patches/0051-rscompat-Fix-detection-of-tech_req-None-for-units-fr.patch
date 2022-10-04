@@ -1,0 +1,32 @@
+From 403b161a5a63795efbdeda657345aee2bc7062eb Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 4 Sep 2022 14:41:58 +0300
+Subject: [PATCH 51/51] rscompat: Fix detection of tech_req "None" for units
+ from 3.1 ruleset
+
+The failure to handle tech_req "None" specially lead such
+requirement to be explicitly listed in requirement vector
+
+See osdn #45497
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/ruleset.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/ruleset.c b/server/ruleset.c
+index f23479ed6e..b1f1eb8a7f 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -2191,7 +2191,7 @@ static bool load_ruleset_units(struct section_file *file,
+                         rule_name_get(&u->name));
+           ok = FALSE;
+           break;
+-        } else if (adv_req != A_NONE) {
++        } else if (adv_req != advance_by_number(A_NONE)) {
+           requirement_vector_append(&u->build_reqs,
+                                     req_from_values(VUT_ADVANCE, REQ_RANGE_PLAYER,
+                                                     FALSE, TRUE, FALSE,
+-- 
+2.35.1
+

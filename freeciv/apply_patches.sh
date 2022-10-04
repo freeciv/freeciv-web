@@ -5,20 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0002-generate_packets.py-Correctly-identify-cm_parameter-
-#   Fix recent regression in generating packet handling code for cma
-#   osdn #45267
-# 0024-Create-web-packages-only-if-there-s-web-clients-pres
-#   Web-client compatibility development
-#   osdn #45319
-# 0023-Be-less-spammy-about-fixing-research-count-errors-fr
-#   Dependency of 0034-Cancel-invalid-war-from-old-savegames
-#   osdn #45344
-# 0034-Cancel-invalid-war-from-old-savegames
-#   Complete change to no-contact-war via alliance -rule
-#   NOTE: This gets effectively reverted by a later patch,
-#         but is needed for later patches to apply cleanly.
-#   osdn #45345
 # 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
 #   Send CMA info to web-client
 #   osdn #45268
@@ -28,6 +14,9 @@
 # 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
 #   Fix build with gcc-12 on high optimization level
 #   osdn #45541
+# 0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr.patch
+#   Fix "Tech" "None" requirements from ending to unit's requirement list.
+#   osdn #45497
 # 0042-Fix-map_claim_base-memory-leak.patch
 #   Memory leak fix
 #   osdn #45545
@@ -61,13 +50,12 @@
 # 0037-Server-CMA-Try-with-default-parameters-after-cancell.patch
 #   Improve server side CMA
 #   osdn #45727
+# 0033-Add-info-about-what-can-be-built-to-city-web-additio.patch
+#   Improve web-client protocol
+#   osdn #45747
 
 # Not in the upstream Freeciv server
 # ----------------------------------
-# tech_req-None-detection.patch
-#   Fix "Tech" "None" requirements from ending to unit's requirement list.
-#   Once we update past upstream 009ca51f541d8da36ca88b50145af96351350783 / hrm #846779,
-#   this is to be replaced by upstream osdn #45497
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # message_escape is a patch for protecting against script injection in the message texts.
@@ -87,13 +75,10 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0002-generate_packets.py-Correctly-identify-cm_parameter-"
-  "0024-Create-web-packages-only-if-there-s-web-clients-pres"
-  "0023-Be-less-spammy-about-fixing-research-count-errors-fr"
-  "0034-Cancel-invalid-war-from-old-savegames"
   "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
   "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
+  "0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr"
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
@@ -105,9 +90,8 @@ declare -a PATCHLIST=(
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
-  "tech_req-None-detection"
+  "0033-Add-info-about-what-can-be-built-to-city-web-additio"
   "meson_webperimental"
-  "city_impr_fix2"
   "city-naming-change"
   "metachange"
   "text_fixes"

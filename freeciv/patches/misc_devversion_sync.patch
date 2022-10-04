@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-08-16 07:48:01.863025037 +0300
-+++ freeciv/common/networking/packets.def	2022-08-16 07:38:08.965080331 +0300
-@@ -760,6 +760,10 @@
+--- freeciv/common/networking/packets.def	2022-09-30 04:59:39.160791631 +0300
++++ freeciv/common/networking/packets.def	2022-09-30 04:59:57.364984539 +0300
+@@ -762,6 +762,10 @@
    WORKLIST worklist;
  
    BV_IMPRS improvements;
@@ -13,24 +13,25 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
    ESTRING name[MAX_LEN_CITYNAME];
  
 diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2022-08-16 07:47:15.467188383 +0300
-+++ freeciv/server/citytools.c	2022-08-16 07:42:50.552114473 +0300
-@@ -2627,6 +2627,11 @@
+--- freeciv/server/citytools.c	2022-09-30 04:59:39.584796126 +0300
++++ freeciv/server/citytools.c	2022-09-30 05:02:36.342660667 +0300
+@@ -2625,6 +2625,12 @@
+ 
+ #ifdef FREECIV_WEB
    if (web_packet != NULL) {
-     char can_build_impr_buf[MAX_NUM_ITEMS + 1];
-     char can_build_unit_buf[MAX_NUM_ITEMS + 1];
 +    char food_output_buf[MAX_NUM_ITEMS + 1];
 +    char shield_output_buf[MAX_NUM_ITEMS + 1];
 +    char trade_output_buf[MAX_NUM_ITEMS + 1];
 +    struct tile *pcenter = city_tile(pcity);
 +    int c = 0;
++
+     BV_CLR_ALL(web_packet->can_build_unit);
+     BV_CLR_ALL(web_packet->can_build_improvement);
  
-     web_packet->id = pcity->id;
- 
-@@ -2648,6 +2653,29 @@
+@@ -2652,6 +2658,28 @@
+         BV_SET(web_packet->can_build_unit, utype_index(punittype));
+       }
      } unit_type_iterate_end;
-     can_build_unit_buf[utype_count()] = '\0';
-     sz_strlcpy(web_packet->can_build_unit, can_build_unit_buf);
 +
 +    city_tile_iterate(city_map_radius_sq_get(pcity), pcenter, ptile) {
 +      char f[2];
@@ -45,7 +46,6 @@ diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
 +      trade_output_buf[c] = t[0];
 +
 +      c += 1;
-+
 +    } city_tile_iterate_end;
 +
 +    food_output_buf[c] = '\0';

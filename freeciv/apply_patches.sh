@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
-#   Send CMA info to web-client
-#   osdn #45268
-# 0050-fc_strrep_resize-Fix-on-NDEBUG-builds.patch
-#   Fix recent freeciv-manual regression
-#   osdn #45508
 # 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
 #   Fix build with gcc-12 on high optimization level
 #   osdn #45541
@@ -75,8 +69,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
-  "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
   "0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr"
   "0042-Fix-map_claim_base-memory-leak"

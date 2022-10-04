@@ -1,7 +1,24 @@
-diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
---- freeciv/common/actions.c	2022-09-24 17:15:22.220555716 +0300
-+++ freeciv/common/actions.c	2022-09-24 17:16:26.501006038 +0300
-@@ -2721,8 +2721,8 @@
+From f2cf5ecca930cc83a2d9cb95eeba54bfb070def3 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 11 Sep 2022 08:55:05 +0300
+Subject: [PATCH 58/58] Fix memory leaks from req_to_fstring() usage
+
+See osdn #45544
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/actions.c          | 15 ++++++++++----
+ common/requirements.c     | 42 +++++++++++++++++++++++++++++----------
+ common/requirements.h     |  8 ++++++--
+ server/rssanity.c         | 20 ++++++++++++++-----
+ tools/ruleutil/rulesave.c |  5 ++++-
+ 5 files changed, 68 insertions(+), 22 deletions(-)
+
+diff --git a/common/actions.c b/common/actions.c
+index 6975e320cf..a20371c5c1 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -2721,8 +2721,8 @@ enabler_tile_tgt_local_diplrel_implies_claimed(
    struct requirement *claimed_req;
    struct requirement tile_is_claimed;
    struct requirement tile_is_unclaimed;
@@ -11,7 +28,7 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
  
    if (action_get_target_kind(paction) != ATK_TILE) {
      /* Not tile targeted */
-@@ -2766,7 +2766,9 @@
+@@ -2766,7 +2766,9 @@ enabler_tile_tgt_local_diplrel_implies_claimed(
             * so this is implicit.) */
            N_("Requirement {%s} of action \"%s\" implies a claimed "
               "tile. No diplomatic relation to Nature."),
@@ -22,7 +39,7 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
  
    /* The solution is to add the requirement that the tile is claimed */
    out->suggested_solutions[0].req = tile_is_claimed;
-@@ -2790,8 +2792,9 @@
+@@ -2790,8 +2792,9 @@ enabler_first_self_contradiction(const struct action_enabler *enabler)
    struct requirement *local_diplrel;
    struct requirement *unclaimed_req;
    struct requirement tile_is_claimed;
@@ -33,7 +50,7 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
  
    if (action_get_target_kind(paction) != ATK_TILE) {
      /* Not tile targeted */
-@@ -2828,7 +2831,11 @@
+@@ -2828,7 +2831,11 @@ enabler_first_self_contradiction(const struct action_enabler *enabler)
            N_("In enabler for \"%s\": No diplomatic relation to Nature."
               " Requirements {%s} and {%s} contradict each other."),
            action_rule_name(paction),
@@ -46,10 +63,11 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
  
    /* The first suggestion is to remove the diplrel */
    out->suggested_solutions[0].req = *local_diplrel;
-diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
---- freeciv/common/requirements.c	2022-09-24 17:15:22.232555800 +0300
-+++ freeciv/common/requirements.c	2022-09-24 17:16:26.501006038 +0300
-@@ -762,19 +762,24 @@
+diff --git a/common/requirements.c b/common/requirements.c
+index 8dbce3ce09..0e1f2dce2f 100644
+--- a/common/requirements.c
++++ b/common/requirements.c
+@@ -776,19 +776,24 @@ const struct req_context *req_context_empty(void)
  /**********************************************************************//**
    Returns the given requirement as a formatted string ready for printing.
    Does not care about the 'quiet' property.
@@ -78,7 +96,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  }
  
  /**********************************************************************//**
-@@ -4132,6 +4137,7 @@
+@@ -4192,6 +4197,7 @@ const char *req_vec_change_translation(const struct req_vec_change *change,
  {
    const char *req_vec_description;
    static char buf[MAX_LEN_NAME * 3];
@@ -86,7 +104,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  
    fc_assert_ret_val(change, NULL);
    fc_assert_ret_val(req_vec_change_operation_is_valid(change->operation),
-@@ -4159,8 +4165,9 @@
+@@ -4219,8 +4225,9 @@ const char *req_vec_change_translation(const struct req_vec_change *change,
                   * like "actor_reqs" */
                  _("%s %s from %s"),
                  req_vec_change_operation_name(change->operation),
@@ -97,7 +115,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
      break;
    case RVCO_APPEND:
      fc_snprintf(buf, sizeof(buf),
-@@ -4172,8 +4179,9 @@
+@@ -4232,8 +4239,9 @@ const char *req_vec_change_translation(const struct req_vec_change *change,
                   * like "actor_reqs" */
                  _("%s %s to %s"),
                  req_vec_change_operation_name(change->operation),
@@ -108,7 +126,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
      break;
    case RVCO_NOOP:
      fc_snprintf(buf, sizeof(buf),
-@@ -4340,10 +4348,15 @@
+@@ -4400,10 +4408,15 @@ req_vec_get_first_contradiction(const struct requirement_vector *vec,
  
        if (are_requirements_contradictions(preq, nreq)) {
          struct req_vec_problem *problem;
@@ -125,7 +143,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  
          /* The solution is to remove one of the contradictions. */
          problem->suggested_solutions[0].operation = RVCO_REMOVE;
-@@ -4419,6 +4432,7 @@
+@@ -4479,6 +4492,7 @@ req_vec_get_first_missing_univ(const struct requirement_vector *vec,
  
      if (universal_never_there(&preq->source)) {
        struct req_vec_problem *problem;
@@ -133,7 +151,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  
        if (preq->present) {
          /* The requirement vector can never be fulfilled. Removing the
-@@ -4431,13 +4445,16 @@
+@@ -4491,13 +4505,16 @@ req_vec_get_first_missing_univ(const struct requirement_vector *vec,
          req_vec_problem_new(0,
                    N_("Requirement {%s} requires %s but it will never be"
                       " there."),
@@ -152,7 +170,7 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  
        /* The solution is to remove the reference to the missing
         * universal. */
-@@ -4492,10 +4509,15 @@
+@@ -4552,10 +4569,15 @@ req_vec_get_first_redundant_req(const struct requirement_vector *vec,
  
        if (are_requirements_equal(preq, nreq)) {
          struct req_vec_problem *problem;
@@ -169,9 +187,10 @@ diff -Nurd freeciv/common/requirements.c freeciv/common/requirements.c
  
          /* The solution is to remove one of the redundant requirements. */
          problem->suggested_solutions[0].operation = RVCO_REMOVE;
-diff -Nurd freeciv/common/requirements.h freeciv/common/requirements.h
---- freeciv/common/requirements.h	2022-09-24 17:15:22.232555800 +0300
-+++ freeciv/common/requirements.h	2022-09-24 17:16:26.501006038 +0300
+diff --git a/common/requirements.h b/common/requirements.h
+index d22954a25e..9e98c15829 100644
+--- a/common/requirements.h
++++ b/common/requirements.h
 @@ -18,6 +18,9 @@
  extern "C" {
  #endif /* __cplusplus */
@@ -182,7 +201,7 @@ diff -Nurd freeciv/common/requirements.h freeciv/common/requirements.h
  /* common */
  #include "fc_types.h"
  
-@@ -114,7 +117,8 @@
+@@ -114,7 +117,8 @@ const struct req_context *req_context_empty(void);
  struct requirement req_from_str(const char *type, const char *range,
                                  bool survives, bool present, bool quiet,
                                  const char *value);
@@ -192,7 +211,7 @@ diff -Nurd freeciv/common/requirements.h freeciv/common/requirements.h
  
  void req_get_values(const struct requirement *req, int *type,
                      int *range, bool *survives, bool *present, bool *quiet,
-@@ -126,7 +130,7 @@
+@@ -126,7 +130,7 @@ struct requirement req_from_values(int type, int range,
  void req_copy(struct requirement *dst, const struct requirement *src);
  
  bool are_requirements_equal(const struct requirement *req1,
@@ -201,10 +220,11 @@ diff -Nurd freeciv/common/requirements.h freeciv/common/requirements.h
  
  bool are_requirements_contradictions(const struct requirement *req1,
                                       const struct requirement *req2);
-diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
---- freeciv/server/rssanity.c	2022-09-24 17:15:23.432564189 +0300
-+++ freeciv/server/rssanity.c	2022-09-24 17:17:41.077530552 +0300
-@@ -493,6 +493,7 @@
+diff --git a/server/rssanity.c b/server/rssanity.c
+index a5a4ebea95..81f3570af3 100644
+--- a/server/rssanity.c
++++ b/server/rssanity.c
+@@ -514,6 +514,7 @@ static bool effect_list_sanity_cb(struct effect *peffect, void *data)
    int one_tile = -1; /* TODO: Determine correct value from effect.
                        *       -1 disables checking */
    els_data *els = (els_data *)data;
@@ -212,40 +232,40 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
  
    /* TODO: Refactor this to be more reusable when we check
     *       for more than one base effect. */
-@@ -513,8 +514,9 @@
-           log_error("The effect Action_Success_Target_Move_Cost has the"
-                     " requirement {%s} but the action %s isn't"
-                     " (single) unit targeted.",
--                    req_to_fstring(preq),
-+                    req_to_fstring(preq, &astr),
-                     universal_rule_name(&preq->source));
+@@ -535,8 +536,9 @@ static bool effect_list_sanity_cb(struct effect *peffect, void *data)
+                         "The effect Action_Success_Target_Move_Cost has the"
+                         " requirement {%s} but the action %s isn't"
+                         " (single) unit targeted.",
+-                        req_to_fstring(preq),
++                        req_to_fstring(preq, &astr),
+                         universal_rule_name(&preq->source));
 +          astr_free(&astr);
            return FALSE;
          }
        }
-@@ -527,8 +529,9 @@
-           log_error("The effect Action_Success_Actor_Move_Cost has the"
-                     " requirement {%s} but the action %s isn't"
-                     " performed by a unit.",
--                    req_to_fstring(preq),
-+                    req_to_fstring(preq, &astr),
-                     universal_rule_name(&preq->source));
+@@ -550,8 +552,9 @@ static bool effect_list_sanity_cb(struct effect *peffect, void *data)
+                         "The effect Action_Success_Actor_Move_Cost has the"
+                         " requirement {%s} but the action %s isn't"
+                         " performed by a unit.",
+-                        req_to_fstring(preq),
++                        req_to_fstring(preq, &astr),
+                         universal_rule_name(&preq->source));
 +          astr_free(&astr);
            return FALSE;
          }
        }
-@@ -544,8 +547,9 @@
-                     " requirement {%s} but the action %s doesn't"
-                     " roll the dice to see if it fails.",
-                     effect_type_name(peffect->type),
--                    req_to_fstring(preq),
-+                    req_to_fstring(preq, &astr),
-                     universal_rule_name(&preq->source));
+@@ -568,8 +571,9 @@ static bool effect_list_sanity_cb(struct effect *peffect, void *data)
+                         " requirement {%s} but the action %s doesn't"
+                         " roll the dice to see if it fails.",
+                         effect_type_name(peffect->type),
+-                        req_to_fstring(preq),
++                        req_to_fstring(preq, &astr),
+                         universal_rule_name(&preq->source));
 +          astr_free(&astr);
            return FALSE;
          }
        }
-@@ -851,6 +855,8 @@
+@@ -878,6 +882,8 @@ bool sanity_check_ruleset_data(struct rscompat_info *compat)
                        advance_rule_name(padvance));
          ok = FALSE;
        } else if (!is_req_unchanging(preq)) {
@@ -254,7 +274,7 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
          /* Only support unchanging requirements until the reachability code
           * can handle it and the tech tree can display changing
           * requirements. */
-@@ -860,7 +866,8 @@
+@@ -887,7 +893,8 @@ bool sanity_check_ruleset_data(struct rscompat_info *compat)
                        " the game. Changing requirements aren't supported"
                        " yet.",
                        advance_rule_name(padvance),
@@ -264,7 +284,7 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
          ok = FALSE;
        }
      } requirement_vector_iterate_end;
-@@ -1231,6 +1238,8 @@
+@@ -1261,6 +1268,8 @@ bool sanity_check_ruleset_data(struct rscompat_info *compat)
        requirement_vector_iterate(&(enabler->target_reqs), preq) {
          if (preq->source.kind == VUT_DIPLREL
              && preq->range == REQ_RANGE_LOCAL) {
@@ -273,7 +293,7 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
            /* A Local DiplRel requirement can be expressed as a requirement
             * in actor_reqs. Demand that it is there. This avoids breaking
             * code that reasons about actions. */
-@@ -1240,7 +1249,8 @@
+@@ -1270,7 +1279,8 @@ bool sanity_check_ruleset_data(struct rscompat_info *compat)
                          "section \"Requirement vector rules\" in "
                          "doc/README.actions",
                          action_id_rule_name(act),
@@ -283,10 +303,11 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
            ok = FALSE;
          }
        } requirement_vector_iterate_end;
-diff -Nurd freeciv/tools/ruleutil/rulesave.c freeciv/tools/ruleutil/rulesave.c
---- freeciv/tools/ruleutil/rulesave.c	2022-09-24 17:15:23.448564301 +0300
-+++ freeciv/tools/ruleutil/rulesave.c	2022-09-24 17:16:26.569006516 +0300
-@@ -533,8 +533,11 @@
+diff --git a/tools/ruleutil/rulesave.c b/tools/ruleutil/rulesave.c
+index b3bc667947..de5e727561 100644
+--- a/tools/ruleutil/rulesave.c
++++ b/tools/ruleutil/rulesave.c
+@@ -533,8 +533,11 @@ static bool save_action_auto_uflag_block(struct section_file *sfile,
  
        protecor_flag[i++] = req->source.value.unitflag;
      } else if (unexpected_req(req)) {
@@ -299,3 +320,6 @@ diff -Nurd freeciv/tools/ruleutil/rulesave.c freeciv/tools/ruleutil/rulesave.c
  
        return FALSE;
      }
+-- 
+2.35.1
+

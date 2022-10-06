@@ -46,6 +46,9 @@
 #   Important mainly because of issues in the fallback implementation
 #   (fixes to those issues not backported to freeciv-web as this makes them redundant)
 #   osdn #45706
+# 0018-Stop-memory-corruption-on-dai_data_phase_begin.patch
+#   Fix a memory corruption issue
+#   osdn #45768
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -81,6 +84,7 @@ declare -a PATCHLIST=(
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
   "0033-Add-info-about-what-can-be-built-to-city-web-additio"
   "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
+  "0018-Stop-memory-corruption-on-dai_data_phase_begin"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

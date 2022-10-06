@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
-#   Fix build with gcc-12 on high optimization level
-#   osdn #45541
-# 0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr.patch
-#   Fix "Tech" "None" requirements from ending to unit's requirement list.
-#   osdn #45497
 # 0042-Fix-map_claim_base-memory-leak.patch
 #   Memory leak fix
 #   osdn #45545
@@ -74,8 +68,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
-  "0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr"
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"

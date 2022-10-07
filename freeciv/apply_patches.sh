@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD.patch
-#   Send CMA info to web-client
-#   osdn #45268
-# 0050-fc_strrep_resize-Fix-on-NDEBUG-builds.patch
-#   Fix recent freeciv-manual regression
-#   osdn #45508
 # 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
 #   Fix build with gcc-12 on high optimization level
 #   osdn #45541
@@ -53,6 +47,11 @@
 # 0033-Add-info-about-what-can-be-built-to-city-web-additio.patch
 #   Improve web-client protocol
 #   osdn #45747
+# 0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN.patch
+#   Make the server use proper vsnprintf() instead of the fallback implementation
+#   Important mainly because of issues in the fallback implementation
+#   (fixes to those issues not backported to freeciv-web as this makes them redundant)
+#   osdn #45706
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -75,8 +74,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0052-Add-server-side-CMA-info-to-PACKET_WEB_CITY_INFO_ADD"
-  "0050-fc_strrep_resize-Fix-on-NDEBUG-builds"
   "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
   "0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr"
   "0042-Fix-map_claim_base-memory-leak"
@@ -91,6 +88,7 @@ declare -a PATCHLIST=(
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
   "0033-Add-info-about-what-can-be-built-to-city-web-additio"
+  "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

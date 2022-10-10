@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0042-Add-inline-advance_count-wrapper-proving-that-it-ret.patch
-#   Fix build with gcc-12 on high optimization level
-#   osdn #45541
-# 0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr.patch
-#   Fix "Tech" "None" requirements from ending to unit's requirement list.
-#   osdn #45497
 # 0042-Fix-map_claim_base-memory-leak.patch
 #   Memory leak fix
 #   osdn #45545
@@ -52,6 +46,9 @@
 #   Important mainly because of issues in the fallback implementation
 #   (fixes to those issues not backported to freeciv-web as this makes them redundant)
 #   osdn #45706
+# 0018-Stop-memory-corruption-on-dai_data_phase_begin.patch
+#   Fix a memory corruption issue
+#   osdn #45768
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -74,8 +71,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0042-Add-inline-advance_count-wrapper-proving-that-it-ret"
-  "0051-rscompat-Fix-detection-of-tech_req-None-for-units-fr"
   "0042-Fix-map_claim_base-memory-leak"
   "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
   "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
@@ -89,6 +84,7 @@ declare -a PATCHLIST=(
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
   "0033-Add-info-about-what-can-be-built-to-city-web-additio"
   "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
+  "0018-Stop-memory-corruption-on-dai_data_phase_begin"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

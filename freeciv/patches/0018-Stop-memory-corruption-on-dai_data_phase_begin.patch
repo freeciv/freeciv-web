@@ -1,0 +1,53 @@
+From f639864a894db9f4f8f27a04aa2429f9ae2ddcfe Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 5 Oct 2022 01:36:26 +0300
+Subject: [PATCH 18/32] Stop memory corruption on dai_data_phase_begin()
+
+It can get called when the tile continent numbers are in
+inconsistent state. Check that ids used are within the
+boundaries of the worker statistics arrays.
+
+This just stops crashes seen because of the broken design.
+It doesn't address the issues of data being inconsistent
+in the first place.
+
+See osdn #45768
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ ai/default/daidata.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/ai/default/daidata.c b/ai/default/daidata.c
+index 00e1dd0f7c..ee6dc35e89 100644
+--- a/ai/default/daidata.c
++++ b/ai/default/daidata.c
+@@ -209,10 +209,23 @@ void dai_data_phase_begin(struct ai_type *ait, struct player *pplayer,
+     struct tile *ptile = unit_tile(punit);
+ 
+     if (unit_has_type_flag(punit, UTYF_SETTLERS)) {
++      Continent_id cont = tile_continent(ptile);
++
++      /* We have to check that continent id is in a legal range,
++       * as this currently gets sometimes called with inconsistent
++       * data regarding continent numbers.
++       * Even if the id is in legal range, it's possible that it
++       * doesn't really refer to the correct continent, but as that's
++       * so rare situation, for now we just ignore the possibility
++       * in constructing these statistics. */
+       if (is_ocean_tile(ptile)) {
+-        ai->stats.ocean_workers[(int)-tile_continent(ptile)]++;
++        if (cont <= 0 && -cont <= adv->num_oceans) {
++          ai->stats.ocean_workers[(int)-cont]++;
++        }
+       } else {
+-        ai->stats.workers[(int)tile_continent(ptile)]++;
++        if (cont >= 0 && cont <= adv->num_continents) {
++          ai->stats.workers[(int)cont]++;
++        }
+       }
+     }
+   } unit_list_iterate_end;
+-- 
+2.35.1
+

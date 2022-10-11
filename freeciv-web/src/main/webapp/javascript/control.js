@@ -1721,7 +1721,7 @@ function do_map_click(ptile, qtype, first_time_called)
       // send goto order for all units in focus. 
       for (var s = 0; s < current_focus.length; s++) {
         punit = current_focus[s];
-        /* Get the path the server sent using PACKET_GOTO_PATH. */
+          /* Get the path the server sent using PACKET_WEB_GOTO_PATH. */
         var goto_path = goto_request_map[punit['id'] + "," + ptile['x'] + "," + ptile['y']];
         if (goto_path == null) {
           continue;
@@ -3207,7 +3207,7 @@ function request_goto_path(unit_id, dst_x, dst_y)
   if (goto_request_map[unit_id + "," + dst_x + "," + dst_y] == null) {
     goto_request_map[unit_id + "," + dst_x + "," + dst_y] = true;
 
-    var packet = {"pid" : packet_goto_path_req, "unit_id" : unit_id,
+    var packet = {"pid" : packet_web_goto_path_req, "unit_id" : unit_id,
                   "goal" : map_pos_to_tile(dst_x, dst_y)['index']};
     send_request(JSON.stringify(packet));
     current_goto_turns = null;
@@ -3339,14 +3339,13 @@ function popit_req(ptile)
     focus_unit_id = current_focus[0]['id'];
   }
 
-  var packet = {"pid" : packet_info_text_req, "visible_unit" : punit_id,
+  var packet = {"pid" : packet_web_info_text_req, "visible_unit" : punit_id,
                 "loc" : ptile['index'], "focus_unit": focus_unit_id};
   send_request(JSON.stringify(packet));
 }
 
-
 /**************************************************************************
-   find any city to focus on.
+  Find any city to focus on.
 **************************************************************************/
 function center_on_any_city()
 {

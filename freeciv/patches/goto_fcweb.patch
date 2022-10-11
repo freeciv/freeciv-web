@@ -1,9 +1,9 @@
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2021-11-03 18:44:06.413154450 +0200
-+++ freeciv/client/packhand.c	2021-11-03 18:55:58.745277222 +0200
-@@ -5402,3 +5402,13 @@
+diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
+--- freeciv/client/packhand.c	2022-10-11 18:00:51.555573241 +0300
++++ freeciv/client/packhand.c	2022-10-11 18:03:07.948871129 +0300
+@@ -5462,3 +5462,13 @@
  {
-   play_single_track(tag);
+   client_recv_remove_clause(counterpart, giver, type, value);
  }
 +
 +/************************************************************************//**
@@ -11,36 +11,34 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/client/packhand.c freeciv/clien
 +  use for it.
 +  TODO: Do not generate code calling this in the C-client.
 +****************************************************************************/
-+void handle_goto_path(int unit_id, int length, const enum direction8 *dir,
-+                      int dest, int turns)
++void handle_web_goto_path(int unit_id, int length, const enum direction8 *dir,
++                          int dest, int turns)
 +{
 +}
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2021-11-03 18:44:06.437154354 +0200
-+++ freeciv/common/networking/packets.def	2021-11-03 18:52:00.194468972 +0200
-@@ -2362,3 +2362,19 @@
+diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2022-10-11 18:00:51.559573278 +0300
++++ freeciv/common/networking/packets.def	2022-10-11 18:02:46.944671839 +0300
+@@ -2393,3 +2393,17 @@
  
    BV_ACTIONS utype_actions;
  end
 +
-+# used for showing GOTO path in web client.
-+# TODO: Rename to contain '_WEB_' in the name.
-+PACKET_GOTO_PATH_REQ = 287; cs, dsend
++# Used for showing GOTO path in web client.
++PACKET_WEB_GOTO_PATH_REQ = 287; cs, dsend, handle-via-fields
 +  UNIT unit_id;
 +  TILE goal;
 +end
 +
-+# TODO: Rename to contain '_WEB_' in the name.
-+PACKET_GOTO_PATH = 288; sc, dsend
++PACKET_WEB_GOTO_PATH = 288; sc, dsend, handle-via-fields
 +  UNIT unit_id;
 +  UINT16 length;
 +  DIRECTION dir[MAX_LEN_ROUTE:length];
 +  TILE dest;
 +  UINT32 turns;
 +end
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2021-11-03 18:44:06.681153381 +0200
-+++ freeciv/server/unithand.c	2021-11-03 18:45:35.916620113 +0200
+diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
+--- freeciv/server/unithand.c	2022-10-11 18:00:52.091578352 +0300
++++ freeciv/server/unithand.c	2022-10-11 18:05:42.898343120 +0300
 @@ -45,6 +45,9 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -51,13 +49,13 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/serve
  /* common/scriptcore */
  #include "luascript_types.h"
  
-@@ -4087,6 +4090,88 @@
+@@ -4208,6 +4211,85 @@
  }
  
  /**********************************************************************//**
 +  This function handles GOTO path requests from the client.
 +**************************************************************************/
-+void handle_goto_path_req(struct player *pplayer, int unit_id, int goal)
++void handle_web_goto_path_req(struct player *pplayer, int unit_id, int goal)
 +{
 +  struct unit *punit = player_unit_by_number(pplayer, unit_id);
 +  struct tile *ptile = index_to_tile(&(wld.map), goal);
@@ -66,20 +64,18 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/serve
 +  struct pf_path *path;
 +  struct tile *old_tile;
 +  int i = 0;
-+  struct packet_goto_path p;
++  struct packet_web_goto_path p;
 +
 +  if (NULL == punit) {
 +    /* Shouldn't happen */
-+    log_error("handle_unit_move()"
-+              " invalid unit %d",
++    log_error("handle_unit_move(): invalid unit %d",
 +              unit_id);
 +    return;
 +  }
 +
 +  if (NULL == ptile) {
 +    /* Shouldn't happen */
-+    log_error("handle_unit_move()"
-+              " invalid %s (%d) tile (%d,%d)",
++    log_error("handle_unit_move(): invalid %s (%d) tile (%d, %d)",
 +              unit_rule_name(punit),
 +              unit_id,
 +              TILE_XY(ptile));
@@ -88,8 +84,7 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/serve
 +
 +  if (!is_player_phase(unit_owner(punit), game.info.phase)) {
 +    /* Client is out of sync, ignore */
-+    log_verbose("handle_unit_move()"
-+                " invalid %s (%d) %s != phase %d",
++    log_verbose("handle_unit_move(): invalid %s (%d) %s != phase %d",
 +                unit_rule_name(punit),
 +                unit_id,
 +                nation_rule_name(nation_of_unit(punit)),
@@ -129,7 +124,7 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/unithand.c freeciv/serve
 +    }
 +    pf_path_destroy(path);
 +    p.turns = total_mc / unit_move_rate(punit);
-+    send_packet_goto_path(pplayer->current_conn, &p);
++    send_packet_web_goto_path(pplayer->current_conn, &p);
 +
 +  } else {
 +    return;

@@ -5,15 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0042-Fix-map_claim_base-memory-leak.patch
-#   Memory leak fix
-#   osdn #45545
-# 0053-Always-free-unit-build-reqs-vector-in-unit_type_free.patch
-#   Make unit requirements to get properly purged before loading another ruleset
-#   osdn #45572
-# 0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN.patch
-#   Fix potocol problems with more than 255 active connections
-#   osdn #45501
 # 0045-Stop-cancelling-wars-on-savegame-load.patch
 #   Practically revert older patch that was causing a regression
 #   osdn #45605
@@ -49,6 +40,14 @@
 # 0018-Stop-memory-corruption-on-dai_data_phase_begin.patch
 #   Fix a memory corruption issue
 #   osdn #45768
+# 0016-Make-vision-site-able-to-hold-maximum-city-name-leng
+#   Fix long city names of FoW map
+#   osdn #45787
+# 0040-Set-barbarians-as-AI-before-initializing-them-otherw
+#   Support one freeciv-web modification, removing need for another
+#   freeciv-modification. Fixes handling of animals barbarian
+#   player that wasn't handled by freeciv-web at all.
+#   osdn #45808
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -71,9 +70,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0042-Fix-map_claim_base-memory-leak"
-  "0053-Always-free-unit-build-reqs-vector-in-unit_type_free"
-  "0031-Protocol-Make-connection-count-UINT16-in-PACKET_CONN"
   "0045-Stop-cancelling-wars-on-savegame-load"
   "0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari"
   "0044-Add-server-support-for-web-client-to-request-CMA"
@@ -85,6 +81,8 @@ declare -a PATCHLIST=(
   "0033-Add-info-about-what-can-be-built-to-city-web-additio"
   "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
   "0018-Stop-memory-corruption-on-dai_data_phase_begin"
+  "0016-Make-vision-site-able-to-hold-maximum-city-name-leng"
+  "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
   "meson_webperimental"
   "city-naming-change"
   "metachange"
@@ -97,7 +95,6 @@ declare -a PATCHLIST=(
   "maphand_ch"
   "ai_traits_crash"
   "server_password"
-  "barbarian-names"
   "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"

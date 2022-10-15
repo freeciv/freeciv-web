@@ -5,18 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0045-Stop-cancelling-wars-on-savegame-load.patch
-#   Practically revert older patch that was causing a regression
-#   osdn #45605
-# 0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari.patch
-#   Fix to ONE issue preventing barbarians from building units
-#   osdn #45632
-# 0044-Add-server-support-for-web-client-to-request-CMA.patch
-#   Add client -> server part of CMA protocol
-#   osdn #45485
-# 0004-Fix-memory-leaks-from-req_to_fstring-usage.patch
-#   Memory leak fix
-#   osdn #45544
 # 0028-req_copy-Copy-present.patch
 #   Fix to barbarian unit requirement check depending on uninialized data
 #   osdn #45709
@@ -70,10 +58,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0045-Stop-cancelling-wars-on-savegame-load"
-  "0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari"
-  "0044-Add-server-support-for-web-client-to-request-CMA"
-  "0004-Fix-memory-leaks-from-req_to_fstring-usage"
   "0028-req_copy-Copy-present"
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"

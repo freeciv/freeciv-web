@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -589,6 +589,7 @@ function handle_ruleset_control(packet)
    *   handle_ruleset_government_ruler_title
    *   handle_ruleset_base
    *   handle_ruleset_choices
+   *   handle_ruleset_counter
    *   handle_ruleset_road
    *   handle_ruleset_disaster
    *   handle_ruleset_extra_flag
@@ -1673,9 +1674,17 @@ function handle_ruleset_extra(packet)
   else window["EXTRA_" + packet['rule_name'].toUpperCase()] = packet['id'];
 }
 
-/**************************************************************************
+/************************************************************************//**
+  Packet handle_ruleset_ruleset handler.
+****************************************************************************/
+function handle_ruleset_counter(packet)
+{
+  /* TODO: implement */
+}
+
+/************************************************************************//**
   Packet ruleset_extra_flag handler.
-**************************************************************************/
+****************************************************************************/
 function handle_ruleset_extra_flag(packet)
 {
   /* TODO: implement */

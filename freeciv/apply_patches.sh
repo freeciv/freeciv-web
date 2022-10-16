@@ -42,6 +42,9 @@
 #   This patch handles only the main map city names - player/FoW maps
 #   still use static city name space.
 #   osdn #45786
+# 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
+#   Make MAX_CITY_TILES definition available for the network protocol
+#   osdn #45886
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -74,6 +77,7 @@ declare -a PATCHLIST=(
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
   "backports/0005-Macrofy-city_owner"
   "backports/0036-Make-city-name-allocation-dynamic"
+  "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

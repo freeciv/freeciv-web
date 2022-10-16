@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Freeciv server version upgrade notes
-# ------------------------------------
+# Freeciv server version upgrade notes (backports)
+# ------------------------------------------------
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
@@ -36,6 +36,15 @@
 #   freeciv-modification. Fixes handling of animals barbarian
 #   player that wasn't handled by freeciv-web at all.
 #   osdn #45808
+# 0005-Macrofy-city_owner
+#   Textual dependency to 0036-Make-city-name-allocation-dynamic.patch
+#   Optimization
+#   #45634
+# 0036-Make-city-name-allocation-dynamic.patch
+#   Do not reserve memory for every city name by the longest possible.
+#   This patch handles only the main map city names - player/FoW maps
+#   still use static city name space.
+#   osdn #45786
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,6 +76,8 @@ declare -a PATCHLIST=(
   "0018-Stop-memory-corruption-on-dai_data_phase_begin"
   "0016-Make-vision-site-able-to-hold-maximum-city-name-leng"
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
+  "backports/0005-Macrofy-city_owner"
+  "backports/0036-Make-city-name-allocation-dynamic"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

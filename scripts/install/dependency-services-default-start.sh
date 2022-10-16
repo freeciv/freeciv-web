@@ -8,7 +8,7 @@
 
 
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
-export CATALINA_HOME=/var/lib/tomcat9
+export CATALINA_HOME=/var/lib/tomcat10
 
 # 0. mysql
 pidof mysqld > /dev/null || sudo service mariadb start || sudo service mysql start
@@ -28,16 +28,17 @@ fi
 
 # 2. Tomcat
 echo "Starting up Tomcat" && \
-if service --status-all | grep -Fq 'tomcat9'; then
-   sudo /usr/sbin/service tomcat9 start || echo "unable to start tomcat9 service"
+if service --status-all | grep -Fq 'tomcat10'; then
+  sudo /usr/sbin/service tomcat10 start || echo "unable to start tomcat10 service"
 else
-   # It's a suid script, so will run as tomcat user
-   sudo $CATALINA_HOME/bin/catalina.sh start
+  # It's a suid script, so will run as tomcat user
+  sudo $CATALINA_HOME/bin/catalina.sh start
 fi
 
 # waiting for Tomcat to start, since it will take some time.
 until `curl --output /dev/null --silent --head --fail "http://localhost:8080/"`; do
-    printf ".."
-    sleep 3
+  printf ".."
+  sleep 3
 done
+
 sleep 8

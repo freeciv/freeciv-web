@@ -21,8 +21,8 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Properties;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import org.freeciv.services.Validation;
 

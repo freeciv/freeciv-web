@@ -26,10 +26,10 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
-	
+
 	<context-param>
 		<param-name>
-			javax.servlet.jsp.jstl.fmt.fallbackLocale
+			jakarta.servlet.jsp.jstl.fmt.fallbackLocale
 		</param-name>
 		<param-value>en_US</param-value>
 	</context-param>
@@ -38,7 +38,7 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/jsp/errors/404.jsp</location>
 	</error-page>
-	
+
 	<!-- / -->
 	<servlet>
 		<servlet-name>Index</servlet-name>

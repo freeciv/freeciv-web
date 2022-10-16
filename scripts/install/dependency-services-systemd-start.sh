@@ -17,6 +17,6 @@ systemctl is-active --quiet mariadb.service || systemctl is-active --quiet mysql
     ${ACCESS_MANAGER} systemctl start mariadb.service ||
     ${ACCESS_MANAGER} systemctl start mysql.service
 
-for unit in tomcat9; do
+for unit in tomcat10; do
   systemctl is-active --quiet ${unit}.service || ${ACCESS_MANAGER} systemctl start ${unit}.service
 done

@@ -1493,7 +1493,10 @@ function handle_edit_object_created(packet)
   /* edit not supported. */
 }
 
-function handle_goto_path(packet)
+/**************************************************************************
+  Received goto path, likely because we requested one.
+**************************************************************************/
+function handle_web_goto_path(packet)
 {
   if (goto_active) {
     update_goto_path(packet);

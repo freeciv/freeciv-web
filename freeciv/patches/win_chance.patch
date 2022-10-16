@@ -1,17 +1,17 @@
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2021-11-03 20:00:26.101642468 +0200
-+++ freeciv/common/networking/packets.def	2021-11-03 20:00:35.693618844 +0200
-@@ -2387,6 +2387,7 @@
- PACKET_INFO_TEXT_REQ = 289; cs, dsend
+diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
+--- freeciv/common/networking/packets.def	2022-10-11 18:08:16.467804568 +0300
++++ freeciv/common/networking/packets.def	2022-10-11 18:09:52.240716983 +0300
+@@ -2415,6 +2415,7 @@
+ PACKET_WEB_INFO_TEXT_REQ = 289; cs, dsend, handle-via-fields
    TILE loc;
    UNIT visible_unit;
 +  UNIT focus_unit;
  end
  
- # TODO: Rename to contain '_WEB_' in the name.
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2021-11-03 20:00:26.381641780 +0200
-+++ freeciv/server/maphand.c	2021-11-03 20:08:00.608324989 +0200
+ PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields
+diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2022-10-11 18:08:16.831808034 +0300
++++ freeciv/server/maphand.c	2022-10-11 18:11:10.341461493 +0300
 @@ -29,6 +29,7 @@
  #include "base.h"
  #include "borders.h"
@@ -20,16 +20,17 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2632,7 +2633,7 @@
-   - copied from /client/text.c
+@@ -2659,7 +2660,8 @@
  **************************************************************************/
- static const char *popup_info_text(struct tile *ptile, struct player *pplayer,
--                                   struct unit *punit)
-+                                   struct unit *punit, struct unit *funit)
+ static const char *web_popup_info_text(struct tile *ptile,
+                                        struct player *pplayer,
+-                                       struct unit *punit)
++                                       struct unit *punit,
++                                       struct unit *funit)
  {
    const char *activity_text;
    struct city *pcity = tile_city(ptile);
-@@ -2825,6 +2826,43 @@
+@@ -2857,6 +2859,43 @@
                        diplo_city_adjectives[ds->type]);
        }
      }
@@ -73,31 +74,29 @@ diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.c freeciv/server
  
      if (unit_owner(punit) == pplayer) {
        /* Show bribe cost for own units. */
-@@ -2849,11 +2887,13 @@
- /**********************************************************************//**
+@@ -2883,11 +2922,12 @@
    Handle client request for tile information text.
  **************************************************************************/
--void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id)
-+void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
-+                          int focus_unit_id)
+ void handle_web_info_text_req(struct player *pplayer, int loc,
+-                              int visible_unit_id)
++                              int visible_unit_id, int focus_unit_id)
  {
    struct tile *ptile = index_to_tile(&(wld.map), loc);
    struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
--  const char *info_text = popup_info_text(ptile, pplayer, punit);
+-  const char *info_text = web_popup_info_text(ptile, pplayer, punit);
 +  struct unit *funit = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
-+  const char *info_text = popup_info_text(ptile, pplayer, punit, funit);
++  const char *info_text = web_popup_info_text(ptile, pplayer, punit, funit);
  
    conn_list_iterate(pplayer->connections, pconn) {
-     dsend_packet_info_text_message(pconn, info_text);
-diff -Nurd -Xfreeciv/scripts/diff_ignore freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2021-11-03 20:00:26.377641791 +0200
-+++ freeciv/server/maphand.h	2021-11-03 20:00:35.697618834 +0200
-@@ -141,6 +141,7 @@
- void give_distorted_map(struct player *pfrom, struct player *pto,
+     dsend_packet_web_info_text_message(pconn, info_text);
+diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
+--- freeciv/server/maphand.h	2022-10-11 18:08:16.823807957 +0300
++++ freeciv/server/maphand.h	2022-10-11 18:11:44.501787245 +0300
+@@ -142,6 +142,6 @@
                          int prob, bool reveal_cities);
  
--void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id);
-+void handle_info_text_req(struct player *pplayer, int loc, int visible_unit_id,
-+                          int focus_unit_id);
+ void handle_web_info_text_req(struct player *pplayer, int loc,
+-                              int visible_unit_id);
++                              int visible_unit_id, int focus_unit_id);
  
- #endif  /* FC__MAPHAND_H */
+ #endif /* FC__MAPHAND_H */

@@ -330,9 +330,9 @@ function recenter_button_pressed(canvas_x, canvas_y)
 }
 
 /**************************************************************************
-...
+  Received tile info text.
 **************************************************************************/
-function handle_info_text_message(packet)
+function handle_web_info_text_message(packet)
 {
   var message = decodeURIComponent(packet['message']);
   var lines = message.split('\n');

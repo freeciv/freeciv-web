@@ -1,29 +1,29 @@
 diff --git a/common/networking/packets.def b/common/networking/packets.def
-index 8bdd1a1c1e..6b2c53634e 100644
+index a7ab1228bd..114f69ad6a 100644
 --- a/common/networking/packets.def
 +++ b/common/networking/packets.def
 @@ -2369,13 +2369,22 @@ PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACK
    TURN granary_turns;
  end
  
--PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info
-+PACKET_WEB_CMA_SET = 257; cs
+-PACKET_WEB_PLAYER_INFO_ADDITION = 257; sc, is-info, handle-via-fields
++PACKET_WEB_CMA_SET = 257; cs, handle-via-fields
 +  CITY id; key
 +  CM_PARAMETER cm_parameter;
 +end
 +
-+PACKET_WEB_CMA_CLEAR = 258; cs
++PACKET_WEB_CMA_CLEAR = 258; cs, handle-via-fields
 +  CITY id;
 +end
 +
-+PACKET_WEB_PLAYER_INFO_ADDITION = 259; sc, is-info
++PACKET_WEB_PLAYER_INFO_ADDITION = 259; sc, is-info, handle-via-fields
    PLAYER playerno; key
  
    UINT32 expected_income;
  end
  
--PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend
-+PACKET_WEB_RULESET_UNIT_ADDITION = 260; sc, lsend
+-PACKET_WEB_RULESET_UNIT_ADDITION = 258; sc, lsend, handle-via-fields
++PACKET_WEB_RULESET_UNIT_ADDITION = 260; sc, lsend, handle-via-fields
    UNIT_TYPE id; key
  
    BV_ACTIONS utype_actions;

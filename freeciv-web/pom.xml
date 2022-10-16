@@ -87,13 +87,6 @@
 			<version>1.2.6</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.taglibs</groupId>
-			<artifactId>taglibs-standard-impl</artifactId>
-			<scope>runtime</scope>
-			<version>1.2.5</version>
-		</dependency>
-
 		<!-- verify oauth tokens -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>

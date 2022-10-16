@@ -23,7 +23,7 @@
 			<id>repo1.maven.org</id>
 			<name>Rep1</name>
 			<layout>default</layout>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -91,21 +91,14 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.1.1</version>
-			<scope>runtime</scope>
+			<version>1.2</version>
 		</dependency>
+
 		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
 			<scope>runtime</scope>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>c</artifactId>
-			<version>1.1.1</version>
-			<scope>runtime</scope>
-			<type>tld</type>
+			<version>1.2.5</version>
 		</dependency>
 
 		<!-- verify oauth tokens -->

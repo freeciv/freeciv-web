@@ -223,7 +223,7 @@ echo "System specific install complete (${basedir}/scripts/install/${FCW_INSTALL
 echo "==== Installing python modules ===="
 pip3 install --user -r "${basedir}/requirements.txt"
 
-if which service > /dev/null; then
+if command -v service > /dev/null; then
   svcman=default
   start_svc () {
     sudo service "$1" start
@@ -233,7 +233,7 @@ if which service > /dev/null; then
   }
 else
   svcman=systemd
-  if which pkexec > /dev/null; then
+  if command -v pkexec > /dev/null; then
     ACCESS_MANAGER=
   else
     ACCESS_MANAGER=sudo
@@ -346,4 +346,3 @@ You may want to personalize some things before starting it:
 
 Then run scripts/start-freeciv-web.sh and enjoy!
 EOF
-

@@ -5,7 +5,7 @@
 # your set up? Create a script that starts them and put it in
 # scripts/dependency-services-start.sh.
 
-if which pkexec > /dev/null; then
+if command -v pkexec > /dev/null; then
   ACCESS_MANAGER=
 else
   ACCESS_MANAGER=sudo

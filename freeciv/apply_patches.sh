@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0028-req_copy-Copy-present.patch
-#   Fix to barbarian unit requirement check depending on uninialized data
-#   osdn #45709
 # 0038-Fix-city_add_improvement_with_gov_notice-memory-leak.patch
 #   Memory leak fix
 #   osdn #45707
@@ -67,7 +64,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0028-req_copy-Copy-present"
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"

@@ -17,7 +17,8 @@ WEBAPP_DIR="${DIR}/target/freeciv-web"
 
 # Creating build.txt info file
 REVTMP="$(git rev-parse HEAD 2>/dev/null)"
-if test "x$REVTMP" != "x" ; then
+
+if test "$REVTMP" != "" ; then
   # This is build from git repository.
   mkdir -p "${WEBAPP_DIR}"
   echo "This build is from freeciv-web commit: $REVTMP" > "${WEBAPP_DIR}/build.txt"

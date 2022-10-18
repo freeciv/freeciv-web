@@ -45,6 +45,9 @@
 # 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
 #   Make MAX_CITY_TILES definition available for the network protocol
 #   osdn #45886
+# 0047-load_rulesetdir-Destroy-actionfile.patch
+#   Memory leak fix
+#   osdn #45909
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -78,6 +81,7 @@ declare -a PATCHLIST=(
   "backports/0005-Macrofy-city_owner"
   "backports/0036-Make-city-name-allocation-dynamic"
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
+  "backports/0047-load_rulesetdir-Destroy-actionfile"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

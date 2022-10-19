@@ -5,26 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0038-Fix-city_add_improvement_with_gov_notice-memory-leak.patch
-#   Memory leak fix
-#   osdn #45707
-# 0038-Fix-barbarians-exception-to-unit-tech-requirements.patch
-#   Fix to final issue preventing barbarians from building units
-#   osdn #45571
-# 0037-Server-CMA-Try-with-default-parameters-after-cancell.patch
-#   Improve server side CMA
-#   osdn #45727
-# 0033-Add-info-about-what-can-be-built-to-city-web-additio.patch
-#   Improve web-client protocol
-#   osdn #45747
-# 0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN.patch
-#   Make the server use proper vsnprintf() instead of the fallback implementation
-#   Important mainly because of issues in the fallback implementation
-#   (fixes to those issues not backported to freeciv-web as this makes them redundant)
-#   osdn #45706
-# 0018-Stop-memory-corruption-on-dai_data_phase_begin.patch
-#   Fix a memory corruption issue
-#   osdn #45768
 # 0016-Make-vision-site-able-to-hold-maximum-city-name-leng
 #   Fix long city names of FoW map
 #   osdn #45787
@@ -70,12 +50,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
-  "0038-Fix-barbarians-exception-to-unit-tech-requirements"
-  "0037-Server-CMA-Try-with-default-parameters-after-cancell"
-  "0033-Add-info-about-what-can-be-built-to-city-web-additio"
-  "0023-Meson-Define-HAVE_VSNPRINTF-and-HAVE_WORKING_VSNPRIN"
-  "0018-Stop-memory-corruption-on-dai_data_phase_begin"
   "0016-Make-vision-site-able-to-hold-maximum-city-name-leng"
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
   "backports/0005-Macrofy-city_owner"

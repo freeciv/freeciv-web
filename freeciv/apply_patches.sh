@@ -1,22 +1,10 @@
 #!/bin/bash
 
-# Freeciv server version upgrade notes
-# ------------------------------------
+# Freeciv server version upgrade notes (backports)
+# ------------------------------------------------
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0045-Stop-cancelling-wars-on-savegame-load.patch
-#   Practically revert older patch that was causing a regression
-#   osdn #45605
-# 0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari.patch
-#   Fix to ONE issue preventing barbarians from building units
-#   osdn #45632
-# 0044-Add-server-support-for-web-client-to-request-CMA.patch
-#   Add client -> server part of CMA protocol
-#   osdn #45485
-# 0004-Fix-memory-leaks-from-req_to_fstring-usage.patch
-#   Memory leak fix
-#   osdn #45544
 # 0028-req_copy-Copy-present.patch
 #   Fix to barbarian unit requirement check depending on uninialized data
 #   osdn #45709
@@ -48,6 +36,15 @@
 #   freeciv-modification. Fixes handling of animals barbarian
 #   player that wasn't handled by freeciv-web at all.
 #   osdn #45808
+# 0005-Macrofy-city_owner
+#   Textual dependency to 0036-Make-city-name-allocation-dynamic.patch
+#   Optimization
+#   #45634
+# 0036-Make-city-name-allocation-dynamic.patch
+#   Do not reserve memory for every city name by the longest possible.
+#   This patch handles only the main map city names - player/FoW maps
+#   still use static city name space.
+#   osdn #45786
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -70,10 +67,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0045-Stop-cancelling-wars-on-savegame-load"
-  "0052-Fix-how-tech-requirement-exceptions-work-wrt-barbari"
-  "0044-Add-server-support-for-web-client-to-request-CMA"
-  "0004-Fix-memory-leaks-from-req_to_fstring-usage"
   "0028-req_copy-Copy-present"
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
@@ -83,6 +76,8 @@ declare -a PATCHLIST=(
   "0018-Stop-memory-corruption-on-dai_data_phase_begin"
   "0016-Make-vision-site-able-to-hold-maximum-city-name-leng"
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
+  "backports/0005-Macrofy-city_owner"
+  "backports/0036-Make-city-name-allocation-dynamic"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

@@ -1,34 +1,31 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-09-30 04:59:39.160791631 +0300
-+++ freeciv/common/networking/packets.def	2022-09-30 04:59:57.364984539 +0300
-@@ -762,6 +762,10 @@
-   WORKLIST worklist;
+--- freeciv/common/networking/packets.def	2022-10-17 01:50:03.127906021 +0300
++++ freeciv/common/networking/packets.def	2022-10-17 01:50:11.203984214 +0300
+@@ -2382,6 +2382,10 @@
  
-   BV_IMPRS improvements;
+   BV_UTYPES can_build_unit;
+   BV_IMPRS can_build_improvement;
 +
-+  STRING food_output[MAX_LEN_MSG];
-+  STRING shield_output[MAX_LEN_MSG];
-+  STRING trade_output[MAX_LEN_MSG];
-   BV_CITY_OPTIONS city_options;
-   ESTRING name[MAX_LEN_CITYNAME];
++  STRING food_output[MAX_CITY_TILES + 1];
++  STRING shield_output[MAX_CITY_TILES + 1];
++  STRING trade_output[MAX_CITY_TILES + 1];
+ end
  
+ PACKET_WEB_CMA_SET = 257; cs, handle-via-fields
 diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2022-09-30 04:59:39.584796126 +0300
-+++ freeciv/server/citytools.c	2022-09-30 05:02:36.342660667 +0300
-@@ -2625,6 +2625,12 @@
+--- freeciv/server/citytools.c	2022-10-17 01:50:03.495909584 +0300
++++ freeciv/server/citytools.c	2022-10-17 01:50:11.203984214 +0300
+@@ -2627,6 +2627,9 @@
  
  #ifdef FREECIV_WEB
    if (web_packet != NULL) {
-+    char food_output_buf[MAX_NUM_ITEMS + 1];
-+    char shield_output_buf[MAX_NUM_ITEMS + 1];
-+    char trade_output_buf[MAX_NUM_ITEMS + 1];
 +    struct tile *pcenter = city_tile(pcity);
 +    int c = 0;
 +
      BV_CLR_ALL(web_packet->can_build_unit);
      BV_CLR_ALL(web_packet->can_build_improvement);
  
-@@ -2652,6 +2658,28 @@
+@@ -2654,6 +2657,25 @@
          BV_SET(web_packet->can_build_unit, utype_index(punittype));
        }
      } unit_type_iterate_end;
@@ -41,19 +38,16 @@ diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
 +      fc_snprintf(f, sizeof(f), "%d", city_tile_output_now(pcity, ptile, O_FOOD));
 +      fc_snprintf(s, sizeof(s), "%d", city_tile_output_now(pcity, ptile, O_SHIELD));
 +      fc_snprintf(t, sizeof(t), "%d", city_tile_output_now(pcity, ptile, O_TRADE));
-+      food_output_buf[c] = f[0];
-+      shield_output_buf[c] = s[0];
-+      trade_output_buf[c] = t[0];
++      web_packet->food_output[c] = f[0];
++      web_packet->shield_output[c] = s[0];
++      web_packet->trade_output[c] = t[0];
 +
-+      c += 1;
++      c++;
 +    } city_tile_iterate_end;
 +
-+    food_output_buf[c] = '\0';
-+    shield_output_buf[c] = '\0';
-+    trade_output_buf[c] = '\0';
-+    sz_strlcpy(packet->food_output, food_output_buf);
-+    sz_strlcpy(packet->shield_output, shield_output_buf);
-+    sz_strlcpy(packet->trade_output, trade_output_buf);
++    web_packet->food_output[c] = '\0';
++    web_packet->shield_output[c] = '\0';
++    web_packet->trade_output[c] = '\0';
    }
  #endif /* FREECIV_WEB */
  }

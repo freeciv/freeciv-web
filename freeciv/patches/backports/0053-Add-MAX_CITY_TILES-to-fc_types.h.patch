@@ -1,0 +1,75 @@
+From ffdfb1776499a0d7092f0300e4d59330b7eaeb8d Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 17 Oct 2022 01:46:22 +0300
+Subject: [PATCH 53/53] Add MAX_CITY_TILES to fc_types.h
+
+See osdn #45886
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/city.h     | 12 +++---------
+ common/fc_types.h | 10 ++++++++++
+ 2 files changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/common/city.h b/common/city.h
+index 23c301bf47..528bc1b77b 100644
+--- a/common/city.h
++++ b/common/city.h
+@@ -63,12 +63,6 @@ enum production_class_type {
+ #define SPECENUM_BITVECTOR bv_city_options
+ #include "specenum_gen.h"
+ 
+-/* Changing the max radius requires updating network capabilities and results
+- * in incompatible savefiles. */
+-#define CITY_MAP_MIN_RADIUS       0
+-#define CITY_MAP_DEFAULT_RADIUS   2
+-#define CITY_MAP_MAX_RADIUS       5
+-
+ /* The city includes all tiles dx^2 + dy^2 <= CITY_MAP_*_RADIUS_SQ */
+ #define CITY_MAP_DEFAULT_RADIUS_SQ \
+   (CITY_MAP_DEFAULT_RADIUS * CITY_MAP_DEFAULT_RADIUS + 1)
+@@ -76,9 +70,9 @@ enum production_class_type {
+   (CITY_MAP_MIN_RADIUS * CITY_MAP_MIN_RADIUS + 1)
+ #define CITY_MAP_MAX_RADIUS_SQ \
+   (CITY_MAP_MAX_RADIUS * CITY_MAP_MAX_RADIUS + 1)
+-/* the id for the city center */
++/* The id for the city center */
+ #define CITY_MAP_CENTER_RADIUS_SQ      -1
+-/* the tile index of the city center */
++/* The tile index of the city center */
+ #define CITY_MAP_CENTER_TILE_INDEX      0
+ 
+ /* Maximum diameter of the workable city area. */
+@@ -94,7 +88,7 @@ enum production_class_type {
+  * The city size is saved as unsigned char. Therefore, MAX_CITY_SIZE should
+  * be below 255!
+  */
+-#define MAX_CITY_SIZE		0xFF
++#define MAX_CITY_SIZE           0xFF
+ 
+ /* Iterate a city map, from the center (the city) outwards */
+ struct iter_index {
+diff --git a/common/fc_types.h b/common/fc_types.h
+index 57ee66479e..be787f72a8 100644
+--- a/common/fc_types.h
++++ b/common/fc_types.h
+@@ -80,6 +80,16 @@ extern "C" {
+ /* Line breaks after this number of characters; be carefull and use only 70 */
+ #define LINE_BREAK 70
+ 
++/* Changing the max radius requires updating network capabilities and results
++ * in incompatible savefiles. */
++#define CITY_MAP_MIN_RADIUS       0
++#define CITY_MAP_DEFAULT_RADIUS   2
++#define CITY_MAP_MAX_RADIUS       5
++
++/* Below size of city tiles array is big enough for radius 5 city */
++FC_STATIC_ASSERT(CITY_MAP_MAX_RADIUS <= 5, too_many_city_tiles);
++#define MAX_CITY_TILES (91)
++
+ /* symbol to flag missing numbers for better debugging */
+ #define IDENTITY_NUMBER_ZERO (0)
+ 
+-- 
+2.35.1
+

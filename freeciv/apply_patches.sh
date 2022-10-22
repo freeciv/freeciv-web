@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0028-req_copy-Copy-present.patch
-#   Fix to barbarian unit requirement check depending on uninialized data
-#   osdn #45709
 # 0038-Fix-city_add_improvement_with_gov_notice-memory-leak.patch
 #   Memory leak fix
 #   osdn #45707
@@ -45,6 +42,12 @@
 #   This patch handles only the main map city names - player/FoW maps
 #   still use static city name space.
 #   osdn #45786
+# 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
+#   Make MAX_CITY_TILES definition available for the network protocol
+#   osdn #45886
+# 0047-load_rulesetdir-Destroy-actionfile.patch
+#   Memory leak fix
+#   osdn #45909
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,7 +70,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0028-req_copy-Copy-present"
   "0038-Fix-city_add_improvement_with_gov_notice-memory-leak"
   "0038-Fix-barbarians-exception-to-unit-tech-requirements"
   "0037-Server-CMA-Try-with-default-parameters-after-cancell"
@@ -78,6 +80,8 @@ declare -a PATCHLIST=(
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
   "backports/0005-Macrofy-city_owner"
   "backports/0036-Make-city-name-allocation-dynamic"
+  "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
+  "backports/0047-load_rulesetdir-Destroy-actionfile"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

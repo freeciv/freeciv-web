@@ -1,0 +1,225 @@
+From 88330ec5d8541d5a5cf9c518f45f04eff74d05e3 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 23 Oct 2022 06:41:07 +0300
+Subject: [PATCH 51/51] Make vision site name allocation dynamic
+
+See osdn #45844
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/vision.c             | 35 ++++++++++++++++++++++++++++++++---
+ common/vision.h             |  6 ++----
+ server/citytools.c          |  8 ++++++--
+ server/maphand.c            |  3 +--
+ server/savegame/savegame2.c | 10 +++++++---
+ server/savegame/savegame3.c | 14 ++++++++++----
+ 6 files changed, 58 insertions(+), 18 deletions(-)
+
+diff --git a/common/vision.c b/common/vision.c
+index 3026846dc2..b6e5838d56 100644
+--- a/common/vision.c
++++ b/common/vision.c
+@@ -64,6 +64,7 @@ bool vision_reveal_tiles(struct vision *vision, bool reveal_tiles)
+   bool was = vision->can_reveal_tiles;
+ 
+   vision->can_reveal_tiles = reveal_tiles;
++
+   return was;
+ }
+ 
+@@ -72,6 +73,10 @@ bool vision_reveal_tiles(struct vision *vision, bool reveal_tiles)
+ ****************************************************************************/
+ void vision_site_destroy(struct vision_site *psite)
+ {
++  if (psite->name != NULL) {
++    free(psite->name);
++  }
++
+   free(psite);
+ }
+ 
+@@ -99,7 +104,7 @@ struct vision_site *vision_site_new_from_city(const struct city *pcity)
+     vision_site_new(pcity->id, city_tile(pcity), city_owner(pcity));
+ 
+   vision_site_size_set(psite, city_size_get(pcity));
+-  sz_strlcpy(psite->name, city_name_get(pcity));
++  psite->name = fc_strdup(city_name_get(pcity));
+ 
+   return psite;
+ }
+@@ -110,14 +115,38 @@ struct vision_site *vision_site_new_from_city(const struct city *pcity)
+ void vision_site_update_from_city(struct vision_site *psite,
+                                   const struct city *pcity)
+ {
+-  /* should be same identity and location */
++  /* Should be same identity and location */
+   fc_assert_ret(psite->identity == pcity->id);
+   fc_assert_ret(psite->location == pcity->tile);
+ 
+   psite->owner = city_owner(pcity);
+ 
+   vision_site_size_set(psite, city_size_get(pcity));
+-  sz_strlcpy(psite->name, city_name_get(pcity));
++
++  if (psite->name != NULL) {
++    free(psite->name);
++  }
++  psite->name = fc_strdup(city_name_get(pcity));
++}
++
++/************************************************************************//**
++  Creates a copy of the vision site.
++****************************************************************************/
++struct vision_site *vision_site_copy(const struct vision_site *psite)
++{
++  /* Unlike in _new(), we don't need to use zeroing calloc() here
++   * as we overwrite everything. */
++  struct vision_site *copy = fc_malloc(sizeof(*psite));
++
++  /* Copy everything. */
++  *copy = *psite;
++
++  /* Then allocate things that aren't shared */
++  if (psite->name != NULL) {
++    copy->name = fc_strdup(psite->name);
++  }
++
++  return copy;
+ }
+ 
+ /************************************************************************//**
+diff --git a/common/vision.h b/common/vision.h
+index e2afa74521..186ac24daa 100644
+--- a/common/vision.h
++++ b/common/vision.h
+@@ -106,11 +106,8 @@ void vision_free(struct vision *vision);
+ 
+ bool vision_reveal_tiles(struct vision *vision, bool reveal_tiles);
+ 
+-/* This is copied in maphand.c really_give_tile_info_from_player_to_player(),
+- * so be careful with pointers!
+- */
+ struct vision_site {
+-  char name[MAX_LEN_CITYNAME];
++  char *name;
+   struct tile *location; /* Cannot be NULL */
+   struct player *owner;  /* May be NULL, always check! */
+ 
+@@ -135,6 +132,7 @@ struct vision_site *vision_site_new(int identity, struct tile *location,
+ struct vision_site *vision_site_new_from_city(const struct city *pcity);
+ void vision_site_update_from_city(struct vision_site *psite,
+                                   const struct city *pcity);
++struct vision_site *vision_site_copy(const struct vision_site *psite);
+ 
+ citizens vision_site_size_get(const struct vision_site *psite);
+ void vision_site_size_set(struct vision_site *psite, citizens size);
+diff --git a/server/citytools.c b/server/citytools.c
+index 8c3830f18e..6a50195d5d 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2145,7 +2145,11 @@ static void package_dumb_city(struct player *pplayer, struct tile *ptile,
+   packet->owner = player_number(vision_site_owner(pdcity));
+ 
+   packet->tile = tile_index(ptile);
+-  sz_strlcpy(packet->name, pdcity->name);
++  if (pdcity->name == NULL) {
++    packet->name[0] = '\0';
++  } else {
++    sz_strlcpy(packet->name, pdcity->name);
++  }
+ 
+   packet->size = vision_site_size_get(pdcity);
+ 
+@@ -2719,7 +2723,7 @@ bool update_dumb_city(struct player *pplayer, struct city *pcity)
+              && BV_ARE_EQUAL(pdcity->improvements, improvements)
+              && vision_site_size_get(pdcity) == city_size_get(pcity)
+              && vision_site_owner(pdcity) == city_owner(pcity)
+-             && 0 == strcmp(pdcity->name, city_name_get(pcity))) {
++             && (pdcity->name && !strcmp(pdcity->name, city_name_get(pcity)))) {
+     return FALSE;
+   }
+ 
+diff --git a/server/maphand.c b/server/maphand.c
+index 73d948cd97..3a34cad25d 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -1500,8 +1500,7 @@ static void really_give_tile_info_from_player_to_player(struct player *pfrom,
+ 	if (!dest_tile->site) {
+           /* We cannot assign new vision site with change_playertile_site(),
+            * since location is not yet set up for new site */
+-          dest_tile->site = vision_site_new(0, ptile, NULL);
+-          *dest_tile->site = *from_tile->site;
++          dest_tile->site = vision_site_copy(from_tile->site);
+ 	}
+         /* Note that we don't care if receiver knows vision source city
+          * or not. */
+diff --git a/server/savegame/savegame2.c b/server/savegame/savegame2.c
+index d699b3ed2e..33eb70a281 100644
+--- a/server/savegame/savegame2.c
++++ b/server/savegame/savegame2.c
+@@ -4839,6 +4839,7 @@ static bool sg_load_player_vision_city(struct loaddata *loading,
+   citizens city_size;
+   int nat_x, nat_y;
+   const char *stylename;
++  const char *vname;
+ 
+   sg_warn_ret_val(secfile_lookup_int(loading->file, &nat_x, "%s.x",
+                                      citystr),
+@@ -4894,9 +4895,12 @@ static bool sg_load_player_vision_city(struct loaddata *loading,
+     }
+   }
+ 
+-  /* Use the section as backup name. */
+-  sz_strlcpy(pdcity->name, secfile_lookup_str_default(loading->file, citystr,
+-                                                      "%s.name", citystr));
++  vname = secfile_lookup_str_default(loading->file, NULL,
++                                     "%s.name", citystr);
++
++  if (vname != NULL) {
++    pdcity->name = fc_strdup(vname);
++  }
+ 
+   pdcity->occupied = secfile_lookup_bool_default(loading->file, FALSE,
+                                                  "%s.occupied", citystr);
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index b105726a62..a5a8eee623 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -6963,6 +6963,7 @@ static bool sg_load_player_vision_city(struct loaddata *loading,
+   int nat_x, nat_y;
+   const char *stylename;
+   enum capital_type cap;
++  const char *vname;
+ 
+   sg_warn_ret_val(secfile_lookup_int(loading->file, &nat_x, "%s.x",
+                                      citystr),
+@@ -7017,9 +7018,12 @@ static bool sg_load_player_vision_city(struct loaddata *loading,
+     }
+   }
+ 
+-  /* Use the section as backup name. */
+-  sz_strlcpy(pdcity->name, secfile_lookup_str_default(loading->file, citystr,
+-                                                      "%s.name", citystr));
++  vname = secfile_lookup_str_default(loading->file, NULL,
++                                     "%s.name", citystr);
++
++  if (vname != NULL) {
++    pdcity->name = fc_strdup(vname);
++  }
+ 
+   pdcity->occupied = secfile_lookup_bool_default(loading->file, FALSE,
+                                                  "%s.occupied", citystr);
+@@ -7205,7 +7209,9 @@ static void sg_save_player_vision(struct savedata *saving,
+                      SIZE_T_PRINTF " < " SIZE_T_PRINTF" ).",
+                      buf, strlen(impr_buf), sizeof(impr_buf));
+       secfile_insert_str(saving->file, impr_buf, "%s.improvements", buf);
+-      secfile_insert_str(saving->file, pdcity->name, "%s.name", buf);
++      if (pdcity->name != NULL) {
++        secfile_insert_str(saving->file, pdcity->name, "%s.name", buf);
++      }
+ 
+       i++;
+     }
+-- 
+2.35.1
+

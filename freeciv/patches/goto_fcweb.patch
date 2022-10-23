@@ -1,24 +1,7 @@
-diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2022-10-11 18:00:51.555573241 +0300
-+++ freeciv/client/packhand.c	2022-10-11 18:03:07.948871129 +0300
-@@ -5462,3 +5462,13 @@
- {
-   client_recv_remove_clause(counterpart, giver, type, value);
- }
-+
-+/************************************************************************//**
-+  This is a packet that only the web-client needs. The regular client has no
-+  use for it.
-+  TODO: Do not generate code calling this in the C-client.
-+****************************************************************************/
-+void handle_web_goto_path(int unit_id, int length, const enum direction8 *dir,
-+                          int dest, int turns)
-+{
-+}
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-10-11 18:00:51.559573278 +0300
-+++ freeciv/common/networking/packets.def	2022-10-11 18:02:46.944671839 +0300
-@@ -2393,3 +2393,17 @@
+--- freeciv/common/networking/packets.def	2022-10-23 07:20:24.406765008 +0300
++++ freeciv/common/networking/packets.def	2022-10-23 07:22:35.295944314 +0300
+@@ -2404,3 +2404,17 @@
  
    BV_ACTIONS utype_actions;
  end
@@ -29,7 +12,7 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  TILE goal;
 +end
 +
-+PACKET_WEB_GOTO_PATH = 288; sc, dsend, handle-via-fields
++PACKET_WEB_GOTO_PATH = 288; sc, dsend, handle-via-fields, no-handle
 +  UNIT unit_id;
 +  UINT16 length;
 +  DIRECTION dir[MAX_LEN_ROUTE:length];
@@ -37,8 +20,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  UINT32 turns;
 +end
 diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2022-10-11 18:00:52.091578352 +0300
-+++ freeciv/server/unithand.c	2022-10-11 18:05:42.898343120 +0300
+--- freeciv/server/unithand.c	2022-10-23 07:20:24.770768269 +0300
++++ freeciv/server/unithand.c	2022-10-23 07:20:40.338907862 +0300
 @@ -45,6 +45,9 @@
  #include "unit.h"
  #include "unitlist.h"

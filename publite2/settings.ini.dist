@@ -1,6 +1,6 @@
 [Config]
 #Freeciv savegames are stored in this directory
-save_directory = /var/lib/tomcat9/webapps/data/savegames/
+save_directory = /var/lib/tomcat10/webapps/data/savegames/
 
 [Resource usage]
 server_capacity_single = 2

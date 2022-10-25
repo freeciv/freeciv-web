@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-			<version>1.2.6</version>
+			<version>2.0.0</version>
 		</dependency>
 
 		<!-- verify oauth tokens -->

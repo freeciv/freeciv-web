@@ -20,8 +20,8 @@ package org.freeciv.servlet;
 import org.apache.commons.codec.digest.Crypt;
 
 import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import java.sql.*;
 

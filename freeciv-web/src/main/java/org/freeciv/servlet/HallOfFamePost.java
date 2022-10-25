@@ -3,10 +3,10 @@ package org.freeciv.servlet;
 import org.apache.commons.io.FileUtils;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +32,10 @@ public class HallOfFamePost extends HttpServlet {
     private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
     
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
-    
-    private static final String mapSrcImgPaths = "/var/lib/tomcat9/webapps/data/savegames/";
-    
-    private static final String mapDstImgPaths = "/var/lib/tomcat9/webapps/data/mapimgs/";
+
+    private static final String mapSrcImgPaths = "/var/lib/tomcat10/webapps/data/savegames/";
+
+    private static final String mapDstImgPaths = "/var/lib/tomcat10/webapps/data/mapimgs/";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {

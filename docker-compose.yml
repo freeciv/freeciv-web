@@ -7,7 +7,7 @@ services:
     container_name: freeciv-web
     command: ["sleep", "infinity"]
     volumes:
-      - "data:/var/lib/tomcat9/webapps/data"
+      - "data:/var/lib/tomcat10/webapps/data"
     ports:
       - "8080:80"
       - "4002:4002"

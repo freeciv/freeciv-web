@@ -24,7 +24,7 @@ FCW_INSTALL_REL=
 SHOW_LIST=0
 basedir=
 
-TOMCAT_HOME=/var/lib/tomcat9
+TOMCAT_HOME=/var/lib/tomcat10
 
 show_help () {
   cat << EOF

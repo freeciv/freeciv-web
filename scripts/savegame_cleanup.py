@@ -5,7 +5,7 @@ from shutil import *
 import time
 import os
 
-rootdir = "/var/lib/tomcat9/webapps/data/savegames/" 
+rootdir = "/var/lib/tomcat10/webapps/data/savegames/"
 scenario_list = ['british-isles.sav', 'iberian-peninsula.sav',
     'earth-large.sav', 'italy.sav',
     'earth-small.sav','japan.sav',

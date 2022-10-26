@@ -1,23 +1,7 @@
-diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2022-10-11 17:43:05.629504353 +0300
-+++ freeciv/client/packhand.c	2022-10-11 17:49:11.092923725 +0300
-@@ -5472,3 +5472,12 @@
-                       int dest, int turns)
- {
- }
-+
-+/************************************************************************//**
-+  This is a packet that only the web-client needs. The regular client has no
-+  use for it.
-+  TODO: Do not generate code calling this in the C-client.
-+****************************************************************************/
-+void handle_web_info_text_message(const char *message)
-+{
-+}
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-10-11 17:43:05.637504426 +0300
-+++ freeciv/common/networking/packets.def	2022-10-11 17:48:17.380417922 +0300
-@@ -2413,3 +2413,12 @@
+--- freeciv/common/networking/packets.def	2022-10-23 07:27:36.522696472 +0300
++++ freeciv/common/networking/packets.def	2022-10-23 07:28:49.539369332 +0300
+@@ -2422,3 +2422,12 @@
    TILE dest;
    UINT32 turns;
  end
@@ -27,12 +11,12 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  UNIT visible_unit;
 +end
 +
-+PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields
++PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields, no-handle
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2022-10-11 17:43:06.057508320 +0300
-+++ freeciv/server/maphand.c	2022-10-11 17:57:10.397466298 +0300
+--- freeciv/server/maphand.c	2022-10-23 07:27:36.918700116 +0300
++++ freeciv/server/maphand.c	2022-10-23 07:27:46.622789438 +0300
 @@ -16,6 +16,7 @@
  #endif
  
@@ -49,7 +33,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2563,3 +2565,330 @@
+@@ -2562,3 +2564,330 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -381,8 +365,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  } conn_list_iterate_end;
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2022-10-11 17:43:06.057508320 +0300
-+++ freeciv/server/maphand.h	2022-10-11 17:50:52.469880610 +0300
+--- freeciv/server/maphand.h	2022-10-23 07:27:36.914700079 +0300
++++ freeciv/server/maphand.h	2022-10-23 07:27:46.622789438 +0300
 @@ -141,4 +141,7 @@
  void give_distorted_map(struct player *pfrom, struct player *pto,
                          int prob, bool reveal_cities);

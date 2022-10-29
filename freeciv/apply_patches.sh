@@ -28,6 +28,10 @@
 # 0047-load_rulesetdir-Destroy-actionfile.patch
 #   Memory leak fix
 #   osdn #45909
+# 0051-Make-vision-site-name-allocation-dynamic.patch
+#   Do not reserve memory for every city name by the longest possible,
+#   FoW part.
+#   osdn #45844
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -56,6 +60,7 @@ declare -a PATCHLIST=(
   "backports/0036-Make-city-name-allocation-dynamic"
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0047-load_rulesetdir-Destroy-actionfile"
+  "backports/0051-Make-vision-site-name-allocation-dynamic"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

@@ -1816,6 +1816,11 @@ function handle_research_info(packet)
   bulbs_output_updater.update();
 }
 
+function handle_unknown_research(packet)
+{
+  delete research_data[packet['id']];
+}
+
 function handle_worker_task(packet)
 {
   /* TODO: Implement */

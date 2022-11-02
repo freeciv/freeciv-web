@@ -25,6 +25,9 @@
 #   Do not reserve memory for every city name by the longest possible,
 #   FoW part.
 #   osdn #45844
+# 0048-Fix-loading-research-free_bulbs-from-a-savegame.patch
+#   Fix savegame loading breakage
+#   osdn #45952
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,6 +54,7 @@ declare -a PATCHLIST=(
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0047-load_rulesetdir-Destroy-actionfile"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
+  "backports/0048-Fix-loading-research-free_bulbs-from-a-savegame"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

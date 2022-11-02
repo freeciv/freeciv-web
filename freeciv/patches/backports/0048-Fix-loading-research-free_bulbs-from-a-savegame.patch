@@ -1,0 +1,35 @@
+From 883d580c51783496a7e15f4088c71c297a1ec533 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 22 Oct 2022 17:35:59 +0300
+Subject: [PATCH 48/48] Fix loading research 'free_bulbs' from a savegame
+
+Not only failing itself, but causing mayhem with
+anything that should have been loaded after it.
+
+See osdn #45952
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savegame3.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index 2934169b1a..b105726a62 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -7272,9 +7272,9 @@ static void sg_load_researches(struct loaddata *loading)
+                                                    "research.r%d.saved", i);
+     presearch->researching = technology_load(loading->file,
+                                              "research.r%d.now", i);
+-    sg_failure_ret(!secfile_lookup_int(loading->file,
+-                                       &presearch->free_bulbs,
+-                                       "research.r%d.free_bulbs", i),
++    sg_failure_ret(secfile_lookup_int(loading->file,
++                                      &presearch->free_bulbs,
++                                      "research.r%d.free_bulbs", i),
+                    "%s", secfile_error());
+ 
+     str = secfile_lookup_str(loading->file, "research.r%d.done", i);
+-- 
+2.35.1
+

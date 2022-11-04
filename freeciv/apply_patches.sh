@@ -28,6 +28,9 @@
 # 0048-Fix-loading-research-free_bulbs-from-a-savegame.patch
 #   Fix savegame loading breakage
 #   osdn #45952
+# 0024-Mark-server-to-web-client-packets-no-handle.patch
+#   Ease maintenance of regular clients when web-packets change
+#   osdn #45955
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -55,6 +58,7 @@ declare -a PATCHLIST=(
   "backports/0047-load_rulesetdir-Destroy-actionfile"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0048-Fix-loading-research-free_bulbs-from-a-savegame"
+  "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

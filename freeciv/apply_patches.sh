@@ -5,18 +5,11 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0016-Make-vision-site-able-to-hold-maximum-city-name-leng
-#   Fix long city names of FoW map
-#   osdn #45787
 # 0040-Set-barbarians-as-AI-before-initializing-them-otherw
 #   Support one freeciv-web modification, removing need for another
 #   freeciv-modification. Fixes handling of animals barbarian
 #   player that wasn't handled by freeciv-web at all.
 #   osdn #45808
-# 0005-Macrofy-city_owner
-#   Textual dependency to 0036-Make-city-name-allocation-dynamic.patch
-#   Optimization
-#   #45634
 # 0036-Make-city-name-allocation-dynamic.patch
 #   Do not reserve memory for every city name by the longest possible.
 #   This patch handles only the main map city names - player/FoW maps
@@ -53,9 +46,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0016-Make-vision-site-able-to-hold-maximum-city-name-leng"
   "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
-  "backports/0005-Macrofy-city_owner"
   "backports/0036-Make-city-name-allocation-dynamic"
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0047-load_rulesetdir-Destroy-actionfile"

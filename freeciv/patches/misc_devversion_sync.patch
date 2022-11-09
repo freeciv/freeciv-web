@@ -1,22 +1,7 @@
-diff -Nurd freeciv/client/packhand.c freeciv/client/packhand.c
---- freeciv/client/packhand.c	2022-10-23 07:35:30.715090523 +0300
-+++ freeciv/client/packhand.c	2022-10-23 07:37:26.116166157 +0300
-@@ -994,7 +994,10 @@
-                                    int granary_size,
-                                    int granary_turns,
-                                    bv_utypes can_build_unit,
--                                   bv_imprs can_build_improvement)
-+                                   bv_imprs can_build_improvement,
-+                                   const char *food_output,
-+                                   const char *shield_output,
-+                                   const char *trade_output)
- {
- }
- 
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-10-23 07:35:30.719090561 +0300
-+++ freeciv/common/networking/packets.def	2022-10-23 07:35:50.259272570 +0300
-@@ -2382,6 +2382,10 @@
+--- freeciv/common/networking/packets.def	2022-11-05 01:33:56.941573783 +0200
++++ freeciv/common/networking/packets.def	2022-11-05 01:34:08.593678176 +0200
+@@ -2385,6 +2385,10 @@
  
    BV_UTYPES can_build_unit;
    BV_IMPRS can_build_improvement;
@@ -28,8 +13,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
  
  PACKET_WEB_CMA_SET = 257; cs, handle-via-fields
 diff -Nurd freeciv/server/citytools.c freeciv/server/citytools.c
---- freeciv/server/citytools.c	2022-10-23 07:35:30.971092908 +0300
-+++ freeciv/server/citytools.c	2022-10-23 07:35:50.259272570 +0300
+--- freeciv/server/citytools.c	2022-11-05 01:33:57.309577081 +0200
++++ freeciv/server/citytools.c	2022-11-05 01:34:08.593678176 +0200
 @@ -2631,6 +2631,9 @@
  
  #ifdef FREECIV_WEB

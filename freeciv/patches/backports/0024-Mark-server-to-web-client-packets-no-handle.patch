@@ -1,0 +1,104 @@
+From b11e552869d7be92e95a905474150c567ef44270 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 5 Nov 2022 01:10:07 +0200
+Subject: [PATCH 24/24] Mark server to web-client packets no-handle
+
+Drop stub handlers from regular clients
+
+See osdn #45955
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ client/packhand.c             | 32 --------------------------------
+ common/networking/packets.def |  6 +++---
+ 2 files changed, 3 insertions(+), 35 deletions(-)
+
+diff --git a/client/packhand.c b/client/packhand.c
+index 3c1c11eb68..2dafee7fff 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -984,20 +984,6 @@ void handle_city_info(const struct packet_city_info *packet)
+   }
+ }
+ 
+-/************************************************************************//**
+-  This is a packet that only the web-client needs. The regular client has no
+-  use for it.
+-  TODO: Do not generate code calling this in the C-client.
+-****************************************************************************/
+-void handle_web_city_info_addition(int id, bool cma_enabled,
+-                                   const struct cm_parameter *cm_parameter,
+-                                   int granary_size,
+-                                   int granary_turns,
+-                                   bv_utypes can_build_unit,
+-                                   bv_imprs can_build_improvement)
+-{
+-}
+-
+ /************************************************************************//**
+   A helper function for handling city-info and city-short-info packets.
+   Naturally, both require many of the same operations to be done on the
+@@ -2620,15 +2606,6 @@ void handle_player_info(const struct packet_player_info *pinfo)
+                                 FALSE);
+ }
+ 
+-/************************************************************************//**
+-  This is a packet that only the web-client needs. The regular client has no
+-  use for it.
+-  TODO: Do not generate code calling this in the C-client.
+-****************************************************************************/
+-void handle_web_player_info_addition(int playerno, int expected_income)
+-{
+-}
+-
+ /************************************************************************//**
+   Receive a research info packet.
+ ****************************************************************************/
+@@ -3630,15 +3607,6 @@ void handle_ruleset_unit(const struct packet_ruleset_unit *p)
+   tileset_setup_unit_type(tileset, u);
+ }
+ 
+-/************************************************************************//**
+-  This is a packet that only the web-client needs. The regular client has no
+-  use for it.
+-  TODO: Do not generate code calling this in the C-client.
+-****************************************************************************/
+-void handle_web_ruleset_unit_addition(int id, bv_actions utype_actions)
+-{
+-}
+-
+ /************************************************************************//**
+   Packet ruleset_unit_bonus handler.
+ ****************************************************************************/
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index e3b5880e88..1481bb7b76 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -2388,7 +2388,7 @@ end
+ /*************** Webclient specific packets ****************/
+ /* Use range 256:511 for these                             */
+ 
+-PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_INFO), handle-via-fields
++PACKET_WEB_CITY_INFO_ADDITION = 256; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_INFO), handle-via-fields, no-handle
+   CITY id; key
+ 
+   BOOL cma_enabled;
+@@ -2410,13 +2410,13 @@ PACKET_WEB_CMA_CLEAR = 258; cs, handle-via-fields
+   CITY id;
+ end
+ 
+-PACKET_WEB_PLAYER_INFO_ADDITION = 259; sc, is-info, handle-via-fields
++PACKET_WEB_PLAYER_INFO_ADDITION = 259; sc, is-info, handle-via-fields, no-handle
+   PLAYER playerno; key
+ 
+   UINT32 expected_income;
+ end
+ 
+-PACKET_WEB_RULESET_UNIT_ADDITION = 260; sc, lsend, handle-via-fields
++PACKET_WEB_RULESET_UNIT_ADDITION = 260; sc, lsend, handle-via-fields, no-handle
+   UNIT_TYPE id; key
+ 
+   BV_ACTIONS utype_actions;
+-- 
+2.35.1
+

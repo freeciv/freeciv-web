@@ -15,9 +15,6 @@
 #   Do not reserve memory for every city name by the longest possible,
 #   FoW part.
 #   osdn #45844
-# 0048-Fix-loading-research-free_bulbs-from-a-savegame.patch
-#   Fix savegame loading breakage
-#   osdn #45952
 # 0024-Mark-server-to-web-client-packets-no-handle.patch
 #   Ease maintenance of regular clients when web-packets change
 #   osdn #45955
@@ -45,7 +42,6 @@ declare -a PATCHLIST=(
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0047-load_rulesetdir-Destroy-actionfile"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
-  "backports/0048-Fix-loading-research-free_bulbs-from-a-savegame"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "meson_webperimental"
   "city-naming-change"

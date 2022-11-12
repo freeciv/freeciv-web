@@ -654,7 +654,7 @@ function handle_authentication_req(packet)
 
 function handle_server_shutdown(packet)
 {
-  /* TODO: implement*/
+  /* TODO: implement */
 }
 
 function handle_nuke_tile_info(packet)
@@ -675,6 +675,10 @@ function handle_city_remove(packet)
   remove_city(packet['city_id']);
 }
 
+function handle_city_update_counter(packet)
+{
+  /* TODO */
+}
 
 function handle_connect_msg(packet)
 {

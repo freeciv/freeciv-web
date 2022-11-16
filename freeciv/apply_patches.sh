@@ -5,16 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0040-Set-barbarians-as-AI-before-initializing-them-otherw
-#   Support one freeciv-web modification, removing need for another
-#   freeciv-modification. Fixes handling of animals barbarian
-#   player that wasn't handled by freeciv-web at all.
-#   osdn #45808
-# 0036-Make-city-name-allocation-dynamic.patch
-#   Do not reserve memory for every city name by the longest possible.
-#   This patch handles only the main map city names - player/FoW maps
-#   still use static city name space.
-#   osdn #45786
 # 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
 #   Make MAX_CITY_TILES definition available for the network protocol
 #   osdn #45886
@@ -52,8 +42,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "0040-Set-barbarians-as-AI-before-initializing-them-otherw"
-  "backports/0036-Make-city-name-allocation-dynamic"
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0047-load_rulesetdir-Destroy-actionfile"
   "backports/0051-Make-vision-site-name-allocation-dynamic"

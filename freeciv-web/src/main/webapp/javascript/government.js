@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. http://play.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -21,7 +21,7 @@ var governments = {};
 var requested_gov = -1;
 
 var REPORT_WONDERS_OF_THE_WORLD = 0;
-var REPORT_TOP_5_CITIES = 1;
+var REPORT_TOP_CITIES = 1;
 var REPORT_DEMOGRAPHIC = 2;
 var REPORT_ACHIEVEMENTS = 3;
 

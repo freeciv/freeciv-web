@@ -97,6 +97,9 @@ if [ "${INSTALLED_NODEJS}" = N ]; then
   curl -LOsS 'https://deb.nodesource.com/setup_14.x'
   sudo bash setup_14.x
   sudo ${APT_GET} install --no-install-recommends nodejs
+  if ! command -v npm >/dev/null ; then
+    sudo ${APT_GET} install --no-install-recommends npm
+  fi
 fi
 # Populate ~/.config with current user
 npm help > /dev/null

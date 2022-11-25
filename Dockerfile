@@ -9,7 +9,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update --yes --quiet && \
     DEBIAN_FRONTEND=noninteractive apt-get install --yes \
         sudo \
         lsb-release \
-        locales && \
+        locales \
+        adduser && \
     DEBIAN_FRONTEND=noninteractive apt-get clean --yes && \
     rm --recursive --force /var/lib/apt/lists/*
 

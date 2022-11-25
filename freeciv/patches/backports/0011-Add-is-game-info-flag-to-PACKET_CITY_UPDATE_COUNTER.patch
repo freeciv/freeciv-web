@@ -1,0 +1,26 @@
+From 662caeef8b579bd367f5f082010966986670fc35 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?S=C5=82awomir=20Lach?= <slawek@lach.art.pl>
+Date: Tue, 1 Nov 2022 09:05:46 +0100
+Subject: [PATCH 11/11] Add is-game-info flag to PACKET_CITY_UPDATE_COUNTER
+
+See osdn #45890
+---
+ common/networking/packets.def | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index abffb0eeda..40d5915591 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -778,7 +778,7 @@ PACKET_CITY_INFO = 31; sc, lsend, is-game-info, force, cancel(PACKET_CITY_SHORT_
+   UNIT_ORDER rally_point_orders[MAX_LEN_ROUTE:rally_point_length];
+ end
+ 
+-PACKET_CITY_UPDATE_COUNTER = 514; sc, lsend
++PACKET_CITY_UPDATE_COUNTER = 514; sc, lsend, is-game-info
+   CITY city;
+   COUNTER counter;
+   UINT32 value;
+-- 
+2.35.1
+

@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
-#   Make MAX_CITY_TILES definition available for the network protocol
-#   osdn #45886
 # 0051-Make-vision-site-name-allocation-dynamic.patch
 #   Do not reserve memory for every city name by the longest possible,
 #   FoW part.
@@ -42,7 +39,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"

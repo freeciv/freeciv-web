@@ -199,7 +199,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.2.0</version>
+					<version>3.3.0</version>
 					<executions>
 						<execution>
 							<id>copy-generated-webapp-resources</id>

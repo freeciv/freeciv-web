@@ -94,8 +94,8 @@ TMPINSTDIR=$(mktemp -d)
 echo "==== Installing Node.js ===="
 if [ "${INSTALLED_NODEJS}" = N ]; then
   cd "${TMPINSTDIR}"
-  curl -LOsS 'https://deb.nodesource.com/setup_14.x'
-  sudo bash setup_14.x
+  curl -LOsS 'https://deb.nodesource.com/setup_16.x'
+  sudo bash setup_16.x
   sudo ${APT_GET} install --no-install-recommends nodejs
   if ! command -v npm >/dev/null ; then
     sudo ${APT_GET} install --no-install-recommends npm

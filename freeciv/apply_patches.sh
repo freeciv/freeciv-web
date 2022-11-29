@@ -18,6 +18,12 @@
 # 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
 #   Protocol update
 #   osdn #46079
+# 0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common.patch
+#   Dependency of 0018-Send-rally-point-separately-from-PACKET_CITY_INFO
+#   osdn #46101
+# 0018-Send-rally-point-separately-from-PACKET_CITY_INFO.patch
+#   Protocol update
+#   osdn #46080
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -43,6 +49,8 @@ declare -a PATCHLIST=(
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
+  "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
+  "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

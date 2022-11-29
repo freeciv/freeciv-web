@@ -266,7 +266,7 @@ function handle_early_chat_msg(packet)
   city, including it's internals.
 
   This is followed by other packets.
-  First one is the city_nationalities.
+  First one is the city_nationalities, followed by city_rally_point
 
   Finally, web_city_info_addition gives additional
   information only needed by Freeciv-web. Its processing will therefore
@@ -334,18 +334,34 @@ function handle_city_info(packet)
 }
 
 /***************************************************************************
-  This is a follow up packet to city_info packet.
+  Generic handling of follow up packets of city_info.
 ***************************************************************************/
-function handle_city_nationalities(packet)
+function city_info_follow_up(packet, pname)
 {
   if (cities[packet['id']] == null) {
     /* The city should have been sent before the additional info. */
-    console.log("packet_city_nationalities for unknown city "
+    console.log(pname + " for unknown city "
                 + packet['id']);
     return;
   }
 
   $.extend(cities[packet['id']], packet);
+}
+
+/***************************************************************************
+  This is a follow up packet to city_info packet.
+***************************************************************************/
+function handle_city_nationalities(packet)
+{
+  city_info_follow_up(packet, "packet_city_nationalities");
+}
+
+/***************************************************************************
+  This is a follow up packet to city_info packet.
+***************************************************************************/
+function handle_city_rally_point(packet)
+{
+  city_info_follow_up(packet, "packet_city_rally_point");
 }
 
 /***************************************************************************

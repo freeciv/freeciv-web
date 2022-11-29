@@ -24,6 +24,9 @@
 # 0018-Send-rally-point-separately-from-PACKET_CITY_INFO.patch
 #   Protocol update
 #   osdn #46080
+# 0034-Stop-registering-hard-requirement-that-has-no-users.patch
+#   Memory leak fix
+#   osdn #45910
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,6 +54,7 @@ declare -a PATCHLIST=(
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
   "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
+  "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

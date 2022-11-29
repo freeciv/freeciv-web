@@ -1,0 +1,67 @@
+From 7b9db6c8b44ca73a5417eebfe47e676c5da0a3a2 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 27 Nov 2022 22:52:13 +0200
+Subject: [PATCH 34/41] Stop registering hard requirement that has no users
+
+The only user has been unhardcoded not to need the requirement.
+
+See osdn #45910
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/actions.c | 24 ++++++------------------
+ 1 file changed, 6 insertions(+), 18 deletions(-)
+
+diff --git a/common/actions.c b/common/actions.c
+index ab20caa37c..0317890646 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -205,6 +205,7 @@ static void voblig_hard_req_reg(struct ae_contra_or *contras,
+ {
+   struct obligatory_req oreq;
+   enum action_result res;
++  int users = 0;
+ 
+   /* A non null action message is used to indicate that an obligatory hard
+    * requirement is missing. */
+@@ -226,8 +227,12 @@ static void voblig_hard_req_reg(struct ae_contra_or *contras,
+     obligatory_req_vector_append(&oblig_hard_reqs_r[res], oreq);
+ 
+     /* Register the new user. */
+-    oreq.contras->users++;
++    users++;
+   }
++
++  fc_assert(users > 0);
++
++  oreq.contras->users += users;
+ }
+ 
+ /**********************************************************************//**
+@@ -441,23 +446,6 @@ static void hard_code_oblig_hard_reqs(void)
+                           ACTRES_WIPE_UNITS,
+                           ACTRES_NONE);
+ 
+-  /* Why this is a hard requirement: assumed by the Freeciv code. */
+-  oblig_hard_req_reg(req_contradiction_or(
+-                       2,
+-                       req_from_values(VUT_DIPLREL_TILE_O,
+-                                       REQ_RANGE_LOCAL,
+-                                       FALSE, FALSE, TRUE, DS_WAR),
+-                       TRUE,
+-                       req_from_values(VUT_CITYTILE, REQ_RANGE_TILE,
+-                                       FALSE, TRUE, TRUE,
+-                                       CITYT_CENTER),
+-                       TRUE),
+-                     N_("All action enablers for %s must require"
+-                        " that the actor is at war with the owner of the"
+-                        " target tile or that the target tile doesn't have"
+-                        " a city."),
+-                     ACTRES_NONE);
+-
+   /* Why this is a hard requirement: Keep the old rules. Need to work
+    * out corner cases. */
+   oblig_hard_req_register(req_from_values(VUT_DIPLREL, REQ_RANGE_LOCAL,
+-- 
+2.35.1
+

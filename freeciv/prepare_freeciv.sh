@@ -47,7 +47,7 @@ if test "$MESON_VER" != "" ; then
   mkdir -p build
 
   ( cd build
-    meson ../freeciv -Dfreeciv-web=true \
+    meson setup ../freeciv -Dfreeciv-web=true \
           -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false \
           -Daudio=false -Druledit=false \
           -Dproject-definition=../freeciv-web.fcproj \

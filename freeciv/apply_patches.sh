@@ -37,10 +37,6 @@
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
-# navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME
-#     when the name is url encoded in json protocol.
-#     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
-#     Giving one of the longer removed city names to a new city still causes problems.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
@@ -71,7 +67,6 @@ declare -a PATCHLIST=(
   "scorelog_filenames"
   "disable_global_warming"
   "win_chance"
-  "navajo-remove-long-city-names"
   "longturn"
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"

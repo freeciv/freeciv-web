@@ -265,7 +265,10 @@ function handle_early_chat_msg(packet)
   The city_info packet is used when the player has full information about a
   city, including it's internals.
 
-  It is followed by web_city_info_addition that gives additional
+  This is followed by other packets.
+  First one is the city_nationalities.
+
+  Finally, web_city_info_addition gives additional
   information only needed by Freeciv-web. Its processing will therefore
   stop while it waits for the corresponding web_city_info_addition packet.
 ***************************************************************************/
@@ -328,6 +331,21 @@ function handle_city_info(packet)
 
   /* Stop the processing here. Wait for the web_city_info_addition packet.
    * The processing of this packet will continue once it arrives. */
+}
+
+/***************************************************************************
+  This is a follow up packet to city_info packet.
+***************************************************************************/
+function handle_city_nationalities(packet)
+{
+  if (cities[packet['id']] == null) {
+    /* The city should have been sent before the additional info. */
+    console.log("packet_city_nationalities for unknown city "
+                + packet['id']);
+    return;
+  }
+
+  $.extend(cities[packet['id']], packet);
 }
 
 /***************************************************************************

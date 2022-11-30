@@ -15,6 +15,12 @@
 # 0024-Mark-server-to-web-client-packets-no-handle.patch
 #   Ease maintenance of regular clients when web-packets change
 #   osdn #45955
+# 0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER.patch
+#   Dependency for 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
+#   osdn #45890
+# 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
+#   Protocol update
+#   osdn #46079
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,6 +45,8 @@ declare -a PATCHLIST=(
   "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
+  "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
+  "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

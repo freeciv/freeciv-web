@@ -5,10 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0051-Make-vision-site-name-allocation-dynamic.patch
-#   Do not reserve memory for every city name by the longest possible,
-#   FoW part.
-#   osdn #45844
 # 0024-Mark-server-to-web-client-packets-no-handle.patch
 #   Ease maintenance of regular clients when web-packets change
 #   osdn #45955
@@ -48,7 +44,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"

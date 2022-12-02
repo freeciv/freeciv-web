@@ -100,6 +100,10 @@ if [ "${INSTALLED_NODEJS}" = N ]; then
   if ! command -v npm >/dev/null ; then
     sudo ${APT_GET} install --no-install-recommends npm
   fi
+  if apt-get --simulate install node-opener &> /dev/null ; then
+    sudo ${APT_GET} install --no-install-recommends node-opener
+  fi
 fi
+
 # Populate ~/.config with current user
 npm help > /dev/null

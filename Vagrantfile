@@ -1,8 +1,8 @@
-# coding: iso-8859-1
+# coding: utf-8
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Freeciv-web Vagrant Vagrantfile - play.freeciv.org
+# Freeciv-web Vagrant Vagrantfile
 # 2014-02-17 - Andreas Røsdal
 #
 # Run 'vagrant up' in this directory, which will create a VirtualBox image

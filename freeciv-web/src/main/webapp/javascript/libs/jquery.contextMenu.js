@@ -1,17 +1,17 @@
 /**
- * jQuery contextMenu v2.5.0 - Plugin for simple contextMenu handling
+ * jQuery contextMenu v2.9.2 - Plugin for simple contextMenu handling
  *
- * Version: v2.5.0
+ * Version: v2.9.2
  *
  * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
  * Web: http://swisnl.github.io/jQuery-contextMenu/
  *
- * Copyright (c) 2011-2017 SWIS BV and contributors
+ * Copyright (c) 2011-2020 SWIS BV and contributors
  *
  * Licensed under
  *   MIT License http://www.opensource.org/licenses/mit-license
  *
- * Date: 2017-08-30T12:41:32.950Z
+ * Date: 2020-05-13T13:55:36.983Z
  */
 
 // jscs:disable
@@ -116,6 +116,10 @@
             // flag denoting if a second trigger should simply move (true) or rebuild (false) an open menu
             // as long as the trigger happened on one of the trigger-element's child nodes
             reposition: true,
+            // Flag denoting if a second trigger should close the menu, as long as
+            // the trigger happened on one of the trigger-element's child nodes.
+            // This overrides the reposition option.
+            hideOnSecondTrigger: false,
 
             //ability to select submenu
             selectableSubMenu: false,
@@ -235,8 +239,10 @@
             },
             // events
             events: {
+                preShow: $.noop,
                 show: $.noop,
-                hide: $.noop
+                hide: $.noop,
+                activated: $.noop
             },
             // default callback
             callback: null,
@@ -273,6 +279,11 @@
             // contextmenu show dispatcher
             contextmenu: function (e) {
                 var $this = $(this);
+
+                //Show browser context-menu when preShow returns false
+                if (e.data.events.preShow($this,e) === false) {
+                    return;
+                }
 
                 // disable actual context-menu if we are using the right mouse button as the trigger
                 if (e.data.trigger === 'right') {
@@ -330,26 +341,7 @@
 
                         op.create(e.data);
                     }
-                    var showMenu = false;
-                    for (var item in e.data.items) {
-                        if (e.data.items.hasOwnProperty(item)) {
-                            var visible;
-                            if ($.isFunction(e.data.items[item].visible)) {
-                                visible = e.data.items[item].visible.call($(e.currentTarget), item, e.data);
-                            } else if (typeof e.data.items[item] !== 'undefined' && e.data.items[item].visible) {
-                                visible = e.data.items[item].visible === true;
-                            } else {
-                                visible = true;
-                            }
-                            if (visible) {
-                                showMenu = true;
-                            }
-                        }
-                    }
-                    if (showMenu) {
-                        // show menu
-                        op.show.call($this, e.data, e.pageX, e.pageY);
-                    }
+                    op.show.call($this, e.data, e.pageX, e.pageY);
                 }
             },
             // contextMenu left-click trigger
@@ -444,12 +436,21 @@
                     button = e.button,
                     x = e.pageX,
                     y = e.pageY,
+                    fakeClick = x === undefined,
                     target,
                     offset;
 
                 e.preventDefault();
 
                 setTimeout(function () {
+                    // If the click is not real, things break: https://github.com/swisnl/jQuery-contextMenu/issues/132
+                    if(fakeClick){
+                        if (root !== null && typeof root !== 'undefined' && root.$menu !== null  && typeof root.$menu !== 'undefined') {
+                            root.$menu.trigger('contextmenu:hide');
+                        }
+                        return;
+                    }
+
                     var $window;
                     var triggerAction = ((root.trigger === 'left' && button === 0) || (root.trigger === 'right' && button === 2));
 
@@ -460,7 +461,7 @@
 
                         // also need to try and focus this element if we're in a contenteditable area,
                         // as the layer will prevent the browser mouse action we want
-                        if (target.isContentEditable) {
+                        if (target !== null && target.isContentEditable) {
                             var range = document.createRange(),
                                 sel = window.getSelection();
                             range.selectNode(target);
@@ -470,6 +471,11 @@
                         }
                         $(target).trigger(e);
                         root.$layer.show();
+                    }
+
+                    if (root.hideOnSecondTrigger && triggerAction && root.$menu !== null && typeof root.$menu !== 'undefined') {
+                      root.$menu.trigger('contextmenu:hide');
+                      return;
                     }
 
                     if (root.reposition && triggerAction) {
@@ -973,7 +979,11 @@
                 }
 
                 // create or update context menu
-                op.update.call($trigger, opt);
+                var hasVisibleItems = op.update.call($trigger, opt);
+                if (hasVisibleItems === false) {
+                    $currentTrigger = null;
+                    return;
+                }
 
                 // position menu
                 opt.position.call($trigger, opt, x, y);
@@ -997,6 +1007,9 @@
                 // position and show context menu
                 opt.$menu.css(css)[opt.animation.show](opt.animation.duration, function () {
                     $trigger.trigger('contextmenu:visible');
+
+                    op.activated(opt);
+                    opt.events.activated(opt);
                 });
                 // make options available and set state
                 $trigger
@@ -1108,6 +1121,11 @@
                     'contextMenu': opt,
                     'contextMenuRoot': root
                 });
+                if(opt.dataAttr){
+                    $.each(opt.dataAttr, function (key, item) {
+                        opt.$menu.attr('data-' + opt.key, item);
+                    });
+                }
 
                 $.each(['callbacks', 'commands', 'inputs'], function (i, k) {
                     opt[k] = {};
@@ -1206,9 +1224,7 @@
                             $t.addClass('context-menu-separator ' + root.classNames.notSelectable);
                         } else if (item.type === 'html') {
                             $t.addClass('context-menu-html ' + root.classNames.notSelectable);
-                        } else if (item.type === 'sub') {
-                            // We don't want to execute the next else-if if it is a sub.
-                        } else if (item.type) {
+                        } else if (item.type !== 'sub' && item.type) {
                             $label = $('<label></label>').appendTo($t);
                             createNameNode(item).appendTo($label);
 
@@ -1323,14 +1339,28 @@
                             if ($.isFunction(item.icon)) {
                                 item._icon = item.icon.call(this, this, $t, key, item);
                             } else {
-                                if (typeof(item.icon) === 'string' && item.icon.substring(0, 3) === 'fa-') {
+                                if (typeof(item.icon) === 'string' && (
+                                    item.icon.substring(0, 4) === 'fab '
+                                    || item.icon.substring(0, 4) === 'fas '
+                                    || item.icon.substring(0, 4) === 'fad '
+                                    || item.icon.substring(0, 4) === 'far '
+                                    || item.icon.substring(0, 4) === 'fal ')
+                                ) {
                                     // to enable font awesome
+                                    $t.addClass(root.classNames.icon + ' ' + root.classNames.icon + '--fa5');
+                                    item._icon = $('<i class="' + item.icon + '"></i>');
+                                } else if (typeof(item.icon) === 'string' && item.icon.substring(0, 3) === 'fa-') {
                                     item._icon = root.classNames.icon + ' ' + root.classNames.icon + '--fa fa ' + item.icon;
                                 } else {
                                     item._icon = root.classNames.icon + ' ' + root.classNames.icon + '-' + item.icon;
                                 }
                             }
-                            $t.addClass(item._icon);
+
+                            if(typeof(item._icon) === "string"){
+                                $t.addClass(item._icon);
+                            } else {
+                                $t.prepend(item._icon);
+                            }
                         }
                     }
 
@@ -1397,6 +1427,9 @@
                     root = opt;
                     op.resize(opt.$menu);
                 }
+
+                var hasVisibleItems = false;
+
                 // re-check disabled for each item
                 opt.$menu.children().each(function () {
                     var $item = $(this),
@@ -1411,6 +1444,11 @@
                     } else {
                         visible = true;
                     }
+
+                    if (visible) {
+                        hasVisibleItems = true;
+                    }
+
                     $item[visible ? 'show' : 'hide']();
 
                     // dis- / enable item
@@ -1418,8 +1456,12 @@
 
                     if ($.isFunction(item.icon)) {
                         $item.removeClass(item._icon);
-                        item._icon = item.icon.call(this, $trigger, $item, key, item);
-                        $item.addClass(item._icon);
+                        var iconResult = item.icon.call(this, $trigger, $item, key, item);
+                        if(typeof(iconResult) === "string"){
+                            $item.addClass(iconResult);
+                        } else {
+                            $item.prepend(iconResult);
+                        }
                     }
 
                     if (item.type) {
@@ -1446,9 +1488,13 @@
 
                     if (item.$menu) {
                         // update sub-menu
-                        op.update.call($trigger, item, root);
+                        var subMenuHasVisibleItems = op.update.call($trigger, item, root);
+                        if (subMenuHasVisibleItems) {
+                            hasVisibleItems = true;
+                        }
                     }
                 });
+                return hasVisibleItems;
             },
             layer: function (opt, zIndex) {
                 // add transparent layer for click area
@@ -1459,7 +1505,7 @@
                         width: $win.width(),
                         display: 'block',
                         position: 'fixed',
-                        'z-index': zIndex,
+                        'z-index': zIndex - 1,
                         top: 0,
                         left: 0,
                         opacity: 0,
@@ -1467,7 +1513,7 @@
                         'background-color': '#000'
                     })
                     .data('contextMenuRoot', opt)
-                    .insertBefore(this)
+                    .appendTo(document.body)
                     .on('contextmenu', handle.abortevent)
                     .on('mousedown', handle.layerClick);
 
@@ -1527,6 +1573,26 @@
                 // Wait for promise completion. .then(success, error, notify) (we don't track notify). Bind the opt
                 // and root to avoid scope problems
                 promise.then(completedPromise.bind(this, opt, root), errorPromise.bind(this, opt, root));
+            },
+            // operation that will run after contextMenu showed on screen
+            activated: function(opt){
+                var $menu = opt.$menu;
+                var $menuOffset = $menu.offset();
+                var winHeight = $(window).height();
+                var winScrollTop = $(window).scrollTop();
+                var menuHeight = $menu.height();
+                if(menuHeight > winHeight){
+                    $menu.css({
+                        'height' : winHeight + 'px',
+                        'overflow-x': 'hidden',
+                        'overflow-y': 'auto',
+                        'top': winScrollTop + 'px'
+                    });
+                } else if(($menuOffset.top < winScrollTop) || ($menuOffset.top + menuHeight > winScrollTop + winHeight)){
+                    $menu.css({
+                        'top': winScrollTop + 'px'
+                    });
+                }
             }
         };
 
@@ -1616,6 +1682,20 @@
         }
 
         switch (operation) {
+
+            case 'update':
+                // Updates visibility and such
+                if(_hasContext){
+                    op.update($context);
+                } else {
+                    for(var menu in menus){
+                        if(menus.hasOwnProperty(menu)){
+                            op.update(menus[menu]);
+                        }
+                    }
+                }
+                break;
+
             case 'create':
                 // no selector no joy
                 if (!o.selector) {
@@ -1905,7 +1985,7 @@
                         disabled: !!$node.attr('disabled'),
                         callback: (function () {
                             return function () {
-                                $node.get(0).click()
+                                $node.get(0).click();
                             };
                         })()
                     };
@@ -1924,7 +2004,7 @@
                                 icon: $node.attr('icon'),
                                 callback: (function () {
                                     return function () {
-                                        $node.get(0).click()
+                                        $node.get(0).click();
                                     };
                                 })()
                             };

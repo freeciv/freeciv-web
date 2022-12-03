@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0024-Mark-server-to-web-client-packets-no-handle.patch
-#   Ease maintenance of regular clients when web-packets change
-#   osdn #45955
 # 0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER.patch
 #   Dependency for 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
 #   osdn #45890
@@ -26,6 +23,9 @@
 # 0034-Increase-MAX_LEN_CITYNAME-to-120.patch
 #   Support longer citynames
 #   osdn #46096
+# 0036-Path-finding-Make-pf_fuel_pos-cost-an-int.patch
+#   Fix an move cost overflow in path finding
+#   osdn #46136
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -43,13 +43,13 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
   "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "backports/0034-Increase-MAX_LEN_CITYNAME-to-120"
+  "backports/0036-Path-finding-Make-pf_fuel_pos-cost-an-int"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

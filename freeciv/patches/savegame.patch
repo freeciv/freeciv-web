@@ -1,8 +1,7 @@
-diff --git a/server/commands.c b/server/commands.c
-index c2282c0359..a28df3f27a 100644
---- a/server/commands.c
-+++ b/server/commands.c
-@@ -551,7 +551,7 @@ static struct command commands[] = {
+diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
+--- freeciv/server/commands.c	2022-12-03 07:02:01.878980808 +0200
++++ freeciv/server/commands.c	2022-12-03 07:02:11.367068641 +0200
+@@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
    },
@@ -11,11 +10,10 @@ index c2282c0359..a28df3f27a 100644
     /* TRANS: translate text between <> only */
     N_("save\n"
        "save <file-name>"),
-diff --git a/server/savegame/savemain.c b/server/savegame/savemain.c
-index 8eda2ed9b6..adb8875f9f 100644
---- a/server/savegame/savemain.c
-+++ b/server/savegame/savemain.c
-@@ -144,8 +144,8 @@ void save_game(const char *orig_filename, const char *save_reason,
+diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
+--- freeciv/server/savegame/savemain.c	2022-12-03 07:02:01.882980845 +0200
++++ freeciv/server/savegame/savemain.c	2022-12-03 07:02:11.367068641 +0200
+@@ -152,8 +152,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
    if (!orig_filename) {
@@ -26,7 +24,7 @@ index 8eda2ed9b6..adb8875f9f 100644
    } else {
      sz_strlcpy(stdata->filepath, orig_filename);
      if ((filename = strrchr(stdata->filepath, '/'))) {
-@@ -182,13 +182,6 @@ void save_game(const char *orig_filename, const char *save_reason,
+@@ -190,13 +190,6 @@
      }
    }
  
@@ -40,10 +38,9 @@ index 8eda2ed9b6..adb8875f9f 100644
    timer_cpu = timer_new(TIMER_CPU, TIMER_ACTIVE, "save cpu");
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
-diff --git a/server/stdinhand.c b/server/stdinhand.c
-index ead9c7c769..c8eacd1a60 100644
---- a/server/stdinhand.c
-+++ b/server/stdinhand.c
+diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
+--- freeciv/server/stdinhand.c	2022-12-03 07:02:01.882980845 +0200
++++ freeciv/server/stdinhand.c	2022-12-03 07:02:11.367068641 +0200
 @@ -19,6 +19,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -52,7 +49,7 @@ index ead9c7c769..c8eacd1a60 100644
  
  #ifdef FREECIV_HAVE_LIBREADLINE
  #include <readline/readline.h>
-@@ -666,11 +667,6 @@ static bool show_serverid(struct connection *caller, char *arg)
+@@ -668,11 +669,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -64,7 +61,7 @@ index ead9c7c769..c8eacd1a60 100644
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3745,10 +3741,20 @@ bool load_command(struct connection *caller, const char *filename, bool check,
+@@ -3803,10 +3799,20 @@
    }
  
    {
@@ -86,7 +83,7 @@ index ead9c7c769..c8eacd1a60 100644
      };
      const char *exts[] = {
        "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", "sav.zst", NULL
-@@ -4434,6 +4440,31 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
+@@ -4500,6 +4506,31 @@
  
    level = command_level(command_by_number(cmd));
  
@@ -118,16 +115,23 @@ index ead9c7c769..c8eacd1a60 100644
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
        && conn_get_access(caller) == ALLOW_BASIC && !check
        && !vote_would_pass_immediately(caller, cmd)) {
-diff --git a/utility/shared.c b/utility/shared.c
-index ea968a0335..c16932fcee 100644
---- a/utility/shared.c
-+++ b/utility/shared.c
-@@ -1766,7 +1766,7 @@ bool make_dir(const char *pathname)
-     mkdir(path, 0755);
+diff -Nurd freeciv/utility/shared.c freeciv/utility/shared.c
+--- freeciv/utility/shared.c	2022-12-03 07:02:01.946981438 +0200
++++ freeciv/utility/shared.c	2022-12-03 07:02:51.719442156 +0200
+@@ -1787,14 +1787,14 @@
+       }
+     }
+ #else  /* HAVE__MKDIR */
+-    if (mkdir(path, 0755) == -1
++    if (mkdir(path, 0775) == -1
+         && fc_get_errno() != EEXIST) {
+       free(path);
+       return FALSE;
+     }
  #endif /* HAVE__MKDIR */
  #else  /* FREECIV_MSWINDOWS */
--    mkdir(path, 0755);
-+    mkdir(path, 0775);
- #endif /* FREECIV_MSWINDOWS */
- 
-     if (dir) {
+-    if (mkdir(path, 0755) == -1
++    if (mkdir(path, 0775) == -1
+         && fc_get_errno() != EEXIST) {
+       free(path);
+       return FALSE;

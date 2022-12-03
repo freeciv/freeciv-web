@@ -1,0 +1,646 @@
+From 7f7631a11dce5a1a49081f7e8a218b5e07f8c377 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 23 Nov 2022 21:28:53 +0200
+Subject: [PATCH 07/28] Move PACKET_CITY_RALLY_POINT unpacking to common/
+
+See osdn #46101
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/city.c                 |  46 ++++++++
+ common/city.h                 |   5 +-
+ common/networking/packets.def |   2 +-
+ common/unit.c                 | 210 ++++++++++++++++++++++++++++++++++
+ common/unit.h                 |   6 +-
+ server/cityhand.c             |  47 +-------
+ server/unittools.c            | 210 ----------------------------------
+ server/unittools.h            |   6 +-
+ 8 files changed, 272 insertions(+), 260 deletions(-)
+
+diff --git a/common/city.c b/common/city.c
+index f77b05e9ea..17fb278a90 100644
+--- a/common/city.c
++++ b/common/city.c
+@@ -3527,3 +3527,49 @@ void city_rally_point_clear(struct city *pcity)
+     pcity->rally_point.orders = NULL;
+   }
+ }
++
++/**********************************************************************//**
++  Fill city rally point from the packet.
++**************************************************************************/
++void city_rally_point_receive(const struct packet_city_rally_point *packet,
++                              struct city *pcity)
++{
++  struct unit_order *checked_orders;
++
++  if (NULL != pcity) {
++    /* Probably lost. */
++    log_verbose("handle_city_rally_point() bad city number %d.",
++                packet->city_id);
++    return;
++  }
++
++  if (0 > packet->length || MAX_LEN_ROUTE < packet->length) {
++    /* Shouldn't happen */
++    log_error("city_rally_point_receive() invalid packet length %d (max %d)",
++              packet->length, MAX_LEN_ROUTE);
++    return;
++  }
++
++  pcity->rally_point.length = packet->length;
++
++  if (packet->length == 0) {
++    pcity->rally_point.vigilant = FALSE;
++    pcity->rally_point.persistent = FALSE;
++    if (pcity->rally_point.orders) {
++      free(pcity->rally_point.orders);
++      pcity->rally_point.orders = NULL;
++    }
++  } else {
++    checked_orders = create_unit_orders(packet->length, packet->orders);
++    if (!checked_orders) {
++      pcity->rally_point.length = 0;
++      log_error("invalid rally point orders for city number %d.",
++                packet->city_id);
++      return;
++    }
++
++    pcity->rally_point.persistent = packet->persistent;
++    pcity->rally_point.vigilant = packet->vigilant;
++    pcity->rally_point.orders = checked_orders;
++  }
++}
+diff --git a/common/city.h b/common/city.h
+index 528bc1b77b..8fa671532b 100644
+--- a/common/city.h
++++ b/common/city.h
+@@ -33,6 +33,7 @@ struct impr_type;
+ struct unit;
+ struct unit_list;
+ struct vision;
++struct packet_city_rally_point;
+ 
+ enum production_class_type {
+   PCT_UNIT,
+@@ -811,9 +812,11 @@ void city_set_ai_data(struct city *pcity, const struct ai_type *ai,
+                       void *data);
+ 
+ void city_rally_point_clear(struct city *pcity);
++void city_rally_point_receive(const struct packet_city_rally_point *packet,
++                              struct city *pcity);
+ 
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+ 
+-#endif  /* FC__CITY_H */
++#endif /* FC__CITY_H */
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index ef5d3f79ca..99eb9163d8 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -890,7 +890,7 @@ PACKET_CITY_SABOTAGE_LIST = 45; sc, lsend, handle-via-fields
+   UINT8 request_kind;
+ end
+ 
+-PACKET_CITY_RALLY_POINT = 138; cs, handle-via-fields
++PACKET_CITY_RALLY_POINT = 138; cs
+   CITY city_id;
+   UINT16 length;
+   BOOL persistent;
+diff --git a/common/unit.c b/common/unit.c
+index 9b53fe8cc3..e7fc60e076 100644
+--- a/common/unit.c
++++ b/common/unit.c
+@@ -2530,3 +2530,213 @@ bool unit_is_cityfounder(const struct unit *punit)
+ {
+   return utype_is_cityfounder(unit_type_get(punit));
+ }
++
++/**********************************************************************//**
++  Returns TRUE iff the unit order array is sane.
++**************************************************************************/
++bool unit_order_list_is_sane(int length, const struct unit_order *orders)
++{
++  int i;
++
++  for (i = 0; i < length; i++) {
++    struct action *paction;
++    struct extra_type *pextra;
++
++    if (orders[i].order > ORDER_LAST) {
++      log_error("invalid order %d at index %d", orders[i].order, i);
++      return FALSE;
++    }
++    switch (orders[i].order) {
++    case ORDER_MOVE:
++    case ORDER_ACTION_MOVE:
++      if (!map_untrusted_dir_is_valid(orders[i].dir)) {
++        log_error("in order %d, invalid move direction %d.", i, orders[i].dir);
++        return FALSE;
++      }
++      break;
++    case ORDER_ACTIVITY:
++      switch (orders[i].activity) {
++      case ACTIVITY_SENTRY:
++        if (i != length - 1) {
++          /* Only allowed as the last order. */
++          log_error("activity %d is not allowed at index %d.", orders[i].activity,
++                    i);
++          return FALSE;
++        }
++        break;
++      /* Replaced by action orders */
++      case ACTIVITY_BASE:
++      case ACTIVITY_GEN_ROAD:
++      case ACTIVITY_FALLOUT:
++      case ACTIVITY_POLLUTION:
++      case ACTIVITY_PILLAGE:
++      case ACTIVITY_MINE:
++      case ACTIVITY_IRRIGATE:
++      case ACTIVITY_PLANT:
++      case ACTIVITY_CULTIVATE:
++      case ACTIVITY_TRANSFORM:
++      case ACTIVITY_CONVERT:
++      case ACTIVITY_FORTIFYING:
++        log_error("at index %d, use action rather than activity %d.",
++                  i, orders[i].activity);
++        return FALSE;
++      /* Not supported. */
++      case ACTIVITY_EXPLORE:
++      case ACTIVITY_IDLE:
++      /* Not set from the client. */
++      case ACTIVITY_GOTO:
++      case ACTIVITY_FORTIFIED:
++      /* Compatiblity, used in savegames. */
++      case ACTIVITY_OLD_ROAD:
++      case ACTIVITY_OLD_RAILROAD:
++      case ACTIVITY_FORTRESS:
++      case ACTIVITY_AIRBASE:
++      /* Unused. */
++      case ACTIVITY_PATROL_UNUSED:
++      case ACTIVITY_LAST:
++      case ACTIVITY_UNKNOWN:
++        log_error("at index %d, unsupported activity %d.", i, orders[i].activity);
++        return FALSE;
++      }
++
++      break;
++    case ORDER_PERFORM_ACTION:
++      if (!action_id_exists(orders[i].action)) {
++        /* Non-existent action. */
++        log_error("at index %d, the action %d doesn't exist.", i, orders[i].action);
++        return FALSE;
++      }
++
++      paction = action_by_number(orders[i].action);
++
++      /* Validate main target. */
++      if (index_to_tile(&(wld.map), orders[i].target) == NULL) {
++        log_error("at index %d, invalid tile target %d for the action %d.",
++                  i, orders[i].target, orders[i].action);
++        return FALSE;
++      }
++
++      if (orders[i].dir != DIR8_ORIGIN) {
++        log_error("at index %d, the action %d sets the outdated target"
++                  " specification dir.",
++                  i, orders[i].action);
++      }
++
++      /* Validate sub target. */
++      switch (action_id_get_sub_target_kind(orders[i].action)) {
++      case ASTK_BUILDING:
++        /* Sub target is a building. */
++        if (!improvement_by_number(orders[i].sub_target)) {
++          /* Sub target is invalid. */
++          log_error("at index %d, cannot do %s without a target.", i,
++                    action_id_rule_name(orders[i].action));
++          return FALSE;
++        }
++        break;
++      case ASTK_TECH:
++        /* Sub target is a technology. */
++        if (orders[i].sub_target == A_NONE
++            || (!valid_advance_by_number(orders[i].sub_target)
++                && orders[i].sub_target != A_FUTURE)) {
++          /* Target tech is invalid. */
++          log_error("at index %d, cannot do %s without a target.", i,
++                    action_id_rule_name(orders[i].action));
++          return FALSE;
++        }
++        break;
++      case ASTK_EXTRA:
++      case ASTK_EXTRA_NOT_THERE:
++        /* Sub target is an extra. */
++        pextra = (!(orders[i].sub_target == NO_TARGET
++                    || (orders[i].sub_target < 0
++                        || (orders[i].sub_target
++                            >= game.control.num_extra_types)))
++                  ? extra_by_number(orders[i].sub_target) : NULL);
++        fc_assert(pextra == NULL || !(pextra->ruledit_disabled));
++        if (pextra == NULL) {
++          if (paction->target_complexity != ACT_TGT_COMPL_FLEXIBLE) {
++            /* Target extra is invalid. */
++            log_error("at index %d, cannot do %s without a target.", i,
++                      action_id_rule_name(orders[i].action));
++            return FALSE;
++          }
++        } else {
++          if (!(action_removes_extra(paction, pextra)
++                || action_creates_extra(paction, pextra))) {
++            /* Target extra is irrelevant for the action. */
++            log_error("at index %d, cannot do %s to %s.", i,
++                      action_id_rule_name(orders[i].action),
++                      extra_rule_name(pextra));
++            return FALSE;
++          }
++        }
++        break;
++      case ASTK_NONE:
++        /* No validation required. */
++        break;
++      /* Invalid action? */
++      case ASTK_COUNT:
++        fc_assert_ret_val_msg(
++            action_id_get_sub_target_kind(orders[i].action) != ASTK_COUNT,
++            FALSE,
++            "Bad action %d in order number %d.", orders[i].action, i);
++      }
++
++      /* Some action orders are sane only in the last order. */
++      if (i != length - 1) {
++        /* If the unit is dead, */
++        if (utype_is_consumed_by_action(paction, NULL)
++            /* or if Freeciv has no idea where the unit will end up after it
++             * has performed this action, */
++            || !(utype_is_unmoved_by_action(paction, NULL)
++                 || utype_is_moved_to_tgt_by_action(paction, NULL))
++            /* or if the unit will end up standing still, */
++            || action_has_result(paction, ACTRES_FORTIFY)) {
++          /* than having this action in the middle of a unit's orders is
++           * probably wrong. */
++          log_error("action %d is not allowed at index %d.",
++                    orders[i].action, i);
++          return FALSE;
++        }
++      }
++
++      /* Don't validate that the target tile really contains a target or
++       * that the actor player's map think the target tile has one.
++       * The player may target something from their player map that isn't
++       * there any more, a target they think is there even if their player
++       * map doesn't have it, or even a target they assume will be there
++       * when the unit reaches the target tile.
++       *
++       * With that said: The client should probably at least have an
++       * option to only aim city targeted actions at cities. */
++
++      break;
++    case ORDER_FULL_MP:
++      break;
++    case ORDER_LAST:
++      /* An invalid order.  This is handled above. */
++      break;
++    }
++  }
++
++  return TRUE;
++}
++
++/**********************************************************************//**
++  Sanity-check unit order arrays from a packet and create a unit_order array
++  from their contents if valid.
++**************************************************************************/
++struct unit_order *create_unit_orders(int length,
++                                      const struct unit_order *orders)
++{
++  struct unit_order *unit_orders;
++
++  if (!unit_order_list_is_sane(length, orders)) {
++    return NULL;
++  }
++
++  unit_orders = fc_malloc(length * sizeof(*(unit_orders)));
++  memcpy(unit_orders, orders, length * sizeof(*(unit_orders)));
++
++  return unit_orders;
++}
+diff --git a/common/unit.h b/common/unit.h
+index 2d65ba83d3..5b358530f3 100644
+--- a/common/unit.h
++++ b/common/unit.h
+@@ -474,8 +474,12 @@ struct iterator *cargo_iter_init(struct cargo_iter *iter,
+                   cargo_iter_sizeof, cargo_iter_init, _ptrans)
+ #define unit_cargo_iterate_end generic_iterate_end
+ 
++bool unit_order_list_is_sane(int length, const struct unit_order *orders);
++struct unit_order *create_unit_orders(int length,
++                                      const struct unit_order *orders);
++
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+ 
+-#endif  /* FC__UNIT_H */
++#endif /* FC__UNIT_H */
+diff --git a/server/cityhand.c b/server/cityhand.c
+index 2cafff75f9..c0b5e95f5d 100644
+--- a/server/cityhand.c
++++ b/server/cityhand.c
+@@ -514,51 +514,14 @@ void handle_city_options_req(struct player *pplayer, int city_id,
+   Handles a request to set city rally point for new units.
+ **************************************************************************/
+ void handle_city_rally_point(struct player *pplayer,
+-                             int city_id, int length,
+-                             bool persistent, bool vigilant,
+-                             const struct unit_order *orders)
++                             const struct packet_city_rally_point *packet)
+ {
+-  struct city *pcity = player_city_by_number(pplayer, city_id);
+-  struct unit_order *checked_orders;
+-
+-  if (NULL == pcity) {
+-    /* Probably lost. */
+-    log_verbose("handle_city_rally_point() bad city number %d.",
+-                city_id);
+-    return;
+-  }
+-
+-  if (0 > length || MAX_LEN_ROUTE < length) {
+-    /* Shouldn't happen */
+-    log_error("handle_city_rally_point() invalid packet length %d (max %d)",
+-              length, MAX_LEN_ROUTE);
+-    return;
+-  }
++  struct city *pcity = player_city_by_number(pplayer, packet->city_id);
+ 
+-  pcity->rally_point.length = length;
+-
+-  if (length == 0) {
+-    pcity->rally_point.vigilant = FALSE;
+-    pcity->rally_point.persistent = FALSE;
+-    if (pcity->rally_point.orders) {
+-      free(pcity->rally_point.orders);
+-      pcity->rally_point.orders = NULL;
+-    }
+-  } else {
+-    checked_orders = create_unit_orders(length, orders);
+-    if (!checked_orders) {
+-      pcity->rally_point.length = 0;
+-      log_error("invalid rally point orders for city number %d.",
+-                city_id);
+-      return;
+-    }
+-
+-    pcity->rally_point.persistent = persistent;
+-    pcity->rally_point.vigilant = vigilant;
+-    pcity->rally_point.orders = checked_orders;
++  if (NULL != pcity) {
++    city_rally_point_receive(packet, pcity);
++    send_city_info(pplayer, pcity);
+   }
+-
+-  send_city_info(pplayer, pcity);
+ }
+ 
+ /**********************************************************************//**
+diff --git a/server/unittools.c b/server/unittools.c
+index 5ba25e2ca4..eae07942fb 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -4764,216 +4764,6 @@ bool unit_can_be_retired(struct unit *punit)
+   return TRUE;
+ }
+ 
+-/**********************************************************************//**
+-  Returns TRUE iff the unit order array is sane.
+-**************************************************************************/
+-bool unit_order_list_is_sane(int length, const struct unit_order *orders)
+-{
+-  int i;
+-
+-  for (i = 0; i < length; i++) {
+-    struct action *paction;
+-    struct extra_type *pextra;
+-
+-    if (orders[i].order > ORDER_LAST) {
+-      log_error("invalid order %d at index %d", orders[i].order, i);
+-      return FALSE;
+-    }
+-    switch (orders[i].order) {
+-    case ORDER_MOVE:
+-    case ORDER_ACTION_MOVE:
+-      if (!map_untrusted_dir_is_valid(orders[i].dir)) {
+-        log_error("in order %d, invalid move direction %d.", i, orders[i].dir);
+-        return FALSE;
+-      }
+-      break;
+-    case ORDER_ACTIVITY:
+-      switch (orders[i].activity) {
+-      case ACTIVITY_SENTRY:
+-        if (i != length - 1) {
+-          /* Only allowed as the last order. */
+-          log_error("activity %d is not allowed at index %d.", orders[i].activity,
+-                    i);
+-          return FALSE;
+-        }
+-        break;
+-      /* Replaced by action orders */
+-      case ACTIVITY_BASE:
+-      case ACTIVITY_GEN_ROAD:
+-      case ACTIVITY_FALLOUT:
+-      case ACTIVITY_POLLUTION:
+-      case ACTIVITY_PILLAGE:
+-      case ACTIVITY_MINE:
+-      case ACTIVITY_IRRIGATE:
+-      case ACTIVITY_PLANT:
+-      case ACTIVITY_CULTIVATE:
+-      case ACTIVITY_TRANSFORM:
+-      case ACTIVITY_CONVERT:
+-      case ACTIVITY_FORTIFYING:
+-        log_error("at index %d, use action rather than activity %d.",
+-                  i, orders[i].activity);
+-        return FALSE;
+-      /* Not supported. */
+-      case ACTIVITY_EXPLORE:
+-      case ACTIVITY_IDLE:
+-      /* Not set from the client. */
+-      case ACTIVITY_GOTO:
+-      case ACTIVITY_FORTIFIED:
+-      /* Compatiblity, used in savegames. */
+-      case ACTIVITY_OLD_ROAD:
+-      case ACTIVITY_OLD_RAILROAD:
+-      case ACTIVITY_FORTRESS:
+-      case ACTIVITY_AIRBASE:
+-      /* Unused. */
+-      case ACTIVITY_PATROL_UNUSED:
+-      case ACTIVITY_LAST:
+-      case ACTIVITY_UNKNOWN:
+-        log_error("at index %d, unsupported activity %d.", i, orders[i].activity);
+-        return FALSE;
+-      }
+-
+-      break;
+-    case ORDER_PERFORM_ACTION:
+-      if (!action_id_exists(orders[i].action)) {
+-        /* Non-existent action. */
+-        log_error("at index %d, the action %d doesn't exist.", i, orders[i].action);
+-        return FALSE;
+-      }
+-
+-      paction = action_by_number(orders[i].action);
+-
+-      /* Validate main target. */
+-      if (index_to_tile(&(wld.map), orders[i].target) == NULL) {
+-        log_error("at index %d, invalid tile target %d for the action %d.",
+-                  i, orders[i].target, orders[i].action);
+-        return FALSE;
+-      }
+-
+-      if (orders[i].dir != DIR8_ORIGIN) {
+-        log_error("at index %d, the action %d sets the outdated target"
+-                  " specification dir.",
+-                  i, orders[i].action);
+-      }
+-
+-      /* Validate sub target. */
+-      switch (action_id_get_sub_target_kind(orders[i].action)) {
+-      case ASTK_BUILDING:
+-        /* Sub target is a building. */
+-        if (!improvement_by_number(orders[i].sub_target)) {
+-          /* Sub target is invalid. */
+-          log_error("at index %d, cannot do %s without a target.", i,
+-                    action_id_rule_name(orders[i].action));
+-          return FALSE;
+-        }
+-        break;
+-      case ASTK_TECH:
+-        /* Sub target is a technology. */
+-        if (orders[i].sub_target == A_NONE
+-            || (!valid_advance_by_number(orders[i].sub_target)
+-                && orders[i].sub_target != A_FUTURE)) {
+-          /* Target tech is invalid. */
+-          log_error("at index %d, cannot do %s without a target.", i,
+-                    action_id_rule_name(orders[i].action));
+-          return FALSE;
+-        }
+-        break;
+-      case ASTK_EXTRA:
+-      case ASTK_EXTRA_NOT_THERE:
+-        /* Sub target is an extra. */
+-        pextra = (!(orders[i].sub_target == NO_TARGET
+-                    || (orders[i].sub_target < 0
+-                        || (orders[i].sub_target
+-                            >= game.control.num_extra_types)))
+-                  ? extra_by_number(orders[i].sub_target) : NULL);
+-        fc_assert(pextra == NULL || !(pextra->ruledit_disabled));
+-        if (pextra == NULL) {
+-          if (paction->target_complexity != ACT_TGT_COMPL_FLEXIBLE) {
+-            /* Target extra is invalid. */
+-            log_error("at index %d, cannot do %s without a target.", i,
+-                      action_id_rule_name(orders[i].action));
+-            return FALSE;
+-          }
+-        } else {
+-          if (!(action_removes_extra(paction, pextra)
+-                || action_creates_extra(paction, pextra))) {
+-            /* Target extra is irrelevant for the action. */
+-            log_error("at index %d, cannot do %s to %s.", i,
+-                      action_id_rule_name(orders[i].action),
+-                      extra_rule_name(pextra));
+-            return FALSE;
+-          }
+-        }
+-        break;
+-      case ASTK_NONE:
+-        /* No validation required. */
+-        break;
+-      /* Invalid action? */
+-      case ASTK_COUNT:
+-        fc_assert_ret_val_msg(
+-            action_id_get_sub_target_kind(orders[i].action) != ASTK_COUNT,
+-            FALSE,
+-            "Bad action %d in order number %d.", orders[i].action, i);
+-      }
+-
+-      /* Some action orders are sane only in the last order. */
+-      if (i != length - 1) {
+-        /* If the unit is dead, */
+-        if (utype_is_consumed_by_action(paction, NULL)
+-            /* or if Freeciv has no idea where the unit will end up after it
+-             * has performed this action, */
+-            || !(utype_is_unmoved_by_action(paction, NULL)
+-                 || utype_is_moved_to_tgt_by_action(paction, NULL))
+-            /* or if the unit will end up standing still, */
+-            || action_has_result(paction, ACTRES_FORTIFY)) {
+-          /* than having this action in the middle of a unit's orders is
+-           * probably wrong. */
+-          log_error("action %d is not allowed at index %d.",
+-                    orders[i].action, i);
+-          return FALSE;
+-        }
+-      }
+-
+-      /* Don't validate that the target tile really contains a target or
+-       * that the actor player's map think the target tile has one.
+-       * The player may target something from their player map that isn't
+-       * there any more, a target they think is there even if their player
+-       * map doesn't have it, or even a target they assume will be there
+-       * when the unit reaches the target tile.
+-       *
+-       * With that said: The client should probably at least have an
+-       * option to only aim city targeted actions at cities. */
+-
+-      break;
+-    case ORDER_FULL_MP:
+-      break;
+-    case ORDER_LAST:
+-      /* An invalid order.  This is handled above. */
+-      break;
+-    }
+-  }
+-
+-  return TRUE;
+-}
+-
+-/**********************************************************************//**
+-  Sanity-check unit order arrays from a packet and create a unit_order array
+-  from their contents if valid.
+-**************************************************************************/
+-struct unit_order *create_unit_orders(int length,
+-                                      const struct unit_order *orders)
+-{
+-  struct unit_order *unit_orders;
+-
+-  if (!unit_order_list_is_sane(length, orders)) {
+-    return NULL;
+-  }
+-
+-  unit_orders = fc_malloc(length * sizeof(*(unit_orders)));
+-  memcpy(unit_orders, orders, length * sizeof(*(unit_orders)));
+-
+-  return unit_orders;
+-}
+-
+ /**********************************************************************//**
+   Make random movements of the units that move that way.
+ **************************************************************************/
+diff --git a/server/unittools.h b/server/unittools.h
+index 47c59908d6..239b139878 100644
+--- a/server/unittools.h
++++ b/server/unittools.h
+@@ -190,8 +190,4 @@ void unit_activities_cancel_all_illegal_area(const struct tile *ptile);
+ 
+ void unit_get_goods(struct unit *punit);
+ 
+-bool unit_order_list_is_sane(int length, const struct unit_order *orders);
+-struct unit_order *create_unit_orders(int length,
+-                                      const struct unit_order *orders);
+-
+-#endif  /* FC__UNITTOOLS_H */
++#endif /* FC__UNITTOOLS_H */
+-- 
+2.35.1
+

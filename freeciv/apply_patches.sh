@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0053-Add-MAX_CITY_TILES-to-fc_types.h.patch
-#   Make MAX_CITY_TILES definition available for the network protocol
-#   osdn #45886
 # 0051-Make-vision-site-name-allocation-dynamic.patch
 #   Do not reserve memory for every city name by the longest possible,
 #   FoW part.
@@ -21,6 +18,15 @@
 # 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
 #   Protocol update
 #   osdn #46079
+# 0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common.patch
+#   Dependency of 0018-Send-rally-point-separately-from-PACKET_CITY_INFO
+#   osdn #46101
+# 0018-Send-rally-point-separately-from-PACKET_CITY_INFO.patch
+#   Protocol update
+#   osdn #46080
+# 0034-Stop-registering-hard-requirement-that-has-no-users.patch
+#   Memory leak fix
+#   osdn #45910
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -42,11 +48,13 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0053-Add-MAX_CITY_TILES-to-fc_types.h"
   "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
+  "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
+  "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
+  "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

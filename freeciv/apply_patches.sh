@@ -26,6 +26,9 @@
 # 0036-Path-finding-Make-pf_fuel_pos-cost-an-int.patch
 #   Fix an move cost overflow in path finding
 #   osdn #46136
+# 0050-AI-Check-that-hunt-target-is-targetable.patch
+#   AI hunter crash fix
+#   osdn #46176
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -50,6 +53,7 @@ declare -a PATCHLIST=(
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "backports/0034-Increase-MAX_LEN_CITYNAME-to-120"
   "backports/0036-Path-finding-Make-pf_fuel_pos-cost-an-int"
+  "backports/0050-AI-Check-that-hunt-target-is-targetable"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

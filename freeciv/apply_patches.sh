@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER.patch
-#   Dependency for 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
-#   osdn #45890
-# 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
-#   Protocol update
-#   osdn #46079
 # 0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common.patch
 #   Dependency of 0018-Send-rally-point-separately-from-PACKET_CITY_INFO
 #   osdn #46101
@@ -46,8 +40,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
-  "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
   "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"

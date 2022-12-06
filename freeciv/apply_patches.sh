@@ -5,10 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0051-Make-vision-site-name-allocation-dynamic.patch
-#   Do not reserve memory for every city name by the longest possible,
-#   FoW part.
-#   osdn #45844
 # 0024-Mark-server-to-web-client-packets-no-handle.patch
 #   Ease maintenance of regular clients when web-packets change
 #   osdn #45955
@@ -27,6 +23,9 @@
 # 0034-Stop-registering-hard-requirement-that-has-no-users.patch
 #   Memory leak fix
 #   osdn #45910
+# 0034-Increase-MAX_LEN_CITYNAME-to-120.patch
+#   Support longer citynames
+#   osdn #46096
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -38,23 +37,19 @@
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # disable_global_warming is Freeciv bug #24418
-# navajo-remove-long-city-names is a quick-fix to remove city names which would be longer than MAX_LEN_NAME
-#     when the name is url encoded in json protocol.
-#     MAX_LEN_CITYNAME was increased in patch #7305 (SVN r33048)
-#     Giving one of the longer removed city names to a new city still causes problems.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0051-Make-vision-site-name-allocation-dynamic"
   "backports/0024-Mark-server-to-web-client-packets-no-handle"
   "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
   "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
   "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
+  "backports/0034-Increase-MAX_LEN_CITYNAME-to-120"
   "meson_webperimental"
   "city-naming-change"
   "metachange"
@@ -72,7 +67,6 @@ declare -a PATCHLIST=(
   "scorelog_filenames"
   "disable_global_warming"
   "win_chance"
-  "navajo-remove-long-city-names"
   "longturn"
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"

@@ -253,10 +253,15 @@ function show_city_dialog(pcity)
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
   renderer = orig_renderer;
 
+  var governor_text = ""
+  if (typeof pcity['cma_enabled'] !== 'undefined') {
+    governor_text = "<br>" + (pcity['cma_enabled'] ? "Governor Enabled" : "Governor Disabled");
+  }
+
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>"
                        + "Size: " + pcity['size'] + "<br>"
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
-                       + "Change in: " + city_turns_to_growth_text(pcity));
+                       + "Change in: " + city_turns_to_growth_text(pcity) + governor_text);
 
   var prod_type = get_city_production_type_sprite(pcity);
   $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['type']['name'] : "None"));

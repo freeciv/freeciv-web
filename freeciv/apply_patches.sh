@@ -26,6 +26,9 @@
 # 0048-Disable-server-side-CMA-when-overridden.patch
 #   Improve behavior of the server side CMA
 #   osdn #46213
+# 0050-Fix-assert-preventing-setting-Restricted-AI-level.patch
+#   Fix failure to set AI level "Restricted"
+#   osdn #46214
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -49,6 +52,7 @@ declare -a PATCHLIST=(
   "backports/0036-Path-finding-Make-pf_fuel_pos-cost-an-int"
   "backports/0050-AI-Check-that-hunt-target-is-targetable"
   "backports/0048-Disable-server-side-CMA-when-overridden"
+  "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

@@ -252,7 +252,6 @@ Slider.eventHandlers = {
 	},
 
 	onmouseup:	function (e) {
-		e = Slider.eventHandlers.getEvent(e, this);
 		var s = Slider._currentInstance;
 		var doc = s.document;
 		if (doc.removeEventListener) {

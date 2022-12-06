@@ -226,14 +226,13 @@ function show_city_dialog(pcity)
   $("#city_dialog").dialog('open');
   $("#game_text_input").blur();
 
-  /* prepare city dialog for small screens. */
+  /* Prepare city dialog for small screens. */
   if (!is_small_screen()) {
-    $("#city_tabs-5").remove();
     $("#city_tabs-6").remove();
     $(".extra_tabs_small").remove();
     $("#mobile_cma_checkbox").remove();
   } else {
-    $("#city_tabs-4").remove();
+    $("#city_tabs-5").remove();
     $(".extra_tabs_big").remove();
     $("#city_stats").hide();
     var units_element = $("#city_improvements_panel").detach();
@@ -431,10 +430,11 @@ function show_city_dialog(pcity)
   });
 
   if (is_small_screen()) {
-   $(".ui-tabs-anchor").css("padding", "2px");
+    $(".ui-tabs-anchor").css("padding", "2px");
   }
-}
 
+  show_city_governor_tab();
+}
 
 /**************************************************************************
  Returns the name and sprite of the current city production.

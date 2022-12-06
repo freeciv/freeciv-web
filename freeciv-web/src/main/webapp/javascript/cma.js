@@ -35,23 +35,17 @@ function show_city_governor_tab()
 { // Reject cases which can't show the Governor: -----------------------------------------------
   if (client_is_observer() || client.conn.playing == null) return false;
   if (!active_city) return false;
-  // this should disable CMA in saved games started before CMA was put in:
-  if (!active_city['cm_parameter']) {
-    // could we just insert a cm_parameter for the city with a default?
-    $("#city_governor_tab").html("Game was started before City Governor feature was added.");
-    return false;
-  }
   if (city_owner_player_id(active_city) != client.conn.playing.playerno) {
     $("#city_governor_tab").html("City Governor available only for domestic cities.");
     return false;
   }
 
-  $("#cma_food").prop('checked', active_city['cm_parameter']['factor'][0] == 6);
-  $("#cma_shield").prop('checked', active_city['cm_parameter']['factor'][1] == 6);
-  $("#cma_trade").prop('checked', active_city['cm_parameter']['factor'][2] == 6);
-  $("#cma_gold").prop('checked', active_city['cm_parameter']['factor'][3] == 6);
-  $("#cma_luxury").prop('checked', active_city['cm_parameter']['factor'][4] == 6);
-  $("#cma_science").prop('checked', active_city['cm_parameter']['factor'][5] == 6);
+  $("#cma_food").prop('checked', active_city['cm_parameter']['factor'][0] >= 5);
+  $("#cma_shield").prop('checked', active_city['cm_parameter']['factor'][1] >= 5);
+  $("#cma_trade").prop('checked', active_city['cm_parameter']['factor'][2] >= 5);
+  $("#cma_gold").prop('checked', active_city['cm_parameter']['factor'][3] >= 5);
+  $("#cma_luxury").prop('checked', active_city['cm_parameter']['factor'][4] >= 5);
+  $("#cma_science").prop('checked', active_city['cm_parameter']['factor'][5] >= 5);
 }
 
 /**************************************************************************

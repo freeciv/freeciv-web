@@ -70,15 +70,14 @@ $.extend({
     {
       hash = hashes[i].split('=');
       vars.push(hash[0]);
-      vars[hash[0].replace(/\\/g, "\\\\").replace(/'/g, "\\'")] = hash[1];
+      vars['var-' + hash[0].replace(/\\/g, "\\\\").replace(/'/g, "\\'")] = hash[1];
     }
     return vars;
   },
   getUrlVar: function(name){
-    return $.getUrlVars()[name];
+    return $.getUrlVars()['var-' + name];
   }
 });
-
 
 
 var benchmark_start = 0;

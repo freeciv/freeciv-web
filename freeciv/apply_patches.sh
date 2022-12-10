@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common.patch
-#   Dependency of 0018-Send-rally-point-separately-from-PACKET_CITY_INFO
-#   osdn #46101
-# 0018-Send-rally-point-separately-from-PACKET_CITY_INFO.patch
-#   Protocol update
-#   osdn #46080
 # 0034-Stop-registering-hard-requirement-that-has-no-users.patch
 #   Memory leak fix
 #   osdn #45910
@@ -45,8 +39,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
-  "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "backports/0034-Increase-MAX_LEN_CITYNAME-to-120"
   "backports/0036-Path-finding-Make-pf_fuel_pos-cost-an-int"

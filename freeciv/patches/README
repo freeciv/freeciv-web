@@ -1,3 +1,6 @@
 This directory contains patches containing the modifications
 against standard Freeciv Git revision listed in version.txt in parent
 directory, to make the webclient work.
+
+Subdirectory backports/ has patches from a later freeciv
+server than the base version listed in version.txt

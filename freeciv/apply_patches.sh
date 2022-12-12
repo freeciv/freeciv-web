@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER.patch
-#   Dependency for 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
-#   osdn #45890
-# 0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-.patch
-#   Protocol update
-#   osdn #46079
 # 0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common.patch
 #   Dependency of 0018-Send-rally-point-separately-from-PACKET_CITY_INFO
 #   osdn #46101
@@ -29,6 +23,12 @@
 # 0050-AI-Check-that-hunt-target-is-targetable.patch
 #   AI hunter crash fix
 #   osdn #46176
+# 0048-Disable-server-side-CMA-when-overridden.patch
+#   Improve behavior of the server side CMA
+#   osdn #46213
+# 0050-Fix-assert-preventing-setting-Restricted-AI-level.patch
+#   Fix failure to set AI level "Restricted"
+#   osdn #46214
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,21 +39,20 @@
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
 # win_chance includes 'Chance to win' in Freeciv-web map tile popup.
-# disable_global_warming is Freeciv bug #24418
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0011-Add-is-game-info-flag-to-PACKET_CITY_UPDATE_COUNTER"
-  "backports/0004-Split-nationalities-list-from-PACKET_CITY_INFO-to-a-"
   "backports/0007-Move-PACKET_CITY_RALLY_POINT-unpacking-to-common"
   "backports/0018-Send-rally-point-separately-from-PACKET_CITY_INFO"
   "backports/0034-Stop-registering-hard-requirement-that-has-no-users"
   "backports/0034-Increase-MAX_LEN_CITYNAME-to-120"
   "backports/0036-Path-finding-Make-pf_fuel_pos-cost-an-int"
   "backports/0050-AI-Check-that-hunt-target-is-targetable"
+  "backports/0048-Disable-server-side-CMA-when-overridden"
+  "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
   "meson_webperimental"
   "city-naming-change"
   "metachange"
@@ -69,7 +68,6 @@ declare -a PATCHLIST=(
   "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"
-  "disable_global_warming"
   "win_chance"
   "longturn"
   "load_command_confirmation"

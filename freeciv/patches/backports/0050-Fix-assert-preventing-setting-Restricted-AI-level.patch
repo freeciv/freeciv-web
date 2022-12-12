@@ -1,0 +1,28 @@
+From 4704d11d841a4d1738fe6bc865eb7a4b18ac894b Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 6 Dec 2022 11:25:31 +0200
+Subject: [PATCH 50/50] Fix assert preventing setting "Restricted" AI level
+
+See osdn #46214
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/stdinhand.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index ce77d50d69..a4eb236c87 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
+@@ -2029,7 +2029,7 @@ static bool set_ai_level(struct connection *caller, const char *name,
+   enum m_pre_result match_result;
+   struct player *pplayer;
+ 
+-  fc_assert_ret_val(level > 0 && level < 11, FALSE);
++  fc_assert_ret_val(level >= 0 && level < AI_LEVEL_AWAY, FALSE);
+ 
+   pplayer = player_by_name_prefix(name, &match_result);
+ 
+-- 
+2.35.1
+

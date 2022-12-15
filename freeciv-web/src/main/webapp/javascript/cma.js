@@ -32,20 +32,29 @@ var _cma_max_growth = false;
   Init Governor tab - returns true if the tab was able to generate
 **************************************************************************/
 function show_city_governor_tab()
-{ // Reject cases which can't show the Governor: -----------------------------------------------
+{
+  // Reject cases which can't show the Governor:
   if (client_is_observer() || client.conn.playing == null) return false;
   if (!active_city) return false;
   if (city_owner_player_id(active_city) != client.conn.playing.playerno) {
     $("#city_governor_tab").html("City Governor available only for domestic cities.");
     return false;
   }
-
-  $("#cma_food").prop('checked', active_city['cm_parameter']['factor'][0] >= 5);
-  $("#cma_shield").prop('checked', active_city['cm_parameter']['factor'][1] >= 5);
-  $("#cma_trade").prop('checked', active_city['cm_parameter']['factor'][2] >= 5);
-  $("#cma_gold").prop('checked', active_city['cm_parameter']['factor'][3] >= 5);
-  $("#cma_luxury").prop('checked', active_city['cm_parameter']['factor'][4] >= 5);
-  $("#cma_science").prop('checked', active_city['cm_parameter']['factor'][5] >= 5);
+  if (typeof active_city['cm_parameter'] !== 'undefined') {
+    $("#cma_food").prop('checked', active_city['cm_parameter']['factor'][0] >= 5);
+    $("#cma_shield").prop('checked', active_city['cm_parameter']['factor'][1] >= 5);
+    $("#cma_trade").prop('checked', active_city['cm_parameter']['factor'][2] >= 5);
+    $("#cma_gold").prop('checked', active_city['cm_parameter']['factor'][3] >= 5);
+    $("#cma_luxury").prop('checked', active_city['cm_parameter']['factor'][4] >= 5);
+    $("#cma_science").prop('checked', active_city['cm_parameter']['factor'][5] >= 5);
+  } else {
+    $("#cma_food").prop('checked', false);
+    $("#cma_shield").prop('checked', false);
+    $("#cma_trade").prop('checked', false);
+    $("#cma_gold").prop('checked', false);
+    $("#cma_luxury").prop('checked', false);
+    $("#cma_science").prop('checked', false);
+  }
 }
 
 /**************************************************************************

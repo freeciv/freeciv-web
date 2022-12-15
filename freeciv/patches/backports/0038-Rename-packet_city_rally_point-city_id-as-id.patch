@@ -1,0 +1,112 @@
+From 7f88dae09f711e5933994bce5b83d2f00d074eff Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 15 Dec 2022 21:36:41 +0200
+Subject: [PATCH 38/38] Rename packet_city_rally_point city_id as id
+
+Freeciv-web expects consistent naming of the city id in
+city info packets
+
+See osdn #46282
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ client/goto.c                 | 2 +-
+ client/packhand.c             | 2 +-
+ common/city.c                 | 6 +++---
+ common/networking/packets.def | 2 +-
+ server/cityhand.c             | 2 +-
+ server/citytools.c            | 2 +-
+ 6 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/client/goto.c b/client/goto.c
+index cc1a33dec6..1c08238515 100644
+--- a/client/goto.c
++++ b/client/goto.c
+@@ -1509,7 +1509,7 @@ static void send_rally_path_orders(struct city *pcity, struct unit *punit,
+   struct packet_city_rally_point p;
+ 
+   memset(&p, 0, sizeof(p));
+-  p.city_id = pcity->id;
++  p.id = pcity->id;
+   p.vigilant = vigilant;
+ 
+   log_goto_packet("Rally orders for city %d:", pcity->id);
+diff --git a/client/packhand.c b/client/packhand.c
+index 6137297a7c..e155bed2ff 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -1000,7 +1000,7 @@ void handle_city_nationalities(const struct packet_city_nationalities *packet)
+ ****************************************************************************/
+ void handle_city_rally_point(const struct packet_city_rally_point *packet)
+ {
+-  struct city *pcity = game_city_by_number(packet->city_id);
++  struct city *pcity = game_city_by_number(packet->id);
+ 
+   if (pcity != NULL) {
+     city_rally_point_receive(packet, pcity);
+diff --git a/common/city.c b/common/city.c
+index 17fb278a90..c80d620089 100644
+--- a/common/city.c
++++ b/common/city.c
+@@ -3539,7 +3539,7 @@ void city_rally_point_receive(const struct packet_city_rally_point *packet,
+   if (NULL != pcity) {
+     /* Probably lost. */
+     log_verbose("handle_city_rally_point() bad city number %d.",
+-                packet->city_id);
++                packet->id);
+     return;
+   }
+ 
+@@ -3563,8 +3563,8 @@ void city_rally_point_receive(const struct packet_city_rally_point *packet,
+     checked_orders = create_unit_orders(packet->length, packet->orders);
+     if (!checked_orders) {
+       pcity->rally_point.length = 0;
+-      log_error("invalid rally point orders for city number %d.",
+-                packet->city_id);
++      log_error("invalid rally point orders for %s.",
++                city_name_get(pcity));
+       return;
+     }
+ 
+diff --git a/common/networking/packets.def b/common/networking/packets.def
+index 7fd784a5d1..9675e64d0b 100644
+--- a/common/networking/packets.def
++++ b/common/networking/packets.def
+@@ -886,7 +886,7 @@ PACKET_CITY_SABOTAGE_LIST = 45; sc, lsend, handle-via-fields
+ end
+ 
+ PACKET_CITY_RALLY_POINT = 138; cs, sc, lsend, is-game-info, force
+-  CITY city_id;
++  CITY id;
+   UINT16 length;
+   BOOL persistent;
+   BOOL vigilant;
+diff --git a/server/cityhand.c b/server/cityhand.c
+index 1f1463ff74..96ac464149 100644
+--- a/server/cityhand.c
++++ b/server/cityhand.c
+@@ -525,7 +525,7 @@ void handle_city_options_req(struct player *pplayer, int city_id,
+ void handle_city_rally_point(struct player *pplayer,
+                              const struct packet_city_rally_point *packet)
+ {
+-  struct city *pcity = player_city_by_number(pplayer, packet->city_id);
++  struct city *pcity = player_city_by_number(pplayer, packet->id);
+ 
+   if (NULL != pcity) {
+     city_rally_point_receive(packet, pcity);
+diff --git a/server/citytools.c b/server/citytools.c
+index 41eb18e94b..6b5e1ca217 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -2638,7 +2638,7 @@ void package_city(struct city *pcity, struct packet_city_info *packet,
+   packet->capital = pcity->capital;
+   packet->steal = pcity->steal;
+ 
+-  rally_packet->city_id = pcity->id;
++  rally_packet->id = pcity->id;
+   rally_packet->length = pcity->rally_point.length;
+   rally_packet->persistent = pcity->rally_point.persistent;
+   rally_packet->vigilant = pcity->rally_point.vigilant;
+-- 
+2.35.1
+

@@ -29,6 +29,9 @@
 # 0037-Inform-client-when-the-server-side-CMA-gets-enabled.patch
 #   Server side CMA fix
 #   osdn #46279
+# 0038-Rename-packet_city_rally_point-city_id-as-id.patch
+#   Enables web-client to attach info to the correct city
+#   osdn #46282
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -53,6 +56,7 @@ declare -a PATCHLIST=(
   "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
   "backports/0034-Fix-heap-use-after-free"
   "backports/0037-Inform-client-when-the-server-side-CMA-gets-enabled"
+  "backports/0038-Rename-packet_city_rally_point-city_id-as-id"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

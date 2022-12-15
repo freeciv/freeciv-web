@@ -23,6 +23,9 @@
 # 0050-Fix-assert-preventing-setting-Restricted-AI-level.patch
 #   Fix failure to set AI level "Restricted"
 #   osdn #46214
+# 0034-Fix-heap-use-after-free.patch
+#   Fix crash after famine destroys a city
+#   osdn #46276
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -45,6 +48,7 @@ declare -a PATCHLIST=(
   "backports/0050-AI-Check-that-hunt-target-is-targetable"
   "backports/0048-Disable-server-side-CMA-when-overridden"
   "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
+  "backports/0034-Fix-heap-use-after-free"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

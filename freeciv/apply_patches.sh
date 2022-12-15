@@ -26,6 +26,9 @@
 # 0034-Fix-heap-use-after-free.patch
 #   Fix crash after famine destroys a city
 #   osdn #46276
+# 0037-Inform-client-when-the-server-side-CMA-gets-enabled.patch
+#   Server side CMA fix
+#   osdn #46279
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -49,6 +52,7 @@ declare -a PATCHLIST=(
   "backports/0048-Disable-server-side-CMA-when-overridden"
   "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
   "backports/0034-Fix-heap-use-after-free"
+  "backports/0037-Inform-client-when-the-server-side-CMA-gets-enabled"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

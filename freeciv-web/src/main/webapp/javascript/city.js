@@ -226,14 +226,13 @@ function show_city_dialog(pcity)
   $("#city_dialog").dialog('open');
   $("#game_text_input").blur();
 
-  /* prepare city dialog for small screens. */
+  /* Prepare city dialog for small screens. */
   if (!is_small_screen()) {
-    $("#city_tabs-5").remove();
     $("#city_tabs-6").remove();
     $(".extra_tabs_small").remove();
     $("#mobile_cma_checkbox").remove();
   } else {
-    $("#city_tabs-4").remove();
+    $("#city_tabs-5").remove();
     $(".extra_tabs_big").remove();
     $("#city_stats").hide();
     var units_element = $("#city_improvements_panel").detach();
@@ -254,10 +253,15 @@ function show_city_dialog(pcity)
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
   renderer = orig_renderer;
 
+  var governor_text = ""
+  if (typeof pcity['cma_enabled'] !== 'undefined') {
+    governor_text = "<br>" + (pcity['cma_enabled'] ? "Governor Enabled" : "Governor Disabled");
+  }
+
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>"
                        + "Size: " + pcity['size'] + "<br>"
                        + "Granary: " + pcity['food_stock'] + "/" + pcity['granary_size'] + "<br>"
-                       + "Change in: " + city_turns_to_growth_text(pcity));
+                       + "Change in: " + city_turns_to_growth_text(pcity) + governor_text);
 
   var prod_type = get_city_production_type_sprite(pcity);
   $("#city_production_overview").html("Producing: " + (prod_type != null ? prod_type['type']['name'] : "None"));
@@ -431,10 +435,11 @@ function show_city_dialog(pcity)
   });
 
   if (is_small_screen()) {
-   $(".ui-tabs-anchor").css("padding", "2px");
+    $(".ui-tabs-anchor").css("padding", "2px");
   }
-}
 
+  show_city_governor_tab();
+}
 
 /**************************************************************************
  Returns the name and sprite of the current city production.

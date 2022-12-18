@@ -253,7 +253,7 @@ function show_city_dialog(pcity)
   update_map_canvas(0, 0, mapview['store_width'], mapview['store_height']);
   renderer = orig_renderer;
 
-  var governor_text = ""
+  var governor_text = "";
   if (typeof pcity['cma_enabled'] !== 'undefined') {
     governor_text = "<br>" + (pcity['cma_enabled'] ? "Governor Enabled" : "Governor Disabled");
   }

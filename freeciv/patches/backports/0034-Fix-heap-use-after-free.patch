@@ -1,0 +1,29 @@
+From f22d35ee9cb88a2cea7e2e9f237113e5f0cab2bc Mon Sep 17 00:00:00 2001
+From: Michael Ortmann <41313082+michaelortmann@users.noreply.github.com>
+Date: Tue, 13 Dec 2022 12:00:20 +0100
+Subject: [PATCH 34/34] Fix heap-use-after-free
+
+See osdn #46276
+---
+ server/cityturn.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/server/cityturn.c b/server/cityturn.c
+index 6cb18b1cb1..a720d440c6 100644
+--- a/server/cityturn.c
++++ b/server/cityturn.c
+@@ -1085,8 +1085,9 @@ static void city_populate(struct city *pcity, struct player *nationality)
+ 		    city_link(pcity));
+     }
+     city_reset_foodbox(pcity, city_size_get(pcity) - 1);
+-    city_reduce_size(pcity, 1, NULL, "famine");
+-    pcity->had_famine = TRUE;
++    if (city_reduce_size(pcity, 1, NULL, "famine")) {
++      pcity->had_famine = TRUE;
++    }
+   }
+ }
+ 
+-- 
+2.35.1
+

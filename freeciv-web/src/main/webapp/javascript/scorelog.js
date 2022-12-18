@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -180,8 +180,9 @@ function get_scorelog_name(tag) {
   "gold" : "Gold",
   "unitsbuilt" : "Units built",
   "unitskilled" : "Units killed",
-  "unitslost" : "Units lost" 
+  "unitslost" : "Units lost",
+  "unitsused" : "Units used"
   };
+
   return names[tag];
 }
-

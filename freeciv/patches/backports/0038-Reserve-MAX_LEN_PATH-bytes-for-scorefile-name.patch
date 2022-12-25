@@ -1,0 +1,30 @@
+From 1633aa5ab52406f84950e8ab8eb256178ccd391b Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 21 Dec 2022 03:44:39 +0200
+Subject: [PATCH 38/38] Reserve MAX_LEN_PATH bytes for scorefile name
+
+It had just MAX_LEN_NAME
+
+See osdn #46316
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/game.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/game.h b/common/game.h
+index 0e4b15e543..eeab9eee03 100644
+--- a/common/game.h
++++ b/common/game.h
+@@ -220,7 +220,7 @@ struct civ_game {
+       char save_name[MAX_LEN_NAME];
+       bool scorelog;
+       enum scorelog_level scoreloglevel;
+-      char scorefile[MAX_LEN_NAME];
++      char scorefile[MAX_LEN_PATH];
+       int scoreturn;    /* next make_history_report() */
+       randseed seed_setting;
+       randseed seed;
+-- 
+2.35.1
+

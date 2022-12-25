@@ -1,0 +1,33 @@
+From 02c8189ff3c729c1f940c07723ac1cf1e2f9e9e0 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 25 Dec 2022 04:28:09 +0200
+Subject: [PATCH 38/38] texan.ruleset: Fix broken msgmerge
+
+See osdn #46358
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ data/nation/texan.ruleset | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/data/nation/texan.ruleset b/data/nation/texan.ruleset
+index a299377794..ac220f2c41 100644
+--- a/data/nation/texan.ruleset
++++ b/data/nation/texan.ruleset
+@@ -6,11 +6,11 @@ groups = "American"
+ legend = _("Texas, \"the Lone Star State\" is the second largest and second\
+  most populous state of the USA, famous for its \"larger than life\"\
+  cowboy culture and Mexican heritage. After the famous Battle of the Alamo,\
+- The Texians defeated the Mexicans at San Jacinto and declared independence.
++ The Texians defeated the Mexicans at San Jacinto and declared independence.\
+  The Republic of Texas lasted from 1836 to 1846, after which it became the\
+  28th state of the United States. Historically, Texas was ruled in full or in\
+  part by six nations: France, Spain, Mexico, the Republic of Texas, the\
+- Confederacy, and the USA, as expressed in the slogan \"six flags over\ Texas\".")
++ Confederacy, and the USA, as expressed in the slogan \"six flags over Texas\".")
+ 
+ leaders = {
+  "name",                "sex"
+-- 
+2.35.1
+

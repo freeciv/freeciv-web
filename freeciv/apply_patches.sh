@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0048-Disable-server-side-CMA-when-overridden.patch
-#   Improve behavior of the server side CMA
-#   osdn #46213
-# 0050-Fix-assert-preventing-setting-Restricted-AI-level.patch
-#   Fix failure to set AI level "Restricted"
-#   osdn #46214
 # 0034-Fix-heap-use-after-free.patch
 #   Fix crash after famine destroys a city
 #   osdn #46276
@@ -39,8 +33,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0048-Disable-server-side-CMA-when-overridden"
-  "backports/0050-Fix-assert-preventing-setting-Restricted-AI-level"
   "backports/0034-Fix-heap-use-after-free"
   "backports/0037-Inform-client-when-the-server-side-CMA-gets-enabled"
   "backports/0038-Rename-packet_city_rally_point-city_id-as-id"

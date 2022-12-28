@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0038-Reserve-MAX_LEN_PATH-bytes-for-scorefile-name.patch
-#   Reserve enough space for scorefile
-#   osdn #46316
 # 0038-texan.ruleset-Fix-broken-msgmerge.patch
 #   Fix broken format of the Texas ruleset
 #   osdn #46358
@@ -27,7 +24,6 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0038-Reserve-MAX_LEN_PATH-bytes-for-scorefile-name"
   "backports/0038-texan.ruleset-Fix-broken-msgmerge"
   "meson_webperimental"
   "city-naming-change"

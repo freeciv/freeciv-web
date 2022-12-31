@@ -36,7 +36,11 @@ if test "$MESON_VER" != "" ; then
 
     ( cd meson-install
 
-      wget "https://github.com/mesonbuild/meson/releases/download/${MESON_VER}/meson-${MESON_VER}.tar.gz"
+      if ! wget "https://github.com/mesonbuild/meson/releases/download/${MESON_VER}/meson-${MESON_VER}.tar.gz" ; then
+        echo "Meson download failed!" >&2
+        exit 1
+      fi
+
       tar xzf meson-${MESON_VER}.tar.gz
       ln -s "meson-${MESON_VER}/meson.py" meson
     )

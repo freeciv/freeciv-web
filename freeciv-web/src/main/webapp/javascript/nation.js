@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -393,14 +393,11 @@ function toggle_ai_clicked()
 **************************************************************************/
 function get_score_text(player)
 {
-
-  if (player['score'] > 0 || client_is_observer()
-      || (client.conn.playing != null && player['playerno'] == client.conn.playing['playerno'])) {
+  if (player['score'] >= 0) {
     return player['score'];
   } else {
     return "?";
   }
-
 }
 
 /**************************************************************************
@@ -530,6 +527,4 @@ function show_send_private_message_dialog()
       send_private_message(name);
     }
   });
-
-
 }

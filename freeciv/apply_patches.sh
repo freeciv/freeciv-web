@@ -35,7 +35,6 @@ declare -a PATCHLIST=(
   "tutorial_ruleset"
   "savegame"
   "maphand_ch"
-  "ai_traits_crash"
   "server_password"
   "message_escape"
   "freeciv_segfauls_fix"

@@ -1,0 +1,3 @@
+Any files with suffix ".patch" in this directory get
+applied to the freeciv source tree, in alphabetical order,
+after all the patches explicitly listed in apply_patches.sh

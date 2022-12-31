@@ -26,6 +26,12 @@
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
+# Local patches
+# -------------
+# Finally patches from patches/local are applied. These can be used
+# to easily apply a temporary debug change that's not meant ever to get
+# included to the repository.
+
 declare -a PATCHLIST=(
   "backports/0038-Reserve-MAX_LEN_PATH-bytes-for-scorefile-name"
   "backports/0038-texan.ruleset-Fix-broken-msgmerge"
@@ -49,6 +55,7 @@ declare -a PATCHLIST=(
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
+  $(ls -1 patches/local/*.patch | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
 )
 
 apply_patch() {

@@ -5,18 +5,12 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0034-Fix-heap-use-after-free.patch
-#   Fix crash after famine destroys a city
-#   osdn #46276
-# 0037-Inform-client-when-the-server-side-CMA-gets-enabled.patch
-#   Server side CMA fix
-#   osdn #46279
-# 0038-Rename-packet_city_rally_point-city_id-as-id.patch
-#   Enables web-client to attach info to the correct city
-#   osdn #46282
 # 0038-Reserve-MAX_LEN_PATH-bytes-for-scorefile-name.patch
 #   Reserve enough space for scorefile
 #   osdn #46316
+# 0038-texan.ruleset-Fix-broken-msgmerge.patch
+#   Fix broken format of the Texas ruleset
+#   osdn #46358
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -33,10 +27,8 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0034-Fix-heap-use-after-free"
-  "backports/0037-Inform-client-when-the-server-side-CMA-gets-enabled"
-  "backports/0038-Rename-packet_city_rally_point-city_id-as-id"
   "backports/0038-Reserve-MAX_LEN_PATH-bytes-for-scorefile-name"
+  "backports/0038-texan.ruleset-Fix-broken-msgmerge"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

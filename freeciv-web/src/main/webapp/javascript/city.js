@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -746,7 +746,7 @@ function city_dialog_close_handler()
       *       setup_window_size will resize (and thus clean) the map canvas,
       *       and this is now called when we show a city dialog while another
       *       one is open, which is unexpectedly common, tracing the functions
-      *       shows two or three calls to show_city_dialog. Maybe one internal
+      *       shows two or three calls to show_city_dialog(). Maybe one internal
       *       from the client UI, the rest from info packets from the server.
       *       Both those duplicate calls and the stopping of map updates due
       *       to the 2D rendered being used to draw the minimap should go.

@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -104,7 +104,7 @@ function civclient_init()
     $("#civ_dialog").remove();
   }
 
-  //initialize a seeded random number generator
+  // Initialize a seeded random number generator
   fc_seedrandom = new Math.seedrandom('freeciv-web');
 
   if (window.requestAnimationFrame == null) {

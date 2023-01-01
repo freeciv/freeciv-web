@@ -144,8 +144,8 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>org.flywaydb</groupId>
 					<artifactId>flyway-maven-plugin</artifactId>
-                                        <!-- Update pending other changes -->
-					<version>4.2.0</version>
+                                        <!-- Outdated -->
+					<version>6.5.7</version>
 				</plugin>
 
 				<plugin>

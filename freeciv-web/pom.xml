@@ -84,10 +84,11 @@
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+                        <!-- Update pending other changes -->
 			<version>2.0.0</version>
 		</dependency>
 
-		<!-- verify oauth tokens -->
+		<!-- Verify oauth tokens -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>

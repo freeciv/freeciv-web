@@ -8,6 +8,9 @@
 # 0038-texan.ruleset-Fix-broken-msgmerge.patch
 #   Fix broken format of the Texas ruleset
 #   osdn #46358
+# 0027-Use-libcurl-mime-API-when-available.patch
+#   Fix deprecation error with latest libcurl
+#   osdn #46345
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -31,6 +34,7 @@
 
 declare -a PATCHLIST=(
   "backports/0038-texan.ruleset-Fix-broken-msgmerge"
+  "backports/0027-Use-libcurl-mime-API-when-available"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

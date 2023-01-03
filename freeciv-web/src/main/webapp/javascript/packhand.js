@@ -292,7 +292,7 @@ function handle_city_info(packet)
     pcity = packet;
     cities[packet['id']] = packet;
     if (C_S_RUNNING == client_state() && !observing && benchmark_start == 0
-        && client.conn.playing != null && packet['owner'] == client.conn.playing.playerno) {
+        && !client_is_observer() && packet['owner'] == client.conn.playing.playerno) {
       show_city_dialog_by_id(packet['id']);
     }
   } else {
@@ -391,11 +391,11 @@ function handle_web_city_info_addition(packet)
 
   /* Continue with the city_info processing. */
 
-  if (active_city != null) {
+  if (active_city != null && !client_is_observer()) {
     show_city_dialog(active_city);
   }
 
-  if (packet['diplomat_investigate']) {
+  if (packet['diplomat_investigate'] && !client_is_observer()) {
     show_city_dialog(cities[packet['id']]);
   }
 

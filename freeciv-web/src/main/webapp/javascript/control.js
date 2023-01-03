@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -1891,7 +1891,7 @@ function do_map_click(ptile, qtype, first_time_called)
           }
         } else if (!goto_active) {
           show_city_dialog(pcity);
-	    }
+	}
       }
       return;
     }
@@ -2261,7 +2261,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 }
 
 /**************************************************************************
- Handles everything when the user clicked on the context menu
+  Handles everything when the user clicked on the context menu
 **************************************************************************/
 function handle_context_menu_callback(key)
 {

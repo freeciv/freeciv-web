@@ -15,7 +15,7 @@
 
 dependencies="\
   acl \
-  meson \
+  ninja-build \
   wget \
   build-essential \
   curl \
@@ -107,3 +107,10 @@ fi
 
 # Populate ~/.config with current user
 npm help > /dev/null
+
+export MESON_VER="0.57.2"
+
+echo "==== Installing Meson ===="
+if ! sudo ${APT_GET} satisfy "meson (>= ${MESON_VER})" ; then
+  ext_install_meson
+fi

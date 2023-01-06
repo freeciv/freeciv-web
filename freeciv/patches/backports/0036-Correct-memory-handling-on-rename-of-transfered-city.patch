@@ -1,0 +1,60 @@
+From d920b3209f751b46dc1a6e5db32e31c9a858178a Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 6 Jan 2023 07:48:29 +0200
+Subject: [PATCH 36/36] Correct memory handling on rename of transfered city
+
+When unique names are required at player level, but not
+globally, city transfer may rename the city if the new
+owner already has that name in use. That code had not
+been updated to use dynamic city name allocations.
+
+Reported by chippo
+
+See osdn #46272
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/citytools.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/server/citytools.c b/server/citytools.c
+index acfdfb24c1..e583ab4460 100644
+--- a/server/citytools.c
++++ b/server/citytools.c
+@@ -1070,7 +1070,6 @@ bool transfer_city(struct player *ptaker, struct city *pcity,
+                    int kill_outside, bool transfer_unit_verbose,
+                    bool resolve_stack, bool raze, bool build_free)
+ {
+-  char old_city_name[MAX_LEN_CITYNAME];
+   bv_imprs had_small_wonders;
+   struct vision *old_vision, *new_vision;
+   struct unit_list *old_city_units = unit_list_new();
+@@ -1161,16 +1160,18 @@ bool transfer_city(struct player *ptaker, struct city *pcity,
+ 
+   ASSERT_VISION(new_vision);
+ 
+-  sz_strlcpy(old_city_name, city_name_get(pcity));
+   if (CNM_PLAYER_UNIQUE == game.server.allowed_city_names
+       && city_list_find_name(ptaker->cities, city_name_get(pcity))) {
+-    sz_strlcpy(pcity->name,
+-	       city_name_suggestion(ptaker, pcenter));
++    char *old_city_name = fc_strdup(city_name_get(pcity));
++
++    city_name_set(pcity, city_name_suggestion(ptaker, pcenter));
+     notify_player(ptaker, pcenter, E_BAD_COMMAND, ftc_server,
+-		  _("You already had a city called %s."
+-		    " The city was renamed to %s."),
+-		  old_city_name,
+-		  city_link(pcity));
++                  _("You already had a city called %s."
++                    " The city was renamed to %s."),
++                  old_city_name,
++                  city_link(pcity));
++
++    free(old_city_name);
+   }
+ 
+   /* Has to follow the unfog call above. */
+-- 
+2.39.0
+

@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0038-texan.ruleset-Fix-broken-msgmerge.patch
-#   Fix broken format of the Texas ruleset
-#   osdn #46358
-# 0027-Use-libcurl-mime-API-when-available.patch
-#   Fix deprecation error with latest libcurl
-#   osdn #46345
 # 0036-Correct-memory-handling-on-rename-of-transfered-city.patch
 #   Fix a memory handling bug
 #   osdn #46272
@@ -36,8 +30,6 @@
 # included to the repository.
 
 declare -a PATCHLIST=(
-  "backports/0038-texan.ruleset-Fix-broken-msgmerge"
-  "backports/0027-Use-libcurl-mime-API-when-available"
   "backports/0036-Correct-memory-handling-on-rename-of-transfered-city"
   "meson_webperimental"
   "city-naming-change"

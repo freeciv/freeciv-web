@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -36,22 +36,23 @@ var FC_INFINITY = (1000 * 1000 * 1000);
 
 var ACTIVITY_IDLE = 0;
 var ACTIVITY_POLLUTION = 1;
-var ACTIVITY_MINE = 3;
-var ACTIVITY_IRRIGATE = 4;
-var ACTIVITY_FORTIFIED = 5;
-var ACTIVITY_SENTRY = 7;
-var ACTIVITY_PILLAGE = 9;
-var ACTIVITY_GOTO = 10;
-var ACTIVITY_EXPLORE = 11;
-var ACTIVITY_TRANSFORM = 12;
-var ACTIVITY_FORTIFYING = 15;
-var ACTIVITY_FALLOUT = 16;
-var ACTIVITY_BASE = 18;			/* building base */
-var ACTIVITY_GEN_ROAD = 19;
-var ACTIVITY_CONVERT = 20;
-var ACTIVITY_CULTIVATE = 21;
-var ACTIVITY_PLANT = 22;
-var ACTIVITY_LAST = 23;   /* leave this one last */
+var ACTIVITY_MINE = 2;
+var ACTIVITY_IRRIGATE = 3;
+var ACTIVITY_FORTIFIED = 4;
+var ACTIVITY_SENTRY = 5;
+var ACTIVITY_PILLAGE = 6;
+var ACTIVITY_GOTO = 7;
+var ACTIVITY_EXPLORE = 8;
+var ACTIVITY_TRANSFORM = 9;
+var ACTIVITY_FORTIFYING = 10;
+var ACTIVITY_FALLOUT = 11;
+var ACTIVITY_BASE = 12;        /* Building base */
+var ACTIVITY_GEN_ROAD = 13;
+var ACTIVITY_CONVERT = 14;
+var ACTIVITY_CULTIVATE = 15;
+var ACTIVITY_PLANT = 16;
+var ACTIVITY_CLEAN = 17;
+var ACTIVITY_LAST = 18;        /* Leave this one last */
 
 /* enum action_result */
 var ACTRES_ESTABLISH_EMBASSY = 0;

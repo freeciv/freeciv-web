@@ -1,8 +1,7 @@
-diff --git a/meson.build b/meson.build
-index 06ad423591..0db6cc3329 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3079,7 +3079,8 @@ rulesets = [
+diff -Nurd freeciv/meson.build freeciv/meson.build
+--- freeciv/meson.build	2023-01-03 23:59:50.121401041 +0200
++++ freeciv/meson.build	2023-01-04 00:00:07.345555922 +0200
+@@ -3547,7 +3547,8 @@
    'sandbox',
    'civ1',
    'civ2',
@@ -12,7 +11,7 @@ index 06ad423591..0db6cc3329 100644
    ]
  
  ruleset_files = [
-@@ -3105,6 +3106,8 @@ install_data(
+@@ -3574,6 +3575,8 @@
    'data/sandbox.modpack',
    'data/civ1.modpack',
    'data/civ2.modpack',
@@ -21,15 +20,15 @@ index 06ad423591..0db6cc3329 100644
    install_dir : join_paths(get_option('datadir'), 'freeciv')
    )
  
-@@ -3142,6 +3145,11 @@ install_data(
-   install_dir : join_paths(get_option('datadir'), 'freeciv/alien')
+@@ -3608,6 +3611,11 @@
    )
  
-+install_data(
+ install_data(
 +  'data/webperimental/README.webperimental',
 +  install_dir : join_paths(get_option('datadir'), 'freeciv/webperimental')
 +  )
 +
- install_data(
++install_data(
    'data/alien/nation/adventurers.ruleset',
    'data/alien/nation/galacticsound.ruleset',
+   'data/alien/nation/jw.ruleset',

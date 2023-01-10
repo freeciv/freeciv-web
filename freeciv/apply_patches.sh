@@ -8,6 +8,9 @@
 # 0036-Correct-memory-handling-on-rename-of-transfered-city.patch
 #   Fix a memory handling bug
 #   osdn #46272
+# 0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type.patch
+#   Alternative Wonders of The World report
+#   osdn #42290
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -31,6 +34,7 @@
 
 declare -a PATCHLIST=(
   "backports/0036-Correct-memory-handling-on-rename-of-transfered-city"
+  "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

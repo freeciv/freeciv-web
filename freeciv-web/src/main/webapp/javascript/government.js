@@ -21,9 +21,10 @@ var governments = {};
 var requested_gov = -1;
 
 var REPORT_WONDERS_OF_THE_WORLD = 0;
-var REPORT_TOP_CITIES = 1;
-var REPORT_DEMOGRAPHIC = 2;
-var REPORT_ACHIEVEMENTS = 3;
+var REPORT_WONDERS_OF_THE_WORLD_LONG = 1;
+var REPORT_TOP_CITIES = 2;
+var REPORT_DEMOGRAPHIC = 3;
+var REPORT_ACHIEVEMENTS = 4;
 
 
 /**************************************************************************
@@ -164,9 +165,9 @@ function send_player_change_government(govt_id)
 }
 
 /**************************************************************************
- Returns the max tax rate for a given government.
- FIXME: This shouldn't be hardcoded, but instead fetched
- from the effects.
+  Returns the max tax rate for a given government.
+  FIXME: This shouldn't be hardcoded, but instead fetched
+  from the effects.
 **************************************************************************/
 function government_max_rate(govt_id)
 {
@@ -192,13 +193,10 @@ function government_max_rate(govt_id)
     // this should not happen
     return 100;
   }
-
-
-
 }
 
 /**************************************************************************
-  Returns true iff the player can get the specified governement.
+  Returns true iff the player can get the specified government.
 
   Uses the JavaScript implementation of the requirement system. Is
   therefore limited to the requirement types and ranges the JavaScript

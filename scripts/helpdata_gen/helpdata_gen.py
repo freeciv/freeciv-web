@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
-''' 
+'''
  Freeciv - Copyright (C) 2009-2014 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -31,9 +31,9 @@ freeciv_dir = args.freeciv
 
 def removeComments(string):
     string = re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,string);
-    string = re.sub(re.compile("//.*?\n" ) ,"" ,string); 
-    string = re.sub(re.compile("([a-zA-Z]);" ) ,"\g<1>," ,string); 
-    string = re.sub(re.compile(";.*?\n" ) ,"" ,string); 
+    string = re.sub(re.compile("//.*?\n" ) ,"" ,string);
+    string = re.sub(re.compile("([a-zA-Z]);" ) ,"\g<1>," ,string);
+    string = re.sub(re.compile(";.*?\n" ) ,"" ,string);
     return string
 
 def config_read(file):
@@ -69,7 +69,7 @@ for section in config.sections():
     thedict[section] = {}
     for key, val in config.items(section):
         # skip these hidden help sections, since they are not in use.
-        if (section in ["help_connecting", "help_languages", "help_governor", 
+        if (section in ["help_connecting", "help_languages", "help_governor",
     "help_chatline", "help_about", "help_worklist_editor", "help_copying"]): continue;
         thedict[section][key] = val
 

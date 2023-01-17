@@ -45,7 +45,7 @@ lazy_overwrite=0
 def verbose(s):
     if len(sys.argv)>1 and sys.argv[1]=="-v":
         print(s)
-        
+
 def prefix(prefix,str):
     lines=str.split("\n")
     lines=list(map(lambda x,prefix=prefix: prefix+x,lines))
@@ -87,7 +87,7 @@ def without(all,part):
         if i not in part:
             result.append(i)
     return result
-    
+
 # A simple container for a type alias
 class Type:
     def __init__(self,alias,dest):
@@ -228,7 +228,7 @@ class Field:
         if self.dataio_type=="string":
             if const: return "const char *"
             else:     return "char *"
-            
+
         if self.dataio_type=="worklist":
             return "%s *"%self.struct_type
         if self.is_array:
@@ -261,13 +261,13 @@ class Field:
       elif self.dataio_type == "requirement": return "BbB??";
       elif self.dataio_type == "float10000": return "f"; #FIXME: float sometimes returns nan
       elif self.dataio_type == "float1000000": return "f"; #FIXME
-      elif self.dataio_type == "bitvector": return "$"; 
-      elif self.dataio_type == "diplstate": return "BBBBBBBBB";  ##FIXME: this needs to be checked... 
+      elif self.dataio_type == "bitvector": return "$";
+      elif self.dataio_type == "diplstate": return "BBBBBBBBB";  ##FIXME: this needs to be checked...
       elif self.dataio_type == "bit_string": return "z"; #FIXME
       else: return self.dataio_type;
 
 
-   
+
     # Returns code which copies the arguments of the direct send
     # functions in the packet struct.
     def get_fill(self):
@@ -286,7 +286,7 @@ class Field:
       %(tmp)s;
     }
   }'''%self.get_dict(vars())
-        
+
         return repr(self.__dict__)
 
     # Returns code which sets "differ" by comparing the field
@@ -302,7 +302,7 @@ class Field:
             return "  differ = !are_%(dataio_type)ss_equal(&old->%(name)s, &real_packet->%(name)s);"%self.__dict__
         if not self.is_array:
             return "  differ = (old->%(name)s != real_packet->%(name)s);"%self.__dict__
-        
+
         if self.dataio_type=="string":
             c="strcmp(old->%(name)s[i], real_packet->%(name)s[i]) != 0"%self.__dict__
             array_size_u=self.array_size1_u
@@ -344,7 +344,7 @@ class Field:
 '''%(cmp,b,i)
 
     # Returns a code fragement which will put this field if the
-    # content has changed. Does nothing for bools-in-header.    
+    # content has changed. Does nothing for bools-in-header.
     def get_put_wrapper(self,packet,i):
         if fold_bool_into_header and self.struct_type=="bool" and \
            not self.is_array:
@@ -372,13 +372,13 @@ class Field:
 
         if self.struct_type=="float" and not self.is_array:
             return "  dio_put_uint32(&dout, (int)(real_packet->%(name)s * %(float_factor)d));"%self.__dict__
-        
+
         if self.dataio_type in ["worklist"]:
             return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s);"%self.__dict__
 
         if self.dataio_type in ["memory"]:
             return "  dio_put_%(dataio_type)s(&dout, &real_packet->%(name)s, %(array_size_u)s);"%self.__dict__
-        
+
         arr_types=["string","bit_string","city_map","tech_list","unit_list","building_list"]
         if (self.dataio_type in arr_types and self.is_array==1) or \
            (self.dataio_type not in arr_types and self.is_array==0):
@@ -442,7 +442,7 @@ class Field:
         if self.struct_type=="float" and not self.is_array:
             return '''{
   int tmp;
-  
+
   dio_get_uint32(&din, &tmp);
   real_packet->%(name)s = (float)(tmp) / %(float_factor)d.0;
 }'''%self.__dict__
@@ -541,7 +541,7 @@ class Variant:
         self.packet_name=packet.name
         self.fields=fields
         self.no=no
-        
+
         self.no_packet=packet.no_packet
         self.want_post_recv=packet.want_post_recv
         self.want_pre_send=packet.want_pre_send
@@ -551,7 +551,7 @@ class Variant:
         self.is_info=packet.is_info
         self.cancel=packet.cancel
         self.want_force=packet.want_force
-        
+
         self.poscaps=poscaps
         self.negcaps=negcaps
         if self.poscaps or self.negcaps:
@@ -618,7 +618,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
     # Returns a code fragement which declares the packet specific
     # bitvector. Each bit in this bitvector represents one non-key
-    # field.    
+    # field.
     def get_bitvector(self):
         return "BV_DEFINE(%(name)s_fields, %(bits)d);\n\n"%self.__dict__
 
@@ -678,7 +678,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
     # Returns a code fragement which is the implementation of the cmp
     # function. The cmp function is using all key fields. The cmp
-    # function is used for the hash table.    
+    # function is used for the hash table.
     def get_cmp(self):
         if len(self.key_fields)==0:
             return "#define cmp_%(name)s cmp_const\n\n"%self.__dict__
@@ -889,7 +889,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
             freelog='  freelog(%(log_level)s, "%(name)s: got info about (%(keys_format)s)"%(keys_arg)s);\n'
         else:
             freelog=""
-        
+
         if self.want_post_recv:
             post="  post_receive_%(packet_name)s(pc, real_packet);\n"
         else:
@@ -940,7 +940,7 @@ static char *stats_%(name)s_names[] = {%(names)s};
 
 '''%self.get_dict(vars())
         return body+extro
-    
+
 
 # Class which represents a packet. A packet contains a list of fields.
 class Packet:
@@ -951,7 +951,7 @@ class Packet:
         self.gen_freelog=generate_freelogs
         str=str.strip()
         lines=str.split("\n")
-        
+
         mo=re.search("^\s*(\S+)\s*=\s*(\d+)\s*;\s*(.*?)\s*$",lines[0])
         assert mo,repr(lines[0])
 
@@ -985,10 +985,10 @@ class Packet:
         if "is-game-info" in arr:
             self.is_info="game"
             arr.remove("is-game-info")
-        
+
         self.want_pre_send="pre-send" in arr
         if self.want_pre_send: arr.remove("pre-send")
-        
+
         self.want_post_recv="post-recv" in arr
         if self.want_post_recv: arr.remove("post-recv")
 
@@ -1034,7 +1034,7 @@ class Packet:
         arr=remaining
 
         assert len(arr)==0,repr(arr)
-        
+
         if disable_delta:
             self.delta=0
 
@@ -1049,7 +1049,7 @@ class Packet:
         if self.keys_arg:
             self.keys_arg=",\n    "+self.keys_arg
 
-        
+
         self.want_dsend=self.dsend_given
 
         if len(self.fields)==0:
@@ -1082,12 +1082,12 @@ class Packet:
             if self.want_lsend:
                 self.dlsend_prototype='void dlsend_%(name)s(struct conn_list *dest%(extra_send_args3)s)'%self.__dict__
 
-        # create cap variants
+        # Create cap variants
         all_caps={}
         for f in self.fields:
             if f.add_cap:  all_caps[f.add_cap]=1
             if f.remove_cap:  all_caps[f.remove_cap]=1
-                        
+
         all_caps=list(all_caps.keys())
         choices=get_choices(all_caps)
         self.variants=[]
@@ -1118,7 +1118,7 @@ class Packet:
         for field in self.key_fields+self.other_fields:
             body=body+"  %s;\n"%field.get_declar()
         if not body:
-            body="  char __dummy;			/* to avoid malloc(0); */\n"
+            body="  char __dummy;                       /* to avoid malloc(0); */\n"
         return intro+body+extro
     # '''
 
@@ -1151,7 +1151,7 @@ class Packet:
         result=self.__dict__.copy()
         result.update(vars)
         return result
-    
+
     # Returns a code fragment which is the implementation of the
     # ensure_valid_variant function
     def get_ensure_valid_variant(self):
@@ -1206,8 +1206,8 @@ class Packet:
 {
   if(!pc->used) {
     freelog(LOG_ERROR,
-	    "WARNING: trying to read data from the closed connection %%s",
-	    conn_description(pc));
+            "WARNING: trying to read data from the closed connection %%s",
+            conn_description(pc));
     return NULL;
   }
   assert(pc->phs.variant != NULL);
@@ -1242,8 +1242,8 @@ class Packet:
 {
   if(!pc->used) {
     freelog(LOG_ERROR,
-	    "WARNING: trying to send data to the closed connection %%s",
-	    conn_description(pc));
+            "WARNING: trying to send data to the closed connection %%s",
+            conn_description(pc));
     return -1;
   }
   assert(pc->phs.variant != NULL);
@@ -1298,7 +1298,7 @@ class Packet:
   struct %(name)s packet, *real_packet = &packet;
 
 %(fill)s
-  
+
   return send_%(name)s(pc, real_packet%(force_value)s);
 }
 
@@ -1314,7 +1314,7 @@ class Packet:
   struct %(name)s packet, *real_packet = &packet;
 
 %(fill)s
-  
+
   lsend_%(name)s(dest, real_packet);
 }
 
@@ -1324,7 +1324,7 @@ class Packet:
 # delta_stats_report() function.
 def get_report(packets):
     if not generate_stats: return 'void delta_stats_report(void) {}\n\n'
-    
+
     intro='''
 void delta_stats_report(void) {
   int i;
@@ -1366,7 +1366,7 @@ def get_get_packet_helper(packets):
         body=body+"  case %(type)s:\n    return receive_%(name)s(pc, type);\n\n"%p.__dict__
     extro='''  default:
     freelog(LOG_ERROR, "unknown packet type %d received from %s",
-	    type, conn_description(pc));
+            type, conn_description(pc));
     remove_packet_from_buffer(pc->buffer);
     return NULL;
   };
@@ -1462,7 +1462,7 @@ def strip_c_comment(s):
       l=i.split("*/",1)
       assert len(l)==2,repr(i)
       result=result+l[1]
-  return result  
+  return result
 
 # Main function. It reads and parses the input and generates the
 # various files.
@@ -1503,12 +1503,12 @@ def gen_main(freeciv_dir):
         freeciv_parse_strings[p.type_number] = p;
         packet_type_names[p.name] = p.type_number;
 
-    return freeciv_parse_strings; 
+    return freeciv_parse_strings;
 
 
 def get_packet_name_type(packet_name):
   if ("packet_" + packet_name not in packet_type_names):
     if (logger.isEnabledFor(logging.ERROR)):
-      logger.error("Invalid packet type: " + packet_name); 
+      logger.error("Invalid packet type: " + packet_name);
     return None;
   return packet_type_names["packet_" + packet_name];

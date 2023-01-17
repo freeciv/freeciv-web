@@ -41,7 +41,7 @@ class TestPBEM(unittest.TestCase):
     finally:
       cursor.close()
       cnx.close()
-    
+
 
   def test_pbem_functions(self):
     print("testing pbem.");

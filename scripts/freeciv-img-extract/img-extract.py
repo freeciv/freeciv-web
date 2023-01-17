@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
-''' 
+'''
  Freeciv - Copyright (C) 2009-2016 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -187,16 +187,16 @@ for tileset_id in sorted(files.keys()):
 
   for file in files[tileset_id]:
     config = config_read(file);
-    
+
     if "extra" in config.sections():
       csprites = config.get("extra", "sprites");
       sprites = csprites.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
       for sprite in sprites:
         rsprite = sprite.split(",");
         if (len(rsprite) != 2 or rsprite[1] == "file"): continue;
-  
+
         tag = rsprite[1];
-        if (tag.find(";")): tag = tag.split(";")[0]; 
+        if (tag.find(";")): tag = tag.split(";")[0];
         tag = tag.strip();
 
         gfx_file = path.join(gfxdir, tag + ".png")
@@ -205,26 +205,26 @@ for tileset_id in sorted(files.keys()):
         if (w > max_width): max_width = w;
         if (h > max_height): max_height = h;
         sum_area += (h*w);
-  
+
         if (curr_y + h >= tileset_height):
           increment_tileset_image(tileset_id);
         tileset.paste(im, (curr_x, curr_y));
         coords[tileset_id][rsprite[0]] = (curr_x, curr_y, w, h, tileset_inc);
         curr_x += w;
         if (h > max_row_height): max_row_height = h;
-        if (w + curr_x >= tileset_width): 
+        if (w + curr_x >= tileset_width):
           curr_x = 0;
           curr_y += max_row_height;
           max_row_height = 0;
-  
-  
+
+
     if "file" in config.sections():
       gfx = config.get("file", "gfx").replace("\"", "")
       gfx_file = path.join(gfxdir, gfx + ".png")
       if verbose: print("  processing: " + gfx_file)
       im = Image.open(gfx_file)
- 
-      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts", "grid_extra"]: 
+
+      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts", "grid_extra"]:
         if current_section in config.sections():
           dx = int(config.get(current_section, "dx"));
           dy = int(config.get(current_section, "dy"));
@@ -238,7 +238,7 @@ for tileset_id in sorted(files.keys()):
 
           if verbose: print("  {} pixel_border {}".format(current_section, pixel_border))
           tag2 = None;
-  
+
           tiles_buf = config.get(current_section, "tiles");
           tiles = tiles_buf.replace("{","").replace("}", "").replace(" ", "").replace("\"","").split("\n");
           for tile in tiles:
@@ -247,22 +247,22 @@ for tileset_id in sorted(files.keys()):
             gx = int(tmptile[1]);
             gy = int(tmptile[0]);
             tag = str(tmptile[2]);
-  
-            if (tag.find(";")): tag = tag.split(";")[0]; 
+
+            if (tag.find(";")): tag = tag.split(";")[0];
             tag = tag.strip();
-              
-            if len(tmptile) == 4: 
+
+            if len(tmptile) == 4:
               tag2 = tmptile[3];
-              if (tag2.find(";")): 
-                tag2 = tag2.split(";")[0]; 
+              if (tag2.find(";")):
+                tag2 = tag2.split(";")[0];
                 tag2 = tag2.strip();
-  
-            dims = (x_top_left + pixel_border*gx + gx*dx, 
-                                          y_top_left + pixel_border*gy + gy*dy, 
-                                          x_top_left + gx*dx + dx + pixel_border*gx, 
+
+            dims = (x_top_left + pixel_border*gx + gx*dx,
+                                          y_top_left + pixel_border*gy + gy*dy,
+                                          x_top_left + gx*dx + dx + pixel_border*gx,
                                           y_top_left + gy*dy + dy + pixel_border*gy)
-  
-            result_tile = im.copy().crop(dims); 
+
+            result_tile = im.copy().crop(dims);
 
             if tag == "t.dither_tile":
               dither_mask = result_tile.copy();
@@ -270,43 +270,43 @@ for tileset_id in sorted(files.keys()):
             if tag == "mask.tile":
               mask_image = result_tile.copy();
 
-  
+
             if (tag.find("cellgroup") != -1):
-              #handle a cell group (1 tile = 4 cells)
+              # Handle a cell group (1 tile = 4 cells)
               (WZ, HZ) = result_tile.size;
               xf = [int(WZ / 4), int(WZ / 4), 0, int(WZ / 2)];
               yf = [int(HZ / 2), 0, int(HZ / 4), int(HZ / 4)];
               xo = [0, 0, int(-WZ / 2), int(WZ / 2)];
               yo = [int(HZ / 2), int(-HZ / 2), 0, 0];
-  
+
               for dir in range(4):
                 result_cell = result_tile.copy().crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
                 mask = Image.new('RGBA', (int(WZ/2), int(HZ/2)), (255));
                 mask.paste(mask_image, (int(xo[dir] - xf[dir]), int(yo[dir] - yf[dir])));
-             
+
                 (w, h) = result_cell.size;
                 if (w > max_width): max_width = w;
                 if (h > max_height): max_height = h;
                 sum_area += (h*w);
-  
+
                 if (curr_y + h >= tileset_height):
                   increment_tileset_image(tileset_id);
-  
+
                 tileset.paste(result_cell, (int(curr_x), int(curr_y)), mask);
                 store_img = Image.new('RGBA', (w, h), (0, 0, 0, 0));
                 store_img.paste(result_cell, (0, 0), mask);
                 coords[tileset_id][tag + "." + str(dir)] = (curr_x, curr_y, w, h, tileset_inc);
                 curr_x += w;
                 if (h > max_row_height): max_row_height = h;
-                if (w + curr_x >= tileset_width): 
+                if (w + curr_x >= tileset_width):
                   curr_x = 0;
                   curr_y += max_row_height;
                   max_row_height = 0;
-  
+
             elif tag in dither_types:
               # handle a dithered tile.
               dither_map[tag] = result_tile.copy();
-  
+
             elif tag.find("explode.nuke_") > -1 \
                  or tag.find("grid.borders") > -1 \
                  or tag.find("grid.selected") > -1 \
@@ -320,26 +320,26 @@ for tileset_id in sorted(files.keys()):
               if (w > max_width): max_width = w;
               if (h > max_height): max_height = h;
               sum_area += (h*w);
-  
+
               if (curr_y + h >= tileset_height):
                 increment_tileset_image(tileset_id);
-  
+
               tileset.paste(result_tile, (curr_x, curr_y));
-  
+
               coords[tileset_id][tag] = (curr_x, curr_y, w, h, tileset_inc);
               curr_x += w;
               if (h > max_row_height): max_row_height = h;
-              if (w + curr_x >= tileset_width): 
+              if (w + curr_x >= tileset_width):
                 curr_x = 0;
                 curr_y += max_row_height;
                 max_row_height = 0;
-  
-              if (tag2 != None and len(tag2) > 0): 
+
+              if (tag2 != None and len(tag2) > 0):
                 coords[tileset_id][tag2] = (curr_x, curr_y, w, h, tileset_inc);
 
   if not (tileset_id == "amplio2" or tileset_id == "isotrident"):
     increment_tileset_image(tileset_id);
-  else: 
+  else:
     for src_key in dither_map.keys():
       for alt_key in dither_map.keys():
           for dir in range(4):
@@ -366,7 +366,7 @@ for tileset_id in sorted(files.keys()):
 
             curr_x += w;
             if (h > max_row_height): max_row_height = h;
-            if (w + curr_x >= tileset_width): 
+            if (w + curr_x >= tileset_width):
               curr_x = 0;
               curr_y += max_row_height;
               max_row_height = 0;

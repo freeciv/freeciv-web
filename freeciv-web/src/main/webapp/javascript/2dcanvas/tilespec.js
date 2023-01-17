@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -394,14 +394,14 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
       }
 
       if (active_city != null && ptile != null && ptile['worked'] != null
-          && active_city['id'] == ptile['worked'] && active_city['food_output'] != null) {
+          && active_city['id'] == ptile['worked'] && active_city['output_food'] != null) {
         var ctile = city_tile(active_city);
         var d = map_distance_vector(ctile, ptile);
         var idx = get_city_dxy_to_index(d[0], d[1], active_city);
 
-        var food_output = active_city['food_output'].substring(idx, idx + 1);
-        var shield_output = active_city['shield_output'].substring(idx, idx + 1);
-        var trade_output = active_city['trade_output'].substring(idx, idx + 1);
+        var food_output = active_city['output_food'][idx];
+        var shield_output = active_city['output_shield'][idx];
+        var trade_output = active_city['output_trade'][idx];
 
         /* The ruleset may use large values scaled down to get greater
          * granularity. */
@@ -749,7 +749,6 @@ function get_city_occupied_sprite(pcity) {
   } else {
     return "citybar.occupancy_0";
   }
-
 }
 
 /**********************************************************************
@@ -1580,4 +1579,3 @@ function color_rbg_to_list(pcolor)
   color_rgb[2] = parseFloat(color_rgb[2]);
   return color_rgb;
 }
-

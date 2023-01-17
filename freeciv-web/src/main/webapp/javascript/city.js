@@ -967,7 +967,7 @@ function dxy_to_center_index(dx, dy, r)
 
 /**************************************************************************
   Converts from coordinate offset from city center (dx, dy),
-  to index in the city_info['food_output'] packet.
+  to index.
 **************************************************************************/
 function get_city_dxy_to_index(dx, dy, pcity)
 {

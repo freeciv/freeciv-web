@@ -14,6 +14,9 @@
 # 0022-Client-Play-quit-sound-while-we-still-can.patch
 #   Fix regression causing trouble on exit
 #   osdn #46426
+# 0013-Update-founder-information-of-cities-when-a-player-r.patch
+#   Memory corruption fix on player removal
+#   osdn #46503
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,6 +42,7 @@ declare -a PATCHLIST=(
   "backports/0036-Correct-memory-handling-on-rename-of-transfered-city"
   "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
   "backports/0022-Client-Play-quit-sound-while-we-still-can"
+  "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

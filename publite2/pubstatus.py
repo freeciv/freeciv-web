@@ -33,14 +33,14 @@ class StatusHandler(web.RequestHandler):
 
     error_rate = 0;
     if (game_count > 0): error_rate = (error_count * 100) / game_count;
-      
-    self.write("<html><head><title>Publite2 status for Freeciv-web</title>" + 
+
+    self.write("<html><head><title>Publite2 status for Freeciv-web</title>" +
                "<link href='/css/bootstrap.min.css' rel='stylesheet'>" +
                "<meta http-equiv=\"refresh\" content=\"20\"><style>td { padding: 2px;}</style></head><body>");
-    self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" + 
+    self.write("<div class='container'><h2>Freeciv-web Publite2 status</h2>" +
                "<table><tr><td>Number of Freeciv-web games run:</td><td>" + str(game_count) + "</td></tr>" +
                "<tr><td>Server limit (maximum number of running servers):</td><td>" + str(self.metachecker.server_limit) + "</td></tr>" +
-               "<tr><td>Server capacity:</td><td>" + str(self.metachecker.server_capacity_single) + "," +  
+               "<tr><td>Server capacity:</td><td>" + str(self.metachecker.server_capacity_single) + "," +
                str(self.metachecker.server_capacity_multi) + "," +  str(self.metachecker.server_capacity_pbem) + "</td></tr>" +
                "<tr><td>Number of servers running according to Publite2:</td><td>" + str(len(self.metachecker.server_list)) + "</td></tr>"
                "<tr><td>Number of servers running according to metaserver:</td><td>" + str(self.metachecker.total) + "</td></tr>" +
@@ -58,8 +58,8 @@ class StatusHandler(web.RequestHandler):
     self.write("<h3>Running Freeciv-web servers:</h3>");
     self.write("<table><tr><td>Server Port</td><td>Type</td><td>Started time</td><td>Restarts</td><td>Errors</td></tr>");
     for server in self.metachecker.server_list:
-      self.write("<tr><td><a href='/civsocket/" + str(server.new_port + 1000) 
-                 + "/status'>" + str(server.new_port) + "</a></td>" + "<td>" + str(server.gametype) 
+      self.write("<tr><td><a href='/civsocket/" + str(server.new_port + 1000)
+                 + "/status'>" + str(server.new_port) + "</a></td>" + "<td>" + str(server.gametype)
                  +  "</td><td>" + str(server.started_time) + "</td><td>" + str(server.num_start) + "</td><td>" + str(server.num_error) +  "</td></tr>");
     self.write("</table></div>");
     self.write("</body></html>");

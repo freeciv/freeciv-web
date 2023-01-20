@@ -104,7 +104,7 @@ class WSHandler(websocket.WebSocketHandler):
             return
 
         # get the civcom instance which corresponds to this user.
-        if (self.is_ready): 
+        if (self.is_ready):
             self.civcom = self.get_civcom(self.username, self.civserverport, self)
 
         if (self.civcom is None):

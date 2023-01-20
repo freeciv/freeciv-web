@@ -41,7 +41,7 @@ mysql_user=settings.get("Config", "mysql_user");
 mysql_database=settings.get("Config", "mysql_database");
 mysql_password=settings.get("Config", "mysql_password");
 
-savedir = settings.get("Config", "savegame_directory"); 
+savedir = settings.get("Config", "savegame_directory");
 rankdir = settings.get("Config", "ranklog_directory");
 
 host = settings.get("Config", "host");
@@ -50,7 +50,7 @@ host = settings.get("Config", "host");
 loaded_games = {};
 try:
   if (os.path.isfile('pbem-games.json')):
-    with open('pbem-games.json') as data_file:    
+    with open('pbem-games.json') as data_file:
       loaded_games = json.load(data_file)
 except Exception as e:
   print(e);
@@ -67,7 +67,7 @@ status.retired = 0;
 status.games = loaded_games;
 status.expiry = game_expire_time;
 
-# send reminder where game is about to expire 
+# send reminder where game is about to expire
 def remind_old_games():
   for key, value in status.games.items():
     if (value['reminder_sent'] == False and (value['time_int'] + game_remind_time) < (time.time())):
@@ -75,7 +75,7 @@ def remind_old_games():
       status.reminders_sent += 1;
       mail.send_game_reminder(status.games[key]['active_player_email'], status.games[key]['url']);
 
-# expire old games 
+# expire old games
 def cleanup_expired_games():
   for key, game in status.games.copy().items():
     if ((game['time_int'] + game_expire_time) < (time.time())):
@@ -120,12 +120,12 @@ def handle_savegame(root, file):
     print("skipping savegame, game is over.");
     return;
   active_player = players[phase];
-  print("active_player=" + active_player);    
+  print("active_player=" + active_player);
   active_email = find_email_address(active_player);
   game_url = "https://" + host + "/webclient/?action=pbem&type=pbem&savegame=" + new_filename.replace(".xz", "");
   if (active_email != None):
-    status.games[game_id] = {'turn' : turn, 'phase': phase, 'players' : players, 'time_str' : time.ctime(), 
-                             'time_int' : int(time.time()), 'state' : state, 'url' : game_url, 
+    status.games[game_id] = {'turn' : turn, 'phase': phase, 'players' : players, 'time_str' : time.ctime(),
+                             'time_int' : int(time.time()), 'state' : state, 'url' : game_url,
                              'active_player_email' : active_email, 'reminder_sent' : False};
     print("active email=" + active_email);
     mail.send_email_next_turn(active_player, players, active_email, game_url, turn);
@@ -222,7 +222,7 @@ def process_savegames():
     for file in files:
       if (file.endswith(".xz") and file.startswith("pbem") and not file.startswith("pbem_processed")):
         handle_savegame(root, file);
-        
+
 
 def handle_ranklog(root, file):
   filename = os.path.join(root,file)
@@ -238,7 +238,7 @@ def handle_ranklog(root, file):
   winner_email = None;
   losers = None;
   losers_score = None;
-  losers_email = None;  
+  losers_email = None;
 
   for line in lines:
     if (len(line) > 9 and line[:7]=='winners' and ',' in line):
@@ -252,7 +252,7 @@ def handle_ranklog(root, file):
   if (losers_email != None and winner_email != None):
     mail.send_game_result_mail(winner, winner_score, winner_email, losers, losers_score, losers_email);
     if (winner != None and len(winner) > 3 and losers != None and len(losers) > 3):
-      save_game_result(winner, losers, winner); 
+      save_game_result(winner, losers, winner);
     status.ranklog_emails_sent += 1;
 
   else:
@@ -264,7 +264,7 @@ def process_ranklogs():
     for file in files:
       if (file.endswith(".log")):
         handle_ranklog(root, file);
-        
+
 if __name__ == '__main__':
   print("Freeciv-PBEM processing savegames");
   status.start();

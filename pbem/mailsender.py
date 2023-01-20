@@ -73,7 +73,7 @@ class MailSender():
   def send_mailgun_message(self, to, subject, text):
     msg = MIMEText(text, _subtype='html', _charset='utf-8', )
     msg['Subject'] = subject
-    msg['From'] = self.smtp_sender; 
+    msg['From'] = self.smtp_sender;
     msg['To'] = to
     self.send_message_via_smtp(self.smtp_sender, to, msg.as_string())
 

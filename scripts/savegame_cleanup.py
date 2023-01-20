@@ -35,4 +35,4 @@ for root, subFolders, files in os.walk(rootdir):
           os.unlink(f)
         if difftime > keeptime_autosave and file.startswith("freeciv-earth-savegame"):
           print("rm file: " + file);
-          os.unlink(f)          
+          os.unlink(f)

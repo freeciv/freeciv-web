@@ -88,15 +88,15 @@ def fix_tech(tech_name):
   return tech_name;
 
 def validate_image(image_url):
-  return ((".png" in image_url.lower() or ".jpg" in image_url.lower()) 
-		  and not "Ambox" in image_url 
-		  and not "Berthabenzportrait" in image_url 
-		  and not "Great_wall_of_china-mutianyu_3" in image_url 
-		  and not "Chevalier" in image_url 
-		  and not "Nuvola_apps_ksysv" in image_url 
-		  and not "mile_Levassor" in image_url 
-		  and not "Place_de_la_R" in image_url 
-		  and not "Elizabeth" in image_url 
+  return ((".png" in image_url.lower() or ".jpg" in image_url.lower())
+		  and not "Ambox" in image_url
+		  and not "Berthabenzportrait" in image_url
+		  and not "Great_wall_of_china-mutianyu_3" in image_url
+		  and not "Chevalier" in image_url
+		  and not "Nuvola_apps_ksysv" in image_url
+		  and not "mile_Levassor" in image_url
+		  and not "Place_de_la_R" in image_url
+		  and not "Elizabeth" in image_url
                   and "Writing_systems_worldwide" not in image_url);
 
 def download_wiki_page(tech_name):
@@ -109,7 +109,7 @@ def download_wiki_page(tech_name):
   image = None;
   # FIXME: page.images seems to be in random order, so we'll get a random image from Wikipedia.
   for i in range(len(page.images)):
-    if validate_image(page.images[i]): 
+    if validate_image(page.images[i]):
       image = page.images[i];
       break;
 

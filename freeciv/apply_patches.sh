@@ -11,9 +11,6 @@
 # 0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type.patch
 #   Alternative Wonders of The World report
 #   osdn #42290
-# 0022-Client-Play-quit-sound-while-we-still-can.patch
-#   Fix regression causing trouble on exit
-#   osdn #46426
 # 0013-Update-founder-information-of-cities-when-a-player-r.patch
 #   Memory corruption fix on player removal
 #   osdn #46503
@@ -45,7 +42,6 @@
 declare -a PATCHLIST=(
   "backports/0036-Correct-memory-handling-on-rename-of-transfered-city"
   "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
-  "backports/0022-Client-Play-quit-sound-while-we-still-can"
   "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "meson_webperimental"

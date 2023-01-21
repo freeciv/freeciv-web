@@ -18,6 +18,9 @@
 #   Replace former custom freeciv-web patch by better protocol
 #   to transfer tile output information
 #   osdn #46535
+# 0038-Move-combat-stats-part-of-popup_info_text-to-clientu.patch
+#   Make combat stats text generation available on common/
+#   osdn #46536
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -44,6 +47,7 @@ declare -a PATCHLIST=(
   "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
   "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
+  "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

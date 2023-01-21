@@ -5,7 +5,7 @@ This is the WebGL + Three.js renderer for Freeciv-web.
 
 [Three.js](https://threejs.org/) is the 3D engine used in Freeciv-web.
 
-Custom GLSL Fragment and Vertex shaders can be found in the shaders subdirectory. 
+Custom GLSL Fragment and Vertex shaders can be found in the shaders subdirectory.
 
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv/freeciv-web/develop/freeciv-web/src/main/webapp/javascript/webgl/freeciv-webgl.png "Freeciv-web WebGL screenshot")
 

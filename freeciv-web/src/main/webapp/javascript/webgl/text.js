@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2016  The Freeciv-web project
 
@@ -295,14 +295,15 @@ function get_unit_activity_text(punit)
 {
   var activity = punit['activity'];
 
-  /* don't draw activity for enemy units */
+  /* Don't draw activity for enemy units */
   if (client.conn.playing == null || punit['owner'] != client.conn.playing.playerno) {
     return null;
   }
 
   switch (activity) {
+    case ACTIVITY_CLEAN:
     case ACTIVITY_POLLUTION:
-      return "F";
+      return "c";
 
     case ACTIVITY_MINE:
       return "m";
@@ -311,7 +312,7 @@ function get_unit_activity_text(punit)
       return "M";
 
     case ACTIVITY_IRRIGATE:
-      return " i ";
+      return "i";
 
     case ACTIVITY_CULTIVATE:
       return "I";
@@ -348,7 +349,7 @@ function get_unit_activity_text(punit)
   }
 
   if (unit_has_goto(punit)) {
-      return "G";
+    return "G";
   }
 
   switch (punit['ssa_controller']) {

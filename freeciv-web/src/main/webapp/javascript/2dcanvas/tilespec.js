@@ -901,7 +901,14 @@ function get_unit_activity_sprite(punit)
   var act_tgt  = punit['activity_tgt'];
 
   switch (activity) {
+    /* TODO: Use target specific sprites. */
+    case ACTIVITY_CLEAN:
     case ACTIVITY_POLLUTION:
+      return {"key" : "unit.pollution",
+          "offset_x" : unit_activity_offset_x,
+          "offset_y" : - unit_activity_offset_y};
+
+    case ACTIVITY_FALLOUT:
       return {"key" : "unit.fallout",
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};

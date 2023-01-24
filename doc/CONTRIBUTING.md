@@ -6,18 +6,18 @@ Thank you for your interest in contributing to Freeciv-web!
 
 Freeciv is an open source project where contributions from the open source community is encouraged.
 There are multiple versions of Freeciv-web, and Freeciv-web can be hosted on multiple server instances.
-To get involved in one of these Freeciv-web instances, you may either contribute directly to the 
+To get involved in one of these Freeciv-web instances, you may either contribute directly to the
 github.com/freeciv/freeciv-web repository by submitting a pull-request there, or contact one of the fork projects
 of Freeciv-web on GitHub, IRC, e-mailing lists, Discord or similar.
 
 ## Multiple Freeciv-web servers
-We need to recognize that there are multiple competing Freeciv-web servers, and that the main 
-freeciv/freeciv-web github repository must be generic and not specific to one site. 
+We need to recognize that there are multiple competing Freeciv-web servers, and that the main
+freeciv/freeciv-web github repository must be generic and not specific to one site.
 We will get a better Freeciv-web service if we allow multiple servers to exists and compete.
 
 ## Pull Request Guidelines
 
-- All changes to Freeciv-web must be done using Pull Requests on GitHub. Don't commit changes directly to the master or develop branch. 
+- All changes to Freeciv-web must be done using Pull Requests on GitHub. Don't commit changes directly to the master or develop branch.
 - Pull requests must be approved by two other Freeciv developers. Minor changes can be approved by one Freeciv developer. If there's no objections within 72h to the pull request, it's ok to merge it.
 - Only freeciv maintainers team members have rights to merge commits.
 - Don't break the build. All tests run by GitHub actions must pass successfully.

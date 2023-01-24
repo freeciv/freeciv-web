@@ -8,8 +8,8 @@ Freeciv-web scripts
   based on the Freeciv packets.def file.
 
 * freeciv-img-extract - extracts the images of the Freeciv tileset,
-  and generates a version for the web. This produces a tileset PNG 
-  and Javascript. 
+  and generates a version for the web. This produces a tileset PNG
+  and Javascript.
 
 * start-freeciv-web.sh - starts Freeciv-web.
 

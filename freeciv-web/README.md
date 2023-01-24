@@ -1,9 +1,9 @@
-Freeciv web application 
+Freeciv web application
 =======================
 
-This is the Freeciv web application, which consists of the Java servlets 
+This is the Freeciv web application, which consists of the Java servlets
 and filters for running the web client, JSP templates, javascript code
-and other web content. 
+and other web content.
 
 Derived Sources
 ===============
@@ -16,20 +16,20 @@ Scripts to generate these files are in `$freeciv-web/scripts` and they
 are generated to `$freeciv-web/freeciv-web/src/derived`. See the
 README.md in those directories for more info.
 
-Tomcat 9 + nginx setup
+Tomcat 10 + nginx setup
 ================================
-Freeciv-web supports the Tomcat 9 application server for hosting the Java web application.
+Freeciv-web supports the Tomcat 10 application server for hosting the Java web application.
 
 The build scripts are updated to build Freeciv-web for Tomcat by default,
 so setting up Freeciv-web with Vagrant will configure this automatically.
 Also see the suggested nginx.conf file in publite2/nginx.conf
 
-  https://tomcat.apache.org/  
-  http://nginx.org/  
+  https://tomcat.apache.org/
+  http://nginx.org/
 
 Build script
 ============
-Use maven to build and deploy, by running this build script: 
+Use maven to build and deploy, by running this build script:
 sh build.sh
 
 There is also a build-js.sh script to build just JavaScript quickly for development work.
@@ -47,6 +47,5 @@ if you are not using vagrant or the install script:
 * freeciv-web/src/main/webapp/WEB-INF/config.properties  (you can use config/web.properties.tmpl as a template)
 
 
-Copyright (C) 2007-2016 Andreas Røsdal. 
+Copyright (C) 2007-2016 Andreas Røsdal.
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
-

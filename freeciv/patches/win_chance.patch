@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-10-23 07:40:04.229642294 +0300
-+++ freeciv/common/networking/packets.def	2022-10-23 07:40:18.945779799 +0300
-@@ -2426,6 +2426,7 @@
+--- freeciv/common/networking/packets.def	2023-01-24 21:14:25.320946490 +0200
++++ freeciv/common/networking/packets.def	2023-01-24 21:14:38.165064480 +0200
+@@ -2447,6 +2447,7 @@
  PACKET_WEB_INFO_TEXT_REQ = 289; cs, dsend, handle-via-fields
    TILE loc;
    UNIT visible_unit;
@@ -10,17 +10,9 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
  
  PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields, no-handle
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2022-10-23 07:40:04.585645621 +0300
-+++ freeciv/server/maphand.c	2022-10-23 07:40:18.949779837 +0300
-@@ -29,6 +29,7 @@
- #include "base.h"
- #include "borders.h"
- #include "clientutils.h"
-+#include "combat.h"
- #include "events.h"
- #include "game.h"
- #include "map.h"
-@@ -2658,7 +2659,8 @@
+--- freeciv/server/maphand.c	2023-01-24 21:14:26.944961415 +0200
++++ freeciv/server/maphand.c	2023-01-24 21:14:38.401066648 +0200
+@@ -2684,7 +2684,8 @@
  **************************************************************************/
  static const char *web_popup_info_text(struct tile *ptile,
                                         struct player *pplayer,
@@ -30,51 +22,36 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  {
    const char *activity_text;
    struct city *pcity = tile_city(ptile);
-@@ -2856,6 +2858,43 @@
-                       diplo_city_adjectives[ds->type]);
+@@ -2843,6 +2844,7 @@
+   if (punit != NULL && pcity == NULL) {
+     struct player *owner = unit_owner(punit);
+     const struct unit_type *ptype = unit_type_get(punit);
++    struct unit_list *focus_unit_list;
+ 
+     get_full_username(username, sizeof(username), owner);
+     get_full_nation(nation, sizeof(nation), owner);
+@@ -2883,6 +2885,20 @@
        }
      }
-+    if (funit) {
-+      int att_chance = FC_INFINITY, def_chance = FC_INFINITY;
-+      bool found = FALSE;
-+
-+      unit_list_iterate(ptile->units, tile_unit) {
-+	if (unit_owner(tile_unit) != unit_owner(funit)) {
-+	  int att = unit_win_chance(funit, tile_unit, NULL) * 100;
-+	  int def = (1.0 - unit_win_chance(tile_unit, funit, NULL)) * 100;
-+
-+	  found = TRUE;
-+
-+	  /* Presumably the best attacker and defender will be used. */
-+	  att_chance = MIN(att, att_chance);
-+	  def_chance = MIN(def, def_chance);
-+	}
-+      } unit_list_iterate_end;
-+
-+      if (found) {
-+	/* TRANS: "Chance to win: A:95% D:46%  (%%25 is HTML encoding for '%' character.)" */
-+	astr_add_line(&str, _("Chance to win: A:%d%%25 D:%d%%25"),
-+		      att_chance, def_chance);	
-+      }
-+    }
-+
-+    /* TRANS: A is attack power, D is defense power, FP is firepower,
-+     * HP is hitpoints (current and max). */
-+    astr_add_line(&str, _("A:%d D:%d FP:%d HP:%d/%d"),
-+                  ptype->attack_strength, ptype->defense_strength,
-+                  ptype->firepower, punit->hp, ptype->hp);
-+    {
-+      const char *veteran_name =
-+        utype_veteran_name_translation(ptype, punit->veteran);
-+
-+      if (veteran_name) {
-+        astr_add(&str, " (%s)", veteran_name);
-+      }
-+    }
  
++    focus_unit_list = unit_list_new();
++
++    if (funit != NULL) {
++      unit_list_append(focus_unit_list, funit);
++    }
++
++    /* "%25" is HTML encoding for '%' character." */
++    /* FIXME: Current omniscient server-side implementation
++     *        gives web-client more accurate data than what
++     *        desktop client can get. */
++    combat_odds_to_astr(&str, focus_unit_list, ptile, punit, "%25");
++
++    unit_list_destroy(focus_unit_list);
++
      if (unit_owner(punit) == pplayer) {
        /* Show bribe cost for own units. */
-@@ -2882,11 +2921,12 @@
+       astr_add_line(&str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
+@@ -2908,11 +2924,12 @@
    Handle client request for tile information text.
  **************************************************************************/
  void handle_web_info_text_req(struct player *pplayer, int loc,
@@ -90,8 +67,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
    conn_list_iterate(pplayer->connections, pconn) {
      dsend_packet_web_info_text_message(pconn, info_text);
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2022-10-23 07:40:04.581645583 +0300
-+++ freeciv/server/maphand.h	2022-10-23 07:40:18.949779837 +0300
+--- freeciv/server/maphand.h	2023-01-24 21:14:27.092962774 +0200
++++ freeciv/server/maphand.h	2023-01-24 21:14:39.005072193 +0200
 @@ -142,6 +142,6 @@
                          int prob, bool reveal_cities);
  

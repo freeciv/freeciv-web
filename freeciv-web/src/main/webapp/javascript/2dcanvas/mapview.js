@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -271,8 +271,8 @@ function canvas_put_select_rectangle(canvas_context, canvas_x, canvas_y, width, 
 /**************************************************************************
   Draw city text onto the canvas.
 **************************************************************************/
-function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
-
+function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y)
+{
   var text = decodeURIComponent(city['name']).toUpperCase();
   var size = city['size'];
   var color = nations[city_owner(city)['nation']]['color'];
@@ -313,9 +313,16 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.globalAlpha = 1.0;
 
   if (prod_type != null) {
-    var tag = tileset_ruleset_entity_tag_str_or_alt(prod_type,
-                                                    "unit or building");
-    if (tag == null) return;
+    if (city['production_kind'] == VUT_UTYPE) {
+      var tag = tileset_unit_type_graphic_tag(prod_type);
+    } else {
+      var tag = tileset_ruleset_entity_tag_str_or_alt(prod_type, "building");
+    }
+
+    if (tag == null) {
+      return;
+    }
+
     pcanvas.drawImage(sprites[tag],
               canvas_x + Math.floor(txt_measure.width / 2) + size_measure.width + 13,
               canvas_y - 19, 28, 24);
@@ -327,7 +334,6 @@ function mapview_put_city_bar(pcanvas, city, canvas_x, canvas_y) {
   pcanvas.fillStyle = "rgba(255, 255, 255, 1)";
   pcanvas.fillText(text, canvas_x - Math.floor(txt_measure.width / 2) - 2, canvas_y - 1);
   pcanvas.fillText(size, canvas_x + Math.floor(txt_measure.width / 2) + 8, canvas_y - 1);
-
 }
 
 /**************************************************************************

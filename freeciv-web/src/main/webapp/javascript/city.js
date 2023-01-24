@@ -17,7 +17,6 @@
 
 ***********************************************************************/
 
-
 var citydlg_map_width = 384;      // default values for most rulesets
 var citydlg_map_height = 192;     // default value for most rulesets
 
@@ -442,7 +441,7 @@ function show_city_dialog(pcity)
 }
 
 /**************************************************************************
- Returns the name and sprite of the current city production.
+  Returns the name and sprite of the current city production.
 **************************************************************************/
 function get_city_production_type_sprite(pcity)
 {
@@ -465,7 +464,10 @@ function get_city_production_type_sprite(pcity)
 **************************************************************************/
 function get_city_production_type(pcity)
 {
-  if (pcity == null) return null; 
+  if (pcity == null) {
+    return null;
+  }
+
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
     return punit_type;

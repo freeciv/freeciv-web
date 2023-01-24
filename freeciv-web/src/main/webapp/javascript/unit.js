@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -169,9 +169,9 @@ function unit_list_without(unit_list, punit)
 /**************************************************************************
   Returns the type of the unit.
 **************************************************************************/
-function unit_type(unit)
+function unit_type(punit)
 {
-  return unit_types[unit['type']];
+  return unit_types[punit['type']];
 }
 
 /**************************************************************************

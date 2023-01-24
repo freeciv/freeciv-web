@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2023-01-17 17:52:58.032733389 +0200
-+++ freeciv/server/commands.c	2023-01-17 17:53:09.832865375 +0200
+--- freeciv/server/commands.c	2023-01-24 05:33:26.983318115 +0200
++++ freeciv/server/commands.c	2023-01-24 05:33:39.691420373 +0200
 @@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,8 +11,8 @@ diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
---- freeciv/server/savegame/savemain.c	2023-01-17 17:52:58.036733434 +0200
-+++ freeciv/server/savegame/savemain.c	2023-01-17 17:53:09.832865375 +0200
+--- freeciv/server/savegame/savemain.c	2023-01-24 05:33:26.983318115 +0200
++++ freeciv/server/savegame/savemain.c	2023-01-24 05:33:39.691420373 +0200
 @@ -152,8 +152,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
@@ -39,8 +39,8 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-01-17 17:52:58.036733434 +0200
-+++ freeciv/server/stdinhand.c	2023-01-17 17:55:48.582596654 +0200
+--- freeciv/server/stdinhand.c	2023-01-24 05:33:26.987318146 +0200
++++ freeciv/server/stdinhand.c	2023-01-24 05:41:12.495109459 +0200
 @@ -21,6 +21,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -105,7 +105,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (check) {
      return TRUE;
    }
-@@ -4502,6 +4513,31 @@
+@@ -4502,6 +4513,35 @@
  
    level = command_level(command_by_number(cmd));
  
@@ -113,24 +113,28 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 +  if (strncmp(game.server.meta_info.type, "pbem", 4) == 0 
 +      && cmd == CMD_SAVE && caller) {
 +    char pbemfile[200];
-+    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem/pbem-%s-%u", srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
++
++    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem/pbem-%s-%u",
++                srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
 +    sz_strlcpy(arg, pbemfile);
 +  } else if (cmd == CMD_SAVE && caller) {
 +    char savefile[300];
 +    char buffer[30];
++    char savedir[300];
 +    time_t timer;
-+    struct tm* tm_info;
++    struct tm tm_info;
 +
 +    time(&timer);
-+    tm_info = localtime(&timer);
-+    strftime(buffer, 30, "%Y-%m-%d-%H_%M", tm_info);
-+    fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s_T%u_%s", srvarg.saves_pathname, 
-+                caller->username, caller->username, game.info.turn, buffer);
++    fc_localtime(&timer, &tm_info);
++    strftime(buffer, 30, "%Y-%m-%d-%H_%M", &tm_info);
++    fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s_T%u_%s",
++                srvarg.saves_pathname,  caller->username,
++                caller->username, game.info.turn, buffer);
 +    sz_strlcpy(arg, savefile);
 +
-+    /* create sub-directory from players username in saves directory. */
-+    char savedir[300];
-+    fc_snprintf(savedir, sizeof(savedir), "%s/%s", srvarg.saves_pathname, caller->username);
++    /* Create sub-directory from players username in saves directory. */
++    fc_snprintf(savedir, sizeof(savedir), "%s/%s",
++                srvarg.saves_pathname, caller->username);
 +    make_dir(savedir);
 +  }
 +
@@ -138,8 +142,8 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
        && conn_get_access(caller) == ALLOW_BASIC && !check
        && !vote_would_pass_immediately(caller, cmd)) {
 diff -Nurd freeciv/utility/shared.c freeciv/utility/shared.c
---- freeciv/utility/shared.c	2023-01-17 17:52:58.120734375 +0200
-+++ freeciv/utility/shared.c	2023-01-17 17:53:09.832865375 +0200
+--- freeciv/utility/shared.c	2023-01-24 05:33:27.043318598 +0200
++++ freeciv/utility/shared.c	2023-01-24 05:33:39.715420565 +0200
 @@ -1790,14 +1790,14 @@
        }
      }

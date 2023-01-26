@@ -1,0 +1,163 @@
+From dfe472337b677507e7690789ab2d4d7f8ba5c9c8 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 21 Jan 2023 13:31:52 +0200
+Subject: [PATCH 38/38] Move combat stats part of popup_info_text() to
+ clientutils.c
+
+Split new combat_odds_to_astr() function from popup_info_text(),
+and place it to common/
+
+See osdn #46536
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ client/text.c        | 38 +--------------------------------
+ common/clientutils.c | 51 ++++++++++++++++++++++++++++++++++++++++++++
+ common/clientutils.h |  6 ++++++
+ 3 files changed, 58 insertions(+), 37 deletions(-)
+
+diff --git a/client/text.c b/client/text.c
+index 1035bb5dae..1acb4ef55e 100644
+--- a/client/text.c
++++ b/client/text.c
+@@ -403,43 +403,7 @@ const char *popup_info_text(struct tile *ptile)
+       }
+     }
+ 
+-    unit_list_iterate(get_units_in_focus(), pfocus_unit) {
+-      int att_chance = FC_INFINITY, def_chance = FC_INFINITY;
+-      bool found = FALSE;
+-
+-      unit_list_iterate(ptile->units, tile_unit) {
+-	if (unit_owner(tile_unit) != unit_owner(pfocus_unit)) {
+-          int att = unit_win_chance(pfocus_unit, tile_unit, NULL) * 100;
+-          int def = (1.0 - unit_win_chance(tile_unit, pfocus_unit,
+-                                           NULL)) * 100;
+-
+-	  found = TRUE;
+-
+-	  /* Presumably the best attacker and defender will be used. */
+-	  att_chance = MIN(att, att_chance);
+-	  def_chance = MIN(def, def_chance);
+-	}
+-      } unit_list_iterate_end;
+-
+-      if (found) {
+-	/* TRANS: "Chance to win: A:95% D:46%" */
+-	astr_add_line(&str, _("Chance to win: A:%d%% D:%d%%"),
+-		      att_chance, def_chance);	
+-      }
+-    } unit_list_iterate_end;
+-
+-    /* TRANS: A is attack power, D is defense power, FP is firepower,
+-     * HP is hitpoints (current and max). */
+-    astr_add_line(&str, _("A:%d D:%d FP:%d HP:%d/%d"),
+-                  ptype->attack_strength, ptype->defense_strength,
+-                  ptype->firepower, punit->hp, ptype->hp);
+-    {
+-      const char *veteran_name =
+-        utype_veteran_name_translation(ptype, punit->veteran);
+-      if (veteran_name) {
+-        astr_add(&str, " (%s)", veteran_name);
+-      }
+-    }
++    combat_odds_to_astr(&str, get_units_in_focus(), ptile, punit, "%%");
+ 
+     if (unit_owner(punit) == client_player()
+         || client_is_global_observer()) {
+diff --git a/common/clientutils.c b/common/clientutils.c
+index a2024a7d61..93540e3dba 100644
+--- a/common/clientutils.c
++++ b/common/clientutils.c
+@@ -19,6 +19,7 @@
+ #include "astring.h"
+ 
+ /* common */
++#include "combat.h"
+ #include "extras.h"
+ #include "fc_types.h"
+ #include "game.h"  /* FIXME it's extra_type_iterate that needs this really */
+@@ -318,3 +319,53 @@ const char *concat_tile_activity_text(struct tile *ptile)
+ 
+   return astr_str(&str);
+ }
++
++/************************************************************************//**
++  Add lines about the combat odds to the str.
++****************************************************************************/
++void combat_odds_to_astr(struct astring *str, struct unit_list *punits,
++                         const struct tile *ptile, const struct unit *punit,
++                         const char *pct_str)
++{
++  const struct unit_type *ptype = unit_type_get(punit);
++
++  unit_list_iterate(punits, pfocus) {
++    int att_chance = FC_INFINITY, def_chance = FC_INFINITY;
++    bool found = FALSE;
++
++    unit_list_iterate(ptile->units, tile_unit) {
++      if (unit_owner(tile_unit) != unit_owner(pfocus)) {
++        int att = unit_win_chance(pfocus, tile_unit, NULL) * 100;
++        int def = (1.0 - unit_win_chance(tile_unit, pfocus,
++                                         NULL)) * 100;
++
++        found = TRUE;
++
++        /* Presumably the best attacker and defender will be used. */
++        att_chance = MIN(att, att_chance);
++        def_chance = MIN(def, def_chance);
++      }
++    } unit_list_iterate_end;
++
++    if (found) {
++      /* TRANS: "Chance to win: A:95% D:46%" - "%s" are just the percent signs. */
++      astr_add_line(str, _("Chance to win: A:%d%s D:%d%s"),
++                    att_chance, pct_str, def_chance, pct_str);
++    }
++  } unit_list_iterate_end;
++
++  /* TRANS: A is attack power, D is defense power, FP is firepower,
++   * HP is hitpoints (current and max). */
++  astr_add_line(str, _("A:%d D:%d FP:%d HP:%d/%d"),
++                ptype->attack_strength, ptype->defense_strength,
++                ptype->firepower, punit->hp, ptype->hp);
++
++  {
++    const char *veteran_name =
++      utype_veteran_name_translation(ptype, punit->veteran);
++
++    if (veteran_name != NULL) {
++      astr_add(str, " (%s)", veteran_name);
++    }
++  }
++}
+diff --git a/common/clientutils.h b/common/clientutils.h
+index 609cf7498c..ef3308b8c3 100644
+--- a/common/clientutils.h
++++ b/common/clientutils.h
+@@ -20,9 +20,11 @@ extern "C" {
+ /* common */
+ #include "fc_types.h"
+ 
++struct astring;
+ struct extra_type;
+ struct tile;
+ struct unit;
++struct unit_list;
+ 
+ int turns_to_activity_done(const struct tile *ptile,
+                            Activity_type_id act,
+@@ -30,6 +32,10 @@ int turns_to_activity_done(const struct tile *ptile,
+                            const struct unit *pnewunit);
+ const char *concat_tile_activity_text(struct tile *ptile);
+ 
++void combat_odds_to_astr(struct astring *str, struct unit_list *punits,
++                         const struct tile *ptile, const struct unit *punit,
++                         const char *pct_str);
++
+ #ifdef __cplusplus
+ }
+ #endif /* __cplusplus */
+-- 
+2.39.0
+

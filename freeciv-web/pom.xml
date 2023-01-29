@@ -107,8 +107,8 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-                        <!-- Update pending other changes -->
-			<version>1.31.2</version>
+                        <!-- Still outdated -->
+			<version>1.31.5</version>
 		</dependency>
 	</dependencies>
 

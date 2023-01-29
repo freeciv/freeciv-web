@@ -21,6 +21,9 @@
 # 0038-Move-combat-stats-part-of-popup_info_text-to-clientu.patch
 #   Make combat stats text generation available on common/
 #   osdn #46536
+# 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
+#   Warning fix for modern clang
+#   osdn #46556
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
+  "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

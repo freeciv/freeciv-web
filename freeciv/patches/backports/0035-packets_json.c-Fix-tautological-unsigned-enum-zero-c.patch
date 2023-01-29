@@ -1,0 +1,30 @@
+From 50243f594e3960ea886a138088819532627b5d13 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 29 Jan 2023 04:28:09 +0200
+Subject: [PATCH 35/35] packets_json.c: Fix
+ tautological-unsigned-enum-zero-compare warning
+
+See osdn #46556
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/networking/packets_json.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/common/networking/packets_json.c b/common/networking/packets_json.c
+index 2833680a12..0155be7592 100644
+--- a/common/networking/packets_json.c
++++ b/common/networking/packets_json.c
+@@ -160,8 +160,7 @@ void *get_packet_from_connection_json(struct connection *pc,
+     utype.type = utype.itype;
+   }
+ 
+-  if (utype.type < 0
+-      || utype.type >= PACKET_LAST
++  if (utype.type >= PACKET_LAST
+       || (receive_handler = pc->phs.handlers->receive[utype.type]) == NULL) {
+     log_verbose("Received unsupported packet type %d (%s). The connection "
+                 "will be closed now.",
+-- 
+2.39.0
+

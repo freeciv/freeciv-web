@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -289,8 +289,8 @@ function update_tech_tree()
     var tech_things = 0;
     var prunits = get_units_from_tech(tech_id);
     for (var i = 0; i < prunits.length; i++) {
-      var punit = prunits[i];
-      var sprite = sprites[tileset_unit_type_graphic_tag(punit)];
+      var utype = prunits[i];
+      var sprite = sprites[tileset_unit_type_graphic_tag(utype)];
       if (sprite != null) {
         tech_canvas_ctx.drawImage(sprite, x + 50 + ((tech_things++) * 30), y + 23, 28, 24);
       }

@@ -143,7 +143,25 @@ function tileset_extra_graphic_tag(extra)
 **************************************************************************/
 function tileset_unit_type_graphic_tag(utype)
 {
-  return tileset_ruleset_entity_tag_str_or_alt(utype, "unit type");
+  if (tileset_has_tag(utype['graphic_str'] + "_Idle")) {
+    return utype['graphic_str'] + "_Idle";
+  }
+
+  if (tileset_has_tag(utype['graphic_alt'] + "_Idle")) {
+    return utype['graphic_alt'] + "_Idle";
+  }
+
+  console.log("No graphic for unit " + utype['name']);
+  return null;
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic for the unit.
+**************************************************************************/
+function tileset_unit_graphic_tag(punit)
+{
+  /* Currently always uses the default "_Idle" sprite */
+  return tileset_unit_type_graphic_tag(unit_type(punit));
 }
 
 /**************************************************************************
@@ -619,7 +637,7 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
 {
   var unit_offset = get_unit_anim_offset(punit);
   var result = [ get_unit_nation_flag_sprite(punit),
-           {"key" : tileset_unit_type_graphic_tag(unit_type(punit)),
+           {"key" : tileset_unit_graphic_tag(punit),
             "offset_x": unit_offset['x'] + unit_offset_x,
 	    "offset_y" : unit_offset['y'] - unit_offset_y} ];
   var activities = get_unit_activity_sprite(punit);
@@ -642,13 +660,10 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
   if (punit['veteran'] > 0) result.push(get_unit_veteran_sprite(punit));
 
   return result;
-
-
 }
 
-
 /**************************************************************************
-  Return the tileset name of the direction.  This is similar to
+  Return the tileset name of the direction. This is similar to
   dir_get_name but you shouldn't change this or all tilesets will break.
 **************************************************************************/
 function dir_get_tileset_name(dir)
@@ -871,11 +886,10 @@ function get_unit_stack_sprite(punit)
 function get_unit_hp_sprite(punit)
 {
   var hp = punit['hp'];
-  var unit_type = unit_types[punit['type']];
-  var max_hp = unit_type['hp'];
+  var utype = unit_type(punit);
+  var max_hp = utype['hp'];
   var healthpercent = 10 * Math.floor((10 * hp) / max_hp);
   var unit_offset = get_unit_anim_offset(punit);
-
 
   return {"key" : "unit.hp_" + healthpercent,
           "offset_x" : unit_flag_offset_x + -25 + unit_offset['x'],

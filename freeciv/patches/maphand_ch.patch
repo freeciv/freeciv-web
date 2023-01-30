@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2022-10-23 07:27:36.522696472 +0300
-+++ freeciv/common/networking/packets.def	2022-10-23 07:28:49.539369332 +0300
-@@ -2422,3 +2422,12 @@
+--- freeciv/common/networking/packets.def	2023-01-30 01:52:59.092246197 +0200
++++ freeciv/common/networking/packets.def	2023-01-30 01:53:05.896317459 +0200
+@@ -2443,3 +2443,12 @@
    TILE dest;
    UINT32 turns;
  end
@@ -15,8 +15,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2022-10-23 07:27:36.918700116 +0300
-+++ freeciv/server/maphand.c	2022-10-23 07:27:46.622789438 +0300
+--- freeciv/server/maphand.c	2023-01-30 01:52:59.548250975 +0200
++++ freeciv/server/maphand.c	2023-01-30 01:53:41.432688180 +0200
 @@ -16,6 +16,7 @@
  #endif
  
@@ -33,7 +33,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2562,3 +2564,330 @@
+@@ -2589,3 +2591,330 @@
  
    unbuffer_shared_vision(pto);
  }
@@ -41,10 +41,10 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +/**********************************************************************//**
 +  Return a (static) string with a tile's food/prod/trade
 +**************************************************************************/
-+static const char *get_tile_output_text(const struct tile *ptile,
-+                                        struct player *pplayer)
++static void get_tile_output_text(struct astring *str,
++                                 const struct tile *ptile,
++                                 struct player *pplayer)
 +{
-+  static struct astring str = ASTRING_INIT;
 +  int i;
 +  char output_text[O_LAST][16];
 +
@@ -65,13 +65,10 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +  }
 +
-+  astr_clear(&str);
-+  astr_add_line(&str, "%s/%s/%s",
++  astr_add_line(str, _("Food/Prod/Trade: %s/%s/%s"),
 +                output_text[O_FOOD],
 +                output_text[O_SHIELD],
 +                output_text[O_TRADE]);
-+
-+  return astr_str(&str);
 +}
 +
 +/**********************************************************************//**
@@ -128,9 +125,10 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  Text to popup on a middle-click in the mapview.
 +  - copied from /client/text.c
 +**************************************************************************/
-+static const char *web_popup_info_text(struct tile *ptile,
-+                                       struct player *pplayer,
-+                                       struct unit *punit)
++static const void web_popup_info_text(struct astring *str,
++                                      struct tile *ptile,
++                                      struct player *pplayer,
++                                      struct unit *punit)
 +{
 +  const char *activity_text;
 +  struct city *pcity = tile_city(ptile);
@@ -144,25 +142,23 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +     Q_("?nation:Neutral"),
 +     Q_("?city:Peaceful"), Q_("?city:Friendly"), Q_("?city:Mysterious"),
 +     Q_("?city:Friendly(team)")};
-+  static struct astring str = ASTRING_INIT;
 +  char username[MAX_LEN_NAME + 32];
 +  char nation[2 * MAX_LEN_NAME + 32];
 +  int tile_x, tile_y, nat_x, nat_y;
 +
-+  astr_clear(&str);
++  astr_clear(str);
 +  index_to_map_pos(&tile_x, &tile_y, tile_index(ptile));
-+  astr_add_line(&str, _("Location: (%d, %d) [%d]"),
++  astr_add_line(str, _("Location: (%d, %d) [%d]"),
 +                tile_x, tile_y, tile_continent(ptile));
 +  index_to_native_pos(&nat_x, &nat_y, tile_index(ptile));
-+  astr_add_line(&str, _("Native coordinates: (%d, %d)"),
++  astr_add_line(str, _("Native coordinates: (%d, %d)"),
 +                nat_x, nat_y);
 +
-+  astr_add_line(&str, _("Terrain: %s"),  tile_get_info_text(ptile, TRUE, 0));
-+  astr_add_line(&str, _("Food/Prod/Trade: %s"),
-+		get_tile_output_text(ptile, pplayer));
++  astr_add_line(str, _("Terrain: %s"),  tile_get_info_text(ptile, TRUE, 0));
++  get_tile_output_text(str, ptile, pplayer);
 +  extra_type_by_cause_iterate(EC_HUT, pextra) {
 +    if (tile_has_extra(ptile, pextra)) {
-+      astr_add_line(&str, "%s", extra_name_translation(pextra));
++      astr_add_line(str, "%s", extra_name_translation(pextra));
 +    }
 +  } extra_type_by_cause_iterate_end;
 +
@@ -173,10 +169,10 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    get_full_nation(nation, sizeof(nation), owner);
 +
 +    if (NULL != pplayer && owner == pplayer) {
-+      astr_add_line(&str, _("Our territory"));
++      astr_add_line(str, _("Our territory"));
 +    } else if (NULL != owner && NULL == pplayer) {
 +      /* TRANS: "Territory of <username> (<nation + team>)" */
-+      astr_add_line(&str, _("Territory of %s (%s)"), username, nation);
++      astr_add_line(str, _("Territory of %s (%s)"), username, nation);
 +    } else if (NULL != owner) {
 +      struct player_diplstate *ds = player_diplstate_get(pplayer,
 +                                                         owner);
@@ -184,7 +180,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +      if (ds->type == DS_CEASEFIRE) {
 +        int turns = ds->turns_left;
 +
-+        astr_add_line(&str,
++        astr_add_line(str,
 +                      /* TRANS: "Territory of <username> (<nation + team>)
 +                       * (<number> turn cease-fire)" */
 +                      PL_("Territory of %s (%s) (%d turn cease-fire)",
@@ -196,12 +192,12 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +        /* TRANS: "Territory of <username>
 +         * (<nation + team> | <diplomatic state>)" */
-+        astr_add_line(&str, _("Territory of %s (%s | %s)"),
++        astr_add_line(str, _("Territory of %s (%s | %s)"),
 +                      username, nation,
 +                      diplo_nation_plural_adjectives[type]);
 +      }
 +    } else {
-+      astr_add_line(&str, _("Unclaimed territory"));
++      astr_add_line(str, _("Unclaimed territory"));
 +    }
 +  }
 +
@@ -217,7 +213,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +    if (NULL == pplayer || owner == pplayer) {
 +      /* TRANS: "City: <city name> | <username> (<nation + team>)" */
-+      astr_add_line(&str, _("City: %s | %s (%s)"),
++      astr_add_line(str, _("City: %s | %s (%s)"),
 +                    city_name_get(pcity), username, nation);
 +    } else {
 +      struct player_diplstate *ds
@@ -228,14 +224,14 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +        /* TRANS:  "City: <city name> | <username>
 +         * (<nation + team>, <number> turn cease-fire)" */
-+        astr_add_line(&str, PL_("City: %s | %s (%s, %d turn cease-fire)",
-+                                "City: %s | %s (%s, %d turn cease-fire)",
-+                                turns),
++        astr_add_line(str, PL_("City: %s | %s (%s, %d turn cease-fire)",
++                               "City: %s | %s (%s, %d turn cease-fire)",
++                               turns),
 +                      city_name_get(pcity), username, nation, turns);
 +      } else {
 +        /* TRANS: "City: <city name> | <username>
 +         * (<nation + team>, <diplomatic state>)" */
-+        astr_add_line(&str, _("City: %s | %s (%s, %s)"),
++        astr_add_line(str, _("City: %s | %s (%s, %s)"),
 +                      city_name_get(pcity), username, nation,
 +                      diplo_city_adjectives[ds->type]);
 +      }
@@ -244,16 +240,16 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +      int count = unit_list_size(ptile->units);
 +
 +      if (count > 0) {
-+        astr_add(&str, PL_(" | Occupied with %d unit.",
-+                           " | Occupied with %d units.", count), count);
++        astr_add(str, PL_(" | Occupied with %d unit.",
++                          " | Occupied with %d units.", count), count);
 +      } else {
-+        astr_add(&str, _(" | Not occupied."));
++        astr_add(str, _(" | Not occupied."));
 +      }
 +    } else {
 +      if (city_is_occupied(pcity)) {
-+        astr_add(&str, _(" | Occupied."));
++        astr_add(str, _(" | Occupied."));
 +      } else {
-+        astr_add(&str, _(" | Not occupied."));
++        astr_add(str, _(" | Not occupied."));
 +      }
 +    }
 +    improvement_iterate(pimprove) {
@@ -269,7 +265,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +      astr_build_and_list(&list, improvements, has_improvements);
 +      /* TRANS: %s is a list of "and"-separated improvements. */
-+      astr_add_line(&str, _("   with %s."), astr_str(&list));
++      astr_add_line(str, _("   with %s."), astr_str(&list));
 +      astr_free(&list);
 +    }
 +  }
@@ -278,13 +274,13 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    const char *infratext = get_infrastructure_text(ptile->extras);
 +
 +    if (*infratext != '\0') {
-+      astr_add_line(&str, _("Infrastructure: %s"), infratext);
++      astr_add_line(str, _("Infrastructure: %s"), infratext);
 +    }
 +  }
 +
 +  activity_text = concat_tile_activity_text(ptile);
 +  if (strlen(activity_text) > 0) {
-+    astr_add_line(&str, _("Activity: %s"), activity_text);
++    astr_add_line(str, _("Activity: %s"), activity_text);
 +  }
 +  if (punit != NULL && pcity == NULL) {
 +    struct player *owner = unit_owner(punit);
@@ -299,12 +295,12 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +      if (hcity != NULL) {
 +        /* TRANS: "Unit: <unit type> | <username>
 +         * (<nation + team>, <homecity>)" */
-+        astr_add_line(&str, _("Unit: %s | %s (%s, %s)"),
++        astr_add_line(str, _("Unit: %s | %s (%s, %s)"),
 +                      utype_name_translation(ptype), username,
 +                      nation, city_name_get(hcity));
 +      } else {
 +        /* TRANS: "Unit: <unit type> | <username> (<nation + team>)" */
-+        astr_add_line(&str, _("Unit: %s | %s (%s)"),
++        astr_add_line(str, _("Unit: %s | %s (%s)"),
 +                      utype_name_translation(ptype), username, nation);
 +      }
 +    } else if (NULL != owner) {
@@ -315,15 +311,15 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +        /* TRANS:  "Unit: <unit type> | <username> (<nation + team>,
 +         * <number> turn cease-fire)" */
-+        astr_add_line(&str, PL_("Unit: %s | %s (%s, %d turn cease-fire)",
-+                                "Unit: %s | %s (%s, %d turn cease-fire)",
-+                                turns),
++        astr_add_line(str, PL_("Unit: %s | %s (%s, %d turn cease-fire)",
++                               "Unit: %s | %s (%s, %d turn cease-fire)",
++                               turns),
 +                      utype_name_translation(ptype),
 +                      username, nation, turns);
 +      } else {
 +        /* TRANS: "Unit: <unit type> | <username> (<nation + team>,
 +         * <diplomatic state>)" */
-+        astr_add_line(&str, _("Unit: %s | %s (%s, %s)"),
++        astr_add_line(str, _("Unit: %s | %s (%s, %s)"),
 +                      utype_name_translation(ptype), username, nation,
 +                      diplo_city_adjectives[ds->type]);
 +      }
@@ -331,23 +327,21 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +    if (unit_owner(punit) == pplayer) {
 +      /* Show bribe cost for own units. */
-+      astr_add_line(&str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
++      astr_add_line(str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
 +    } else {
 +      /* We can only give an (lower) boundary for units of other players. */
-+      astr_add_line(&str, _("Estimated bribe cost: > %d"),
++      astr_add_line(str, _("Estimated bribe cost: > %d"),
 +                    unit_bribe_cost(punit, pplayer));
 +    }
 +
 +    if ((NULL == pplayer || owner == pplayer)
 +        && unit_list_size(ptile->units) >= 2) {
 +      /* TRANS: "5 more" units on this tile */
-+      astr_add(&str, _("  (%d more)"), unit_list_size(ptile->units) - 1);
++      astr_add(str, _("  (%d more)"), unit_list_size(ptile->units) - 1);
 +    }
 +  }
 +
-+  astr_break_lines(&str, LINE_BREAK);
-+
-+  return astr_str(&str);
++  astr_break_lines(str, LINE_BREAK);
 +}
 +
 +/**********************************************************************//**
@@ -356,17 +350,23 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +void handle_web_info_text_req(struct player *pplayer, int loc,
 +                              int visible_unit_id)
 +{
++  static struct astring str = ASTRING_INIT;
 +  struct tile *ptile = index_to_tile(&(wld.map), loc);
 +  struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
-+  const char *info_text = web_popup_info_text(ptile, pplayer, punit);
++  const char *info_text;
++
++  web_popup_info_text(&str, ptile, pplayer, punit);
++  info_text = astr_str(&str);
 +
 +  conn_list_iterate(pplayer->connections, pconn) {
 +    dsend_packet_web_info_text_message(pconn, info_text);
 +  } conn_list_iterate_end;
++
++  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2022-10-23 07:27:36.914700079 +0300
-+++ freeciv/server/maphand.h	2022-10-23 07:27:46.622789438 +0300
+--- freeciv/server/maphand.h	2023-01-30 01:52:59.548250975 +0200
++++ freeciv/server/maphand.h	2023-01-30 01:53:05.896317459 +0200
 @@ -141,4 +141,7 @@
  void give_distorted_map(struct player *pfrom, struct player *pto,
                          int prob, bool reveal_cities);

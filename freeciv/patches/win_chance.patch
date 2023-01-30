@@ -1,6 +1,6 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-01-24 21:14:25.320946490 +0200
-+++ freeciv/common/networking/packets.def	2023-01-24 21:14:38.165064480 +0200
+--- freeciv/common/networking/packets.def	2023-01-30 01:55:01.161511643 +0200
++++ freeciv/common/networking/packets.def	2023-01-30 01:55:09.325595368 +0200
 @@ -2447,6 +2447,7 @@
  PACKET_WEB_INFO_TEXT_REQ = 289; cs, dsend, handle-via-fields
    TILE loc;
@@ -10,19 +10,19 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
  
  PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields, no-handle
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-01-24 21:14:26.944961415 +0200
-+++ freeciv/server/maphand.c	2023-01-24 21:14:38.401066648 +0200
-@@ -2684,7 +2684,8 @@
- **************************************************************************/
- static const char *web_popup_info_text(struct tile *ptile,
-                                        struct player *pplayer,
--                                       struct unit *punit)
-+                                       struct unit *punit,
-+                                       struct unit *funit)
+--- freeciv/server/maphand.c	2023-01-30 01:55:01.521515337 +0200
++++ freeciv/server/maphand.c	2023-01-30 01:55:28.009786590 +0200
+@@ -2682,7 +2682,8 @@
+ static const void web_popup_info_text(struct astring *str,
+                                       struct tile *ptile,
+                                       struct player *pplayer,
+-                                      struct unit *punit)
++                                      struct unit *punit,
++                                      struct unit *funit)
  {
    const char *activity_text;
    struct city *pcity = tile_city(ptile);
-@@ -2843,6 +2844,7 @@
+@@ -2839,6 +2840,7 @@
    if (punit != NULL && pcity == NULL) {
      struct player *owner = unit_owner(punit);
      const struct unit_type *ptype = unit_type_get(punit);
@@ -30,7 +30,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  
      get_full_username(username, sizeof(username), owner);
      get_full_nation(nation, sizeof(nation), owner);
-@@ -2883,6 +2885,20 @@
+@@ -2879,6 +2881,20 @@
        }
      }
  
@@ -44,31 +44,35 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    /* FIXME: Current omniscient server-side implementation
 +     *        gives web-client more accurate data than what
 +     *        desktop client can get. */
-+    combat_odds_to_astr(&str, focus_unit_list, ptile, punit, "%25");
++    combat_odds_to_astr(str, focus_unit_list, ptile, punit, "%25");
 +
 +    unit_list_destroy(focus_unit_list);
 +
      if (unit_owner(punit) == pplayer) {
        /* Show bribe cost for own units. */
-       astr_add_line(&str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
-@@ -2908,11 +2924,12 @@
+       astr_add_line(str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
+@@ -2902,14 +2918,16 @@
    Handle client request for tile information text.
  **************************************************************************/
  void handle_web_info_text_req(struct player *pplayer, int loc,
 -                              int visible_unit_id)
 +                              int visible_unit_id, int focus_unit_id)
  {
+   static struct astring str = ASTRING_INIT;
    struct tile *ptile = index_to_tile(&(wld.map), loc);
    struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
--  const char *info_text = web_popup_info_text(ptile, pplayer, punit);
-+  struct unit *funit = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
-+  const char *info_text = web_popup_info_text(ptile, pplayer, punit, funit);
++  struct unit *funit
++    = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
+   const char *info_text;
+ 
+-  web_popup_info_text(&str, ptile, pplayer, punit);
++  web_popup_info_text(&str, ptile, pplayer, punit, funit);
+   info_text = astr_str(&str);
  
    conn_list_iterate(pplayer->connections, pconn) {
-     dsend_packet_web_info_text_message(pconn, info_text);
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-01-24 21:14:27.092962774 +0200
-+++ freeciv/server/maphand.h	2023-01-24 21:14:39.005072193 +0200
+--- freeciv/server/maphand.h	2023-01-30 01:55:01.517515296 +0200
++++ freeciv/server/maphand.h	2023-01-30 01:55:09.325595368 +0200
 @@ -142,6 +142,6 @@
                          int prob, bool reveal_cities);
  

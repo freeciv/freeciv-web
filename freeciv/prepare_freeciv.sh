@@ -3,9 +3,6 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "${DIR}"
 
-# Fix line endings on Windows
-sed -i 's/\r$//' freeciv-web.project
-
 . ./version.txt
 
 # Allow the user to override how Freeciv is downloaded.

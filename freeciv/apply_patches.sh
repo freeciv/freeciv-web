@@ -70,7 +70,7 @@ declare -a PATCHLIST=(
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  $(ls -1 patches/local/*.patch | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
+  $(ls -1 patches/local/*.patch 2>/dev/null | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
 )
 
 apply_patch() {

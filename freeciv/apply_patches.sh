@@ -21,6 +21,9 @@
 # 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
 #   Warning fix for modern clang
 #   osdn #46556
+# 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
+#   AI regression fix
+#   osdn #46617
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
+  "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "meson_webperimental"
   "city-naming-change"
   "metachange"

@@ -1,0 +1,80 @@
+From ac4ebe22c38ea7e615ceadbb1d27936f9dab108b Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 30 Jan 2023 00:25:55 +0200
+Subject: [PATCH 24/35] Fix cases where AI didn't consider that building might
+ provide impr flag
+
+See osdn #46617
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ ai/default/daicity.c | 32 ++++++++++++++++++++++++--------
+ 1 file changed, 24 insertions(+), 8 deletions(-)
+
+diff --git a/ai/default/daicity.c b/ai/default/daicity.c
+index aefa29f944..d48752c89f 100644
+--- a/ai/default/daicity.c
++++ b/ai/default/daicity.c
+@@ -1686,15 +1686,15 @@ static void adjust_improvement_wants_by_effects(struct ai_type *ait,
+     requirement_vector_iterate(&peffect->reqs, preq) {
+       /* Check if all the requirements for the currently evaluated effect
+        * are met, except for having the building that we are evaluating. */
+-      if (VUT_IMPROVEMENT == preq->source.kind
+-	  && preq->source.value.building == pimprove) {
+-	mypreq = preq;
++      if (universal_fulfills_requirement(preq, &source) == ITF_YES) {
++        mypreq = preq;
+         present = preq->present;
+         continue;
+       }
++
+       if (!is_req_active(&effect_ctxt, NULL, preq, RPT_POSSIBLE)) {
+-	active = FALSE;
+-	if (VUT_ADVANCE == preq->source.kind && preq->present) {
++        active = FALSE;
++        if (VUT_ADVANCE == preq->source.kind && preq->present) {
+           /* This missing requirement is a missing tech requirement.
+            * This will be for some additional effect
+            * (For example, in the default ruleset, Mysticism increases
+@@ -1774,8 +1774,7 @@ static void adjust_improvement_wants_by_effects(struct ai_type *ait,
+       enum req_range range = REQ_RANGE_LOCAL;
+ 
+       requirement_vector_iterate(&(enabler->target_reqs), preq) {
+-        if (VUT_IMPROVEMENT == preq->source.kind
+-            && preq->source.value.building == pimprove) {
++        if (universal_fulfills_requirement(preq, &source) == ITF_YES) {
+           /* Pretend the building is there */
+           if (preq->present) {
+             range = preq->range; /* Assumption: Max one pr vector */
+@@ -2161,10 +2160,27 @@ Impr_type_id dai_find_source_building(struct city *pcity,
+           building = preq->source.value.building;
+ 
+           if (!can_city_build_improvement_now(pcity, building)
+-              || !is_improvement(building)) {          
++              || !is_improvement(building)) {
+             building = NULL;
+             break;
+           }
++        } else if (VUT_IMPR_FLAG == preq->source.kind && preq->present) {
++          /* TODO: Ruleset cache for buildings with specific flag */
++          improvement_iterate(impr) {
++            if (improvement_has_flag(impr, preq->source.value.impr_flag)) {
++              if (can_city_build_improvement_now(pcity, impr)
++                  && is_improvement(impr)) {
++                if (building == NULL) {
++                  building = impr;
++                  break;
++                }
++              }
++            }
++          } improvement_iterate_end;
++
++          if (building == NULL) {
++            break;
++          }
+         } else if (utype != NULL
+                    && !is_req_active(&context, NULL, preq, RPT_POSSIBLE)) {
+           /* Effect requires other kind of unit than what we are interested about */
+-- 
+2.39.0
+

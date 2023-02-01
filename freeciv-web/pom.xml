@@ -107,8 +107,8 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-                        <!-- Update pending other changes -->
-			<version>1.31.2</version>
+                        <!-- Still outdated -->
+			<version>1.31.5</version>
 		</dependency>
 	</dependencies>
 
@@ -154,6 +154,7 @@ Rerun the sync-js-hand.js script.
 				</plugin>
 
 				<plugin>
+                                        <groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.10.1</version>
 					<configuration>
@@ -328,7 +329,7 @@ Rerun the sync-js-hand.js script.
 				<plugin>
 					<groupId>com.github.blutorange</groupId>
 					<artifactId>closure-compiler-maven-plugin</artifactId>
-					<version>2.24.0</version>
+					<version>2.25.0</version>
 					<configuration>
 						<closureLanguageIn>ECMASCRIPT_2019</closureLanguageIn>
 						<closureLanguageOut>ECMASCRIPT_2019</closureLanguageOut>

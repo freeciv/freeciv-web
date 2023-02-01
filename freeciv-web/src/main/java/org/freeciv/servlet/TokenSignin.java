@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
  * Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
  * Copyright (C) 2009-2017 The Freeciv-web project
  *
@@ -26,7 +26,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.json.gson.GsonFactory;
 
 import java.sql.*;
 import java.util.Properties;
@@ -43,10 +43,9 @@ import javax.naming.*;
  * https://developers.google.com/identity/sign-in/web/backend-auth
  */
 public class TokenSignin extends HttpServlet {
-	
-    private static final long serialVersionUID = 1L;
 
-    private static final JacksonFactory jacksonFactory = new JacksonFactory();
+    private static final long serialVersionUID = 1L;
+    private static final GsonFactory gsonFactory = GsonFactory.getDefaultInstance();
     private String google_signin_key;
 
     public void init(ServletConfig config) throws ServletException {
@@ -74,7 +73,7 @@ public class TokenSignin extends HttpServlet {
         }
 
         try {
-            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(GoogleNetHttpTransport.newTrustedTransport(), jacksonFactory)
+            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(GoogleNetHttpTransport.newTrustedTransport(), gsonFactory)
                     .setAudience(Collections.singletonList(google_signin_key))
                     .build();
             GoogleIdToken idToken = verifier.verify(idtoken);

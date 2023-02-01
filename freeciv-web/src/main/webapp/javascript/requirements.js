@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -17,9 +17,7 @@
 
 ***********************************************************************/
 
-
 var requirements = {};
-
 
 /* Range of requirements.
  * Used in the network protocol.
@@ -32,17 +30,17 @@ var requirements = {};
  *  - World contains Alliance contains Player (a requirement we ourselves
  *    have is also within Alliance range). */
 var REQ_RANGE_LOCAL = 0;
-var REQ_RANGE_CADJACENT = 1;
-var REQ_RANGE_ADJACENT = 2;
-var REQ_RANGE_CITY = 3;
-var REQ_RANGE_TRADEROUTE = 4;
-var REQ_RANGE_CONTINENT = 5;
-var REQ_RANGE_PLAYER = 6;
-var REQ_RANGE_TEAM = 7;
-var REQ_RANGE_ALLIANCE = 8;
-var REQ_RANGE_WORLD = 9;
-var REQ_RANGE_COUNT = 10;   /* keep this last */
-
+var REQ_RANGE_TILE = 1;
+var REQ_RANGE_CADJACENT = 2;
+var REQ_RANGE_ADJACENT = 3;
+var REQ_RANGE_CITY = 4;
+var REQ_RANGE_TRADEROUTE = 5;
+var REQ_RANGE_CONTINENT = 6;
+var REQ_RANGE_PLAYER = 7;
+var REQ_RANGE_TEAM = 8;
+var REQ_RANGE_ALLIANCE = 9;
+var REQ_RANGE_WORLD = 10;
+var REQ_RANGE_COUNT = 11;   /* Keep this last */
 
 /****************************************************************************
   Checks the requirement to see if it is active on the given target.
@@ -56,20 +54,20 @@ var REQ_RANGE_COUNT = 10;   /* keep this last */
   player as well as the city itself as the target city.
 ****************************************************************************/
 function is_req_active(target_player,
-		   target_city,
-		   target_building,
-		   target_tile,
-		   target_unittype,
-		   target_output,
-		   target_specialist,
-		   req,
-           prob_type)
+                       target_city,
+                       target_building,
+                       target_tile,
+                       target_unittype,
+                       target_output,
+                       target_specialist,
+                       req,
+                       prob_type)
 {
   var result = TRI_NO;
 
-  /* Note the target may actually not exist.  In particular, effects that
+  /* Note the target may actually not exist. In particular, effects that
    * have a VUT_SPECIAL or VUT_TERRAIN may often be passed to this function
-   * with a city as their target.  In this case the requirement is simply
+   * with a city as their target. In this case the requirement is simply
    * not met. */
   switch (req['kind']) {
   case VUT_NONE:
@@ -128,7 +126,7 @@ function is_req_active(target_player,
   case VUT_EXTRAFLAG:
   case VUT_MINCALFRAG:
   case VUT_SERVERSETTING:
-    //FIXME: implement
+    // FIXME: implement
     console.log("Unimplemented requirement type " + req['kind']);
     break;
   case VUT_COUNT:
@@ -166,27 +164,25 @@ function is_req_active(target_player,
   player as well as the city itself as the target city.
 ****************************************************************************/
 function are_reqs_active(target_player,
-		     target_city,
-		     target_building,
-		     target_tile,
-		     target_unittype,
-		     target_output,
-		     target_specialist,
-		     reqs,
-             prob_type)
+                         target_city,
+                         target_building,
+                         target_tile,
+                         target_unittype,
+                         target_output,
+                         target_specialist,
+                         reqs,
+                         prob_type)
 {
-
   for (var i = 0; i < reqs.length; i++) {
     if (!is_req_active(target_player, target_city, target_building,
-		       target_tile, target_unittype, target_output,
-		       target_specialist,
-		       reqs[i], prob_type)) {
+                       target_tile, target_unittype, target_output,
+                       target_specialist,
+                       reqs[i], prob_type)) {
       return false;
     }
   }
   return true;
 }
-
 
 /****************************************************************************
   Is there a source tech within range of the target?
@@ -207,6 +203,7 @@ function is_tech_in_range(target_player, range, tech)
     console.log("Unimplemented tech requirement range " + range);
     return TRI_MAYBE;
   case REQ_RANGE_LOCAL:
+  case REQ_RANGE_TILE:
   case REQ_RANGE_CADJACENT:
   case REQ_RANGE_ADJACENT:
   case REQ_RANGE_CITY:
@@ -219,7 +216,6 @@ function is_tech_in_range(target_player, range, tech)
   console.log("Invalid tech req range " + range);
   return TRI_MAYBE;
 }
-
 
 /**************************************************************************
   Return the number of shields it takes to build this universal.

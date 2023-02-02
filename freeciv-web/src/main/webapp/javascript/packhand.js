@@ -31,7 +31,7 @@ const REQEST_BACKGROUND_REFRESH = 1;
 const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 
 /* Freeciv Web Client.
-   This file contains the handling-code for packets from the civserver.
+   This file contains the handling-code for packets from the server.
 */
 
 function handle_processing_started(packet)
@@ -57,7 +57,8 @@ function handle_thaw_hint(packet)
 /* 100% */
 function handle_ruleset_terrain(packet)
 {
-  /* FIXME: These two hacks are there since Freeciv-web doesn't support rendering Lake and Glacier correctly. */
+  /* FIXME: These two hacks are there since Freeciv-web doesn't support
+   *        rendering Lake nor Glacier correctly. */
   if (packet['name'] == "Lake") packet['graphic_str'] = packet['graphic_alt'];
   if (packet['name'] == "Glacier") packet['graphic_str'] = "tundra";
   terrains[packet['id']] = packet;
@@ -632,6 +633,7 @@ function handle_ruleset_control(packet)
    *   handle_ruleset_unit_flag
    *   handle_ruleset_unit_class_flag
    *   handle_ruleset_terrain_flag
+   *   handle_ruleset_impr_flag
    *   handle_ruleset_achievement
    *   handle_ruleset_tech_flag
    *   handle_ruleset_nation_sets
@@ -1468,6 +1470,11 @@ function handle_ruleset_unit_bonus(packet)
 }
 
 function handle_ruleset_terrain_flag(packet)
+{
+  /* TODO: implement */
+}
+
+function handle_ruleset_impr_flag(packet)
 {
   /* TODO: implement */
 }

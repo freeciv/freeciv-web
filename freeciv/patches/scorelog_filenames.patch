@@ -1,7 +1,7 @@
 diff -Nurd freeciv/server/report.c freeciv/server/report.c
---- freeciv/server/report.c	2022-12-21 03:53:19.852072979 +0200
-+++ freeciv/server/report.c	2022-12-21 03:53:23.880114096 +0200
-@@ -598,6 +598,7 @@
+--- freeciv/server/report.c	2023-02-02 22:04:38.177451109 +0200
++++ freeciv/server/report.c	2023-02-02 22:05:04.745695201 +0200
+@@ -712,6 +712,7 @@
    return result;
  }
  
@@ -9,7 +9,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  /**********************************************************************//**
    Number of city building units.
  **************************************************************************/
-@@ -616,6 +617,7 @@
+@@ -730,6 +731,7 @@
  
    return result;
  }
@@ -17,7 +17,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  
  /**********************************************************************//**
    Wonder score
-@@ -633,6 +635,7 @@
+@@ -747,6 +749,7 @@
    return pplayer->score.techout;
  }
  
@@ -25,7 +25,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  /**********************************************************************//**
    Literacy score calculated one way. See also get_literacy() to see
    alternative way.
-@@ -641,6 +644,7 @@
+@@ -755,6 +758,7 @@
  {
    return pplayer->score.literacy;
  }
@@ -33,7 +33,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  
  /**********************************************************************//**
    Spaceship score
-@@ -690,6 +694,7 @@
+@@ -804,6 +808,7 @@
    return pplayer->economic.gold;
  }
  
@@ -41,7 +41,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  /**********************************************************************//**
    Tax rate
  **************************************************************************/
-@@ -789,6 +794,7 @@
+@@ -903,6 +908,7 @@
  
    return result;
  }
@@ -49,7 +49,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
  
  /**********************************************************************//**
    Total score
-@@ -1303,6 +1309,10 @@
+@@ -1417,6 +1423,10 @@
      return;
    }
  
@@ -60,7 +60,7 @@ diff -Nurd freeciv/server/report.c freeciv/server/report.c
    score_log = fc_calloc(1, sizeof(*score_log));
    score_log->fp = NULL;
    score_log->last_turn = -1;
-@@ -1362,42 +1372,26 @@
+@@ -1476,42 +1486,26 @@
      char *name;
      int (*get_value) (const struct player *);
    } score_tags[] = {

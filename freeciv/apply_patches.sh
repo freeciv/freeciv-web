@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0036-Correct-memory-handling-on-rename-of-transfered-city.patch
-#   Fix a memory handling bug
-#   osdn #46272
 # 0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type.patch
 #   Alternative Wonders of The World report
 #   osdn #42290
@@ -24,6 +21,9 @@
 # 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
 #   Warning fix for modern clang
 #   osdn #46556
+# 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
+#   AI regression fix
+#   osdn #46617
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -46,12 +46,12 @@
 # included to the repository.
 
 declare -a PATCHLIST=(
-  "backports/0036-Correct-memory-handling-on-rename-of-transfered-city"
   "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
   "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
+  "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "meson_webperimental"
   "city-naming-change"
   "metachange"
@@ -70,7 +70,7 @@ declare -a PATCHLIST=(
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"
   "endgame-mapimg"
-  $(ls -1 patches/local/*.patch | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
+  $(ls -1 patches/local/*.patch 2>/dev/null | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
 )
 
 apply_patch() {

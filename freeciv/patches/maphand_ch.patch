@@ -1,6 +1,6 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-01-30 01:52:59.092246197 +0200
-+++ freeciv/common/networking/packets.def	2023-01-30 01:53:05.896317459 +0200
+--- freeciv/common/networking/packets.def	2023-01-30 06:54:45.859347655 +0200
++++ freeciv/common/networking/packets.def	2023-01-30 06:54:56.895466267 +0200
 @@ -2443,3 +2443,12 @@
    TILE dest;
    UINT32 turns;
@@ -15,8 +15,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-01-30 01:52:59.548250975 +0200
-+++ freeciv/server/maphand.c	2023-01-30 01:53:41.432688180 +0200
+--- freeciv/server/maphand.c	2023-01-30 06:54:46.207351401 +0200
++++ freeciv/server/maphand.c	2023-01-30 06:54:56.895466267 +0200
 @@ -16,6 +16,7 @@
  #endif
  
@@ -33,9 +33,9 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2589,3 +2591,330 @@
- 
-   unbuffer_shared_vision(pto);
+@@ -2609,3 +2611,330 @@
+     pcity->specialists[DEFAULT_SPECIALIST]++;
+   }
  }
 +
 +/**********************************************************************//**
@@ -365,14 +365,13 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-01-30 01:52:59.548250975 +0200
-+++ freeciv/server/maphand.h	2023-01-30 01:53:05.896317459 +0200
-@@ -141,4 +141,7 @@
- void give_distorted_map(struct player *pfrom, struct player *pto,
-                         int prob, bool reveal_cities);
+--- freeciv/server/maphand.h	2023-01-30 06:54:46.207351401 +0200
++++ freeciv/server/maphand.h	2023-01-30 06:55:32.639847865 +0200
+@@ -144,4 +144,7 @@
+ void tile_change_side_effects(struct tile *ptile)
+   fc__attribute((nonnull (1)));
  
--#endif  /* FC__MAPHAND_H */
 +void handle_web_info_text_req(struct player *pplayer, int loc,
 +                              int visible_unit_id);
 +
-+#endif /* FC__MAPHAND_H */
+ #endif /* FC__MAPHAND_H */

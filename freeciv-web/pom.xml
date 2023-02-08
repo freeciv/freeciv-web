@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>9.12.0</version>
+			<version>9.14.1</version>
 		</dependency>
 
 		<dependency>
@@ -97,7 +97,8 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
-			<version>2.1.2</version>
+                        <!-- Still not latest -->
+                        <version>2.1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
@@ -107,8 +108,8 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-                        <!-- Still outdated -->
-			<version>1.31.5</version>
+                        <!-- Still not latest -->
+                        <version>1.35.2</version>
 		</dependency>
 	</dependencies>
 
@@ -119,7 +120,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>3.1.0</version>
+                                        <version>3.2.1</version>
 					<executions>
 						<execution>
 							<id>enforce-files-exist</id>
@@ -150,7 +151,7 @@ Rerun the sync-js-hand.js script.
 					<groupId>org.flywaydb</groupId>
 					<artifactId>flyway-maven-plugin</artifactId>
                                         <!-- Outdated -->
-					<version>7.15.0</version>
+                                        <version>8.0.5</version>
 				</plugin>
 
 				<plugin>

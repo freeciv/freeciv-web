@@ -47,7 +47,6 @@ declare -a PATCHLIST=(
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "meson_webperimental"
-  "city-naming-change"
   "metachange"
   "text_fixes"
   "freeciv-svn-webclient-changes"

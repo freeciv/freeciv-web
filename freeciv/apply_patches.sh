@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type.patch
-#   Alternative Wonders of The World report
-#   osdn #42290
 # 0013-Update-founder-information-of-cities-when-a-player-r.patch
 #   Memory corruption fix on player removal
 #   osdn #46503
@@ -46,7 +43,6 @@
 # included to the repository.
 
 declare -a PATCHLIST=(
-  "backports/0060-Add-REPORT_WONDERS_OF_THE_WORLD_LONG-type"
   "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"

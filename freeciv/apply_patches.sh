@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0013-Update-founder-information-of-cities-when-a-player-r.patch
-#   Memory corruption fix on player removal
-#   osdn #46503
 # 0032-Add-city-tile-output-to-city-web-addition-packet.patch
 #   Replace former custom freeciv-web patch by better protocol
 #   to transfer tile output information
@@ -43,7 +40,6 @@
 # included to the repository.
 
 declare -a PATCHLIST=(
-  "backports/0013-Update-founder-information-of-cities-when-a-player-r"
   "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"

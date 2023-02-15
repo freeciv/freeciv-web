@@ -17,6 +17,9 @@
 # 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
 #   Collection of Lua upstream bug fixes
 #   osdn #46492
+# 0001-Add-Floridian-nation.patch
+#   Add Florida as nation
+#   osdn #46657
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -40,6 +43,7 @@
 
 declare -a GIT_PATCHLIST=(
   "backports/0031-Meson-Install-luik-flag"
+  "backports/0001-Add-Floridian-nation"
 )
 
 declare -a PATCHLIST=(

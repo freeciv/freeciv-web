@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0038-Move-combat-stats-part-of-popup_info_text-to-clientu.patch
-#   Make combat stats text generation available on common/
-#   osdn #46536
 # 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
 #   Warning fix for modern clang
 #   osdn #46556
@@ -43,7 +40,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "meson_webperimental"

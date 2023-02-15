@@ -14,6 +14,9 @@
 # 0031-Meson-Install-luik-flag.patch
 #   Complete addition of Liege nation
 #   osdn #46615
+# 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
+#   Collection of Lua upstream bug fixes
+#   osdn #46492
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -42,6 +45,7 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
+  "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
   "meson_webperimental"
   "metachange"
   "text_fixes"

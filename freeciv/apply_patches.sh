@@ -20,6 +20,9 @@
 # 0001-Add-Floridian-nation.patch
 #   Add Florida as nation
 #   osdn #46657
+# 0027-Add-name-parameter-missing-from-some-timer_new-calls
+#   Fix functions calls with random memory as parameters
+#   osdn #47356
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -50,6 +53,7 @@ declare -a PATCHLIST=(
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
+  "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "meson_webperimental"
   "metachange"
   "text_fixes"

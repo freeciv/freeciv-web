@@ -1,0 +1,27 @@
+From 831245ff199edbcea6b3d7695ca8a8d5fe5a7b07 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 28 Jan 2023 21:03:42 +0200
+Subject: [PATCH 31/35] Meson: Install luik flag
+
+See osdn #46615
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meson.build b/meson.build
+index 8c5704887c..ab72526b58 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2164,6 +2164,7 @@ flags = [
+   'lippe',
+   'lithuania',
+   'lorraine',
++  'luik',
+   'luna',
+   'lusatia',
+   'luwian',
+-- 
+2.39.0
+

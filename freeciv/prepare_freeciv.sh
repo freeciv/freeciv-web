@@ -3,6 +3,8 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 cd "${DIR}"
 
+export GIT_PATCHING="yes"
+
 . ./version.txt
 
 # Allow the user to override how Freeciv is downloaded.
@@ -12,7 +14,7 @@ else
   DL_FREECIV=dl_freeciv_default.sh
 fi
 
-if ! ./$DL_FREECIV $FCREV ; then
+if ! ./$DL_FREECIV "$FCREV" "$GIT_PATCHING" ; then
   echo "Git checkout failed" >&2
   exit 1
 fi

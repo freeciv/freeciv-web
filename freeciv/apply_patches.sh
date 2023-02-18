@@ -5,10 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0032-Add-city-tile-output-to-city-web-addition-packet.patch
-#   Replace former custom freeciv-web patch by better protocol
-#   to transfer tile output information
-#   osdn #46535
 # 0038-Move-combat-stats-part-of-popup_info_text-to-clientu.patch
 #   Make combat stats text generation available on common/
 #   osdn #46536
@@ -18,6 +14,9 @@
 # 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
 #   AI regression fix
 #   osdn #46617
+# 0031-Meson-Install-luik-flag.patch
+#   Complete addition of Liege nation
+#   osdn #46615
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,13 +38,15 @@
 # to easily apply a temporary debug change that's not meant ever to get
 # included to the repository.
 
+declare -a GIT_PATCHLIST=(
+  "backports/0031-Meson-Install-luik-flag"
+)
+
 declare -a PATCHLIST=(
-  "backports/0032-Add-city-tile-output-to-city-web-addition-packet"
   "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "meson_webperimental"
-  "city-naming-change"
   "metachange"
   "text_fixes"
   "freeciv-svn-webclient-changes"
@@ -65,6 +66,15 @@ declare -a PATCHLIST=(
   $(ls -1 patches/local/*.patch 2>/dev/null | sed -e 's,patches/,,' -e 's,\.patch,,' | sort)
 )
 
+apply_git_patch() {
+  echo "*** Applying $1.patch ***"
+  if ! git -C freeciv apply ../patches/$1.patch ; then
+    echo "APPLYING PATCH $1.patch FAILED!"
+    return 1
+  fi
+  echo "=== $1.patch applied ==="
+}
+
 apply_patch() {
   echo "*** Applying $1.patch ***"
   if ! patch -u -p1 -d freeciv < patches/$1.patch ; then
@@ -80,7 +90,7 @@ if test "$1" != "" ; then
   APPLY_UNTIL="$1"
   au_found=false
 
-  for patch in "${PATCHLIST[@]}"
+  for patch in "${GIT_PATCHLIST[@]} ${PATCHLIST[@]}"
   do
     if test "$patch" = "$APPLY_UNTIL" ; then
       au_found=true
@@ -112,6 +122,23 @@ fi
 sed "s/${ORIGCAPSTR}/${WEBCAPSTR}/" freeciv/fc_version > freeciv/fc_version.tmp
 mv freeciv/fc_version.tmp freeciv/fc_version
 chmod a+x freeciv/fc_version
+
+if test "$GIT_PATCHING" = "yes" ; then
+  for patch in "${GIT_PATCHLIST[@]}"
+  do
+    if test "${patch}.patch" = "$APPLY_UNTIL" ; then
+      echo "$patch not applied as requested to stop"
+      break
+    fi
+    if ! apply_git_patch $patch ; then
+      echo "Patching failed ($patch.patch)" >&2
+      exit 1
+    fi
+  done
+elif test "${GIT_PATCHLIST[@]}" != "" ; then
+  echo "Git patches defined, but git patching is not enabled" >&2
+  exit 1
+fi
 
 for patch in "${PATCHLIST[@]}"
 do

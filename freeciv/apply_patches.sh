@@ -11,9 +11,6 @@
 # 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
 #   AI regression fix
 #   osdn #46617
-# 0031-Meson-Install-luik-flag.patch
-#   Complete addition of Liege nation
-#   osdn #46615
 # 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
 #   Collection of Lua upstream bug fixes
 #   osdn #46492
@@ -45,7 +42,6 @@
 # included to the repository.
 
 declare -a GIT_PATCHLIST=(
-  "backports/0031-Meson-Install-luik-flag"
   "backports/0001-Add-Floridian-nation"
 )
 

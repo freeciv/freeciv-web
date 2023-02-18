@@ -143,7 +143,7 @@ if test "$GIT_PATCHING" = "yes" ; then
       exit 1
     fi
   done
-elif test "${GIT_PATCHLIST[@]}" != "" ; then
+elif test "${GIT_PATCHLIST[0]}" != "" ; then
   echo "Git patches defined, but git patching is not enabled" >&2
   exit 1
 fi

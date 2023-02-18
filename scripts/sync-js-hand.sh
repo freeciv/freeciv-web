@@ -3,7 +3,7 @@
 # -Synchronizes the javascript packet handler (packhand_gen.js)
 #  with the definitions in packets.def.
 # -extracts scenarios and helpdata from Freeciv into Freeciv-web.
-# -copies sound files from Freeciv to Freeciv-web. 
+# -copies sound files from Freeciv to Freeciv-web.
 
 resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
 while [[ $# -gt 0 ]]; do

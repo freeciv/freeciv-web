@@ -33,15 +33,15 @@ fi
 . ./dependency-services-stop.sh
 
 #3. publite2
-ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9 
+ps aux | grep -ie publite2 | awk '{print $2}' | xargs kill -9
 killall -9 freeciv-web
 
 
 #4. freeciv-proxy
-ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9 
+ps aux | grep -ie freeciv-proxy | awk '{print $2}' | xargs kill -9
 
 #5.1 Freeciv-PBEM
-ps aux | grep -ie pbem | awk '{print $2}' | xargs kill -9 
+ps aux | grep -ie pbem | awk '{print $2}' | xargs kill -9
 
 # Clean up server list in metaserver database.
 echo "delete from servers" | mysql -u "${DB_USER}" -p"${DB_PASSWORD}" "${DB_NAME}"

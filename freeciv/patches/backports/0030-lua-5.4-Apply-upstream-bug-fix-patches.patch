@@ -1,0 +1,486 @@
+From 79a852cfee52316e4026585d95368c9918a8ef73 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 13 Feb 2023 00:56:14 +0200
+Subject: [PATCH 30/45] lua-5.4: Apply upstream bug fix patches
+
+See osdn #46492
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ dependencies/lua-5.4/Version.txt    |  5 +++
+ dependencies/lua-5.4/src/lapi.c     |  5 +--
+ dependencies/lua-5.4/src/lcode.c    | 16 +++++---
+ dependencies/lua-5.4/src/lcorolib.c |  4 +-
+ dependencies/lua-5.4/src/ldo.c      | 12 +++---
+ dependencies/lua-5.4/src/lfunc.c    |  5 ++-
+ dependencies/lua-5.4/src/lfunc.h    |  2 +-
+ dependencies/lua-5.4/src/lgc.c      | 63 ++++++++++++++---------------
+ dependencies/lua-5.4/src/lparser.c  | 16 ++++----
+ dependencies/lua-5.4/src/lstate.c   |  3 +-
+ dependencies/lua-5.4/src/lua.h      |  2 +-
+ dependencies/lua-5.4/src/lutf8lib.c | 27 ++++++++-----
+ 12 files changed, 87 insertions(+), 73 deletions(-)
+
+diff --git a/dependencies/lua-5.4/Version.txt b/dependencies/lua-5.4/Version.txt
+index 85c6553a31..6c896e68d3 100644
+--- a/dependencies/lua-5.4/Version.txt
++++ b/dependencies/lua-5.4/Version.txt
+@@ -1,6 +1,11 @@
+ Sources here are from lua-5.4.4
+ (http://www.lua.org/ftp/lua-5.4.4.tar.gz)
+ 
++Upstream bug fixes from https://www.lua.org/bugs.html applied:
++2, 3, 4, 5, 6, 7, 8, 9
++
++Bug fix 1 is not relevant to freeciv.
++
+ Not entire lua distribution directory hierarchy is included here, and
+ some files needed for Freeciv usage have been added.
+ Changes applied to included lua source files are included in freeciv_lua.patch
+diff --git a/dependencies/lua-5.4/src/lapi.c b/dependencies/lua-5.4/src/lapi.c
+index 5ee65792d2..9f1d6a7604 100644
+--- a/dependencies/lua-5.4/src/lapi.c
++++ b/dependencies/lua-5.4/src/lapi.c
+@@ -202,7 +202,7 @@ LUA_API void lua_settop (lua_State *L, int idx) {
+   newtop = L->top + diff;
+   if (diff < 0 && L->tbclist >= newtop) {
+     lua_assert(hastocloseCfunc(ci->nresults));
+-    luaF_close(L, newtop, CLOSEKTOP, 0);
++    newtop = luaF_close(L, newtop, CLOSEKTOP, 0);
+   }
+   L->top = newtop;  /* correct top only after closing any upvalue */
+   lua_unlock(L);
+@@ -215,8 +215,7 @@ LUA_API void lua_closeslot (lua_State *L, int idx) {
+   level = index2stack(L, idx);
+   api_check(L, hastocloseCfunc(L->ci->nresults) && L->tbclist == level,
+      "no variable to close at given level");
+-  luaF_close(L, level, CLOSEKTOP, 0);
+-  level = index2stack(L, idx);  /* stack may be moved */
++  level = luaF_close(L, level, CLOSEKTOP, 0);
+   setnilvalue(s2v(level));
+   lua_unlock(L);
+ }
+diff --git a/dependencies/lua-5.4/src/lcode.c b/dependencies/lua-5.4/src/lcode.c
+index 06425a1db8..cb724a0908 100644
+--- a/dependencies/lua-5.4/src/lcode.c
++++ b/dependencies/lua-5.4/src/lcode.c
+@@ -1391,7 +1391,10 @@ static void finishbinexpval (FuncState *fs, expdesc *e1, expdesc *e2,
+ */
+ static void codebinexpval (FuncState *fs, OpCode op,
+                            expdesc *e1, expdesc *e2, int line) {
+-  int v2 = luaK_exp2anyreg(fs, e2);  /* both operands are in registers */
++  int v2 = luaK_exp2anyreg(fs, e2);  /* make sure 'e2' is in a register */
++  /* 'e1' must be already in a register or it is a constant */
++  lua_assert((VNIL <= e1->k && e1->k <= VKSTR) ||
++             e1->k == VNONRELOC || e1->k == VRELOC);
+   lua_assert(OP_ADD <= op && op <= OP_SHR);
+   finishbinexpval(fs, e1, e2, op, v2, 0, line, OP_MMBIN,
+                   cast(TMS, (op - OP_ADD) + TM_ADD));
+@@ -1478,7 +1481,7 @@ static void codecommutative (FuncState *fs, BinOpr op,
+ 
+ 
+ /*
+-** Code bitwise operations; they are all associative, so the function
++** Code bitwise operations; they are all commutative, so the function
+ ** tries to put an integer constant as the 2nd operand (a K operand).
+ */
+ static void codebitwise (FuncState *fs, BinOpr opr,
+@@ -1486,11 +1489,11 @@ static void codebitwise (FuncState *fs, BinOpr opr,
+   int flip = 0;
+   int v2;
+   OpCode op;
+-  if (e1->k == VKINT && luaK_exp2RK(fs, e1)) {
++  if (e1->k == VKINT && luaK_exp2K(fs, e1)) {
+     swapexps(e1, e2);  /* 'e2' will be the constant operand */
+     flip = 1;
+   }
+-  else if (!(e2->k == VKINT && luaK_exp2RK(fs, e2))) {  /* no constants? */
++  else if (!(e2->k == VKINT && luaK_exp2K(fs, e2))) {  /* no constants? */
+     op = cast(OpCode, opr + OP_ADD);
+     codebinexpval(fs, op, e1, e2, line);  /* all-register opcodes */
+     return;
+@@ -1551,7 +1554,7 @@ static void codeeq (FuncState *fs, BinOpr opr, expdesc *e1, expdesc *e2) {
+     op = OP_EQI;
+     r2 = im;  /* immediate operand */
+   }
+-  else if (luaK_exp2RK(fs, e2)) {  /* 1st expression is constant? */
++  else if (luaK_exp2RK(fs, e2)) {  /* 2nd expression is constant? */
+     op = OP_EQK;
+     r2 = e2->u.info;  /* constant index */
+   }
+@@ -1611,7 +1614,8 @@ void luaK_infix (FuncState *fs, BinOpr op, expdesc *v) {
+     case OPR_SHL: case OPR_SHR: {
+       if (!tonumeral(v, NULL))
+         luaK_exp2anyreg(fs, v);
+-      /* else keep numeral, which may be folded with 2nd operand */
++      /* else keep numeral, which may be folded or used as an immediate
++         operand */
+       break;
+     }
+     case OPR_EQ: case OPR_NE: {
+diff --git a/dependencies/lua-5.4/src/lcorolib.c b/dependencies/lua-5.4/src/lcorolib.c
+index 785a1e81aa..40b880b14d 100644
+--- a/dependencies/lua-5.4/src/lcorolib.c
++++ b/dependencies/lua-5.4/src/lcorolib.c
+@@ -76,7 +76,7 @@ static int luaB_auxwrap (lua_State *L) {
+   if (l_unlikely(r < 0)) {  /* error? */
+     int stat = lua_status(co);
+     if (stat != LUA_OK && stat != LUA_YIELD) {  /* error in the coroutine? */
+-      stat = lua_resetthread(co);  /* close its tbc variables */
++      stat = lua_resetthread(co, L);  /* close its tbc variables */
+       lua_assert(stat != LUA_OK);
+       lua_xmove(co, L, 1);  /* move error message to the caller */
+     }
+@@ -172,7 +172,7 @@ static int luaB_close (lua_State *L) {
+   int status = auxstatus(L, co);
+   switch (status) {
+     case COS_DEAD: case COS_YIELD: {
+-      status = lua_resetthread(co);
++      status = lua_resetthread(co, L);
+       if (status == LUA_OK) {
+         lua_pushboolean(L, 1);
+         return 1;
+diff --git a/dependencies/lua-5.4/src/ldo.c b/dependencies/lua-5.4/src/ldo.c
+index 41db9e2dd5..616709c5ce 100644
+--- a/dependencies/lua-5.4/src/ldo.c
++++ b/dependencies/lua-5.4/src/ldo.c
+@@ -427,14 +427,15 @@ l_sinline void moveresults (lua_State *L, StkId res, int nres, int wanted) {
+       break;
+     default:  /* two/more results and/or to-be-closed variables */
+       if (hastocloseCfunc(wanted)) {  /* to-be-closed variables? */
+-        ptrdiff_t savedres = savestack(L, res);
+         L->ci->callstatus |= CIST_CLSRET;  /* in case of yields */
+         L->ci->u2.nres = nres;
+-        luaF_close(L, res, CLOSEKTOP, 1);
++        res = luaF_close(L, res, CLOSEKTOP, 1);
+         L->ci->callstatus &= ~CIST_CLSRET;
+-        if (L->hookmask)  /* if needed, call hook after '__close's */
++        if (L->hookmask) {  /* if needed, call hook after '__close's */
++          ptrdiff_t savedres = savestack(L, res);
+           rethook(L, L->ci, nres);
+-        res = restorestack(L, savedres);  /* close and hook can move stack */
++          res = restorestack(L, savedres);  /* hook can move stack */
++        }
+         wanted = decodeNresults(wanted);
+         if (wanted == LUA_MULTRET)
+           wanted = nres;  /* we want all results */
+@@ -651,8 +652,7 @@ static int finishpcallk (lua_State *L,  CallInfo *ci) {
+   else {  /* error */
+     StkId func = restorestack(L, ci->u2.funcidx);
+     L->allowhook = getoah(ci->callstatus);  /* restore 'allowhook' */
+-    luaF_close(L, func, status, 1);  /* can yield or raise an error */
+-    func = restorestack(L, ci->u2.funcidx);  /* stack may be moved */
++    func = luaF_close(L, func, status, 1);  /* can yield or raise an error */
+     luaD_seterrorobj(L, status, func);
+     luaD_shrinkstack(L);   /* restore stack size in case of overflow */
+     setcistrecst(ci, LUA_OK);  /* clear original status */
+diff --git a/dependencies/lua-5.4/src/lfunc.c b/dependencies/lua-5.4/src/lfunc.c
+index f5889a21d1..3ed65de2b5 100644
+--- a/dependencies/lua-5.4/src/lfunc.c
++++ b/dependencies/lua-5.4/src/lfunc.c
+@@ -223,9 +223,9 @@ static void poptbclist (lua_State *L) {
+ 
+ /*
+ ** Close all upvalues and to-be-closed variables up to the given stack
+-** level.
++** level. Return restored 'level'.
+ */
+-void luaF_close (lua_State *L, StkId level, int status, int yy) {
++StkId luaF_close (lua_State *L, StkId level, int status, int yy) {
+   ptrdiff_t levelrel = savestack(L, level);
+   luaF_closeupval(L, level);  /* first, close the upvalues */
+   while (L->tbclist >= level) {  /* traverse tbc's down to that level */
+@@ -234,6 +234,7 @@ void luaF_close (lua_State *L, StkId level, int status, int yy) {
+     prepcallclosemth(L, tbc, status, yy);  /* close variable */
+     level = restorestack(L, levelrel);
+   }
++  return level;
+ }
+ 
+ 
+diff --git a/dependencies/lua-5.4/src/lfunc.h b/dependencies/lua-5.4/src/lfunc.h
+index dc1cebccd1..3d296971ec 100644
+--- a/dependencies/lua-5.4/src/lfunc.h
++++ b/dependencies/lua-5.4/src/lfunc.h
+@@ -54,7 +54,7 @@ LUAI_FUNC void luaF_initupvals (lua_State *L, LClosure *cl);
+ LUAI_FUNC UpVal *luaF_findupval (lua_State *L, StkId level);
+ LUAI_FUNC void luaF_newtbcupval (lua_State *L, StkId level);
+ LUAI_FUNC void luaF_closeupval (lua_State *L, StkId level);
+-LUAI_FUNC void luaF_close (lua_State *L, StkId level, int status, int yy);
++LUAI_FUNC StkId luaF_close (lua_State *L, StkId level, int status, int yy);
+ LUAI_FUNC void luaF_unlinkupval (UpVal *uv);
+ LUAI_FUNC void luaF_freeproto (lua_State *L, Proto *f);
+ LUAI_FUNC const char *luaF_getlocalname (const Proto *func, int local_number,
+diff --git a/dependencies/lua-5.4/src/lgc.c b/dependencies/lua-5.4/src/lgc.c
+index 42a73d813a..317ea45081 100644
+--- a/dependencies/lua-5.4/src/lgc.c
++++ b/dependencies/lua-5.4/src/lgc.c
+@@ -1041,7 +1041,25 @@ void luaC_checkfinalizer (lua_State *L, GCObject *o, Table *mt) {
+ ** =======================================================
+ */
+ 
+-static void setpause (global_State *g);
++
++/*
++** Set the "time" to wait before starting a new GC cycle; cycle will
++** start when memory use hits the threshold of ('estimate' * pause /
++** PAUSEADJ). (Division by 'estimate' should be OK: it cannot be zero,
++** because Lua cannot even start with less than PAUSEADJ bytes).
++*/
++static void setpause (global_State *g) {
++  l_mem threshold, debt;
++  int pause = getgcparam(g->gcpause);
++  l_mem estimate = g->GCestimate / PAUSEADJ;  /* adjust 'estimate' */
++  lua_assert(estimate > 0);
++  threshold = (pause < MAX_LMEM / estimate)  /* overflow? */
++            ? estimate * pause  /* no overflow */
++            : MAX_LMEM;  /* overflow; truncate to maximum */
++  debt = gettotalbytes(g) - threshold;
++  if (debt > 0) debt = 0;
++  luaE_setdebt(g, debt);
++}
+ 
+ 
+ /*
+@@ -1285,6 +1303,15 @@ static void atomic2gen (lua_State *L, global_State *g) {
+ }
+ 
+ 
++/*
++** Set debt for the next minor collection, which will happen when
++** memory grows 'genminormul'%.
++*/
++static void setminordebt (global_State *g) {
++  luaE_setdebt(g, -(cast(l_mem, (gettotalbytes(g) / 100)) * g->genminormul));
++}
++
++
+ /*
+ ** Enter generational mode. Must go until the end of an atomic cycle
+ ** to ensure that all objects are correctly marked and weak tables
+@@ -1297,6 +1324,7 @@ static lu_mem entergen (lua_State *L, global_State *g) {
+   luaC_runtilstate(L, bitmask(GCSpropagate));  /* start new cycle */
+   numobjs = atomic(L);  /* propagates all and then do the atomic stuff */
+   atomic2gen(L, g);
++  setminordebt(g);  /* set debt assuming next cycle will be minor */
+   return numobjs;
+ }
+ 
+@@ -1342,15 +1370,6 @@ static lu_mem fullgen (lua_State *L, global_State *g) {
+ }
+ 
+ 
+-/*
+-** Set debt for the next minor collection, which will happen when
+-** memory grows 'genminormul'%.
+-*/
+-static void setminordebt (global_State *g) {
+-  luaE_setdebt(g, -(cast(l_mem, (gettotalbytes(g) / 100)) * g->genminormul));
+-}
+-
+-
+ /*
+ ** Does a major collection after last collection was a "bad collection".
+ **
+@@ -1422,8 +1441,8 @@ static void genstep (lua_State *L, global_State *g) {
+       lu_mem numobjs = fullgen(L, g);  /* do a major collection */
+       if (gettotalbytes(g) < majorbase + (majorinc / 2)) {
+         /* collected at least half of memory growth since last major
+-           collection; keep doing minor collections */
+-        setminordebt(g);
++           collection; keep doing minor collections. */
++        lua_assert(g->lastatomic == 0);
+       }
+       else {  /* bad collection */
+         g->lastatomic = numobjs;  /* signal that last collection was bad */
+@@ -1449,26 +1468,6 @@ static void genstep (lua_State *L, global_State *g) {
+ */
+ 
+ 
+-/*
+-** Set the "time" to wait before starting a new GC cycle; cycle will
+-** start when memory use hits the threshold of ('estimate' * pause /
+-** PAUSEADJ). (Division by 'estimate' should be OK: it cannot be zero,
+-** because Lua cannot even start with less than PAUSEADJ bytes).
+-*/
+-static void setpause (global_State *g) {
+-  l_mem threshold, debt;
+-  int pause = getgcparam(g->gcpause);
+-  l_mem estimate = g->GCestimate / PAUSEADJ;  /* adjust 'estimate' */
+-  lua_assert(estimate > 0);
+-  threshold = (pause < MAX_LMEM / estimate)  /* overflow? */
+-            ? estimate * pause  /* no overflow */
+-            : MAX_LMEM;  /* overflow; truncate to maximum */
+-  debt = gettotalbytes(g) - threshold;
+-  if (debt > 0) debt = 0;
+-  luaE_setdebt(g, debt);
+-}
+-
+-
+ /*
+ ** Enter first sweep phase.
+ ** The call to 'sweeptolive' makes the pointer point to an object
+diff --git a/dependencies/lua-5.4/src/lparser.c b/dependencies/lua-5.4/src/lparser.c
+index a5cd552578..fe693b5718 100644
+--- a/dependencies/lua-5.4/src/lparser.c
++++ b/dependencies/lua-5.4/src/lparser.c
+@@ -674,19 +674,19 @@ static void leaveblock (FuncState *fs) {
+   LexState *ls = fs->ls;
+   int hasclose = 0;
+   int stklevel = reglevel(fs, bl->nactvar);  /* level outside the block */
+-  if (bl->isloop)  /* fix pending breaks? */
++  removevars(fs, bl->nactvar);  /* remove block locals */
++  lua_assert(bl->nactvar == fs->nactvar);  /* back to level on entry */
++  if (bl->isloop)  /* has to fix pending breaks? */
+     hasclose = createlabel(ls, luaS_newliteral(ls->L, "break"), 0, 0);
+-  if (!hasclose && bl->previous && bl->upval)
++  if (!hasclose && bl->previous && bl->upval)  /* still need a 'close'? */
+     luaK_codeABC(fs, OP_CLOSE, stklevel, 0, 0);
+-  fs->bl = bl->previous;
+-  removevars(fs, bl->nactvar);
+-  lua_assert(bl->nactvar == fs->nactvar);
+   fs->freereg = stklevel;  /* free registers */
+   ls->dyd->label.n = bl->firstlabel;  /* remove local labels */
+-  if (bl->previous)  /* inner block? */
+-    movegotosout(fs, bl);  /* update pending gotos to outer block */
++  fs->bl = bl->previous;  /* current block now is previous one */
++  if (bl->previous)  /* was it a nested block? */
++    movegotosout(fs, bl);  /* update pending gotos to enclosing block */
+   else {
+-    if (bl->firstgoto < ls->dyd->gt.n)  /* pending gotos in outer block? */
++    if (bl->firstgoto < ls->dyd->gt.n)  /* still pending gotos? */
+       undefgoto(ls, &ls->dyd->gt.arr[bl->firstgoto]);  /* error */
+   }
+ }
+diff --git a/dependencies/lua-5.4/src/lstate.c b/dependencies/lua-5.4/src/lstate.c
+index 1ffe1a0f71..4b5c100088 100644
+--- a/dependencies/lua-5.4/src/lstate.c
++++ b/dependencies/lua-5.4/src/lstate.c
+@@ -343,9 +343,10 @@ int luaE_resetthread (lua_State *L, int status) {
+ }
+ 
+ 
+-LUA_API int lua_resetthread (lua_State *L) {
++LUA_API int lua_resetthread (lua_State *L, lua_State *from) {
+   int status;
+   lua_lock(L);
++  L->nCcalls = (from) ? getCcalls(from) : 0;
+   status = luaE_resetthread(L, L->status);
+   lua_unlock(L);
+   return status;
+diff --git a/dependencies/lua-5.4/src/lua.h b/dependencies/lua-5.4/src/lua.h
+index e6618392cc..1ae7d10398 100644
+--- a/dependencies/lua-5.4/src/lua.h
++++ b/dependencies/lua-5.4/src/lua.h
+@@ -153,7 +153,7 @@ extern const char lua_ident[];
+ LUA_API lua_State *(lua_newstate) (lua_Alloc f, void *ud);
+ LUA_API void       (lua_close) (lua_State *L);
+ LUA_API lua_State *(lua_newthread) (lua_State *L);
+-LUA_API int        (lua_resetthread) (lua_State *L);
++LUA_API int        (lua_resetthread) (lua_State *L, lua_State *from);
+ 
+ LUA_API lua_CFunction (lua_atpanic) (lua_State *L, lua_CFunction panicf);
+ 
+diff --git a/dependencies/lua-5.4/src/lutf8lib.c b/dependencies/lua-5.4/src/lutf8lib.c
+index e7bf098f6d..3a5b9bc38a 100644
+--- a/dependencies/lua-5.4/src/lutf8lib.c
++++ b/dependencies/lua-5.4/src/lutf8lib.c
+@@ -25,6 +25,9 @@
+ 
+ #define MAXUTF		0x7FFFFFFFu
+ 
++
++#define MSGInvalid	"invalid UTF-8 code"
++
+ /*
+ ** Integer type for decoded UTF-8 values; MAXUTF needs 31 bits.
+ */
+@@ -35,7 +38,8 @@ typedef unsigned long utfint;
+ #endif
+ 
+ 
+-#define iscont(p)	((*(p) & 0xC0) == 0x80)
++#define iscont(c)	(((c) & 0xC0) == 0x80)
++#define iscontp(p)	iscont(*(p))
+ 
+ 
+ /* from strlib */
+@@ -65,7 +69,7 @@ static const char *utf8_decode (const char *s, utfint *val, int strict) {
+     int count = 0;  /* to count number of continuation bytes */
+     for (; c & 0x40; c <<= 1) {  /* while it needs continuation bytes... */
+       unsigned int cc = (unsigned char)s[++count];  /* read next byte */
+-      if ((cc & 0xC0) != 0x80)  /* not a continuation byte? */
++      if (!iscont(cc))  /* not a continuation byte? */
+         return NULL;  /* invalid byte sequence */
+       res = (res << 6) | (cc & 0x3F);  /* add lower 6 bits from cont. byte */
+     }
+@@ -140,7 +144,7 @@ static int codepoint (lua_State *L) {
+     utfint code;
+     s = utf8_decode(s, &code, !lax);
+     if (s == NULL)
+-      return luaL_error(L, "invalid UTF-8 code");
++      return luaL_error(L, MSGInvalid);
+     lua_pushinteger(L, code);
+     n++;
+   }
+@@ -190,16 +194,16 @@ static int byteoffset (lua_State *L) {
+                    "position out of bounds");
+   if (n == 0) {
+     /* find beginning of current byte sequence */
+-    while (posi > 0 && iscont(s + posi)) posi--;
++    while (posi > 0 && iscontp(s + posi)) posi--;
+   }
+   else {
+-    if (iscont(s + posi))
++    if (iscontp(s + posi))
+       return luaL_error(L, "initial position is a continuation byte");
+     if (n < 0) {
+        while (n < 0 && posi > 0) {  /* move back */
+          do {  /* find beginning of previous character */
+            posi--;
+-         } while (posi > 0 && iscont(s + posi));
++         } while (posi > 0 && iscontp(s + posi));
+          n++;
+        }
+      }
+@@ -208,7 +212,7 @@ static int byteoffset (lua_State *L) {
+        while (n > 0 && posi < (lua_Integer)len) {
+          do {  /* find beginning of next character */
+            posi++;
+-         } while (iscont(s + posi));  /* (cannot pass final '\0') */
++         } while (iscontp(s + posi));  /* (cannot pass final '\0') */
+          n--;
+        }
+      }
+@@ -226,15 +230,15 @@ static int iter_aux (lua_State *L, int strict) {
+   const char *s = luaL_checklstring(L, 1, &len);
+   lua_Unsigned n = (lua_Unsigned)lua_tointeger(L, 2);
+   if (n < len) {
+-    while (iscont(s + n)) n++;  /* skip continuation bytes */
++    while (iscontp(s + n)) n++;  /* go to next character */
+   }
+   if (n >= len)  /* (also handles original 'n' being negative) */
+     return 0;  /* no more codepoints */
+   else {
+     utfint code;
+     const char *next = utf8_decode(s + n, &code, strict);
+-    if (next == NULL)
+-      return luaL_error(L, "invalid UTF-8 code");
++    if (next == NULL || iscontp(next))
++      return luaL_error(L, MSGInvalid);
+     lua_pushinteger(L, n + 1);
+     lua_pushinteger(L, code);
+     return 2;
+@@ -253,7 +257,8 @@ static int iter_auxlax (lua_State *L) {
+ 
+ static int iter_codes (lua_State *L) {
+   int lax = lua_toboolean(L, 2);
+-  luaL_checkstring(L, 1);
++  const char *s = luaL_checkstring(L, 1);
++  luaL_argcheck(L, !iscontp(s), 1, MSGInvalid);
+   lua_pushcfunction(L, lax ? iter_auxlax : iter_auxstrict);
+   lua_pushvalue(L, 1);
+   lua_pushinteger(L, 0);
+-- 
+2.39.1
+

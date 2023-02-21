@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0038-Move-combat-stats-part-of-popup_info_text-to-clientu.patch
-#   Make combat stats text generation available on common/
-#   osdn #46536
 # 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
 #   Warning fix for modern clang
 #   osdn #46556
@@ -17,6 +14,15 @@
 # 0031-Meson-Install-luik-flag.patch
 #   Complete addition of Liege nation
 #   osdn #46615
+# 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
+#   Collection of Lua upstream bug fixes
+#   osdn #46492
+# 0001-Add-Floridian-nation.patch
+#   Add Florida as nation
+#   osdn #46657
+# 0027-Add-name-parameter-missing-from-some-timer_new-calls
+#   Fix functions calls with random memory as parameters
+#   osdn #47356
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -40,12 +46,14 @@
 
 declare -a GIT_PATCHLIST=(
   "backports/0031-Meson-Install-luik-flag"
+  "backports/0001-Add-Floridian-nation"
 )
 
 declare -a PATCHLIST=(
-  "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
   "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
   "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
+  "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
+  "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "meson_webperimental"
   "metachange"
   "text_fixes"
@@ -135,7 +143,7 @@ if test "$GIT_PATCHING" = "yes" ; then
       exit 1
     fi
   done
-elif test "${GIT_PATCHLIST[@]}" != "" ; then
+elif test "${GIT_PATCHLIST[0]}" != "" ; then
   echo "Git patches defined, but git patching is not enabled" >&2
   exit 1
 fi

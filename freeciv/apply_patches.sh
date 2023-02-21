@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
-#   Warning fix for modern clang
-#   osdn #46556
-# 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
-#   AI regression fix
-#   osdn #46617
 # 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
 #   Collection of Lua upstream bug fixes
 #   osdn #46492
@@ -46,8 +40,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
-  "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "meson_webperimental"

@@ -72,8 +72,22 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>9.14.1</version>
+                        <version>9.15.0</version>
 		</dependency>
+
+                <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <!-- Outdated -->
+                        <artifactId>flyway-sqlserver</artifactId>
+                        <version>8.3.0</version>
+                </dependency>
+
+                <dependency>
+                       <groupId>org.flywaydb</groupId>
+                        <!-- Outdated -->
+                       <artifactId>flyway-mysql</artifactId>
+                       <version>8.3.0</version>
+                </dependency>
 
 		<dependency>
 			<groupId>org.json</groupId>
@@ -107,8 +121,7 @@
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
-                        <!-- Still not latest -->
-                        <version>2.1.4</version>
+                        <version>2.2.0</version>
 		</dependency>
 	</dependencies>
 
@@ -150,7 +163,7 @@ Rerun the sync-js-hand.js script.
 					<groupId>org.flywaydb</groupId>
 					<artifactId>flyway-maven-plugin</artifactId>
                                         <!-- Outdated -->
-                                        <version>8.1.0</version>
+                                        <version>8.2.3</version>
 				</plugin>
 
 				<plugin>

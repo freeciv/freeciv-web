@@ -1,10 +1,41 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-01-30 06:54:45.859347655 +0200
-+++ freeciv/common/networking/packets.def	2023-01-30 06:54:56.895466267 +0200
-@@ -2443,3 +2443,12 @@
+--- freeciv/common/networking/packets.def	2023-02-22 01:57:17.487343511 +0200
++++ freeciv/common/networking/packets.def	2023-02-22 01:57:31.551472926 +0200
+@@ -2450,3 +2450,13 @@
    TILE dest;
    UINT32 turns;
  end
++
++PACKET_WEB_INFO_TEXT_REQ = 289; cs, dsend, handle-via-fields
++  TILE loc;
++  UNIT visible_unit;
++  UNIT focus_unit;
++end
++
++PACKET_WEB_INFO_TEXT_MESSAGE = 290; sc, dsend, handle-via-fields, no-handle
++  STRING message[MAX_LEN_MSG];
++end
+diff -Nurd freeciv/common/networking/packets.def.orig freeciv/common/networking/packets.def.orig
+--- freeciv/common/networking/packets.def.orig	2023-02-22 01:57:17.487343511 +0200
++++ freeciv/common/networking/packets.def.orig	2023-02-22 01:57:26.335424927 +0200
+@@ -2436,3 +2436,26 @@
+ 
+   BV_ACTIONS utype_actions;
+ end
++
++# Used for showing GOTO path in web client.
++PACKET_WEB_GOTO_PATH_REQ = 287; cs, dsend, handle-via-fields
++  UNIT unit_id;
++  TILE goal;
++end
++
++PACKET_WEB_GOTO_PATH = 288; sc, dsend, handle-via-fields, no-handle
++  UNIT unit_id;
++  UINT16 length;
++  DIRECTION dir[MAX_LEN_ROUTE:length];
++  TILE dest;
++  UINT32 turns;
++end
 +
 +PACKET_WEB_INFO_TEXT_REQ = 289; cs, dsend, handle-via-fields
 +  TILE loc;
@@ -15,8 +46,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-01-30 06:54:46.207351401 +0200
-+++ freeciv/server/maphand.c	2023-01-30 06:54:56.895466267 +0200
+--- freeciv/server/maphand.c	2023-02-22 01:57:17.915347449 +0200
++++ freeciv/server/maphand.c	2023-02-22 01:57:31.551472926 +0200
 @@ -16,6 +16,7 @@
  #endif
  
@@ -33,7 +64,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2609,3 +2611,330 @@
+@@ -2609,3 +2611,348 @@
      pcity->specialists[DEFAULT_SPECIALIST]++;
    }
  }
@@ -128,7 +159,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +static const void web_popup_info_text(struct astring *str,
 +                                      struct tile *ptile,
 +                                      struct player *pplayer,
-+                                      struct unit *punit)
++                                      struct unit *punit,
++                                      struct unit *funit)
 +{
 +  const char *activity_text;
 +  struct city *pcity = tile_city(ptile);
@@ -285,6 +317,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  if (punit != NULL && pcity == NULL) {
 +    struct player *owner = unit_owner(punit);
 +    const struct unit_type *ptype = unit_type_get(punit);
++    struct unit_list *focus_unit_list;
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);
@@ -325,6 +358,20 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +      }
 +    }
 +
++    focus_unit_list = unit_list_new();
++
++    if (funit != NULL) {
++      unit_list_append(focus_unit_list, funit);
++    }
++
++    /* "%25" is HTML encoding for '%' character." */
++    /* FIXME: Current omniscient server-side implementation
++     *        gives web-client more accurate data than what
++     *        desktop client can get. */
++    combat_odds_to_astr(str, focus_unit_list, ptile, punit, "%25");
++
++    unit_list_destroy(focus_unit_list);
++
 +    if (unit_owner(punit) == pplayer) {
 +      /* Show bribe cost for own units. */
 +      astr_add_line(str, _("Bribe cost: %d"), unit_bribe_cost(punit, pplayer));
@@ -348,14 +395,16 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  Handle client request for tile information text.
 +**************************************************************************/
 +void handle_web_info_text_req(struct player *pplayer, int loc,
-+                              int visible_unit_id)
++                              int visible_unit_id, int focus_unit_id)
 +{
 +  static struct astring str = ASTRING_INIT;
 +  struct tile *ptile = index_to_tile(&(wld.map), loc);
 +  struct unit *punit = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
++  struct unit *funit
++    = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
 +  const char *info_text;
 +
-+  web_popup_info_text(&str, ptile, pplayer, punit);
++  web_popup_info_text(&str, ptile, pplayer, punit, funit);
 +  info_text = astr_str(&str);
 +
 +  conn_list_iterate(pplayer->connections, pconn) {
@@ -365,13 +414,13 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-01-30 06:54:46.207351401 +0200
-+++ freeciv/server/maphand.h	2023-01-30 06:55:32.639847865 +0200
+--- freeciv/server/maphand.h	2023-02-22 01:57:17.915347449 +0200
++++ freeciv/server/maphand.h	2023-02-22 01:57:31.551472926 +0200
 @@ -144,4 +144,7 @@
  void tile_change_side_effects(struct tile *ptile)
    fc__attribute((nonnull (1)));
  
 +void handle_web_info_text_req(struct player *pplayer, int loc,
-+                              int visible_unit_id);
++                              int visible_unit_id, int focus_unit_id);
 +
  #endif /* FC__MAPHAND_H */

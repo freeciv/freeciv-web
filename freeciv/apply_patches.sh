@@ -23,7 +23,6 @@
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
-# win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
@@ -54,7 +53,6 @@ declare -a PATCHLIST=(
   "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"
-  "win_chance"
   "longturn"
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"

@@ -1,0 +1,48 @@
+From 9951d2709b31d01d9d81422d627251baadd3af72 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 1 Mar 2023 03:27:51 +0200
+Subject: [PATCH 25/25] Set city names correctly when loading a saved game
+
+Reported anonymously
+
+See osdn #47496
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savegame2.c | 4 ++--
+ server/savegame/savegame3.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/server/savegame/savegame2.c b/server/savegame/savegame2.c
+index 741f818e5b..cc1fa09d81 100644
+--- a/server/savegame/savegame2.c
++++ b/server/savegame/savegame2.c
+@@ -3494,8 +3494,8 @@ static bool sg_load_player_city(struct loaddata *loading, struct player *plr,
+                   "%s duplicates city (%d, %d)", citystr, nat_x, nat_y);
+ 
+   /* Instead of dying, use 'citystr' string for damaged name. */
+-  sz_strlcpy(pcity->name, secfile_lookup_str_default(loading->file, citystr,
+-                                                     "%s.name", citystr));
++  city_name_set(pcity, secfile_lookup_str_default(loading->file, citystr,
++                                                  "%s.name", citystr));
+ 
+   sg_warn_ret_val(secfile_lookup_int(loading->file, &pcity->id, "%s.id",
+                                      citystr), FALSE, "%s", secfile_error());
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index 67484f0c20..9c5c55eeb9 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -4975,8 +4975,8 @@ static bool sg_load_player_city(struct loaddata *loading, struct player *plr,
+                   "%s duplicates city (%d, %d)", citystr, nat_x, nat_y);
+ 
+   /* Instead of dying, use 'citystr' string for damaged name. */
+-  sz_strlcpy(pcity->name, secfile_lookup_str_default(loading->file, citystr,
+-                                                     "%s.name", citystr));
++  city_name_set(pcity, secfile_lookup_str_default(loading->file, citystr,
++                                                  "%s.name", citystr));
+ 
+   sg_warn_ret_val(secfile_lookup_int(loading->file, &pcity->id, "%s.id",
+                                      citystr), FALSE, "%s", secfile_error());
+-- 
+2.39.2
+

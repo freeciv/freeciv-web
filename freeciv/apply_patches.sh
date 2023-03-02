@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c.patch
-#   Warning fix for modern clang
-#   osdn #46556
-# 0024-Fix-cases-where-AI-didn-t-consider-that-building-mig.patch
-#   AI regression fix
-#   osdn #46617
 # 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
 #   Collection of Lua upstream bug fixes
 #   osdn #46492
@@ -29,7 +23,6 @@
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
-# win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # webgl_vision_cheat_temporary is a temporary solution to reveal terrain types to the WebGL client.
 # longturn implements a very basic longturn mode for Freeciv-web.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
@@ -46,8 +39,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
-  "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
   "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "meson_webperimental"
@@ -62,7 +53,6 @@ declare -a PATCHLIST=(
   "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"
-  "win_chance"
   "longturn"
   "load_command_confirmation"
   "webgl_vision_cheat_temporary"

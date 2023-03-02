@@ -2560,10 +2560,11 @@ function key_unit_unload()
 
   for (var i = 0; i < units_on_tile.length; i++) {
     var punit = units_on_tile[i];
-    if (punit['transported'] && punit['transported_by'] > 0 &&
-        punit['owner'] == client.conn.playing.playerno) {
+
+    if (punit['transported'] && punit['transported_by'] > 0
+        && punit['owner'] == client.conn.playing.playerno) {
       request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
-      request_unit_do_action(ACTION_TRANSPORT_ALIGHT, punit['id'],
+      request_unit_do_action(ACTION_TRANSPORT_DEBOARD, punit['id'],
                              punit['transported_by']);
     } else {
       request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);

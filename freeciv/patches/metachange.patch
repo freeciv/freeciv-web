@@ -1,8 +1,7 @@
-Index: freeciv/server/connecthand.c
-===================================================================
---- freeciv/server/connecthand.c	(revision 24891)
-+++ freeciv/server/connecthand.c	(working copy)
-@@ -155,7 +155,7 @@
+diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
+--- freeciv/server/connecthand.c	2023-02-26 12:52:42.309235664 +0200
++++ freeciv/server/connecthand.c	2023-02-26 12:52:51.221312749 +0200
+@@ -163,7 +163,7 @@
      /* First connection
       * Replace "restarting in x seconds" meta message */
      maybe_automatic_meta_message(default_meta_message_string());
@@ -11,11 +10,10 @@ Index: freeciv/server/connecthand.c
    }
  
    /* introduce the server to the connection */
-Index: freeciv/server/meta.c
-===================================================================
---- freeciv/server/meta.c	(revision 24891)
-+++ freeciv/server/meta.c	(working copy)
-@@ -349,6 +364,10 @@
+diff -Nurd freeciv/server/meta.c freeciv/server/meta.c
+--- freeciv/server/meta.c	2023-02-26 12:52:42.309235664 +0200
++++ freeciv/server/meta.c	2023-02-26 12:54:07.365971516 +0200
+@@ -391,6 +391,10 @@
          }
        } players_iterate_end;
  
@@ -23,22 +21,24 @@ Index: freeciv/server/meta.c
 +        humans = conn_list_size(game.est_connections);
 +      }
 +
-       /* send the number of available players. */
+       /* Send the number of available players. */
        netfile_add_form_int(post, "available", players);
        netfile_add_form_int(post, "humans", humans);
-@@ -467,7 +486,7 @@
+@@ -529,8 +533,9 @@
    }
  
-   /* don't allow the user to spam the metaserver with updates */
+   /* Don't allow the user to spam the metaserver with updates */
 -  if (last_send_timer && (timer_read_seconds(last_send_timer)
-+  if (flag != META_FORCE && last_send_timer && (timer_read_seconds(last_send_timer)
-                                           < METASERVER_MIN_UPDATE_INTERVAL)) {
+-                                          < METASERVER_MIN_UPDATE_INTERVAL)) {
++  if (flag != META_FORCE && last_send_timer
++      && (timer_read_seconds(last_send_timer)
++          < METASERVER_MIN_UPDATE_INTERVAL)) {
      if (flag == META_INFO) {
-       want_update = TRUE; /* we couldn't update now, but update a.s.a.p. */
-Index: freeciv/server/meta.h
-===================================================================
---- freeciv/server/meta.h	(revision 24891)
-+++ freeciv/server/meta.h	(working copy)
+       want_update = TRUE; /* We couldn't update now, but update a.s.a.p. */
+     }
+diff -Nurd freeciv/server/meta.h freeciv/server/meta.h
+--- freeciv/server/meta.h	2023-02-26 12:52:42.309235664 +0200
++++ freeciv/server/meta.h	2023-02-26 12:52:51.221312749 +0200
 @@ -19,13 +19,14 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE

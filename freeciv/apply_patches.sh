@@ -14,6 +14,9 @@
 # 0027-Add-name-parameter-missing-from-some-timer_new-calls
 #   Fix functions calls with random memory as parameters
 #   osdn #47356
+# 0025-Set-city-names-correctly-when-loading-a-saved-game.patch
+#   Savegame loading fix
+#   osdn #47496
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -41,6 +44,7 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
+  "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "meson_webperimental"
   "metachange"
   "text_fixes"

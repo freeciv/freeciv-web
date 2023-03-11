@@ -23,6 +23,9 @@
 # 0027-Savegame-Store-counter-information-when-there-is-cou.patch
 #   Fix trouble with savegames from rulesets with no counters
 #   osdn #46499
+# 0030-Stop-civil-war-from-adding-player-above-max_players.patch
+#   Respect server operator set setting
+#   osdn #45587
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -53,6 +56,7 @@ declare -a PATCHLIST=(
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
   "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
+  "backports/0030-Stop-civil-war-from-adding-player-above-max_players"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -86,7 +86,7 @@
                        <groupId>org.flywaydb</groupId>
                         <!-- Outdated -->
                        <artifactId>flyway-mysql</artifactId>
-                       <version>8.5.13</version>
+                       <version>9.0.4</version>
                 </dependency>
 
 		<dependency>

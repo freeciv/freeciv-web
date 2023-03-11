@@ -79,7 +79,7 @@
                         <groupId>org.flywaydb</groupId>
                         <!-- Outdated -->
                         <artifactId>flyway-sqlserver</artifactId>
-                        <version>8.5.13</version>
+                        <version>9.0.4</version>
                 </dependency>
 
                 <dependency>

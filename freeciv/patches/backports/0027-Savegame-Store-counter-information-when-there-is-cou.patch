@@ -1,0 +1,38 @@
+From 753979f5f061eea99ca9bec9e5a113a00d62442c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?S=C5=82awomir=20Lach?= <slawek@lach.art.pl>
+Date: Sun, 26 Feb 2023 18:13:34 +0100
+Subject: [PATCH 27/27] Savegame: Store counter information when there is
+ counters
+
+It was saving unnecessary metadata for zero-length counter lists.
+
+See osdn #46499
+---
+ server/savegame/savegame3.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index 90c0fcef3a..06737e86e9 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -2668,11 +2668,16 @@ static void sg_save_counters(struct savedata *saving)
+   int    i, j, count;
+ 
+   count = counters_get_city_counters_count();
+-  countnames = fc_calloc(count, sizeof(*countnames));
+ 
+   secfile_insert_int(saving->file, count,
+                      "savefile.city_counters_order_size");
+ 
++  if (0 == count) {
++
++    return;
++  }
++
++  countnames = fc_calloc(count, sizeof(*countnames));
+   for (j = 0; j < count; j++) {
+     countnames[j] = counter_rule_name(counter_by_index(j, CTGT_CITY));
+   }
+-- 
+2.39.2
+

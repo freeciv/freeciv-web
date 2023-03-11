@@ -20,6 +20,9 @@
 # 0019-send_server_info_to_metaserver-Read-timer-just-once.patch
 #   Metaserver communication improvement
 #   osdn #46445
+# 0027-Savegame-Store-counter-information-when-there-is-cou.patch
+#   Fix trouble with savegames from rulesets with no counters
+#   osdn #46499
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -49,6 +52,7 @@ declare -a PATCHLIST=(
   "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
+  "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0030-lua-5.4-Apply-upstream-bug-fix-patches.patch
-#   Collection of Lua upstream bug fixes
-#   osdn #46492
 # 0027-Add-name-parameter-missing-from-some-timer_new-calls
 #   Fix functions calls with random memory as parameters
 #   osdn #47356
@@ -50,7 +47,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0030-lua-5.4-Apply-upstream-bug-fix-patches"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"

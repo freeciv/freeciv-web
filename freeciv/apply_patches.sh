@@ -26,6 +26,9 @@
 # 0030-Stop-civil-war-from-adding-player-above-max_players.patch
 #   Respect server operator set setting
 #   osdn #45587
+# 0012-Drop-deprecated-real_activities-array.patch
+#   Fix a memory corruption issue
+#   osdn #46527
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -57,6 +60,7 @@ declare -a PATCHLIST=(
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
   "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
   "backports/0030-Stop-civil-war-from-adding-player-above-max_players"
+  "backports/0012-Drop-deprecated-real_activities-array"
   "meson_webperimental"
   "metachange"
   "text_fixes"

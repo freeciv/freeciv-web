@@ -5,6 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
+# 0038-AI-Correct-which-units-are-considered-as-defender-ro.patch
+#   Fix reversed AI defender selection
+#   osdn #47434
 # 0027-Add-name-parameter-missing-from-some-timer_new-calls
 #   Fix functions calls with random memory as parameters
 #   osdn #47356
@@ -47,6 +50,7 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
+  "backports/0038-AI-Correct-which-units-are-considered-as-defender-ro"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"

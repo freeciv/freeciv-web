@@ -1,0 +1,30 @@
+From aa234f6a1a216e294be0b770c7d2f2ac4a6ef1be Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 19 Mar 2023 20:38:59 +0200
+Subject: [PATCH 27/27] Make research invention array big enough for A_FUTURE
+
+Reported by alain_bkr
+
+See osdn #47574
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/research.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/research.h b/common/research.h
+index b7f609b2ae..a44b54da94 100644
+--- a/common/research.h
++++ b/common/research.h
+@@ -76,7 +76,7 @@ struct research {
+     bool root_reqs_known;
+     bv_techs required_techs;
+     int num_required_techs, bulbs_required, bulbs_researched_saved;
+-  } inventions[A_LAST];
++  } inventions[A_ARRAY_SIZE];
+ 
+   /* Tech goal (similar to worklists; when one tech is researched the next
+    * tech toward the goal will be chosen).  May be A_NONE. */
+-- 
+2.39.2
+

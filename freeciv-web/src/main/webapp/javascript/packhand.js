@@ -366,6 +366,16 @@ function handle_city_rally_point(packet)
 }
 
 /***************************************************************************
+  This packet is related to the city, and sent at the same time
+  as city info. Current implementation is not a clean
+  "city_info follow up packet", though.
+***************************************************************************/
+function handle_city_update_counters(packet)
+{
+  // TODO: Implement
+}
+
+/***************************************************************************
   The web_city_info_addition packet is a follow up packet to
   city_info packet. It gives some information the C clients calculates on
   their own. It is used when the player has full information about a city,

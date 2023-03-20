@@ -29,6 +29,9 @@
 # 0032-Fix-freeciv-manual-failure-with-native_bases-cache.patch
 #   Fix freeciv-manual failure
 #   osdn #47607
+# 0005-Save-map-images-also-on-game-over.patch
+#   Upstream implementation of game-end map image saving
+#   osdn #47551
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -61,6 +64,7 @@ declare -a PATCHLIST=(
   "backports/0012-Drop-deprecated-real_activities-array"
   "backports/0027-Make-research-invention-array-big-enough-for-A_FUTUR"
   "backports/0032-Fix-freeciv-manual-failure-with-native_bases-cache"
+  "backports/0005-Save-map-images-also-on-game-over"
   "meson_webperimental"
   "metachange"
   "text_fixes"

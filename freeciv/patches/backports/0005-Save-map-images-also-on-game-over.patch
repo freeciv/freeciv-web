@@ -1,0 +1,183 @@
+From 773f892d60200cf463a8d7d790406d5500e925a5 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 18 Mar 2023 01:11:43 +0200
+Subject: [PATCH 5/5] Save map images also on game over
+
+See osdn #47551
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/mapimg.c    | 13 ++++++++-----
+ server/srv_main.c  | 37 ++++++++++++++++++++++++++-----------
+ server/stdinhand.c |  9 ++++++---
+ 3 files changed, 40 insertions(+), 19 deletions(-)
+
+diff --git a/common/mapimg.c b/common/mapimg.c
+index ac4df7c88b..abe0a33a4e 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -768,6 +768,7 @@ bool mapimg_define(const char *maparg, bool check)
+   char *mapargs[NUM_MAX_MAPARGS], *mapopts[NUM_MAX_MAPOPTS];
+   int nmapargs, nmapopts, i;
+   bool ret = TRUE;
++  int count;
+ 
+   MAPIMG_ASSERT_RET_VAL(mapimg_initialised(), FALSE);
+ 
+@@ -777,19 +778,20 @@ bool mapimg_define(const char *maparg, bool check)
+   }
+ 
+   if (strlen(maparg) > MAX_LEN_MAPARG) {
+-    /* too long map definition string */
++    /* Too long map definition string */
+     MAPIMG_LOG(_("map definition string too long (max %d characters)"),
+                MAX_LEN_MAPARG);
+     return FALSE;
+   }
+ 
+-  if (mapimg_count() == MAX_NUM_MAPIMG) {
++  count = mapimg_count();
++  if (count == MAX_NUM_MAPIMG) {
+     MAPIMG_LOG(_("maximum number of map definitions reached (%d)"),
+                MAX_NUM_MAPIMG);
+     return FALSE;
+   }
+ 
+-  for (i = 0; i < mapimg_count(); i++) {
++  for (i = 0; i < count; i++) {
+     pmapdef = mapdef_list_get(mapimg.mapdef, i);
+     if (0 == fc_strcasecmp(pmapdef->maparg, maparg)) {
+       MAPIMG_LOG(_("duplicate of map image definition %d ('%s')"), i,
+@@ -800,15 +802,16 @@ bool mapimg_define(const char *maparg, bool check)
+ 
+   pmapdef = mapdef_new(FALSE);
+ 
+-  /* get map options */
++  /* Get map options */
+   nmapargs = get_tokens(maparg, mapargs, NUM_MAX_MAPARGS, ":");
+ 
+   for (i = 0; i < nmapargs; i++) {
+-    /* split map options into variable and value */
++    /* Split map options into variable and value */
+     nmapopts = get_tokens(mapargs[i], mapopts, NUM_MAX_MAPOPTS, "=");
+ 
+     if (nmapopts == 2) {
+       enum mapdef_arg arg = mapdef_arg_by_name(mapopts[0], strcmp);
++
+       if (mapdef_arg_is_valid(arg)) {
+         /* If ret is FALSE an error message is set by mapimg_define_arg(). */
+         ret = mapimg_define_arg(pmapdef, arg, mapopts[1], check);
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 90ae586978..2272a91ecf 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -168,6 +168,8 @@ static struct player *mapimg_server_tile_unit(const struct tile *ptile,
+ static int mapimg_server_plrcolor_count(void);
+ static struct rgbcolor *mapimg_server_plrcolor_get(int i);
+ 
++static void save_all_map_images(void);
++
+ static void handle_observer_ready(struct connection *pconn);
+ 
+ /* command-line arguments to server */
+@@ -2833,7 +2835,6 @@ static void announce_player(struct player *pplayer)
+ **************************************************************************/
+ static void srv_running(void)
+ {
+-  int i;
+   bool is_new_turn = game.info.is_new_game;
+   bool skip_mapimg = !game.info.is_new_game; /* Do not overwrite start-of-turn image */
+   bool need_send_pending_events = !game.info.is_new_game;
+@@ -2923,16 +2924,7 @@ static void srv_running(void)
+ 	save_counter++;
+ 
+         if (!skip_mapimg) {
+-          /* Save map image(s). */
+-          for (i = 0; i < mapimg_count(); i++) {
+-            struct mapdef *pmapdef = mapimg_isvalid(i);
+-            if (pmapdef != NULL) {
+-              mapimg_create(pmapdef, FALSE, game.server.save_name,
+-                            srvarg.saves_pathname);
+-            } else {
+-              log_error("%s", mapimg_error());
+-            }
+-          }
++          save_all_map_images();
+         } else {
+           skip_mapimg = FALSE;
+         }
+@@ -3142,6 +3134,8 @@ static void srv_scores(void)
+      * with no human players. */
+     save_game_auto("Game over", AS_GAME_OVER);
+   }
++
++  save_all_map_images();
+ }
+ 
+ /**********************************************************************//**
+@@ -3812,3 +3806,24 @@ static struct rgbcolor *mapimg_server_plrcolor_get(int i)
+ {
+   return playercolor_get(i);
+ }
++
++/**********************************************************************//**
++  Save all defined map images.
++**************************************************************************/
++static void save_all_map_images(void)
++{
++  int count = mapimg_count();
++  int i;
++
++  /* Save map image(s). */
++  for (i = 0; i < count; i++) {
++    struct mapdef *pmapdef = mapimg_isvalid(i);
++
++    if (pmapdef != NULL) {
++      mapimg_create(pmapdef, FALSE, game.server.save_name,
++                    srvarg.saves_pathname);
++    } else {
++      log_error("%s", mapimg_error());
++    }
++  }
++}
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index 545947037a..02ec6855b5 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
+@@ -5845,19 +5845,22 @@ static bool mapimg_command(struct connection *caller, char *arg, bool check)
+     }
+ 
+     if (strcmp(token[1], "all") == 0) {
++      int count;
++
+       /* 'mapimg create all' */
+       if (check) {
+         goto cleanup;
+       }
+ 
+-      for (id = 0; id < mapimg_count(); id++) {
++      count = mapimg_count();
++      for (id = 0; id < count; id++) {
+         struct mapdef *pmapdef = mapimg_isvalid(id);
+ 
+         if (pmapdef == NULL
+             || !mapimg_create(pmapdef, TRUE, game.server.save_name,
+                               srvarg.saves_pathname)) {
+           cmd_reply(CMD_MAPIMG, caller, C_FAIL,
+-                _("Error saving map image %d: %s."), id, mapimg_error());
++                    _("Error saving map image %d: %s."), id, mapimg_error());
+           ret = FALSE;
+         }
+       }
+@@ -5874,7 +5877,7 @@ static bool mapimg_command(struct connection *caller, char *arg, bool check)
+           || !mapimg_create(pmapdef, TRUE, game.server.save_name,
+                             srvarg.saves_pathname)) {
+         cmd_reply(CMD_MAPIMG, caller, C_FAIL,
+-              _("Error saving map image %d: %s."), id, mapimg_error());
++                  _("Error saving map image %d: %s."), id, mapimg_error());
+         ret = FALSE;
+       }
+     } else {
+-- 
+2.39.2
+

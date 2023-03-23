@@ -1,0 +1,31 @@
+From e925350fbe22fb8ac575079bb1bacd77d20ae3a1 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 19 Feb 2023 03:26:55 +0200
+Subject: [PATCH 38/38] AI: Correct which units are considered as defender role
+ ones
+
+Check was reversed, so only civilians counted as worthy defenders.
+
+See osdn #47434
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ ai/default/daimilitary.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ai/default/daimilitary.c b/ai/default/daimilitary.c
+index f10c3167d6..6e910b999e 100644
+--- a/ai/default/daimilitary.c
++++ b/ai/default/daimilitary.c
+@@ -228,7 +228,7 @@ static int base_assess_defense_unit(struct city *pcity, struct unit *punit,
+   int defense;
+   int fp;
+ 
+-  if (!is_special_unit(punit)) {
++  if (is_special_unit(punit)) {
+     return 0;
+   }
+ 
+-- 
+2.39.1
+

@@ -5,6 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
+# 0038-AI-Correct-which-units-are-considered-as-defender-ro.patch
+#   Fix reversed AI defender selection
+#   osdn #47434
 # 0027-Add-name-parameter-missing-from-some-timer_new-calls
 #   Fix functions calls with random memory as parameters
 #   osdn #47356
@@ -23,6 +26,12 @@
 # 0030-Stop-civil-war-from-adding-player-above-max_players.patch
 #   Respect server operator set setting
 #   osdn #45587
+# 0012-Drop-deprecated-real_activities-array.patch
+#   Fix a memory corruption issue
+#   osdn #46527
+# 0027-Make-research-invention-array-big-enough-for-A_FUTUR.patch
+#   Fix out-of-bounds bug
+#   osdn #47574
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -47,12 +56,15 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
+  "backports/0038-AI-Correct-which-units-are-considered-as-defender-ro"
   "backports/0027-Add-name-parameter-missing-from-some-timer_new-calls"
   "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
   "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
   "backports/0030-Stop-civil-war-from-adding-player-above-max_players"
+  "backports/0012-Drop-deprecated-real_activities-array"
+  "backports/0027-Make-research-invention-array-big-enough-for-A_FUTUR"
   "meson_webperimental"
   "metachange"
   "text_fixes"

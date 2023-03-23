@@ -1,0 +1,148 @@
+From 39745efd92f590feb853696b3645cf6f287f1683 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 18 Mar 2023 05:53:54 +0200
+Subject: [PATCH 12/12] Drop deprecated real_activities array
+
+All activities are real, so use them directly.
+There was an off-by-one write in the old code.
+
+Reported by mortmann
+
+See osdn #46527
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/fc_interface.c |  5 ++---
+ common/requirements.c |  1 -
+ common/unit.c         | 27 ---------------------------
+ common/unit.h         | 11 +++--------
+ common/workertask.c   |  2 +-
+ 5 files changed, 6 insertions(+), 40 deletions(-)
+
+diff --git a/common/fc_interface.c b/common/fc_interface.c
+index d505f248e2..bdeb122f79 100644
+--- a/common/fc_interface.c
++++ b/common/fc_interface.c
+@@ -52,7 +52,8 @@ struct functions *fc_interface_funcs(void)
+ 
+ /************************************************************************//**
+   Initialize libfreeciv.
+-  With check_fc_interface, also tests and initialize the functions.
++
++  @param check_fc_interface  Whether to lso test and initialize functions.
+ ****************************************************************************/
+ void libfreeciv_init(bool check_fc_interface)
+ {
+@@ -74,8 +75,6 @@ void libfreeciv_init(bool check_fc_interface)
+     fc_assert_exit(fc_funcs->gui_color_free);
+ 
+     fc_funcs_defined = TRUE;
+-
+-    setup_real_activities_array();
+   }
+ }
+ 
+diff --git a/common/requirements.c b/common/requirements.c
+index 53cbf21d1e..f4b77b3ee7 100644
+--- a/common/requirements.c
++++ b/common/requirements.c
+@@ -244,7 +244,6 @@ struct universal universal_by_rule_name(const char *kind,
+ static bool activity_is_valid_in_requirement(enum unit_activity act)
+ {
+   return unit_activity_is_valid(act)
+-      && is_real_activity(act)
+       && act != ACTIVITY_SENTRY
+       && act != ACTIVITY_GOTO
+       && act != ACTIVITY_EXPLORE;
+diff --git a/common/unit.c b/common/unit.c
+index 717a46e4e4..64585cb216 100644
+--- a/common/unit.c
++++ b/common/unit.c
+@@ -41,8 +41,6 @@
+ 
+ #include "unit.h"
+ 
+-Activity_type_id real_activities[ACTIVITY_LAST];
+-
+ const Activity_type_id tile_changing_activities[] =
+     { ACTIVITY_PILLAGE, ACTIVITY_GEN_ROAD, ACTIVITY_IRRIGATE, ACTIVITY_MINE,
+       ACTIVITY_BASE, ACTIVITY_CULTIVATE, ACTIVITY_PLANT, ACTIVITY_TRANSFORM,
+@@ -604,31 +602,6 @@ bool can_unit_do_autosettlers(const struct unit *punit)
+   return unit_type_get(punit)->adv.worker;
+ }
+ 
+-/**********************************************************************//**
+-  Setup array of real activities
+-**************************************************************************/
+-void setup_real_activities_array(void)
+-{
+-  Activity_type_id act;
+-  int i = 0;
+-
+-  for (act = 0; act < ACTIVITY_LAST; act++) {
+-    if (is_real_activity(act)) {
+-      real_activities[i++] = act;
+-    }
+-  }
+-
+-  real_activities[i] = ACTIVITY_LAST;
+-}
+-
+-/**********************************************************************//**
+-  Return if given activity really is in game.
+-**************************************************************************/
+-bool is_real_activity(enum unit_activity activity)
+-{
+-  return (activity < ACTIVITY_LAST);
+-}
+-
+ /**********************************************************************//**
+   Return the name of the activity in a static buffer.
+ **************************************************************************/
+diff --git a/common/unit.h b/common/unit.h
+index a4d23d8f21..87362abb74 100644
+--- a/common/unit.h
++++ b/common/unit.h
+@@ -267,12 +267,6 @@ struct unit {
+ #define CHECK_UNIT(punit) /* Do nothing */
+ #endif /* FREECIV_DEBUG */
+ 
+-void setup_real_activities_array(void);
+-
+-bool is_real_activity(enum unit_activity activity);
+-
+-extern Activity_type_id real_activities[ACTIVITY_LAST];
+-
+ #define activity_type_list_iterate(_act_list_, _act_)                        \
+ {                                                                            \
+   int _act_i_;                                                               \
+@@ -286,10 +280,11 @@ extern Activity_type_id real_activities[ACTIVITY_LAST];
+ /* Iterates over the types of unit activity. */
+ #define activity_type_iterate(_act_)					    \
+ {									    \
+-  activity_type_list_iterate(real_activities, _act_)
++  Activity_type_id _act_;                                                   \
++  for (_act_ = 0; _act_ != ACTIVITY_LAST; _act_++) {                        \
+ 
+ #define activity_type_iterate_end                                           \
+-  activity_type_list_iterate_end                                            \
++  }                                                                         \
+ }
+ 
+ extern const Activity_type_id tile_changing_activities[];
+diff --git a/common/workertask.c b/common/workertask.c
+index 57bd8f7039..8693151c9d 100644
+--- a/common/workertask.c
++++ b/common/workertask.c
+@@ -47,7 +47,7 @@ bool worker_task_is_sane(struct worker_task *ptask)
+     return FALSE;
+   }
+ 
+-  if (!is_real_activity(ptask->act)) {
++  if (ptask->act >= ACTIVITY_LAST) {
+     return FALSE;
+   }
+ 
+-- 
+2.39.2
+

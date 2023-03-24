@@ -1,4 +1,4 @@
-/********************************************************************** 
+/***********************************************************************
  Freeciv - Copyright (C) 2009 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -405,6 +405,5 @@ if ('btoa' in window && typeof window.btoa == 'function' &&
   // Overwrite previous function with native call.
   bmp_lib.encode64_ = function(input) {
     return window.btoa(input);
-  }
+  };
 }
-

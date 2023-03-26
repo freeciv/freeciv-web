@@ -1,8 +1,7 @@
-diff --git a/common/mapimg.c b/common/mapimg.c
-index 9303a32b1e..72708cb733 100644
---- a/common/mapimg.c
-+++ b/common/mapimg.c
-@@ -1372,13 +1372,11 @@ bool mapimg_create(struct mapdef *pmapdef, bool force, const char *savename,
+diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
+--- freeciv/common/mapimg.c	2023-03-20 21:20:36.583110690 +0200
++++ freeciv/common/mapimg.c	2023-03-20 21:20:48.383147420 +0200
+@@ -1375,13 +1375,11 @@
    case SHOW_NONE:    /* no player one the map */
    case SHOW_ALL:     /* show all players in one map */
    case SHOW_PLRBV:   /* display player(s) given by bitvector */
@@ -17,40 +16,19 @@ index 9303a32b1e..72708cb733 100644
        ret = FALSE;
      }
      img_destroy(pimg);
-diff --git a/server/srv_main.c b/server/srv_main.c
-index 957496883e..818f2d7205 100644
---- a/server/srv_main.c
-+++ b/server/srv_main.c
-@@ -2877,7 +2877,10 @@ static void srv_running(void)
-           for (i = 0; i < mapimg_count(); i++) {
-             struct mapdef *pmapdef = mapimg_isvalid(i);
-             if (pmapdef != NULL) {
--              mapimg_create(pmapdef, FALSE, game.server.save_name,
-+              char imgfilename[128];
-+              fc_snprintf(imgfilename, sizeof(imgfilename), "map-%d", srvarg.port);
-+
-+              mapimg_create(pmapdef, FALSE, imgfilename,
-                             srvarg.saves_pathname);
-             } else {
-               log_error("%s", mapimg_error());
-@@ -3089,6 +3092,20 @@ static void srv_scores(void)
-      * with no human players. */
-     save_game_auto("Game over", AS_GAME_OVER);
-   }
-+  int i = 0;
-+  for (i = 0; i < mapimg_count(); i++) {
-+    struct mapdef *pmapdef = mapimg_isvalid(i);
-+    if (pmapdef != NULL) {
+diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv/server/srv_main.c	2023-03-20 21:20:36.859111547 +0200
++++ freeciv/server/srv_main.c	2023-03-20 21:25:53.304164329 +0200
+@@ -3831,7 +3831,11 @@
+     struct mapdef *pmapdef = mapimg_isvalid(i);
+ 
+     if (pmapdef != NULL) {
+-      mapimg_create(pmapdef, FALSE, game.server.save_name,
 +      char imgfilename[128];
++
 +      fc_snprintf(imgfilename, sizeof(imgfilename), "map-%d", srvarg.port);
 +
-+      mapimg_create(pmapdef, TRUE, imgfilename,
-+                    srvarg.saves_pathname);
-+    } else {
-+      log_error("%s", mapimg_error());
-+    }
-+  }
-+
- }
- 
- /**********************************************************************//**
++      mapimg_create(pmapdef, FALSE, imgfilename,
+                     srvarg.saves_pathname);
+     } else {
+       log_error("%s", mapimg_error());

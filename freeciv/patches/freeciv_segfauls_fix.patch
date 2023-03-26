@@ -1,7 +1,7 @@
 diff -Nurd freeciv/ai/default/aidiplomat.c freeciv/ai/default/aidiplomat.c
---- freeciv/ai/default/aidiplomat.c	2022-12-15 22:19:08.000595657 +0200
-+++ freeciv/ai/default/aidiplomat.c	2022-12-15 22:19:22.828722206 +0200
-@@ -767,6 +767,11 @@
+--- freeciv/ai/default/aidiplomat.c	2023-03-20 07:14:33.450796239 +0200
++++ freeciv/ai/default/aidiplomat.c	2023-03-20 07:14:46.323059631 +0200
+@@ -766,6 +766,11 @@
        || unit_data->task == AIUNIT_DEFEND_HOME) {
      bool failure = FALSE;
  
@@ -13,9 +13,9 @@ diff -Nurd freeciv/ai/default/aidiplomat.c freeciv/ai/default/aidiplomat.c
      ctarget = tile_city(punit->goto_tile);
      if (pf_map_position(pfm, punit->goto_tile, &pos)
          && ctarget) {
-diff -Nurd freeciv/ai/default/aiunit.c freeciv/ai/default/aiunit.c
---- freeciv/ai/default/aiunit.c	2022-12-15 22:19:08.000595657 +0200
-+++ freeciv/ai/default/aiunit.c	2022-12-15 22:19:22.828722206 +0200
+diff -Nurd freeciv/ai/default/daiunit.c freeciv/ai/default/daiunit.c
+--- freeciv/ai/default/daiunit.c	2023-03-20 07:14:33.450796239 +0200
++++ freeciv/ai/default/daiunit.c	2023-03-20 07:14:53.451206237 +0200
 @@ -2287,9 +2287,16 @@
         || unit_data->task == AIUNIT_WONDER)) {
      /* we are moving to our destination */

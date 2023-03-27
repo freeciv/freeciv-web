@@ -70,23 +70,23 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-                        <version>9.16.0</version>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-core</artifactId>
+                        <version>9.16.1</version>
 		</dependency>
 
                 <dependency>
                         <groupId>org.flywaydb</groupId>
                         <!-- Outdated -->
                         <artifactId>flyway-sqlserver</artifactId>
-                        <version>9.1.6</version>
+                        <version>9.4.0</version>
                 </dependency>
 
                 <dependency>
                        <groupId>org.flywaydb</groupId>
                         <!-- Outdated -->
                        <artifactId>flyway-mysql</artifactId>
-                       <version>9.1.6</version>
+                       <version>9.4.0</version>
                 </dependency>
 
 		<dependency>
@@ -160,10 +160,10 @@ Rerun the sync-js-hand.js script.
 				</plugin>
 
 				<plugin>
-					<groupId>org.flywaydb</groupId>
-					<artifactId>flyway-maven-plugin</artifactId>
+                                        <groupId>org.flywaydb</groupId>
+                                        <artifactId>flyway-maven-plugin</artifactId>
                                         <!-- Outdated -->
-                                        <version>9.1.6</version>
+                                        <version>9.4.0</version>
 				</plugin>
 
 				<plugin>
@@ -171,8 +171,7 @@ Rerun the sync-js-hand.js script.
 					<artifactId>maven-compiler-plugin</artifactId>
                                         <version>3.11.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+                                                <release>8</release>
 					</configuration>
 				</plugin>
 

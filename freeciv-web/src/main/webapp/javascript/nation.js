@@ -64,7 +64,8 @@ function update_nation_screen()
           get_ai_level_text(pplayer) + " AI" : "Human") + "</td><td>"
 	   + (pplayer['is_alive'] ? "Alive" : "Dead") +  "</td>";
 
-    if (!client_is_observer() && client.conn.playing != null && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
+    if (!client_is_observer() && client.conn.playing != null
+        && diplstates[player_id] != null && player_id != client.conn.playing['playerno']) {
       nation_list_html += "<td>" + get_diplstate_text(diplstates[player_id]) + "</td>";
     } else {
       nation_list_html += "<td>-</td>";
@@ -74,10 +75,11 @@ function update_nation_screen()
 
     nation_list_html += "<td>";
     if (!client_is_observer() && client.conn.playing != null) {
-      if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno']) && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
+      if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno'])
+          && client.conn.playing['gives_shared_vision'].isSet(player_id)) {
         nation_list_html += "Both ways";
       } else if (pplayer['gives_shared_vision'].isSet(client.conn.playing['playerno'])) {
-        nation_list_html += "To you"
+        nation_list_html += "To you";
       } else if (client.conn.playing['gives_shared_vision'].isSet(player_id)) {
         nation_list_html += "To them";
       } else {

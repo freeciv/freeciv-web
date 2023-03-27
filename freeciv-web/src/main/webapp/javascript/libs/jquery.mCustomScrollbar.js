@@ -438,7 +438,7 @@ and dependencies (minified).
 				options.axis=(options.horizontalScroll) ? "x" : _findAxis(options.axis);
 				options.scrollInertia=options.scrollInertia>0 && options.scrollInertia<17 ? 17 : options.scrollInertia;
 				if(typeof options.mouseWheel!=="object" &&  options.mouseWheel==true){ /* old school mouseWheel option (non-object) */
-					options.mouseWheel={enable:true,scrollAmount:"auto",axis:"y",preventDefault:false,deltaFactor:"auto",normalizeDelta:false,invert:false}
+				        options.mouseWheel={enable:true,scrollAmount:"auto",axis:"y",preventDefault:false,deltaFactor:"auto",normalizeDelta:false,invert:false};
 				}
 				options.mouseWheel.scrollAmount=!options.mouseWheelPixels ? options.mouseWheel.scrollAmount : options.mouseWheelPixels;
 				options.mouseWheel.normalizeDelta=!options.advanced.normalizeMouseWheelDelta ? options.mouseWheel.normalizeDelta : options.advanced.normalizeMouseWheelDelta;
@@ -1197,7 +1197,7 @@ and dependencies (minified).
 				e.preventDefault();
 				if(!_mouseBtnLeft(e)){return;} /* left mouse button only */
 				touchActive=true;
-				if(oldIE){document.onselectstart=function(){return false;}} /* disable text selection for IE < 9 */
+			        if(oldIE){document.onselectstart=function(){return false;};} /* disable text selection for IE < 9 */
 				_iframe.call(mCSB_container,false); /* enable scrollbar dragging over iframes by disabling their events */
 				_stop($this);
 				draggable=$(this);

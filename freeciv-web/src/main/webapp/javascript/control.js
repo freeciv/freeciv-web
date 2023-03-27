@@ -1811,7 +1811,7 @@ function do_map_click(ptile, qtype, first_time_called)
 
           /* Perform the final action. */
           order['action'] = goto_last_action;
-          order['target'] = ptile['index']
+          order['target'] = ptile['index'];
 
           packet['orders'][pos] = Object.assign({}, order);
         }

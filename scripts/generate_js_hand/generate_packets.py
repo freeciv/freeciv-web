@@ -1023,7 +1023,6 @@ class Packet:
         if self.want_force: arr.remove("force")
 
         self.cancel=[]
-        removes=[]
         remaining=[]
         for i in arr:
             mo=re.search("^cancel\((.*)\)$",i)

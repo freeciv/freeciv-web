@@ -1,0 +1,47 @@
+From 5b0012ba36374547283af9cf0234750c32c72cf0 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 21 Mar 2023 20:31:14 +0200
+Subject: [PATCH 40/50] Fix threaded saving of the game on signal
+
+Wait for the saving thread to finish before quitting the program.
+
+Reported by alain_bkr
+
+See osdn #47540
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/srv_signal.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/server/srv_signal.c b/server/srv_signal.c
+index c86a5d0c87..d41a8c680b 100644
+--- a/server/srv_signal.c
++++ b/server/srv_signal.c
+@@ -33,6 +33,9 @@
+ /* server */
+ #include "srv_main.h"
+ 
++/* server/savegame */
++#include "savemain.h"
++
+ #include "srv_signal.h"
+ 
+ #ifdef HAVE_SIGNAL_H
+@@ -43,11 +46,12 @@
+ #define save_and_exit(sig)              \
+ if (S_S_RUNNING == server_state()) {    \
+   save_game_auto(#sig, AS_INTERRUPT);   \
++  save_system_close();                  \
+ }                                       \
+ exit(EXIT_SUCCESS);
+ 
+ /**********************************************************************//**
+-  This function is called when a SIGINT (ctrl-c) is received.  It will exit
++  This function is called when a SIGINT (ctrl-c) is received. It will exit
+   only if two SIGINTs are received within a second.
+ **************************************************************************/
+ static void signal_handler(int sig)
+-- 
+2.39.2
+

@@ -32,6 +32,12 @@
 # 0005-Save-map-images-also-on-game-over.patch
 #   Upstream implementation of game-end map image saving
 #   osdn #47551
+# 0040-Fix-threaded-saving-of-the-game-on-signal.patch
+#   Dataloss avoidance
+#   osdn #47540
+# 0015-lua_command-Use-fc_stat-instead-of-opening-the-file.patch
+#   File descriptor leak fix
+#   osdn #47609
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -65,6 +71,8 @@ declare -a PATCHLIST=(
   "backports/0027-Make-research-invention-array-big-enough-for-A_FUTUR"
   "backports/0032-Fix-freeciv-manual-failure-with-native_bases-cache"
   "backports/0005-Save-map-images-also-on-game-over"
+  "backports/0040-Fix-threaded-saving-of-the-game-on-signal"
+  "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
   "meson_webperimental"
   "metachange"
   "text_fixes"

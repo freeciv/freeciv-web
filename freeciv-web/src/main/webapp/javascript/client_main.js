@@ -29,8 +29,10 @@ var endgame_player_info = [];
 var height_offset = 52;
 var width_offset = 10;
 
+var mapview_canvas_ctx;
+
 /**************************************************************************
- Sets the client state (initial, pre, running, over etc).
+  Sets the client state (initial, pre, running, over etc).
 **************************************************************************/
 function set_client_state(newstate)
 {

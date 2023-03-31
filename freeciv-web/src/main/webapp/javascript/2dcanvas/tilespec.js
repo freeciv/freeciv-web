@@ -527,10 +527,10 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
 
     case CELL_CORNER:
     {
-      /* Divide the tile up into four rectangular cells.  Each of these
+      /* Divide the tile up into four rectangular cells. Each of these
        * cells covers one corner, and each is adjacent to 3 different
        * tiles.  For each cell we pick a sprite based upon the adjacent
-       * terrains at each of those tiles.  Thus, we have 8 different sprites
+       * terrains at each of those tiles. Thus, we have 8 different sprites
        * for each of the 4 cells (32 sprites total).
        *
        * These arrays correspond to the direction4 ordering. */
@@ -539,10 +539,10 @@ function fill_terrain_sprite_array(l, ptile, pterrain, tterrain_near)
       var H = normal_tile_height;
       var iso_offsets = [ [W / 4, 0], [W / 4, H / 2], [W / 2, H / 4], [0, H / 4]];
       var this_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][0] : -1;
-      var that_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][1] : -1;
+      /* var that_match_index = ('l' + l + '.' + pterrain['graphic_str'] in tile_types_setup) ? tile_types_setup['l' + l + '.' + pterrain['graphic_str']]['match_index'][1] : -1; */
       var result_sprites = [];
 
-      /* put corner cells */
+      /* Put corner cells */
       for (var i = 0; i < NUM_CORNER_DIRS; i++) {
 	    var count = dlp['match_indices'];
 	    var array_index = 0;

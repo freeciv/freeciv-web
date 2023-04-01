@@ -44,6 +44,9 @@
 # 0033-Improve-handling-of-fc_rand-1.patch
 #   Performance improvement
 #   osdn #45917
+# 0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere.patch
+#   Path Findig fix
+#   osdn osdn #47731
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -81,6 +84,7 @@ declare -a PATCHLIST=(
   "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
   "backports/0036-Optimize-V_RADIUS-usage"
   "backports/0033-Improve-handling-of-fc_rand-1"
+  "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "meson_webperimental"
   "metachange"
   "text_fixes"

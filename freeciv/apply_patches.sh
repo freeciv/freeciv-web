@@ -38,6 +38,12 @@
 # 0015-lua_command-Use-fc_stat-instead-of-opening-the-file.patch
 #   File descriptor leak fix
 #   osdn #47609
+# 0036-Optimize-V_RADIUS-usage.patch
+#   Performance improvement
+#   osdn #45627
+# 0033-Improve-handling-of-fc_rand-1.patch
+#   Performance improvement
+#   osdn #45917
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -73,6 +79,8 @@ declare -a PATCHLIST=(
   "backports/0005-Save-map-images-also-on-game-over"
   "backports/0040-Fix-threaded-saving-of-the-game-on-signal"
   "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
+  "backports/0036-Optimize-V_RADIUS-usage"
+  "backports/0033-Improve-handling-of-fc_rand-1"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -45,17 +45,17 @@ public class ResetPassword extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private String captchaSecret;
-    
+
     private String emailUsername;
-    
+
     private String emailPassword;
-    
+
     private String emailHost;
-    
+
     private String emailPort;
-    
+
     private String emailSender;
-    
+
     private String fcwHost;
 
     public void init(ServletConfig config) throws ServletException {

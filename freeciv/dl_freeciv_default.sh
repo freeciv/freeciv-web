@@ -20,7 +20,7 @@ rm -Rf freeciv
 if test "$GIT_PATCHING" = "yes" ; then
 
   # Fetch one commit from freeciv
-  git clone --no-tags --branch=master --single-branch https://github.com/freeciv/freeciv.git freeciv
+  git clone --no-tags --branch=main --single-branch https://github.com/freeciv/freeciv.git freeciv
   ( cd freeciv && git checkout $1 )
 
 else

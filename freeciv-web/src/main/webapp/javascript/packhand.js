@@ -57,7 +57,7 @@ function handle_thaw_hint(packet)
 /* 100% */
 function handle_ruleset_terrain(packet)
 {
-  /* FIXME: These two hacks are there since Freeciv-web doesn't support
+  /* FIXME: These two hacks are here since Freeciv-web doesn't support
    *        rendering Lake nor Glacier correctly. */
   if (packet['name'] == "Lake") packet['graphic_str'] = packet['graphic_alt'];
   if (packet['name'] == "Glacier") packet['graphic_str'] = "tundra";
@@ -65,8 +65,9 @@ function handle_ruleset_terrain(packet)
 }
 
 /****************************************************************************
-  After we send a join packet to the server we receive a reply.  This
-  function handles the reply.  100% Complete.
+  After we send a join packet to the server we receive a reply. This
+  function handles the reply.
+  100% Complete.
 ****************************************************************************/
 function handle_server_join_reply(packet)
 {
@@ -127,11 +128,9 @@ function handle_server_join_reply(packet)
   } else {
 
     swal("You were rejected from the game.", (packet['message'] || ""), "error");
-    client.conn.id = -1;/* not in range of conn_info id */
+    client.conn.id = -1; /* Not in range of conn_info id */
     set_client_page(PAGE_MAIN);
-
   }
-
 }
 
 /**************************************************************************
@@ -190,7 +189,7 @@ function handle_ruleset_resource(packet)
 }
 
 /**************************************************************************
- 100% complete.
+  100% complete.
 **************************************************************************/
 function handle_tile_info(packet)
 {
@@ -232,8 +231,8 @@ function handle_chat_msg(packet)
     show_dialog_message("Message for you:", message);
     return;
   } else {
-    if (message.indexOf("/metamessage") != -1) return;  //don't spam message dialog on game start.
-    if (message.indexOf("Metaserver message string") != -1) return;  //don't spam message dialog on game start.
+    if (message.indexOf("/metamessage") != -1) return;  // Don't spam message dialog on game start.
+    if (message.indexOf("Metaserver message string") != -1) return;  // Don't spam message dialog on game start.
 
     if (ptile != null && ptile > 0) {
        message = "<span class='chatbox_text_tileinfo' "
@@ -310,12 +309,12 @@ function handle_city_info(packet)
     production_changed = true;
   }
 
-  /* manually update tile relation.*/
+  /* Manually update tile relation.*/
   if (tiles[packet['tile']] != null) {
     tiles[packet['tile']]['worked'] = packet['id'];
   }
 
-  /* update caravan dialog */
+  /* Update caravan dialog */
   if ((production_changed || shield_stock_changed)
       && action_selection_target_city() == pcity['id']) {
     let refresh_packet = {
@@ -616,7 +615,7 @@ function handle_ruleset_control(packet)
 
   improvements_init();
 
-  /* handle_ruleset_extra defines some variables dynamically */
+  /* handle_ruleset_extra() defines some variables dynamically */
   for (var extra in extras) {
     var ename = extras[extra]['rule_name'];
     if (ename == "Railroad") delete window["EXTRA_RAIL"];
@@ -684,7 +683,7 @@ function handle_endgame_report(packet)
 
   update_client_state(C_S_OVER);
 
-  /* TODO: implement rest*/
+  /* TODO: implement rest */
 
 }
 
@@ -715,7 +714,7 @@ function handle_nuke_tile_info(packet)
 
 }
 
-/* done */
+/* Done */
 function handle_city_remove(packet)
 {
   remove_city(packet['city_id']);
@@ -731,7 +730,7 @@ function handle_connect_msg(packet)
   add_chatbox_text(packet);
 }
 
-/* done */
+/* Done */
 function handle_server_info(packet)
 {
 
@@ -746,7 +745,7 @@ function handle_server_info(packet)
   }
 }
 
-/* done */
+/* Done */
 function handle_city_name_suggestion_info(packet)
 {
   /* Decode the city name. */
@@ -795,7 +794,8 @@ function handle_player_attribute_chunk(packet)
 
 /**************************************************************************
   Handle a remove-unit packet, sent by the server to tell us any time a
-  unit is no longer there.                             99% complete.
+  unit is no longer there.
+  99% complete.
 **************************************************************************/
 function handle_unit_remove(packet)
 {
@@ -980,7 +980,7 @@ function handle_unit_packet_common(packet_unit)
     update_unit_position(index_to_tile(units[packet_unit['id']]['tile']));
   }
 
-  /* TODO: update various dialogs and mapview. */
+  /* TODO: Update various dialogs and mapview. */
 }
 
 function handle_unit_combat_info(packet)
@@ -1131,7 +1131,7 @@ function handle_unit_actions(packet)
 
 function handle_diplomacy_init_meeting(packet)
 {
-  // for hotseat games, only activate diplomacy if the player is playing.
+  // For hotseat games, only activate diplomacy if the player is playing.
   if (is_hotseat() && packet['initiated_from'] != client.conn.playing['playerno']) return;   
 
   diplomacy_clause_map[packet['counterpart']] = [];
@@ -1386,8 +1386,8 @@ function handle_ruleset_terrain_control(packet)
 {
   terrain_control = packet;
 
-  /* Separate since it is easier understand what SINGLE_MOVE means than to
-   * understand what terrain_control['move_fragments'] means. */
+  /* Separate since it is easier to understand what SINGLE_MOVE means
+   * than to understand what terrain_control['move_fragments'] means. */
   SINGLE_MOVE = terrain_control['move_fragments'];
 }
 
@@ -1536,17 +1536,17 @@ function handle_vote_resolve(packet)
 
 function handle_edit_startpos(packet)
 {
-  /* edit not supported. */
+  /* Edit not supported. */
 }
 
 function handle_edit_startpos_full(packet)
 {
-  /* edit not supported. */
+  /* Edit not supported. */
 }
 
 function handle_edit_object_created(packet)
 {
-  /* edit not supported. */
+  /* Edit not supported. */
 }
 
 /**************************************************************************
@@ -1658,11 +1658,11 @@ function handle_player_diplstate(packet)
     diplstates[packet['plr1']] = packet['type'];
   }
 
-  // TODO: remove current diplstates (after moving all users to the new one),
+  // TODO: Remove current diplstates (after moving all users to the new one),
   //       or just make it a reference to players[me].diplstates
   //
   // There's no need to set players[packet.plr2].diplstates, as there'll be
-  // a packet for that.  In fact, there's a packet for each of (p1,x) and (p2,x)
+  // a packet for that. In fact, there's a packet for each of (p1,x) and (p2,x)
   // when the state changes between p1 and p2, and for all pairs of players
   // when a turn begins
   if (players[packet['plr1']].diplstates === undefined) {

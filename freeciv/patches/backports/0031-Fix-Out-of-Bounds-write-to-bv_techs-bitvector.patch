@@ -1,0 +1,30 @@
+From 4cd78dc4e789d825778fb238cd10339cad327e8d Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 4 Apr 2023 16:05:44 +0300
+Subject: [PATCH 31/31] Fix Out of Bounds write to bv_techs bitvector
+
+There was no space reserved for A_FUTURE
+
+See osdn #47762
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/tech.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/tech.h b/common/tech.h
+index c80edf3663..45ee87a7b9 100644
+--- a/common/tech.h
++++ b/common/tech.h
+@@ -155,7 +155,7 @@ struct advance {
+   int num_reqs;
+ };
+ 
+-BV_DEFINE(bv_techs, A_LAST);
++BV_DEFINE(bv_techs, A_ARRAY_SIZE);
+ 
+ /* General advance/technology accessor functions. */
+ Tech_type_id advance_count_real(void);
+-- 
+2.39.2
+

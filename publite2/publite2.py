@@ -160,11 +160,11 @@ class metachecker():
 
 
 if __name__ == '__main__':
-  #perform a test-request to the Metaserver
+  # Perform a test-request to the Metaserver
   try:
     conn = http.client.HTTPConnection(metahost, metaport);
     conn.request("GET", statuspath);
-    r1 = conn.getresponse();
+    conn.getresponse();
   except Exception as e:
     print("Error: Publite2 is unable to connect to Freeciv-web metaserver on http://"
           + metahost + metapath + ", error" + str(e));

@@ -28,9 +28,9 @@ import org.freeciv.util.Constants;
 public class HallOfFamePost extends HttpServlet {
 
     private final Validation validation = new Validation();
-    
+
     private String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
-    
+
     private Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
 
     private static final String mapSrcImgPaths = "/var/lib/tomcat10/webapps/data/savegames/";

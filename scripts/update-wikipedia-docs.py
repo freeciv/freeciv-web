@@ -183,10 +183,9 @@ for tech in techs:
   download_wiki_page(tech);
 
 output_name = path.join(webapp_dir, 'javascript', 'freeciv-wiki-doc.js')
-f = open(output_name ,'w');
-f.write("var freeciv_wiki_docs = "
-        + json.dumps(freeciv_wiki_doc, sort_keys=True, indent=2) + ";\n");
-f.close();
+with open(output_name, 'w') as f:
+  f.write("var freeciv_wiki_docs = "
+          + json.dumps(freeciv_wiki_doc, sort_keys=True, indent=2) + ";\n");
 print("Generated " + output_name)
 
 print("\n*****************************************************")

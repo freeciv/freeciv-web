@@ -68,15 +68,19 @@ thedict = {}
 for section in config.sections():
     thedict[section] = {}
     for key, val in config.items(section):
-        # skip these hidden help sections, since they are not in use.
+        # Skip these hidden help sections, since they are not in use.
         if (section in ["help_connecting", "help_languages", "help_governor",
     "help_chatline", "help_about", "help_worklist_editor", "help_copying"]): continue;
         thedict[section][key] = val
 
 output_name = path.join(webapp_dir, 'javascript', 'freeciv-helpdata.js')
-f = open(output_name, 'w')
 
-f.write("var helpdata_order = " + json.dumps(config.sections(), indent=2, separators=(',', ': ')) + ";\n")
-f.write("var helpdata = " + json.dumps(thedict, indent=2, separators=(',', ': ')) + ";\n")
+with open(output_name, 'w') as f:
+    f.write("var helpdata_order = " + json.dumps(config.sections(),
+                                                 indent = 2,
+                                                 separators = (',', ': ')) + ";\n")
+    f.write("var helpdata = " + json.dumps(thedict,
+                                           indent = 2,
+                                           separators = (',', ': ')) + ";\n")
 
 print("Generated " + output_name)

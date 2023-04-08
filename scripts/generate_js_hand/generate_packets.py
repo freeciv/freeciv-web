@@ -51,23 +51,6 @@ def prefix(prefix,str):
     lines=list(map(lambda x,prefix=prefix: prefix+x,lines))
     return "\n".join(lines)
 
-def write_disclaimer(f):
-    f.write('''
- /****************************************************************************
- *                       THIS FILE WAS GENERATED                             *
- * Script: common/generate_packets.py                                        *
- * Input:  common/networking/packets.def                                                *
- *                       DO NOT CHANGE THIS FILE                             *
- ****************************************************************************/
-
-''')
-
-def my_open(name):
-    verbose("writing %s"%name)
-    f=open(name,"w")
-    write_disclaimer(f)
-    return f
-
 def get_choices(all):
     def helper(helper,all, index, so_far):
         if index>=len(all):
@@ -1466,16 +1449,17 @@ def strip_c_comment(s):
 # Main function. It reads and parses the input and generates the
 # various files.
 def gen_main(freeciv_dir):
-    ### parsing input
+    ### Parsing input
     input_name = path.abspath(path.join(freeciv_dir, "common/networking/packets.def"))
+    print("Parsing " + input_name)
     try:
-      print("Parsing " + input_name)
-      content=open(input_name).read()
+        with open(input_name) as f:
+            content = f.read()
     except IOError:
-      print("Error! Check out freeciv from Git in ../freeciv directory and apply patches.");
-      exit(-1);
-    content=strip_c_comment(content)
-    lines=content.split("\n")
+        print("Error! Check out freeciv from Git in ../freeciv directory and apply patches.");
+        exit(-1);
+    content = strip_c_comment(content)
+    lines = content.split("\n")
     lines=[re.sub("#.*$","",x) for x in lines]
     lines=[re.sub("//.*$","",x) for x in lines]
     lines=[x for x in lines if not re.search("^\s*$",x)]
@@ -1494,7 +1478,7 @@ def gen_main(freeciv_dir):
         if str:
             packets.append(Packet(str,types))
 
-    ### parsing finished
+    ### Parsing finished
 
     freeciv_parse_strings = {};
 

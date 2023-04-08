@@ -53,6 +53,9 @@
 # 0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector.patch
 #   Illegal memory access fix
 #   osdn #47762
+# 0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10.patch
+#   Upstream bugfix to included lua
+#   osdn #47593
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -93,6 +96,7 @@ declare -a PATCHLIST=(
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
   "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
+  "backports/0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10"
   "meson_webperimental"
   "metachange"
   "text_fixes"

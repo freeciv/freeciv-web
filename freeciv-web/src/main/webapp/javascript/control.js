@@ -1176,23 +1176,21 @@ function update_unit_order_commands()
       $("#order_sentry").hide();
       $("#order_explore").hide();
       $("#order_auto_settlers").show();
-      $("#order_pollution").show();
-      if (!tile_has_extra(ptile, EXTRA_MINE) && tile_terrain(ptile)['mining_time'] > 0) {
+      $("#order_clean").show();
+      if (!tile_has_extra(ptile, EXTRA_MINE)
+          && tile_terrain(ptile)['mining_time'] > 0) {
         $("#order_mine").show();
         unit_actions["mine"] =  {name: "Mine (M)"};
       } else {
         $("#order_mine").hide();
       }
 
-      if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
-        unit_actions["fallout"] = {name: "Remove fallout (N)"};
-      }
-
-      if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
-        $("#order_pollution").show();
-	unit_actions["pollution"] = {name: "Remove pollution (P)"};
+      if (tile_has_extra(ptile, EXTRA_POLLUTION)
+          || tile_has_extra(ptile, EXTRA_FALLOUT)) {
+        $("#order_clean").show();
+	unit_actions["clean"] = {name: "Remove pollution (P)"};
       } else {
-        $("#order_pollution").hide();
+        $("#order_clean").hide();
       }
 
       if (tile_terrain(ptile)['cultivate_time'] > 0) {
@@ -1242,7 +1240,7 @@ function update_unit_order_commands()
       $("#order_auto_settlers").hide();
       $("#order_sentry").show();
       $("#order_explore").show();
-      $("#order_pollution").hide();
+      $("#order_clean").hide();
       unit_actions["fortify"] = {name: "Fortify (F)"};
     }
 
@@ -2099,7 +2097,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       if (shift) {
         key_unit_pillage();
       } else {
-        key_unit_pollution();
+        key_unit_clean();
       }
     break;
 
@@ -2130,8 +2128,6 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 'N':
       if (shift) {
         key_unit_nuke();
-      } else {
-        key_unit_fallout();
       }
     break;
 
@@ -2307,12 +2303,8 @@ function handle_context_menu_callback(key)
       key_unit_auto_settle();
       break;
 
-    case "fallout":
-      key_unit_fallout();
-      break;
-
-    case "pollution":
-      key_unit_pollution();
+    case "clean":
+      key_unit_clean();
       break;
 
     case "cultivate":
@@ -2721,14 +2713,16 @@ function key_unit_cultivate()
 }
 
 /**************************************************************************
- Tell the units to remove pollution.
+  Tell the units to clean pollution.
 **************************************************************************/
-function key_unit_pollution()
+function key_unit_clean()
 {
   var funits = get_units_in_focus();
+
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_POLLUTION, EXTRA_NONE);
+
+    request_new_unit_activity(punit, ACTIVITY_CLEAN, EXTRA_NONE);
   }
   setTimeout(update_unit_focus, 700);
 }
@@ -2781,19 +2775,6 @@ function key_unit_airlift()
     event: E_BEGINNER_HELP,
     message: "Click on the city to airlift this unit to."
   });
-}
-
-/**************************************************************************
- Tell the units to remove nuclear fallout.
-**************************************************************************/
-function key_unit_fallout()
-{
-  var funits = get_units_in_focus();
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_FALLOUT, EXTRA_NONE);
-  }
-  update_unit_focus();
 }
 
 /**************************************************************************

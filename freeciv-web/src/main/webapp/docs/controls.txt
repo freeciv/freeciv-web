@@ -51,8 +51,8 @@ Wait
 <img src="/images/orders/transform_default.png">
 Transform terrain
 
-<img src="/images/orders/pollution.png">
-Remove pollution
+<img src="/images/orders/clean.png">
+Clean pollution
 
 <img src="/images/orders/fortify_default.png">
 Fortify
@@ -76,7 +76,6 @@ Remove forest
   h: set unit's (h)omecity  (to city on current tile)
   i: build (i)rrigation or convert terrain  (settler/worker units)
   m: build (m)ine or convert terrain  (settler/worker units)
-  n: clean (n)uclear fallout
   N: explode (N)uclear
   o: transf(o)rm terrain  (engineer unit)
   p: clean (p)ollution  (settler/worker units)

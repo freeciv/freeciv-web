@@ -50,6 +50,9 @@
 # 0030-AI-Fix-check-if-new-building-enables-disables-action.patch
 #   AI fix
 #   osdn #42169
+# 0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector.patch
+#   Illegal memory access fix
+#   osdn #47762
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -89,6 +92,7 @@ declare -a PATCHLIST=(
   "backports/0033-Improve-handling-of-fc_rand-1"
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
+  "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
   "meson_webperimental"
   "metachange"
   "text_fixes"

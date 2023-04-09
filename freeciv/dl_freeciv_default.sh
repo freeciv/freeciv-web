@@ -20,7 +20,7 @@ rm -Rf freeciv
 if test "$GIT_PATCHING" = "yes" ; then
 
   # Fetch one commit from freeciv
-  git clone --no-tags --branch=master --single-branch https://github.com/freeciv/freeciv.git freeciv
+  git clone --no-tags --branch=main --single-branch https://github.com/freeciv/freeciv.git freeciv
   ( cd freeciv && git checkout $1 )
 
 else
@@ -29,7 +29,7 @@ else
   # The download step saves having to merge in Freeciv's history each time the
   # Freeciv server revision is updated.
   echo "  fetching missing revisions"
-  git cat-file -e $1 || git fetch --no-tags --depth=1 https://github.com/freeciv/freeciv.git $1:freeciv
+  git cat-file -e $1 || git fetch --no-tags --depth=1 https://github.com/freeciv/freeciv.git $1:freeciv || /bin/true
 
   # Place the requested Freeciv revision in the freeciv/freeciv folder.
   # The checkout isn't owned by git. This means that the patches automatically

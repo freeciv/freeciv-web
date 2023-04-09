@@ -108,7 +108,7 @@ fi
 # Populate ~/.config with current user
 npm help > /dev/null
 
-export MESON_VER="0.57.2"
+export MESON_VER="0.58.1"
 
 echo "==== Installing Meson ===="
 if ! sudo ${APT_GET} satisfy "meson (>= ${MESON_VER})" ; then

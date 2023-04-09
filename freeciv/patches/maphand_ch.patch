@@ -1,6 +1,6 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-03-18 06:57:57.363546352 +0200
-+++ freeciv/common/networking/packets.def	2023-03-18 06:58:13.783702504 +0200
+--- freeciv/common/networking/packets.def	2023-04-09 07:42:32.330546600 +0300
++++ freeciv/common/networking/packets.def	2023-04-09 07:42:43.378652040 +0300
 @@ -2448,3 +2448,13 @@
    TILE dest;
    UINT32 turns;
@@ -16,8 +16,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-03-18 06:57:58.283555104 +0200
-+++ freeciv/server/maphand.c	2023-03-18 06:58:13.783702504 +0200
+--- freeciv/server/maphand.c	2023-04-09 07:42:32.758550685 +0300
++++ freeciv/server/maphand.c	2023-04-09 07:42:43.378652040 +0300
 @@ -16,6 +16,7 @@
  #endif
  
@@ -34,8 +34,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2609,3 +2611,348 @@
-     pcity->specialists[DEFAULT_SPECIALIST]++;
+@@ -2615,3 +2617,348 @@
+     }
    }
  }
 +
@@ -384,10 +384,10 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-03-18 06:57:58.283555104 +0200
-+++ freeciv/server/maphand.h	2023-03-18 06:58:13.783702504 +0200
-@@ -144,4 +144,7 @@
- void tile_change_side_effects(struct tile *ptile)
+--- freeciv/server/maphand.h	2023-04-09 07:42:32.758550685 +0300
++++ freeciv/server/maphand.h	2023-04-09 07:42:43.378652040 +0300
+@@ -145,4 +145,7 @@
+ void tile_change_side_effects(struct tile *ptile, bool refresh_city)
    fc__attribute((nonnull (1)));
  
 +void handle_web_info_text_req(struct player *pplayer, int loc,

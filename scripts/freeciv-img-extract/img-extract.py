@@ -377,7 +377,8 @@ if verbose: print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str
 
 for tileset_id in files.keys():
   tileset_file = 'tileset_spec_' + tileset_id + '.js'
-  f = open(path.join(out_dir, tileset_file), 'w')
-  f.write("var tileset = " + json.dumps(coords[tileset_id], separators=(',', ':')) + ";")
+  with open(path.join(out_dir, tileset_file), 'w') as f:
+    f.write("var tileset = " + json.dumps(coords[tileset_id],
+                                          separators=(',', ':')) + ";")
 
 print("Freeciv-img-extract creating tilesets complete.");

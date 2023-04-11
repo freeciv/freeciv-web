@@ -40,14 +40,14 @@ config = configparser.ConfigParser()
 config.read(input_name)
 
 output_name = path.join(webapp_dir, 'javascript', 'soundset_spec.js')
-f = open(output_name, 'w')
-f.write("var soundset = {");
+with open(output_name, 'w') as f:
+  f.write("var soundset = {");
 
-for key in config['files']:
-  f.write("\"" + key + "\" : " );
-  f.write(config['files'][key].replace("stdsounds/","").split(";")[0]);
-  f.write(", ");
+  for key in config['files']:
+    f.write("\"" + key + "\" : " );
+    f.write(config['files'][key].replace("stdsounds/","").split(";")[0]);
+    f.write(", ");
 
-f.write("\"last\":null};");
+  f.write("\"last\":null};");
 
 print("Generated " + output_name)

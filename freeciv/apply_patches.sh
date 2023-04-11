@@ -59,6 +59,9 @@
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
+# 0032-Mapgenerator-Check-if-lake-exist-before-regenerate.patch
+#   Zero-length VLA fix
+#   osdn #47825
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -101,6 +104,7 @@ declare -a PATCHLIST=(
   "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
   "backports/0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
+  "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -160,7 +160,7 @@ Rerun the sync-js-hand.js script.
                                 <plugin>
                                         <groupId>org.flywaydb</groupId>
                                         <artifactId>flyway-maven-plugin</artifactId>
-                                        <version>9.16.1</version>
+                                        <version>9.16.3</version>
                                 </plugin>
 
                                 <plugin>

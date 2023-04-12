@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
---- freeciv/server/connecthand.c	2023-01-20 17:13:40.589939444 +0200
-+++ freeciv/server/connecthand.c	2023-01-20 17:19:10.844575219 +0200
+--- freeciv/server/connecthand.c	2023-04-09 07:45:08.072059036 +0300
++++ freeciv/server/connecthand.c	2023-04-09 07:46:06.388640225 +0300
 @@ -54,6 +54,11 @@
  /* server/scripting */
  #include "script_fcdb.h"
@@ -102,8 +102,8 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
        toggle_ai_player_direct(NULL, pplayer);
 diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2023-01-20 17:13:40.589939444 +0200
-+++ freeciv/server/settings.c	2023-01-20 17:19:34.124761158 +0200
+--- freeciv/server/settings.c	2023-04-09 07:45:08.072059036 +0300
++++ freeciv/server/settings.c	2023-04-09 07:46:06.388640225 +0300
 @@ -857,6 +857,10 @@
  ****************************************************************************/
  static void metamessage_action(const struct setting *pset)
@@ -116,8 +116,8 @@ diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
     * An empty user metaserver message results in an automatic meta message.
     * A non empty user meta message results in the user meta message. */
 diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2023-01-20 17:13:40.589939444 +0200
-+++ freeciv/server/srv_main.c	2023-01-20 17:20:52.909390512 +0200
+--- freeciv/server/srv_main.c	2023-04-09 07:45:08.068058996 +0300
++++ freeciv/server/srv_main.c	2023-04-09 07:46:06.408640425 +0300
 @@ -3413,6 +3413,15 @@
          map_show_all(pplayer);
        } players_iterate_end;
@@ -134,9 +134,9 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
    }
  
    if (game.scenario.is_scenario && game.scenario.players) {
-@@ -3808,3 +3817,11 @@
- {
-   return playercolor_get(i);
+@@ -3829,3 +3838,11 @@
+     }
+   }
  }
 +
 +/**********************************************************************//**
@@ -147,8 +147,8 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +  return (!fc_strcasecmp(game.server.meta_info.type, "longturn"));
 +}
 diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
---- freeciv/server/srv_main.h	2023-01-20 17:13:40.589939444 +0200
-+++ freeciv/server/srv_main.h	2023-01-20 17:13:52.062030927 +0200
+--- freeciv/server/srv_main.h	2023-04-09 07:45:08.068058996 +0300
++++ freeciv/server/srv_main.h	2023-04-09 07:46:06.408640425 +0300
 @@ -96,6 +96,7 @@
  void fc__noreturn srv_main(void);
  void fc__noreturn server_quit(void);
@@ -158,8 +158,8 @@ diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
  enum server_states server_state(void);
  void set_server_state(enum server_states newstate);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-01-20 17:13:40.585939412 +0200
-+++ freeciv/server/stdinhand.c	2023-01-20 17:13:52.062030927 +0200
+--- freeciv/server/stdinhand.c	2023-04-09 07:45:08.076059075 +0300
++++ freeciv/server/stdinhand.c	2023-04-09 07:46:06.408640425 +0300
 @@ -614,6 +614,10 @@
    log_deprecation(_("/metamessage command is deprecated. "
                      "Set metamessage setting instead."));

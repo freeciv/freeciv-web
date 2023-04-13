@@ -64,7 +64,11 @@
 #   osdn #47825
 # 0017-Meson-Add-testmatic-support.patch
 #   Debugging support improvement
-#   #47675
+#   osdn #47675
+# 0050-Add-ERM_CLEAN.patch
+#   Dependency for "Clean" action to work properly
+#   Heavily rebased to current freeciv-web version when backported
+#   osdn #47839
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -109,6 +113,7 @@ declare -a PATCHLIST=(
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
+  "backports/rebased-0050-Add-ERM_CLEAN"
   "meson_webperimental"
   "metachange"
   "text_fixes"

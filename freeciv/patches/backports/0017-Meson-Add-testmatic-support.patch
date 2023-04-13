@@ -1,0 +1,79 @@
+From baffa62fadf830062f54bcce969dea496f59299e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 8 Apr 2023 12:28:10 +0300
+Subject: [PATCH 17/40] Meson: Add testmatic support
+
+Controlled by the project file, i.e., one is expected
+to define testing setup as a project.
+
+See osdn #47675
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ bootstrap/freeciv.fcproj              | 3 +++
+ gen_headers/meson_freeciv_config.h.in | 3 +++
+ meson.build                           | 9 +++++++++
+ 3 files changed, 15 insertions(+)
+
+diff --git a/bootstrap/freeciv.fcproj b/bootstrap/freeciv.fcproj
+index 552310fb6f..1b021a2b42 100644
+--- a/bootstrap/freeciv.fcproj
++++ b/bootstrap/freeciv.fcproj
+@@ -15,3 +15,6 @@ META_URL https://meta.freeciv.org/metaserver.php
+ 
+ # Default ports
+ FREECIV_DEFAULT_PORT=5556
++
++# Uncomment if you want extended/testmatic logging
++# FREECIV_TESTMATIC=yes
+diff --git a/gen_headers/meson_freeciv_config.h.in b/gen_headers/meson_freeciv_config.h.in
+index ffb15fe82c..7e231d7737 100644
+--- a/gen_headers/meson_freeciv_config.h.in
++++ b/gen_headers/meson_freeciv_config.h.in
+@@ -85,6 +85,9 @@
+ /* Produce debug version */
+ #mesondefine FREECIV_DEBUG
+ 
++/* Testmatic integration enabled */
++#mesondefine FREECIV_TESTMATIC
++
+ /* Winsock available */
+ #mesondefine FREECIV_HAVE_WINSOCK
+ 
+diff --git a/meson.build b/meson.build
+index a70df87035..535aa70ae4 100644
+--- a/meson.build
++++ b/meson.build
+@@ -16,6 +16,7 @@ meta_url = 'https://meta.freeciv.org/metaserver.php'
+ mp_list_url = ''
+ storage_dir = ''
+ default_port = ''
++testmatic = ''
+ 
+ proj_def = get_option('project-definition')
+ if proj_def != ''
+@@ -31,6 +32,8 @@ if proj_def != ''
+         storage_dir = item.substring(20)
+       elif item.startswith('FREECIV_DEFAULT_PORT')
+         default_port = item.substring(21)
++      elif item.startswith('FREECIV_TESTMATIC')
++        testmatic = item.substring(18)
+       elif not item.startswith('#') and item != ''
+         error('Unknown parameter ' + item + ' in project definition')
+       endif
+@@ -55,6 +58,12 @@ if default_port == ''
+ endif
+ priv_conf_data.set('DEFAULT_SOCK_PORT', default_port)
+ 
++if testmatic == 'yes'
++  pub_conf_data.set('FREECIV_TESTMATIC', 1)
++elif testmatic != '' and testmatic != 'no'
++  error('Unknown testmatic value ' + testmatic)
++endif
++
+ pub_conf_data.set('FREECIV_AI_MOD_LAST', 3)
+ priv_conf_data.set('BINDIR',
+                    join_paths(get_option('prefix'), get_option('bindir')))
+-- 
+2.39.2
+

@@ -62,6 +62,9 @@
 # 0032-Mapgenerator-Check-if-lake-exist-before-regenerate.patch
 #   Zero-length VLA fix
 #   osdn #47825
+# 0017-Meson-Add-testmatic-support.patch
+#   Debugging support improvement
+#   #47675
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -105,6 +108,7 @@ declare -a PATCHLIST=(
   "backports/0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
+  "backports/0017-Meson-Add-testmatic-support"
   "meson_webperimental"
   "metachange"
   "text_fixes"

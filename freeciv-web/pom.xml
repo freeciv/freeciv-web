@@ -72,19 +72,19 @@
                 <dependency>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-core</artifactId>
-                        <version>9.16.1</version>
+                        <version>9.16.3</version>
                 </dependency>
 
                 <dependency>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-sqlserver</artifactId>
-                        <version>9.16.1</version>
+                        <version>9.16.3</version>
                 </dependency>
 
                 <dependency>
                        <groupId>org.flywaydb</groupId>
                        <artifactId>flyway-mysql</artifactId>
-                       <version>9.16.1</version>
+                       <version>9.16.3</version>
                 </dependency>
 
                 <dependency>
@@ -130,7 +130,7 @@
                                 <plugin>
                                         <groupId>org.apache.maven.plugins</groupId>
                                         <artifactId>maven-enforcer-plugin</artifactId>
-                                        <version>3.2.1</version>
+                                        <version>3.3.0</version>
                                         <executions>
                                                 <execution>
                                                         <id>enforce-files-exist</id>
@@ -160,7 +160,7 @@ Rerun the sync-js-hand.js script.
                                 <plugin>
                                         <groupId>org.flywaydb</groupId>
                                         <artifactId>flyway-maven-plugin</artifactId>
-                                        <version>9.16.1</version>
+                                        <version>9.16.3</version>
                                 </plugin>
 
                                 <plugin>
@@ -338,7 +338,7 @@ Rerun the sync-js-hand.js script.
                                 <plugin>
                                         <groupId>com.github.blutorange</groupId>
                                         <artifactId>closure-compiler-maven-plugin</artifactId>
-                                        <version>2.25.0</version>
+                                        <version>2.26.0</version>
                                         <configuration>
                                                 <closureLanguageIn>ECMASCRIPT_2019</closureLanguageIn>
                                                 <closureLanguageOut>ECMASCRIPT_2019</closureLanguageOut>

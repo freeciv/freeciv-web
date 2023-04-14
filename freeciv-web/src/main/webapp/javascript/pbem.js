@@ -151,12 +151,11 @@ function login_pbem_user()
 }
 
 /**************************************************************************
-...
+  ...
 **************************************************************************/
 function login_pbem_user_request() 
 {
-
-  username = $("#username").val().trim();
+  username = sanitize_username($("#username").val());
   var password = $("#password").val().trim();
   if (password != null && password.length > 2) {
     var shaObj = new jsSHA("SHA-512", "TEXT");
@@ -584,11 +583,11 @@ function close_pbem_account()
 
 
 /**************************************************************************
- Will request the user to be deactivated  (activated='0' in DB).
+  Will request the user to be deactivated (activated='0' in DB).
 **************************************************************************/
 function request_deactivate_account()
 {
-  var usr = $("#username").val().trim();
+  var usr = sanitize_username($("#username").val());
   var password = $("#password").val().trim();
 
   var shaObj = new jsSHA("SHA-512", "TEXT");

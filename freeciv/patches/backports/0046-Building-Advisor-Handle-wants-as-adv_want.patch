@@ -1,0 +1,110 @@
+From 112687176da8d718048e3419614720db44e7f9ba Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 9 Apr 2023 20:23:46 +0300
+Subject: [PATCH 46/46] Building Advisor: Handle wants as adv_want
+
+Reported by bard
+
+See osdn #47776
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ ai/default/aitools.c          | 14 ++++++++------
+ server/advisors/advbuilding.c | 22 +++++++++++++---------
+ 2 files changed, 21 insertions(+), 15 deletions(-)
+
+diff --git a/ai/default/aitools.c b/ai/default/aitools.c
+index 42430460dd..82d7d6a8c1 100644
+--- a/ai/default/aitools.c
++++ b/ai/default/aitools.c
+@@ -1381,7 +1381,7 @@ void dai_build_adv_override(struct ai_type *ait, struct city *pcity,
+                             struct adv_choice *choice)
+ {
+   const struct impr_type *chosen;
+-  int want;
++  adv_want want;
+ 
+   if (choice->type == CT_NONE) {
+     want = 0;
+@@ -1394,9 +1394,11 @@ void dai_build_adv_override(struct ai_type *ait, struct city *pcity,
+   improvement_iterate(pimprove) {
+     /* Advisor code did not consider wonders, let's do it here */
+     if (is_wonder(pimprove)) {
+-      if (pcity->server.adv->building_want[improvement_index(pimprove)] > want
++      int id = improvement_index(pimprove);
++
++      if (pcity->server.adv->building_want[id] > want
+           && can_city_build_improvement_now(pcity, pimprove)) {
+-        want = pcity->server.adv->building_want[improvement_index(pimprove)];
++        want = pcity->server.adv->building_want[id];
+         chosen = pimprove;
+       }
+     }
+@@ -1408,9 +1410,9 @@ void dai_build_adv_override(struct ai_type *ait, struct city *pcity,
+   if (chosen) {
+     choice->type = CT_BUILDING; /* In case advisor had not chosen anything */
+ 
+-    CITY_LOG(LOG_DEBUG, pcity, "ai wants most to build %s at %d",
+-             improvement_rule_name(chosen),
+-             want);
++    CITY_LOG(LOG_DEBUG, pcity, "AI wants to build %s with want "
++             ADV_WANT_PRINTF,
++             improvement_rule_name(chosen), want);
+   }
+ }
+ 
+diff --git a/server/advisors/advbuilding.c b/server/advisors/advbuilding.c
+index 675f922e80..0f02993da7 100644
+--- a/server/advisors/advbuilding.c
++++ b/server/advisors/advbuilding.c
+@@ -269,15 +269,19 @@ void building_advisor_choose(struct city *pcity, struct adv_choice *choice)
+ {
+   struct player *plr = city_owner(pcity);
+   struct impr_type *chosen = NULL;
+-  int want = 0;
++  adv_want want = 0;
+ 
+   improvement_iterate(pimprove) {
++    int id;
++
+     if (is_wonder(pimprove)) {
+       continue; /* Humans should not be advised to build wonders or palace */
+     }
+-    if (pcity->server.adv->building_want[improvement_index(pimprove)] > want
+-          && can_city_build_improvement_now(pcity, pimprove)) {
+-      want = pcity->server.adv->building_want[improvement_index(pimprove)];
++
++    id = improvement_index(pimprove);
++    if (pcity->server.adv->building_want[id] > want
++        && can_city_build_improvement_now(pcity, pimprove)) {
++      want = pcity->server.adv->building_want[id];
+       chosen = pimprove;
+     }
+   } improvement_iterate_end;
+@@ -285,18 +289,18 @@ void building_advisor_choose(struct city *pcity, struct adv_choice *choice)
+   choice->want = want;
+   choice->value.building = chosen;
+ 
+-  if (chosen) {
++  if (chosen != NULL) {
+     choice->type = CT_BUILDING;
+ 
+-    CITY_LOG(LOG_DEBUG, pcity, "wants most to build %s at %d",
+-             improvement_rule_name(chosen),
+-             want);
++    CITY_LOG(LOG_DEBUG, pcity, "advisor wants to build %s with want "
++             ADV_WANT_PRINTF,
++             improvement_rule_name(chosen), want);
+   } else {
+     choice->type = CT_NONE;
+   }
+   choice->need_boat = FALSE;
+ 
+-  /* Allow ai to override */
++  /* Allow AI to override */
+   CALL_PLR_AI_FUNC(choose_building, plr, pcity, choice);
+ }
+ 
+-- 
+2.39.2
+

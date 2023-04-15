@@ -1,8 +1,7 @@
-diff --git a/server/maphand.c b/server/maphand.c
-index 9862015..86a7eae 100644
---- a/server/maphand.c
-+++ b/server/maphand.c
-@@ -463,7 +463,7 @@ void send_all_known_tiles(struct conn_list *dest)
+diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
+--- freeciv/server/maphand.c	2023-04-09 08:05:54.216224334 +0300
++++ freeciv/server/maphand.c	2023-04-09 08:10:50.923088236 +0300
+@@ -461,7 +461,7 @@
        conn_list_do_buffer(dest);
      }
  
@@ -11,7 +10,7 @@ index 9862015..86a7eae 100644
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -596,19 +596,21 @@ void send_tile_info(struct conn_list *dest, struct tile *ptile,
+@@ -594,20 +594,32 @@
        }
  
        send_packet_tile_info(pconn, &info);
@@ -31,8 +30,18 @@ index 9862015..86a7eae 100644
        info.placing = -1;
        info.place_turn = 0;
  
--      BV_CLR_ALL(info.extras);
-+      info.extras = ptile->extras; // WebGL client needs to know which tiles are rivers on game start.
+       BV_CLR_ALL(info.extras);
  
++      /* WebGL client needs to know which tiles are rivers on game start. */
++      extra_type_by_cause_iterate(EC_ROAD, priver) {
++        struct road_type *proad = extra_road_get(priver);
++
++        if (road_has_flag(proad, RF_RIVER)
++            && tile_has_road(ptile, proad)) {
++          BV_SET(info.extras, extra_number(priver));
++        }
++      } extra_type_by_cause_iterate_end;
++
        info.label[0] = '\0';
  
+       send_packet_tile_info(pconn, &info);

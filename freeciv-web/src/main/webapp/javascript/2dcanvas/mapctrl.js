@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -376,6 +376,4 @@ function handle_web_info_text_message(packet)
   message = lines.join("<br>\n");
 
   show_dialog_message("Tile Information", message);
-
 }
-

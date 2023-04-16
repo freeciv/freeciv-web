@@ -3317,16 +3317,13 @@ function popit()
 }
 
 /**************************************************************************
-  request tile popup
+  Request tile popup
 **************************************************************************/
 function popit_req(ptile)
 {
   if (ptile == null) return;
 
-  if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN) {
-    show_dialog_message("Tile info", "Location: x:" + ptile['x'] + " y:" + ptile['y']);
-    return;
-  } else if (tile_get_known(ptile) == TILE_UNKNOWN) {
+  if (tile_get_known(ptile) == TILE_UNKNOWN) {
     show_dialog_message("Tile info", "Location: x:" + ptile['x'] + " y:" + ptile['y']);
     return;
   }

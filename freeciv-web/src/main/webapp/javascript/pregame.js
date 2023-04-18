@@ -33,6 +33,22 @@ var google_user_token = null;
 /****************************************************************************
   ...
 ****************************************************************************/
+function sanitize_username(un)
+{
+  return (un.trim()
+    .replace(/&/g, '&amp;') // Must be first
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/`/g, '&#96;')
+    .replace(/\//g, '&#x2F;')
+    .replace(/\\/g, '&#x5C;'));
+}
+
+/****************************************************************************
+  ...
+****************************************************************************/
 function pregame_start_game()
 {
   if (client.conn['player_num'] == null) return;
@@ -1250,7 +1266,7 @@ function validate_username_callback()
           simpleStorage.set("password", "");
         }
       } else {
-        username = $("#username_req").val().trim();
+        username = sanitize_username($("#username_req").val());
         var password = $("#password_req").val();
         if (password == null) {
           var stored_password = simpleStorage.get("password", "");
@@ -1414,7 +1430,7 @@ function show_new_user_account_dialog(gametype)
 **************************************************************************/
 function create_new_freeciv_user_account_request(action_type)
 {
-  username = $("#username").val().trim().toLowerCase();
+  username = sanitize_username($("#username").val()).toLowerCase();
   var password = $("#password").val().trim();
   var confirm_password = $("#confirm_password").val().trim();
   var email = $("#email").val().trim();
@@ -1663,16 +1679,17 @@ function forgot_pbem_password()
 }
 
 /**************************************************************************
- User signed in with Google account.
+  User signed in with Google account.
 **************************************************************************/
 function google_signin_on_success(googleUser)
 {
   var id_token = googleUser.getAuthResponse().id_token;
-  username = $("#username_req").val().trim().toLowerCase();
+  username = sanitize_username($("#username_req").val()).toLowerCase();
   if (!validate_username()) {
     return;
   }
-  //validate user token.
+
+  // Validate user token.
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/token_signin');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

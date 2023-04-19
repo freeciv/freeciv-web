@@ -1,3 +1,6 @@
 META_URL http://localhost:8080/meta/metaserver.php
 
 FREECIV_STORAGE_DIR ~/.freeciv-web
+
+# Uncomment if you want extended/testmatic logging
+# FREECIV_TESTMATIC=yes

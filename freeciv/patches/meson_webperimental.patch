@@ -1,7 +1,7 @@
 diff -Nurd freeciv/meson.build freeciv/meson.build
---- freeciv/meson.build	2023-01-03 23:59:50.121401041 +0200
-+++ freeciv/meson.build	2023-01-04 00:00:07.345555922 +0200
-@@ -3547,7 +3547,8 @@
+--- freeciv/meson.build	2023-04-13 05:55:37.004281966 +0300
++++ freeciv/meson.build	2023-04-13 05:56:16.664672577 +0300
+@@ -3649,7 +3649,8 @@
    'sandbox',
    'civ1',
    'civ2',
@@ -11,7 +11,7 @@ diff -Nurd freeciv/meson.build freeciv/meson.build
    ]
  
  ruleset_files = [
-@@ -3574,6 +3575,8 @@
+@@ -3677,6 +3678,8 @@
    'data/sandbox.modpack',
    'data/civ1.modpack',
    'data/civ2.modpack',
@@ -20,7 +20,7 @@ diff -Nurd freeciv/meson.build freeciv/meson.build
    install_dir : join_paths(get_option('datadir'), 'freeciv')
    )
  
-@@ -3608,6 +3611,11 @@
+@@ -3711,6 +3714,11 @@
    )
  
  install_data(

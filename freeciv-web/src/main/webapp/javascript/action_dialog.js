@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -874,10 +874,9 @@ function list_potential_target_extras(act_unit, target_tile)
       /* This extra is at the tile. Can anything be done to it? */
       if ((is_extra_removed_by(pextra, ERM_PILLAGE)
            && unit_can_do_action(act_unit, ACTION_PILLAGE))
-          || (is_extra_removed_by(pextra, ERM_CLEANPOLLUTION)
-              && unit_can_do_action(act_unit, ACTION_CLEAN_POLLUTION))
-          || (is_extra_removed_by(pextra, ERM_CLEANFALLOUT)
-              && unit_can_do_action(act_unit, ACTION_CLEAN_FALLOUT))) {
+          || (unit_can_do_action(act_unit, ACTION_CLEAN)
+              && (is_extra_removed_by(pextra, ERM_CLEANPOLLUTION)
+                  || is_extra_removed_by(pextra, ERM_CLEANFALLOUT)))) {
         /* TODO: add more extra removal actions as they appear. */
         potential_targets.push(pextra);
       }

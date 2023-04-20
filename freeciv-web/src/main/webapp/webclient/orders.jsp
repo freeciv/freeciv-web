@@ -55,8 +55,8 @@
     <a href="#" onclick="key_unit_transform();"><img src="/images/orders/transform_default.png" name="transform_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
-  <div id="order_pollution" class="order_button" title="Remove pollution (P)">
-    <a href="#" onclick="key_unit_pollution();"><img src="/images/orders/pollution.png" name="pollution_button" alt="" border="0" width="30" height="30"></a>
+  <div id="order_clean" class="order_button" title="Remove pollution (P)">
+    <a href="#" onclick="key_unit_clean();"><img src="/images/orders/clean.png" name="clean_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
   <div id="order_sentry" class="order_button" title="Sentry unit (S)">

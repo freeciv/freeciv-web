@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2016  The Freeciv-web project
 
@@ -61,10 +61,10 @@ function webglOnWindowResize() {
 }
 
 /****************************************************************************
-Triggered when the mouse button is clicked UP on the mapview canvas.
+  Triggered when the mouse button is clicked UP on the mapview canvas.
 ****************************************************************************/
-function webglOnDocumentMouseUp( e ) {
-
+function webglOnDocumentMouseUp( e )
+{
   var rightclick = false;
   var middleclick = false;
 
@@ -78,22 +78,23 @@ function webglOnDocumentMouseUp( e ) {
   }
 
   var ptile = webgl_canvas_pos_to_tile(e.clientX, e.clientY - $("#canvas_div").offset().top);
+
   if (ptile == null) return;
 
   if (rightclick) {
-    /* right click to recenter. */
+    /* Right click to recenter. */
     if (!map_select_active || !map_select_setting_enabled) {
       context_menu_active = true;
       webgl_recenter_button_pressed(ptile);
     } else {
       context_menu_active = false;
-      //map_select_units(mouse_x, mouse_y);
+      // map_select_units(mouse_x, mouse_y);
     }
     map_select_active = false;
     map_select_check = false;
     mapview_mouse_movement = false;
 
-  } else if (!rightclick && !middleclick) {
+  } else if (!middleclick) {
     /* Left mouse button*/
     do_map_click(ptile, SELECT_POPUP, true);
     mapview_mouse_movement = false;

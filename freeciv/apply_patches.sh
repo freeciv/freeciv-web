@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0025-Set-city-names-correctly-when-loading-a-saved-game.patch
-#   Savegame loading fix
-#   osdn #47496
 # 0016-img_save-Avoid-make_dir-failure-with-empty-path.patch
 #   Fix mapimg saving
 #   osdn #47550
@@ -93,7 +90,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
   "backports/0027-Savegame-Store-counter-information-when-there-is-cou"

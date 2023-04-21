@@ -1,6 +1,6 @@
 diff -Nurd freeciv/client/control.c freeciv/client/control.c
---- freeciv/client/control.c	2023-04-13 22:53:36.057286289 +0300
-+++ freeciv/client/control.c	2023-04-13 22:54:30.281818675 +0300
+--- freeciv/client/control.c	2023-04-22 00:28:05.984606306 +0300
++++ freeciv/client/control.c	2023-04-22 00:28:22.228750376 +0300
 @@ -3617,7 +3617,7 @@
  {
    unit_list_iterate(get_units_in_focus(), punit) {
@@ -36,8 +36,8 @@ diff -Nurd freeciv/client/control.c freeciv/client/control.c
      }
    } unit_list_iterate_end;
 diff -Nurd freeciv/client/gui-gtk-3.22/citydlg.c freeciv/client/gui-gtk-3.22/citydlg.c
---- freeciv/client/gui-gtk-3.22/citydlg.c	2023-04-13 22:53:36.061286328 +0300
-+++ freeciv/client/gui-gtk-3.22/citydlg.c	2023-04-13 22:54:30.281818675 +0300
+--- freeciv/client/gui-gtk-3.22/citydlg.c	2023-04-22 00:28:05.988606340 +0300
++++ freeciv/client/gui-gtk-3.22/citydlg.c	2023-04-22 00:28:22.228750376 +0300
 @@ -3000,6 +3000,12 @@
                          G_CALLBACK(set_city_workertask),
                          GINT_TO_POINTER(ACTIVITY_TRANSFORM), FALSE, NULL);
@@ -52,8 +52,8 @@ diff -Nurd freeciv/client/gui-gtk-3.22/citydlg.c freeciv/client/gui-gtk-3.22/cit
                             city_owner(pcity), NULL) != NULL) {
        choice_dialog_add(shl, _("Clean Pollution"),
 diff -Nurd freeciv/client/gui-gtk-4.0/citydlg.c freeciv/client/gui-gtk-4.0/citydlg.c
---- freeciv/client/gui-gtk-4.0/citydlg.c	2023-04-13 22:53:36.069286407 +0300
-+++ freeciv/client/gui-gtk-4.0/citydlg.c	2023-04-13 22:54:30.281818675 +0300
+--- freeciv/client/gui-gtk-4.0/citydlg.c	2023-04-22 00:28:05.992606377 +0300
++++ freeciv/client/gui-gtk-4.0/citydlg.c	2023-04-22 00:28:22.228750376 +0300
 @@ -3135,6 +3135,12 @@
                          G_CALLBACK(set_city_workertask),
                          GINT_TO_POINTER(ACTIVITY_TRANSFORM), FALSE, NULL);
@@ -68,8 +68,8 @@ diff -Nurd freeciv/client/gui-gtk-4.0/citydlg.c freeciv/client/gui-gtk-4.0/cityd
                             city_owner(pcity), NULL) != NULL) {
        choice_dialog_add(shl, _("Clean Pollution"),
 diff -Nurd freeciv/client/gui-gtk-4.0/menu.c freeciv/client/gui-gtk-4.0/menu.c
---- freeciv/client/gui-gtk-4.0/menu.c	2023-04-13 22:53:36.069286407 +0300
-+++ freeciv/client/gui-gtk-4.0/menu.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/client/gui-gtk-4.0/menu.c	2023-04-22 00:28:05.992606377 +0300
++++ freeciv/client/gui-gtk-4.0/menu.c	2023-04-22 00:28:22.228750376 +0300
 @@ -3548,7 +3548,7 @@
  
    submenu = g_menu_new();
@@ -79,79 +79,9 @@ diff -Nurd freeciv/client/gui-gtk-4.0/menu.c freeciv/client/gui-gtk-4.0/menu.c
      char actname[256];
      GSimpleAction *act;
  
-@@ -3556,7 +3556,7 @@
-     act = g_simple_action_new(actname, NULL);
-     g_simple_action_set_enabled(act,
-                                 can_units_do_activity_targeted(punits,
--                                                               ACTIVITY_POLLUTION,
-+                                                               ACTIVITY_CLEAN,
-                                                                pextra));
-     g_action_map_add_action(map, G_ACTION(act));
-     g_signal_connect(act, "activate", G_CALLBACK(clean_menu_callback), pextra);
-@@ -3566,22 +3566,47 @@
-                            g_menu_item_new(extra_name_translation(pextra), actname));
-   } extra_type_by_rmcause_iterate_end;
- 
-+  extra_type_by_rmcause_iterate(ERM_CLEANPOLLUTION, pextra) {
-+    if (!is_extra_removed_by(pextra, ERM_CLEAN)) {
-+      char actname[256];
-+      GSimpleAction *act;
-+
-+      fc_snprintf(actname, sizeof(actname), "clean_%d", i);
-+      act = g_simple_action_new(actname, NULL);
-+      g_simple_action_set_enabled(act,
-+                                  can_units_do_activity_targeted(punits,
-+                                                                 ACTIVITY_CLEAN,
-+                                                                 pextra)
-+                                  || can_units_do_activity_targeted(punits,
-+                                                                    ACTIVITY_POLLUTION,
-+                                                                    pextra));
-+      g_action_map_add_action(map, G_ACTION(act));
-+      g_signal_connect(act, "activate", G_CALLBACK(clean_menu_callback), pextra);
-+
-+      fc_snprintf(actname, sizeof(actname), "app.clean_%d", i++);
-+      menu_item_append_unref(submenu,
-+                             g_menu_item_new(extra_name_translation(pextra), actname));
-+    }
-+  } extra_type_by_rmcause_iterate_end;
-+
-   extra_type_by_rmcause_iterate(ERM_CLEANFALLOUT, pextra) {
--    char actname[256];
--    GSimpleAction *act;
-+    if (!is_extra_removed_by(pextra, ERM_CLEAN)) {
-+      char actname[256];
-+      GSimpleAction *act;
- 
--    fc_snprintf(actname, sizeof(actname), "clean_%d", i);
--    act = g_simple_action_new(actname, NULL);
--    g_simple_action_set_enabled(act,
--                                can_units_do_activity_targeted(punits,
--                                                               ACTIVITY_FALLOUT,
--                                                               pextra));
--    g_action_map_add_action(map, G_ACTION(act));
--    g_signal_connect(act, "activate", G_CALLBACK(clean_menu_callback), pextra);
-+      fc_snprintf(actname, sizeof(actname), "clean_%d", i);
-+      act = g_simple_action_new(actname, NULL);
-+      g_simple_action_set_enabled(act,
-+                                  can_units_do_activity_targeted(punits,
-+                                                                 ACTIVITY_FALLOUT,
-+                                                                 pextra));
-+      g_action_map_add_action(map, G_ACTION(act));
-+      g_signal_connect(act, "activate", G_CALLBACK(clean_menu_callback), pextra);
- 
--    fc_snprintf(actname, sizeof(actname), "app.clean_%d", i++);
--    menu_item_append_unref(submenu,
--                           g_menu_item_new(extra_name_translation(pextra), actname));
-+      fc_snprintf(actname, sizeof(actname), "app.clean_%d", i++);
-+      menu_item_append_unref(submenu,
-+                             g_menu_item_new(extra_name_translation(pextra), actname));
-+    }
-   } extra_type_by_rmcause_iterate_end;
- 
-   g_menu_remove(work_menu, 5);
 diff -Nurd freeciv/client/gui-sdl2/menu.c freeciv/client/gui-sdl2/menu.c
---- freeciv/client/gui-sdl2/menu.c	2023-04-13 22:53:36.077286486 +0300
-+++ freeciv/client/gui-sdl2/menu.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/client/gui-sdl2/menu.c	2023-04-22 00:28:06.000606447 +0300
++++ freeciv/client/gui-sdl2/menu.c	2023-04-22 00:28:22.228750376 +0300
 @@ -1307,16 +1307,23 @@
          set_wflag(order_airbase_button, WF_HIDDEN);
        }
@@ -204,8 +134,8 @@ diff -Nurd freeciv/client/gui-sdl2/menu.c freeciv/client/gui-sdl2/menu.c
            && can_unit_do_activity_targeted(punit, ACTIVITY_CLEAN,
                                             clean_target)) {
 diff -Nurd freeciv/client/helpdata.c freeciv/client/helpdata.c
---- freeciv/client/helpdata.c	2023-04-13 22:53:36.061286328 +0300
-+++ freeciv/client/helpdata.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/client/helpdata.c	2023-04-22 00:28:05.988606340 +0300
++++ freeciv/client/helpdata.c	2023-04-22 00:28:22.228750376 +0300
 @@ -270,6 +270,17 @@
              transform_result);
  
@@ -247,8 +177,8 @@ diff -Nurd freeciv/client/helpdata.c freeciv/client/helpdata.c
          if (pextra->removal_time == 0) {
            if (factor < 0) {
 diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
---- freeciv/common/actions.c	2023-04-13 22:53:36.085286564 +0300
-+++ freeciv/common/actions.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/common/actions.c	2023-04-22 00:28:06.004606482 +0300
++++ freeciv/common/actions.c	2023-04-22 00:31:08.294224715 +0300
 @@ -2299,7 +2299,8 @@
    case ACTRES_PILLAGE:
      return is_extra_removed_by(pextra, ERM_PILLAGE);
@@ -259,7 +189,7 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
        || is_extra_removed_by(pextra, ERM_CLEANFALLOUT);
    case ACTRES_CLEAN_POLLUTION:
      return is_extra_removed_by(pextra, ERM_CLEANPOLLUTION);
-@@ -4321,31 +4322,38 @@
+@@ -4321,31 +4322,37 @@
    case ACTRES_CLEAN:
      {
        const struct extra_type *pextra = NULL;
@@ -293,7 +223,6 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
 +                                    ERM_CLEAN,
                                      actor->player,
                                      actor->unit);
-+
 +        if (pextra == NULL) {
 +          pextra = prev_extra_in_tile(target->tile,
 +                                      ERM_CLEANPOLLUTION,
@@ -310,7 +239,7 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
        }
  
        if (pextra != NULL && pterrain->extra_removal_times[extra_index(pextra)] > 0
-@@ -4353,11 +4361,6 @@
+@@ -4353,11 +4360,6 @@
          return TRI_YES;
        }
  
@@ -323,8 +252,8 @@ diff -Nurd freeciv/common/actions.c freeciv/common/actions.c
      }
  
 diff -Nurd freeciv/common/clientutils.c freeciv/common/clientutils.c
---- freeciv/common/clientutils.c	2023-04-13 22:53:36.085286564 +0300
-+++ freeciv/common/clientutils.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/common/clientutils.c	2023-04-22 00:28:06.004606482 +0300
++++ freeciv/common/clientutils.c	2023-04-22 00:28:22.228750376 +0300
 @@ -258,7 +258,9 @@
        case ACTIVITY_PILLAGE:
          rmcause = ERM_PILLAGE;
@@ -364,8 +293,8 @@ diff -Nurd freeciv/common/clientutils.c freeciv/common/clientutils.c
  
              if (calc->rmextra_turns[ei][i] > 0) {
 diff -Nurd freeciv/common/extras.c freeciv/common/extras.c
---- freeciv/common/extras.c	2023-04-13 22:53:36.085286564 +0300
-+++ freeciv/common/extras.c	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/common/extras.c	2023-04-22 00:28:06.004606482 +0300
++++ freeciv/common/extras.c	2023-04-22 00:28:22.228750376 +0300
 @@ -977,7 +977,8 @@
  {
    /* Is any of the worker remove action bits set? */
@@ -386,8 +315,8 @@ diff -Nurd freeciv/common/extras.c freeciv/common/extras.c
      return ERM_PILLAGE;
    case ACTIVITY_POLLUTION:
 diff -Nurd freeciv/common/fc_types.h freeciv/common/fc_types.h
---- freeciv/common/fc_types.h	2023-04-13 22:53:36.085286564 +0300
-+++ freeciv/common/fc_types.h	2023-04-13 22:54:30.285818714 +0300
+--- freeciv/common/fc_types.h	2023-04-22 00:28:06.004606482 +0300
++++ freeciv/common/fc_types.h	2023-04-22 00:28:22.228750376 +0300
 @@ -1083,14 +1083,16 @@
  #define SPECENUM_NAME extra_rmcause
  #define SPECENUM_VALUE0 ERM_PILLAGE
@@ -408,8 +337,8 @@ diff -Nurd freeciv/common/fc_types.h freeciv/common/fc_types.h
  #define SPECENUM_BITVECTOR bv_rmcauses
  #include "specenum_gen.h"
 diff -Nurd freeciv/data/alien/terrain.ruleset freeciv/data/alien/terrain.ruleset
---- freeciv/data/alien/terrain.ruleset	2023-04-13 22:53:36.093286643 +0300
-+++ freeciv/data/alien/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/alien/terrain.ruleset	2023-04-22 00:28:06.028606696 +0300
++++ freeciv/data/alien/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -692,8 +692,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -440,8 +369,8 @@ diff -Nurd freeciv/data/alien/terrain.ruleset freeciv/data/alien/terrain.ruleset
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/civ1/terrain.ruleset freeciv/data/civ1/terrain.ruleset
---- freeciv/data/civ1/terrain.ruleset	2023-04-13 22:53:36.113286839 +0300
-+++ freeciv/data/civ1/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/civ1/terrain.ruleset	2023-04-22 00:28:06.052606909 +0300
++++ freeciv/data/civ1/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -859,8 +859,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -463,8 +392,8 @@ diff -Nurd freeciv/data/civ1/terrain.ruleset freeciv/data/civ1/terrain.ruleset
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/civ2/terrain.ruleset freeciv/data/civ2/terrain.ruleset
---- freeciv/data/civ2/terrain.ruleset	2023-04-13 22:53:36.113286839 +0300
-+++ freeciv/data/civ2/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/civ2/terrain.ruleset	2023-04-22 00:28:06.052606909 +0300
++++ freeciv/data/civ2/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -930,8 +930,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -486,8 +415,8 @@ diff -Nurd freeciv/data/civ2/terrain.ruleset freeciv/data/civ2/terrain.ruleset
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/civ2civ3/terrain.ruleset freeciv/data/civ2civ3/terrain.ruleset
---- freeciv/data/civ2civ3/terrain.ruleset	2023-04-13 22:53:36.113286839 +0300
-+++ freeciv/data/civ2civ3/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/civ2civ3/terrain.ruleset	2023-04-22 00:28:06.052606909 +0300
++++ freeciv/data/civ2civ3/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1135,8 +1135,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -518,8 +447,8 @@ diff -Nurd freeciv/data/civ2civ3/terrain.ruleset freeciv/data/civ2civ3/terrain.r
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/classic/terrain.ruleset freeciv/data/classic/terrain.ruleset
---- freeciv/data/classic/terrain.ruleset	2023-04-13 22:53:36.117286878 +0300
-+++ freeciv/data/classic/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/classic/terrain.ruleset	2023-04-22 00:28:06.052606909 +0300
++++ freeciv/data/classic/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1114,8 +1114,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -550,8 +479,8 @@ diff -Nurd freeciv/data/classic/terrain.ruleset freeciv/data/classic/terrain.rul
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/goldkeep/terrain.ruleset freeciv/data/goldkeep/terrain.ruleset
---- freeciv/data/goldkeep/terrain.ruleset	2023-04-13 22:53:36.237288057 +0300
-+++ freeciv/data/goldkeep/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/goldkeep/terrain.ruleset	2023-04-22 00:28:06.140607689 +0300
++++ freeciv/data/goldkeep/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1090,8 +1090,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -582,8 +511,8 @@ diff -Nurd freeciv/data/goldkeep/terrain.ruleset freeciv/data/goldkeep/terrain.r
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/granularity/terrain.ruleset freeciv/data/granularity/terrain.ruleset
---- freeciv/data/granularity/terrain.ruleset	2023-04-13 22:53:36.237288057 +0300
-+++ freeciv/data/granularity/terrain.ruleset	2023-04-13 22:54:30.293818793 +0300
+--- freeciv/data/granularity/terrain.ruleset	2023-04-22 00:28:06.140607689 +0300
++++ freeciv/data/granularity/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -463,8 +463,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -596,8 +525,8 @@ diff -Nurd freeciv/data/granularity/terrain.ruleset freeciv/data/granularity/ter
  ;                           extra. 0, the default, means extra cannot be placed.
  ; graphic                 = tag specifying preferred graphic
 diff -Nurd freeciv/data/multiplayer/terrain.ruleset freeciv/data/multiplayer/terrain.ruleset
---- freeciv/data/multiplayer/terrain.ruleset	2023-04-13 22:53:36.421289863 +0300
-+++ freeciv/data/multiplayer/terrain.ruleset	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/data/multiplayer/terrain.ruleset	2023-04-22 00:28:06.280608931 +0300
++++ freeciv/data/multiplayer/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1088,8 +1088,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -627,9 +556,9 @@ diff -Nurd freeciv/data/multiplayer/terrain.ruleset freeciv/data/multiplayer/ter
  graphic        = "tx.fallout"
  graphic_alt    = "-"
  activity_gfx   = "None"
-diff -Nurd freeciv/data/ruledit/comments-3.2.txt freeciv/data/ruledit/comments-3.2.txt
---- freeciv/data/ruledit/comments-3.2.txt	2023-04-13 22:53:36.441290061 +0300
-+++ freeciv/data/ruledit/comments-3.2.txt	2023-04-13 22:54:30.297818832 +0300
+diff -Nurd freeciv/data/ruledit/comments-3.3.txt freeciv/data/ruledit/comments-3.3.txt
+--- freeciv/data/ruledit/comments-3.3.txt	2023-04-22 00:28:06.292609037 +0300
++++ freeciv/data/ruledit/comments-3.3.txt	2023-04-22 00:28:22.232750413 +0300
 @@ -747,8 +747,8 @@
  ;                           (the last three require a corresponding\n\
  ;                           [resource_*] / [base_*] / [road_*] section)\n\
@@ -642,8 +571,8 @@ diff -Nurd freeciv/data/ruledit/comments-3.2.txt freeciv/data/ruledit/comments-3
  ;                           extra. 0, the default, means extra cannot be placed.\n\
  ; graphic                 = tag specifying preferred graphic\n\
 diff -Nurd freeciv/data/sandbox/terrain.ruleset freeciv/data/sandbox/terrain.ruleset
---- freeciv/data/sandbox/terrain.ruleset	2023-04-13 22:53:36.445290098 +0300
-+++ freeciv/data/sandbox/terrain.ruleset	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/data/sandbox/terrain.ruleset	2023-04-22 00:28:06.296609072 +0300
++++ freeciv/data/sandbox/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1136,8 +1136,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -674,8 +603,8 @@ diff -Nurd freeciv/data/sandbox/terrain.ruleset freeciv/data/sandbox/terrain.rul
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/data/stub/terrain.ruleset freeciv/data/stub/terrain.ruleset
---- freeciv/data/stub/terrain.ruleset	2023-04-13 22:53:36.457290216 +0300
-+++ freeciv/data/stub/terrain.ruleset	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/data/stub/terrain.ruleset	2023-04-22 00:28:06.304609144 +0300
++++ freeciv/data/stub/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -356,8 +356,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -688,8 +617,8 @@ diff -Nurd freeciv/data/stub/terrain.ruleset freeciv/data/stub/terrain.ruleset
  ;                           extra. 0, the default, means extra cannot be placed.
  ; graphic                 = tag specifying preferred graphic
 diff -Nurd freeciv/data/webperimental/terrain.ruleset freeciv/data/webperimental/terrain.ruleset
---- freeciv/data/webperimental/terrain.ruleset	2023-04-13 22:53:36.493290570 +0300
-+++ freeciv/data/webperimental/terrain.ruleset	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/data/webperimental/terrain.ruleset	2023-04-22 00:28:06.332609392 +0300
++++ freeciv/data/webperimental/terrain.ruleset	2023-04-22 00:28:22.232750413 +0300
 @@ -1114,8 +1114,8 @@
  ;                           (the last three require a corresponding
  ;                           [resource_*] / [base_*] / [road_*] section)
@@ -720,8 +649,8 @@ diff -Nurd freeciv/data/webperimental/terrain.ruleset freeciv/data/webperimental
  graphic_alt    = "-"
  activity_gfx   = "None"
 diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
---- freeciv/server/rssanity.c	2023-04-13 22:53:36.509290727 +0300
-+++ freeciv/server/rssanity.c	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/server/rssanity.c	2023-04-22 00:28:06.344609499 +0300
++++ freeciv/server/rssanity.c	2023-04-22 00:28:22.232750413 +0300
 @@ -1148,8 +1148,8 @@
      }
      if ((requirement_vector_size(&pextra->rmreqs) > 0)
@@ -734,8 +663,8 @@ diff -Nurd freeciv/server/rssanity.c freeciv/server/rssanity.c
                      "Requirements for extra removal defined but not "
                      "a valid remove cause!");
 diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2023-04-13 22:53:36.513290766 +0300
-+++ freeciv/server/unithand.c	2023-04-13 22:54:30.297818832 +0300
+--- freeciv/server/unithand.c	2023-04-22 00:28:06.348609534 +0300
++++ freeciv/server/unithand.c	2023-04-22 00:28:22.232750413 +0300
 @@ -4299,11 +4299,16 @@
        }
  
@@ -756,8 +685,8 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
      } else if (activity == ACTIVITY_POLLUTION) {
        activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANPOLLUTION,
 diff -Nurd freeciv/server/unittools.c freeciv/server/unittools.c
---- freeciv/server/unittools.c	2023-04-13 22:53:36.509290727 +0300
-+++ freeciv/server/unittools.c	2023-04-13 22:54:30.309818950 +0300
+--- freeciv/server/unittools.c	2023-04-22 00:28:06.344609499 +0300
++++ freeciv/server/unittools.c	2023-04-22 00:28:22.232750413 +0300
 @@ -954,32 +954,31 @@
       *       set */
      {

@@ -1,0 +1,195 @@
+From ac6a830b126e8e582168ca2c97c3fd4f9eba75fb Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 10 Mar 2023 07:18:16 +0200
+Subject: [PATCH 33/33] Meson: Add emscripten build support
+
+See osdn #46354
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ gen_headers/meson_fc_config.h.in |   4 +-
+ meson.build                      | 104 +++++++++++++++++++++++++------
+ 2 files changed, 88 insertions(+), 20 deletions(-)
+
+diff --git a/gen_headers/meson_fc_config.h.in b/gen_headers/meson_fc_config.h.in
+index f1e8544b43..a1cb052efb 100644
+--- a/gen_headers/meson_fc_config.h.in
++++ b/gen_headers/meson_fc_config.h.in
+@@ -43,10 +43,10 @@
+ #mesondefine WORDS_BIGENDIAN
+ 
+ /* Database backend available */
+-#define HAVE_FCDB 1
++#mesondefine HAVE_FCDB
+ 
+ /* Have Sqlite3 database backend */
+-#define HAVE_FCDB_SQLITE3 1
++#mesondefine HAVE_FCDB_SQLITE3
+ 
+ /* Build in Qt5 mode */
+ #mesondefine FC_QT5_MODE
+diff --git a/meson.build b/meson.build
+index d6aa0fd7ed..0ae88e76d3 100644
+--- a/meson.build
++++ b/meson.build
+@@ -150,11 +150,22 @@ if meson.is_cross_build()
+   cross_inc_path = [cross_inc_str]
+   cross_lib_path = [meson.get_cross_property('cross_lib_path')]
+   crosser = meson.get_cross_property('crosser')
++
++  # emscripten build is always cross-build, so check it only here
++  if c_compiler.compiles(
++'''#ifndef __EMSCRIPTEN__
++  error fail
++#endif''')
++    emscripten = true
++  else
++    emscripten = false
++  endif
+ else
+   cross_inc_str = ''
+   cross_inc_path = []
+   cross_lib_path = []
+   crosser = false
++  emscripten = false
+ endif
+ 
+ qtver = get_option('qtver')
+@@ -487,10 +498,30 @@ int main(void) { int *var = nullptr; return 0; }''',
+   pub_conf_data.set('FREECIV_HAVE_CXX_NULLPTR', 1)
+ endif
+ 
+-icu_dep = dependency('icu-uc')
++if emscripten
++  icu_dep = []
++  syslua = 'false'
++
++  emscripten_use_args = [
++     '-s', 'USE_ICU=1',
++     '-s', 'USE_ZLIB=1',
++     '-s', 'USE_PTHREADS=1'
++    ]
+ 
+-syslua = get_option('syslua')
+-lua_dep_tmp = dependency('lua-5.4', required:false)
++  add_global_arguments(
++     emscripten_use_args,
++     language : [ 'c', 'cpp'])
++  add_global_link_arguments(
++     emscripten_use_args,
++     '-s', 'TOTAL_MEMORY=64MB',
++     language : [ 'c', 'cpp'])
++else
++  priv_conf_data.set('HAVE_FCDB', 1)
++  priv_conf_data.set('HAVE_FCDB_SQLITE3', 1)
++  icu_dep = dependency('icu-uc')
++  syslua = get_option('syslua')
++  lua_dep_tmp = dependency('lua-5.4', required:false)
++endif
+ 
+ if syslua != 'false' and lua_dep_tmp.found()
+   lua_inc_path = []
+@@ -594,7 +625,29 @@ if get_option('audio') or get_option('clients').contains('sdl2')
+                     c_compiler.find_library('SDL2main', dirs: cross_lib_path),
+                     c_compiler.find_library('SDL2', dirs: cross_lib_path)]
+   else
+-    sdl2main_dep = [c_compiler.find_library('SDL2', dirs: cross_lib_path)]
++    if emscripten
++      emscripten_sdl2_args = [
++        '-s', 'USE_SDL=2'
++      ]
++
++      if get_option('audio')
++        emscripten_sdl2_args += [ '-s', 'USE_SDL_MIXER=2' ]
++      endif
++
++      if get_option('clients').contains('sdl2')
++        emscripten_sdl2_args += [
++          '-s', 'USE_SDL_IMAGE=2',
++          '-s', 'USE_SDL_TTF=2',
++          '-s', 'USE_SDL_GFX=2'
++        ]
++      endif
++
++      add_global_arguments(emscripten_sdl2_args, language: ['c', 'cpp'])
++      add_global_link_arguments(emscripten_sdl2_args, language: ['c', 'cpp'])
++      sdl2main_dep = []
++    else
++      sdl2main_dep = [c_compiler.find_library('SDL2', dirs: cross_lib_path)]
++    endif
+   endif
+ endif
+ 
+@@ -613,9 +666,14 @@ endif
+ if get_option('audio')
+   priv_conf_data.set('AUDIO_SDL', 1)
+ 
+-  audio_sdl2_dep = c_compiler.find_library('SDL2_mixer',
+-                                           dirs: cross_lib_path)
+-  audio_dep = [sdl2main_dep, audio_sdl2_dep]
++  if emscripten
++    audio_dep = []
++  else
++    audio_sdl2_dep = c_compiler.find_library('SDL2_mixer',
++                                             dirs: cross_lib_path)
++    audio_dep = [sdl2main_dep, audio_sdl2_dep]
++  endif
++
+   audio_sdl_src = 'client/audio_sdl.c'
+ else
+   audio_dep = []
+@@ -650,20 +708,32 @@ else
+   gettext_dep = []
+ endif
+ 
+-sqlite3_dep = c_compiler.find_library('sqlite3', dirs: cross_lib_path)
+-m_dep = c_compiler.find_library('m', dirs: cross_lib_path)
+-
+-curl_dep = c_compiler.find_library('curl', dirs: cross_lib_path)
++if emscripten
++  sqlite3_dep = []
++  sqlite3_src = []
++  curl_dep = []
++  m_dep = []
++else
++  sqlite3_dep = c_compiler.find_library('sqlite3', dirs: cross_lib_path)
++  sqlite3_src = [
++    'dependencies/luasql/src/luasql.c',
++    'dependencies/luasql/src/ls_sqlite3.c',
++  ]
++  curl_dep = c_compiler.find_library('curl', dirs: cross_lib_path)
++  m_dep = c_compiler.find_library('m', dirs: cross_lib_path)
++endif
+ 
+-if c_compiler.compiles(net_incl + '''
++if not emscripten
++  if c_compiler.compiles(net_incl + '''
+ #include <stddef.h>
+ #include <curl/curl.h>
+ int main(void) { curl_mime *mime = curl_mime_init(NULL); }''',
+   include_directories: include_directories(cross_inc_path)
+   )
+-  priv_conf_data.set('HAVE_CURL_MIME_API', 1)
+-else
+-  error('Too old libcurl version - does not support mime API')
++    priv_conf_data.set('HAVE_CURL_MIME_API', 1)
++  else
++    error('Too old libcurl version - does not support mime API')
++  endif
+ endif
+ 
+ if get_option('gitrev')
+@@ -784,9 +854,7 @@ fc_deps = static_library('fc_dependencies',
+   'dependencies/tolua-5.2/src/lib/tolua_map.c',
+   'dependencies/tolua-5.2/src/lib/tolua_push.c',
+   'dependencies/tolua-5.2/src/lib/tolua_to.c',
+-  'dependencies/luasql/src/luasql.c',
+-  'dependencies/luasql/src/ls_sqlite3.c',
+-  tinycthr_files,
++  sqlite3_src, tinycthr_files,
+   sources: [verhdr],
+   include_directories : common_inc,
+   dependencies: lua_dep
+-- 
+2.39.2
+

@@ -69,6 +69,12 @@
 # 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
 #   Fix to illegal memory access
 #   osdn #47900
+# 0033-Meson-Add-emscripten-build-support.patch
+#   Dependency to later meson patches
+#   osdn #46354
+# 0028-Meson-Stop-using-deprecated-get_cross_property.patch
+#   Meson deprecation fix
+#   osdn #44913
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -114,6 +120,8 @@ declare -a PATCHLIST=(
   "backports/0017-Meson-Add-testmatic-support"
   "backports/rebased-0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
+  "backports/0033-Meson-Add-emscripten-build-support"
+  "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "meson_webperimental"
   "metachange"
   "text_fixes"

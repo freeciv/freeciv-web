@@ -66,6 +66,9 @@
 #   Dependency for "Clean" action to work properly
 #   Heavily rebased to current freeciv-web version when backported
 #   osdn #47839
+# 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
+#   Fix to illegal memory access
+#   osdn #47900
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -110,6 +113,7 @@ declare -a PATCHLIST=(
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
   "backports/rebased-0050-Add-ERM_CLEAN"
+  "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "meson_webperimental"
   "metachange"
   "text_fixes"

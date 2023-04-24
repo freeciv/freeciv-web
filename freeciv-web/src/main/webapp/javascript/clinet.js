@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -24,7 +24,7 @@ var syncTimerId = -1;
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 
-var freeciv_version = "+Freeciv.Web.Devel-3.2";
+var freeciv_version = "+Freeciv.Web.Devel-3.3";
 
 var ws = null;
 var civserverport = null;

@@ -17,7 +17,6 @@
 ***********************************************************************'''
 
 
-
 import unittest
 import mysql.connector
 import pbem
@@ -27,7 +26,6 @@ class TestPBEM(unittest.TestCase):
 
   def test_create_testusers(self):
     print("creating test users");
-    result = None;
     cursor = None;
     cnx = None;
     try:
@@ -55,6 +53,3 @@ class TestPBEM(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-

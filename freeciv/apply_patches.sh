@@ -51,6 +51,9 @@
 # 0028-Meson-Stop-using-deprecated-get_cross_property.patch
 #   Meson deprecation fix
 #   osdn #44913
+# 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
+#   Assert fix
+#   osdn #47938
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -90,6 +93,7 @@ declare -a PATCHLIST=(
   "backports/rebased-0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
+  "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "meson_webperimental"
   "metachange"
   "text_fixes"

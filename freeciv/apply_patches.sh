@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0025-Set-city-names-correctly-when-loading-a-saved-game.patch
-#   Savegame loading fix
-#   osdn #47496
 # 0016-img_save-Avoid-make_dir-failure-with-empty-path.patch
 #   Fix mapimg saving
 #   osdn #47550
@@ -69,6 +66,15 @@
 #   Dependency for "Clean" action to work properly
 #   Heavily rebased to current freeciv-web version when backported
 #   osdn #47839
+# 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
+#   Fix to illegal memory access
+#   osdn #47900
+# 0033-Meson-Add-emscripten-build-support.patch
+#   Dependency to later meson patches
+#   osdn #46354
+# 0028-Meson-Stop-using-deprecated-get_cross_property.patch
+#   Meson deprecation fix
+#   osdn #44913
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -93,7 +99,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0025-Set-city-names-correctly-when-loading-a-saved-game"
   "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
   "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
   "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
@@ -114,6 +119,9 @@ declare -a PATCHLIST=(
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
   "backports/rebased-0050-Add-ERM_CLEAN"
+  "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
+  "backports/0033-Meson-Add-emscripten-build-support"
+  "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "meson_webperimental"
   "metachange"
   "text_fixes"

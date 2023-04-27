@@ -1,0 +1,45 @@
+From c32d4e3fff189fd8105c76d4e23ca7c9ef054d65 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 22 Apr 2023 13:36:29 +0300
+Subject: [PATCH 24/27] Fix cargo_iter_next() out-of-bounds read
+
+If cargo_iter_next() was called when iterator had already
+reached the topmost transport in the end, it tried to look
+for upper level transport.
+
+Reported by alain_bkr
+
+See osdn #47900
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/unit.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/common/unit.c b/common/unit.c
+index 28a8421b39..57a286494a 100644
+--- a/common/unit.c
++++ b/common/unit.c
+@@ -2489,7 +2489,9 @@ static void cargo_iter_next(struct iterator *it)
+     return;
+   }
+ 
+-  do {
++  fc_assert(iter->depth > 0);
++
++  while (iter->depth > 0) {
+     /* Variant 2: there are other cargo units at same level. */
+     pnext = unit_list_link_next(piter);
+     if (NULL != pnext) {
+@@ -2499,7 +2501,7 @@ static void cargo_iter_next(struct iterator *it)
+ 
+     /* Variant 3: return to previous level, and do same tests. */
+     piter = iter->links[iter->depth-- - 2];
+-  } while (0 < iter->depth);
++  }
+ }
+ 
+ /**********************************************************************//**
+-- 
+2.39.2
+

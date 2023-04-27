@@ -5,15 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0027-Make-research-invention-array-big-enough-for-A_FUTUR.patch
-#   Fix out-of-bounds bug
-#   osdn #47574
 # 0032-Fix-freeciv-manual-failure-with-native_bases-cache.patch
 #   Fix freeciv-manual failure
 #   osdn #47607
-# 0040-Fix-threaded-saving-of-the-game-on-signal.patch
-#   Dataloss avoidance
-#   osdn #47540
 # 0015-lua_command-Use-fc_stat-instead-of-opening-the-file.patch
 #   File descriptor leak fix
 #   osdn #47609
@@ -78,9 +72,7 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0027-Make-research-invention-array-big-enough-for-A_FUTUR"
   "backports/0032-Fix-freeciv-manual-failure-with-native_bases-cache"
-  "backports/0040-Fix-threaded-saving-of-the-game-on-signal"
   "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
   "backports/0036-Optimize-V_RADIUS-usage"
   "backports/0033-Improve-handling-of-fc_rand-1"

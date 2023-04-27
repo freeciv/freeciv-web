@@ -70,6 +70,7 @@ spec_files = {
     "terrain2.spec",
     "tiles.spec",
     "units.spec",
+    "extra_units.spec",
     "upkeep.spec",
     "veterancy.spec",
     "water.spec"

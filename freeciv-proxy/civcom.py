@@ -19,6 +19,8 @@ from threading import Thread
 import logging
 import time
 
+__all__ = ['CivCom']
+
 HOST = '127.0.0.1'
 logger = logging.getLogger("freeciv-proxy")
 

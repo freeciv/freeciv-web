@@ -1,0 +1,42 @@
+From 2aba3a49f9bde0e16c65967e225d29c0de16a9fd Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 25 Apr 2023 19:46:17 +0300
+Subject: [PATCH 35/35] Fix overzealous 'pcity->surplus[O_SHIELD] >= 0' assert
+
+The surplus can be negative as long as there's enough
+shields left from the previous turn to pay.
+
+See osdn #47938
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/cityturn.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/server/cityturn.c b/server/cityturn.c
+index 61a1f5f17b..0e4fb076d5 100644
+--- a/server/cityturn.c
++++ b/server/cityturn.c
+@@ -2503,7 +2503,7 @@ static bool city_build_building(struct player *pplayer, struct city *pcity)
+ 
+   if (is_convert_improvement(pcity->production.value.building)) {
+     /* Coinage-like improvements that convert production */
+-    fc_assert(pcity->surplus[O_SHIELD] >= 0);
++    fc_assert(pcity->before_change_shields >= 0);
+ 
+     /* pcity->before_change_shields already contains the surplus from
+      * this turn. */
+@@ -2514,8 +2514,10 @@ static bool city_build_building(struct player *pplayer, struct city *pcity)
+     pcity->before_change_shields = 0;
+     pcity->shield_stock = 0;
+     choose_build_target(pplayer, pcity);
++
+     return TRUE;
+   }
++
+   upgrade_building_prod(pcity);
+ 
+   /* The final (after upgrade) build target */
+-- 
+2.39.2
+

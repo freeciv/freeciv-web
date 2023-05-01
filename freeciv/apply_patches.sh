@@ -5,30 +5,12 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0016-img_save-Avoid-make_dir-failure-with-empty-path.patch
-#   Fix mapimg saving
-#   osdn #47550
-# 0019-send_server_info_to_metaserver-Read-timer-just-once.patch
-#   Metaserver communication improvement
-#   osdn #46445
-# 0027-Savegame-Store-counter-information-when-there-is-cou.patch
-#   Fix trouble with savegames from rulesets with no counters
-#   osdn #46499
-# 0030-Stop-civil-war-from-adding-player-above-max_players.patch
-#   Respect server operator set setting
-#   osdn #45587
-# 0012-Drop-deprecated-real_activities-array.patch
-#   Fix a memory corruption issue
-#   osdn #46527
 # 0027-Make-research-invention-array-big-enough-for-A_FUTUR.patch
 #   Fix out-of-bounds bug
 #   osdn #47574
 # 0032-Fix-freeciv-manual-failure-with-native_bases-cache.patch
 #   Fix freeciv-manual failure
 #   osdn #47607
-# 0005-Save-map-images-also-on-game-over.patch
-#   Upstream implementation of game-end map image saving
-#   osdn #47551
 # 0040-Fix-threaded-saving-of-the-game-on-signal.patch
 #   Dataloss avoidance
 #   osdn #47540
@@ -50,9 +32,6 @@
 # 0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector.patch
 #   Illegal memory access fix
 #   osdn #47762
-# 0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10.patch
-#   Upstream bugfix to included lua
-#   osdn #47593
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
@@ -69,12 +48,12 @@
 # 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
 #   Fix to illegal memory access
 #   osdn #47900
-# 0033-Meson-Add-emscripten-build-support.patch
-#   Dependency to later meson patches
-#   osdn #46354
 # 0028-Meson-Stop-using-deprecated-get_cross_property.patch
 #   Meson deprecation fix
 #   osdn #44913
+# 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
+#   Assert fix
+#   osdn #47938
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -99,14 +78,8 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0016-img_save-Avoid-make_dir-failure-with-empty-path"
-  "backports/0019-send_server_info_to_metaserver-Read-timer-just-once"
-  "backports/0027-Savegame-Store-counter-information-when-there-is-cou"
-  "backports/0030-Stop-civil-war-from-adding-player-above-max_players"
-  "backports/0012-Drop-deprecated-real_activities-array"
   "backports/0027-Make-research-invention-array-big-enough-for-A_FUTUR"
   "backports/0032-Fix-freeciv-manual-failure-with-native_bases-cache"
-  "backports/0005-Save-map-images-also-on-game-over"
   "backports/0040-Fix-threaded-saving-of-the-game-on-signal"
   "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
   "backports/0036-Optimize-V_RADIUS-usage"
@@ -114,14 +87,13 @@ declare -a PATCHLIST=(
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
   "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
-  "backports/0011-lua-5.4.4-Apply-upstream-bug-fix-patch-10"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
   "backports/rebased-0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
-  "backports/0033-Meson-Add-emscripten-build-support"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
+  "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -36,6 +36,9 @@
 # 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
 #   Assert fix
 #   osdn #47938
+# 0022-Fix-out-of-bounds-on-cargo-iter.patch
+#   Memory fix
+#   osdn #47982
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -70,6 +73,7 @@ declare -a PATCHLIST=(
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
+  "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "meson_webperimental"
   "metachange"
   "text_fixes"

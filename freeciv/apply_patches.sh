@@ -36,6 +36,9 @@
 # 0022-Fix-out-of-bounds-on-cargo-iter.patch
 #   Memory fix
 #   osdn #47982
+# 0021-Autoworkers-Fix-assert-failure-because-of-recursive-.patch
+#   Assert failure fix
+#   osdn #47992
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -70,6 +73,7 @@ declare -a PATCHLIST=(
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
+  "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "meson_webperimental"
   "metachange"
   "text_fixes"

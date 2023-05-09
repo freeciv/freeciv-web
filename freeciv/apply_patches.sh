@@ -5,18 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0032-Fix-freeciv-manual-failure-with-native_bases-cache.patch
-#   Fix freeciv-manual failure
-#   osdn #47607
-# 0015-lua_command-Use-fc_stat-instead-of-opening-the-file.patch
-#   File descriptor leak fix
-#   osdn #47609
-# 0036-Optimize-V_RADIUS-usage.patch
-#   Performance improvement
-#   osdn #45627
-# 0033-Improve-handling-of-fc_rand-1.patch
-#   Performance improvement
-#   osdn #45917
 # 0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere.patch
 #   Path Findig fix
 #   osdn #47731
@@ -72,10 +60,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0032-Fix-freeciv-manual-failure-with-native_bases-cache"
-  "backports/0015-lua_command-Use-fc_stat-instead-of-opening-the-file"
-  "backports/0036-Optimize-V_RADIUS-usage"
-  "backports/0033-Improve-handling-of-fc_rand-1"
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
   "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"

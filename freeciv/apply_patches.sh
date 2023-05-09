@@ -11,9 +11,6 @@
 # 0030-AI-Fix-check-if-new-building-enables-disables-action.patch
 #   AI fix
 #   osdn #42169
-# 0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector.patch
-#   Illegal memory access fix
-#   osdn #47762
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
@@ -65,7 +62,6 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
-  "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"

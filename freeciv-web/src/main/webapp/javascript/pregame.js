@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -29,6 +29,13 @@ var antialiasing_setting = true;
 var update_player_info_pregame_queued = false;
 var password_reset_count = 0;
 var google_user_token = null;
+
+
+var QUALITY_MEDIUM = 2; // Medium quality.
+var QUALITY_HIGH = 3;   // Best quality, add features which require
+                        // high-end graphics hardware here.
+
+var graphics_quality = QUALITY_HIGH;
 
 /****************************************************************************
   ...

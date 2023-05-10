@@ -42,12 +42,14 @@
 # 0023-Savegame-Correct-loading-governor-settings.patch
 #   Savegame loading fix
 #   osdn #48002
+# 0025-Filter-chat-messages-more-aggressively-on-freeciv-we.patch
+#   Replaces former freeciv-web specific patch
+#   osdn #48007
 
 # Not in the upstream Freeciv server
 # ----------------------------------
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
-# message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
@@ -78,6 +80,7 @@ declare -a PATCHLIST=(
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
+  "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
   "meson_webperimental"
   "metachange"
   "text_fixes"
@@ -87,7 +90,6 @@ declare -a PATCHLIST=(
   "savegame"
   "maphand_ch"
   "server_password"
-  "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"
   "longturn"

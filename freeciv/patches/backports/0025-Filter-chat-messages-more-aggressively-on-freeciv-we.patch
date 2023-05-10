@@ -1,0 +1,178 @@
+From fb579471802d825d884f39fae930d674adea6a1c Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 9 May 2023 23:03:48 +0300
+Subject: [PATCH 25/25] Filter chat messages more aggressively on freeciv-web
+ builds
+
+See osdn #48007
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/handchat.c | 61 ++++++++++++++++++++++++++---------------------
+ 1 file changed, 34 insertions(+), 27 deletions(-)
+
+diff --git a/server/handchat.c b/server/handchat.c
+index 87abc2ec40..c216c3dfca 100644
+--- a/server/handchat.c
++++ b/server/handchat.c
+@@ -101,7 +101,7 @@ static void send_chat_msg(struct connection *pconn,
+   2 for attempt to send to an anonymous player.
+ **************************************************************************/
+ static void complain_ambiguous(struct connection *pconn, const char *name,
+-			       int player_conn)
++                               int player_conn)
+ {
+   switch (player_conn) {
+   case 0:
+@@ -298,20 +298,20 @@ static void chat_msg_to_all(struct connection *sender, char *msg)
+   Handle a chat message packet from client:
+   1. Work out whether it is a server command and if so run it;
+   2. Otherwise work out whether it is directed to a single player, or
+-     to a single connection, and send there.  (For a player, send to
++     to a single connection, and send there. (For a player, send to
+      all clients connected as that player, in multi-connect case);
+   3. Or it may be intended for all allied players.
+   4. Else send to all connections (game.est_connections).
+ 
+   In case 2, there can sometimes be ambiguity between player and
+-  connection names.  By default this tries to match player name first,
+-  and only if that fails tries to match connection name.  User can
++  connection names. By default this tries to match player name first,
++  and only if that fails tries to match connection name. User can
+   override this and specify connection only by using two colons ("::")
+   after the destination name/prefix, instead of one.
+ 
+   The message sent will name the sender, and via format differences
+-  also indicates whether the recipient is either all connections, a
+-  single connection, or multiple connections to a single player.
++  also indicates whether the recipient is either all connections,
++  a single connection, or multiple connections to a single player.
+ 
+   Message is also echoed back to sender (with different format),
+   avoiding sending both original and echo if sender is in destination
+@@ -331,6 +331,12 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+       *cp = '\0';
+       break;
+     }
++#ifdef FREECIV_WEB
++    if (*cp == '<' || *cp == '>' || *cp == '"' || *cp == '\'') {
++      *cp = '\0';
++      break;
++    }
++#endif /* FREECIV_WEB */
+   }
+ 
+   /* Server commands are prefixed with '/', which is an obvious
+@@ -340,14 +346,14 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+      or change it in chat.h - rp
+   */
+   if (real_message[0] == SERVER_COMMAND_PREFIX) {
+-    /* pass it to the command parser, which will chop the prefix off */
++    /* Pass it to the command parser, which will chop the prefix off */
+     (void) handle_stdin_input(pconn, real_message);
+     return;
+   }
+ 
+   /* Send to allies command */
+   if (real_message[0] == CHAT_ALLIES_PREFIX) {
+-    /* this won't work if we aren't attached to a player */
++    /* This won't work if we aren't attached to a player */
+     if (NULL == pconn->playing && !pconn->observer) {
+       notify_conn(pconn->self, NULL, E_CHAT_ERROR, ftc_server,
+                   _("You are not attached to a player."));
+@@ -369,22 +375,22 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+      notice intended private messages with (eg) mis-spelt name.
+ 
+      Approach:
+-     
++
+      If there is no ':', or ':' is first on line,
+           message is global (send to all players)
+      else if the ':' is double, try matching part before "::" against
+           connection names: for single match send to that connection,
+-	  for multiple matches complain, else goto heuristics below.
++          for multiple matches complain, else goto heuristics below.
+      else try matching part before (single) ':' against player names:
+           for single match send to that player, for multiple matches
+-	  complain
++          complain
+      else try matching against connection names: for single match send
+           to that connection, for multiple matches complain
+      else if some heuristics apply (a space anywhere before first ':')
+           then treat as global message,
+      else complain (might be a typo-ed intended private message)
+   */
+-  
++
+   cp = strchr(real_message, CHAT_DIRECT_PREFIX);
+ 
+   if (cp && (cp != &real_message[0])) {
+@@ -401,19 +407,19 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+     if (double_colon) {
+       conn_dest = conn_by_user_prefix(name, &match_result_conn);
+       if (match_result_conn == M_PRE_AMBIGUOUS) {
+-	complain_ambiguous(pconn, name, 1);
+-	return;
++        complain_ambiguous(pconn, name, 1);
++        return;
+       }
+       if (conn_dest && match_result_conn < M_PRE_AMBIGUOUS) {
+-	chat_msg_to_conn(pconn, conn_dest, cp+2);
+-	return;
++        chat_msg_to_conn(pconn, conn_dest, cp+2);
++        return;
+       }
+     } else {
+-      /* single colon */
++      /* Single colon */
+       pdest = player_by_name_prefix(name, &match_result_player);
+       if (match_result_player == M_PRE_AMBIGUOUS) {
+-	complain_ambiguous(pconn, name, 0);
+-	return;
++        complain_ambiguous(pconn, name, 0);
++        return;
+       }
+       if (pdest && strcmp(player_name(pdest), ANON_PLAYER_NAME) == 0) {
+         complain_ambiguous(pconn, name, 2);
+@@ -422,22 +428,22 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+       if (pdest && match_result_player < M_PRE_AMBIGUOUS) {
+         chat_msg_to_player(pconn, pdest, cp + 1);
+         return;
+-	/* else try for connection name match before complaining */
++        /* Else try for connection name match before complaining */
+       }
+       conn_dest = conn_by_user_prefix(name, &match_result_conn);
+       if (match_result_conn == M_PRE_AMBIGUOUS) {
+-	complain_ambiguous(pconn, name, 1);
+-	return;
++        complain_ambiguous(pconn, name, 1);
++        return;
+       }
+       if (conn_dest && match_result_conn < M_PRE_AMBIGUOUS) {
+-	chat_msg_to_conn(pconn, conn_dest, cp+1);
+-	return;
++        chat_msg_to_conn(pconn, conn_dest, cp+1);
++        return;
+       }
+       if (pdest && match_result_player < M_PRE_AMBIGUOUS) {
+-	/* Would have done something above if connected */
++        /* Would have done something above if connected */
+         notify_conn(pconn->self, NULL, E_CHAT_ERROR, ftc_server,
+                     _("%s is not connected."), player_name(pdest));
+-	return;
++        return;
+       }
+     }
+     /* Didn't match; check heuristics to see if this is likely
+@@ -456,6 +462,7 @@ void handle_chat_msg_req(struct connection *pconn, const char *message)
+       return;
+     }
+   }
+-  /* global message: */
++
++  /* Global message: */
+   chat_msg_to_all(pconn, real_message);
+ }
+-- 
+2.39.2
+

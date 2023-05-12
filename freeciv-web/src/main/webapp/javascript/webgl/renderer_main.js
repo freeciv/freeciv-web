@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2017  The Freeciv-web project
 
@@ -16,11 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ***********************************************************************/
-
-var QUALITY_MEDIUM = 2; // medium quality.
-var QUALITY_HIGH = 3;   // best quality, add features which require high-end graphics hardware here.
-
-var graphics_quality = QUALITY_HIGH;
 
 var anaglyph_3d_enabled = false;
 

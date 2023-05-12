@@ -44,6 +44,14 @@ function handle_processing_finished(packet)
   client_frozen = false;
 }
 
+function handle_investigate_started(packet)
+{
+}
+
+function handle_investigate_finished(packet)
+{
+}
+
 function handle_freeze_hint(packet)
 {
   client_frozen = true;
@@ -78,7 +86,7 @@ function handle_server_join_reply(packet)
     client.conn.id = packet['conn_id'];
 
     if (get_client_page() == PAGE_MAIN
-	|| get_client_page() == PAGE_NETWORK) {
+        || get_client_page() == PAGE_NETWORK) {
       set_client_page(PAGE_START);
     }
 
@@ -1162,8 +1170,8 @@ function handle_diplomacy_remove_clause(packet)
 function handle_diplomacy_accept_treaty(packet)
 {
   accept_treaty(packet['counterpart'],
-		packet['I_accepted'],
-		packet['other_accepted']);
+                packet['I_accepted'],
+                packet['other_accepted']);
 }
 
 /* Assemble incoming page_msg here. */
@@ -1848,7 +1856,7 @@ function handle_research_info(packet)
     for (var player_id in players) {
       var pplayer = players[player_id];
       if (pplayer['team'] == packet['id']) {
-	pplayer = $.extend(pplayer, packet);
+        pplayer = $.extend(pplayer, packet);
         delete pplayer['id'];
       }
     }
@@ -1862,7 +1870,7 @@ function handle_research_info(packet)
     for (var i = 0; i < packet['inventions'].length; i++) {
       if (packet['inventions'][i] != old_inventions[i] && packet['inventions'][i] == TECH_KNOWN) {
         queue_tech_gained_dialog(i);
-	break;
+        break;
       }
     }
   }

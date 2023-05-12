@@ -42,6 +42,9 @@
 # 0025-Filter-chat-messages-more-aggressively-on-freeciv-we.patch
 #   Replaces former freeciv-web specific patch
 #   osdn #48007
+# 0029-Keep-observers-in-sync-with-city-investigation.patch
+#   Protocol fix for observer connections
+#   osdn #46186
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -77,6 +80,7 @@ declare -a PATCHLIST=(
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
+  "backports/0029-Keep-observers-in-sync-with-city-investigation"
   "meson_webperimental"
   "metachange"
   "text_fixes"

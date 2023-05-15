@@ -121,7 +121,8 @@ var ACTRES_SPY_ESCAPE = 62;
 var ACTRES_TRANSPORT_LOAD = 63;
 var ACTRES_CLEAN = 64;
 var ACTRES_TELEPORT = 65;
-var ACTRES_NONE = 66;
+var ACTRES_ENABLER_CHECK = 66;
+var ACTRES_NONE = 67;
 
 /* enum action_sub_result */
 var ACT_SUB_RES_HUT_ENTER = 0;

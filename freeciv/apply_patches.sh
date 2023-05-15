@@ -11,9 +11,6 @@
 # 0030-AI-Fix-check-if-new-building-enables-disables-action.patch
 #   AI fix
 #   osdn #42169
-# 0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector.patch
-#   Illegal memory access fix
-#   osdn #47762
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
@@ -39,12 +36,20 @@
 # 0022-Fix-out-of-bounds-on-cargo-iter.patch
 #   Memory fix
 #   osdn #47982
+# 0021-Autoworkers-Fix-assert-failure-because-of-recursive-.patch
+#   Assert failure fix
+#   osdn #47992
+# 0023-Savegame-Correct-loading-governor-settings.patch
+#   Savegame loading fix
+#   osdn #48002
+# 0025-Filter-chat-messages-more-aggressively-on-freeciv-we.patch
+#   Replaces former freeciv-web specific patch
+#   osdn #48007
 
 # Not in the upstream Freeciv server
 # ----------------------------------
 # meson_webperimental installs webperimental ruleset
 # freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
-# message_escape is a patch for protecting against script injection in the message texts.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
@@ -65,7 +70,6 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
-  "backports/0031-Fix-Out-of-Bounds-write-to-bv_techs-bitvector"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
@@ -74,6 +78,9 @@ declare -a PATCHLIST=(
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
+  "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
+  "backports/0023-Savegame-Correct-loading-governor-settings"
+  "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
   "meson_webperimental"
   "metachange"
   "text_fixes"
@@ -83,7 +90,6 @@ declare -a PATCHLIST=(
   "savegame"
   "maphand_ch"
   "server_password"
-  "message_escape"
   "freeciv_segfauls_fix"
   "scorelog_filenames"
   "longturn"

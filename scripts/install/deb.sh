@@ -44,6 +44,9 @@ dependencies="\
   python3-setuptools \
   python3-dev \
   python3-wheel \
+  python3-tornado \
+  python3-pil \
+  python3-requests \
   sed \
   tar \
   unzip \

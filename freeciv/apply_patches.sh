@@ -45,6 +45,9 @@
 # 0029-Keep-observers-in-sync-with-city-investigation.patch
 #   Protocol fix for observer connections
 #   osdn #46186
+# 0024-Delay-city-size-change-when-restoring-protected-unit.patch
+#   Fix inconsistent data -> wrong amount of unit shield upkeep
+#   osdn #48023
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -81,6 +84,7 @@ declare -a PATCHLIST=(
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
   "backports/0029-Keep-observers-in-sync-with-city-investigation"
+  "backports/0024-Delay-city-size-change-when-restoring-protected-unit"
   "meson_webperimental"
   "metachange"
   "text_fixes"

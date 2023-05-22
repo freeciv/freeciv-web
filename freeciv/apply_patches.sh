@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere.patch
-#   Path Findig fix
-#   osdn #47731
 # 0030-AI-Fix-check-if-new-building-enables-disables-action.patch
 #   AI fix
 #   osdn #42169
@@ -45,6 +42,9 @@
 # 0025-Filter-chat-messages-more-aggressively-on-freeciv-we.patch
 #   Replaces former freeciv-web specific patch
 #   osdn #48007
+# 0029-Keep-observers-in-sync-with-city-investigation.patch
+#   Protocol fix for observer connections
+#   osdn #46186
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -68,7 +68,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0027-Path-Finding-Make-MC-and-EC-unsigned-everywhere"
   "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
@@ -81,6 +80,7 @@ declare -a PATCHLIST=(
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
+  "backports/0029-Keep-observers-in-sync-with-city-investigation"
   "meson_webperimental"
   "metachange"
   "text_fixes"

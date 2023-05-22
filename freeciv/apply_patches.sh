@@ -8,9 +8,6 @@
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
-# 0032-Mapgenerator-Check-if-lake-exist-before-regenerate.patch
-#   Zero-length VLA fix
-#   osdn #47825
 # 0017-Meson-Add-testmatic-support.patch
 #   Debugging support improvement
 #   osdn #47675
@@ -72,7 +69,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
-  "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
   "backports/0031-gtk3.22-Add-Clean-action-and-activity-support"
   "backports/0050-Add-ERM_CLEAN"

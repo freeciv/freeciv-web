@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0030-AI-Fix-check-if-new-building-enables-disables-action.patch
-#   AI fix
-#   osdn #42169
 # 0046-Building-Advisor-Handle-wants-as-adv_want.patch
 #   AI fix
 #   osdn #47776
@@ -17,6 +14,9 @@
 # 0017-Meson-Add-testmatic-support.patch
 #   Debugging support improvement
 #   osdn #47675
+# 0031-gtk3.22-Add-Clean-action-and-activity-support.patch
+#   Dependency for 0050-Add-ERM_CLEAN.patch
+#   osdn #47799
 # 0050-Add-ERM_CLEAN.patch
 #   Dependency for "Clean" action to work properly
 #   Heavily rebased to current freeciv-web version when backported
@@ -45,6 +45,9 @@
 # 0029-Keep-observers-in-sync-with-city-investigation.patch
 #   Protocol fix for observer connections
 #   osdn #46186
+# 0024-Delay-city-size-change-when-restoring-protected-unit.patch
+#   Fix inconsistent data -> wrong amount of unit shield upkeep
+#   osdn #48023
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -68,11 +71,11 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0030-AI-Fix-check-if-new-building-enables-disables-action"
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0032-Mapgenerator-Check-if-lake-exist-before-regenerate"
   "backports/0017-Meson-Add-testmatic-support"
-  "backports/rebased-0050-Add-ERM_CLEAN"
+  "backports/0031-gtk3.22-Add-Clean-action-and-activity-support"
+  "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
@@ -81,6 +84,7 @@ declare -a PATCHLIST=(
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
   "backports/0029-Keep-observers-in-sync-with-city-investigation"
+  "backports/0024-Delay-city-size-change-when-restoring-protected-unit"
   "meson_webperimental"
   "metachange"
   "text_fixes"

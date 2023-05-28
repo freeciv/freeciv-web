@@ -1,0 +1,30 @@
+From f17e2acb786374c5f871934c5beff08a3015623b Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 10 May 2023 05:06:16 +0300
+Subject: [PATCH 28/28] Fix action_is_internal() crash when actions are not set
+ up
+
+See osdn #48009
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/actions.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/common/actions.c b/common/actions.c
+index c6449b1ffc..980705e90d 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -6607,7 +6607,8 @@ bool action_is_in_use(struct action *paction)
+ **************************************************************************/
+ bool action_is_internal(struct action *paction)
+ {
+-  return action_has_result(paction, ACTRES_ENABLER_CHECK);
++  return paction != nullptr
++    && action_has_result(paction, ACTRES_ENABLER_CHECK);
+ }
+ 
+ /**********************************************************************//**
+-- 
+2.39.2
+

@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0046-Building-Advisor-Handle-wants-as-adv_want.patch
-#   AI fix
-#   osdn #47776
-# 0017-Meson-Add-testmatic-support.patch
-#   Debugging support improvement
-#   osdn #47675
 # 0050-Add-ERM_CLEAN.patch
 #   Dependency for "Clean" action to work properly
 #   Heavily rebased to current freeciv-web version when backported
@@ -42,6 +36,12 @@
 # 0024-Delay-city-size-change-when-restoring-protected-unit.patch
 #   Fix inconsistent data -> wrong amount of unit shield upkeep
 #   osdn #48023
+# 0023-Rulesave-Fix-crash-when-handling-internal-actions.patch
+#   Crash fix
+#   osdn #48036
+# 0028-Fix-action_is_internal-crash-when-actions-are-not-se.patch
+#   Crash fix
+#   osdn #48009
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -65,8 +65,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
-  "backports/0017-Meson-Add-testmatic-support"
   "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
@@ -77,6 +75,8 @@ declare -a PATCHLIST=(
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
   "backports/0029-Keep-observers-in-sync-with-city-investigation"
   "backports/0024-Delay-city-size-change-when-restoring-protected-unit"
+  "backports/0023-Rulesave-Fix-crash-when-handling-internal-actions"
+  "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
   "meson_webperimental"
   "metachange"
   "text_fixes"

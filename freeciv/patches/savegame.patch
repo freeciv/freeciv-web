@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2023-01-24 05:33:26.983318115 +0200
-+++ freeciv/server/commands.c	2023-01-24 05:33:39.691420373 +0200
+--- freeciv/server/commands.c	2023-05-28 10:47:05.228715104 +0300
++++ freeciv/server/commands.c	2023-05-28 10:47:20.112804093 +0300
 @@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,8 +11,8 @@ diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
---- freeciv/server/savegame/savemain.c	2023-01-24 05:33:26.983318115 +0200
-+++ freeciv/server/savegame/savemain.c	2023-01-24 05:33:39.691420373 +0200
+--- freeciv/server/savegame/savemain.c	2023-05-28 10:47:05.232715128 +0300
++++ freeciv/server/savegame/savemain.c	2023-05-28 10:48:04.009066546 +0300
 @@ -152,8 +152,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
@@ -30,7 +30,7 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
  
 -  /* If orig_filename is NULL or empty, use a generated default name. */
 -  if (filename[0] == '\0') {
--    /* manual save */
+-    /* Manual save */
 -    generate_save_name(game.server.save_name, filename,
 -                       sizeof(stdata->filepath) + stdata->filepath - filename, "manual");
 -  }
@@ -39,8 +39,8 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-01-24 05:33:26.987318146 +0200
-+++ freeciv/server/stdinhand.c	2023-01-24 05:41:12.495109459 +0200
+--- freeciv/server/stdinhand.c	2023-05-28 10:47:05.228715104 +0300
++++ freeciv/server/stdinhand.c	2023-05-28 10:50:14.749848273 +0300
 @@ -21,6 +21,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -132,32 +132,12 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 +                caller->username, game.info.turn, buffer);
 +    sz_strlcpy(arg, savefile);
 +
-+    /* Create sub-directory from players username in saves directory. */
++    /* Create sub-directory from player's username in saves directory. */
 +    fc_snprintf(savedir, sizeof(savedir), "%s/%s",
 +                srvarg.saves_pathname, caller->username);
-+    make_dir(savedir);
++    make_dir(savedir, 0775);
 +  }
 +
    if (conn_can_vote(caller, NULL) && level == ALLOW_CTRL
        && conn_get_access(caller) == ALLOW_BASIC && !check
        && !vote_would_pass_immediately(caller, cmd)) {
-diff -Nurd freeciv/utility/shared.c freeciv/utility/shared.c
---- freeciv/utility/shared.c	2023-01-24 05:33:27.043318598 +0200
-+++ freeciv/utility/shared.c	2023-01-24 05:33:39.715420565 +0200
-@@ -1790,14 +1790,14 @@
-       }
-     }
- #else  /* HAVE__MKDIR */
--    if (mkdir(path, 0755) == -1
-+    if (mkdir(path, 0775) == -1
-         && fc_get_errno() != EEXIST) {
-       free(path);
-       return FALSE;
-     }
- #endif /* HAVE__MKDIR */
- #else  /* FREECIV_MSWINDOWS */
--    if (mkdir(path, 0755) == -1
-+    if (mkdir(path, 0775) == -1
-         && fc_get_errno() != EEXIST) {
-       free(path);
-       return FALSE;

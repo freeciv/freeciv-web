@@ -42,6 +42,9 @@
 # 0028-Fix-action_is_internal-crash-when-actions-are-not-se.patch
 #   Crash fix
 #   osdn #48009
+# 0036-make_dir-Add-mode-parameter.patch
+#   Improvement to rebase freeciv-web's own savegame.patch on
+#   osdn #48094
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -77,6 +80,7 @@ declare -a PATCHLIST=(
   "backports/0024-Delay-city-size-change-when-restoring-protected-unit"
   "backports/0023-Rulesave-Fix-crash-when-handling-internal-actions"
   "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
+  "backports/0036-make_dir-Add-mode-parameter"
   "meson_webperimental"
   "metachange"
   "text_fixes"

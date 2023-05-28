@@ -45,6 +45,9 @@
 # 0036-make_dir-Add-mode-parameter.patch
 #   Improvement to rebase freeciv-web's own savegame.patch on
 #   osdn #48094
+# 0039-Meson-Make-it-possible-to-disable-server-build.patch
+#   Reworked server build option
+#   osdn #48098
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -81,6 +84,7 @@ declare -a PATCHLIST=(
   "backports/0023-Rulesave-Fix-crash-when-handling-internal-actions"
   "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
   "backports/0036-make_dir-Add-mode-parameter"
+  "backports/0039-Meson-Make-it-possible-to-disable-server-build"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -47,6 +47,7 @@ dependencies="\
   python3-tornado \
   python3-pil \
   python3-requests \
+  python3-mysqldb \
   sed \
   tar \
   unzip \

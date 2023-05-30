@@ -44,6 +44,12 @@
 # 0039-Meson-Make-it-possible-to-disable-server-build.patch
 #   Reworked server build option
 #   osdn #48098
+# 0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b.patch
+#   Dependency of 0028-Meson-Fix-gzipped-saves-support.patch
+#   osdn #48043
+# 0028-Meson-Fix-gzipped-saves-support.patch
+#   Fix handling of compressed saves
+#   osdn #48101
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -80,6 +86,8 @@ declare -a PATCHLIST=(
   "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
   "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
+  "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"
+  "backports/0028-Meson-Fix-gzipped-saves-support"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -1,0 +1,52 @@
+From 44c7d7c352f4d330759b206568805c9234d58547 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 30 May 2023 16:47:42 +0300
+Subject: [PATCH 28/33] Meson: Fix gzipped saves support
+
+See osdn #48101
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ gen_headers/meson_freeciv_config.h.in | 3 +++
+ meson.build                           | 6 ++++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/gen_headers/meson_freeciv_config.h.in b/gen_headers/meson_freeciv_config.h.in
+index 466ff08827..9ed5c9d2f9 100644
+--- a/gen_headers/meson_freeciv_config.h.in
++++ b/gen_headers/meson_freeciv_config.h.in
+@@ -136,6 +136,9 @@
+ /* Readline support */
+ #mesondefine FREECIV_HAVE_LIBREADLINE
+ 
++/* zlib is available */
++#mesondefine FREECIV_HAVE_LIBZ
++
+ /* liblzma is available */
+ #mesondefine FREECIV_HAVE_LIBLZMA
+ 
+diff --git a/meson.build b/meson.build
+index 5d1829da09..6f36bf6aed 100644
+--- a/meson.build
++++ b/meson.build
+@@ -532,11 +532,17 @@ else
+   priv_conf_data.set('HAVE_FCDB', 1)
+   priv_conf_data.set('HAVE_FCDB_SQLITE3', 1)
+   zlib_dep = c_compiler.find_library('z', dirs: cross_lib_path)
++  if not c_compiler.has_header('zlib.h', args: header_arg)
++    error('Mandatory header zlib.h not found!')
++  endif
+   icu_dep = dependency('icu-uc')
+   syslua = get_option('syslua')
+   lua_dep_tmp = dependency('lua-5.4', required:false)
+ endif
+ 
++# Set unconditionally, as it was checked as hard requirement
++pub_conf_data.set('FREECIV_HAVE_LIBZ', 1)
++
+ if syslua != 'false' and lua_dep_tmp.found()
+   lua_inc_path = []
+   lua_sources = []
+-- 
+2.39.2
+

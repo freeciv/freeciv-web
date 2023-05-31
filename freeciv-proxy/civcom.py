@@ -47,7 +47,7 @@ class CivCom(Thread):
         self.civwebserver = civwebserver
 
     def run(self):
-        # setup connection to civserver
+        # Setup connection to freeciv-server
         if (logger.isEnabledFor(logging.INFO)):
             logger.info("Start connection to civserver for " + self.username)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -63,11 +63,11 @@ class CivCom(Thread):
             self.close_connection()
             return
 
-        # send initial login packet to civserver
+        # Send initial login packet to freeciv-server
         self.civserver_messages = [self.civwebserver.loginpacket]
         self.send_packets_to_civserver()
 
-        # receive packets from server
+        # Receive packets from server
         while True:
             packet = self.read_from_connection()
 
@@ -78,7 +78,7 @@ class CivCom(Thread):
                 self.net_buf += packet
 
                 if (len(self.net_buf) == self.packet_size and self.net_buf[-1] == 0):
-                    # valid packet received from freeciv server, send it to
+                    # Valid packet received from freeciv server, send it to
                     # client.
                     self.send_buffer_append(self.net_buf[:-1])
                     self.packet_size = -1
@@ -86,7 +86,7 @@ class CivCom(Thread):
                     continue
 
             time.sleep(0.01)
-            # prevent max CPU usage in case of error
+            # Prevent max CPU usage in case of error
 
     def read_from_connection(self):
         try:
@@ -104,7 +104,7 @@ class CivCom(Thread):
                         if (self.packet_size <= 0 or self.packet_size > 32767):
                             logger.error("Invalid packet size " + str(self.packet_size))
                     else:
-                        # complete header not read yet. return now, and read
+                        # Complete header not read yet. Return now, and read
                         # the rest next time.
                         return None
 
@@ -121,6 +121,7 @@ class CivCom(Thread):
             return None
         except OSError:
             return None
+        return None
 
     def close_connection(self):
         if (logger.isEnabledFor(logging.INFO)):
@@ -141,7 +142,7 @@ class CivCom(Thread):
         self.civwebserver = None
         self.stopped = True
 
-    # queue messages to be sent to client.
+    # Queue messages to be sent to client.
     def send_buffer_append(self, data):
         try:
             self.send_buffer.append(
@@ -155,11 +156,12 @@ class CivCom(Thread):
                     self.username)
             return
 
-    # sends packets to client (WebSockets client / browser)
+    # Sends packets to client (WebSockets client / browser)
     def send_packets_to_client(self):
         packet = self.get_client_result_string()
         if (packet is not None and self.civwebserver is not None):
-            # Calls the write_message callback on the next Tornado I/O loop iteration (thread safely).
+            # Calls the write_message callback on the next
+            # Tornado I/O loop iteration (thread safely).
             conn = self.civwebserver
             conn.io_loop.add_callback(lambda: conn.write_message(packet))
 
@@ -180,7 +182,7 @@ class CivCom(Thread):
         self.send_buffer_append(
             ("{\"pid\":25,\"event\":100,\"message\":\"" + message + "\"}").encode("utf-8"))
 
-    # Send packets from freeciv-proxy to civserver
+    # Send packets from freeciv-proxy to freeciv-server
     def send_packets_to_civserver(self):
         if (self.civserver_messages is None or self.socket is None):
             return
@@ -199,6 +201,6 @@ class CivCom(Thread):
         finally:
             self.civserver_messages = []
 
-    # queue message for the civserver
+    # Queue message for the freeciv-server
     def queue_to_civserver(self, message):
         self.civserver_messages.append(message)

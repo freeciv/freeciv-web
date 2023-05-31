@@ -31,7 +31,7 @@ from civcom import *
 import json
 import uuid
 import gc
-import mysql.connector
+import MySQLdb
 import configparser
 import urllib.request
 import urllib.parse
@@ -80,7 +80,7 @@ class WSHandler(websocket.WebSocketHandler):
 
     def on_message(self, message):
         if (not self.is_ready and len(civcoms) <= CONNECTION_LIMIT):
-            # called the first time the user connects.
+            # Called the first time the user connects.
             login_message = json.loads(message)
             self.username = login_message['username']
             if (not validate_username(self.username)):
@@ -103,7 +103,7 @@ class WSHandler(websocket.WebSocketHandler):
                 self)
             return
 
-        # get the civcom instance which corresponds to this user.
+        # Get the civcom instance which corresponds to this user.
         if (self.is_ready):
             self.civcom = self.get_civcom(self.username, self.civserverport, self)
 
@@ -111,7 +111,7 @@ class WSHandler(websocket.WebSocketHandler):
             self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user.\",\"you_can_join\":false,\"conn_id\":-1}]")
             return
 
-        # send JSON request to civserver.
+        # Send JSON request to freeciv-server.
         self.civcom.queue_to_civserver(message)
 
     def on_close(self):
@@ -128,7 +128,7 @@ class WSHandler(websocket.WebSocketHandler):
       cursor = None
       cnx = None
       try:
-        cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+        cnx = MySQLdb.connect(user=mysql_user, password=mysql_password, database=mysql_database)
         cursor = cnx.cursor()
 
         auth_method = self.get_game_auth_method(cursor)
@@ -181,15 +181,15 @@ class WSHandler(websocket.WebSocketHandler):
             logger.warn(e)
             return False
 
-    # enables support for allowing alternate origins. See check_origin in websocket.py
+    # Enables support for allowing alternate origins. See check_origin in websocket.py
     def check_origin(self, origin):
       return True;
 
-    # this enables WebSocket compression with default options.
+    # This enables WebSocket compression with default options.
     def get_compression_options(self):
         return {'compression_level' : 9, 'mem_level' : 9}
 
-    # get the civcom instance which corresponds to the requested user.
+    # Get the civcom instance which corresponds to the requested user.
     def get_civcom(self, username, civserverport, ws_connection):
         key = username + str(civserverport) + ws_connection.id
         if key not in list(civcoms.keys()):

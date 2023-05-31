@@ -32,7 +32,7 @@ dependencies="\
   libsqlite3-dev \
   libtool \
   maven \
-  default-mysql-server \
+  mariadb-server \
   nginx \
   default-jdk-headless \
   patch \
@@ -83,7 +83,7 @@ if apt-get --simulate install liblua5.4-dev &> /dev/null; then
 fi
 
 echo "==== Installing Dependencies ===="
-echo "mysql setup..."
+echo "mariadb setup..."
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT_PASSWORD}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASSWORD}"
 echo "apt-get install dependencies"

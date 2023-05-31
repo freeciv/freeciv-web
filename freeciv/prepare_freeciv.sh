@@ -30,7 +30,7 @@ mkdir -p build
 
 ( cd build
   meson setup ../freeciv -Dserver='freeciv-web' \
-        -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false \
+        -Dclients=[] -Dfcmp=cli -Djson-protocol=true -Dnls=false \
         -Daudio=false -Druledit=false \
         -Dproject-definition=../freeciv-web.fcproj \
         -Ddefault_library=static -Dprefix=${HOME}/freeciv \

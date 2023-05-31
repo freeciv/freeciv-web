@@ -11,9 +11,6 @@
 # 0017-Meson-Add-testmatic-support.patch
 #   Debugging support improvement
 #   osdn #47675
-# 0031-gtk3.22-Add-Clean-action-and-activity-support.patch
-#   Dependency for 0050-Add-ERM_CLEAN.patch
-#   osdn #47799
 # 0050-Add-ERM_CLEAN.patch
 #   Dependency for "Clean" action to work properly
 #   Heavily rebased to current freeciv-web version when backported
@@ -70,7 +67,6 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0046-Building-Advisor-Handle-wants-as-adv_want"
   "backports/0017-Meson-Add-testmatic-support"
-  "backports/0031-gtk3.22-Add-Clean-action-and-activity-support"
   "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"

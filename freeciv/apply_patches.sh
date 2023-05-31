@@ -5,10 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0050-Add-ERM_CLEAN.patch
-#   Dependency for "Clean" action to work properly
-#   Heavily rebased to current freeciv-web version when backported
-#   osdn #47839
 # 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
 #   Fix to illegal memory access
 #   osdn #47900
@@ -71,7 +67,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"

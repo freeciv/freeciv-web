@@ -1,2 +1,1 @@
--r pbem/requirements.txt
 -r scripts/requirements.txt

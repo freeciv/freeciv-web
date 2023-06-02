@@ -1,0 +1,31 @@
+From 52d4398b361c3cd2f002d6d6bf5fecb881a0c747 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 2 Jun 2023 18:04:49 +0300
+Subject: [PATCH 37/37] Add ACTIVITY_CLEAN to tile changing activities
+
+This affects multiple workers on the same tile, trying to
+avoid conflicting activities.
+
+See osdn #48147
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/unit.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/unit.c b/common/unit.c
+index f957e01777..5979d5e68b 100644
+--- a/common/unit.c
++++ b/common/unit.c
+@@ -44,7 +44,7 @@
+ const Activity_type_id tile_changing_activities[] =
+     { ACTIVITY_PILLAGE, ACTIVITY_GEN_ROAD, ACTIVITY_IRRIGATE, ACTIVITY_MINE,
+       ACTIVITY_BASE, ACTIVITY_CULTIVATE, ACTIVITY_PLANT, ACTIVITY_TRANSFORM,
+-      ACTIVITY_POLLUTION, ACTIVITY_FALLOUT, ACTIVITY_LAST };
++      ACTIVITY_CLEAN, ACTIVITY_POLLUTION, ACTIVITY_FALLOUT, ACTIVITY_LAST };
+ 
+ struct cargo_iter {
+   struct iterator vtable;
+-- 
+2.39.2
+

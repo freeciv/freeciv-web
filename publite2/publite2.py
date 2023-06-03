@@ -26,7 +26,7 @@ import sys
 import time
 import http.client
 import configparser
-from pubstatus import *
+from pubstatus import PubStatus
 from civlauncher import Civlauncher
 import os.path
 import glob
@@ -99,7 +99,7 @@ class metachecker():
                       + " servers (the server limit) but according to the"
                       + " metaserver it has found none.");
 
-              # start LongTurn games, one per pass
+              # Start LongTurn games, one per pass
               lt_scripts = glob.glob('pubscript_longturn_*.serv')
               self.longturn.intersection_update(lt_scripts)
               for script in lt_scripts:

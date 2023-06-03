@@ -135,7 +135,7 @@ Install this software if you are not running Freeciv-web with Vagrant:
 - Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
   (required for freeciv-img-extract)
 
-- Mysql 5.5.x - http://www.mysql.com/
+- MariaDB - https://mariadb.org/
 
 - Maven 3 - http://maven.apache.org/download.html
 

@@ -29,7 +29,7 @@ export PATH=${HOME}/freeciv/meson-install:${PATH}
 mkdir -p build
 
 ( cd build
-  meson setup ../freeciv -Dfreeciv-web=true \
+  meson setup ../freeciv -Dserver='freeciv-web' \
         -Dclients=[] -Dfcmp=[] -Djson-protocol=true -Dnls=false \
         -Daudio=false -Druledit=false \
         -Dproject-definition=../freeciv-web.fcproj \

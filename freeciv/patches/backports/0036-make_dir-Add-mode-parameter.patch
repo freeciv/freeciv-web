@@ -1,0 +1,227 @@
+From d221bd9c581b50d0e2e0e995d55e3680a3056399 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 28 May 2023 05:39:52 +0300
+Subject: [PATCH 36/36] make_dir(): Add mode parameter
+
+See osdn #48094
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ client/connectdlg_common.c |  2 +-
+ client/options.c           |  2 +-
+ common/mapimg.c            |  2 +-
+ server/savegame/savemain.c |  6 +++---
+ server/sernet.c            |  9 +++++----
+ tools/fcmp/mpdb.c          |  2 +-
+ tools/ruleutil/rulesave.c  |  2 +-
+ utility/shared.c           | 16 ++++++++++++----
+ utility/shared.h           |  4 +++-
+ 9 files changed, 28 insertions(+), 17 deletions(-)
+
+diff --git a/client/connectdlg_common.c b/client/connectdlg_common.c
+index 0158374599..15c66834a9 100644
+--- a/client/connectdlg_common.c
++++ b/client/connectdlg_common.c
+@@ -673,7 +673,7 @@ void send_client_wants_hack(const char *filename)
+       return;
+     }
+ 
+-    if (!make_dir(sdir)) {
++    if (!make_dir(sdir, DIRMODE_DEFAULT)) {
+       log_error("Couldn't create storage directory for token.");
+       return;
+     }
+diff --git a/client/options.c b/client/options.c
+index 0402ef8923..ecf1169616 100644
+--- a/client/options.c
++++ b/client/options.c
+@@ -6320,7 +6320,7 @@ void options_save(option_save_log_callback log_cb)
+ 
+   if (i > 0) {
+     dir_name[i] = '\0';
+-    if (!make_dir(dir_name)) {
++    if (!make_dir(dir_name, DIRMODE_DEFAULT)) {
+       log_cb(LOG_ERROR, _("Saving options failed, cannot create directory %s"),
+              dir_name);
+       secfile_destroy(sf);
+diff --git a/common/mapimg.c b/common/mapimg.c
+index 8156311be3..13670f7af2 100644
+--- a/common/mapimg.c
++++ b/common/mapimg.c
+@@ -2054,7 +2054,7 @@ static bool img_save(const struct img *pimg, const char *mapimgfile,
+   }
+ 
+   if (!path_is_absolute(mapimgfile) && path != NULL && path[0] != '\0') {
+-    if (!make_dir(path)) {
++    if (!make_dir(path, DIRMODE_DEFAULT)) {
+       MAPIMG_LOG(_("can't create directory"));
+       return FALSE;
+     }
+diff --git a/server/savegame/savemain.c b/server/savegame/savemain.c
+index ed21e91a84..cdafeff659 100644
+--- a/server/savegame/savemain.c
++++ b/server/savegame/savemain.c
+@@ -192,7 +192,7 @@ void save_game(const char *orig_filename, const char *save_reason,
+ 
+   /* If orig_filename is NULL or empty, use a generated default name. */
+   if (filename[0] == '\0') {
+-    /* manual save */
++    /* Manual save */
+     generate_save_name(game.server.save_name, filename,
+                        sizeof(stdata->filepath) + stdata->filepath - filename, "manual");
+   }
+@@ -253,7 +253,7 @@ void save_game(const char *orig_filename, const char *save_reason,
+     if (!scenario) {
+       /* Ensure the saves directory exists. */
+       if (srvarg.saves_pathname[0] != '\0'
+-          && !make_dir(srvarg.saves_pathname)) {
++          && !make_dir(srvarg.saves_pathname, DIRMODE_DEFAULT)) {
+         log_error(_("Can't create saves directory %s!"),
+                   srvarg.saves_pathname);
+         /* Don't tell server paths to clients */
+@@ -271,7 +271,7 @@ void save_game(const char *orig_filename, const char *save_reason,
+     } else {
+       /* Make sure scenario directory exist */
+       if (srvarg.scenarios_pathname[0] != '\0'
+-          && !make_dir(srvarg.scenarios_pathname)) {
++          && !make_dir(srvarg.scenarios_pathname, DIRMODE_DEFAULT)) {
+         log_error(_("Can't create scenario saves directory %s!"),
+                   srvarg.scenarios_pathname);
+         /* Don't tell server paths to clients */
+diff --git a/server/sernet.c b/server/sernet.c
+index d66d065589..51570b77c6 100644
+--- a/server/sernet.c
++++ b/server/sernet.c
+@@ -518,7 +518,7 @@ static void incoming_client_packets(struct connection *pconn)
+   - input from server operator in stdin
+ 
+   This function also handles prompt printing, via the con_prompt_*
+-  functions.  That is, other functions should not need to do so.  --dwp
++  functions. That is, other functions should not need to do so.  --dwp
+ *****************************************************************************/
+ enum server_events server_sniff_all_input(void)
+ {
+@@ -542,13 +542,13 @@ enum server_events server_sniff_all_input(void)
+         int fcdl = strlen(storage_dir) + 1;
+         char *fc_dir = fc_malloc(fcdl);
+ 
+-        if (fc_dir != NULL) {
++        if (fc_dir != nullptr) {
+           fc_snprintf(fc_dir, fcdl, "%s", storage_dir);
+ 
+-          if (make_dir(fc_dir)) {
++          if (make_dir(fc_dir, DIRMODE_DEFAULT)) {
+             history_file
+               = fc_malloc(strlen(fc_dir) + 1 + strlen(HISTORY_FILENAME) + 1);
+-            if (history_file) {
++            if (history_file != nullptr) {
+               strcpy(history_file, fc_dir);
+               strcat(history_file, "/");
+               strcat(history_file, HISTORY_FILENAME);
+@@ -556,6 +556,7 @@ enum server_events server_sniff_all_input(void)
+               read_history(history_file);
+             }
+           }
++
+           FC_FREE(fc_dir);
+         }
+       }
+diff --git a/tools/fcmp/mpdb.c b/tools/fcmp/mpdb.c
+index be88914ccc..bf8eba2a26 100644
+--- a/tools/fcmp/mpdb.c
++++ b/tools/fcmp/mpdb.c
+@@ -144,7 +144,7 @@ void create_mpdb(const char *filename, bool scenario_db)
+     /* Nothing */
+   }
+   local_name[i] = '\0';
+-  if (!make_dir(local_name)) {
++  if (!make_dir(local_name, DIRMODE_DEFAULT)) {
+     log_error(_("Can't create directory \"%s\" for modpack database."), local_name);
+     return;
+   }
+diff --git a/tools/ruleutil/rulesave.c b/tools/ruleutil/rulesave.c
+index 3c8fd12adb..f5d8848211 100644
+--- a/tools/ruleutil/rulesave.c
++++ b/tools/ruleutil/rulesave.c
+@@ -3370,7 +3370,7 @@ static bool save_luadata(const char *filename)
+ **************************************************************************/
+ bool save_ruleset(const char *path, const char *name, struct rule_data *data)
+ {
+-  if (make_dir(path)) {
++  if (make_dir(path, DIRMODE_DEFAULT)) {
+     bool success = TRUE;
+     char filename[500];
+ 
+diff --git a/utility/shared.c b/utility/shared.c
+index 1dd8eb74eb..4cf9e2efad 100644
+--- a/utility/shared.c
++++ b/utility/shared.c
+@@ -1749,8 +1749,12 @@ char *skip_to_basename(char *filepath)
+   TODO: Make errno available after a failure, preferably via fc_get_errno().
+         Currently there's things potentially messing errno between
+         failed mkdir() and the function return.
++
++  @param  pathname  directory path to create
++  @param  mode      directory creation mode, or negative for default mode
++  @return           success or not
+ ****************************************************************************/
+-bool make_dir(const char *pathname)
++bool make_dir(const char *pathname, int mode)
+ {
+   char *dir;
+   char *path = NULL;
+@@ -1759,6 +1763,10 @@ bool make_dir(const char *pathname)
+     return FALSE;
+   }
+ 
++  if (mode < 0) {
++    mode = 0755;
++  }
++
+   path = interpret_tilde_alloc(pathname);
+   dir = path;
+ 
+@@ -1800,14 +1808,14 @@ bool make_dir(const char *pathname)
+       }
+     }
+ #else  /* HAVE__MKDIR */
+-    if (mkdir(path, 0755) == -1
++    if (mkdir(path, mode) == -1
+         && fc_get_errno() != EEXIST) {
+       free(path);
+       return FALSE;
+     }
+ #endif /* HAVE__MKDIR */
+ #else  /* FREECIV_MSWINDOWS */
+-    if (mkdir(path, 0755) == -1
++    if (mkdir(path, mode) == -1
+         && fc_get_errno() != EEXIST) {
+       free(path);
+       return FALSE;
+@@ -1840,7 +1848,7 @@ bool make_dir_for_file(char *filename)
+   filename[i] = '\0';
+   log_debug("Create directory \"%s\"", filename);
+ 
+-  if (!make_dir(filename)) {
++  if (!make_dir(filename, DIRMODE_DEFAULT)) {
+     return FALSE;
+   }
+   filename[i] = DIR_SEPARATOR_CHAR;
+diff --git a/utility/shared.h b/utility/shared.h
+index c39a3181c9..be2caca39b 100644
+--- a/utility/shared.h
++++ b/utility/shared.h
+@@ -253,7 +253,9 @@ void interpret_tilde(char *buf, size_t buf_size, const char *filename);
+ char *interpret_tilde_alloc(const char *filename);
+ char *skip_to_basename(char *filepath);
+ 
+-bool make_dir(const char *pathname)
++#define DIRMODE_DEFAULT (-1)
++
++bool make_dir(const char *pathname, int mode)
+        fc__attribute((nonnull (1)));
+ bool make_dir_for_file(char *filename)
+        fc__attribute((nonnull (1)));
+-- 
+2.39.2
+

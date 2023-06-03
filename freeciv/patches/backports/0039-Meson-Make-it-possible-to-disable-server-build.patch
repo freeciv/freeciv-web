@@ -1,0 +1,141 @@
+From 6ae1bc6c8e5473e1b5430dedfcc5a55a2ff409ec Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 28 May 2023 13:22:29 +0300
+Subject: [PATCH 39/39] Meson: Make it possible to disable server build
+
+Turn former boolean 'freeciv-web' option to
+a three-value 'server' option.
+
+See osdn #48098
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ doc/INSTALL.meson |  6 +++--
+ meson.build       | 59 +++++++++++++++++++++++++----------------------
+ meson_options.txt |  9 ++++----
+ 3 files changed, 41 insertions(+), 33 deletions(-)
+
+diff --git a/doc/INSTALL.meson b/doc/INSTALL.meson
+index b498e73275..a05d68797a 100644
+--- a/doc/INSTALL.meson
++++ b/doc/INSTALL.meson
+@@ -154,8 +154,10 @@ nls (boolean):
+ gitrev (boolean):
+   Include git commit id to the version string.
+ 
+-freeciv-web (boolean):
+-  Build freeciv-web version instead of normal one.
++server ('disabled'/'enabled'/'freeciv-web'):
++  Whether to build server, or not. Special value 'freeciv-web'
++  means that freeciv-web version will be built instead of
++  the regular server.
+ 
+ gen-packets-args (array):
+   Aditional packet generator arguments passed to common/generate_packets.py.
+diff --git a/meson.build b/meson.build
+index 53d058fed5..5d1829da09 100644
+--- a/meson.build
++++ b/meson.build
+@@ -146,7 +146,9 @@ else
+     '".:data/scenarios:@FREECIV_STORAGE_DIR@/@DATASUBDIR@/scenarios:@FREECIV_STORAGE_DIR@/scenarios:@DATADIR@/freeciv/scenarios"')
+ endif
+ 
+-if get_option('freeciv-web')
++server_type = get_option('server')
++
++if server_type == 'freeciv-web'
+   pub_conf_data.set('FREECIV_WEB', 1)
+   server_binary_name = 'freeciv-web'
+ else
+@@ -1208,39 +1210,42 @@ server_lib = static_library('fc_server',
+   dependencies: lua_dep
+   )
+ 
+-executable(server_binary_name,
+-  'server/civserver.c',
+-  servericon,
+-  include_directories: server_inc,
+-  link_with: [server_lib, common_lib, ais],
+-  dependencies: [m_dep, net_dep, readline_dep, gettext_dep],
+-  install: true
+-  )
++if server_type != 'disabled'
++  executable(server_binary_name,
++    'server/civserver.c',
++    servericon,
++    include_directories: server_inc,
++    link_with: [server_lib, common_lib, ais],
++    dependencies: [m_dep, net_dep, readline_dep, gettext_dep],
++    install: true
++    )
+ 
+-install_data(
+-  'lua/database.lua',
+-  install_dir : join_paths(get_option('sysconfdir'), 'freeciv')
+-  )
++  install_data(
++    'lua/database.lua',
++    install_dir : join_paths(get_option('sysconfdir'), 'freeciv')
++    )
++
++  install_data(
++    'bootstrap/org.freeciv.server.desktop',
++    install_dir : join_paths(get_option('prefix'), 'share/applications')
++    )
++
++  custom_target('mi_server',
++                input: 'bootstrap/org.freeciv.server.metainfo.xml.in',
++                output: '@BASENAME@',
++                command: [sh_exe, files('bootstrap/generate_metainfo.sh'),
++                          '@OUTPUT@',
++                          meson.project_build_root(), 'development'],
++                install: true,
++                install_dir: join_paths(get_option('datadir'), 'metainfo'))
++
++endif
+ 
+ install_data(
+   'data/ruledit/comments-3.3.txt',
+   install_dir : join_paths(get_option('datadir'), 'freeciv/ruledit')
+   )
+ 
+-install_data(
+-  'bootstrap/org.freeciv.server.desktop',
+-  install_dir : join_paths(get_option('prefix'), 'share/applications')
+-  )
+-
+-custom_target('mi_server',
+-              input: 'bootstrap/org.freeciv.server.metainfo.xml.in',
+-              output: '@BASENAME@',
+-              command: [sh_exe, files('bootstrap/generate_metainfo.sh'),
+-                        '@OUTPUT@',
+-                        meson.project_build_root(), 'development'],
+-              install: true,
+-              install_dir: join_paths(get_option('datadir'), 'metainfo'))
+-
+ nations = [
+   'abkhaz',
+   'aborigines',
+diff --git a/meson_options.txt b/meson_options.txt
+index 73a7e1ff53..83f0c228b5 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -65,10 +65,11 @@ option('gitrev',
+        value: false,
+        description: 'Include git commit id to the version string')
+ 
+-option('freeciv-web',
+-       type: 'boolean',
+-       value: false,
+-       description: 'Make a freeciv-web server build instead of normal one')
++option('server',
++       type: 'combo',
++       choices: ['disabled', 'enabled', 'freeciv-web' ],
++       value: 'enabled',
++       description: 'What kind of server should be build, if any')
+ 
+ option('gen-packets-args',
+        type: 'array',
+-- 
+2.39.2
+

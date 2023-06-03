@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
-#   Fix to illegal memory access
-#   osdn #47900
-# 0028-Meson-Stop-using-deprecated-get_cross_property.patch
-#   Meson deprecation fix
-#   osdn #44913
 # 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
 #   Assert fix
 #   osdn #47938
@@ -76,8 +70,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
-  "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"

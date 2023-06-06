@@ -4,7 +4,7 @@ Freeciv-PBEM
 Play-By-Email support for Freeciv-web!
 
 Requires:
-https://github.com/mysql/mysql-connector-python
+MySQLdb
 
 Run like this:
 python3 pbem.py

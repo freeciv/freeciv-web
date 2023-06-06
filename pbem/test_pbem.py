@@ -18,7 +18,7 @@
 
 
 import unittest
-import mysql.connector
+import MySQLdb
 import pbem
 
 # Unit tests from Freeciv-PBEM.
@@ -29,7 +29,7 @@ class TestPBEM(unittest.TestCase):
     cursor = None;
     cnx = None;
     try:
-      cnx = mysql.connector.connect(user=pbem.mysql_user, database=pbem.mysql_database, password=pbem.mysql_password)
+      cnx = MySQLdb.connect(user=pbem.mysql_user, database=pbem.mysql_database, password=pbem.mysql_password)
       cursor = cnx.cursor()
       query = ("insert ignore into auth (username, email, activated) values ('test', 'test@testtest.com', '1')");
       cursor.execute(query)

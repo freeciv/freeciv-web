@@ -21,7 +21,7 @@
 import os, os.path
 import time
 import lzma
-import mysql.connector
+import MySQLdb
 from mailsender import MailSender
 from mailstatus import *
 import shutil
@@ -131,30 +131,30 @@ def handle_savegame(root, file):
     mail.send_email_next_turn(active_player, players, active_email, game_url, turn);
     status.emails_sent += 1;
 
-  #store games status in file
+  # Store games status in a file
   with open('pbem-games.json', 'w') as outfile:
     json.dump(status.games, outfile);
 
-#Returns the phase (active player number), eg 1
+# Returns the phase (active player number), eg 1
 def find_phase(lines):
   for l in lines:
     if ("phase=" in l): return int(l[6:]);
   return None;
 
-#Returns the current turn
+# Returns the current turn
 def find_turn(lines):
   for l in lines:
     if ("turn=" == l[0:5]): return int(l[5:]);
   return None;
 
-#Returns the current server state
+# Returns the current server state
 def find_state(lines):
   for l in lines:
     if ("server_state=" == l[0:13]): return l[18:].replace("\"","");
   return None;
 
 
-#Returns the game id
+# Returns the game id
 def find_game_id(lines):
   for l in lines:
     if ("id=" == l[0:3]): return l[4:];
@@ -168,13 +168,13 @@ def list_players(lines):
     if (l[:4] == "name"): players.append(l[5:].replace("\"", ""));
   return players;
 
-# Returns the emailaddress of the given username
+# Returns the email address of the given username
 def find_email_address(user_to_find):
   result = None;
   cursor = None;
   cnx = None;
   try:
-    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    cnx = MySQLdb.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
     query = ("select email from auth where lower(username)=lower(%(usr)s) and activated='1' limit 1")
     cursor.execute(query, {'usr' : user_to_find})
@@ -196,7 +196,7 @@ def save_game_result(winner, playerOne, playerTwo):
   cursor = None;
   cnx = None;
   try:
-    cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
+    cnx = MySQLdb.connect(user=mysql_user, database=mysql_database, password=mysql_password)
     cursor = cnx.cursor()
 
     # check if game result has already been stored, for example expiring game when ranklog already read in previously.

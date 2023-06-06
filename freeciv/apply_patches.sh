@@ -5,10 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0050-Add-ERM_CLEAN.patch
-#   Dependency for "Clean" action to work properly
-#   Heavily rebased to current freeciv-web version when backported
-#   osdn #47839
 # 0024-Fix-cargo_iter_next-out-of-bounds-read.patch
 #   Fix to illegal memory access
 #   osdn #47900
@@ -48,6 +44,15 @@
 # 0039-Meson-Make-it-possible-to-disable-server-build.patch
 #   Reworked server build option
 #   osdn #48098
+# 0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b.patch
+#   Dependency of 0028-Meson-Fix-gzipped-saves-support.patch
+#   osdn #48043
+# 0028-Meson-Fix-gzipped-saves-support.patch
+#   Fix handling of compressed saves
+#   osdn #48101
+# 0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities.patch
+#   Fix to ACTIVITY_CLEAN support
+#   osdn #48147
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -71,7 +76,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0028-Meson-Stop-using-deprecated-get_cross_property"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
@@ -85,6 +89,9 @@ declare -a PATCHLIST=(
   "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
   "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
+  "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"
+  "backports/0028-Meson-Fix-gzipped-saves-support"
+  "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -45,7 +45,7 @@ var USSDT_SENTRY = 3;
 
 /* enum server_side_agent */
 var SSA_NONE = 0;
-var SSA_AUTOSETTLER = 1;
+var SSA_AUTOWORKER = 1;
 var SSA_AUTOEXPLORE = 2;
 var SSA_COUNT = 3;
 

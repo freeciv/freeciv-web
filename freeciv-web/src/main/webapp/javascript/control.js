@@ -3017,10 +3017,9 @@ function request_unit_autosettlers(punit)
   if (punit != null ) {
     request_unit_cancel_orders(punit);
     action_decision_clear_want(punit['id']);
-    request_unit_ssa_set(punit, SSA_AUTOSETTLER);
+    request_unit_ssa_set(punit, SSA_AUTOWORKER);
   }
 }
-
 
 /****************************************************************************
   Request that a city is built.

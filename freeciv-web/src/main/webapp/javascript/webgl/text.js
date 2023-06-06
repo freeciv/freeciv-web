@@ -355,7 +355,7 @@ function get_unit_activity_text(punit)
   switch (punit['ssa_controller']) {
   case SSA_NONE:
     break;
-  case SSA_AUTOSETTLER:
+  case SSA_AUTOWORKER:
     return "A";
   case SSA_AUTOEXPLORE:
     return "X";

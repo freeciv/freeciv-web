@@ -874,10 +874,9 @@ function list_potential_target_extras(act_unit, target_tile)
       /* This extra is at the tile. Can anything be done to it? */
       if ((is_extra_removed_by(pextra, ERM_PILLAGE)
            && unit_can_do_action(act_unit, ACTION_PILLAGE))
-          || (unit_can_do_action(act_unit, ACTION_CLEAN)
-              && (is_extra_removed_by(pextra, ERM_CLEANPOLLUTION)
-                  || is_extra_removed_by(pextra, ERM_CLEANFALLOUT)))) {
-        /* TODO: add more extra removal actions as they appear. */
+          || (is_extra_removed_by(pextra, ERM_CLEAN)
+              && unit_can_do_action(act_unit, ACTION_CLEAN))) {
+        /* TODO: Add more extra removal actions as they appear. */
         potential_targets.push(pextra);
       }
     } else {

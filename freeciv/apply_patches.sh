@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
-#   Assert fix
-#   osdn #47938
 # 0022-Fix-out-of-bounds-on-cargo-iter.patch
 #   Memory fix
 #   osdn #47982
@@ -70,7 +67,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"

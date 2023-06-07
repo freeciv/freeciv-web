@@ -1,0 +1,32 @@
+From dfcecb3b974b7afd79f80f89a36131d2ce6cc44e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 7 Jun 2023 05:32:23 +0300
+Subject: [PATCH 43/43] Reformat amplio2/tiles.spec
+
+So that freeciv-web is able to parse auto_worker icon information.
+
+See osdn #48179
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ data/amplio2/tiles.spec | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/data/amplio2/tiles.spec b/data/amplio2/tiles.spec
+index ed40dbbd29..e86ae19ef8 100644
+--- a/data/amplio2/tiles.spec
++++ b/data/amplio2/tiles.spec
+@@ -111,9 +111,7 @@ tiles = { "row", "column", "tag"
+ ; Unit Extras(not activities)
+ 
+   3, 10, "unit.connect"
+-  4, 10, "unit.auto_attack",
+-         "unit.auto_worker"
++  4, 10, "unit.auto_worker", "unit.auto_attack"
+   5, 10, "unit.stack"
+   6, 10, "unit.loaded"
+-
+ }
+-- 
+2.39.2
+

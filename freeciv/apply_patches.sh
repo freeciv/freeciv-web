@@ -44,6 +44,9 @@
 # 0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities.patch
 #   Fix to ACTIVITY_CLEAN support
 #   osdn #48147
+# 0043-Reformat-amplio2-tiles.spec.patch
+#   Work around freeciv-web auto_worker icon problem
+#   osdn #48179
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -80,6 +83,7 @@ declare -a PATCHLIST=(
   "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"
   "backports/0028-Meson-Fix-gzipped-saves-support"
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
+  "backports/0043-Reformat-amplio2-tiles.spec"
   "meson_webperimental"
   "metachange"
   "text_fixes"

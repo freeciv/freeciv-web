@@ -987,16 +987,16 @@ function update_unit_focus()
     }
   }
 
-  /* iterate zero times for no units in focus,
+  /* Iterate zero times for no units in focus,
    * otherwise quit for any of the conditions. */
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
 
     if (punit['movesleft'] > 0
-	  && punit['done_moving'] == false
-      && punit['ssa_controller'] == SSA_NONE
-	  && punit['activity'] == ACTIVITY_IDLE) {
+	&& punit['done_moving'] == false
+        && punit['ssa_controller'] == SSA_NONE
+	&& punit['activity'] == ACTIVITY_IDLE) {
       return;
     }
 

@@ -192,7 +192,7 @@ function update_player_info_pregame_real()
     }
     $("#pregame_player_list").html(player_html);
 
-    /* show player ready state in pregame dialog */
+    /* Show player ready state in pregame dialog */
     for (id in players) {
       var player = players[id];
       var nation_text = "";
@@ -269,7 +269,7 @@ function update_player_info_pregame_real()
       });
     }
 
-    /* set state of Start game button depending on if user is ready. */
+    /* Set state of Start game button depending on if user is ready. */
     if (client.conn['player_num'] != null  && client.conn['player_num'] in players
         && players[client.conn['player_num']]['is_ready'] == true) {
         $("#start_game_button").button( "option", "disabled", true);
@@ -296,7 +296,7 @@ function pick_nation(player_id)
                   + "<input id='nation_autocomplete_box' type='text' size='20'>"
 		  + "<div id='nation_choice'></div></div> <div id='nation_list'> ";
 
-  /* prepare a list of flags and nations. */
+  /* Prepare a list of flags and nations. */
   var nation_name_list = [];
   for (var nation_id in nations) {
     var pnation = nations[nation_id];
@@ -374,8 +374,8 @@ function pick_nation(player_id)
 }
 
 /****************************************************************************
- This function is called when the nation select autocomplete box has been used,
- and it will call select_nation based on the user's choice.
+  This function is called when the nation select autocomplete box
+  has been used, and it will call select_nation based on the user's choice.
 ****************************************************************************/
 function update_nation_selection()
 {
@@ -393,11 +393,11 @@ function update_nation_selection()
 }
 
 /****************************************************************************
- Renders a list of city styles in the choose nation dialog.
+  Renders a list of city styles in the choose nation dialog.
 ****************************************************************************/
 function render_city_style_list()
 {
-  /* prepare a list of city styles. */
+  /* Prepare a list of city styles. */
   var city_style_html = "<b>City Styles:</b><br>";
   for (var style_id in city_rules) {
     if (style_id > 5) continue;
@@ -426,7 +426,6 @@ function render_city_style_list()
     });
 
   }
-
 
 }
 
@@ -495,7 +494,7 @@ function submit_nation_choice()
 ***************************************************************************/
 function ruledir_from_ruleset_name(ruleset_name, fall_back_dir)
 {
-  /* HACK: find current ruleset dir based on its name. */
+  /* HACK: Find current ruleset dir based on its name. */
   switch (ruleset_name) {
   case "Classic ruleset":
     return "classic";
@@ -1007,18 +1006,18 @@ function pregame_settings()
 /**************************************************************************
   Change the ruleset to
 **************************************************************************/
-function change_ruleset(to) {
-    send_message("/rulesetdir " + to);
-    // reset some ruleset defined settings.
-    send_message("/set nationset all");
-    if (chosen_nation != -1) {
-      swal("Ruleset changed. You need to select your nation again.");
-    }
+function change_ruleset(to)
+{
+  send_message("/rulesetdir " + to);
+  // Reset some ruleset defined settings.
+  send_message("/set nationset all");
+  if (chosen_nation != -1) {
+    swal("Ruleset changed. You need to select your nation again.");
   }
-
+}
 
 /**************************************************************************
- Shows the Freeciv intro dialog.
+  Shows the Freeciv intro dialog.
 **************************************************************************/
 function show_intro_dialog(title, message) {
 
@@ -1027,7 +1026,7 @@ function show_intro_dialog(title, message) {
     return;
   }
 
-  // reset dialog page.
+  // Reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
@@ -1082,7 +1081,8 @@ function show_intro_dialog(title, message) {
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
 			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
+			  // If intro dialog is closed,
+                          // then check the username and connect to the server.
 			  if (dialog_close_trigger != "button") {
 			    if (validate_username()) {
 			      network_init();
@@ -1142,7 +1142,7 @@ function show_intro_dialog(title, message) {
   }
 
   if (is_small_screen()) {
-    /* some fixes for pregame screen on small devices.*/
+    // Some fixes for pregame screen on small devices.
     $("#freeciv_logo").remove();
     $("#pregame_message_area").css("width", "73%");
     $("#observe_button").remove();
@@ -1195,7 +1195,7 @@ function show_longturn_intro_dialog() {
       "<div id='fc-signin2'></div><br>";
   }
 
-  // reset dialog page.
+  // Reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
@@ -1205,14 +1205,14 @@ function show_longturn_intro_dialog() {
     $("#username_req").val(stored_username);
   }
 
-
   $("#dialog").attr("title", title);
   $("#dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "80%" : "60%",
 			beforeClose: function( event, ui ) {
-			  // if intro dialog is closed, then check the username and connect to the server.
+			  // If intro dialog is closed,
+                          // then check the username and connect to the server.
 			  if (dialog_close_trigger != "button") {
 			    if (validate_username()) {
 			      network_init();
@@ -1228,7 +1228,7 @@ function show_longturn_intro_dialog() {
 		});
 
   if (is_small_screen()) {
-    /* some fixes for pregame screen on small devices.*/
+    /* Some fixes for pregame screen on small devices.*/
     $("#freeciv_logo").remove();
     $("#pregame_message_area").css("width", "73%");
     $("#observe_button").remove();
@@ -1239,7 +1239,7 @@ function show_longturn_intro_dialog() {
   blur_input_on_touchdevice();
 
   google_user_token = null;
- gapi.signin2.render('fc-signin2', {
+  gapi.signin2.render('fc-signin2', {
         'scope': 'profile email',
         'width': 240,
         'height': 50,
@@ -1331,7 +1331,6 @@ function validate_username_callback()
 
 }
 
-
 /**************************************************************************
  Shows the create new user account with password dialog.
 **************************************************************************/
@@ -1355,7 +1354,7 @@ function show_new_user_account_dialog(gametype)
                 + "<li>You can <a href='#' onclick='javascript:close_pbem_account();' style='color: black;'>cancel</a> your account at any time if you want.</li>"
                 + "</ul></small></div>";
 
-  // reset dialog page.
+  // Reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
@@ -1502,7 +1501,7 @@ function show_customize_nation_dialog(player_id) {
 
   var pnation = nations[chosen_nation];
 
-  // reset dialog page.
+  // Reset dialog page.
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
 
@@ -1566,7 +1565,6 @@ function handle_customized_nation(player_id)
     $.unblockUI();
     swal("Image file " + file.name + "  not supported: " + file.type);
   }
-
 }
 
 /**************************************************************************
@@ -1600,16 +1598,14 @@ function handle_new_flag(image_data, player_id) {
   img.src = image_data;
 
   nations[chosen_nation]['customized'] = true;
-
 }
 
 /**************************************************************************
   Recaptcha callback.
 **************************************************************************/
 function onloadCallback() {
-  // recaptcha is ready and loaded.
+  // Recaptcha is ready and loaded.
 }
-
 
 /**************************************************************************
  Reset the password for the user.
@@ -1624,7 +1620,7 @@ function forgot_pbem_password()
                 + "<div id='captcha_element'></div>"
                 + "<br><br>";
 
-  // reset dialog page.
+  // Reset dialog page.
   $("#pwd_dialog").remove();
   $("<div id='pwd_dialog'></div>").appendTo("div#game_page");
 
@@ -1682,7 +1678,6 @@ function forgot_pbem_password()
       swal("Captcha not available. This could be caused by a browser plugin.");
     }
   }
-
 }
 
 /**************************************************************************
@@ -1691,10 +1686,11 @@ function forgot_pbem_password()
 function google_signin_on_success(googleUser)
 {
   var id_token = googleUser.getAuthResponse().id_token;
-  username = sanitize_username($("#username_req").val()).toLowerCase();
+
   if (!validate_username()) {
     return;
   }
+  var username = sanitize_username($("#username_req").val()).toLowerCase();
 
   // Validate user token.
   var xhr = new XMLHttpRequest();
@@ -1711,13 +1707,12 @@ function google_signin_on_success(googleUser)
       swal("Login failed.");
     }
   };
-  xhr.send('idtoken=' + id_token + "&username=" + username);
 
+  xhr.send('idtoken=' + id_token + "&username=" + username);
 }
 
-
 /**************************************************************************
- Handle Google signin problems.
+  Handle Google signin problems.
 **************************************************************************/
 function google_signin_on_failure(error)
 {
@@ -1725,5 +1720,4 @@ function google_signin_on_failure(error)
 
   swal("Unable to sign in with Google: " + JSON.stringify(error));
   console.error("Unable to sign in with Google: " + JSON.stringify(error));
-
 }

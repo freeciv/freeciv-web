@@ -3,9 +3,9 @@ lock compresstype
 set maxconnectionsperhost 256
 lock maxconnectionsperhost
 
-# Should we disable also nuclear winter?
-# It's largely the same code which caused the problems with global warming
-# TODO: This has not been re-evaluated soon in ten years.
-#       Does freeciv-web still need this?
+# It can take very long time for the freeciv-web and web-client
+# to handle environmental disasters, so they are not usable.
 set globalwarming disabled
 lock globalwarming
+set nuclearwinter disabled
+lock nuclearwinter

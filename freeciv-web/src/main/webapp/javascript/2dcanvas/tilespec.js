@@ -917,6 +917,11 @@ function get_unit_veteran_sprite(punit)
 ***********************************************************************/
 function get_unit_activity_sprite(punit)
 {
+  if (punit['ssa_controller'] == SSA_AUTOEXPLORE) {
+    // FIXME: Currently can't have SSA_AUTOEXPLORE sprite with activity sprites
+    return null;
+  }
+
   var activity = punit['activity'];
   var act_tgt  = punit['activity_tgt'];
 

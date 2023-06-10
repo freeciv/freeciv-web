@@ -987,16 +987,16 @@ function update_unit_focus()
     }
   }
 
-  /* iterate zero times for no units in focus,
+  /* Iterate zero times for no units in focus,
    * otherwise quit for any of the conditions. */
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
 
     if (punit['movesleft'] > 0
-	  && punit['done_moving'] == false
-      && punit['ssa_controller'] == SSA_NONE
-	  && punit['activity'] == ACTIVITY_IDLE) {
+	&& punit['done_moving'] == false
+        && punit['ssa_controller'] == SSA_NONE
+	&& punit['activity'] == ACTIVITY_IDLE) {
       return;
     }
 
@@ -3017,10 +3017,9 @@ function request_unit_autosettlers(punit)
   if (punit != null ) {
     request_unit_cancel_orders(punit);
     action_decision_clear_want(punit['id']);
-    request_unit_ssa_set(punit, SSA_AUTOSETTLER);
+    request_unit_ssa_set(punit, SSA_AUTOWORKER);
   }
 }
-
 
 /****************************************************************************
   Request that a city is built.

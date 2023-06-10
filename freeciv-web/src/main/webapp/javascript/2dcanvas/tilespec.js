@@ -646,6 +646,12 @@ function fill_unit_sprite_array(punit, stacked, backdrop)
     activities['offset_y'] = activities['offset_y'] + unit_offset['y'];
     result.push(activities);
   }
+  var agent = get_unit_agent_sprite(punit);
+  if (agent != null) {
+    agent['offset_x'] = agent['offset_x'] + unit_offset['x'];
+    agent['offset_y'] = agent['offset_y'] + unit_offset['y'];
+    result.push(agent);
+  }
 
   if (should_ask_server_for_actions(punit)) {
     result.push({
@@ -692,8 +698,8 @@ function dir_get_tileset_name(dir)
 
 
 /****************************************************************************
-  Return a directional string for the cardinal directions.  Normally the
-  binary value 1000 will be converted into "n1e0s0w0".  This is in a
+  Return a directional string for the cardinal directions. Normally the
+  binary value 1000 will be converted into "n1e0s0w0". This is in a
   clockwise ordering.
 ****************************************************************************/
 function cardinal_index_str(idx)
@@ -710,7 +716,7 @@ function cardinal_index_str(idx)
 }
 
 
-/**********************************************************************
+/***********************************************************************
   Return the flag graphic to be used by the city.
 ***********************************************************************/
 function get_city_flag_sprite(pcity) {
@@ -727,7 +733,7 @@ function get_city_flag_sprite(pcity) {
           "offset_y" : - city_flag_offset_y};
 }
 
-/**********************************************************************
+/***********************************************************************
   Return the flag graphic to be used by the base on tile
 ***********************************************************************/
 function get_base_flag_sprite(ptile) {
@@ -744,8 +750,8 @@ function get_base_flag_sprite(ptile) {
           "offset_y" : - city_flag_offset_y};
 }
 
-/**********************************************************************
- Returns the sprite key for the number of defending units in a city.
+/***********************************************************************
+  Returns the sprite key for the number of defending units in a city.
 ***********************************************************************/
 function get_city_occupied_sprite(pcity) {
   var owner_id = pcity['owner'];
@@ -766,7 +772,7 @@ function get_city_occupied_sprite(pcity) {
   }
 }
 
-/**********************************************************************
+/***********************************************************************
 ...
 ***********************************************************************/
 function get_city_food_output_sprite(num) {
@@ -775,7 +781,7 @@ function get_city_food_output_sprite(num) {
           "offset_y" : -normal_tile_height/4};
 }
 
-/**********************************************************************
+/***********************************************************************
 ...
 ***********************************************************************/
 function get_city_shields_output_sprite(num) {
@@ -784,7 +790,7 @@ function get_city_shields_output_sprite(num) {
           "offset_y" : -normal_tile_height/4};
 }
 
-/**********************************************************************
+/***********************************************************************
 ...
 ***********************************************************************/
 function get_city_trade_output_sprite(num) {
@@ -794,7 +800,7 @@ function get_city_trade_output_sprite(num) {
 }
 
 
-/**********************************************************************
+/***********************************************************************
   Return the sprite for an invalid city worked tile.
 ***********************************************************************/
 function get_city_invalid_worked_sprite() {
@@ -804,7 +810,7 @@ function get_city_invalid_worked_sprite() {
 }
 
 
-/**********************************************************************
+/***********************************************************************
 ...
 ***********************************************************************/
 function fill_goto_line_sprite_array(ptile)
@@ -812,7 +818,7 @@ function fill_goto_line_sprite_array(ptile)
   return {"key" : "goto_line", "goto_dir" : ptile['goto_dir']};
 }
 
-/**********************************************************************
+/***********************************************************************
 ...
 ***********************************************************************/
 function get_border_line_sprites(ptile)
@@ -838,7 +844,7 @@ function get_border_line_sprites(ptile)
 }
 
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_nation_flag_sprite(punit)
@@ -854,7 +860,7 @@ function get_unit_nation_flag_sprite(punit)
           "offset_y" : - unit_flag_offset_y + unit_offset['y']};
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_nation_flag_normal_sprite(punit)
@@ -870,7 +876,7 @@ function get_unit_nation_flag_normal_sprite(punit)
           "offset_y" : - unit_flag_offset_y + unit_offset['y']};
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_stack_sprite(punit)
@@ -880,7 +886,7 @@ function get_unit_stack_sprite(punit)
           "offset_y" : - unit_flag_offset_y - 15};
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_hp_sprite(punit)
@@ -896,7 +902,7 @@ function get_unit_hp_sprite(punit)
           "offset_y" : - unit_flag_offset_y - 15 + unit_offset['y']};
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_veteran_sprite(punit)
@@ -906,7 +912,7 @@ function get_unit_veteran_sprite(punit)
           "offset_y" : - unit_activity_offset_y - 10};
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_activity_sprite(punit)
@@ -976,11 +982,6 @@ function get_unit_activity_sprite(punit)
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};
 
-    case ACTIVITY_EXPLORE:
-      return {"key" : "unit.auto_explore",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
-
     case ACTIVITY_TRANSFORM:
       return {"key" : "unit.transform",
           "offset_x" : unit_activity_offset_x,
@@ -1008,14 +1009,23 @@ function get_unit_activity_sprite(punit)
           "offset_y" : - unit_activity_offset_y};
   }
 
+  return null;
+}
+
+/***********************************************************************
+  ...
+***********************************************************************/
+function get_unit_agent_sprite(punit)
+{
   switch (punit['ssa_controller']) {
   case SSA_NONE:
     break;
-  case SSA_AUTOSETTLER:
-    return {"key" : "unit.auto_settler",
-          "offset_x" : 20, //FIXME.
-          "offset_y" : - unit_activity_offset_y};
+  case SSA_AUTOWORKER:
+    return {"key" : "unit.auto_worker",
+          "offset_x" : 0,
+          "offset_y" : 0};
   case SSA_AUTOEXPLORE:
+    // Treated like an activity in the tilespec format
     return {"key" : "unit.auto_explore",
           "offset_x" : unit_activity_offset_x,
           "offset_y" : -unit_activity_offset_y};

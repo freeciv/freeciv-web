@@ -1,0 +1,541 @@
+From e018e2b9b173679a7cb02b8f78ff0f2b0963ed15 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 27 May 2023 01:19:14 +0300
+Subject: [PATCH 04/29] Rulesets: Drop "Clean Pollution" and "Clean Fallout"
+ actions
+
+Rely on generic "Clean" action
+
+See osdn #47628
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ data/alien/actions.ruleset         | 20 --------------------
+ data/alien/terrain.ruleset         |  4 ++--
+ data/civ1/actions.ruleset          | 12 +-----------
+ data/civ1/terrain.ruleset          |  2 +-
+ data/civ2/actions.ruleset          | 12 +-----------
+ data/civ2/terrain.ruleset          |  2 +-
+ data/civ2civ3/actions.ruleset      | 20 --------------------
+ data/civ2civ3/terrain.ruleset      |  4 ++--
+ data/classic/actions.ruleset       | 20 --------------------
+ data/classic/terrain.ruleset       |  4 ++--
+ data/goldkeep/actions.ruleset      | 20 --------------------
+ data/goldkeep/terrain.ruleset      |  4 ++--
+ data/multiplayer/actions.ruleset   | 20 --------------------
+ data/multiplayer/terrain.ruleset   |  4 ++--
+ data/sandbox/actions.ruleset       | 20 --------------------
+ data/sandbox/terrain.ruleset       |  4 ++--
+ data/webperimental/actions.ruleset | 20 --------------------
+ data/webperimental/terrain.ruleset |  4 ++--
+ 18 files changed, 18 insertions(+), 178 deletions(-)
+
+diff --git a/data/alien/actions.ruleset b/data/alien/actions.ruleset
+index dd6dd0508d..a21a5c503e 100644
+--- a/data/alien/actions.ruleset
++++ b/data/alien/actions.ruleset
+@@ -286,12 +286,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -756,20 +750,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/alien/terrain.ruleset b/data/alien/terrain.ruleset
+index 4f63c8ec01..a64a855a21 100644
+--- a/data/alien/terrain.ruleset
++++ b/data/alien/terrain.ruleset
+@@ -850,7 +850,7 @@ is known, Thick Mountains can also be mined.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -940,7 +940,7 @@ get Protein Houses as soon as they are available.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/civ1/actions.ruleset b/data/civ1/actions.ruleset
+index d6a6d76558..bbbf391d6a 100644
+--- a/data/civ1/actions.ruleset
++++ b/data/civ1/actions.ruleset
+@@ -268,10 +268,7 @@ ui_name_plant = _("Transform by %sPlanting%s")
+ ui_name_pillage = _("Pilla%sge%s")
+ 
+ ; /* TRANS: Clean (100% chance of success). */
+-ui_name_clean = _("%sClean%s")
+-
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
++ui_name_clean = _("Clean %sPollution%s")
+ 
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+@@ -634,13 +631,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/civ1/terrain.ruleset b/data/civ1/terrain.ruleset
+index f43379cdec..73920b3266 100644
+--- a/data/civ1/terrain.ruleset
++++ b/data/civ1/terrain.ruleset
+@@ -1024,7 +1024,7 @@ Building a mine on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution", "Fallout"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/civ2/actions.ruleset b/data/civ2/actions.ruleset
+index 90a999e07c..8804009d9d 100644
+--- a/data/civ2/actions.ruleset
++++ b/data/civ2/actions.ruleset
+@@ -320,10 +320,7 @@ ui_name_plant = _("Transform by %sPlanting%s")
+ ui_name_pillage = _("Pilla%sge%s")
+ 
+ ; /* TRANS: Clean (100% chance of success). */
+-ui_name_clean = _("%sClean%s")
+-
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
++ui_name_clean = _("Clean %sPollution%s")
+ 
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+@@ -950,13 +947,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/civ2/terrain.ruleset b/data/civ2/terrain.ruleset
+index 965c22067e..a1b9280056 100644
+--- a/data/civ2/terrain.ruleset
++++ b/data/civ2/terrain.ruleset
+@@ -1096,7 +1096,7 @@ Building a mine on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution", "Fallout"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/civ2civ3/actions.ruleset b/data/civ2civ3/actions.ruleset
+index d0d52602d7..393d3d7546 100644
+--- a/data/civ2civ3/actions.ruleset
++++ b/data/civ2civ3/actions.ruleset
+@@ -351,12 +351,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -1125,20 +1119,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/civ2civ3/terrain.ruleset b/data/civ2civ3/terrain.ruleset
+index 03de78d101..99a04b1c82 100644
+--- a/data/civ2civ3/terrain.ruleset
++++ b/data/civ2civ3/terrain.ruleset
+@@ -1370,7 +1370,7 @@ or directly by Transport units.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1501,7 +1501,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/classic/actions.ruleset b/data/classic/actions.ruleset
+index cd1e001dcc..5004acd155 100644
+--- a/data/classic/actions.ruleset
++++ b/data/classic/actions.ruleset
+@@ -341,12 +341,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -1071,20 +1065,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/classic/terrain.ruleset b/data/classic/terrain.ruleset
+index 08700f4fc2..d843f09a4b 100644
+--- a/data/classic/terrain.ruleset
++++ b/data/classic/terrain.ruleset
+@@ -1312,7 +1312,7 @@ Building an oil well on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1437,7 +1437,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/goldkeep/actions.ruleset b/data/goldkeep/actions.ruleset
+index 2782176dad..d4806fb164 100644
+--- a/data/goldkeep/actions.ruleset
++++ b/data/goldkeep/actions.ruleset
+@@ -341,12 +341,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -1085,20 +1079,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/goldkeep/terrain.ruleset b/data/goldkeep/terrain.ruleset
+index 9a811a8796..2dddc1455d 100644
+--- a/data/goldkeep/terrain.ruleset
++++ b/data/goldkeep/terrain.ruleset
+@@ -1288,7 +1288,7 @@ Building an oil well on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1413,7 +1413,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/multiplayer/actions.ruleset b/data/multiplayer/actions.ruleset
+index 2d3ef6ce0e..f545b198bc 100644
+--- a/data/multiplayer/actions.ruleset
++++ b/data/multiplayer/actions.ruleset
+@@ -332,12 +332,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -1059,20 +1053,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/multiplayer/terrain.ruleset b/data/multiplayer/terrain.ruleset
+index 48e9503f19..f1bd0ad2a3 100644
+--- a/data/multiplayer/terrain.ruleset
++++ b/data/multiplayer/terrain.ruleset
+@@ -1286,7 +1286,7 @@ Building an oil well on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1410,7 +1410,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/sandbox/actions.ruleset b/data/sandbox/actions.ruleset
+index ad95d0fd3a..2bb246e2f9 100644
+--- a/data/sandbox/actions.ruleset
++++ b/data/sandbox/actions.ruleset
+@@ -383,12 +383,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -2228,20 +2222,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/sandbox/terrain.ruleset b/data/sandbox/terrain.ruleset
+index d8870f5dcc..3f3598fddc 100644
+--- a/data/sandbox/terrain.ruleset
++++ b/data/sandbox/terrain.ruleset
+@@ -1371,7 +1371,7 @@ or directly by Transport units.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1532,7 +1532,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+diff --git a/data/webperimental/actions.ruleset b/data/webperimental/actions.ruleset
+index 52195470f1..d098031330 100644
+--- a/data/webperimental/actions.ruleset
++++ b/data/webperimental/actions.ruleset
+@@ -319,12 +319,6 @@ ui_name_pillage = _("Pilla%sge%s")
+ ; /* TRANS: Clean (100% chance of success). */
+ ui_name_clean = _("%sClean%s")
+ 
+-; /* TRANS: Clean _Pollution (100% chance of success). */
+-ui_name_clean_pollution = _("Clean %sPollution%s")
+-
+-; /* TRANS: Clean _Fallout (100% chance of success). */
+-ui_name_clean_fallout = _("Clean %sFallout%s")
+-
+ ; /* TRANS: _Fortify (100% chance of success). */
+ ui_name_fortify = _("%sFortify%s")
+ 
+@@ -1371,20 +1365,6 @@ actor_reqs    =
+       "UnitFlag",      "Settlers",     "Local", TRUE
+     }
+ 
+-[actionenabler_clean_pollution]
+-action        = "Clean Pollution"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+-[actionenabler_clean_fallout]
+-action        = "Clean Fallout"
+-actor_reqs    =
+-    { "type",          "name",         "range", "present"
+-      "UnitFlag",      "Settlers",     "Local", TRUE
+-    }
+-
+ [actionenabler_fortify_terrain]
+ action        = "Fortify"
+ actor_reqs    =
+diff --git a/data/webperimental/terrain.ruleset b/data/webperimental/terrain.ruleset
+index e7d851ffba..eaea28824c 100644
+--- a/data/webperimental/terrain.ruleset
++++ b/data/webperimental/terrain.ruleset
+@@ -1312,7 +1312,7 @@ Building an oil well on an irrigated tile will destroy the irrigation.\
+ name           = _("Pollution")
+ category       = "Nuisance"
+ causes         = "Pollution"
+-rmcauses       = "Clean", "CleanPollution"
++rmcauses       = "Clean"
+ graphic        = "tx.pollution"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+@@ -1437,7 +1437,7 @@ Like irrigation, farmland is incompatible with mines and oil wells.\
+ name           = _("Fallout")
+ category       = "Nuisance"
+ causes         = "Fallout"
+-rmcauses       = "Clean", "CleanFallout"
++rmcauses       = "Clean"
+ graphic        = "tx.fallout"
+ graphic_alt    = "-"
+ activity_gfx   = "None"
+-- 
+2.39.2
+

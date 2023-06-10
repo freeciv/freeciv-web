@@ -50,6 +50,9 @@
 # 0002-Meson-Compress-scenario-files-installed.patch
 #   Fix an autotools -> meson regression of not compressing scenarios
 #   osdn #47826
+# 0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti.patch
+#   Use new generic "Clean" action only in rulesets
+#   osdn #47628
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -88,6 +91,7 @@ declare -a PATCHLIST=(
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "backports/0043-Reformat-amplio2-tiles.spec"
   "backports/0002-Meson-Compress-scenario-files-installed"
+  "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"
   "meson_webperimental"
   "metachange"
   "text_fixes"

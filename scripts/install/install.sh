@@ -220,8 +220,10 @@ fi
 . "${basedir}/scripts/install/${FCW_INSTALL_SCRIPT}"
 echo "System specific install complete (${basedir}/scripts/install/${FCW_INSTALL_SCRIPT})"
 
-echo "==== Installing python modules ===="
-pip3 install --user -r "${basedir}/requirements.txt"
+if [ "${PIP_SKIP}" != "Y" ] ; then
+  echo "==== Installing python modules ===="
+  pip3 install --user -r "${basedir}/requirements.txt"
+fi
 
 if command -v service > /dev/null; then
   svcman=default

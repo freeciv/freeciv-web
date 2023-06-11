@@ -1,0 +1,95 @@
+From e12d2ccc5e6e395b677e7a65f38c0e65fa8417da Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 11 Jun 2023 05:30:25 +0300
+Subject: [PATCH 52/53] Correct version numbers in sg_regr() uses to decimal
+
+Format "030?0?00" was being used, where the leading zero
+made compiler to consider them octals.
+
+See osdn #48212
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savecompat.h | 2 ++
+ server/savegame/savegame2.c  | 6 +++---
+ server/savegame/savegame3.c  | 6 +++---
+ 3 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/server/savegame/savecompat.h b/server/savegame/savecompat.h
+index 5fcf81bbd9..a91710a162 100644
+--- a/server/savegame/savecompat.h
++++ b/server/savegame/savecompat.h
+@@ -188,6 +188,8 @@ struct loaddata {
+     sg_check_ret_val(_val);                                                 \
+   }
+ 
++/* Resist urge to write version numbers with leading zero; "030?0?00",
++ * as that makes compiler to consider them octal. */
+ #define sg_regr(fixversion, message, ...)                                   \
+   if (loading->full_version >= fixversion) {                                \
+     log_sg(message, ## __VA_ARGS__);                                        \
+diff --git a/server/savegame/savegame2.c b/server/savegame/savegame2.c
+index 783efe6048..8c38f8ca8a 100644
+--- a/server/savegame/savegame2.c
++++ b/server/savegame/savegame2.c
+@@ -2996,7 +2996,7 @@ static void sg_load_player_main(struct loaddata *loading,
+     /* FIXME: If either party is barbarian, we cannot enforce below check */
+ #if 0
+     if (ds->type == DS_WAR && ds->first_contact_turn <= 0) {
+-      sg_regr(03020000,
++      sg_regr(3020000,
+               "Player%d: War with player %d who has never been met. "
+               "Reverted to No Contact state.", plrno, i);
+       ds->type = DS_NO_CONTACT;
+@@ -3004,7 +3004,7 @@ static void sg_load_player_main(struct loaddata *loading,
+ #endif
+ 
+     if (valid_dst_closest(ds) != ds->max_state) {
+-      sg_regr(03020000,
++      sg_regr(3020000,
+               "Player%d: closest diplstate to player %d less than current. "
+               "Updated.", plrno, i);
+       ds->max_state = ds->type;
+@@ -5393,7 +5393,7 @@ static void sg_load_sanitycheck(struct loaddata *loading)
+     techs = recalculate_techs_researched(presearch);
+ 
+     if (presearch->techs_researched != techs) {
+-      sg_regr(03000300,
++      sg_regr(3000300,
+               _("%s had finished researches count wrong."),
+               research_name_translation(presearch));
+       presearch->techs_researched = techs;
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index 7b37745723..a9cb6c4317 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -4142,7 +4142,7 @@ static void sg_load_player_main(struct loaddata *loading,
+     /* FIXME: If either party is barbarian, we cannot enforce below check */
+ #if 0
+     if (ds->type == DS_WAR && ds->first_contact_turn <= 0) {
+-      sg_regr(03020000,
++      sg_regr(3020000,
+               "Player%d: War with player %d who has never been met. "
+               "Reverted to No Contact state.", plrno, i);
+       ds->type = DS_NO_CONTACT;
+@@ -4150,7 +4150,7 @@ static void sg_load_player_main(struct loaddata *loading,
+ #endif
+ 
+     if (valid_dst_closest(ds) != ds->max_state) {
+-      sg_regr(03020000,
++      sg_regr(3020000,
+               "Player%d: closest diplstate to player %d less than current. "
+               "Updated.", plrno, i);
+       ds->max_state = ds->type;
+@@ -7903,7 +7903,7 @@ static void sg_load_sanitycheck(struct loaddata *loading)
+     techs = recalculate_techs_researched(presearch);
+ 
+     if (presearch->techs_researched != techs) {
+-      sg_regr(03000300,
++      sg_regr(3000300,
+               _("%s had finished researches count wrong."),
+               research_name_translation(presearch));
+       presearch->techs_researched = techs;
+-- 
+2.39.2
+

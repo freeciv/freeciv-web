@@ -213,6 +213,7 @@ function tileset_extra_activity_graphic_tag(extra)
   }
 
   console.log("No activity graphic for extra " + extra['name']);
+
   return null;
 }
 
@@ -223,6 +224,43 @@ function tileset_extra_activity_graphic_tag(extra)
 function tileset_extra_id_activity_graphic_tag(extra_id)
 {
   return tileset_extra_activity_graphic_tag(extras[extra_id]);
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic showing that a unit is removing the
+  specified Extra.
+**************************************************************************/
+function tileset_extra_rmactivity_graphic_tag(extra)
+{
+  if (extra == null) {
+    console.log("No extra to return tag for.");
+    return null;
+  }
+
+  if (tileset_has_tag(extra['rmact_gfx'])) {
+    return extra['rmact_gfx'];
+  }
+
+  if (tileset_has_tag(extra['rmact_gfx_alt'])) {
+    return extra['rmact_gfx_alt'];
+  }
+
+  if (tileset_has_tag(extra['rmact_gfx_alt2'])) {
+    return extra['rmact_gfx_alt2'];
+  }
+
+  console.log("No removal activity graphic for extra " + extra['name']);
+
+  return null;
+}
+
+/**************************************************************************
+  Returns the tag name of the graphic showing that a unit is removing the
+  Extra specified by the id.
+**************************************************************************/
+function tileset_extra_id_rmactivity_graphic_tag(extra_id)
+{
+  return tileset_extra_rmactivity_graphic_tag(extras[extra_id]);
 }
 
 /****************************************************************************
@@ -921,15 +959,18 @@ function get_unit_activity_sprite(punit)
   var act_tgt  = punit['activity_tgt'];
 
   switch (activity) {
-    /* TODO: Use target specific sprites. */
     case ACTIVITY_CLEAN:
     case ACTIVITY_POLLUTION:
-      return {"key" : "unit.pollution",
+      return {"key" : -1 == act_tgt ?
+                        "unit.pollution" :
+                        tileset_extra_id_rmactivity_graphic_tag(act_tgt),
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};
 
     case ACTIVITY_FALLOUT:
-      return {"key" : "unit.fallout",
+      return {"key" : -1 == act_tgt ?
+                        "unit.fallout" :
+                        tileset_extra_id_rmactivity_graphic_tag(act_tgt),
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};
 

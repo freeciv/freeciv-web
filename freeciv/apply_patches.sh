@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0022-Fix-out-of-bounds-on-cargo-iter.patch
-#   Memory fix
-#   osdn #47982
 # 0021-Autoworkers-Fix-assert-failure-because-of-recursive-.patch
 #   Assert failure fix
 #   osdn #47992
@@ -82,7 +79,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"

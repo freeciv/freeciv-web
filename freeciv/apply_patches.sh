@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert.patch
-#   Assert fix
-#   osdn #47938
 # 0022-Fix-out-of-bounds-on-cargo-iter.patch
 #   Memory fix
 #   osdn #47982
@@ -47,6 +44,12 @@
 # 0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities.patch
 #   Fix to ACTIVITY_CLEAN support
 #   osdn #48147
+# 0043-Reformat-amplio2-tiles.spec.patch
+#   Work around freeciv-web auto_worker icon problem
+#   osdn #48179
+# 0002-Meson-Compress-scenario-files-installed.patch
+#   Fix an autotools -> meson regression of not compressing scenarios
+#   osdn #47826
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -70,7 +73,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0022-Fix-out-of-bounds-on-cargo-iter"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
@@ -84,6 +86,8 @@ declare -a PATCHLIST=(
   "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"
   "backports/0028-Meson-Fix-gzipped-saves-support"
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
+  "backports/0043-Reformat-amplio2-tiles.spec"
+  "backports/0002-Meson-Compress-scenario-files-installed"
   "meson_webperimental"
   "metachange"
   "text_fixes"

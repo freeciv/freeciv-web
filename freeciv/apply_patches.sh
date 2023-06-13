@@ -56,6 +56,9 @@
 # 0039-Protocol-Fix-sending-gives_shared_tiles.patch
 #   Network protocol fix
 #   osdn #48119
+# 0044-Meson-Include-just-stub-AI-when-server-not-built.patch
+#   Included to freeciv-web for memory savings on any build
+#   osdn #48193
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -96,6 +99,7 @@ declare -a PATCHLIST=(
   "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"
   "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
   "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
+  "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
   "meson_webperimental"
   "metachange"
   "text_fixes"

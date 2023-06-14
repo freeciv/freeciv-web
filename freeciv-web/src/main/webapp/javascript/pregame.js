@@ -538,7 +538,7 @@ function show_ruleset_description_full() {
 }
 
 /****************************************************************************
- Shows the pregame settings dialog.
+  Shows the pregame settings dialog.
 ****************************************************************************/
 function pregame_settings()
 {
@@ -573,7 +573,7 @@ function pregame_settings()
 	  "<td><input type='number' name='mapsize' id='mapsize' size='4' length='3' min='1' max='10' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	      "<option value='1'>Handicapped</option>" +
+	      "<option value='1'>Restricted</option>" +
 	      "<option value='2'>Novice</option>" +
 	      "<option value='3'>Easy</option>" +
           "<option value='4'>Normal</option>" +
@@ -855,7 +855,7 @@ function pregame_settings()
   $('#skill_level').change(function() {
     ai_skill_level = parseFloat($('#skill_level').val());
     if (ai_skill_level == 1) {
-      send_message("/handicapped");
+      send_message("/restricted");
     } else if (ai_skill_level == 2) {
       send_message("/novice");
     } else if (ai_skill_level == 3) {
@@ -999,7 +999,6 @@ function pregame_settings()
      "North West, North East, South East, South West<br>"
       );
   });
-
 
 }
 

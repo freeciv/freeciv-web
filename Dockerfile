@@ -1,7 +1,7 @@
 # Freeciv-web docker file
 # Dockerfile update based on debian/tomcat package
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 MAINTAINER The Freeciv Project version: 3.3
 
@@ -49,6 +49,7 @@ WORKDIR /docker/scripts/
 
 RUN DEBIAN_FRONTEND=noninteractive sudo apt-get update --yes --quiet && \
     DEBIAN_FRONTEND=noninteractive DEB_NO_TOMCAT=Y \
+                                   PIP_SKIP=Y \
                                    install/install.sh --mode=TEST && \
     DEBIAN_FRONTEND=noninteractive sudo apt-get clean --yes && \
     sudo rm --recursive --force /var/lib/apt/lists/*

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
- Freeciv - Copyright (C) 2009-2017 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv-web - Copyright (C) 2009-2017 - Andreas Røsdal andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -18,6 +18,8 @@ import platform
 import threading
 import time
 from tornado import version as tornado_version
+
+__all__ = ['get_debug_info']
 
 startTime = time.time()
 
@@ -61,5 +63,3 @@ def get_debug_info(civcoms):
     code += "</div></body></html>"
 
     return code
-
-

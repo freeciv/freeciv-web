@@ -34,6 +34,8 @@ const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
    This file contains the handling-code for packets from the server.
 */
 
+var terrain_control;
+
 function handle_processing_started(packet)
 {
   client_frozen = true;

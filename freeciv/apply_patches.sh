@@ -11,9 +11,6 @@
 # 0039-Meson-Make-it-possible-to-disable-server-build.patch
 #   Reworked server build option
 #   osdn #48098
-# 0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b.patch
-#   Dependency of 0028-Meson-Fix-gzipped-saves-support.patch
-#   osdn #48043
 # 0028-Meson-Fix-gzipped-saves-support.patch
 #   Fix handling of compressed saves
 #   osdn #48101
@@ -38,6 +35,9 @@
 # 0044-Meson-Include-just-stub-AI-when-server-not-built.patch
 #   Included to freeciv-web for memory savings on any build
 #   osdn #48193
+# 0038-Give-ui_name-for-internal-actions.patch
+#   Fix freeciv-manual assert failure
+#   osdn #48246
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -63,7 +63,6 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
-  "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"
   "backports/0028-Meson-Fix-gzipped-saves-support"
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "backports/0043-Reformat-amplio2-tiles.spec"
@@ -72,6 +71,7 @@ declare -a PATCHLIST=(
   "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
   "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
+  "backports/0038-Give-ui_name-for-internal-actions"
   "meson_webperimental"
   "metachange"
   "text_fixes"

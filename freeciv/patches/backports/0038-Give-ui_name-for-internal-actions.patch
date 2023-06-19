@@ -1,0 +1,54 @@
+From 4339f9a869bfe1ea02f47b2a7fdf6ca694b4cd2c Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 19 Jun 2023 14:58:25 +0300
+Subject: [PATCH 38/38] Give ui_name for internal actions
+
+Required when constructing help text about what actions
+ruleset object enables.
+
+See osdn #48246
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/actions.c | 4 +---
+ server/ruleset.c | 2 +-
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/common/actions.c b/common/actions.c
+index cfe4b4d1de..b681ea5ae0 100644
+--- a/common/actions.c
++++ b/common/actions.c
+@@ -2003,8 +2003,6 @@ const char *action_prepare_ui_name(action_id act_id, const char *mnemonic,
+   /* Text representation of the probability. */
+   const char *probtxt;
+ 
+-  fc_assert(!action_id_is_internal(act_id));
+-
+   if (!actions_are_ready()) {
+     /* Could be a client who haven't gotten the ruleset yet */
+ 
+@@ -7221,7 +7219,7 @@ const char *action_ui_name_default(int act)
+     /* TRANS: _User Action 4 (100% chance of success). */
+     return N_("%sUser Action 4%s");
+   case ACTION_GAIN_VETERANCY:
+-    fc_assert(!action_id_is_internal(act)); /* Fail always */
++    return N_("%sGain Veterancy%s");
+     break;
+   }
+ 
+diff --git a/server/ruleset.c b/server/ruleset.c
+index 9e42001ba2..ee99dd5fc8 100644
+--- a/server/ruleset.c
++++ b/server/ruleset.c
+@@ -7644,7 +7644,7 @@ static bool load_ruleset_actions(struct section_file *file,
+           ok = FALSE;
+         } else if (!load_action_actor_consuming_always(file, act_id)) {
+           ok = FALSE;
+-        } else if (!action_id_is_internal(act_id)) {
++        } else {
+           load_action_ui_name(file, act_id,
+                               action_ui_name_ruleset_var_name(act_id));
+         }
+-- 
+2.39.2
+

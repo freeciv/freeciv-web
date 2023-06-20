@@ -17,7 +17,8 @@
 
 ***********************************************************************/
 
-
+var mouse_x;
+var mouse_y;
 var touch_start_x;
 var touch_start_y;
 
@@ -186,10 +187,7 @@ function mapview_touch_move(e)
       }
     }
   }
-
-
 }
-
 
 /****************************************************************************
   This function is triggered when the mouse is clicked on the city canvas.
@@ -207,14 +205,11 @@ function city_mapview_mouse_click(e)
   if (!rightclick) {
     city_action_button_pressed(mouse_x, mouse_y);
   }
-
-
 }
-
 
 /**************************************************************************
   Do some appropriate action when the "main" mouse button (usually
-  left-click) is pressed.  For more sophisticated user control use (or
+  left-click) is pressed. For more sophisticated user control use (or
   write) a different xxx_button_pressed function.
 **************************************************************************/
 function action_button_pressed(canvas_x, canvas_y, qtype)
@@ -291,7 +286,7 @@ function map_select_units(canvas_x, canvas_y)
 }
 
 /**************************************************************************
-  Recenter the map on the canvas location, on user request.  Usually this
+  Recenter the map on the canvas location, on user request. Usually this
   is done with a right-click.
 **************************************************************************/
 function recenter_button_pressed(canvas_x, canvas_y)

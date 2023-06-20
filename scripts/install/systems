@@ -6,3 +6,4 @@ Ubuntu	kinetic	deb.sh
 Ubuntu	lunar	deb.sh
 Debian	bullseye	deb.sh
 Debian	bookworm	deb.sh
+Debian	trixie	deb.sh

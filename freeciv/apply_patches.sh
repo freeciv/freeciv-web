@@ -5,27 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0021-Autoworkers-Fix-assert-failure-because-of-recursive-.patch
-#   Assert failure fix
-#   osdn #47992
-# 0023-Savegame-Correct-loading-governor-settings.patch
-#   Savegame loading fix
-#   osdn #48002
-# 0025-Filter-chat-messages-more-aggressively-on-freeciv-we.patch
-#   Replaces former freeciv-web specific patch
-#   osdn #48007
-# 0029-Keep-observers-in-sync-with-city-investigation.patch
-#   Protocol fix for observer connections
-#   osdn #46186
-# 0024-Delay-city-size-change-when-restoring-protected-unit.patch
-#   Fix inconsistent data -> wrong amount of unit shield upkeep
-#   osdn #48023
-# 0023-Rulesave-Fix-crash-when-handling-internal-actions.patch
-#   Crash fix
-#   osdn #48036
-# 0028-Fix-action_is_internal-crash-when-actions-are-not-se.patch
-#   Crash fix
-#   osdn #48009
 # 0036-make_dir-Add-mode-parameter.patch
 #   Improvement to rebase freeciv-web's own savegame.patch on
 #   osdn #48094
@@ -82,13 +61,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
-  "backports/0023-Savegame-Correct-loading-governor-settings"
-  "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
-  "backports/0029-Keep-observers-in-sync-with-city-investigation"
-  "backports/0024-Delay-city-size-change-when-restoring-protected-unit"
-  "backports/0023-Rulesave-Fix-crash-when-handling-internal-actions"
-  "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
   "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
   "backports/0017-Meson-Don-t-try-to-link-against-zlib-on-emscripten-b"

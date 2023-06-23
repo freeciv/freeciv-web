@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -44,7 +44,7 @@ var T_UNKNOWN = 0; /* An unknown terrain. */
 /* The first terrain value. */
 var T_FIRST = 0;
 
-/* used to compute neighboring tiles.
+/* Used to compute neighboring tiles.
  *
  * using
  *   x1 = x + DIR_DX[dir];
@@ -92,7 +92,7 @@ function map_allocate()
   tiles = {};
 
   /* Note this use of whole_map_iterate may be a bit sketchy, since the
-   * tile values (ptile->index, etc.) haven't been set yet.  It might be
+   * tile values (ptile->index, etc.) haven't been set yet. It might be
    * better to do a manual loop here. */
   for (var x = 0; x < map['xsize']; x++) {
     for (var y = 0; y < map['ysize']; y++) {
@@ -134,6 +134,7 @@ function tile_init(tile)
   tile['spec_sprite'] = null;
   tile['goto_dir'] = null;
   tile['nuke'] = 0;
+
   return tile;
 }
 
@@ -159,7 +160,6 @@ function map_init_topology(set_sizes)
       map.num_cardinal_dirs++;
     }
   }
-
 }
 
 /****************************************************************************
@@ -228,7 +228,7 @@ function index_to_tile(index)
 }
 
 /****************************************************************************
-  Obscure math.  See explanation in doc/HACKING.
+  Obscure math. See explanation in doc/HACKING.
 ****************************************************************************/
 function NATIVE_TO_MAP_POS(nat_x, nat_y)
 {
@@ -337,7 +337,7 @@ function map_distance_vector(tile0, tile1)
 }
 
 /****************************************************************************
-  Step from the given tile in the given direction.  The new tile is returned,
+  Step from the given tile in the given direction. The new tile is returned,
   or NULL if the direction is invalid or leads off the map.
 ****************************************************************************/
 function mapstep(ptile, dir)
@@ -369,7 +369,7 @@ function get_direction_for_step(start_tile, end_tile)
 }
 
 /**************************************************************************
-Return the debugging name of the direction.
+  Return the debugging name of the direction.
 **************************************************************************/
 function dir_get_name(dir)
 {

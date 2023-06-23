@@ -34,6 +34,7 @@ const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
    This file contains the handling-code for packets from the server.
 */
 
+var map;
 var terrain_control;
 
 function handle_processing_started(packet)
@@ -558,7 +559,6 @@ function handle_map_info(packet)
     mapview_model_width = Math.floor(MAPVIEW_ASPECT_FACTOR * map['xsize']);
     mapview_model_height = Math.floor(MAPVIEW_ASPECT_FACTOR * map['ysize']);
   }
-
 }
 
 /* 100% complete */

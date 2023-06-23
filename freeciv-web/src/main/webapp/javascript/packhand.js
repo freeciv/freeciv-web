@@ -36,6 +36,8 @@ const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 
 var terrain_control;
 
+var roads = [];
+
 function handle_processing_started(packet)
 {
   client_frozen = true;
@@ -633,6 +635,7 @@ function handle_ruleset_control(packet)
     else delete window["EXTRA_" + ename.toUpperCase()];
   }
   extras = {};
+  roads = [];
 
   /* Reset legal diplomatic clauses. */
   clause_infos = {};
@@ -665,7 +668,6 @@ function handle_ruleset_control(packet)
    *   handle_rulesets_ready
    *   handle_nation_availability
    */
-
 }
 
 /**************************************************************************
@@ -1734,6 +1736,10 @@ function handle_ruleset_extra(packet)
   extras[packet['id']] = packet;
   extras[packet['rule_name']] = packet;
 
+  if (is_extra_caused_by(packet, EC_ROAD) && packet['buildable']) {
+    roads.push(packet);
+  }
+
   if (packet['rule_name'] == "Railroad") window["EXTRA_RAIL"] = packet['id'];
   else if (packet['rule_name'] == "Oil Well") window["EXTRA_OIL_WELL"] = packet['id'];
   else window["EXTRA_" + packet['rule_name'].toUpperCase()] = packet['id'];
@@ -1744,7 +1750,7 @@ function handle_ruleset_extra(packet)
 ****************************************************************************/
 function handle_ruleset_counter(packet)
 {
-  /* TODO: implement */
+  /* TODO: Implement */
 }
 
 /************************************************************************//**
@@ -1752,7 +1758,7 @@ function handle_ruleset_counter(packet)
 ****************************************************************************/
 function handle_ruleset_extra_flag(packet)
 {
-  /* TODO: implement */
+  /* TODO: Implement */
 }
 
 /************************************************************************//**

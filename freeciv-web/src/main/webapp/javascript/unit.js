@@ -82,7 +82,7 @@ function client_remove_unit(punit)
 }
 
 /**************************************************************************
- Returns a list of units on the given tile. See update_tile_unit().
+  Returns a list of units on the given tile. See update_tile_unit().
 **************************************************************************/
 function tile_units(ptile)
 {

@@ -72,6 +72,7 @@ spec_files = {
     "units.spec",
     "extra_units.spec",
     "upkeep.spec",
+    "maglev.spec",
     "veterancy.spec",
     "water.spec"
   ],
@@ -126,7 +127,7 @@ max_row_height = 0;
 curr_x = 0;
 curr_y = 14;
 # Set size of tileset image manually depending on number of tiles.
-# Note!  Safari on iPhone doesn't support more than 3000000 pixels in a single image.
+# Note! Safari on iPhone doesn't support more than 3000000 pixels in a single image.
 tileset_height = 1030;
 tileset_width = 1800;
 
@@ -156,7 +157,7 @@ def config_read(file):
     return config;
 
 def increment_tileset_image(tileset_name):
-  # save current tileset file.
+  # Save current tileset file.
   global tileset;
   global curr_x;
   global curr_y;
@@ -225,7 +226,7 @@ for tileset_id in sorted(files.keys()):
       if verbose: print("  processing: " + gfx_file)
       im = Image.open(gfx_file)
 
-      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_coasts", "grid_extra"]:
+      for current_section in ["grid_main", "grid_roads", "grid_rails", "grid_maglev", "grid_coasts", "grid_extra"]:
         if current_section in config.sections():
           dx = int(config.get(current_section, "dx"));
           dy = int(config.get(current_section, "dy"));
@@ -305,7 +306,7 @@ for tileset_id in sorted(files.keys()):
                   max_row_height = 0;
 
             elif tag in dither_types:
-              # handle a dithered tile.
+              # Handle a dithered tile.
               dither_map[tag] = result_tile.copy();
 
             elif tag.find("explode.nuke_") > -1 \
@@ -314,9 +315,9 @@ for tileset_id in sorted(files.keys()):
                  or tag.find("grid.main") > -1 \
                  or tag.find("grid.city") > -1 \
                  or tag.find("grid.coastline") > -1:
-              continue; #skip unused tiles.
+              continue; # Skip unused tiles.
             else:
-              # handle a non-cellgroup tile.
+              # Handle a non-cellgroup tile.
               (w, h) = result_tile.size;
               if (w > max_width): max_width = w;
               if (h > max_height): max_height = h;

@@ -1154,23 +1154,36 @@ function update_unit_order_commands()
       if (ptype['name'] == "Engineers") unit_actions["autosettlers"] = {name: "Auto engineers (A)"};
 
       if (!tile_has_extra(ptile, EXTRA_ROAD)) {
-        $("#order_road").show();
         $("#order_railroad").hide();
-        if (!(tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN)) {
-	      unit_actions["road"] = {name: "Build road (R)"};
-	    }
-      } else if (player_invention_state(client.conn.playing, tech_id_by_name('Railroad')) == TECH_KNOWN
-                 && tile_has_extra(ptile, EXTRA_ROAD)
-               && !tile_has_extra(ptile, EXTRA_RAIL)) {
+        $("#order_maglev").hide();
+        if (!(tile_has_extra(ptile, EXTRA_RIVER)
+                && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN)) {
+	  unit_actions["road"] = {name: "Build road (R)"};
+          $("#order_road").show();
+	} else {
+          $("#order_road").hide();
+        }
+      } else if (!tile_has_extra(ptile, EXTRA_RAIL)
+                 && player_invention_state(client.conn.playing,
+                                           tech_id_by_name('Railroad')) == TECH_KNOWN
+                 && tile_has_extra(ptile, EXTRA_ROAD)) {
         $("#order_road").hide();
+        $("#order_maglev").hide();
         $("#order_railroad").show();
 	    unit_actions['railroad'] = {name: "Build railroad (R)"};
+      } else if (typeof EXTRA_MAGLEV !== 'undefined'
+                 && !tile_has_extra(ptile, EXTRA_MAGLEV)
+                 && player_invention_state(client.conn.playing,
+                                           tech_id_by_name('Superconductors')) == TECH_KNOWN
+                 && tile_has_extra(ptile, EXTRA_RAIL)) {
+        $("#order_road").hide();
+        $("#order_railroad").hide();
+        $("#order_maglev").show();
+	    unit_actions['maglev'] = {name: "Build maglev (R)"};
       } else {
         $("#order_road").hide();
         $("#order_railroad").hide();
-      }
-      if (tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN) {
-        $("#order_road").hide();
+        $("#order_maglev").hide();
       }
 
       $("#order_fortify").hide();
@@ -2284,10 +2297,8 @@ function handle_context_menu_callback(key)
       break;
 
     case "road":
-      key_unit_road();
-      break;
-
     case "railroad":
+    case "maglev":
       key_unit_road();
       break;
 

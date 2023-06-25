@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0036-make_dir-Add-mode-parameter.patch
-#   Improvement to rebase freeciv-web's own savegame.patch on
-#   osdn #48094
 # 0039-Meson-Make-it-possible-to-disable-server-build.patch
 #   Reworked server build option
 #   osdn #48098
@@ -67,7 +64,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
   "backports/0028-Meson-Fix-gzipped-saves-support"
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"

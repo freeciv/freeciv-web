@@ -41,6 +41,9 @@
 # 0023-Meson-Add-dev-save-compat-support.patch
 #   Make dev-format savegame compatibility to work on Meson builds
 #   osdn #45610
+# 0001-Fix-action_id_is_internal-act-assert-failure-on-rule.patch
+#   Ruleset load time assert fix
+#   osdn #48267
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -76,6 +79,7 @@ declare -a PATCHLIST=(
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
   "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"
+  "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
   "meson_webperimental"
   "metachange"
   "text_fixes"

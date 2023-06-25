@@ -1,0 +1,44 @@
+From d823e214e4183bd7cf12047ecbd5b78abe69f03b Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Mon, 26 Jun 2023 01:42:06 +0300
+Subject: [PATCH 35/35] Make diplstate struct smaller
+
+Turn fields with small maximum values from int to char.
+
+See osdn #48293
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/player.h | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/common/player.h b/common/player.h
+index 82fd7539c8..681a470c18 100644
+--- a/common/player.h
++++ b/common/player.h
+@@ -203,14 +203,14 @@ enum dipl_reason {
+ 
+ /* The following are for "pacts" */
+ struct player_diplstate {
+-  enum diplstate_type type; /* this player's disposition towards other */
+-  enum diplstate_type max_state; /* maximum treaty level ever had */
+-  int first_contact_turn; /* turn we had first contact with this player */
+-  int turns_left; /* until pact (e.g., cease-fire) ends */
+-  int has_reason_to_cancel; /* 0: no, 1: this turn, 2: this or next turn */
+-  int contact_turns_left; /* until contact ends */
+-
+-  int auto_cancel_turn; /* used to avoid asymmetric turns_left */
++  enum diplstate_type type;  /* This player's disposition towards other */
++  enum diplstate_type max_state; /* Maximum treaty level ever had */
++  int first_contact_turn;    /* Turn we had first contact with this player */
++  char turns_left;           /* Until pact (e.g., cease-fire) ends */
++  char has_reason_to_cancel; /* 0: no, 1: this turn, 2: this or next turn */
++  char contact_turns_left;   /* Until contact ends */
++
++  int auto_cancel_turn;      /* Used to avoid asymmetric turns_left */
+ };
+ 
+ /***************************************************************************
+-- 
+2.40.1
+

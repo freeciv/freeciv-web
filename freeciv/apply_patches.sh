@@ -41,6 +41,9 @@
 # 0001-Fix-action_id_is_internal-act-assert-failure-on-rule.patch
 #   Ruleset load time assert fix
 #   osdn #48267
+# 0035-Make-diplstate-struct-smaller.patch
+#   Save memory with high number of players
+#   osdn #48293
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -76,6 +79,7 @@ declare -a PATCHLIST=(
   "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"
   "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
+  "backports/0035-Make-diplstate-struct-smaller"
   "meson_webperimental"
   "metachange"
   "text_fixes"

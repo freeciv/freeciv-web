@@ -44,6 +44,9 @@
 # 0035-Make-diplstate-struct-smaller.patch
 #   Save memory with high number of players
 #   osdn #48293
+# 0018-Set-diplstate-max_state-correctly-for-teamed-players.patch
+#   Fix failing asserts on a teamed game
+#   osdn #48295
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -80,6 +83,7 @@ declare -a PATCHLIST=(
   "backports/0023-Meson-Add-dev-save-compat-support"
   "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
   "backports/0035-Make-diplstate-struct-smaller"
+  "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
   "meson_webperimental"
   "metachange"
   "text_fixes"

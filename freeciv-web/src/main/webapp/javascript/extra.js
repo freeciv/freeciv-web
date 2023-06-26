@@ -1,4 +1,4 @@
-/**********************************************************************
+/***********************************************************************
     Freeciv-web - the web version of Freeciv. https://www.freeciv.org/
     Copyright (C) 2009-2015  The Freeciv-web project
 
@@ -18,10 +18,11 @@
 ***********************************************************************/
 
 var extras = {};
+var roads = {};
 
 var EXTRA_NONE = -1;
 
-// see handle_ruleset_extra, where EXTRA_* variables are defines dynamically.
+// See handle_ruleset_extra(), where EXTRA_* variables are defines dynamically.
 
 /************************************************************************//**
   Return extras type of given id.

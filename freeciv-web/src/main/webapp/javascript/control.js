@@ -26,6 +26,8 @@ var unitpanel_active = false;
 var allow_right_click = false;
 var mapview_mouse_movement = false;
 
+var roads = [];
+
 var current_focus = [];
 
 /* The priority unit(s) for unit_focus_advance(). */
@@ -951,7 +953,7 @@ function control_unit_killed(punit)
 
   if (unit_is_in_focus(punit)) {
     if (current_focus.length == 1) {
-      /* if the unit in focus is removed, then advance the unit focus. */
+      /* If the unit in focus is removed, then advance the unit focus. */
       advance_unit_focus();
     } else {
       current_focus = unit_list_without(current_focus, punit);
@@ -1714,10 +1716,10 @@ function do_map_click(ptile, qtype, first_time_called)
 
   if (goto_active) {
     if (current_focus.length > 0) {
-      // send goto order for all units in focus. 
+      // Send goto order for all units in focus.
       for (var s = 0; s < current_focus.length; s++) {
         punit = current_focus[s];
-          /* Get the path the server sent using PACKET_WEB_GOTO_PATH. */
+        // Get the path the server sent using PACKET_WEB_GOTO_PATH.
         var goto_path = goto_request_map[punit['id'] + "," + ptile['x'] + "," + ptile['y']];
         if (goto_path == null) {
           continue;
@@ -1916,7 +1918,7 @@ function do_map_click(ptile, qtype, first_time_called)
           }
 	    }
       } else if (pcity == null) {
-        // clicked on a tile with units owned by other players.
+        // Clicked on a tile with units owned by other players.
         current_focus = sunits;
         $("#game_unit_orders_default").hide();
         update_active_units_dialog();
@@ -2204,7 +2206,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       action_tgt_sel_active = false;
       break;
 
-    case 32: // space, will clear selection and goto.
+    case 32: // Space, will clear selection and goto.
       current_focus = [];
       if (renderer == RENDERER_WEBGL) webgl_clear_unit_focus();
       goto_active = false;
@@ -2836,7 +2838,7 @@ function key_unit_plant()
 }
 
 /**************************************************************************
-  Tell the units in focus to build road or railroad.
+  Tell the units in focus to build some kind of road.
 **************************************************************************/
 function key_unit_road()
 {
@@ -2844,12 +2846,14 @@ function key_unit_road()
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
     var ptile = index_to_tile(punit['tile']);
-    if (!tile_has_extra(ptile, EXTRA_ROAD)) {
-      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Road']['id']);
-    } else if (!tile_has_extra(ptile, EXTRA_RAIL)) {
-      request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, extras['Railroad']['id']);
+
+    for (var r = 0; r < roads.length; r++) {
+      if (!tile_has_extra(ptile, roads[r])) {
+        request_new_unit_activity(punit, ACTIVITY_GEN_ROAD, roads[r]['id']);
+      }
     }
   }
+
   setTimeout(update_unit_focus, 700);
 }
 
@@ -3348,6 +3352,7 @@ function update_active_units_dialog()
     ptile = index_to_tile(current_focus[0]['tile']);
     punits.push(current_focus[0]);
     var tmpunits = tile_units(ptile);
+
     for (var i = 0; i < tmpunits.length; i++) {
       var kunit = tmpunits[i];
       if (kunit['id'] == current_focus[0]['id']) continue;

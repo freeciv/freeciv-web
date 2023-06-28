@@ -47,6 +47,9 @@
 # 0018-Set-diplstate-max_state-correctly-for-teamed-players.patch
 #   Fix failing asserts on a teamed game
 #   osdn #48295
+# 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
+#   Fix converting old savegames
+#   osdn #48310
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -84,6 +87,7 @@ declare -a PATCHLIST=(
   "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
   "backports/0035-Make-diplstate-struct-smaller"
   "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
+  "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
   "meson_webperimental"
   "metachange"
   "text_fixes"

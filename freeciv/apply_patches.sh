@@ -38,6 +38,9 @@
 # 0038-Give-ui_name-for-internal-actions.patch
 #   Fix freeciv-manual assert failure
 #   osdn #48246
+# 0023-Meson-Add-dev-save-compat-support.patch
+#   Make dev-format savegame compatibility to work on Meson builds
+#   osdn #45610
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -72,6 +75,7 @@ declare -a PATCHLIST=(
   "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
   "backports/0038-Give-ui_name-for-internal-actions"
+  "backports/0023-Meson-Add-dev-save-compat-support"
   "meson_webperimental"
   "metachange"
   "text_fixes"

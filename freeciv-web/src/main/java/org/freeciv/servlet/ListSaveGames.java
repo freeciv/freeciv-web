@@ -79,7 +79,13 @@ public class ListSaveGames extends HttpServlet {
 
 					for (File file : files) {
 						if (file.isFile()) {
-							buffer.append(file.getName().replaceAll(".sav.xz", ""));
+							String name = file.getName();
+							if (name.endsWith(".sav.xz")) {
+								name = name.replaceAll(".sav.xz", "");
+							}else if (name.endsWith(".sav.zst")) {
+								name = name.replaceAll(".sav.zst", "");
+							}
+							buffer.append(name);
 							buffer.append(';');
 						}
 					}

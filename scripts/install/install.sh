@@ -297,7 +297,8 @@ mig_scripts=([0-9]*)
 echo "${mig_scripts[-1]}" > checkpoint
 
 mkdir -p "${basedir}/freeciv-web/src/derived/webapp" && \
-"${basedir}"/scripts/sync-js-hand.sh \
+  "${basedir}"/scripts/sync-js-hand.sh \
+  -b "${basedir}" \
   -f "${basedir}/freeciv/freeciv" \
   -i "${HOME}/freeciv" \
   -o "${basedir}/freeciv-web/src/derived/webapp" \

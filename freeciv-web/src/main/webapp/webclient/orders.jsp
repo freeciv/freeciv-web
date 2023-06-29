@@ -43,6 +43,11 @@
     <a href="#" onclick="key_unit_road();"><img src="/images/orders/railroad_default.png" name="railroad_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
+  <div id="order_maglev" class="order_button" title="Build maglev (R)">
+    <!-- TODO: Add maglev_default.png -->
+    <a href="#" onclick="key_unit_road();"><img src="/images/orders/railroad_default.png" name="maglev_button" alt="" border="0" width="30" height="30"></a>
+  </div>
+
   <div id="order_forest_add" class="order_button" title="Plant (M)" >
     <a href="#" onclick="key_unit_plant();"><img src="/images/orders/forest_add_default.png" name="forest_add_button" alt="" border="0" width="30" height="30"></a>
   </div>

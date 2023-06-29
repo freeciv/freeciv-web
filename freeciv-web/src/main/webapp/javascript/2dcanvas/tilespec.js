@@ -314,7 +314,7 @@ function fill_sprite_array(layer, ptile, pedge, pcorner, punit, pcity, citymode)
 
     case LAYER_ROADS:
       if (ptile != null) {
-        sprite_array = sprite_array.concat(fill_road_rail_sprite_array(ptile, pcity));
+        sprite_array = sprite_array.concat(fill_path_sprite_array(ptile, pcity));
       }
     break;
 
@@ -1417,73 +1417,103 @@ function get_treaty_disagree_thumb_down()
 
 
 /****************************************************************************
-  Returns a list of tiles to draw to render roads and railroads.
-  TODO: add support for road and railroad on same tile.
+  Returns a list of tiles to draw to render roads, railroads, and maglevs.
+  TODO:
+    - Support generic road types
+    - Properly support generic extra hiding properties
 ****************************************************************************/
-function fill_road_rail_sprite_array(ptile, pcity)
+function fill_path_sprite_array(ptile, pcity)
 {
+  var rs_maglev = typeof EXTRA_MAGLEV !== 'undefined';
   var road = tile_has_extra(ptile, EXTRA_ROAD);
   var rail = tile_has_extra(ptile, EXTRA_RAIL);
+  var maglev = rs_maglev && tile_has_extra(ptile, EXTRA_MAGLEV);
   var road_near = [];
   var rail_near = [];
+  var maglev_near = [];
   var draw_rail = [];
   var draw_road = [];
+  var draw_maglev = [];
   var result_sprites = [];
+  var draw_single_road;
+  var draw_single_rail;
+  var draw_single_maglev;
 
-  var draw_single_road = road == true && pcity == null && rail == false;
-  var draw_single_rail = rail && pcity == null;
+  if (pcity != null) {
+    draw_single_road = draw_single_rail = draw_single_maglev = false;
+  } else if (maglev) {
+    draw_single_road = draw_single_rail = false;
+    draw_single_maglev = maglev;
+  } else {
+    draw_single_road = road && rail == false;
+    draw_single_rail = rail;
+    draw_single_maglev = false;
+  }
 
   for (var dir = 0; dir < 8; dir++) {
-    /* Check if there is adjacent road/rail. */
+    /* Check if there is adjacent road/rail/maglev. */
     var tile1 = mapstep(ptile, dir);
     if (tile1 != null && tile_get_known(tile1) != TILE_UNKNOWN) {
       road_near[dir] = tile_has_extra(tile1, EXTRA_ROAD);
       rail_near[dir] = tile_has_extra(tile1, EXTRA_RAIL);
+      maglev_near[dir] = rs_maglev && tile_has_extra(tile1, EXTRA_MAGLEV);
 
-      /* Draw rail/road if there is a connection from this tile to the
-        * adjacent tile.  But don't draw road if there is also a rail
-        * connection. */
-      draw_rail[dir] = rail && rail_near[dir];
-      draw_road[dir] = road && road_near[dir] && !draw_rail[dir];
+      /* Draw path if there is a connection from this tile to the
+       * adjacent tile. But don't draw path if there is also an extra
+       * hiding it. */
+      draw_maglev[dir] = maglev && maglev_near[dir];
+      draw_rail[dir] = rail && rail_near[dir] && !draw_maglev[dir];
+      draw_road[dir] = road && road_near[dir] && !draw_rail[dir] && !draw_maglev[dir];
 
-      /* Don't draw an isolated road/rail if there's any connection. */
-      draw_single_rail &= !draw_rail[dir];
-      draw_single_road &= !draw_rail[dir] && !draw_road[dir];
-
+      /* Don't draw an isolated road/rail/maglev if there's any connection. */
+      if (draw_maglev[dir]) {
+        draw_single_maglev = draw_single_rail = draw_single_road = false;
+      } else {
+        draw_single_rail &= !draw_rail[dir];
+        draw_single_road &= !draw_rail[dir] && !draw_road[dir];
+      }
     }
   }
 
+  /* With roadstyle 0, we simply draw one road/rail/maglev for every connection.
+   * This means we only need a few sprites, but a lot of drawing is
+   * necessary and it generally doesn't look very good. */
+  var i;
 
-    /* With roadstyle 0, we simply draw one road/rail for every connection.
-     * This means we only need a few sprites, but a lot of drawing is
-     * necessary and it generally doesn't look very good. */
-    var i;
-
-    /* First raw roads under rails. */
-    if (road) {
-      for (i = 0; i < 8; i++) {
-        if (draw_road[i]) {
-	      result_sprites.push({"key" : "road.road_" + dir_get_tileset_name(i)});
-	    }
+  /* First raw roads under rails. */
+  if (road) {
+    for (i = 0; i < 8; i++) {
+      if (draw_road[i]) {
+        result_sprites.push({"key" : "road.road_" + dir_get_tileset_name(i)});
       }
     }
+  }
 
-    /* Then draw rails over roads. */
-    if (rail) {
-      for (i = 0; i < 8; i++) {
-        if (draw_rail[i]) {
-	      result_sprites.push({"key" : "road.rail_" + dir_get_tileset_name(i)});
-        }
+  /* Then draw rails over roads. */
+  if (rail) {
+    for (i = 0; i < 8; i++) {
+      if (draw_rail[i]) {
+        result_sprites.push({"key" : "road.rail_" + dir_get_tileset_name(i)});
       }
     }
+  }
 
+  /* Then draw maglevs over rails. */
+  if (maglev) {
+    for (i = 0; i < 8; i++) {
+      if (draw_maglev[i]) {
+        result_sprites.push({"key" : "road.maglev_" + dir_get_tileset_name(i)});
+      }
+    }
+  }
 
- /* Draw isolated rail/road separately (styles 0 and 1 only). */
-
-  if (draw_single_rail) {
-      result_sprites.push({"key" : "road.rail_isolated"});
+  /* Draw isolated path separately (styles 0 and 1 only). */
+  if (draw_single_maglev) {
+    result_sprites.push({"key" : "road.maglev_isolated"});
+  } else if (draw_single_rail) {
+    result_sprites.push({"key" : "road.rail_isolated"});
   } else if (draw_single_road) {
-      result_sprites.push({"key" : "road.road_isolated"});
+    result_sprites.push({"key" : "road.road_isolated"});
   }
 
   return result_sprites;

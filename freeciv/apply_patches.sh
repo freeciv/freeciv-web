@@ -5,15 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0039-Meson-Make-it-possible-to-disable-server-build.patch
-#   Reworked server build option
-#   osdn #48098
-# 0028-Meson-Fix-gzipped-saves-support.patch
-#   Fix handling of compressed saves
-#   osdn #48101
-# 0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities.patch
-#   Fix to ACTIVITY_CLEAN support
-#   osdn #48147
 # 0043-Reformat-amplio2-tiles.spec.patch
 #   Work around freeciv-web auto_worker icon problem
 #   osdn #48179
@@ -73,9 +64,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0039-Meson-Make-it-possible-to-disable-server-build"
-  "backports/0028-Meson-Fix-gzipped-saves-support"
-  "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "backports/0043-Reformat-amplio2-tiles.spec"
   "backports/0002-Meson-Compress-scenario-files-installed"
   "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"

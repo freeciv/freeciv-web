@@ -41,6 +41,12 @@
 # 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
 #   Fix converting old savegames
 #   osdn #48310
+# 0010-AI-Stop-cancelling-shared-vision-to-team-members.patch
+#   Fix to keeping shared vision state sane
+#   osdn #48152
+# 0016-Fix-warning-about-player-not-providing-shared-vision.patch
+#   Regression fix against spammy messages
+#   osdn #48311
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -76,6 +82,8 @@ declare -a PATCHLIST=(
   "backports/0035-Make-diplstate-struct-smaller"
   "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
+  "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
+  "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "meson_webperimental"
   "metachange"
   "text_fixes"

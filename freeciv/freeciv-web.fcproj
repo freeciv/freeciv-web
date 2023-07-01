@@ -4,3 +4,7 @@ FREECIV_STORAGE_DIR ~/.freeciv-web
 
 # Uncomment if you want extended/testmatic logging
 # FREECIV_TESTMATIC=yes
+
+# Enable ability to load recent freeciv development (unstable)
+# savegame formats.
+FREECIV_DEV_SAVE_COMPAT=yes

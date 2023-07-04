@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0036-make_dir-Add-mode-parameter.patch
-#   Improvement to rebase freeciv-web's own savegame.patch on
-#   osdn #48094
 # 0039-Meson-Make-it-possible-to-disable-server-build.patch
 #   Reworked server build option
 #   osdn #48098
@@ -44,6 +41,15 @@
 # 0001-Fix-action_id_is_internal-act-assert-failure-on-rule.patch
 #   Ruleset load time assert fix
 #   osdn #48267
+# 0035-Make-diplstate-struct-smaller.patch
+#   Save memory with high number of players
+#   osdn #48293
+# 0018-Set-diplstate-max_state-correctly-for-teamed-players.patch
+#   Fix failing asserts on a teamed game
+#   osdn #48295
+# 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
+#   Fix converting old savegames
+#   osdn #48310
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,7 +73,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0036-make_dir-Add-mode-parameter"
   "backports/0039-Meson-Make-it-possible-to-disable-server-build"
   "backports/0028-Meson-Fix-gzipped-saves-support"
   "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
@@ -80,6 +85,9 @@ declare -a PATCHLIST=(
   "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"
   "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
+  "backports/0035-Make-diplstate-struct-smaller"
+  "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
+  "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -19,8 +19,12 @@
 
 var extras = {};
 var roads = {};
+var bases = {};
 
 var EXTRA_NONE = -1;
+
+var BASE_GUI_FORTRESS = 0;
+var BASE_GUI_AIRBASE = 1;
 
 // See handle_ruleset_extra(), where EXTRA_* variables are defines dynamically.
 

@@ -27,6 +27,7 @@ var allow_right_click = false;
 var mapview_mouse_movement = false;
 
 var roads = [];
+var bases = [];
 
 var current_focus = [];
 
@@ -2676,9 +2677,16 @@ function key_unit_fortress()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    /* EXTRA_NONE -> server decides */
-    request_new_unit_activity(punit, ACTIVITY_BASE, EXTRA_NONE);
+    var ptile = index_to_tile(punit['tile']);
+
+    for (var b = 0; b < bases.length; b++) {
+      if (bases[b]['base']['gui_type'] == BASE_GUI_FORTRESS
+          && !tile_has_extra(ptile, bases[b])) {
+        request_new_unit_activity(punit, ACTIVITY_BASE, bases[b]['id']);
+      }
+    }
   }
+
   setTimeout(update_unit_focus, 700);
 }
 
@@ -2690,8 +2698,16 @@ function key_unit_airbase()
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_BASE, EXTRA_AIRBASE);
+    var ptile = index_to_tile(punit['tile']);
+
+    for (var b = 0; b < bases.length; b++) {
+      if (bases[b]['base']['gui_type'] == BASE_GUI_AIRBASE
+          && !tile_has_extra(ptile, bases[b])) {
+        request_new_unit_activity(punit, ACTIVITY_BASE, bases[b]['id']);
+      }
+    }
   }
+
   setTimeout(update_unit_focus, 700);
 }
 

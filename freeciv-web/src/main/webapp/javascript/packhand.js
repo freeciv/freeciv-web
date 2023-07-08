@@ -37,6 +37,7 @@ const REQEST_BACKGROUND_FAST_AUTO_ATTACK = 2;
 var terrain_control;
 
 var roads = [];
+var bases = [];
 
 function handle_processing_started(packet)
 {
@@ -636,6 +637,7 @@ function handle_ruleset_control(packet)
   }
   extras = {};
   roads = [];
+  bases = [];
 
   /* Reset legal diplomatic clauses. */
   clause_infos = {};
@@ -1738,6 +1740,9 @@ function handle_ruleset_extra(packet)
 
   if (is_extra_caused_by(packet, EC_ROAD) && packet['buildable']) {
     roads.push(packet);
+  }
+  if (is_extra_caused_by(packet, EC_BASE) && packet['buildable']) {
+    bases.push(packet);
   }
 
   if (packet['rule_name'] == "Railroad") window["EXTRA_RAIL"] = packet['id'];

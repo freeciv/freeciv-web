@@ -5,15 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0043-Reformat-amplio2-tiles.spec.patch
-#   Work around freeciv-web auto_worker icon problem
-#   osdn #48179
 # 0002-Meson-Compress-scenario-files-installed.patch
 #   Fix an autotools -> meson regression of not compressing scenarios
 #   osdn #47826
-# 0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti.patch
-#   Use new generic "Clean" action only in rulesets
-#   osdn #47628
 # 0052-Correct-version-numbers-in-sg_regr-uses-to-decimal.patch
 #   Correction to savegame loading error reporting
 #   osdn #48212
@@ -70,9 +64,7 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0043-Reformat-amplio2-tiles.spec"
   "backports/0002-Meson-Compress-scenario-files-installed"
-  "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"
   "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
   "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"

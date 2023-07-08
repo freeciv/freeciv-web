@@ -44,6 +44,9 @@
 # 0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters.patch
 #   Savegame VLA fix
 #   osdn #47956
+# 0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs.patch
+#   Build fix with fortified sources
+#   osdn #48362
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -80,6 +83,7 @@ declare -a PATCHLIST=(
   "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
+  "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "meson_webperimental"
   "metachange"
   "text_fixes"

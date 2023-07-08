@@ -41,6 +41,9 @@
 # 0016-Fix-warning-about-player-not-providing-shared-vision.patch
 #   Regression fix against spammy messages
 #   osdn #48311
+# 0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters.patch
+#   Savegame VLA fix
+#   osdn #47956
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -76,6 +79,7 @@ declare -a PATCHLIST=(
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
   "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
+  "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -5,15 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0039-Meson-Make-it-possible-to-disable-server-build.patch
-#   Reworked server build option
-#   osdn #48098
-# 0028-Meson-Fix-gzipped-saves-support.patch
-#   Fix handling of compressed saves
-#   osdn #48101
-# 0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities.patch
-#   Fix to ACTIVITY_CLEAN support
-#   osdn #48147
 # 0043-Reformat-amplio2-tiles.spec.patch
 #   Work around freeciv-web auto_worker icon problem
 #   osdn #48179
@@ -50,6 +41,12 @@
 # 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
 #   Fix converting old savegames
 #   osdn #48310
+# 0010-AI-Stop-cancelling-shared-vision-to-team-members.patch
+#   Fix to keeping shared vision state sane
+#   osdn #48152
+# 0016-Fix-warning-about-player-not-providing-shared-vision.patch
+#   Regression fix against spammy messages
+#   osdn #48311
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -73,9 +70,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0039-Meson-Make-it-possible-to-disable-server-build"
-  "backports/0028-Meson-Fix-gzipped-saves-support"
-  "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "backports/0043-Reformat-amplio2-tiles.spec"
   "backports/0002-Meson-Compress-scenario-files-installed"
   "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"
@@ -88,6 +82,8 @@ declare -a PATCHLIST=(
   "backports/0035-Make-diplstate-struct-smaller"
   "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
+  "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
+  "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "meson_webperimental"
   "metachange"
   "text_fixes"

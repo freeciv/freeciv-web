@@ -14,7 +14,7 @@ else
   DL_FREECIV=dl_freeciv_default.sh
 fi
 
-if ! ./$DL_FREECIV "$FCREV" "$GIT_PATCHING" ; then
+if ! "./${DL_FREECIV}" "$FCREV" "$GIT_PATCHING" ; then
   echo "Git checkout failed" >&2
   exit 1
 fi
@@ -26,6 +26,10 @@ fi
 
 export PATH=${HOME}/freeciv/meson-install:${PATH}
 
+if test "$1" = "TEST" ; then
+  EXTRA_MESON_PARAMS="-Dwerror=true"
+fi
+
 mkdir -p build
 
 ( cd build
@@ -34,7 +38,7 @@ mkdir -p build
         -Daudio=false -Druledit=false \
         -Dproject-definition=../freeciv-web.fcproj \
         -Ddefault_library=static -Dprefix=${HOME}/freeciv \
-        -Doptimization=3
+        -Doptimization=3 $EXTRA_MESON_PARAMS
   ninja
 )
 

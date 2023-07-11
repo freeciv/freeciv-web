@@ -38,6 +38,9 @@
 # 0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs.patch
 #   Build fix with fortified sources
 #   osdn #48362
+# 0025-Don-t-notify-unrelated-players-about-their-governmen.patch
+#   Fix illegal memory access
+#   osdn #48301
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -72,6 +75,7 @@ declare -a PATCHLIST=(
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
+  "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
   "meson_webperimental"
   "metachange"
   "text_fixes"

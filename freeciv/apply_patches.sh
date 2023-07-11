@@ -5,15 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0002-Meson-Compress-scenario-files-installed.patch
-#   Fix an autotools -> meson regression of not compressing scenarios
-#   osdn #47826
-# 0052-Correct-version-numbers-in-sg_regr-uses-to-decimal.patch
-#   Correction to savegame loading error reporting
-#   osdn #48212
-# 0039-Protocol-Fix-sending-gives_shared_tiles.patch
-#   Network protocol fix
-#   osdn #48119
 # 0044-Meson-Include-just-stub-AI-when-server-not-built.patch
 #   Included to freeciv-web for memory savings on any build
 #   osdn #48193
@@ -70,9 +61,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0002-Meson-Compress-scenario-files-installed"
-  "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
-  "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
   "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"

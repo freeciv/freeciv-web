@@ -32,9 +32,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import javax.sql.DataSource;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
-
 
 /**
  * Deletes a savegame.
@@ -73,7 +73,7 @@ public class DeleteSaveGame extends HttpServlet {
 					"Invalid username");
 			return;
 		}
-		if (savegame == null || savegame.length() > 100 || savegame.contains(".") || savegame.contains("/") || savegame.contains("\\")) {
+		if (savegame == null || savegame.length() > 100 || savegame.contains("/") || savegame.contains("\\")) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Invalid savegame");
 			return;
@@ -99,11 +99,8 @@ public class DeleteSaveGame extends HttpServlet {
 				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB == null || secure_password == null) {
-					response.getOutputStream().print("Failed auth when deleting.");
-					return;
-				}
-				if ( hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
+				if (hashedPasswordFromDB != null &&
+						hashedPasswordFromDB.equals(DigestUtils.sha256Hex(secure_password))) {
 					// Login OK!
 				} else {
 					response.getOutputStream().print("Failed");
@@ -125,22 +122,26 @@ public class DeleteSaveGame extends HttpServlet {
 		}
 
 		try {
-			if (savegame.equals("ALL")) {
-				File folder = new File(savegameDirectory + "/" + username);
-				if (!folder.exists()) {
-					response.getOutputStream().print("Error!");
-				} else {
-					for (File savegameFile: folder.listFiles()) {
-						if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
-							Files.delete(savegameFile.toPath());
-						}
+			File folder = new File(savegameDirectory + "/" + username);
+			if (!folder.exists()) {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+						"Save folder under the given username cannot be found.");
+				return;
+			} 
+			boolean fileFound = false;
+			for (File savegameFile: folder.listFiles()) {
+				if (savegameFile.exists() && savegameFile.isFile()) {
+					if (savegame.equals("ALL") || savegameFile.getName().startsWith(savegame)){
+						// NOTE: the server does not distinguish saved games of different extensions when loading. So we can delete all of them.
+						Files.delete(savegameFile.toPath());
+						fileFound = true;
 					}
 				}
-			} else {
-				File savegameFile = new File(savegameDirectory + username + "/" + savegame + ".sav.xz");
-				if (savegameFile.exists() && savegameFile.isFile() && savegameFile.getName().endsWith(".sav.xz")) {
-					Files.delete(savegameFile.toPath());
-				}
+			}
+			if (!fileFound) {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+						"Saved game not found.");
+				return;
 			}
 		} catch (Exception err) {
 			response.setHeader("result", "error");

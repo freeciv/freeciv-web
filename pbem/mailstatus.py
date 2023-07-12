@@ -24,6 +24,8 @@ import time
 
 STATUS_PORT = 4003
 
+__all__ = 'MailStatus';
+
 """Serves the PBEM status page, on the url:  /mailstatus """
 class MailStatus(Thread):
   def __init__(self):

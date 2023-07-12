@@ -45,7 +45,6 @@
 # Not in the upstream Freeciv server
 # ----------------------------------
 # meson_webperimental installs webperimental ruleset
-# freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
@@ -85,7 +84,6 @@ declare -a PATCHLIST=(
   "savegame"
   "maphand_ch"
   "server_password"
-  "freeciv_segfauls_fix"
   "scorelog_filenames"
   "longturn"
   "load_command_confirmation"

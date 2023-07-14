@@ -5,15 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0043-Reformat-amplio2-tiles.spec.patch
-#   Work around freeciv-web auto_worker icon problem
-#   osdn #48179
 # 0002-Meson-Compress-scenario-files-installed.patch
 #   Fix an autotools -> meson regression of not compressing scenarios
 #   osdn #47826
-# 0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti.patch
-#   Use new generic "Clean" action only in rulesets
-#   osdn #47628
 # 0052-Correct-version-numbers-in-sg_regr-uses-to-decimal.patch
 #   Correction to savegame loading error reporting
 #   osdn #48212
@@ -47,6 +41,12 @@
 # 0016-Fix-warning-about-player-not-providing-shared-vision.patch
 #   Regression fix against spammy messages
 #   osdn #48311
+# 0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters.patch
+#   Savegame VLA fix
+#   osdn #47956
+# 0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs.patch
+#   Build fix with fortified sources
+#   osdn #48362
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -70,9 +70,7 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0043-Reformat-amplio2-tiles.spec"
   "backports/0002-Meson-Compress-scenario-files-installed"
-  "backports/0004-Rulesets-Drop-Clean-Pollution-and-Clean-Fallout-acti"
   "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
   "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
@@ -84,6 +82,8 @@ declare -a PATCHLIST=(
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
   "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
+  "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
+  "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "meson_webperimental"
   "metachange"
   "text_fixes"

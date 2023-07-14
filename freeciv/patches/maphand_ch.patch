@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-04-14 00:38:28.627705100 +0300
-+++ freeciv/common/networking/packets.def	2023-04-14 00:38:38.779810126 +0300
-@@ -2448,3 +2448,13 @@
+--- freeciv/common/networking/packets.def	2023-07-08 23:04:46.585966666 +0300
++++ freeciv/common/networking/packets.def	2023-07-08 23:04:55.422057998 +0300
+@@ -2462,3 +2462,13 @@
    TILE dest;
    UINT32 turns;
  end
@@ -16,8 +16,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-04-14 00:38:29.063709611 +0300
-+++ freeciv/server/maphand.c	2023-04-14 01:05:46.316516445 +0300
+--- freeciv/server/maphand.c	2023-07-08 23:04:47.209973114 +0300
++++ freeciv/server/maphand.c	2023-07-08 23:04:55.422057998 +0300
 @@ -16,6 +16,7 @@
  #endif
  
@@ -34,7 +34,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2615,3 +2617,375 @@
+@@ -2644,3 +2646,376 @@
      }
    }
  }
@@ -51,9 +51,9 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +  for (i = 0; i < O_LAST; i++) {
 +    int before_penalty = 0;
-+    int x = city_tile_output(NULL, ptile, FALSE, i);
++    int x = city_tile_output(nullptr, ptile, FALSE, i);
 +
-+    if (NULL != pplayer) {
++    if (nullptr != pplayer) {
 +      before_penalty = get_player_output_bonus(pplayer,
 +                                               get_output_type(i),
 +                                               EFT_OUTPUT_PENALTY_TILE);
@@ -152,7 +152,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +  if (pdcity <= IDENTITY_NUMBER_ZERO) {
 +    /* Not an actual city */
-+    pdcity = NULL;
++    pdcity = nullptr;
 +  }
 +
 +  astr_clear(str);
@@ -171,18 +171,18 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +  } extra_type_by_cause_iterate_end;
 +
-+  if (BORDERS_DISABLED != game.info.borders && pdcity == NULL) {
++  if (BORDERS_DISABLED != game.info.borders && pdcity == nullptr) {
 +    struct player *owner = plrtile->owner;
 +
 +    get_full_username(username, sizeof(username), owner);
 +    get_full_nation(nation, sizeof(nation), owner);
 +
-+    if (NULL != pplayer && owner == pplayer) {
++    if (nullptr != pplayer && owner == pplayer) {
 +      astr_add_line(str, _("Our territory"));
-+    } else if (NULL != owner && NULL == pplayer) {
++    } else if (nullptr != owner && nullptr == pplayer) {
 +      /* TRANS: "Territory of <username> (<nation + team>)" */
 +      astr_add_line(str, _("Territory of %s (%s)"), username, nation);
-+    } else if (NULL != owner) {
++    } else if (nullptr != owner) {
 +      struct player_diplstate *ds = player_diplstate_get(pplayer,
 +                                                         owner);
 +
@@ -210,18 +210,18 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    }
 +  }
 +
-+  if (pdcity != NULL) {
++  if (pdcity != nullptr) {
 +    /* Look at city owner, not tile owner (the two should be the same, if
 +     * borders are in use). */
 +    struct player *owner = vision_site_owner(pdcity);
 +    const char *improvements[improvement_count()];
 +    int has_improvements = 0;
 +
-+    if (owner != NULL) {
++    if (owner != nullptr) {
 +      get_full_username(username, sizeof(username), owner);
 +      get_full_nation(nation, sizeof(nation), owner);
 +
-+      if (NULL == pplayer || owner == pplayer) {
++      if (nullptr == pplayer || owner == pplayer) {
 +        /* TRANS: "City: <city name> | <username> (<nation + team>)" */
 +        astr_add_line(str, _("City: %s | %s (%s)"),
 +                      pdcity->name, username, nation);
@@ -264,7 +264,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +          astr_add(str, _(" | Not occupied."));
 +        }
 +      } else {
-+        if (pcity != NULL && city_is_occupied(pcity)) {
++        if (pcity != nullptr && city_is_occupied(pcity)) {
 +          astr_add(str, _(" | Occupied."));
 +        } else {
 +          astr_add(str, _(" | Not occupied."));
@@ -303,7 +303,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +    if (strlen(activity_text) > 0) {
 +      astr_add_line(str, _("Activity: %s"), activity_text);
 +    }
-+    if (punit != NULL && pdcity == NULL) {
++
++    if (punit != nullptr && pdcity == nullptr) {
 +      struct player *owner = unit_owner(punit);
 +      const struct unit_type *ptype = unit_type_get(punit);
 +      struct unit_list *focus_unit_list;
@@ -313,13 +314,13 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +      if (!pplayer || owner == pplayer) {
 +        struct city *hcity = player_city_by_number(owner, punit->homecity);
-+        struct vision_site *site = NULL;
++        struct vision_site *site = nullptr;
 +
-+        if (hcity != NULL) {
++        if (hcity != nullptr) {
 +          site = map_get_player_city(city_tile(hcity), pplayer);
 +        }
 +
-+        if (site != NULL && site->identity == hcity->id) {
++        if (site != nullptr && site->identity == hcity->id) {
 +          /* TRANS: "Unit: <unit type> | <username>
 +           * (<nation + team>, <homecity>)" */
 +          astr_add_line(str, _("Unit: %s | %s (%s, %s)"),
@@ -330,7 +331,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +          astr_add_line(str, _("Unit: %s | %s (%s)"),
 +                        utype_name_translation(ptype), username, nation);
 +        }
-+      } else if (NULL != owner) {
++      } else if (nullptr != owner) {
 +        struct player_diplstate *ds = player_diplstate_get(pplayer,
 +                                                           owner);
 +        if (ds->type == DS_CEASEFIRE) {
@@ -354,7 +355,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
 +      focus_unit_list = unit_list_new();
 +
-+      if (funit != NULL) {
++      if (funit != nullptr) {
 +        unit_list_append(focus_unit_list, funit);
 +      }
 +
@@ -376,7 +377,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +                      unit_bribe_cost(punit, pplayer));
 +      }
 +
-+      if ((NULL == pplayer || owner == pplayer)
++      if ((nullptr == pplayer || owner == pplayer)
 +          && unit_list_size(ptile->units) >= 2) {
 +        /* TRANS: "5 more" units on this tile */
 +        astr_add(str, _("  (%d more)"), unit_list_size(ptile->units) - 1);
@@ -396,9 +397,9 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  static struct astring str = ASTRING_INIT;
 +  struct tile *ptile = index_to_tile(&(wld.map), loc);
 +  struct unit *punit
-+    = (visible_unit_id == 0) ? NULL : game_unit_by_number(visible_unit_id);
++    = (visible_unit_id == 0) ? nullptr : game_unit_by_number(visible_unit_id);
 +  struct unit *funit
-+    = (focus_unit_id == 0) ? NULL : game_unit_by_number(focus_unit_id);
++    = (focus_unit_id == 0) ? nullptr : game_unit_by_number(focus_unit_id);
 +  const char *info_text;
 +
 +  web_popup_info_text(&str, ptile, pplayer, punit, funit);
@@ -411,8 +412,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-04-14 00:38:29.063709611 +0300
-+++ freeciv/server/maphand.h	2023-04-14 00:38:38.779810126 +0300
+--- freeciv/server/maphand.h	2023-07-08 23:04:47.209973114 +0300
++++ freeciv/server/maphand.h	2023-07-08 23:04:55.422057998 +0300
 @@ -145,4 +145,7 @@
  void tile_change_side_effects(struct tile *ptile, bool refresh_city)
    fc__attribute((nonnull (1)));

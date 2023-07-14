@@ -1,0 +1,42 @@
+From 0e57687102dd6195b855cc1ab22047099e2b9eba Mon Sep 17 00:00:00 2001
+From: Steam Deck User <deck@tumbleweed-pkg.steamdeck>
+Date: Tue, 4 Jul 2023 16:45:32 +0200
+Subject: [PATCH 12/16] savegame3.c: Fix zero length VLA when saving counters
+
+See osdn #47956
+---
+ server/savegame/savegame3.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index d82264ab91..2235c5d0e8 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -2625,16 +2625,19 @@ static void sg_load_counters(struct loaddata *loading)
+   length = secfile_lookup_int_default(loading->file, 0,
+                               "savefile.city_counters_order_size");
+ 
+-  if (length) {
+-    loading->counter.order = secfile_lookup_str_vec(loading->file, &loading->counter.size, "savefile.city_counters_order_vector");
++  if (0==length) {
+ 
+-    sg_failure_ret(loading->counter.order != 0,
++    return;
++  }
++
++  loading->counter.order = secfile_lookup_str_vec(loading->file, &loading->counter.size, "savefile.city_counters_order_vector");
++
++  sg_failure_ret(loading->counter.order != 0,
+                    "Failed to load counter's ruleset order: %s",
+                    secfile_error());
+-    sg_failure_ret(loading->counter.size = length,
++  sg_failure_ret(loading->counter.size = length,
+                    "Counter vector in savegame have bad size: %s",
+                    secfile_error());
+-  }
+ 
+   int corder[length];
+ 
+-- 
+2.40.1
+

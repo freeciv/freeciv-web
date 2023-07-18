@@ -5,15 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0002-Meson-Compress-scenario-files-installed.patch
-#   Fix an autotools -> meson regression of not compressing scenarios
-#   osdn #47826
-# 0052-Correct-version-numbers-in-sg_regr-uses-to-decimal.patch
-#   Correction to savegame loading error reporting
-#   osdn #48212
-# 0039-Protocol-Fix-sending-gives_shared_tiles.patch
-#   Network protocol fix
-#   osdn #48119
 # 0044-Meson-Include-just-stub-AI-when-server-not-built.patch
 #   Included to freeciv-web for memory savings on any build
 #   osdn #48193
@@ -47,11 +38,13 @@
 # 0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs.patch
 #   Build fix with fortified sources
 #   osdn #48362
+# 0025-Don-t-notify-unrelated-players-about-their-governmen.patch
+#   Fix illegal memory access
+#   osdn #48301
 
 # Not in the upstream Freeciv server
 # ----------------------------------
 # meson_webperimental installs webperimental ruleset
-# freeciv_segfauls_fix is a workaround some segfaults in the Freeciv server. Freeciv bug #23884.
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
@@ -70,9 +63,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0002-Meson-Compress-scenario-files-installed"
-  "backports/0052-Correct-version-numbers-in-sg_regr-uses-to-decimal"
-  "backports/0039-Protocol-Fix-sending-gives_shared_tiles"
   "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
   "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"
@@ -84,6 +74,7 @@ declare -a PATCHLIST=(
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
+  "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
   "meson_webperimental"
   "metachange"
   "text_fixes"
@@ -93,7 +84,6 @@ declare -a PATCHLIST=(
   "savegame"
   "maphand_ch"
   "server_password"
-  "freeciv_segfauls_fix"
   "scorelog_filenames"
   "longturn"
   "load_command_confirmation"

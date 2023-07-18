@@ -110,7 +110,7 @@ while :; do
   shift
 done
 
-case $FCW_INSTALL_MODE in
+case "${FCW_INSTALL_MODE}" in
   DFLT) ;;
   TEST) ;;
   *)
@@ -282,7 +282,7 @@ echo "==== Building freeciv ===="
 echo "Please be patient"
 
 cd "${basedir}"/freeciv && \
-  ./prepare_freeciv.sh  && \
+  ./prepare_freeciv.sh "${FCW_INSTALL_MODE}" && \
   cd build && ninja install || \
   handle_error 5 "Failed to install freeciv"
 

@@ -26,6 +26,9 @@
 # 0025-Don-t-notify-unrelated-players-about-their-governmen.patch
 #   Fix illegal memory access
 #   osdn #48301
+# 0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers.patch
+#   Fix crash when server side autoattack enabled
+#   osdn #48300
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -55,6 +58,7 @@ declare -a PATCHLIST=(
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
+  "backports/0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers"
   "meson_webperimental"
   "metachange"
   "text_fixes"

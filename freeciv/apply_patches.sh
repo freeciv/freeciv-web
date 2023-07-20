@@ -29,6 +29,9 @@
 # 0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers.patch
 #   Fix crash when server side autoattack enabled
 #   osdn #48300
+# 0023-bounce_unit-Fix-unit-list-corruption-on-iteration.patch
+#   Memory handling fix
+#   osdn #48392
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -59,6 +62,7 @@ declare -a PATCHLIST=(
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
   "backports/0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers"
+  "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
   "meson_webperimental"
   "metachange"
   "text_fixes"

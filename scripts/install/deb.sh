@@ -30,7 +30,6 @@ dependencies="\
   libmagickcore.*extra \
   libmagickwand-dev \
   libsqlite3-dev \
-  libtool \
   maven \
   mariadb-server \
   nginx \

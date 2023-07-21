@@ -5,18 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0035-Make-diplstate-struct-smaller.patch
-#   Save memory with high number of players
-#   osdn #48293
-# 0018-Set-diplstate-max_state-correctly-for-teamed-players.patch
-#   Fix failing asserts on a teamed game
-#   osdn #48295
-# 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
-#   Fix converting old savegames
-#   osdn #48310
-# 0016-Fix-warning-about-player-not-providing-shared-vision.patch
-#   Regression fix against spammy messages
-#   osdn #48311
 # 0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters.patch
 #   Savegame VLA fix
 #   osdn #47956
@@ -54,10 +42,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0035-Make-diplstate-struct-smaller"
-  "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
-  "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
-  "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"

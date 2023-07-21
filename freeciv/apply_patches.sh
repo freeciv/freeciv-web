@@ -5,18 +5,9 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0044-Meson-Include-just-stub-AI-when-server-not-built.patch
-#   Included to freeciv-web for memory savings on any build
-#   osdn #48193
-# 0038-Give-ui_name-for-internal-actions.patch
-#   Fix freeciv-manual assert failure
-#   osdn #48246
 # 0023-Meson-Add-dev-save-compat-support.patch
 #   Make dev-format savegame compatibility to work on Meson builds
 #   osdn #45610
-# 0001-Fix-action_id_is_internal-act-assert-failure-on-rule.patch
-#   Ruleset load time assert fix
-#   osdn #48267
 # 0035-Make-diplstate-struct-smaller.patch
 #   Save memory with high number of players
 #   osdn #48293
@@ -63,10 +54,7 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0044-Meson-Include-just-stub-AI-when-server-not-built"
-  "backports/0038-Give-ui_name-for-internal-actions"
   "backports/0023-Meson-Add-dev-save-compat-support"
-  "backports/0001-Fix-action_id_is_internal-act-assert-failure-on-rule"
   "backports/0035-Make-diplstate-struct-smaller"
   "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"

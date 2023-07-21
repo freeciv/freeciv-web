@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-05-28 04:56:42.084118825 +0300
-+++ freeciv/common/networking/packets.def	2023-05-28 04:57:02.080267631 +0300
-@@ -2445,3 +2445,17 @@
+--- freeciv/common/networking/packets.def	2023-07-17 05:03:40.618266173 +0300
++++ freeciv/common/networking/packets.def	2023-07-17 05:03:51.398377331 +0300
+@@ -2448,3 +2448,17 @@
  
    BV_ACTIONS utype_actions;
  end
@@ -20,8 +20,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  UINT32 turns;
 +end
 diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2023-05-28 04:56:42.396121144 +0300
-+++ freeciv/server/unithand.c	2023-05-28 04:57:02.084267661 +0300
+--- freeciv/server/unithand.c	2023-07-17 05:03:41.078270917 +0300
++++ freeciv/server/unithand.c	2023-07-17 05:08:07.001008180 +0300
 @@ -45,6 +45,9 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -32,7 +32,7 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
  /* common/scriptcore */
  #include "luascript_types.h"
  
-@@ -4228,6 +4231,85 @@
+@@ -4232,6 +4235,84 @@
  }
  
  /**********************************************************************//**
@@ -49,14 +49,13 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +  int i = 0;
 +  struct packet_web_goto_path p;
 +
-+  if (NULL == punit) {
-+    /* Shouldn't happen */
-+    log_error("handle_unit_move(): invalid unit %d",
-+              unit_id);
++  if (punit == nullptr) {
++    /* Meanwhile unit has died on the server side? */
++    log_warn("handle_unit_move(): invalid unit %d", unit_id);
 +    return;
 +  }
 +
-+  if (NULL == ptile) {
++  if (ptile == nullptr) {
 +    /* Shouldn't happen */
 +    log_error("handle_unit_move(): invalid %s (%d) tile (%d, %d)",
 +              unit_rule_name(punit),
@@ -84,7 +83,7 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +  path = pf_map_path(pfm, ptile);
 +  pf_map_destroy(pfm);
 +
-+  if (path) {
++  if (path != nullptr) {
 +    int total_mc = 0;
 +
 +    p.length = path->length - 1;

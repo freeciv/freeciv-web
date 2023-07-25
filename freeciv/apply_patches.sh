@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0023-Meson-Add-dev-save-compat-support.patch
-#   Make dev-format savegame compatibility to work on Meson builds
-#   osdn #45610
 # 0035-Make-diplstate-struct-smaller.patch
 #   Save memory with high number of players
 #   osdn #48293
@@ -17,9 +14,6 @@
 # 0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker.patch
 #   Fix converting old savegames
 #   osdn #48310
-# 0010-AI-Stop-cancelling-shared-vision-to-team-members.patch
-#   Fix to keeping shared vision state sane
-#   osdn #48152
 # 0016-Fix-warning-about-player-not-providing-shared-vision.patch
 #   Regression fix against spammy messages
 #   osdn #48311
@@ -32,6 +26,12 @@
 # 0025-Don-t-notify-unrelated-players-about-their-governmen.patch
 #   Fix illegal memory access
 #   osdn #48301
+# 0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers.patch
+#   Fix crash when server side autoattack enabled
+#   osdn #48300
+# 0023-bounce_unit-Fix-unit-list-corruption-on-iteration.patch
+#   Memory handling fix
+#   osdn #48392
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -54,15 +54,15 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0023-Meson-Add-dev-save-compat-support"
   "backports/0035-Make-diplstate-struct-smaller"
   "backports/0018-Set-diplstate-max_state-correctly-for-teamed-players"
   "backports/0026-Savecompat-Convert-SSA-Autosettlers-to-Autoworker"
-  "backports/0010-AI-Stop-cancelling-shared-vision-to-team-members"
   "backports/0016-Fix-warning-about-player-not-providing-shared-vision"
   "backports/0012-savegame3.c-Fix-zero-length-VLA-when-saving-counters"
   "backports/0014-Meson-Fix-configure-on-FORTIFY_SOURCE-envs"
   "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
+  "backports/0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers"
+  "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
   "meson_webperimental"
   "metachange"
   "text_fixes"

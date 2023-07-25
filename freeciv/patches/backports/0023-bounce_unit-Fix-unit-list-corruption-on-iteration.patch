@@ -1,0 +1,60 @@
+From f5e07871ae254926e70110fff36be57729379ff8 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 19 Jul 2023 22:33:49 +0300
+Subject: [PATCH 23/23] bounce_unit(): Fix unit list corruption on iteration
+
+Transported units were bounced away from transported list,
+within normal unit list iteration.
+Turn that to a safe-iterator.
+
+See osdn #48392
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unittools.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/server/unittools.c b/server/unittools.c
+index 4dbcb39b5e..4024c4a194 100644
+--- a/server/unittools.c
++++ b/server/unittools.c
+@@ -1300,9 +1300,9 @@ void bounce_unit(struct unit *punit, bool verbose)
+     struct unit_list *pcargo_units;
+ 
+     pcargo_units = unit_transport_cargo(punit);
+-    unit_list_iterate(pcargo_units, pcargo) {
++    unit_list_iterate_safe(pcargo_units, pcargo) {
+       bounce_unit(pcargo, verbose);
+-    } unit_list_iterate_end;
++    } unit_list_iterate_safe_end;
+   }
+ 
+   if (verbose) {
+@@ -1311,10 +1311,10 @@ void bounce_unit(struct unit *punit, bool verbose)
+                   _("Disbanded your %s."),
+                   unit_tile_link(punit));
+   }
++
+   wipe_unit(punit, ULR_STACK_CONFLICT, NULL);
+ }
+ 
+-
+ /**********************************************************************//**
+   Throw pplayer's units from non-allied cities
+ 
+@@ -1399,10 +1399,10 @@ static void resolve_stack_conflicts(struct player *pplayer,
+           bounce_unit(aunit, verbose);
+         }
+       } unit_list_iterate_safe_end;
+-    }    
++    }
+   } unit_list_iterate_safe_end;
+ }
+-				
++
+ /**********************************************************************//**
+   When in civil war or an alliance breaks there will potentially be units
+   from both sides coexisting on the same squares.  This routine resolves
+-- 
+2.40.1
+

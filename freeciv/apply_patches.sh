@@ -20,6 +20,9 @@
 # 0023-bounce_unit-Fix-unit-list-corruption-on-iteration.patch
 #   Memory handling fix
 #   osdn #48392
+# 0022-Fix-web-mode-build.patch
+#   Fix freeciv-web build
+#   osdn #48366
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -47,6 +50,7 @@ declare -a PATCHLIST=(
   "backports/0025-Don-t-notify-unrelated-players-about-their-governmen"
   "backports/0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers"
   "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
+  "backports/0022-Fix-web-mode-build"
   "meson_webperimental"
   "metachange"
   "text_fixes"

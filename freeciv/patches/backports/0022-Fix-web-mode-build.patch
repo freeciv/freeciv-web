@@ -1,0 +1,43 @@
+From 891fcc0bb0649e44fe4a852b6c38a408312d3df1 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 9 Jul 2023 01:10:09 +0300
+Subject: [PATCH 22/22] Fix web-mode build
+
+Broken by removal of old cleaning activities
+
+See osdn #48366
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/unithand.c | 15 ---------------
+ 1 file changed, 15 deletions(-)
+
+diff --git a/server/unithand.c b/server/unithand.c
+index 34eee8f96c..381fe6b441 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -4324,21 +4324,6 @@ void handle_unit_change_activity(struct player *pplayer, int unit_id,
+     } else if (activity == ACTIVITY_CLEAN) {
+       activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEAN,
+                                            pplayer, punit);
+-
+-      if (activity_target == NULL) {
+-        activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANPOLLUTION,
+-                                             pplayer, punit);
+-        if (activity_target == NULL) {
+-          activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANFALLOUT,
+-                                               pplayer, punit);
+-        }
+-      }
+-    } else if (activity == ACTIVITY_POLLUTION) {
+-      activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANPOLLUTION,
+-                                           pplayer, punit);
+-    } else if (activity == ACTIVITY_FALLOUT) {
+-      activity_target = prev_extra_in_tile(unit_tile(punit), ERM_CLEANFALLOUT,
+-                                           pplayer, punit);
+     } else {
+       required = FALSE;
+     }
+-- 
+2.40.1
+

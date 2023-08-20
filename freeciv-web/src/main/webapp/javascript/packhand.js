@@ -461,10 +461,10 @@ function handle_city_short_info(packet)
 }
 
 /**************************************************************************
-  A traderoute-info packet contains information about one end of a
-  traderoute
+  A trade_route_info packet contains information about one end of
+  a trade route
 **************************************************************************/
-function handle_traderoute_info(packet)
+function handle_trade_route_info(packet)
 {
   if (city_trade_routes[packet['city']] == null) {
     /* This is the first trade route received for this city. */

@@ -333,12 +333,14 @@ function popup_action_selection(actor_unit, action_probabilities,
     }
 
     for (var action_id = 0; action_id < ACTION_COUNT; action_id++) {
-      if (actions[action_id]['tgt_kind'] == tgt_kind
-          && action_prob_possible(
-              action_probabilities[action_id])) {
-        buttons.push(create_act_sel_button(id, actor_unit['id'],
-                                           tgt_id, sub_tgt_id, action_id,
-                                           action_probabilities));
+      if (action_id != ACTION_UNUSED_1 && action_id != ACTION_UNUSED_2) {
+        if (actions[action_id]['tgt_kind'] == tgt_kind
+            && action_prob_possible(
+                action_probabilities[action_id])) {
+          buttons.push(create_act_sel_button(id, actor_unit['id'],
+                                             tgt_id, sub_tgt_id, action_id,
+                                             action_probabilities));
+        }
       }
     }
   }

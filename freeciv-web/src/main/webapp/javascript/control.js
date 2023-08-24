@@ -1669,30 +1669,32 @@ function do_unit_paradrop_to(punit, ptile)
   var paradrop_action = null;
 
   for (act_id = 0; act_id < ACTION_COUNT; act_id++) {
-    var paction = action_by_number(act_id);
+    if (action_id != ACTION_UNUSED_1 && action_id != ACTION_UNUSED_2) {
+      var paction = action_by_number(act_id);
 
-    if (!(action_has_result(paction, ACTRES_PARADROP_CONQUER)
-          || action_has_result(paction, ACTRES_PARADROP))) {
-      /* Not relevant. */
-      continue;
-    }
+      if (!(action_has_result(paction, ACTRES_PARADROP_CONQUER)
+            || action_has_result(paction, ACTRES_PARADROP))) {
+        /* Not relevant. */
+        continue;
+      }
 
-    if (utype_can_do_action(unit_type(punit), act_id)) {
-      if (paradrop_action == null) {
-        /* This is the first possible paradrop action. */
-        paradrop_action = paction;
-      } else {
-        /* More than one paradrop action may be possible. The user must
-         * choose. Have the server record that an action decision is wanted
-         * for this unit so the dialog will be brought up. */
-        var packet = {
-          "pid"     : packet_unit_sscs_set,
-          "unit_id" : punit['id'],
-          "type"    : USSDT_QUEUE,
-          "value"   : ptile['index']
-        };
-        send_request(JSON.stringify(packet));
-        return;
+      if (utype_can_do_action(unit_type(punit), act_id)) {
+        if (paradrop_action == null) {
+          /* This is the first possible paradrop action. */
+          paradrop_action = paction;
+        } else {
+          /* More than one paradrop action may be possible. The user must
+           * choose. Have the server record that an action decision is wanted
+           * for this unit so the dialog will be brought up. */
+          var packet = {
+            "pid"     : packet_unit_sscs_set,
+            "unit_id" : punit['id'],
+            "type"    : USSDT_QUEUE,
+            "value"   : ptile['index']
+          };
+          send_request(JSON.stringify(packet));
+          return;
+        }
       }
     }
   }

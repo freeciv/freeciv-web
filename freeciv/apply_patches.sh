@@ -11,6 +11,9 @@
 # 0021-Free-actions-on-ACTION_UNUSED_-slots.patch
 #   Memory handling fix
 #   osdn #48416
+# 0009-Fix-handling-of-invalid-player-flag-on-savegame-load.patch
+#   Savegame loading fix
+#   osdn #48563
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -35,6 +38,7 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
   "backports/0021-Free-actions-on-ACTION_UNUSED_-slots"
+  "backports/0009-Fix-handling-of-invalid-player-flag-on-savegame-load"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers.patch
-#   Fix crash when server side autoattack enabled
-#   osdn #48300
 # 0023-bounce_unit-Fix-unit-list-corruption-on-iteration.patch
 #   Memory handling fix
 #   osdn #48392
@@ -33,7 +30,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0022-occupy_move-Fix-crash-if-unit-died-on-autoperformers"
   "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
   "meson_webperimental"
   "metachange"

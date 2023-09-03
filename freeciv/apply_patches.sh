@@ -14,6 +14,9 @@
 # 0009-Fix-handling-of-invalid-player-flag-on-savegame-load.patch
 #   Savegame loading fix
 #   osdn #48563
+# 0016-Introduce-fc_strncmp.patch
+#   Update baseline for some freeciv-web patches
+#   osdn #48420
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,6 +42,7 @@ declare -a PATCHLIST=(
   "backports/0023-bounce_unit-Fix-unit-list-corruption-on-iteration"
   "backports/0021-Free-actions-on-ACTION_UNUSED_-slots"
   "backports/0009-Fix-handling-of-invalid-player-flag-on-savegame-load"
+  "backports/0016-Introduce-fc_strncmp"
   "meson_webperimental"
   "metachange"
   "text_fixes"

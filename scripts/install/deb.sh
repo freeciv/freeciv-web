@@ -96,9 +96,11 @@ TMPINSTDIR=$(mktemp -d)
 
 echo "==== Installing Node.js ===="
 if [ "${INSTALLED_NODEJS}" = N ]; then
-  cd "${TMPINSTDIR}"
-  curl -LOsS 'https://deb.nodesource.com/setup_20.x'
-  sudo bash setup_20.x
+  NODE_MAJOR=20
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+  sudo ${APT_GET} update
   sudo ${APT_GET} install --no-install-recommends nodejs
   if ! command -v npm >/dev/null ; then
     sudo ${APT_GET} install --no-install-recommends npm

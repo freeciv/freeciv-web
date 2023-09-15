@@ -1,0 +1,30 @@
+From d6ef2c980eb6b179064e6b2abfb1be6ddf18d529 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 3 Sep 2023 08:37:00 +0300
+Subject: [PATCH 22/22] AI: Set countdown correctly if senate blocks war
+ completely
+
+Reported by alain_bkr
+
+See osdn #47786
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ ai/default/daidiplomacy.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ai/default/daidiplomacy.c b/ai/default/daidiplomacy.c
+index d4803db406..db311b0c5f 100644
+--- a/ai/default/daidiplomacy.c
++++ b/ai/default/daidiplomacy.c
+@@ -1383,6 +1383,7 @@ static void dai_go_to_war(struct ai_type *ait, struct player *pplayer,
+     } else {
+       /* There would be Senate even during revolution. Better not to revolt for nothing */
+       pplayer->government = real_gov;
++      adip->countdown = -1; /* War declaration aborted */
+ 
+       DIPLO_LOG(ait, LOG_DEBUG, pplayer, target,
+                 "Not revolting, as there would be Senate regardless.");
+-- 
+2.40.1
+

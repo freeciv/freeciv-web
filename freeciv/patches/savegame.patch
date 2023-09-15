@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2023-05-28 10:47:05.228715104 +0300
-+++ freeciv/server/commands.c	2023-05-28 10:47:20.112804093 +0300
+--- freeciv/server/commands.c	2023-09-03 05:24:19.832252951 +0300
++++ freeciv/server/commands.c	2023-09-03 05:24:30.656357307 +0300
 @@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,8 +11,8 @@ diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
---- freeciv/server/savegame/savemain.c	2023-05-28 10:47:05.232715128 +0300
-+++ freeciv/server/savegame/savemain.c	2023-05-28 10:48:04.009066546 +0300
+--- freeciv/server/savegame/savemain.c	2023-09-03 05:24:19.856253182 +0300
++++ freeciv/server/savegame/savemain.c	2023-09-03 05:24:30.656357307 +0300
 @@ -152,8 +152,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
@@ -39,8 +39,8 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-05-28 10:47:05.228715104 +0300
-+++ freeciv/server/stdinhand.c	2023-05-28 10:50:14.749848273 +0300
+--- freeciv/server/stdinhand.c	2023-09-03 05:24:19.844253067 +0300
++++ freeciv/server/stdinhand.c	2023-09-03 05:28:20.614581947 +0300
 @@ -21,6 +21,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -61,7 +61,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3786,6 +3782,7 @@
+@@ -3791,6 +3787,7 @@
    struct section_file *file;
    char arg[MAX_LEN_PATH];
    struct conn_list *global_observers;
@@ -69,7 +69,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
  
    if (!filename || filename[0] == '\0') {
      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Usage:\n%s"),
-@@ -3805,10 +3802,21 @@
+@@ -3810,10 +3807,21 @@
    }
  
    {
@@ -77,7 +77,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
 +
 +    webdirs = strvec_new();
 +
-+    if (caller != NULL) {
++    if (caller != nullptr) {
 +      fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username);
 +      strvec_append(webdirs, websave);
 +    }
@@ -92,7 +92,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
      };
      const char *exts[] = {
        "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", "sav.zst", NULL
-@@ -3859,9 +3867,12 @@
+@@ -3864,9 +3872,12 @@
      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Could not load savefile: %s"),
                arg);
      dlsend_packet_game_load(game.est_connections, FALSE, arg);
@@ -105,19 +105,19 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (check) {
      return TRUE;
    }
-@@ -4502,6 +4513,35 @@
+@@ -4507,6 +4518,35 @@
  
    level = command_level(command_by_number(cmd));
  
 +  /* Special savegame handling for Freeciv-web. */
-+  if (strncmp(game.server.meta_info.type, "pbem", 4) == 0 
-+      && cmd == CMD_SAVE && caller) {
++  if (!fc_strncmp(game.server.meta_info.type, "pbem", 4)
++      && cmd == CMD_SAVE && caller != nullptr) {
 +    char pbemfile[200];
 +
 +    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem/pbem-%s-%u",
-+                srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
++                srvarg.saves_pathname, caller->username, (unsigned)time(nullptr));
 +    sz_strlcpy(arg, pbemfile);
-+  } else if (cmd == CMD_SAVE && caller) {
++  } else if (cmd == CMD_SAVE && caller != nullptr) {
 +    char savefile[300];
 +    char buffer[30];
 +    char savedir[300];

@@ -1,0 +1,531 @@
+From 37efc77b485199f0e06af9ede9ec9476a6d2fe1f Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sat, 2 Sep 2023 20:12:08 +0300
+Subject: [PATCH 16/19] Introduce fc_strncmp()
+
+Currently just a wrapper macro around strncmp()
+
+See osdn #48420
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ client/gui-gtk-3.22/pages.c  | 18 +++++++++---------
+ client/gui-gtk-4.0/pages.c   |  2 +-
+ client/gui-qt/pages.cpp      |  2 +-
+ client/gui-sdl2/connectdlg.c |  9 +++++----
+ client/helpdata.c            |  6 +++---
+ client/options.c             |  2 +-
+ client/packhand.c            |  6 ++----
+ doc/CodingStyle              |  1 +
+ server/auth.c                |  6 +++---
+ server/connecthand.c         |  2 +-
+ server/edithand.c            | 10 +++++-----
+ server/report.c              | 10 +++++-----
+ server/savegame/savecompat.c |  9 ++++++---
+ server/stdinhand.c           |  2 +-
+ utility/capability.c         |  4 ++--
+ utility/fc_cmdline.c         | 10 +++++-----
+ utility/inputfile.c          |  8 ++++----
+ utility/log.c                |  4 ++--
+ utility/registry_ini.c       | 12 ++++++------
+ utility/support.c            |  2 +-
+ utility/support.h            |  3 +++
+ 21 files changed, 67 insertions(+), 61 deletions(-)
+
+diff --git a/client/gui-gtk-3.22/pages.c b/client/gui-gtk-3.22/pages.c
+index 97c20235ad..93cdc74910 100644
+--- a/client/gui-gtk-3.22/pages.c
++++ b/client/gui-gtk-3.22/pages.c
+@@ -1046,25 +1046,25 @@ static void connect_callback(GtkWidget *w, gpointer data)
+   case NEW_PASSWORD_TYPE:
+     if (w != network_password) {
+       sz_strlcpy(fc_password,
+-	  gtk_entry_get_text(GTK_ENTRY(network_password)));
++                 gtk_entry_get_text(GTK_ENTRY(network_password)));
+       sz_strlcpy(reply.password,
+-	  gtk_entry_get_text(GTK_ENTRY(network_confirm_password)));
+-      if (strncmp(reply.password, fc_password, MAX_LEN_NAME) == 0) {
+-	fc_password[0] = '\0';
+-	send_packet_authentication_reply(&client.conn, &reply);
++                 gtk_entry_get_text(GTK_ENTRY(network_confirm_password)));
++      if (!fc_strncmp(reply.password, fc_password, MAX_LEN_NAME)) {
++        fc_password[0] = '\0';
++        send_packet_authentication_reply(&client.conn, &reply);
+ 
+-	set_connection_state(WAITING_TYPE);
++        set_connection_state(WAITING_TYPE);
+       } else { 
+-	append_network_statusbar(_("Passwords don't match, enter password."),
++        append_network_statusbar(_("Passwords don't match, enter password."),
+                                  TRUE);
+ 
+-	set_connection_state(NEW_PASSWORD_TYPE);
++        set_connection_state(NEW_PASSWORD_TYPE);
+       }
+     }
+     return;
+   case ENTER_PASSWORD_TYPE:
+     sz_strlcpy(reply.password,
+-	gtk_entry_get_text(GTK_ENTRY(network_password)));
++               gtk_entry_get_text(GTK_ENTRY(network_password)));
+     send_packet_authentication_reply(&client.conn, &reply);
+ 
+     set_connection_state(WAITING_TYPE);
+diff --git a/client/gui-gtk-4.0/pages.c b/client/gui-gtk-4.0/pages.c
+index 863232f297..a2ccae6a96 100644
+--- a/client/gui-gtk-4.0/pages.c
++++ b/client/gui-gtk-4.0/pages.c
+@@ -1066,7 +1066,7 @@ static void connect_callback(GtkWidget *w, gpointer data)
+           gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(network_password))));
+       sz_strlcpy(reply.password,
+           gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(network_confirm_password))));
+-      if (strncmp(reply.password, fc_password, MAX_LEN_NAME) == 0) {
++      if (!fc_strncmp(reply.password, fc_password, MAX_LEN_NAME)) {
+         fc_password[0] = '\0';
+         send_packet_authentication_reply(&client.conn, &reply);
+ 
+diff --git a/client/gui-qt/pages.cpp b/client/gui-qt/pages.cpp
+index aa3a055713..3a903ddda5 100644
+--- a/client/gui-qt/pages.cpp
++++ b/client/gui-qt/pages.cpp
+@@ -1629,7 +1629,7 @@ void fc_client::slot_connect()
+     sz_strlcpy(reply.password,
+                ba_bytes.data());
+ 
+-    if (strncmp(reply.password, fc_password, MAX_LEN_NAME) == 0) {
++    if (!fc_strncmp(reply.password, fc_password, MAX_LEN_NAME)) {
+       fc_password[0] = '\0';
+       send_packet_authentication_reply(&client.conn, &reply);
+       set_connection_state(WAITING_TYPE);
+diff --git a/client/gui-sdl2/connectdlg.c b/client/gui-sdl2/connectdlg.c
+index 81948ae65d..a7a5c1080a 100644
+--- a/client/gui-sdl2/connectdlg.c
++++ b/client/gui-sdl2/connectdlg.c
+@@ -926,16 +926,17 @@ static int convert_second_passwd_callback(struct widget *pwidget)
+ {
+   if (PRESSED_EVENT(main_data.event)) {
+     if (pwidget->string_utf8->text != NULL
+-        && !strncmp(fc_password, pwidget->string_utf8->text, MAX_LEN_NAME)) {
+-      set_wstate(pwidget->prev, FC_WS_NORMAL); /* next button */
++        && !fc_strncmp(fc_password, pwidget->string_utf8->text,
++                       MAX_LEN_NAME)) {
++      set_wstate(pwidget->prev, FC_WS_NORMAL); /* Next button */
+       widget_redraw(pwidget->prev);
+       widget_flush(pwidget->prev);
+     } else {
+       memset(fc_password, 0, MAX_LEN_NAME);
+       fc_password[0] = '\0';
+ 
+-      FC_FREE(pwidget->next->string_utf8->text);/* first edit */
+-      FC_FREE(pwidget->string_utf8->text); /* second edit */
++      FC_FREE(pwidget->next->string_utf8->text);/* First edit */
++      FC_FREE(pwidget->string_utf8->text); /* Second edit */
+ 
+       popup_new_user_passwd_dialog(_("Passwords don't match, enter password."));
+     }
+diff --git a/client/helpdata.c b/client/helpdata.c
+index 49c2374bc7..daa8853033 100644
+--- a/client/helpdata.c
++++ b/client/helpdata.c
+@@ -1170,9 +1170,9 @@ void boot_help_texts(void)
+         bool inserted;
+         const char *para = paras[i];
+ 
+-        if (strncmp(para, "$", 1) == 0) {
+-          inserted =
+-            insert_generated_text(long_buffer, sizeof(long_buffer), para+1);
++        if (!fc_strncmp(para, "$", 1)) {
++          inserted
++            = insert_generated_text(long_buffer, sizeof(long_buffer), para+1);
+         } else {
+           sz_strlcat(long_buffer, _(para));
+           inserted = TRUE;
+diff --git a/client/options.c b/client/options.c
+index a10c9cf360..536ef68ec3 100644
+--- a/client/options.c
++++ b/client/options.c
+@@ -5974,7 +5974,7 @@ static void options_dialogs_load(struct section_file *sf)
+   if (NULL != entries) {
+     entry_list_iterate(entries, pentry) {
+       for (prefix = prefixes; NULL != *prefix; prefix++) {
+-        if (0 == strncmp(*prefix, entry_name(pentry), strlen(*prefix))
++        if (!fc_strncmp(*prefix, entry_name(pentry), strlen(*prefix))
+             && secfile_lookup_bool(sf, &visible, "client.%s",
+                                    entry_name(pentry))) {
+           dialog_options_hash_replace(dialog_options_hash,
+diff --git a/client/packhand.c b/client/packhand.c
+index d84071f9eb..70d13a4240 100644
+--- a/client/packhand.c
++++ b/client/packhand.c
+@@ -728,8 +728,7 @@ void handle_city_info(const struct packet_city_info *packet)
+               TILE_XY(ptile), TILE_XY(pcenter));
+     return;
+   } else {
+-    name_changed = (0 != strncmp(packet->name, pcity->name,
+-                                 MAX_LEN_CITYNAME));
++    name_changed = (fc_strncmp(packet->name, pcity->name, MAX_LEN_CITYNAME));
+ 
+     while (trade_route_list_size(pcity->routes) > packet->trade_route_count) {
+       struct trade_route *proute = trade_route_list_get(pcity->routes, -1);
+@@ -1218,8 +1217,7 @@ void handle_city_short_info(const struct packet_city_short_info *packet)
+               TILE_XY(city_tile(pcity)), TILE_XY(pcenter));
+     return;
+   } else {
+-    name_changed = (0 != strncmp(packet->name, pcity->name,
+-                                 MAX_LEN_CITYNAME));
++    name_changed = (fc_strncmp(packet->name, pcity->name, MAX_LEN_CITYNAME));
+ 
+     /* Check if city descriptions should be updated */
+     if (gui_options.draw_city_names && name_changed) {
+diff --git a/doc/CodingStyle b/doc/CodingStyle
+index 2b0029aeba..5108cb19d5 100644
+--- a/doc/CodingStyle
++++ b/doc/CodingStyle
+@@ -539,6 +539,7 @@ functions available natively.
+ 
+ - Instead of fopen(), use fc_fopen()
+ - Instead of localtime(), use fc_localtime()
++- Instead of strncmp(), use fc_strncmp()
+ 
+ ============================================================================
+   Miscellaneous
+diff --git a/server/auth.c b/server/auth.c
+index 1b1d19d6c3..5bf666d013 100644
+--- a/server/auth.c
++++ b/server/auth.c
+@@ -74,14 +74,14 @@ bool auth_user(struct connection *pconn, char *username)
+ {
+   char tmpname[MAX_LEN_NAME] = "\0";
+ 
+-  /* assign the client a unique guest name/reject if guests aren't allowed */
++  /* Assign the client a unique guest name/Reject if guests aren't allowed */
+   if (is_guest_name(username)) {
+     if (srvarg.auth_allow_guests) {
+ 
+       sz_strlcpy(tmpname, username);
+       get_unique_guest_name(username);
+ 
+-      if (strncmp(tmpname, username, MAX_LEN_NAME) != 0) {
++      if (fc_strncmp(tmpname, username, MAX_LEN_NAME)) {
+         notify_conn_early(pconn->self, NULL, E_CONNECTION, ftc_warning,
+                           _("Warning: the guest name '%s' has been "
+                             "taken, renaming to user '%s'."), tmpname, username);
+@@ -95,7 +95,7 @@ bool auth_user(struct connection *pconn, char *username)
+       return FALSE;
+     }
+   } else {
+-    /* we are not a guest, we need an extra check as to whether a 
++    /* We are not a guest, we need an extra check as to whether a
+      * connection can be established: the client must authenticate itself */
+     char buffer[MAX_LEN_MSG];
+     bool exists = FALSE;
+diff --git a/server/connecthand.c b/server/connecthand.c
+index 7d7adc5289..654ddc0061 100644
+--- a/server/connecthand.c
++++ b/server/connecthand.c
+@@ -723,7 +723,7 @@ static bool connection_attach_real(struct connection *pconn,
+   /* We don't want the connection's username on another player. */
+   players_iterate(aplayer) {
+     if (aplayer != pplayer
+-        && 0 == strncmp(aplayer->username, pconn->username, MAX_LEN_NAME)) {
++        && !fc_strncmp(aplayer->username, pconn->username, MAX_LEN_NAME)) {
+       sz_strlcpy(aplayer->username, _(ANON_USER_NAME));
+       aplayer->unassigned_user = TRUE;
+       send_player_info_c(aplayer, NULL);
+diff --git a/server/edithand.c b/server/edithand.c
+index 01376a0653..65518eb032 100644
+--- a/server/edithand.c
++++ b/server/edithand.c
+@@ -1428,7 +1428,7 @@ void handle_edit_game(struct connection *pc,
+     changed = TRUE;
+   }
+ 
+-  if (0 != strncmp(packet->scenario_name, game.scenario.name, 256)) {
++  if (fc_strncmp(packet->scenario_name, game.scenario.name, 256)) {
+     sz_strlcpy(game.scenario.name, packet->scenario_name);
+     changed = TRUE;
+   }
+@@ -1436,8 +1436,8 @@ void handle_edit_game(struct connection *pc,
+   FC_STATIC_ASSERT(sizeof(packet->scenario_authors) == sizeof(game.scenario.authors),
+                    scen_authors_field_size_mismatch);
+ 
+-  if (0 != strncmp(packet->scenario_authors, game.scenario.authors,
+-                   sizeof(game.scenario.authors))) {
++  if (fc_strncmp(packet->scenario_authors, game.scenario.authors,
++                 sizeof(game.scenario.authors))) {
+     sz_strlcpy(game.scenario.authors, packet->scenario_authors);
+     changed = TRUE;
+   }
+@@ -1483,8 +1483,8 @@ void handle_edit_game(struct connection *pc,
+ ****************************************************************************/
+ void handle_edit_scenario_desc(struct connection *pc, const char *scenario_desc)
+ {
+-  if (0 != strncmp(scenario_desc, game.scenario_desc.description,
+-                   MAX_LEN_PACKET)) {
++  if (fc_strncmp(scenario_desc, game.scenario_desc.description,
++                 MAX_LEN_PACKET)) {
+     sz_strlcpy(game.scenario_desc.description, scenario_desc);
+     send_scenario_description(NULL);
+   }
+diff --git a/server/report.c b/server/report.c
+index 17837df049..75e324cc25 100644
+--- a/server/report.c
++++ b/server/report.c
+@@ -1290,13 +1290,13 @@ static bool scan_score_log(char *id)
+     *ptr = '\0';
+ 
+     if (line_nr == 1) {
+-      if (strncmp(line, scorelog_magic, strlen(scorelog_magic)) != 0) {
++      if (fc_strncmp(line, scorelog_magic, strlen(scorelog_magic))) {
+         log_error("[%s:%d] Bad file magic!", game.server.scorefile, line_nr);
+         return FALSE;
+       }
+     }
+ 
+-    if (strncmp(line, "id ", strlen("id ")) == 0) {
++    if (!fc_strncmp(line, "id ", strlen("id "))) {
+       if (strlen(id) > 0) {
+         log_error("[%s:%d] Multiple ID entries!", game.server.scorefile,
+                   line_nr);
+@@ -1311,7 +1311,7 @@ static bool scan_score_log(char *id)
+       }
+     }
+ 
+-    if (strncmp(line, "turn ", strlen("turn ")) == 0) {
++    if (!fc_strncmp(line, "turn ", strlen("turn "))) {
+       if (sscanf(line + strlen("turn "), "%d", &turn) != 1) {
+         log_error("[%s:%d] Bad line (turn)!", game.server.scorefile,
+                   line_nr);
+@@ -1322,7 +1322,7 @@ static bool scan_score_log(char *id)
+       score_log->last_turn = turn;
+     }
+ 
+-    if (strncmp(line, "addplayer ", strlen("addplayer ")) == 0) {
++    if (!fc_strncmp(line, "addplayer ", strlen("addplayer "))) {
+       /* If you change this, be sure to adjust plr_name buffer size to
+        * match longest possible string read. */
+       if (3 != sscanf(line + strlen("addplayer "), "%d %d %s",
+@@ -1361,7 +1361,7 @@ static bool scan_score_log(char *id)
+       plrdata_slot_init(plrdata, plr_name);
+     }
+ 
+-    if (strncmp(line, "delplayer ", strlen("delplayer ")) == 0) {
++    if (!fc_strncmp(line, "delplayer ", strlen("delplayer "))) {
+       if (2 != sscanf(line + strlen("delplayer "), "%d %d",
+                       &turn, &plr_no)) {
+         log_error("[%s:%d] Bad line (delplayer)!",
+diff --git a/server/savegame/savecompat.c b/server/savegame/savecompat.c
+index a1bae47727..55feee466b 100644
+--- a/server/savegame/savecompat.c
++++ b/server/savegame/savecompat.c
+@@ -393,15 +393,18 @@ static void compat_load_020400(struct loaddata *loading,
+       /* This savefile contains known information in a sane format.
+        * Just move any entries to where 2.4.x+ expect to find them. */
+       struct section *map = secfile_section_by_name(loading->file, "map");
+-      if (map) {
++
++      if (map != NULL) {
+         entry_list_iterate(section_entries(map), pentry) {
+           const char *name = entry_name(pentry);
+-          if (strncmp(name, "kvb", 3) == 0) {
++
++          if (!fc_strncmp(name, "kvb", 3)) {
+             /* Rename the "kvb..." entry to "k..." */
+             char *name2 = fc_strdup(name), *newname = name2 + 2;
++
+             *newname = 'k';
+             /* Savefile probably contains existing "k" entries, which are bogus
+-             * so we trash them */
++             * so we trash them. */
+             secfile_entry_delete(loading->file, "map.%s", newname);
+             entry_set_name(pentry, newname);
+             FC_FREE(name2);
+diff --git a/server/stdinhand.c b/server/stdinhand.c
+index 9e751fb1ce..d031ac8d96 100644
+--- a/server/stdinhand.c
++++ b/server/stdinhand.c
+@@ -3744,7 +3744,7 @@ static bool detach_command(struct connection *caller, char *str, bool check)
+   /* The user explicitly wanted to detach, so if a player is marked for
+    * them, reset its username. */
+   players_iterate(aplayer) {
+-    if (0 == strncmp(aplayer->username, pconn->username, MAX_LEN_NAME)) {
++    if (!fc_strncmp(aplayer->username, pconn->username, MAX_LEN_NAME)) {
+       sz_strlcpy(aplayer->username, _(ANON_USER_NAME));
+       aplayer->unassigned_user = TRUE;
+       send_player_info_c(aplayer, NULL);
+diff --git a/utility/capability.c b/utility/capability.c
+index edc66f7588..6d434f50b9 100644
+--- a/utility/capability.c
++++ b/utility/capability.c
+@@ -40,7 +40,7 @@
+ 
+ /***********************************************************************//**
+   This routine returns TRUE if the capability in cap appears
+-  in the capability list in capstr.  The capabilities in capstr
++  in the capability list in capstr. The capabilities in capstr
+   are allowed to start with a "+", but the capability in cap must not.
+ ***************************************************************************/
+ static bool fc_has_capability(const char *cap, const char *capstr,
+@@ -60,7 +60,7 @@ static bool fc_has_capability(const char *cap, const char *capstr,
+     fc_assert(next >= capstr);
+ 
+     if (((size_t)(next - capstr) == cap_len)
+-        && strncmp(cap, capstr, cap_len) == 0) {
++        && !fc_strncmp(cap, capstr, cap_len)) {
+       return TRUE;
+     }
+     if (*next == '\0') {
+diff --git a/utility/fc_cmdline.c b/utility/fc_cmdline.c
+index b7f96ce3f9..cab4fceead 100644
+--- a/utility/fc_cmdline.c
++++ b/utility/fc_cmdline.c
+@@ -57,9 +57,9 @@ char *get_option_malloc(const char *option_name,
+     cmdline_values = cmdline_value_list_new();
+   }
+ 
+-  if (strcmp(option_name, argv[*i]) == 0
+-      || (strncmp(option_name, argv[*i], len) == 0 && argv[*i][len] == '=')
+-      || strncmp(option_name + 1, argv[*i], 2) == 0) {
++  if (!strcmp(option_name, argv[*i])
++      || (!fc_strncmp(option_name, argv[*i], len) && argv[*i][len] == '=')
++      || !fc_strncmp(option_name + 1, argv[*i], 2)) {
+     char *opt = argv[*i] + (argv[*i][1] != '-' ? 0 : len);
+     char *ret;
+ 
+@@ -111,8 +111,8 @@ void cmdline_option_values_free(void)
+ **************************************************************************/
+ bool is_option(const char *option_name, char *option)
+ {
+-  return (strcmp(option_name, option) == 0
+-          || strncmp(option_name + 1, option, 2) == 0);
++  return (!strcmp(option_name, option)
++          || !fc_strncmp(option_name + 1, option, 2));
+ }
+ 
+ /**********************************************************************//**
+diff --git a/utility/inputfile.c b/utility/inputfile.c
+index 3a9c1b91b3..3ffa1b10e4 100644
+--- a/utility/inputfile.c
++++ b/utility/inputfile.c
+@@ -382,14 +382,14 @@ static bool check_include(struct inputfile *inf)
+     return FALSE;
+   }
+ 
+-  if (strncmp(astr_str(&inf->cur_line), include_prefix, len) != 0) {
++  if (fc_strncmp(astr_str(&inf->cur_line), include_prefix, len)) {
+     return FALSE;
+   }
+ 
+-  /* from here, the include-line must be well formed */
+-  /* keep inf->cur_line_pos accurate just so error messages are useful */
++  /* From here, the include-line must be well formed.
++   * Keep inf->cur_line_pos accurate just so error messages are useful */
+ 
+-  /* skip any whitespace: */
++  /* Skip any whitespace: */
+   inf->cur_line_pos = len;
+   c = astr_str(&inf->cur_line) + len;
+   while (*c != '\0' && fc_isspace(*c)) {
+diff --git a/utility/log.c b/utility/log.c
+index 96fa0ce72f..58c9e18d87 100644
+--- a/utility/log.c
++++ b/utility/log.c
+@@ -451,8 +451,8 @@ static void log_real(enum log_level level, bool print_from_where,
+     fs = stderr;
+   }
+ 
+-  if (level == prev_level && 0 == strncmp(msg, last_msg,
+-                                          MAX_LEN_LOG_LINE - 1)) {
++  if (level == prev_level && !fc_strncmp(msg, last_msg,
++                                         MAX_LEN_LOG_LINE - 1)) {
+     repeated++;
+     if (repeated == next) {
+       fc_snprintf(buf, sizeof(buf),
+diff --git a/utility/registry_ini.c b/utility/registry_ini.c
+index 3fa17dcd9d..39bb10ff47 100644
+--- a/utility/registry_ini.c
++++ b/utility/registry_ini.c
+@@ -734,7 +734,7 @@ bool secfile_save(const struct section_file *secfile, const char *filename,
+           for (; *c != '\0' && is_legal_table_entry_name(*c, FALSE); c++) {
+             /* nothing */
+           }
+-          if (0 != strncmp(c, "0.", 2)) {
++          if (fc_strncmp(c, "0.", 2)) {
+             break;
+           }
+           c += 2;
+@@ -753,7 +753,7 @@ bool secfile_save(const struct section_file *secfile, const char *filename,
+            */
+           save_iter = ent_iter;
+ 
+-          /* write the column names, and calculate ncol: */
++          /* Write the column names, and calculate ncol: */
+           ncol = 0;
+           col_iter = save_iter;
+           for (; (col_pentry = entry_list_link_data(col_iter));
+@@ -762,7 +762,7 @@ bool secfile_save(const struct section_file *secfile, const char *filename,
+               continue;
+             }
+             col_entry_name = entry_name(col_pentry);
+-            if (strncmp(col_entry_name, first, offset) != 0) {
++            if (fc_strncmp(col_entry_name, first, offset)) {
+               break;
+             }
+             fz_fprintf(fs, "%s\"%s\"", (ncol == 0 ? "" : ","),
+@@ -772,7 +772,7 @@ bool secfile_save(const struct section_file *secfile, const char *filename,
+           fz_fprintf(fs, "\n");
+ 
+           /* Iterate over rows and columns, incrementing ent_iter as we go,
+-           * and writing values to the table.  Have a separate iterator
++           * and writing values to the table. Have a separate iterator
+            * to the column names to check they all match.
+            */
+           irow = icol = 0;
+@@ -2883,7 +2883,7 @@ secfile_sections_by_name_prefix(const struct section_file *secfile,
+   }
+ 
+   section_list_iterate(secfile->sections, psection) {
+-    if (0 == strncmp(section_name(psection), prefix, len)) {
++    if (!fc_strncmp(section_name(psection), prefix, len)) {
+       if (NULL == matches) {
+         matches = section_list_new();
+       }
+@@ -2911,7 +2911,7 @@ bool secfile_section_prefix_present(const struct section_file *secfile,
+   }
+ 
+   section_list_iterate(secfile->sections, psection) {
+-    if (!strncmp(section_name(psection), prefix, len)) {
++    if (!fc_strncmp(section_name(psection), prefix, len)) {
+       return TRUE;
+     }
+   } section_list_iterate_end;
+diff --git a/utility/support.c b/utility/support.c
+index a4d43c8863..caa5a9ad73 100644
+--- a/utility/support.c
++++ b/utility/support.c
+@@ -230,7 +230,7 @@ int fc_strcasecmp(const char *str0, const char *str1)
+ 
+ /************************************************************************//**
+   Compare strings like strncmp(), but ignoring case.
+-  ie, only compares first n chars. UTF8 aware.
++  i.e. only compares first n chars. UTF8 aware.
+ ****************************************************************************/
+ int fc_strncasecmp(const char *str0, const char *str1, size_t n)
+ {
+diff --git a/utility/support.h b/utility/support.h
+index 49f2c5fe9c..fb30419ced 100644
+--- a/utility/support.h
++++ b/utility/support.h
+@@ -148,6 +148,9 @@ int fc_strcasecmp(const char *str0, const char *str1);
+ int fc_strncasecmp(const char *str0, const char *str1, size_t n);
+ int fc_strncasequotecmp(const char *str0, const char *str1, size_t n);
+ 
++/* TODO: Make UTF-8 aware */
++#define fc_strncmp(_s1_, _s2_, _len_) strncmp(_s1_, _s2_, _len_)
++
+ void fc_support_init(void);
+ void fc_support_free(void);
+ bool are_support_services_available(void);
+-- 
+2.40.1
+

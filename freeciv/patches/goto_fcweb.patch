@@ -1,6 +1,6 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-07-17 05:03:40.618266173 +0300
-+++ freeciv/common/networking/packets.def	2023-07-17 05:03:51.398377331 +0300
+--- freeciv/common/networking/packets.def	2023-09-22 12:12:56.821516408 +0300
++++ freeciv/common/networking/packets.def	2023-09-22 12:13:07.021607360 +0300
 @@ -2448,3 +2448,17 @@
  
    BV_ACTIONS utype_actions;
@@ -20,8 +20,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  UINT32 turns;
 +end
 diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2023-07-17 05:03:41.078270917 +0300
-+++ freeciv/server/unithand.c	2023-07-17 05:08:07.001008180 +0300
+--- freeciv/server/unithand.c	2023-09-22 12:12:57.389521473 +0300
++++ freeciv/server/unithand.c	2023-09-22 12:14:07.894149436 +0300
 @@ -45,6 +45,9 @@
  #include "unit.h"
  #include "unitlist.h"
@@ -32,7 +32,7 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
  /* common/scriptcore */
  #include "luascript_types.h"
  
-@@ -4232,6 +4235,84 @@
+@@ -4239,6 +4242,84 @@
  }
  
  /**********************************************************************//**
@@ -78,7 +78,7 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
 +  p.dest = tile_index(ptile);
 +
 +  /* Use path-finding to find a goto path. */
-+  pft_fill_unit_parameter(&parameter, punit);
++  pft_fill_unit_parameter(&parameter, &(wld.map), punit);
 +  pfm = pf_map_new(&parameter);
 +  path = pf_map_path(pfm, ptile);
 +  pf_map_destroy(pfm);

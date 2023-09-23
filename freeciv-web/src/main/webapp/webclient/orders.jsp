@@ -19,8 +19,8 @@
     <a href="#" onclick="request_unit_build_city();"><img src="/images/orders/build_city_default.png" name="build_city_button" alt="" border="0" width="30" height="30"></a>
   </div>  
 
-  <div id="order_auto_settlers" class="order_button" title="Auto build settler improvements (A)">
-    <a href="#" onclick="key_unit_auto_settle();"><img src="/images/orders/auto_settlers_default.png" name="auto_settlers_button" alt="" border="0" width="30" height="30"></a>
+  <div id="order_auto_workers" class="order_button" title="Auto build worker improvements (A)">
+    <a href="#" onclick="key_unit_auto_work();"><img src="/images/orders/auto_workers_default.png" name="auto_workers_button" alt="" border="0" width="30" height="30"></a>
   </div>
 
   <div id="order_irrigate" class="order_button" title="Create irrigation (i)" >

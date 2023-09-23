@@ -1150,9 +1150,9 @@ function update_unit_order_commands()
     if (ptype['name'] == "Settlers" || ptype['name'] == "Workers"
         || ptype['name'] == "Engineers") {
 
-      if (ptype['name'] == "Settlers") unit_actions["autosettlers"] = {name: "Auto settler (A)"};
-      if (ptype['name'] == "Workers") unit_actions["autosettlers"] = {name: "Auto workers (A)"};
-      if (ptype['name'] == "Engineers") unit_actions["autosettlers"] = {name: "Auto engineers (A)"};
+      if (ptype['name'] == "Settlers") unit_actions["autoworkers"] = {name: "Auto settler (A)"};
+      if (ptype['name'] == "Workers") unit_actions["autoworkers"] = {name: "Auto workers (A)"};
+      if (ptype['name'] == "Engineers") unit_actions["autoworkers"] = {name: "Auto engineers (A)"};
 
       if (!tile_has_extra(ptile, EXTRA_ROAD)) {
         $("#order_railroad").hide();
@@ -1190,7 +1190,7 @@ function update_unit_order_commands()
       $("#order_fortify").hide();
       $("#order_sentry").hide();
       $("#order_explore").hide();
-      $("#order_auto_settlers").show();
+      $("#order_auto_workers").show();
       $("#order_clean").show();
       if (!tile_has_extra(ptile, EXTRA_MINE)
           && tile_terrain(ptile)['mining_time'] > 0) {
@@ -1252,7 +1252,7 @@ function update_unit_order_commands()
       $("#order_irrigate").hide();
       $("#order_build_farmland").hide();
       $("#order_fortify").show();
-      $("#order_auto_settlers").hide();
+      $("#order_auto_workers").hide();
       $("#order_sentry").show();
       $("#order_explore").show();
       $("#order_clean").hide();
@@ -2050,7 +2050,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     break;
 
     case 'A':
-      key_unit_auto_settle();
+      key_unit_auto_work();
     break;
 
     case 'L':
@@ -2313,8 +2313,8 @@ function handle_context_menu_callback(key)
       key_unit_mine();
       break;
 
-    case "autosettlers":
-      key_unit_auto_settle();
+    case "autoworkers":
+      key_unit_auto_work();
       break;
 
     case "clean":
@@ -2972,19 +2972,19 @@ function request_unit_act_sel_vs_own_tile()
 
 /**************************************************************************
   Call to request (from the server) that the focus unit is put into
-  autosettler mode.
+  autoworker mode.
 **************************************************************************/
-function key_unit_auto_settle()
+function key_unit_auto_work()
 {
   var funits = get_units_in_focus();
+
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_unit_autosettlers(punit);
+
+    request_unit_autoworkers(punit);
   }
   setTimeout(update_unit_focus, 700);
 }
-
-
 
 /**************************************************************************
   Ask the server to cancel unit orders, if any.
@@ -3040,9 +3040,9 @@ function request_unit_ssa_set(punit, agent)
 
 /****************************************************************************
   Call to request (from the server) that the settler unit is put into
-  autosettler mode.
+  autoworker mode.
 ****************************************************************************/
-function request_unit_autosettlers(punit)
+function request_unit_autoworkers(punit)
 {
   if (punit != null ) {
     request_unit_cancel_orders(punit);

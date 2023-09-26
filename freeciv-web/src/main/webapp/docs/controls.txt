@@ -18,8 +18,8 @@ Auto explore
 <img src="/images/orders/road_default.png">
 Build road
 
-<img src="/images/orders/auto_settlers_default.png">
-Auto settlers
+<img src="/images/orders/auto_workers_default.png">
+Auto workers
 
 <img src="/images/orders/mine_default.png">
 Build mine

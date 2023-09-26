@@ -14,6 +14,9 @@
 # 0021-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
 #   Refactored meson options
 #   osdn #48700
+# 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
+#   Lua API fix
+#   osdn #48722
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,6 +42,7 @@ declare -a PATCHLIST=(
   "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
   "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
   "backports/0021-Meson-Replace-boolean-ruledit-option-with-tools-arra"
+  "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "meson_webperimental"
   "metachange"
   "text_fixes"

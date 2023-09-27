@@ -11,7 +11,13 @@
 # 0022-Lua-Fix-Unit-is_on_possible_city_tile.patch
 #   Fix finding cities from huts
 #   osdn #48582
-# 0021-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
+# 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
+#   Form baseline for 0030-Flatpak-Build-with-meson.patch
+#   osdn #48625
+# 0030-Flatpak-Build-with-meson.patch
+#   Form baseline for 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
+#   osdn #45871
+# 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
 #   Refactored meson options
 #   osdn #48700
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
@@ -41,7 +47,9 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
   "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
-  "backports/0021-Meson-Replace-boolean-ruledit-option-with-tools-arra"
+  "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
+  "backports/0030-Flatpak-Build-with-meson"
+  "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "meson_webperimental"
   "metachange"

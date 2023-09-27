@@ -18,11 +18,14 @@
 #   Form baseline for 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
 #   osdn #45871
 # 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
-#   Refactored meson options
+#   Refactor meson options
 #   osdn #48700
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
+# 0042-Meson-Make-manual-generator-build-optional.patch
+#   Manual Generator build optional
+#   osdn #48650
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,6 +54,7 @@ declare -a PATCHLIST=(
   "backports/0030-Flatpak-Build-with-meson"
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
+  "backports/0042-Meson-Make-manual-generator-build-optional"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -26,6 +26,9 @@
 # 0042-Meson-Make-manual-generator-build-optional.patch
 #   Manual Generator build optional
 #   osdn #48650
+# 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
+#   Unit movemenet handling fix
+#   osdn #48737
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -55,6 +58,7 @@ declare -a PATCHLIST=(
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "backports/0042-Meson-Make-manual-generator-build-optional"
+  "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "meson_webperimental"
   "metachange"
   "text_fixes"

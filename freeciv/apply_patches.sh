@@ -5,18 +5,15 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0009-Fix-handling-of-invalid-player-flag-on-savegame-load.patch
-#   Savegame loading fix
-#   osdn #48563
-# 0016-Introduce-fc_strncmp.patch
-#   Update baseline for some freeciv-web patches
-#   osdn #48420
 # 0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp.patch
 #   AI assert failure fix
 #   osdn #47786
 # 0022-Lua-Fix-Unit-is_on_possible_city_tile.patch
 #   Fix finding cities from huts
 #   osdn #48582
+# 0021-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
+#   Refactored meson options
+#   osdn #48700
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -39,10 +36,9 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0009-Fix-handling-of-invalid-player-flag-on-savegame-load"
-  "backports/0016-Introduce-fc_strncmp"
   "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
   "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
+  "backports/0021-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "meson_webperimental"
   "metachange"
   "text_fixes"

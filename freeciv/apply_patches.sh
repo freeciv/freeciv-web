@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp.patch
-#   AI assert failure fix
-#   osdn #47786
-# 0022-Lua-Fix-Unit-is_on_possible_city_tile.patch
-#   Fix finding cities from huts
-#   osdn #48582
 # 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
 #   Form baseline for 0030-Flatpak-Build-with-meson.patch
 #   osdn #48625
@@ -51,8 +45,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
-  "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
   "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
   "backports/0030-Flatpak-Build-with-meson"
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"

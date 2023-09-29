@@ -23,6 +23,9 @@
 # 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
 #   Unit movemenet handling fix
 #   osdn #48737
+# 0047-Meson-Turn-audio-option-to-a-combo.patch
+#   Rework disabling audio
+#   osdn #48757
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,6 +54,7 @@ declare -a PATCHLIST=(
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
+  "backports/0047-Meson-Turn-audio-option-to-a-combo"
   "meson_webperimental"
   "metachange"
   "text_fixes"

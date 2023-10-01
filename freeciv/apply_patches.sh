@@ -26,6 +26,15 @@
 # 0047-Meson-Turn-audio-option-to-a-combo.patch
 #   Rework disabling audio
 #   osdn #48757
+# 0008-Add-new-bitvector-utility-functions.patch
+#   New bitvector utility functions
+#   osdn #48731
+# 0047-Add-bv_match_dbv-utility-function.patch
+#   New bitvector utility function
+#   osdn #48771
+# 0057-Fix-bitvector-copy-functions.patch
+#   Fix to bitvector utility functions
+#   osdn #48772
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -55,6 +64,9 @@ declare -a PATCHLIST=(
   "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "backports/0047-Meson-Turn-audio-option-to-a-combo"
+  "backports/0008-Add-new-bitvector-utility-functions"
+  "backports/0047-Add-bv_match_dbv-utility-function"
+  "backports/0057-Fix-bitvector-copy-functions"
   "meson_webperimental"
   "metachange"
   "text_fixes"

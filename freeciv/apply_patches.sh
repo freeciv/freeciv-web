@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
-#   Form baseline for 0030-Flatpak-Build-with-meson.patch
-#   osdn #48625
 # 0030-Flatpak-Build-with-meson.patch
 #   Form baseline for 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
 #   osdn #45871
@@ -57,7 +54,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
   "backports/0030-Flatpak-Build-with-meson"
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"

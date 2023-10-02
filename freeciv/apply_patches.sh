@@ -32,6 +32,9 @@
 # 0057-Fix-bitvector-copy-functions.patch
 #   Fix to bitvector utility functions
 #   osdn #48772
+# 0064-featured_text.-ch-Replace-NULL-with-nullptr.patch
+#   Update baseline of a freeciv-web patch
+#   osdn #48793
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -63,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0008-Add-new-bitvector-utility-functions"
   "backports/0047-Add-bv_match_dbv-utility-function"
   "backports/0057-Fix-bitvector-copy-functions"
+  "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "meson_webperimental"
   "metachange"
   "text_fixes"

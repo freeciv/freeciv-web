@@ -1,0 +1,76 @@
+From bac8bf3a92b58b89066af8948deb3b7da163cfb4 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 15 Sep 2023 14:38:39 +0300
+Subject: [PATCH 14/14] build_flatpak.sh: Support build outside srcdir
+
+See osdn #48625
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ platforms/flatpak/.gitignore       |  2 +-
+ platforms/flatpak/build_flatpak.sh | 33 ++++++++++++++++--------------
+ 2 files changed, 19 insertions(+), 16 deletions(-)
+
+diff --git a/platforms/flatpak/.gitignore b/platforms/flatpak/.gitignore
+index 42c1916101..925c98b092 100644
+--- a/platforms/flatpak/.gitignore
++++ b/platforms/flatpak/.gitignore
+@@ -1,3 +1,3 @@
+-.flatpak-builder
++state
+ *.flatpak
+ repo
+diff --git a/platforms/flatpak/build_flatpak.sh b/platforms/flatpak/build_flatpak.sh
+index 7410648233..eb486a3c2e 100755
+--- a/platforms/flatpak/build_flatpak.sh
++++ b/platforms/flatpak/build_flatpak.sh
+@@ -11,6 +11,9 @@
+ #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ #  GNU General Public License for more details.
+ 
++BROOT="$(pwd)"
++
++cd "$(dirname "$0")" || exit 1
+ FCVER=$(../../fc_version)
+ 
+ # On a git clone, regenerate configure with autogen.sh
+@@ -21,21 +24,21 @@ if test -f ../../.git && test -x ../../autogen.sh ; then
+   fi
+ fi
+ 
+-if ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.gtk4.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.gtk322.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.mp.gtk4.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.mp.gtk3.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.qt.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.sdl2.yml ||
+-   ! flatpak-builder --user --repo=repo --force-clean build org.freeciv.ruledit.yml ||
+-   ! flatpak build-update-repo repo ||
+-   ! flatpak build-bundle repo "freeciv-gtk4-${FCVER}.flatpak" org.freeciv.gtk4 ||
+-   ! flatpak build-bundle repo "freeciv-gtk3.22-${FCVER}.flatpak" org.freeciv.gtk322 ||
+-   ! flatpak build-bundle repo "freeciv-mp-gtk4-${FCVER}.flatpak" org.freeciv.mp.gtk4 ||
+-   ! flatpak build-bundle repo "freeciv-mp-gtk3-${FCVER}.flatpak" org.freeciv.mp.gtk3 ||
+-   ! flatpak build-bundle repo "freeciv-qt-${FCVER}.flatpak" org.freeciv.qt ||
+-   ! flatpak build-bundle repo "freeciv-sdl2-${FCVER}.flatpak" org.freeciv.sdl2 ||
+-   ! flatpak build-bundle repo "freeciv-ruledit-${FCVER}.flatpak" org.freeciv.ruledit
++if ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.gtk4.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.gtk322.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.mp.gtk4.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.mp.gtk3.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.qt.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.sdl2.yml ||
++   ! flatpak-builder --user --repo="${BROOT}/repo" --state-dir="${BROOT}/state" --force-clean "${BROOT}/build" org.freeciv.ruledit.yml ||
++   ! flatpak build-update-repo "${BROOT}/repo" ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-gtk4-${FCVER}.flatpak" org.freeciv.gtk4 ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-gtk3.22-${FCVER}.flatpak" org.freeciv.gtk322 ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-mp-gtk4-${FCVER}.flatpak" org.freeciv.mp.gtk4 ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-mp-gtk3-${FCVER}.flatpak" org.freeciv.mp.gtk3 ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-qt-${FCVER}.flatpak" org.freeciv.qt ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-sdl2-${FCVER}.flatpak" org.freeciv.sdl2 ||
++   ! flatpak build-bundle "${BROOT}/repo" "${BROOT}/freeciv-ruledit-${FCVER}.flatpak" org.freeciv.ruledit
+ then
+   echo "FAILURE" >&2
+   exit 1
+-- 
+2.40.1
+

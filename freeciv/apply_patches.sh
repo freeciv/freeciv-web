@@ -11,9 +11,24 @@
 # 0022-Lua-Fix-Unit-is_on_possible_city_tile.patch
 #   Fix finding cities from huts
 #   osdn #48582
-# 0021-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
-#   Refactored meson options
+# 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
+#   Form baseline for 0030-Flatpak-Build-with-meson.patch
+#   osdn #48625
+# 0030-Flatpak-Build-with-meson.patch
+#   Form baseline for 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
+#   osdn #45871
+# 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
+#   Refactor meson options
 #   osdn #48700
+# 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
+#   Lua API fix
+#   osdn #48722
+# 0042-Meson-Make-manual-generator-build-optional.patch
+#   Manual Generator build optional
+#   osdn #48650
+# 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
+#   Unit movemenet handling fix
+#   osdn #48737
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -38,7 +53,12 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
   "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
-  "backports/0021-Meson-Replace-boolean-ruledit-option-with-tools-arra"
+  "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
+  "backports/0030-Flatpak-Build-with-meson"
+  "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
+  "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
+  "backports/0042-Meson-Make-manual-generator-build-optional"
+  "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "meson_webperimental"
   "metachange"
   "text_fixes"

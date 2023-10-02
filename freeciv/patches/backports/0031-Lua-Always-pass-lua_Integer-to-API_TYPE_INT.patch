@@ -1,0 +1,143 @@
+From 5731f75ed3b33c7920781d344c503866f997a40e Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 24 Sep 2023 18:54:33 +0300
+Subject: [PATCH 31/37] Lua: Always pass lua_Integer to API_TYPE_INT
+
+See osdn #48722
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/cityturn.c | 24 +++++++++++++++---------
+ server/srv_main.c |  6 ++++--
+ server/unithand.c |  8 ++++++--
+ 3 files changed, 25 insertions(+), 13 deletions(-)
+
+diff --git a/server/cityturn.c b/server/cityturn.c
+index 084bf596c9..37aacdc04e 100644
+--- a/server/cityturn.c
++++ b/server/cityturn.c
+@@ -20,6 +20,9 @@
+ #include <string.h>
+ #include <math.h> /* exp, sqrt */
+ 
++/* dependencies/lua */
++#include "lua.h" /* lua_Integer */
++
+ /* utility */
+ #include "fcintl.h"
+ #include "log.h"
+@@ -829,7 +832,8 @@ bool city_reduce_size(struct city *pcity, citizens pop_loss,
+   if (reason != NULL) {
+     int id = pcity->id;
+ 
+-    script_server_signal_emit("city_size_change", pcity, -pop_loss, reason);
++    script_server_signal_emit("city_size_change", pcity,
++                              (lua_Integer)(-pop_loss), reason);
+ 
+     return city_exist(id);
+   }
+@@ -977,7 +981,8 @@ static bool city_increase_size(struct city *pcity)
+ 
+   /* Deprecated signal. Connect your lua functions to "city_size_change" that's
+    * emitted from calling functions which know the 'reason' of the increase. */
+-  script_server_signal_emit("city_growth", pcity, city_size_get(pcity));
++  script_server_signal_emit("city_growth", pcity,
++                            (lua_Integer)city_size_get(pcity));
+ 
+   return TRUE;
+ }
+@@ -1047,8 +1052,8 @@ bool city_change_size(struct city *pcity, citizens size,
+     real_change = current_size - old_size;
+ 
+     if (real_change != 0 && reason != NULL) {
+-      script_server_signal_emit("city_size_change", pcity, real_change,
+-                                reason);
++      script_server_signal_emit("city_size_change", pcity,
++                                (lua_Integer)real_change, reason);
+ 
+       if (!city_exist(id)) {
+         return FALSE;
+@@ -1092,7 +1097,8 @@ static void city_populate(struct city *pcity, struct player *nationality)
+ 
+       if (success) {
+         city_refresh_after_city_size_increase(pcity, nationality);
+-        script_server_signal_emit("city_size_change", pcity, 1, "growth");
++        script_server_signal_emit("city_size_change", pcity,
++                                  (lua_Integer)1, "growth");
+       }
+     }
+   } else if (pcity->food_stock < 0) {
+@@ -4038,8 +4044,8 @@ static bool do_city_migration(struct city *pcity_from,
+                           -1, TRUE);
+       sz_strlcpy(name_from, city_tile_link(pcity_from));
+ 
+-      script_server_signal_emit("city_size_change", pcity_from, -1,
+-                                "migration_from");
++      script_server_signal_emit("city_size_change", pcity_from,
++                                (lua_Integer)(-1), "migration_from");
+ 
+       if (city_exist(id)) {
+         script_server_signal_emit("city_destroyed", pcity_from,
+@@ -4116,8 +4122,8 @@ static bool do_city_migration(struct city *pcity_from,
+         auto_arrange_workers(pcity_to);
+       }
+       if (incr_success) {
+-        script_server_signal_emit("city_size_change", pcity_to, 1,
+-                                  "migration_to");
++        script_server_signal_emit("city_size_change", pcity_to,
++                                  (lua_Integer)1, "migration_to");
+       }
+     }
+   }
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 0c3de49441..9975f769ef 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -1145,8 +1145,10 @@ static void begin_turn(bool is_new_turn)
+                               (lua_Integer)game.info.turn,
+                               (lua_Integer)game.info.year);
+     script_server_signal_emit("turn_started",
+-                              game.info.turn > 0 ? game.info.turn - 1
+-                              : game.info.turn, game.info.year);
++                              game.info.turn > 0
++                              ? (lua_Integer)game.info.turn - 1
++                              : (lua_Integer)game.info.turn,
++                              (lua_Integer)game.info.year);
+ 
+     /* We build scores at the beginning of every turn.  We have to
+      * build them at the beginning so that the AI can use the data,
+diff --git a/server/unithand.c b/server/unithand.c
+index 39b28650d6..c1e280cfb8 100644
+--- a/server/unithand.c
++++ b/server/unithand.c
+@@ -19,6 +19,9 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++/* dependencies/lua */
++#include "lua.h" /* lua_Integer */
++
+ /* utility */
+ #include "astring.h"
+ #include "fcintl.h"
+@@ -4178,14 +4181,15 @@ static bool city_add_unit(struct player *pplayer, struct unit *punit,
+ 
+   send_city_info(NULL, pcity);
+ 
+-  script_server_signal_emit("city_size_change", pcity, amount, "unit_added");
++  script_server_signal_emit("city_size_change", pcity,
++                            (lua_Integer)amount, "unit_added");
+ 
+   return TRUE;
+ }
+ 
+ /**********************************************************************//**
+   This function assumes a certain level of consistency checking: There
+-  is no city under punit->(x,y), and that location is a valid one on
++  is no city under punit->(x, y), and that location is a valid one on
+   which to build a city. It should only be called after a call to a
+   function like test_unit_add_or_build_city, which does the checking.
+ 
+-- 
+2.40.1
+

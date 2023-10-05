@@ -1,0 +1,81 @@
+From 258d802b11fe6998f1b09581c1923c87499ccd02 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 29 Sep 2023 20:50:33 +0300
+Subject: [PATCH 47/47] Meson: Turn 'audio' option to a combo
+
+See osdn #48757
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ doc/INSTALL.meson | 4 ++--
+ meson.build       | 6 +++---
+ meson_options.txt | 7 ++++---
+ 3 files changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/doc/INSTALL.meson b/doc/INSTALL.meson
+index 88f8c7af4c..98636a6e01 100644
+--- a/doc/INSTALL.meson
++++ b/doc/INSTALL.meson
+@@ -147,8 +147,8 @@ readline ('try'/'true'/'false')
+   Whether to enable readline functionality on server.
+   The default is 'try' to enable it if suitable readline found.
+ 
+-audio (boolean):
+-  Build sound support to the clients. Defaults to true.
++audio ('none'/'sdl2'):
++  What kind of sound support should be built to the clients. Defaults to sdl2.
+ 
+ tools (array):
+   Extra tools to build:
+diff --git a/meson.build b/meson.build
+index ce7ba03070..45663542c9 100644
+--- a/meson.build
++++ b/meson.build
+@@ -770,7 +770,7 @@ if c_compiler.compiles('''int main(void) { __builtin_unreachable(); return 0; }'
+     pub_conf_data.set('FREECIV_HAVE_UNREACHABLE', 1)
+ endif
+ 
+-if get_option('audio') or get_option('clients').contains('sdl2')
++if get_option('audio') == 'sdl2' or get_option('clients').contains('sdl2')
+   if host_system == 'windows'
+     sdl2main_dep = [c_compiler.find_library('mingw32', dirs: cross_lib_path),
+                     c_compiler.find_library('SDL2main', dirs: cross_lib_path),
+@@ -781,7 +781,7 @@ if get_option('audio') or get_option('clients').contains('sdl2')
+         '-s', 'USE_SDL=2'
+       ]
+ 
+-      if get_option('audio')
++      if get_option('audio') == 'sdl2'
+         emscripten_sdl2_args += [ '-s', 'USE_SDL_MIXER=2' ]
+       endif
+ 
+@@ -840,7 +840,7 @@ else
+   qt_opts = 'cpp_std=c++17'
+ endif
+ 
+-if get_option('audio')
++if get_option('audio') != 'none'
+   priv_conf_data.set('AUDIO_SDL', 1)
+ 
+   if emscripten
+diff --git a/meson_options.txt b/meson_options.txt
+index f5bb14e456..ac65a3f727 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -46,9 +46,10 @@ option('readline',
+        description: 'Enable readline functionality')
+ 
+ option('audio',
+-       type: 'boolean',
+-       value: true,
+-       description: 'Build in sound support')
++       type: 'combo',
++       choices: ['none', 'sdl2'],
++       value: 'sdl2',
++       description: 'Sound support type to build')
+ 
+ option('tools',
+        type: 'array',
+-- 
+2.40.1
+

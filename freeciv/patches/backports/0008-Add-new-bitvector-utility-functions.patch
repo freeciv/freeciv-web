@@ -1,0 +1,76 @@
+From ef337f93a4c8d4147da296703ef466252a449137 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 26 Sep 2023 12:32:50 +0300
+Subject: [PATCH 08/47] Add new bitvector utility functions
+
+- dbv_copy()
+- dbv_to_bv()
+- bv_to_dbv()
+
+See osdn #48731
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ utility/bitvector.c | 30 ++++++++++++++++++++++++++++++
+ utility/bitvector.h |  4 ++++
+ 2 files changed, 34 insertions(+)
+
+diff --git a/utility/bitvector.c b/utility/bitvector.c
+index 2d1851b68b..65047bfda6 100644
+--- a/utility/bitvector.c
++++ b/utility/bitvector.c
+@@ -198,6 +198,36 @@ bool dbv_are_equal(const struct dbv *pdbv1, const struct dbv *pdbv2)
+                       _BV_BYTES(pdbv2->bits));
+ }
+ 
++/***********************************************************************//**
++  Copy dynamic bit vector content from another.
++***************************************************************************/
++void dbv_copy(struct dbv *dest, const struct dbv *src)
++{
++  if (dest->bits != src->bits) {
++    dbv_resize(dest, src->bits);
++  }
++
++  memcpy(&dest->vec, &src->vec, _BV_BYTES(src->bits));
++}
++
++/***********************************************************************//**
++  Copy dynamic bit vector content to static bitvector. Static vector
++  is assumed to be at least same size as the dynamic one.
++***************************************************************************/
++void dbv_to_bv(unsigned char *dest, const struct dbv *src)
++{
++  memcpy(dest, &(src->vec), _BV_BYTES(src->bits));
++}
++
++/***********************************************************************//**
++  Copy static bit vector content to dynamic bitvector. Static vector
++  is assumed to be at least same size as the dynamic one.
++***************************************************************************/
++void bv_to_dbv(struct dbv *dest, const unsigned char *src)
++{
++  memcpy(&(dest->vec), dest, _BV_BYTES(dest->bits));
++}
++
+ /***********************************************************************//**
+   Debug a dynamic bitvector.
+ ***************************************************************************/
+diff --git a/utility/bitvector.h b/utility/bitvector.h
+index cccde12a83..9ce4230853 100644
+--- a/utility/bitvector.h
++++ b/utility/bitvector.h
+@@ -50,6 +50,10 @@ void dbv_clr(struct dbv *pdbv, int bit);
+ void dbv_clr_all(struct dbv *pdbv);
+ 
+ bool dbv_are_equal(const struct dbv *pdbv1, const struct dbv *pdbv2);
++void dbv_copy(struct dbv *dest, const struct dbv *src);
++
++void dbv_to_bv(unsigned char *dest, const struct dbv *src);
++void bv_to_dbv(struct dbv *dest, const unsigned char *src);
+ 
+ void dbv_debug(struct dbv *pdbv);
+ 
+-- 
+2.40.1
+

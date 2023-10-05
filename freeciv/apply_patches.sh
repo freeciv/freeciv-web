@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp.patch
-#   AI assert failure fix
-#   osdn #47786
-# 0022-Lua-Fix-Unit-is_on_possible_city_tile.patch
-#   Fix finding cities from huts
-#   osdn #48582
 # 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
 #   Form baseline for 0030-Flatpak-Build-with-meson.patch
 #   osdn #48625
@@ -29,6 +23,18 @@
 # 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
 #   Unit movemenet handling fix
 #   osdn #48737
+# 0047-Meson-Turn-audio-option-to-a-combo.patch
+#   Rework disabling audio
+#   osdn #48757
+# 0008-Add-new-bitvector-utility-functions.patch
+#   New bitvector utility functions
+#   osdn #48731
+# 0047-Add-bv_match_dbv-utility-function.patch
+#   New bitvector utility function
+#   osdn #48771
+# 0057-Fix-bitvector-copy-functions.patch
+#   Fix to bitvector utility functions
+#   osdn #48772
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -51,14 +57,16 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0022-AI-Set-countdown-correctly-if-senate-blocks-war-comp"
-  "backports/0022-Lua-Fix-Unit-is_on_possible_city_tile"
   "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
   "backports/0030-Flatpak-Build-with-meson"
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
+  "backports/0047-Meson-Turn-audio-option-to-a-combo"
+  "backports/0008-Add-new-bitvector-utility-functions"
+  "backports/0047-Add-bv_match_dbv-utility-function"
+  "backports/0057-Fix-bitvector-copy-functions"
   "meson_webperimental"
   "metachange"
   "text_fixes"

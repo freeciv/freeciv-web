@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0014-build_flatpak.sh-Support-build-outside-srcdir.patch
-#   Form baseline for 0030-Flatpak-Build-with-meson.patch
-#   osdn #48625
 # 0030-Flatpak-Build-with-meson.patch
 #   Form baseline for 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
 #   osdn #45871
@@ -35,6 +32,9 @@
 # 0057-Fix-bitvector-copy-functions.patch
 #   Fix to bitvector utility functions
 #   osdn #48772
+# 0064-featured_text.-ch-Replace-NULL-with-nullptr.patch
+#   Update baseline of a freeciv-web patch
+#   osdn #48793
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -57,7 +57,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0014-build_flatpak.sh-Support-build-outside-srcdir"
   "backports/0030-Flatpak-Build-with-meson"
   "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
@@ -67,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0008-Add-new-bitvector-utility-functions"
   "backports/0047-Add-bv_match_dbv-utility-function"
   "backports/0057-Fix-bitvector-copy-functions"
+  "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "meson_webperimental"
   "metachange"
   "text_fixes"

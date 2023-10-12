@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
-#   Refactor meson options
-#   osdn #48700
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
@@ -60,7 +57,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"

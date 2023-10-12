@@ -38,6 +38,8 @@ var UCF_ATTACK_NON_NATIVE = 9;
 var UCF_KILLCITIZEN = 10;
 var UCF_HUT_FRIGHTEN = 11;
 
+var UTYF_FLAGLESS = 30;
+
 /**********************************************************************//**
   Return true iff units of the given type can do the specified generalized
   (ruleset defined) action enabler controlled action.

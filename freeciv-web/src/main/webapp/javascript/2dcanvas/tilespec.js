@@ -757,7 +757,8 @@ function cardinal_index_str(idx)
 /***********************************************************************
   Return the flag graphic to be used by the city.
 ***********************************************************************/
-function get_city_flag_sprite(pcity) {
+function get_city_flag_sprite(pcity)
+{
   var owner_id = pcity['owner'];
   if (owner_id == null) return {};
   var owner = players[owner_id];
@@ -774,7 +775,8 @@ function get_city_flag_sprite(pcity) {
 /***********************************************************************
   Return the flag graphic to be used by the base on tile
 ***********************************************************************/
-function get_base_flag_sprite(ptile) {
+function get_base_flag_sprite(ptile)
+{
   var owner_id = ptile['extras_owner'];
   if (owner_id == null) return {};
   var owner = players[owner_id];
@@ -791,7 +793,8 @@ function get_base_flag_sprite(ptile) {
 /***********************************************************************
   Returns the sprite key for the number of defending units in a city.
 ***********************************************************************/
-function get_city_occupied_sprite(pcity) {
+function get_city_occupied_sprite(pcity)
+{
   var owner_id = pcity['owner'];
   var ptile = city_tile(pcity);
   var punits = tile_units(ptile);
@@ -811,37 +814,41 @@ function get_city_occupied_sprite(pcity) {
 }
 
 /***********************************************************************
-...
+  ...
 ***********************************************************************/
-function get_city_food_output_sprite(num) {
+function get_city_food_output_sprite(num)
+{
   return {"key" : "city.t_food_" + num,
-          "offset_x" : normal_tile_width/4,
-          "offset_y" : -normal_tile_height/4};
+          "offset_x" : normal_tile_width / 4,
+          "offset_y" : -normal_tile_height / 4};
 }
 
 /***********************************************************************
 ...
 ***********************************************************************/
-function get_city_shields_output_sprite(num) {
+function get_city_shields_output_sprite(num)
+{
   return {"key" : "city.t_shields_" + num,
-          "offset_x" : normal_tile_width/4,
-          "offset_y" : -normal_tile_height/4};
+          "offset_x" : normal_tile_width / 4,
+          "offset_y" : -normal_tile_height / 4};
 }
 
 /***********************************************************************
 ...
 ***********************************************************************/
-function get_city_trade_output_sprite(num) {
+function get_city_trade_output_sprite(num)
+{
   return {"key" : "city.t_trade_" + num,
-          "offset_x" : normal_tile_width/4,
-          "offset_y" : -normal_tile_height/4};
+          "offset_x" : normal_tile_width / 4,
+          "offset_y" : -normal_tile_height / 4};
 }
 
 
 /***********************************************************************
   Return the sprite for an invalid city worked tile.
 ***********************************************************************/
-function get_city_invalid_worked_sprite() {
+function get_city_invalid_worked_sprite()
+{
   return {"key" : "grid.unavailable",
           "offset_x" : 0,
           "offset_y" : 0};
@@ -888,14 +895,21 @@ function get_border_line_sprites(ptile)
 function get_unit_nation_flag_sprite(punit)
 {
   var owner_id = punit['owner'];
-  var owner = players[owner_id];
-  var nation_id = owner['nation'];
-  var nation = nations[nation_id];
-  var unit_offset = get_unit_anim_offset(punit);
 
-  return {"key" : "f.shield." + nation['graphic_str'],
-          "offset_x" : unit_flag_offset_x + unit_offset['x'],
-          "offset_y" : - unit_flag_offset_y + unit_offset['y']};
+  if (unit_type(punit)['flags'].isSet(UTYF_FLAGLESS)
+      && client.conn.playing != null
+      && owner_id != client.conn.playing.playerno) {
+    return [];
+  } else {
+    var owner = players[owner_id];
+    var nation_id = owner['nation'];
+    var nation = nations[nation_id];
+    var unit_offset = get_unit_anim_offset(punit);
+
+    return {"key" : "f.shield." + nation['graphic_str'],
+            "offset_x" : unit_flag_offset_x + unit_offset['x'],
+            "offset_y" : - unit_flag_offset_y + unit_offset['y']};
+  }
 }
 
 /***********************************************************************
@@ -1089,7 +1103,7 @@ function get_unit_agent_sprite(punit)
 function get_city_sprite(pcity)
 {
   var style_id = pcity['style'];
-  if (style_id == -1) style_id = 0;   /* sometimes a player has no city_style. */
+  if (style_id == -1) style_id = 0;   /* Sometimes a player has no city_style. */
   var city_rule = city_rules[style_id];
 
   var size = 0;

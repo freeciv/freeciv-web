@@ -35,6 +35,12 @@
 # 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
 #   Autoworkers work value fix
 #   osdn #48842
+# 0032-mapimg_help-Fix-format-overflow-warning.patch
+#   gcc-14 warning fix
+#   osdn #48850
+# 0031-city_from_wonder-Fix-illegal-array-subscript-warning.patch
+#   gcc-14 warning fix
+#   osdn #48849
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,6 +73,8 @@ declare -a PATCHLIST=(
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
+  "backports/0032-mapimg_help-Fix-format-overflow-warning"
+  "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
   "meson_webperimental"
   "metachange"
   "text_fixes"

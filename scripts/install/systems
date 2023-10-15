@@ -3,6 +3,7 @@
 Ubuntu	focal	deb.sh
 Ubuntu	jammy	deb.sh
 Ubuntu	lunar	deb.sh
+Ubuntu	mantic	deb.sh
 Debian	bullseye	deb.sh
 Debian	bookworm	deb.sh
 Debian	trixie	deb.sh

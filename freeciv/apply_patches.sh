@@ -35,6 +35,9 @@
 # 0050-Correct-filling-of-territory-claiming-extras-cache.patch
 #   Fix terr claiming extras cache
 #   osdn #48838
+# 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
+#   Autoworkers work value fix
+#   osdn #48842
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,6 +70,7 @@ declare -a PATCHLIST=(
   "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
+  "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
   "meson_webperimental"
   "metachange"
   "text_fixes"

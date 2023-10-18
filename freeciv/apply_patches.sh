@@ -41,6 +41,9 @@
 # 0031-city_from_wonder-Fix-illegal-array-subscript-warning.patch
 #   gcc-14 warning fix
 #   osdn #48849
+# 0029-Fix-dbv_copy.patch
+#   Memory handling fix
+#   osdn #48869
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -75,6 +78,7 @@ declare -a PATCHLIST=(
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
   "backports/0032-mapimg_help-Fix-format-overflow-warning"
   "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
+  "backports/0029-Fix-dbv_copy"
   "meson_webperimental"
   "metachange"
   "text_fixes"

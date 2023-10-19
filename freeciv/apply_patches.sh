@@ -8,9 +8,6 @@
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
-# 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
-#   Unit movemenet handling fix
-#   osdn #48737
 # 0047-Meson-Turn-audio-option-to-a-combo.patch
 #   Rework disabling audio
 #   osdn #48757
@@ -67,7 +64,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
-  "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "backports/0047-Meson-Turn-audio-option-to-a-combo"
   "backports/0008-Add-new-bitvector-utility-functions"
   "backports/0047-Add-bv_match_dbv-utility-function"

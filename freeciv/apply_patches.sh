@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0013-Meson-Replace-boolean-ruledit-option-with-tools-arra.patch
-#   Refactor meson options
-#   osdn #48700
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
@@ -38,6 +35,9 @@
 # 0050-Correct-filling-of-territory-claiming-extras-cache.patch
 #   Fix terr claiming extras cache
 #   osdn #48838
+# 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
+#   Autoworkers work value fix
+#   osdn #48842
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -60,7 +60,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0013-Meson-Replace-boolean-ruledit-option-with-tools-arra"
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
   "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
@@ -71,6 +70,7 @@ declare -a PATCHLIST=(
   "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
+  "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
   "meson_webperimental"
   "metachange"
   "text_fixes"

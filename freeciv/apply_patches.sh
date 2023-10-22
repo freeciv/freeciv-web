@@ -8,9 +8,6 @@
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
-# 0042-Meson-Make-manual-generator-build-optional.patch
-#   Manual Generator build optional
-#   osdn #48650
 # 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
 #   Unit movemenet handling fix
 #   osdn #48737
@@ -38,6 +35,15 @@
 # 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
 #   Autoworkers work value fix
 #   osdn #48842
+# 0032-mapimg_help-Fix-format-overflow-warning.patch
+#   gcc-14 warning fix
+#   osdn #48850
+# 0031-city_from_wonder-Fix-illegal-array-subscript-warning.patch
+#   gcc-14 warning fix
+#   osdn #48849
+# 0029-Fix-dbv_copy.patch
+#   Memory handling fix
+#   osdn #48869
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -61,7 +67,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
-  "backports/0042-Meson-Make-manual-generator-build-optional"
   "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "backports/0047-Meson-Turn-audio-option-to-a-combo"
   "backports/0008-Add-new-bitvector-utility-functions"
@@ -71,6 +76,9 @@ declare -a PATCHLIST=(
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
+  "backports/0032-mapimg_help-Fix-format-overflow-warning"
+  "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
+  "backports/0029-Fix-dbv_copy"
   "meson_webperimental"
   "metachange"
   "text_fixes"

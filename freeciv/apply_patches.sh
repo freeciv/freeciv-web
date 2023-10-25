@@ -8,9 +8,6 @@
 # 0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT.patch
 #   Lua API fix
 #   osdn #48722
-# 0036-tile_move_cost_ptrs-Make-cardinal_move-signed.patch
-#   Unit movemenet handling fix
-#   osdn #48737
 # 0047-Meson-Turn-audio-option-to-a-combo.patch
 #   Rework disabling audio
 #   osdn #48757
@@ -44,6 +41,9 @@
 # 0029-Fix-dbv_copy.patch
 #   Memory handling fix
 #   osdn #48869
+# 0020-Player-removal-Clear-city-border-claims.patch
+#   Player removal fix
+#   osdn #48837
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -67,7 +67,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0031-Lua-Always-pass-lua_Integer-to-API_TYPE_INT"
-  "backports/0036-tile_move_cost_ptrs-Make-cardinal_move-signed"
   "backports/0047-Meson-Turn-audio-option-to-a-combo"
   "backports/0008-Add-new-bitvector-utility-functions"
   "backports/0047-Add-bv_match_dbv-utility-function"
@@ -79,6 +78,7 @@ declare -a PATCHLIST=(
   "backports/0032-mapimg_help-Fix-format-overflow-warning"
   "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
   "backports/0029-Fix-dbv_copy"
+  "backports/0020-Player-removal-Clear-city-border-claims"
   "meson_webperimental"
   "metachange"
   "text_fixes"

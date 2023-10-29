@@ -37,10 +37,11 @@ function extra_by_number(id)
     return null;
   }
 
-  if (id >= 0 && id < MAX_EXTRA_TYPES) {
+  if (id >= 0 && id < ruleset_control['num_extra_types']) {
     return extras[id];
   } else {
     console.log("extra_by_number(): Invalid extra id: " + id);
+
     return null;
   }
 }

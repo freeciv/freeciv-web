@@ -1775,7 +1775,7 @@ function handle_ruleset_base(packet)
 {
   var i;
 
-  for (i = 0; i < MAX_EXTRA_TYPES; i++) {
+  for (i = 0; i < ruleset_control['num_extra_types']; i++) {
     if (is_extra_caused_by(extras[i], EC_BASE)
         && extras[i]['base'] == null) {
       /* This is the first base without base data */
@@ -1796,7 +1796,7 @@ function handle_ruleset_road(packet)
 {
   var i;
 
-  for (i = 0; i < MAX_EXTRA_TYPES; i++) {
+  for (i = 0; i < ruleset_control['num_extra_types']; i++) {
     if (is_extra_caused_by(extras[i], EC_ROAD)
         && extras[i]['road'] == null) {
       /* This is the first road without road data */

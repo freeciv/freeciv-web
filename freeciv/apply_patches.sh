@@ -38,6 +38,9 @@
 # 0020-Player-removal-Clear-city-border-claims.patch
 #   Player removal fix
 #   osdn #48837
+# 0002-Make-playertile-extras-dynamic-bitvector.patch
+#   Memory usage optimization
+#   osdn #48798
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -71,6 +74,7 @@ declare -a PATCHLIST=(
   "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
   "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
+  "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "meson_webperimental"
   "metachange"
   "text_fixes"

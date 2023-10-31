@@ -1,7 +1,7 @@
-diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured_text.c
---- freeciv/common/featured_text.c	2014-09-11 01:41:13.951730689 +0300
-+++ freeciv/common/featured_text.c	2014-09-11 01:41:34.947685408 +0300
-@@ -33,8 +33,8 @@
+diff -Nurd freeciv/common/featured_text.c freeciv/common/featured_text.c
+--- freeciv/common/featured_text.c	2023-11-01 00:21:32.242495319 +0200
++++ freeciv/common/featured_text.c	2023-11-01 00:21:42.682542714 +0200
+@@ -34,8 +34,8 @@
  
  #include "featured_text.h"
  
@@ -12,7 +12,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
  #define SEQ_END '/'
  
  #define MAX_LEN_STR 32
-@@ -141,7 +141,7 @@
+@@ -144,7 +144,7 @@
    case TTT_UNDERLINE:
      return "u";
    case TTT_COLOR:
@@ -21,7 +21,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
    case TTT_LINK:
      return "l";
    };
-@@ -238,7 +238,7 @@
+@@ -243,7 +243,7 @@
      {
        if (!find_option(sequence, "foreground", ptag->color.foreground,
                         sizeof(ptag->color.foreground))
@@ -30,7 +30,7 @@ diff -Nurd -X.diff_ignore freeciv/common/featured_text.c freeciv/common/featured
                            sizeof(ptag->color.foreground))) {
          ptag->color.foreground[0] = '\0';
        }
-@@ -482,7 +482,7 @@
+@@ -487,7 +487,7 @@
                                 text_tag_type_short_name(ptag->type));
  
        if (ptag->color.foreground[0] != '\0') {

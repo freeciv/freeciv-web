@@ -8,9 +8,6 @@
 # 0047-Meson-Turn-audio-option-to-a-combo.patch
 #   Rework disabling audio
 #   osdn #48757
-# 0008-Add-new-bitvector-utility-functions.patch
-#   New bitvector utility functions
-#   osdn #48731
 # 0047-Add-bv_match_dbv-utility-function.patch
 #   New bitvector utility function
 #   osdn #48771
@@ -64,7 +61,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0047-Meson-Turn-audio-option-to-a-combo"
-  "backports/0008-Add-new-bitvector-utility-functions"
   "backports/0047-Add-bv_match_dbv-utility-function"
   "backports/0057-Fix-bitvector-copy-functions"
   "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"

@@ -5,12 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0047-Meson-Turn-audio-option-to-a-combo.patch
-#   Rework disabling audio
-#   osdn #48757
-# 0047-Add-bv_match_dbv-utility-function.patch
-#   New bitvector utility function
-#   osdn #48771
 # 0057-Fix-bitvector-copy-functions.patch
 #   Fix to bitvector utility functions
 #   osdn #48772
@@ -63,8 +57,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0047-Meson-Turn-audio-option-to-a-combo"
-  "backports/0047-Add-bv_match_dbv-utility-function"
   "backports/0057-Fix-bitvector-copy-functions"
   "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "backports/0050-Cache-territory-claiming-base-types"

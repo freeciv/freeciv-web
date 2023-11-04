@@ -8,9 +8,6 @@
 # 0057-Fix-bitvector-copy-functions.patch
 #   Fix to bitvector utility functions
 #   osdn #48772
-# 0064-featured_text.-ch-Replace-NULL-with-nullptr.patch
-#   Update baseline of a freeciv-web patch
-#   osdn #48793
 # 0050-Cache-territory-claiming-base-types.patch
 #   Performance improvement
 #   osdn #47345
@@ -58,7 +55,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0057-Fix-bitvector-copy-functions"
-  "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"

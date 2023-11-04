@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-07-08 23:04:46.585966666 +0300
-+++ freeciv/common/networking/packets.def	2023-07-08 23:04:55.422057998 +0300
-@@ -2462,3 +2462,13 @@
+--- freeciv/common/networking/packets.def	2023-10-29 13:48:12.627769696 +0200
++++ freeciv/common/networking/packets.def	2023-10-29 13:48:22.407818344 +0200
+@@ -2461,3 +2461,13 @@
    TILE dest;
    UINT32 turns;
  end
@@ -16,8 +16,8 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  STRING message[MAX_LEN_MSG];
 +end
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-07-08 23:04:47.209973114 +0300
-+++ freeciv/server/maphand.c	2023-07-08 23:04:55.422057998 +0300
+--- freeciv/server/maphand.c	2023-10-29 13:48:13.143772263 +0200
++++ freeciv/server/maphand.c	2023-10-29 14:07:13.112339222 +0200
 @@ -16,6 +16,7 @@
  #endif
  
@@ -34,7 +34,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
  #include "events.h"
  #include "game.h"
  #include "map.h"
-@@ -2644,3 +2646,376 @@
+@@ -2688,3 +2690,380 @@
      }
    }
  }
@@ -291,7 +291,11 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  }
 +
 +  {
-+    const char *infratext = get_infrastructure_text(plrtile->extras);
++    bv_extras full;
++    const char *infratext;
++
++    dbv_to_bv(full.vec, &(plrtile->extras));
++    infratext = get_infrastructure_text(full);
 +
 +    if (*infratext != '\0') {
 +      astr_add_line(str, _("Infrastructure: %s"), infratext);
@@ -412,9 +416,9 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +  astr_free(&str);
 +}
 diff -Nurd freeciv/server/maphand.h freeciv/server/maphand.h
---- freeciv/server/maphand.h	2023-07-08 23:04:47.209973114 +0300
-+++ freeciv/server/maphand.h	2023-07-08 23:04:55.422057998 +0300
-@@ -145,4 +145,7 @@
+--- freeciv/server/maphand.h	2023-10-29 13:48:13.143772263 +0200
++++ freeciv/server/maphand.h	2023-10-29 13:48:22.407818344 +0200
+@@ -147,4 +147,7 @@
  void tile_change_side_effects(struct tile *ptile, bool refresh_city)
    fc__attribute((nonnull (1)));
  

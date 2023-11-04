@@ -463,7 +463,6 @@ function get_what_can_unit_pillage_from(punit, ptile)
   if (terrains[ptile.terrain].pillage_time == 0) return targets;
   if (!utype_can_do_action(unit_type(punit), ACTION_PILLAGE)) return targets;
 
-  var available = ptile.extras.toBitSet();
   var cannot_pillage = new BitVector([]);
 
   /* Get what other units are pillaging on the tile */
@@ -475,24 +474,27 @@ function get_what_can_unit_pillage_from(punit, ptile)
   }
 
   /* Get what extras that are dependencies of other */
-  for (i = 0; i < available.length; i++) {
-    extra = extras[available[i]];
-    for (j = 0; j < extra.reqs.length; j++) {
-      var req = extra.reqs[j];
-      if (req.kind == VUT_EXTRA && req.present == true) {
-        cannot_pillage.set(req.value);
+  for (i = 0; i < ruleset_control['num_extra_types']; i++) {
+    if (tile_has_extra(ptile, i)) {
+      extra = extras[i];
+      for (j = 0; j < extra.reqs.length; j++) {
+        var req = extra.reqs[j];
+        if (req.kind == VUT_EXTRA && req.present == true) {
+          cannot_pillage.set(req.value);
+        }
       }
+    } else {
+      cannot_pillage.set(i);
     }
   }
 
   // TODO: more things to check?
 
-  for (i = 0; i < available.length; i++) {
-    extra = available[i];
-    if (is_extra_removed_by(extras[extra], ERM_PILLAGE)
-        && !cannot_pillage.isSet(extra)) {
+  for (i = 0; i < ruleset_control['num_extra_types']; i++) {
+    if (is_extra_removed_by(extras[i], ERM_PILLAGE)
+        && !cannot_pillage.isSet(i)) {
       if (game_info.pillage_select) {
-        targets.push(extra);
+        targets.push(i);
       } else {
         targets.push(EXTRA_NONE);
         break;

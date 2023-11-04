@@ -54,16 +54,15 @@ function tile_has_extra(ptile, extra)
   return ptile['extras'].isSet(extra);
 }
 
-function tile_resource(tile)
+/************************************************************************//**
+  Return resource on a tile.
+****************************************************************************/
+function tile_resource(ptile)
 {
-  if (tile != null && tile.extras != null) {
-    const tile_extras = tile.extras.toBitSet();
-    for (var extra in tile_extras) {
-      if (is_extra_caused_by(extras[tile_extras[extra]], EC_RESOURCE)) {
-        return tile_extras[extra];
-      }
-    }
+  if (ptile != null) {
+    return ptile.resource;
   }
+
   return null;
 }
 
@@ -74,7 +73,7 @@ function tile_has_territory_claiming_extra(ptile)
 {
   var extra;
 
-  for (extra = 0; extra < MAX_EXTRA_TYPES; extra++) {
+  for (extra = 0; extra < ruleset_control['num_extra_types']; extra++) {
     if (tile_has_extra(ptile, extra)
         && territory_claiming_extra(extra_by_number(extra))) {
       return true;

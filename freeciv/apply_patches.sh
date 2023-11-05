@@ -32,6 +32,9 @@
 # 0002-Make-playertile-extras-dynamic-bitvector.patch
 #   Memory usage optimization
 #   osdn #48798
+# 0039-Improve-report.c-coding-style.patch
+#   Baseline for scorelog_filenames.patch
+#   osdn #48949
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -63,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
+  "backports/0039-Improve-report.c-coding-style"
   "meson_webperimental"
   "metachange"
   "text_fixes"

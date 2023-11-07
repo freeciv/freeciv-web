@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-04-09 08:05:54.216224334 +0300
-+++ freeciv/server/maphand.c	2023-04-09 08:10:50.923088236 +0300
+--- freeciv/server/maphand.c	2023-10-31 23:58:21.251108170 +0200
++++ freeciv/server/maphand.c	2023-10-31 23:59:56.819663086 +0200
 @@ -461,7 +461,7 @@
        conn_list_do_buffer(dest);
      }
@@ -10,7 +10,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -594,20 +594,32 @@
+@@ -599,20 +599,32 @@
        }
  
        send_packet_tile_info(pconn, &info);
@@ -23,7 +23,7 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
        info.worked = IDENTITY_NUMBER_ZERO;
  
 -      info.terrain = terrain_count();
-+      info.terrain = (NULL != tile_terrain(ptile))
++      info.terrain = (tile_terrain(ptile) != nullptr)
 +                      ? terrain_number(tile_terrain(ptile))
 +                      : terrain_count();
        info.resource = MAX_EXTRA_TYPES;

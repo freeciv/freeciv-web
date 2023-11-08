@@ -288,7 +288,7 @@ function create_map_tile_label(ptile)
   return canvas_to_user_facing_mesh(canvas, width, Math.floor(width * 0.5), 20, true, "ptile_" + ptile['label']);
 }
 
-/**********************************************************************
+/***********************************************************************
   ...
 ***********************************************************************/
 function get_unit_activity_text(punit)
@@ -302,7 +302,6 @@ function get_unit_activity_text(punit)
 
   switch (activity) {
     case ACTIVITY_CLEAN:
-    case ACTIVITY_POLLUTION:
       return "c";
 
     case ACTIVITY_MINE:

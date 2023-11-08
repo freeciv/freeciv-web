@@ -35,7 +35,7 @@ var MAX_LEN_CITYNAME = 50;
 var FC_INFINITY = (1000 * 1000 * 1000);
 
 var ACTIVITY_IDLE = 0;
-var ACTIVITY_POLLUTION = 1;
+var ACTIVITY_CULTIVATE = 1;
 var ACTIVITY_MINE = 2;
 var ACTIVITY_IRRIGATE = 3;
 var ACTIVITY_FORTIFIED = 4;
@@ -45,14 +45,12 @@ var ACTIVITY_GOTO = 7;
 var ACTIVITY_EXPLORE = 8;
 var ACTIVITY_TRANSFORM = 9;
 var ACTIVITY_FORTIFYING = 10;
-var ACTIVITY_FALLOUT = 11;
+var ACTIVITY_CLEAN = 11;
 var ACTIVITY_BASE = 12;        /* Building base */
 var ACTIVITY_GEN_ROAD = 13;
 var ACTIVITY_CONVERT = 14;
-var ACTIVITY_CULTIVATE = 15;
-var ACTIVITY_PLANT = 16;
-var ACTIVITY_CLEAN = 17;
-var ACTIVITY_LAST = 18;        /* Leave this one last */
+var ACTIVITY_PLANT = 15;
+var ACTIVITY_LAST = 16;        /* Leave this one last */
 
 /* enum action_result */
 var ACTRES_ESTABLISH_EMBASSY = 0;

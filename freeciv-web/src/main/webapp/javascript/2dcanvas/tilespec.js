@@ -979,16 +979,8 @@ function get_unit_activity_sprite(punit)
 
   switch (activity) {
     case ACTIVITY_CLEAN:
-    case ACTIVITY_POLLUTION:
       return {"key" : -1 == act_tgt ?
                         "unit.pollution" :
-                        tileset_extra_id_rmactivity_graphic_tag(act_tgt),
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
-
-    case ACTIVITY_FALLOUT:
-      return {"key" : -1 == act_tgt ?
-                        "unit.fallout" :
                         tileset_extra_id_rmactivity_graphic_tag(act_tgt),
           "offset_x" : unit_activity_offset_x,
           "offset_y" : - unit_activity_offset_y};

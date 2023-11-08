@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
---- freeciv/server/connecthand.c	2023-03-11 03:50:04.941527761 +0200
-+++ freeciv/server/connecthand.c	2023-03-11 03:50:14.317578810 +0200
+--- freeciv/server/connecthand.c	2023-11-09 00:49:39.588315816 +0200
++++ freeciv/server/connecthand.c	2023-11-09 00:49:52.828396400 +0200
 @@ -163,7 +163,7 @@
      /* First connection
       * Replace "restarting in x seconds" meta message */
@@ -9,10 +9,10 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +    (void) send_server_info_to_metaserver(META_FORCE);
    }
  
-   /* introduce the server to the connection */
+   /* Introduce the server to the connection */
 diff -Nurd freeciv/server/meta.c freeciv/server/meta.c
---- freeciv/server/meta.c	2023-03-11 03:50:04.941527761 +0200
-+++ freeciv/server/meta.c	2023-03-11 03:51:02.557837885 +0200
+--- freeciv/server/meta.c	2023-11-09 00:49:39.588315816 +0200
++++ freeciv/server/meta.c	2023-11-09 00:49:52.828396400 +0200
 @@ -391,6 +391,10 @@
          }
        } players_iterate_end;
@@ -34,8 +34,8 @@ diff -Nurd freeciv/server/meta.c freeciv/server/meta.c
          want_update = TRUE; /* We couldn't update now, but update a.s.a.p. */
        }
 diff -Nurd freeciv/server/meta.h freeciv/server/meta.h
---- freeciv/server/meta.h	2023-03-11 03:50:04.941527761 +0200
-+++ freeciv/server/meta.h	2023-03-11 03:50:14.317578810 +0200
+--- freeciv/server/meta.h	2023-11-09 00:49:39.588315816 +0200
++++ freeciv/server/meta.h	2023-11-09 00:49:52.828396400 +0200
 @@ -19,13 +19,14 @@
  
  #define DEFAULT_META_SERVER_NO_SEND  TRUE

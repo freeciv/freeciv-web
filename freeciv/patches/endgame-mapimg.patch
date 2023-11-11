@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
---- freeciv/common/mapimg.c	2023-03-20 21:20:36.583110690 +0200
-+++ freeciv/common/mapimg.c	2023-03-20 21:20:48.383147420 +0200
-@@ -1375,13 +1375,11 @@
+--- freeciv/common/mapimg.c	2023-11-11 19:44:44.097907846 +0200
++++ freeciv/common/mapimg.c	2023-11-11 19:44:55.149923531 +0200
+@@ -1379,13 +1379,11 @@
    case SHOW_NONE:    /* no player one the map */
    case SHOW_ALL:     /* show all players in one map */
    case SHOW_PLRBV:   /* display player(s) given by bitvector */
@@ -17,9 +17,9 @@ diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
      }
      img_destroy(pimg);
 diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2023-03-20 21:20:36.859111547 +0200
-+++ freeciv/server/srv_main.c	2023-03-20 21:25:53.304164329 +0200
-@@ -3831,7 +3831,11 @@
+--- freeciv/server/srv_main.c	2023-11-11 19:44:44.585908538 +0200
++++ freeciv/server/srv_main.c	2023-11-11 19:44:55.149923531 +0200
+@@ -3850,7 +3850,11 @@
      struct mapdef *pmapdef = mapimg_isvalid(i);
  
      if (pmapdef != NULL) {

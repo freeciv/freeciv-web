@@ -8,9 +8,6 @@
 # 0057-Fix-bitvector-copy-functions.patch
 #   Fix to bitvector utility functions
 #   osdn #48772
-# 0064-featured_text.-ch-Replace-NULL-with-nullptr.patch
-#   Update baseline of a freeciv-web patch
-#   osdn #48793
 # 0050-Cache-territory-claiming-base-types.patch
 #   Performance improvement
 #   osdn #47345
@@ -35,6 +32,9 @@
 # 0002-Make-playertile-extras-dynamic-bitvector.patch
 #   Memory usage optimization
 #   osdn #48798
+# 0039-Improve-report.c-coding-style.patch
+#   Baseline for scorelog_filenames.patch
+#   osdn #48949
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -58,7 +58,6 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0057-Fix-bitvector-copy-functions"
-  "backports/0064-featured_text.-ch-Replace-NULL-with-nullptr"
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
@@ -67,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
+  "backports/0039-Improve-report.c-coding-style"
   "meson_webperimental"
   "metachange"
   "text_fixes"

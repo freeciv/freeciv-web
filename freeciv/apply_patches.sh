@@ -32,6 +32,9 @@
 # 0039-Improve-report.c-coding-style.patch
 #   Baseline for scorelog_filenames.patch
 #   osdn #48949
+# 0002-Pick-random-nations-before-setting-turn-number-to-1.patch
+#   Assert fix
+#   ?????
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -63,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
+  "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "meson_webperimental"
   "metachange"
   "text_fixes"

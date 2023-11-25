@@ -332,7 +332,14 @@ var VUT_DIPLREL_TILE = 45;
 var VUT_DIPLREL_TILE_O = 46;
 var VUT_DIPLREL_UNITANY = 47;
 var VUT_DIPLREL_UNITANY_O = 48;
-var VUT_COUNT = 49;             /* Keep this last. */
+var VUT_MINLATITUDE = 49;
+var VUT_MAXLATITUDE = 50;
+var VUT_COUNTER = 51;
+var VUT_ORIGINAL_OWNER = 52;
+var VUT_IMPR_FLAG = 53;
+var VUT_WRAP = 54;
+var VUT_PLAYER_FLAG = 55;
+var VUT_COUNT = 56;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* GUI_STUB used for options which do not belong to any gui. */

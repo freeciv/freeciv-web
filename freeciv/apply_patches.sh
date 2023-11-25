@@ -5,9 +5,6 @@
 # osdn #????? is ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 #
-# 0057-Fix-bitvector-copy-functions.patch
-#   Fix to bitvector utility functions
-#   osdn #48772
 # 0050-Cache-territory-claiming-base-types.patch
 #   Performance improvement
 #   osdn #47345
@@ -35,6 +32,9 @@
 # 0039-Improve-report.c-coding-style.patch
 #   Baseline for scorelog_filenames.patch
 #   osdn #48949
+# 0002-Pick-random-nations-before-setting-turn-number-to-1.patch
+#   Assert fix
+#   ?????
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -57,7 +57,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0057-Fix-bitvector-copy-functions"
   "backports/0050-Cache-territory-claiming-base-types"
   "backports/0050-Correct-filling-of-territory-claiming-extras-cache"
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
@@ -67,6 +66,7 @@ declare -a PATCHLIST=(
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
+  "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "meson_webperimental"
   "metachange"
   "text_fixes"

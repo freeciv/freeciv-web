@@ -1,7 +1,7 @@
 diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packets.def
---- freeciv/common/networking/packets.def	2023-09-22 12:12:56.821516408 +0300
-+++ freeciv/common/networking/packets.def	2023-09-22 12:13:07.021607360 +0300
-@@ -2448,3 +2448,17 @@
+--- freeciv/common/networking/packets.def	2023-11-27 01:51:06.516677533 +0200
++++ freeciv/common/networking/packets.def	2023-11-27 01:51:18.284703422 +0200
+@@ -2447,3 +2447,17 @@
  
    BV_ACTIONS utype_actions;
  end
@@ -20,9 +20,9 @@ diff -Nurd freeciv/common/networking/packets.def freeciv/common/networking/packe
 +  UINT32 turns;
 +end
 diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
---- freeciv/server/unithand.c	2023-09-22 12:12:57.389521473 +0300
-+++ freeciv/server/unithand.c	2023-09-22 12:14:07.894149436 +0300
-@@ -45,6 +45,9 @@
+--- freeciv/server/unithand.c	2023-11-27 01:51:06.908678396 +0200
++++ freeciv/server/unithand.c	2023-11-27 01:51:18.288703431 +0200
+@@ -48,6 +48,9 @@
  #include "unit.h"
  #include "unitlist.h"
  
@@ -32,7 +32,7 @@ diff -Nurd freeciv/server/unithand.c freeciv/server/unithand.c
  /* common/scriptcore */
  #include "luascript_types.h"
  
-@@ -4239,6 +4242,84 @@
+@@ -4253,6 +4256,84 @@
  }
  
  /**********************************************************************//**

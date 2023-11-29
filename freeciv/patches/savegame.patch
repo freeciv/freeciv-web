@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2023-09-03 05:24:19.832252951 +0300
-+++ freeciv/server/commands.c	2023-09-03 05:24:30.656357307 +0300
+--- freeciv/server/commands.c	2023-11-23 00:08:14.914204235 +0200
++++ freeciv/server/commands.c	2023-11-23 00:08:21.958242708 +0200
 @@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,8 +11,8 @@ diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
---- freeciv/server/savegame/savemain.c	2023-09-03 05:24:19.856253182 +0300
-+++ freeciv/server/savegame/savemain.c	2023-09-03 05:24:30.656357307 +0300
+--- freeciv/server/savegame/savemain.c	2023-11-23 00:08:14.922204280 +0200
++++ freeciv/server/savegame/savemain.c	2023-11-23 00:08:21.958242708 +0200
 @@ -152,8 +152,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
@@ -39,8 +39,8 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-09-03 05:24:19.844253067 +0300
-+++ freeciv/server/stdinhand.c	2023-09-03 05:28:20.614581947 +0300
+--- freeciv/server/stdinhand.c	2023-11-23 00:08:14.918204257 +0200
++++ freeciv/server/stdinhand.c	2023-11-23 00:08:21.962242728 +0200
 @@ -21,6 +21,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -105,7 +105,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (check) {
      return TRUE;
    }
-@@ -4507,6 +4518,35 @@
+@@ -4522,6 +4533,35 @@
  
    level = command_level(command_by_number(cmd));
  

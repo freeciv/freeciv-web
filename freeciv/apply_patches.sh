@@ -2,8 +2,9 @@
 
 # Freeciv server version upgrade notes (backports)
 # ------------------------------------------------
-# osdn #????? is ticket in freeciv.org tracker:
+# osdn #????? or RM #? is a ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
+# https://redmine.freeciv.org/issues/?
 #
 # 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
 #   Autoworkers work value fix
@@ -29,6 +30,9 @@
 # 0003-Reserve-space-for-terminating-NULL-on-astr_buffer.patch
 #   String handling / datafile loading fix
 #   ?????
+# 0005-Meson-Define-SIZEOF_INT.patch
+#   Fix to meson based build
+#   RM #7
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -59,6 +63,7 @@ declare -a PATCHLIST=(
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
+  "backports/0005-Meson-Define-SIZEOF_INT"
   "meson_webperimental"
   "metachange"
   "text_fixes"

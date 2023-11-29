@@ -11,9 +11,6 @@
 # 0032-mapimg_help-Fix-format-overflow-warning.patch
 #   gcc-14 warning fix
 #   osdn #48850
-# 0031-city_from_wonder-Fix-illegal-array-subscript-warning.patch
-#   gcc-14 warning fix
-#   osdn #48849
 # 0029-Fix-dbv_copy.patch
 #   Memory handling fix
 #   osdn #48869
@@ -56,7 +53,6 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
   "backports/0032-mapimg_help-Fix-format-overflow-warning"
-  "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
   "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"

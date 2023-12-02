@@ -29,6 +29,9 @@
 # 0002-Pick-random-nations-before-setting-turn-number-to-1.patch
 #   Assert fix
 #   ?????
+# 0003-Reserve-space-for-terminating-NULL-on-astr_buffer.patch
+#   String handling / datafile loading fix
+#   ?????
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -59,6 +62,7 @@ declare -a PATCHLIST=(
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
+  "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
   "meson_webperimental"
   "metachange"
   "text_fixes"

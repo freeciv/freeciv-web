@@ -2,8 +2,9 @@
 
 # Freeciv server version upgrade notes (backports)
 # ------------------------------------------------
-# osdn #????? is ticket in freeciv.org tracker:
+# osdn #????? or RM #? is a ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
+# https://redmine.freeciv.org/issues/?
 #
 # 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
 #   Autoworkers work value fix
@@ -11,9 +12,6 @@
 # 0032-mapimg_help-Fix-format-overflow-warning.patch
 #   gcc-14 warning fix
 #   osdn #48850
-# 0031-city_from_wonder-Fix-illegal-array-subscript-warning.patch
-#   gcc-14 warning fix
-#   osdn #48849
 # 0029-Fix-dbv_copy.patch
 #   Memory handling fix
 #   osdn #48869
@@ -32,6 +30,9 @@
 # 0003-Reserve-space-for-terminating-NULL-on-astr_buffer.patch
 #   String handling / datafile loading fix
 #   ?????
+# 0005-Meson-Define-SIZEOF_INT.patch
+#   Fix to meson based build
+#   RM #7
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -56,13 +57,13 @@ declare -a GIT_PATCHLIST=(
 declare -a PATCHLIST=(
   "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
   "backports/0032-mapimg_help-Fix-format-overflow-warning"
-  "backports/0031-city_from_wonder-Fix-illegal-array-subscript-warning"
   "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
+  "backports/0005-Meson-Define-SIZEOF_INT"
   "meson_webperimental"
   "metachange"
   "text_fixes"

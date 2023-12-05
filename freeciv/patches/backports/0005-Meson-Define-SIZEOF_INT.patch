@@ -1,0 +1,43 @@
+From 0e5a1f3ea059aaada4740719323ac778b898c06f Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Tue, 28 Nov 2023 12:03:27 +0200
+Subject: [PATCH 5/7] Meson: Define SIZEOF_INT
+
+See RM #7
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ gen_headers/meson_fc_config.h.in | 3 +++
+ meson.build                      | 2 ++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/gen_headers/meson_fc_config.h.in b/gen_headers/meson_fc_config.h.in
+index 315d330942..5fde52f32a 100644
+--- a/gen_headers/meson_fc_config.h.in
++++ b/gen_headers/meson_fc_config.h.in
+@@ -43,6 +43,9 @@
+ /* Processor stores words with the most significant byte first */
+ #mesondefine WORDS_BIGENDIAN
+ 
++/* Size of int type */
++#mesondefine SIZEOF_INT
++
+ /* Database backend available */
+ #mesondefine HAVE_FCDB
+ 
+diff --git a/meson.build b/meson.build
+index cfed0f9e08..d7861e1b37 100644
+--- a/meson.build
++++ b/meson.build
+@@ -145,6 +145,8 @@ if host_machine.endian() == 'big'
+   priv_conf_data.set('WORDS_BIGENDIAN', 1)
+ endif
+ 
++priv_conf_data.set('SIZEOF_INT', c_compiler.sizeof('int'))
++
+ if get_option('debug')
+   priv_conf_data.set('FREECIV_DEBUG', 1)
+   pub_conf_data.set('FREECIV_DEBUG', 1)
+-- 
+2.42.0
+

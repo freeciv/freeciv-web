@@ -24,6 +24,9 @@
 # 0005-Meson-Define-SIZEOF_INT.patch
 #   Fix to meson based build
 #   RM #7
+# 0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc.patch
+#   MagickWand configure time fix on latest Debian/Ubuntu
+#   RM #32
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -52,6 +55,7 @@ declare -a PATCHLIST=(
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
   "backports/0005-Meson-Define-SIZEOF_INT"
+  "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -6,12 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/?
 #
-# 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
-#   Autoworkers work value fix
-#   osdn #48842
-# 0029-Fix-dbv_copy.patch
-#   Memory handling fix
-#   osdn #48869
 # 0020-Player-removal-Clear-city-border-claims.patch
 #   Player removal fix
 #   osdn #48837
@@ -52,8 +46,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
-  "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"

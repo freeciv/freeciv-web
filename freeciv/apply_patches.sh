@@ -6,9 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/?
 #
-# 0020-Player-removal-Clear-city-border-claims.patch
-#   Player removal fix
-#   osdn #48837
 # 0002-Make-playertile-extras-dynamic-bitvector.patch
 #   Memory usage optimization
 #   osdn #48798
@@ -49,7 +46,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"

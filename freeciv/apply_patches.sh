@@ -6,9 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/?
 #
-# 0002-Make-playertile-extras-dynamic-bitvector.patch
-#   Memory usage optimization
-#   osdn #48798
 # 0039-Improve-report.c-coding-style.patch
 #   Baseline for scorelog_filenames.patch
 #   osdn #48949
@@ -46,7 +43,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"

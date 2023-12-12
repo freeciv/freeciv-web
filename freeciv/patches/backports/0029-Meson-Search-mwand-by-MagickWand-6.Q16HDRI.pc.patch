@@ -1,0 +1,32 @@
+From 5794237261d56eb9722b1046b14af894d8263d7a Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 6 Dec 2023 03:46:58 +0200
+Subject: [PATCH 29/30] Meson: Search mwand by MagickWand-6.Q16HDRI.pc
+
+See RM #32
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ meson.build | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/meson.build b/meson.build
+index 1670fd7cdc..ba6c887fbd 100644
+--- a/meson.build
++++ b/meson.build
+@@ -631,8 +631,12 @@ if mw_req != 'false'
+     mwand_incl = '#include <MagickWand/MagickWand.h>'
+   else
+     mw_dep = dependency('MagickWand', version : '>= 6.0', required : false)
++    if not mw_dep.found()
++      mw_dep = dependency('MagickWand-6.Q16HDRI', required: false)
++    endif
+     if mw_dep.found()
+       mwand_incl = '#include <wand/MagickWand.h>'
++      mwand_incl = '#include <wand/MagickWand.h>'
+     endif
+   endif
+   if mw_dep.found()
+-- 
+2.42.0
+

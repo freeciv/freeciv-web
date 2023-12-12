@@ -6,12 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/?
 #
-# 0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu.patch
-#   Autoworkers work value fix
-#   osdn #48842
-# 0029-Fix-dbv_copy.patch
-#   Memory handling fix
-#   osdn #48869
 # 0020-Player-removal-Clear-city-border-claims.patch
 #   Player removal fix
 #   osdn #48837
@@ -30,6 +24,9 @@
 # 0005-Meson-Define-SIZEOF_INT.patch
 #   Fix to meson based build
 #   RM #7
+# 0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc.patch
+#   MagickWand configure time fix on latest Debian/Ubuntu
+#   RM #32
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -52,14 +49,13 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0025-Autoworkers-Use-ADV_WANTS_EQ-for-comparing-tile-valu"
-  "backports/0029-Fix-dbv_copy"
   "backports/0020-Player-removal-Clear-city-border-claims"
   "backports/0002-Make-playertile-extras-dynamic-bitvector"
   "backports/0039-Improve-report.c-coding-style"
   "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
   "backports/0005-Meson-Define-SIZEOF_INT"
+  "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
   "meson_webperimental"
   "metachange"
   "text_fixes"

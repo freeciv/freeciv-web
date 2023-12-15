@@ -341,7 +341,8 @@ var VUT_IMPR_FLAG = 53;
 var VUT_WRAP = 54;
 var VUT_PLAYER_FLAG = 55;
 var VUT_PLAYER_STATE = 56;
-var VUT_COUNT = 57;             /* Keep this last. */
+var VUT_FORM_AGE = 57;
+var VUT_COUNT = 58;             /* Keep this last. */
 
 /* Freeciv's gui_type enum */
 /* GUI_STUB used for options which do not belong to any gui. */

@@ -24,6 +24,9 @@
 # 0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA.patch
 #   Build target postponing fix
 #   RM #72
+# 0029-universal_value_initial-Fix-switch-case-fall-through.patch
+#   Compiler warning fix
+#   RM #74
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -52,6 +55,7 @@ declare -a PATCHLIST=(
   "backports/0005-Meson-Define-SIZEOF_INT"
   "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
   "backports/0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA"
+  "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "meson_webperimental"
   "metachange"
   "text_fixes"

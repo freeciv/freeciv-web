@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
---- freeciv/server/commands.c	2023-11-23 00:08:14.914204235 +0200
-+++ freeciv/server/commands.c	2023-11-23 00:08:21.958242708 +0200
+--- freeciv/server/commands.c	2023-12-25 20:51:02.322522586 +0200
++++ freeciv/server/commands.c	2023-12-25 20:51:10.406577004 +0200
 @@ -552,7 +552,7 @@
        "all cities and units etc. Use with care!"), NULL,
     CMD_ECHO_ALL, VCF_NONE, 50
@@ -11,12 +11,12 @@ diff -Nurd freeciv/server/commands.c freeciv/server/commands.c
     N_("save\n"
        "save <file-name>"),
 diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
---- freeciv/server/savegame/savemain.c	2023-11-23 00:08:14.922204280 +0200
-+++ freeciv/server/savegame/savemain.c	2023-11-23 00:08:21.958242708 +0200
-@@ -152,8 +152,8 @@
+--- freeciv/server/savegame/savemain.c	2023-12-25 20:51:02.326522613 +0200
++++ freeciv/server/savegame/savemain.c	2023-12-25 20:52:18.935034920 +0200
+@@ -153,8 +153,8 @@
    stdata->save_compress_level = game.server.save_compress_level;
  
-   if (!orig_filename) {
+   if (orig_filename == nullptr) {
 -    stdata->filepath[0] = '\0';
 -    filename = stdata->filepath;
 +    con_write(C_FAIL, _("Failed saving game. Missing filename."));
@@ -24,11 +24,11 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    } else {
      sz_strlcpy(stdata->filepath, orig_filename);
      if ((filename = strrchr(stdata->filepath, '/'))) {
-@@ -190,13 +190,6 @@
+@@ -191,13 +191,6 @@
      }
    }
  
--  /* If orig_filename is NULL or empty, use a generated default name. */
+-  /* If orig_filename is nullptr or empty, use a generated default name. */
 -  if (filename[0] == '\0') {
 -    /* Manual save */
 -    generate_save_name(game.server.save_name, filename,
@@ -39,8 +39,8 @@ diff -Nurd freeciv/server/savegame/savemain.c freeciv/server/savegame/savemain.c
    timer_user = timer_new(TIMER_USER, TIMER_ACTIVE, "save user");
    timer_start(timer_cpu);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-11-23 00:08:14.918204257 +0200
-+++ freeciv/server/stdinhand.c	2023-11-23 00:08:21.962242728 +0200
+--- freeciv/server/stdinhand.c	2023-12-25 20:51:02.326522613 +0200
++++ freeciv/server/stdinhand.c	2023-12-25 20:51:10.406577004 +0200
 @@ -21,6 +21,7 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -49,7 +49,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
  
  #ifdef FREECIV_HAVE_LIBREADLINE
  #include <readline/readline.h>
-@@ -670,11 +671,6 @@
+@@ -671,11 +672,6 @@
  **************************************************************************/
  static bool save_command(struct connection *caller, char *arg, bool check)
  {
@@ -61,7 +61,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (!check) {
      save_game(arg, "User request", FALSE);
    }
-@@ -3791,6 +3787,7 @@
+@@ -3792,6 +3788,7 @@
    struct section_file *file;
    char arg[MAX_LEN_PATH];
    struct conn_list *global_observers;
@@ -69,7 +69,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
  
    if (!filename || filename[0] == '\0') {
      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Usage:\n%s"),
-@@ -3810,10 +3807,21 @@
+@@ -3811,10 +3808,21 @@
    }
  
    {
@@ -92,7 +92,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
      };
      const char *exts[] = {
        "sav", "gz", "bz2", "xz", "sav.gz", "sav.bz2", "sav.xz", "sav.zst", NULL
-@@ -3864,9 +3872,12 @@
+@@ -3865,9 +3873,12 @@
      cmd_reply(CMD_LOAD, caller, C_FAIL, _("Could not load savefile: %s"),
                arg);
      dlsend_packet_game_load(game.est_connections, FALSE, arg);
@@ -105,7 +105,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (check) {
      return TRUE;
    }
-@@ -4522,6 +4533,35 @@
+@@ -4523,6 +4534,35 @@
  
    level = command_level(command_by_number(cmd));
  

@@ -18,6 +18,9 @@
 # 0031-Meson-Enable-implicit-fallthrough-compiler-warnings.patch
 #   Stricter compiler warnings
 #   RM #76
+# 0014-Improve-savemain.c-coding-style.patch
+#   Baseline for freeciv-web patches
+#   RM #79
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -44,6 +47,7 @@ declare -a PATCHLIST=(
   "backports/0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA"
   "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
+  "backports/0014-Improve-savemain.c-coding-style"
   "meson_webperimental"
   "metachange"
   "text_fixes"

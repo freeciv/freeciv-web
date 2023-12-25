@@ -4,7 +4,7 @@
 # ------------------------------------------------
 # osdn #????? or RM #? is a ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
-# https://redmine.freeciv.org/issues/?
+# https://redmine.freeciv.org/issues/??
 #
 # 0039-Improve-report.c-coding-style.patch
 #   Baseline for scorelog_filenames.patch
@@ -21,6 +21,9 @@
 # 0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc.patch
 #   MagickWand configure time fix on latest Debian/Ubuntu
 #   RM #32
+# 0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA.patch
+#   Build target postponing fix
+#   RM #72
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
   "backports/0005-Meson-Define-SIZEOF_INT"
   "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
+  "backports/0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA"
   "meson_webperimental"
   "metachange"
   "text_fixes"

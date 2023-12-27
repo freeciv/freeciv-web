@@ -21,6 +21,9 @@
 # 0014-Improve-savemain.c-coding-style.patch
 #   Baseline for freeciv-web patches
 #   RM #79
+# 0017-Fix-city-removal-server-crashes.patch
+#   Crash fix
+#   RM #81
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
   "backports/0014-Improve-savemain.c-coding-style"
+  "backports/0017-Fix-city-removal-server-crashes"
   "meson_webperimental"
   "metachange"
   "text_fixes"

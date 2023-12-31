@@ -39,6 +39,7 @@ var UCF_KILLCITIZEN = 10;
 var UCF_HUT_FRIGHTEN = 11;
 
 var UTYF_FLAGLESS = 30;
+var UTYF_PROVIDES_RANSOM = 31;
 
 /**********************************************************************//**
   Return true iff units of the given type can do the specified generalized

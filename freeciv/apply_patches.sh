@@ -2,22 +2,10 @@
 
 # Freeciv server version upgrade notes (backports)
 # ------------------------------------------------
-# osdn #????? or RM #? is a ticket in freeciv.org tracker:
+# osdn #????? or RM #?? is a ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/??
 #
-# 0039-Improve-report.c-coding-style.patch
-#   Baseline for scorelog_filenames.patch
-#   osdn #48949
-# 0002-Pick-random-nations-before-setting-turn-number-to-1.patch
-#   Assert fix
-#   ?????
-# 0003-Reserve-space-for-terminating-NULL-on-astr_buffer.patch
-#   String handling / datafile loading fix
-#   ?????
-# 0005-Meson-Define-SIZEOF_INT.patch
-#   Fix to meson based build
-#   RM #7
 # 0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc.patch
 #   MagickWand configure time fix on latest Debian/Ubuntu
 #   RM #32
@@ -30,6 +18,12 @@
 # 0031-Meson-Enable-implicit-fallthrough-compiler-warnings.patch
 #   Stricter compiler warnings
 #   RM #76
+# 0014-Improve-savemain.c-coding-style.patch
+#   Baseline for freeciv-web patches
+#   RM #79
+# 0017-Fix-city-removal-server-crashes.patch
+#   Crash fix
+#   RM #81
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -52,14 +46,12 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0039-Improve-report.c-coding-style"
-  "backports/0002-Pick-random-nations-before-setting-turn-number-to-1"
-  "backports/0003-Reserve-space-for-terminating-NULL-on-astr_buffer"
-  "backports/0005-Meson-Define-SIZEOF_INT"
   "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
   "backports/0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA"
   "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
+  "backports/0014-Improve-savemain.c-coding-style"
+  "backports/0017-Fix-city-removal-server-crashes"
   "meson_webperimental"
   "metachange"
   "text_fixes"

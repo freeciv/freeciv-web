@@ -21,6 +21,9 @@
 # 0017-Fix-city-removal-server-crashes.patch
 #   Crash fix
 #   RM #81
+# 0004-Fix-bombard-rate-always-being-1.patch
+#   Bombard action fix
+#   RM #93
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -48,6 +51,7 @@ declare -a PATCHLIST=(
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
   "backports/0014-Improve-savemain.c-coding-style"
   "backports/0017-Fix-city-removal-server-crashes"
+  "backports/0004-Fix-bombard-rate-always-being-1"
   "meson_webperimental"
   "metachange"
   "text_fixes"

@@ -1,0 +1,31 @@
+From 8998a1c138c94f5d73bf9b6ee2e8b2a3f518ee3f Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Fri, 29 Dec 2023 17:26:30 +0200
+Subject: [PATCH 04/22] Fix bombard rate always being 1
+
+Ruleset defined value had no effect, as unit_bombard_rate()
+erroneously sanitised scaling result with MIN(), and not MAX()
+
+See RM #93
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ common/combat.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/combat.c b/common/combat.c
+index a6552696a8..9af193d7c4 100644
+--- a/common/combat.c
++++ b/common/combat.c
+@@ -1025,7 +1025,7 @@ int unit_bombard_rate(struct unit *punit)
+   if (game.info.damage_reduces_bombard_rate && base_bombard_rate > 0) {
+     int rate = (base_bombard_rate * punit->hp) / utype->hp;
+ 
+-    return MIN(rate, 1);
++    return MAX(rate, 1);
+   }
+ 
+   return base_bombard_rate;
+-- 
+2.43.0
+

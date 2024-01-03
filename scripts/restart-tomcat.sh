@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
 export CATALINA_HOME=/var/lib/tomcat10

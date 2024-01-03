@@ -1,5 +1,6 @@
-#!/bin/bash
-# builds Freeciv-web and copies the war file to Tomcat.
+#!/usr/bin/env bash
+
+# Builds Freeciv-web and copies the war file to Tomcat.
 
 BATCH_MODE=""
 

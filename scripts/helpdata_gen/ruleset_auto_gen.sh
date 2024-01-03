@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Freeciv has code that generates certain help texts based on the ruleset.
 # This code is written in C. It is huge. Replicating it in JavaScript would

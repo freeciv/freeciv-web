@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Freeciv server version upgrade notes (backports)
 # ------------------------------------------------

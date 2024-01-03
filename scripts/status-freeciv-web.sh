@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Checks status of various Freeciv-web processes
 
 alias curl='stdbuf -i0 -o0 -e0 curl'

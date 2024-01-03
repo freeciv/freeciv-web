@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # -Synchronizes the javascript packet handler (packhand_gen.js)
 #  with the definitions in packets.def.

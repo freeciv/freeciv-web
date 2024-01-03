@@ -1,5 +1,6 @@
-#!/bin/bash
-# nightly restart of PBEM process.
+#!/usr/bin/env bash
+
+# Nightly restart of PBEM process.
 
 kill $(ps -ef | grep python| grep pbem | awk '{print $2}')
 sleep 4

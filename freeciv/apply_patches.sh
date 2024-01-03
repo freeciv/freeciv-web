@@ -6,9 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/??
 #
-# 0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc.patch
-#   MagickWand configure time fix on latest Debian/Ubuntu
-#   RM #32
 # 0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA.patch
 #   Build target postponing fix
 #   RM #72
@@ -46,7 +43,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0029-Meson-Search-mwand-by-MagickWand-6.Q16HDRI.pc"
   "backports/0027-worklist_item_postpone_req_vec-Add-break-for-VUT_PLA"
   "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"

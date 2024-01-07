@@ -6,9 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/??
 #
-# 0029-universal_value_initial-Fix-switch-case-fall-through.patch
-#   Compiler warning fix
-#   RM #74
 # 0031-Meson-Enable-implicit-fallthrough-compiler-warnings.patch
 #   Stricter compiler warnings
 #   RM #76
@@ -43,7 +40,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0029-universal_value_initial-Fix-switch-case-fall-through"
   "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
   "backports/0014-Improve-savemain.c-coding-style"
   "backports/0017-Fix-city-removal-server-crashes"

@@ -64,4 +64,4 @@ EXPOSE 80 8080 4002 6000 6001 6002 7000 7001 7002
 
 ENTRYPOINT ["/docker/docker-entrypoint.sh"]
 
-CMD ["/bin/bash"]
+CMD ["/usr/bin/env bash"]

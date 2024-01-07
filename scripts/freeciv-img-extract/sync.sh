@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 resolve() { echo "$(cd "$1" >/dev/null && pwd)"; }
 while [[ $# -gt 0 ]]; do

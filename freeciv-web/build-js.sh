@@ -1,5 +1,6 @@
-#!/bin/bash
-# builds javascript files Freeciv-web and copies the resulting file to tomcat.
+#!/usr/bin/env bash
+
+# Builds javascript files Freeciv-web and copies the resulting file to tomcat.
 
 FCW_DEST=/var/lib/tomcat10/webapps/freeciv-web
 

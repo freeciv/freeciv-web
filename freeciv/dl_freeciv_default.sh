@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env -S bash -e
 
 # Places the specified revision of Freeciv in freeciv/freeciv/
 # This is the default. The script dl_freeciv.sh will run instead of

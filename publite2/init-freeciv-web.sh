@@ -1,5 +1,6 @@
-#! /bin/bash
-# starts freeciv-proxy and freeciv-web.
+#!/usr/bin/env bash
+
+# Starts freeciv-proxy and freeciv-web.
 # This script is started by civlauncher.py in publite2.
 
 if [ "$#" -ne 6 ]; then

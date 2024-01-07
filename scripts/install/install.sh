@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #   Copyright (C) 2018  The Freeciv-web project
 #

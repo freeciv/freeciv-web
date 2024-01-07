@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Install modpacks listed in freeciv/modpackURLs.lst
 

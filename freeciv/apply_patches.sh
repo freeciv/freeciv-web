@@ -2,9 +2,9 @@
 
 # Freeciv server version upgrade notes (backports)
 # ------------------------------------------------
-# osdn #????? or RM #?? is a ticket in freeciv.org tracker:
+# osdn #????? or RM #??? is a ticket in freeciv.org tracker:
 # https://osdn.net/projects/freeciv/ticket/?????
-# https://redmine.freeciv.org/issues/??
+# https://redmine.freeciv.org/issues/???
 #
 # 0031-Meson-Enable-implicit-fallthrough-compiler-warnings.patch
 #   Stricter compiler warnings
@@ -18,6 +18,9 @@
 # 0004-Fix-bombard-rate-always-being-1.patch
 #   Bombard action fix
 #   RM #93
+# 0026-savecompat-Add-wlcb-for-all-cities.patch
+#   Savegame loading fix
+#   RM #143
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -44,6 +47,7 @@ declare -a PATCHLIST=(
   "backports/0014-Improve-savemain.c-coding-style"
   "backports/0017-Fix-city-removal-server-crashes"
   "backports/0004-Fix-bombard-rate-always-being-1"
+  "backports/0026-savecompat-Add-wlcb-for-all-cities"
   "meson_webperimental"
   "metachange"
   "text_fixes"

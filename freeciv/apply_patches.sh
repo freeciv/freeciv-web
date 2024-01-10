@@ -6,15 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/???
 #
-# 0031-Meson-Enable-implicit-fallthrough-compiler-warnings.patch
-#   Stricter compiler warnings
-#   RM #76
-# 0014-Improve-savemain.c-coding-style.patch
-#   Baseline for freeciv-web patches
-#   RM #79
-# 0017-Fix-city-removal-server-crashes.patch
-#   Crash fix
-#   RM #81
 # 0004-Fix-bombard-rate-always-being-1.patch
 #   Bombard action fix
 #   RM #93
@@ -43,9 +34,6 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0031-Meson-Enable-implicit-fallthrough-compiler-warnings"
-  "backports/0014-Improve-savemain.c-coding-style"
-  "backports/0017-Fix-city-removal-server-crashes"
   "backports/0004-Fix-bombard-rate-always-being-1"
   "backports/0026-savecompat-Add-wlcb-for-all-cities"
   "meson_webperimental"

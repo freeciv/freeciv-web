@@ -9,6 +9,9 @@
 # 0026-savecompat-Add-wlcb-for-all-cities.patch
 #   Savegame loading fix
 #   RM #143
+# 0037-Correct-action_post_success_forced_ruleset_var_name-.patch
+#   Collect Ransom fix
+#   RM #221
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -32,6 +35,7 @@ declare -a GIT_PATCHLIST=(
 
 declare -a PATCHLIST=(
   "backports/0026-savecompat-Add-wlcb-for-all-cities"
+  "backports/0037-Correct-action_post_success_forced_ruleset_var_name-"
   "meson_webperimental"
   "metachange"
   "text_fixes"

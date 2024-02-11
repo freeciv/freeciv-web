@@ -486,6 +486,7 @@ function handle_player_info(packet)
   /* Interpret player flags. */
   packet['flags'] = new BitVector(packet['flags']);
   packet['gives_shared_vision'] = new BitVector(packet['gives_shared_vision']);
+  packet['real_embassy'] = new BitVector(packet['real_embassy']);
 
   players[packet['playerno']] = $.extend(players[packet['playerno']], packet);
 }

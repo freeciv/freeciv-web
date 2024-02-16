@@ -19,8 +19,8 @@
 
 
 /**************************************************************************
- Show the intelligence report dialog, with data depending on the
- stablishment of an embassy.
+  Show the intelligence report dialog, with data depending on the
+  establishment of an embassy.
 **************************************************************************/
 function show_intelligence_report_dialog()
 {
@@ -28,7 +28,7 @@ function show_intelligence_report_dialog()
   var pplayer = players[selected_player];
 
   if (client_is_observer()
-      || client.conn.playing.real_embassy[selected_player]) {
+      || client.conn.playing['real_embassy'].isSet(selected_player)) {
     show_intelligence_report_embassy(pplayer);
   } else {
     show_intelligence_report_hearsay(pplayer);
@@ -36,7 +36,7 @@ function show_intelligence_report_dialog()
 }
 
 /**************************************************************************
- Show the intelligence report dialog when there's no embassy.
+  Show the intelligence report dialog when there's no embassy.
 **************************************************************************/
 function show_intelligence_report_hearsay(pplayer)
 {

@@ -172,8 +172,8 @@ function get_embassy_text(player_id)
   const them = players[player_id];
   if (them == null) return NO_INFO;
 
-  const embassy_with = me.real_embassy[player_id];
-  const embassy_from = them.real_embassy[my_id];
+  const embassy_with = me['real_embassy'].isSet(player_id);
+  const embassy_from = them['real_embassy'].isSet(my_id);
 
   if (embassy_with && embassy_from) {
     return "Both";

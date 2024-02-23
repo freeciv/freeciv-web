@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
---- freeciv/server/connecthand.c	2023-10-23 02:04:27.415315939 +0300
-+++ freeciv/server/connecthand.c	2023-10-23 02:14:43.875921439 +0300
+--- freeciv/server/connecthand.c	2024-02-16 23:22:03.446761475 +0200
++++ freeciv/server/connecthand.c	2024-02-16 23:22:15.126944960 +0200
 @@ -18,6 +18,7 @@
  #include <string.h>
  
@@ -59,10 +59,10 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +
  /**********************************************************************//**
    This is used when a new player joins a server, before the game
-   has started. If pconn is NULL, is an AI, else a client.
-@@ -297,6 +328,25 @@
-     notify_conn(dest, NULL, E_CONNECTION, ftc_server,
- 		_("You are logged in as '%s' connected to no player."),
+   has started. If pconn is nullptr, is an AI, else a client.
+@@ -295,6 +326,25 @@
+     notify_conn(dest, nullptr, E_CONNECTION, ftc_server,
+                 _("You are logged in as '%s' connected to no player."),
                  pconn->username);
 +
 +    if (is_longturn()) {
@@ -84,9 +84,9 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +      }
 +    }
    } else {
-     notify_conn(dest, NULL, E_CONNECTION, ftc_server,
- 		_("You are logged in as '%s' connected to %s."),
-@@ -620,8 +670,18 @@
+     notify_conn(dest, nullptr, E_CONNECTION, ftc_server,
+                 _("You are logged in as '%s' connected to %s."),
+@@ -618,8 +668,18 @@
  struct player *find_uncontrolled_player(void)
  {
    players_iterate(played) {
@@ -107,7 +107,7 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
      }
    } players_iterate_end;
  
-@@ -695,6 +755,9 @@
+@@ -693,6 +753,9 @@
        }
        (void) aifill(game.info.aifill);
      }
@@ -116,10 +116,10 @@ diff -Nurd freeciv/server/connecthand.c freeciv/server/connecthand.c
 +    }
  
      if (game.server.auto_ai_toggle && !is_human(pplayer)) {
-       toggle_ai_player_direct(NULL, pplayer);
+       toggle_ai_player_direct(nullptr, pplayer);
 diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
---- freeciv/server/settings.c	2023-10-23 02:04:27.419315971 +0300
-+++ freeciv/server/settings.c	2023-10-23 02:04:39.999411274 +0300
+--- freeciv/server/settings.c	2024-02-16 23:22:03.450761538 +0200
++++ freeciv/server/settings.c	2024-02-16 23:22:15.126944960 +0200
 @@ -857,6 +857,10 @@
  ****************************************************************************/
  static void metamessage_action(const struct setting *pset)
@@ -132,9 +132,9 @@ diff -Nurd freeciv/server/settings.c freeciv/server/settings.c
     * An empty user metaserver message results in an automatic meta message.
     * A non empty user meta message results in the user meta message. */
 diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2023-10-23 02:04:27.415315939 +0300
-+++ freeciv/server/srv_main.c	2023-10-23 02:04:40.027411487 +0300
-@@ -3423,6 +3423,15 @@
+--- freeciv/server/srv_main.c	2024-02-16 23:22:03.446761475 +0200
++++ freeciv/server/srv_main.c	2024-02-16 23:22:15.126944960 +0200
+@@ -3431,6 +3431,15 @@
          map_show_all(pplayer);
        } players_iterate_end;
      }
@@ -150,7 +150,7 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
    }
  
    if (game.scenario.is_scenario && game.scenario.players) {
-@@ -3847,3 +3856,11 @@
+@@ -3855,3 +3864,11 @@
      }
    }
  }
@@ -163,8 +163,8 @@ diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
 +  return (!fc_strcasecmp(game.server.meta_info.type, "longturn"));
 +}
 diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
---- freeciv/server/srv_main.h	2023-10-23 02:04:27.423316000 +0300
-+++ freeciv/server/srv_main.h	2023-10-23 02:04:40.027411487 +0300
+--- freeciv/server/srv_main.h	2024-02-16 23:22:03.450761538 +0200
++++ freeciv/server/srv_main.h	2024-02-16 23:22:15.126944960 +0200
 @@ -96,6 +96,7 @@
  void fc__noreturn srv_main(void);
  void fc__noreturn server_quit(void);
@@ -174,9 +174,9 @@ diff -Nurd freeciv/server/srv_main.h freeciv/server/srv_main.h
  enum server_states server_state(void);
  void set_server_state(enum server_states newstate);
 diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
---- freeciv/server/stdinhand.c	2023-10-23 02:04:27.419315971 +0300
-+++ freeciv/server/stdinhand.c	2023-10-23 02:04:40.027411487 +0300
-@@ -614,6 +614,10 @@
+--- freeciv/server/stdinhand.c	2024-02-16 23:22:03.446761475 +0200
++++ freeciv/server/stdinhand.c	2024-02-16 23:22:15.130945024 +0200
+@@ -615,6 +615,10 @@
    log_deprecation(_("/metamessage command is deprecated. "
                      "Set metamessage setting instead."));
  
@@ -187,7 +187,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (check) {
      return TRUE;
    }
-@@ -701,6 +705,10 @@
+@@ -702,6 +706,10 @@
  {
    fc_assert_ret(pplayer != NULL);
  
@@ -198,7 +198,7 @@ diff -Nurd freeciv/server/stdinhand.c freeciv/server/stdinhand.c
    if (is_human(pplayer)) {
      cmd_reply(CMD_AITOGGLE, caller, C_OK,
  	      _("%s is now under AI control."),
-@@ -727,6 +735,10 @@
+@@ -728,6 +736,10 @@
    enum m_pre_result match_result;
    struct player *pplayer;
  

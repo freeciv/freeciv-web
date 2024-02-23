@@ -56,6 +56,7 @@ misc_files = [
 spec_files = {
   "amplio2" : [
     "terrain1.spec",
+    "volcano.spec",
     "activities.spec",
     "cities.spec",
     "bases.spec",

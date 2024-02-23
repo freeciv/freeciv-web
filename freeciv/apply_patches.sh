@@ -15,6 +15,9 @@
 # 0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus.patch
 #   CM fix
 #   RM #245
+# 0023-Improve-connecthand.-ch-coding-style.patch
+#   Set baseline for freeciv-web patches
+#   RM #264
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -40,6 +43,7 @@ declare -a PATCHLIST=(
   "backports/0026-savecompat-Add-wlcb-for-all-cities"
   "backports/0037-Correct-action_post_success_forced_ruleset_var_name-"
   "backports/0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus"
+  "backports/0023-Improve-connecthand.-ch-coding-style"
   "meson_webperimental"
   "metachange"
   "text_fixes"

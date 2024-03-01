@@ -6,9 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/???
 #
-# 0026-savecompat-Add-wlcb-for-all-cities.patch
-#   Savegame loading fix
-#   RM #143
 # 0037-Correct-action_post_success_forced_ruleset_var_name-.patch
 #   Collect Ransom fix
 #   RM #221
@@ -21,6 +18,7 @@
 
 # Not in the upstream Freeciv server
 # ----------------------------------
+# RevertAmplio2ExtraUnits.patch Revert freeciv-web breaking changes from amplio2 extra_units.spec
 # meson_webperimental installs webperimental ruleset
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
@@ -40,10 +38,10 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0026-savecompat-Add-wlcb-for-all-cities"
   "backports/0037-Correct-action_post_success_forced_ruleset_var_name-"
   "backports/0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus"
   "backports/0023-Improve-connecthand.-ch-coding-style"
+  "RevertAmplio2ExtraUnits"
   "meson_webperimental"
   "metachange"
   "text_fixes"

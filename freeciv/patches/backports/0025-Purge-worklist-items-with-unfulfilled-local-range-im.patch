@@ -1,0 +1,47 @@
+From a612446f31fa2a4e281fc6943fda755af3f34e42 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 13 Mar 2024 19:32:41 +0200
+Subject: [PATCH 25/25] Purge worklist items with unfulfilled local range impr
+ reqs
+
+See osdn #48773
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/cityturn.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/server/cityturn.c b/server/cityturn.c
+index a05034ba97..da0f5e3ee6 100644
+--- a/server/cityturn.c
++++ b/server/cityturn.c
+@@ -1260,7 +1260,7 @@ static bool worklist_item_postpone_req_vec(struct universal *target,
+       case VUT_IMPROVEMENT:
+         if (preq->range == REQ_RANGE_LOCAL) {
+           /* Building itself is never going to change */
+-          purge = FALSE;
++          purge = TRUE;
+         } else {
+           if (preq->present) {
+             notify_player(pplayer, city_tile(pcity),
+@@ -1290,7 +1290,7 @@ static bool worklist_item_postpone_req_vec(struct universal *target,
+       case VUT_IMPR_GENUS:
+         if (preq->range == REQ_RANGE_LOCAL) {
+           /* Building's own genus is never going to change */
+-          purge = FALSE;
++          purge = TRUE;
+         } else {
+           if (preq->present) {
+             notify_player(pplayer, city_tile(pcity),
+@@ -1320,7 +1320,7 @@ static bool worklist_item_postpone_req_vec(struct universal *target,
+       case VUT_IMPR_FLAG:
+         if (preq->range == REQ_RANGE_LOCAL) {
+           /* Building's own flags are never going to change */
+-          purge = FALSE;
++          purge = TRUE;
+         } else {
+           if (preq->present) {
+             notify_player(pplayer, city_tile(pcity),
+-- 
+2.43.0
+

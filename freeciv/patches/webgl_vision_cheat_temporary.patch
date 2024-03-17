@@ -1,6 +1,6 @@
 diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
---- freeciv/server/maphand.c	2023-10-31 23:58:21.251108170 +0200
-+++ freeciv/server/maphand.c	2023-10-31 23:59:56.819663086 +0200
+--- freeciv/server/maphand.c	2024-03-17 11:41:42.049729184 +0200
++++ freeciv/server/maphand.c	2024-03-17 11:41:51.409766779 +0200
 @@ -461,7 +461,7 @@
        conn_list_do_buffer(dest);
      }
@@ -10,8 +10,8 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
    } whole_map_iterate_end;
  
    conn_list_do_unbuffer(dest);
-@@ -599,20 +599,32 @@
-       }
+@@ -603,20 +603,32 @@
+       info.altitude = ptile->altitude;
  
        send_packet_tile_info(pconn, &info);
 -    } else if (send_unknown) {
@@ -44,4 +44,4 @@ diff -Nurd freeciv/server/maphand.c freeciv/server/maphand.c
 +
        info.label[0] = '\0';
  
-       send_packet_tile_info(pconn, &info);
+       info.altitude = 0;

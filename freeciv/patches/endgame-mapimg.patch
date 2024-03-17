@@ -1,6 +1,6 @@
 diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
---- freeciv/common/mapimg.c	2023-11-11 19:44:44.097907846 +0200
-+++ freeciv/common/mapimg.c	2023-11-11 19:44:55.149923531 +0200
+--- freeciv/common/mapimg.c	2024-03-17 11:10:03.414047235 +0200
++++ freeciv/common/mapimg.c	2024-03-17 11:11:22.498437035 +0200
 @@ -1379,13 +1379,11 @@
    case SHOW_NONE:    /* no player one the map */
    case SHOW_ALL:     /* show all players in one map */
@@ -9,7 +9,7 @@ diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
 -                       mapimg_generate_name(pmapdef));
  
      pimg = img_new(pmapdef, CURRENT_TOPOLOGY, CURRENT_WRAP,
-                    wld.map.xsize, wld.map.ysize);
+                    MAP_NATIVE_WIDTH, MAP_NATIVE_HEIGHT);
      img_createmap(pimg);
 -    if (!img_save(pimg, mapimgfile, path)) {
 +    if (!img_save(pimg, savename, path)) {
@@ -17,9 +17,9 @@ diff -Nurd freeciv/common/mapimg.c freeciv/common/mapimg.c
      }
      img_destroy(pimg);
 diff -Nurd freeciv/server/srv_main.c freeciv/server/srv_main.c
---- freeciv/server/srv_main.c	2023-11-11 19:44:44.585908538 +0200
-+++ freeciv/server/srv_main.c	2023-11-11 19:44:55.149923531 +0200
-@@ -3850,7 +3850,11 @@
+--- freeciv/server/srv_main.c	2024-03-17 11:10:03.746048919 +0200
++++ freeciv/server/srv_main.c	2024-03-17 11:10:12.330092302 +0200
+@@ -3857,7 +3857,11 @@
      struct mapdef *pmapdef = mapimg_isvalid(i);
  
      if (pmapdef != NULL) {

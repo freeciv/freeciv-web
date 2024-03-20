@@ -15,6 +15,12 @@
 # 0023-Improve-connecthand.-ch-coding-style.patch
 #   Set baseline for freeciv-web patches
 #   RM #264
+# 0023-Fix-activity2char-assert-failure.patch
+#   Savegame loading fix
+#   RM #305
+# 0025-Purge-worklist-items-with-unfulfilled-local-range-im.patch
+#   Worklist handling fix
+#   osdn #48773
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -41,6 +47,8 @@ declare -a PATCHLIST=(
   "backports/0037-Correct-action_post_success_forced_ruleset_var_name-"
   "backports/0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus"
   "backports/0023-Improve-connecthand.-ch-coding-style"
+  "backports/0023-Fix-activity2char-assert-failure"
+  "backports/0025-Purge-worklist-items-with-unfulfilled-local-range-im"
   "RevertAmplio2ExtraUnits"
   "meson_webperimental"
   "metachange"

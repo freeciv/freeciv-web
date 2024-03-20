@@ -1,0 +1,36 @@
+From 8b63f65072bfe597db1d44db32728611c0b7a1a0 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Wed, 13 Mar 2024 02:48:32 +0200
+Subject: [PATCH 23/24] Fix activity2char() assert failure
+
+See RM #305
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/savegame/savegame3.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/server/savegame/savegame3.c b/server/savegame/savegame3.c
+index e7d633419b..a3aefeeb49 100644
+--- a/server/savegame/savegame3.c
++++ b/server/savegame/savegame3.c
+@@ -876,10 +876,13 @@ static enum unit_activity char2activity(char activity)
+   enum unit_activity a;
+ 
+   for (a = 0; a < ACTIVITY_LAST_SAVEGAME3; a++) {
+-    char achar = activity2char(a);
++    /* Skip ACTIVITY_LAST. The SAVEGAME3 specific values are after it. */
++    if (a != ACTIVITY_LAST) {
++      char achar = activity2char(a);
+ 
+-    if (activity == achar) {
+-      return a;
++      if (activity == achar) {
++        return a;
++      }
+     }
+   }
+ 
+-- 
+2.43.0
+

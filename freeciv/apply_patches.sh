@@ -15,6 +15,9 @@
 # 0025-Purge-worklist-items-with-unfulfilled-local-range-im.patch
 #   Worklist handling fix
 #   osdn #48773
+# 0041-Stop-sending-hidden-resources-to-the-client.patch
+#   Extra visibility fix
+#   RM #350
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -41,6 +44,7 @@ declare -a PATCHLIST=(
   "backports/0023-Improve-connecthand.-ch-coding-style"
   "backports/0023-Fix-activity2char-assert-failure"
   "backports/0025-Purge-worklist-items-with-unfulfilled-local-range-im"
+  "backports/0041-Stop-sending-hidden-resources-to-the-client"
   "RevertAmplio2ExtraUnits"
   "meson_webperimental"
   "metachange"

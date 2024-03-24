@@ -1,0 +1,87 @@
+From 2eed4eddb6623022dbcdf90270694d53f6f7ddaa Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 24 Mar 2024 08:47:11 +0200
+Subject: [PATCH 41/42] Stop sending hidden resources to the client
+
+Hidden extras were not sent in the extras array,
+but if they happened to be also a tile resource,
+the resource information was still sent.
+
+See RM #350
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/maphand.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
+
+diff --git a/server/maphand.c b/server/maphand.c
+index ce4a086a49..68dcb7fa49 100644
+--- a/server/maphand.c
++++ b/server/maphand.c
+@@ -527,6 +527,8 @@ void send_tile_info(struct conn_list *dest, struct tile *ptile,
+     }
+ 
+     if (pplayer == NULL || (known && map_is_also_seen(ptile, pplayer, V_MAIN))) {
++      struct extra_type *resource;
++
+       info.known = TILE_KNOWN_SEEN;
+       info.continent = tile_continent(ptile);
+       owner = tile_owner(ptile);
+@@ -540,9 +542,16 @@ void send_tile_info(struct conn_list *dest, struct tile *ptile,
+       info.terrain = (NULL != tile_terrain(ptile))
+                       ? terrain_number(tile_terrain(ptile))
+                       : terrain_count();
+-      info.resource = (NULL != tile_resource(ptile))
+-                       ? extra_number(tile_resource(ptile))
+-                       : MAX_EXTRA_TYPES;
++
++      resource = tile_resource(ptile);
++      if (resource != NULL
++          && (pplayer == NULL
++              || player_knows_extra_exist(pplayer, resource, ptile))) {
++        info.resource = extra_number(resource);
++      } else {
++        info.resource = MAX_EXTRA_TYPES;
++      }
++
+       info.placing = (NULL != ptile->placing)
+                       ? extra_number(ptile->placing)
+                       : -1;
+@@ -778,17 +787,17 @@ void map_show_tile(struct player *src_player, struct tile *ptile)
+       if (!map_is_known_and_seen(ptile, pplayer, V_MAIN)) {
+ 	map_set_known(ptile, pplayer);
+ 
+-	/* as the tile may be fogged send_tile_info won't always do this for us */
++	/* As the tile may be fogged send_tile_info won't always do this for us */
+ 	update_player_tile_knowledge(pplayer, ptile);
+ 	update_player_tile_last_seen(pplayer, ptile);
+ 
+         send_tile_info(pplayer->connections, ptile, FALSE);
+ 
+-	/* remove old cities that exist no more */
++	/* Remove old cities that exist no more */
+ 	reality_check_city(pplayer, ptile);
+ 
+ 	if ((pcity = tile_city(ptile))) {
+-	  /* as the tile may be fogged send_city_info won't do this for us */
++	  /* As the tile may be fogged send_city_info won't do this for us */
+ 	  update_dumb_city(pplayer, pcity);
+ 	  send_city_info(pplayer, pcity);
+ 	}
+@@ -1406,7 +1415,12 @@ bool update_player_tile_knowledge(struct player *pplayer, struct tile *ptile)
+ 	dbv_clr(&(plrtile->extras), extra_number(pextra));
+       }
+     } extra_type_iterate_end;
+-    plrtile->resource = ptile->resource;
++    if (ptile->resource != NULL
++        && player_knows_extra_exist(pplayer, ptile->resource, ptile)) {
++      plrtile->resource = ptile->resource;
++    } else {
++      plrtile->resource = NULL;
++    }
+     plrtile->owner = tile_owner(ptile);
+     plrtile->extras_owner = extra_owner(ptile);
+ 
+-- 
+2.43.0
+

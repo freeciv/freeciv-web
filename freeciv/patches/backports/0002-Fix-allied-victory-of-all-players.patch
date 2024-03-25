@@ -1,0 +1,109 @@
+From 012bd29227e9ac423ac84e5956fca208f0347cda Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Thu, 21 Mar 2024 20:20:24 +0200
+Subject: [PATCH 02/57] Fix allied victory of all players
+
+Allied victory was not occurring if nobody had been defeated
+beforehand, i.e., if all the players just got in to the same alliance.
+
+See RM #324
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+---
+ server/srv_main.c | 76 ++++++++++++++++++++++++-----------------------
+ 1 file changed, 39 insertions(+), 37 deletions(-)
+
+diff --git a/server/srv_main.c b/server/srv_main.c
+index 7edf693839..7538a17181 100644
+--- a/server/srv_main.c
++++ b/server/srv_main.c
+@@ -424,47 +424,49 @@ bool check_for_game_over(void)
+                 _("Game is over."));
+     log_normal(_("Game is over."));
+     return TRUE;
+-  } else if (0 < defeated) {
+-    /* If nobody conceded the game, it mays be a solo game or a single team
+-     * game. */
+-    fc_assert(NULL != victor);
+-
+-    /* Quit if we have team victory. */
+-    if (1 < team_count()) {
+-      teams_iterate(pteam) {
+-        const struct player_list *members = team_members(pteam);
+-        int team_candidates = 0, team_defeated = 0;
+-
+-        if (1 == player_list_size(members)) {
+-          /* This is not really a team, single players are handled below. */
+-          continue;
+-        }
+-
+-        player_list_iterate(members, pplayer) {
+-          if (pplayer->is_alive
+-              && !player_status_check((pplayer), PSTATUS_SURRENDER)) {
+-            team_candidates++;
+-          } else {
+-            team_defeated++;
++  } else {
++    if (0 < defeated) {
++      /* If nobody conceded the game, it mays be a solo game or a single team
++       * game. */
++      fc_assert(NULL != victor);
++
++      /* Quit if we have team victory. */
++      if (1 < team_count()) {
++        teams_iterate(pteam) {
++          const struct player_list *members = team_members(pteam);
++          int team_candidates = 0, team_defeated = 0;
++
++          if (1 == player_list_size(members)) {
++            /* This is not really a team, single players are handled below. */
++            continue;
+           }
+-        } player_list_iterate_end;
+ 
+-        fc_assert(team_candidates + team_defeated
+-                  == player_list_size(members));
+-
+-        if (team_candidates == candidates && team_defeated < defeated) {
+-          /* We need a player in a other team to conced the game here. */
+-          notify_conn(game.est_connections, NULL, E_GAME_END, ftc_server,
+-                      _("Team victory to %s."),
+-                      team_name_translation(pteam));
+-          log_normal(_("Team victory to %s."), team_name_translation(pteam));
+-          /* All players of the team win, even dead and surrended ones. */
+           player_list_iterate(members, pplayer) {
+-            pplayer->is_winner = TRUE;
++            if (pplayer->is_alive
++                && !player_status_check((pplayer), PSTATUS_SURRENDER)) {
++              team_candidates++;
++            } else {
++              team_defeated++;
++            }
+           } player_list_iterate_end;
+-          return TRUE;
+-        }
+-      } teams_iterate_end;
++
++          fc_assert(team_candidates + team_defeated
++                    == player_list_size(members));
++
++          if (team_candidates == candidates && team_defeated < defeated) {
++            /* We need a player in a other team to conced the game here. */
++            notify_conn(game.est_connections, NULL, E_GAME_END, ftc_server,
++                        _("Team victory to %s."),
++                        team_name_translation(pteam));
++            log_normal(_("Team victory to %s."), team_name_translation(pteam));
++            /* All players of the team win, even dead and surrended ones. */
++            player_list_iterate(members, pplayer) {
++              pplayer->is_winner = TRUE;
++            } player_list_iterate_end;
++            return TRUE;
++          }
++        } teams_iterate_end;
++      }
+     }
+ 
+     /* Check for allied victory. */
+-- 
+2.43.0
+

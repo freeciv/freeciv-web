@@ -15,6 +15,9 @@
 # 0025-Purge-worklist-items-with-unfulfilled-local-range-im.patch
 #   Worklist handling fix
 #   osdn #48773
+# 0002-Fix-allied-victory-of-all-players.patch
+#   Victory conditions fix
+#   RM #324
 # 0041-Stop-sending-hidden-resources-to-the-client.patch
 #   Extra visibility fix
 #   RM #350
@@ -44,6 +47,7 @@ declare -a PATCHLIST=(
   "backports/0023-Improve-connecthand.-ch-coding-style"
   "backports/0023-Fix-activity2char-assert-failure"
   "backports/0025-Purge-worklist-items-with-unfulfilled-local-range-im"
+  "backports/0002-Fix-allied-victory-of-all-players"
   "backports/0041-Stop-sending-hidden-resources-to-the-client"
   "RevertAmplio2ExtraUnits"
   "meson_webperimental"

@@ -35,7 +35,7 @@
                 <dependency>
                         <groupId>commons-codec</groupId>
                         <artifactId>commons-codec</artifactId>
-                        <version>1.16.0</version>
+                        <version>1.16.1</version>
                 </dependency>
 
                 <dependency>
@@ -47,7 +47,7 @@
                 <dependency>
                         <groupId>org.apache.commons</groupId>
                         <artifactId>commons-email</artifactId>
-                        <version>1.5</version>
+                        <version>1.6.0</version>
                 </dependency>
 
                 <dependency>
@@ -59,13 +59,13 @@
                 <dependency>
                         <groupId>com.mysql</groupId>
                         <artifactId>mysql-connector-j</artifactId>
-                        <version>8.2.0</version>
+                        <version>8.3.0</version>
                 </dependency>
 
                 <dependency>
                         <groupId>org.apache.httpcomponents.client5</groupId>
                         <artifactId>httpclient5</artifactId>
-                        <version>5.2.2</version>
+                        <version>5.3.1</version>
                 </dependency>
 
                 <dependency>

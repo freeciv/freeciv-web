@@ -167,7 +167,7 @@ Rerun the sync-js-hand.js script.
                                         <artifactId>maven-compiler-plugin</artifactId>
                                         <version>3.12.1</version>
                                         <configuration>
-                                                <release>11</release>
+                                                <release>17</release>
                                         </configuration>
                                 </plugin>
 

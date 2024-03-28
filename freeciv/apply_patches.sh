@@ -6,12 +6,6 @@
 # https://osdn.net/projects/freeciv/ticket/?????
 # https://redmine.freeciv.org/issues/???
 #
-# 0037-Correct-action_post_success_forced_ruleset_var_name-.patch
-#   Collect Ransom fix
-#   RM #221
-# 0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus.patch
-#   CM fix
-#   RM #245
 # 0023-Improve-connecthand.-ch-coding-style.patch
 #   Set baseline for freeciv-web patches
 #   RM #264
@@ -21,6 +15,12 @@
 # 0025-Purge-worklist-items-with-unfulfilled-local-range-im.patch
 #   Worklist handling fix
 #   osdn #48773
+# 0002-Fix-allied-victory-of-all-players.patch
+#   Victory conditions fix
+#   RM #324
+# 0041-Stop-sending-hidden-resources-to-the-client.patch
+#   Extra visibility fix
+#   RM #350
 
 # Not in the upstream Freeciv server
 # ----------------------------------
@@ -44,11 +44,11 @@ declare -a GIT_PATCHLIST=(
 )
 
 declare -a PATCHLIST=(
-  "backports/0037-Correct-action_post_success_forced_ruleset_var_name-"
-  "backports/0046-Fix-auto_arrange_workers-garbage-cmp.minimal_surplus"
   "backports/0023-Improve-connecthand.-ch-coding-style"
   "backports/0023-Fix-activity2char-assert-failure"
   "backports/0025-Purge-worklist-items-with-unfulfilled-local-range-im"
+  "backports/0002-Fix-allied-victory-of-all-players"
+  "backports/0041-Stop-sending-hidden-resources-to-the-client"
   "RevertAmplio2ExtraUnits"
   "meson_webperimental"
   "metachange"

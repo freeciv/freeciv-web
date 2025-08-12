@@ -294,4 +294,26 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
+	<!-- /api/trading -->
+	<servlet>
+		<servlet-name>TradingApiServlet</servlet-name>
+		<servlet-class>org.freeciv.servlet.TradingApiServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TradingApiServlet</servlet-name>
+		<url-pattern>/api/trading</url-pattern>
+	</servlet-mapping>
+
+	<!-- /api/admin -->
+	<servlet>
+		<servlet-name>AdminApiServlet</servlet-name>
+		<servlet-class>org.freeciv.servlet.AdminApiServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminApiServlet</servlet-name>
+		<url-pattern>/api/admin</url-pattern>
+	</servlet-mapping>
+
 </web-app>

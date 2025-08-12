@@ -41,6 +41,7 @@ PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
 
 civcoms = {}
+ws_clients = set()
 
 chdir(sys.path[0])
 settings = configparser.ConfigParser()
@@ -77,6 +78,8 @@ class WSHandler(websocket.WebSocketHandler):
         self.id = str(uuid.uuid4())
         self.is_ready = False
         self.set_nodelay(True)
+        ws_clients.add(self)
+        logger.info("WebSocket opened, total clients: %d", len(ws_clients))
 
     def on_message(self, message):
         if (not self.is_ready and len(civcoms) <= CONNECTION_LIMIT):
@@ -115,6 +118,10 @@ class WSHandler(websocket.WebSocketHandler):
         self.civcom.queue_to_civserver(message)
 
     def on_close(self):
+        if self in ws_clients:
+            ws_clients.remove(self)
+        logger.info("WebSocket closed, total clients: %d", len(ws_clients))
+
         if hasattr(self, 'civcom') and self.civcom is not None:
             self.civcom.stopped = True
             self.civcom.close_connection()

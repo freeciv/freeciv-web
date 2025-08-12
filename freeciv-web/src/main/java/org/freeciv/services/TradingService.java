@@ -12,6 +12,9 @@ package org.freeciv.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -42,6 +45,7 @@ public class TradingService {
     public JSONObject createOrderAndAttemptMatch(int userId, int goodId, String type, int quantity, double price) {
         JSONObject result = new JSONObject();
         Connection conn = null;
+        JSONObject tradeDetails = null; // To hold details for WebSocket notification
 
         try {
             conn = getDbConnection();
@@ -85,7 +89,6 @@ public class TradingService {
             }
 
             // Step 3: Attempt to match the order
-            // This is still a simplified engine that processes one match. A loop would be needed for full matching.
             String matchSql;
             if ("BUY".equals(type)) {
                 matchSql = "SELECT * FROM Orders WHERE good_id = ? AND type = 'SELL' AND status = 'OPEN' AND price <= ? ORDER BY price ASC, created_at ASC LIMIT 1 FOR UPDATE";
@@ -96,7 +99,6 @@ public class TradingService {
             try (PreparedStatement ps = conn.prepareStatement(matchSql)) {
                 ps.setInt(1, goodId);
                 ps.setDouble(2, price);
-
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     // Match found!
@@ -105,9 +107,8 @@ public class TradingService {
                     int matchedOrderQuantity = rs.getInt("quantity");
                     double matchedOrderPrice = rs.getDouble("price");
 
-                    // For simplicity, we'll assume a full match. Partial fills are more complex.
                     int tradeQuantity = Math.min(quantity, matchedOrderQuantity);
-                    double tradePrice = matchedOrderPrice; // The price of the existing order on the book is used
+                    double tradePrice = matchedOrderPrice;
 
                     int buyerId, sellerId, buyOrderId, sellOrderId;
                     if ("BUY".equals(type)) {
@@ -128,15 +129,25 @@ public class TradingService {
                     updateUserInventory(conn, sellerId, goodId, -tradeQuantity);
                     updateUserInventory(conn, buyerId, goodId, tradeQuantity);
 
-                    // TODO: Handle partial fills properly. For now, assume full fills and close both orders.
                     updateOrderStatus(conn, matchedOrderId, "CLOSED");
                     updateOrderStatus(conn, (int) newOrderId, "CLOSED");
                     createTransaction(conn, buyOrderId, sellOrderId, tradeQuantity, tradePrice);
+
+                    // Prepare details for notification
+                    tradeDetails = new JSONObject();
+                    tradeDetails.put("good_id", goodId);
+                    tradeDetails.put("quantity", tradeQuantity);
+                    tradeDetails.put("price", tradePrice);
                 }
             }
 
             conn.commit(); // Commit transaction
             result.put("success", true).put("message", "Order created successfully.");
+
+            // Notify proxy after successful commit
+            if (tradeDetails != null) {
+                notifyProxyOfTrade(tradeDetails);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,5 +230,37 @@ public class TradingService {
         Context env = (Context) new InitialContext().lookup(Constants.JNDI_CONNECTION);
         DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
         return ds.getConnection();
+    }
+
+    private void notifyProxyOfTrade(JSONObject tradeDetails) {
+        // This runs in a new thread to avoid blocking the main request thread.
+        // Notification failure should not cause the user's action to fail.
+        new Thread(() -> {
+            try {
+                URL url = new URL("http://localhost:8002/notify/trade"); // Default proxy port
+                HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                httpConn.setRequestMethod("POST");
+                httpConn.setRequestProperty("Content-Type", "application/json");
+                httpConn.setDoOutput(true);
+
+                try (OutputStream os = httpConn.getOutputStream()) {
+                    byte[] input = tradeDetails.toString().getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }
+
+                // We can log the response code for debugging, but we don't act on it.
+                int responseCode = httpConn.getResponseCode();
+                if (responseCode != 200) {
+                    System.err.println("Warning: Notification to proxy failed with response code: " + responseCode);
+                } else {
+                    System.out.println("Successfully notified proxy of trade.");
+                }
+
+            } catch (Exception e) {
+                // Log and ignore.
+                System.err.println("Warning: Failed to send trade notification to proxy.");
+                e.printStackTrace();
+            }
+        }).start();
     }
 }

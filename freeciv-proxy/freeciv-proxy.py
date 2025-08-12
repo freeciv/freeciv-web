@@ -70,6 +70,40 @@ class StatusHandler(web.RequestHandler):
         self.write(get_debug_info(civcoms))
 
 
+class NotifyHandler(web.RequestHandler):
+    """Handles notifications from other services (e.g., Java backend)
+    and broadcasts them to WebSocket clients.
+    """
+    def post(self):
+        try:
+            # The body of the POST request from the Java service contains the trade data
+            trade_data_str = self.request.body.decode('utf-8')
+
+            # Construct a standard message format for the client
+            message_to_broadcast = {
+                "type": "trade_update",
+                "data": json.loads(trade_data_str)
+            }
+
+            message_json_str = json.dumps(message_to_broadcast)
+
+            # Broadcast the message to all connected WebSocket clients
+            logger.info("Broadcasting trade update to %d clients", len(ws_clients))
+            for client in ws_clients:
+                try:
+                    client.write_message(message_json_str)
+                except Exception as e:
+                    logger.error("Failed to write to client: %s", e)
+
+            self.set_status(200)
+            self.write({"status": "ok", "message": "Notification broadcasted successfully."})
+
+        except Exception as e:
+            logger.error("Error processing notification: %s", e)
+            self.set_status(500)
+            self.write({"status": "error", "message": str(e)})
+
+
 class WSHandler(websocket.WebSocketHandler):
     logger = logging.getLogger("freeciv-proxy")
     io_loop = ioloop.IOLoop.current()
@@ -232,6 +266,7 @@ if __name__ == "__main__":
 
         application = web.Application([
             (r'/civsocket/' + str(PROXY_PORT), WSHandler),
+            (r"/notify/trade", NotifyHandler),
             (r"/", IndexHandler),
             (r"(.*)status", StatusHandler),
         ])

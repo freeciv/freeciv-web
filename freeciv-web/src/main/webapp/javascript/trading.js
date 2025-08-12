@@ -191,7 +191,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- WebSocket Integration ---
+    function connectWebSocket() {
+        // The port (8002) should match the PROXY_PORT in freeciv-proxy.py
+        const wsUrl = `ws://${window.location.hostname}:8002/civsocket/8002`;
+        const ws = new WebSocket(wsUrl);
+
+        ws.onopen = function() {
+            console.log('WebSocket connection established.');
+            // The proxy expects a login message. We need to send one.
+            // This is a simplified version of the game's login packet.
+            // In a real scenario, this would use the same validated credentials.
+            const loginPacket = {
+                username: tempUsername || 'market_viewer',
+                password: tempAuthToken || 'token',
+                port: 'meta' // Connect to metaserver context for general updates
+            };
+            ws.send(JSON.stringify(loginPacket));
+        };
+
+        ws.onmessage = function(event) {
+            try {
+                const message = JSON.parse(event.data);
+                if (message.type === 'trade_update') {
+                    console.log('Received trade update:', message.data);
+                    // If the update is for the currently selected good, refresh the order book
+                    if (selectedGoodId && message.data.good_id === selectedGoodId) {
+                        loadOrderBook(selectedGoodId);
+                    }
+                    // Always refresh the user's personal orders and balance
+                    loadUserOrders();
+                    // TODO: Also refresh user balance display if visible on page
+                }
+            } catch (e) {
+                // Not a JSON message or not the format we expect, ignore.
+                // The proxy sends many other message types.
+            }
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket connection closed. Attempting to reconnect in 5 seconds...');
+            setTimeout(connectWebSocket, 5000);
+        };
+
+        ws.onerror = function(error) {
+            console.error('WebSocket error:', error);
+        };
+    }
+
+
     // Initial data loads
     loadGoods();
     loadUserOrders();
+    connectWebSocket(); // Establish WebSocket connection
 });

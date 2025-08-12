@@ -47,19 +47,27 @@ public class TradingService {
             conn = getDbConnection();
             conn.setAutoCommit(false); // Start transaction
 
-            // Step 1: Check if the user has enough funds (for a BUY order)
+            // Step 1: Validate the order
             if ("BUY".equals(type)) {
                 if (!hasSufficientFunds(conn, userId, quantity * price)) {
                     result.put("success", false).put("message", "Insufficient funds.");
                     conn.rollback();
                     return result;
                 }
+            } else if ("SELL".equals(type)) {
+                if (!hasSufficientInventory(conn, userId, goodId, quantity)) {
+                    result.put("success", false).put("message", "Insufficient inventory.");
+                    conn.rollback();
+                    return result;
+                }
+            } else {
+                result.put("success", false).put("message", "Invalid order type.");
+                conn.rollback();
+                return result;
             }
-            // TODO: For SELL orders, check if the user has enough of the asset.
-            // This requires a new table to track user asset inventories.
-            // For now, we will assume they have the assets.
 
-            // Step 2: Insert the new order
+            // Step 2: Insert the new order and get its ID
+            long newOrderId = -1;
             String sql = "INSERT INTO Orders (user_id, good_id, type, quantity, price) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, userId);
@@ -68,19 +76,21 @@ public class TradingService {
                 ps.setInt(4, quantity);
                 ps.setDouble(5, price);
                 ps.executeUpdate();
-                // We don't need the new order's ID for this logic, but it's good practice.
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    newOrderId = generatedKeys.getLong(1);
+                } else {
+                    throw new SQLException("Creating order failed, no ID obtained.");
+                }
             }
 
             // Step 3: Attempt to match the order
-            // This is a simplified matching engine. A real-world engine would be more complex.
-            // We look for one matching order and process it. A loop would be needed for multiple matches.
+            // This is still a simplified engine that processes one match. A loop would be needed for full matching.
             String matchSql;
             if ("BUY".equals(type)) {
-                // Find the cheapest sell order that meets the buy price
-                matchSql = "SELECT * FROM Orders WHERE good_id = ? AND type = 'SELL' AND status = 'OPEN' AND price <= ? ORDER BY price ASC, created_at ASC LIMIT 1";
+                matchSql = "SELECT * FROM Orders WHERE good_id = ? AND type = 'SELL' AND status = 'OPEN' AND price <= ? ORDER BY price ASC, created_at ASC LIMIT 1 FOR UPDATE";
             } else { // SELL
-                // Find the most expensive buy order that meets the sell price
-                matchSql = "SELECT * FROM Orders WHERE good_id = ? AND type = 'BUY' AND status = 'OPEN' AND price >= ? ORDER BY price DESC, created_at ASC LIMIT 1";
+                matchSql = "SELECT * FROM Orders WHERE good_id = ? AND type = 'BUY' AND status = 'OPEN' AND price >= ? ORDER BY price DESC, created_at ASC LIMIT 1 FOR UPDATE";
             }
 
             try (PreparedStatement ps = conn.prepareStatement(matchSql)) {
@@ -99,24 +109,29 @@ public class TradingService {
                     int tradeQuantity = Math.min(quantity, matchedOrderQuantity);
                     double tradePrice = matchedOrderPrice; // The price of the existing order on the book is used
 
-                    // Determine buyer and seller
-                    int buyerId = "BUY".equals(type) ? userId : matchedOrderUserId;
-                    int sellerId = "SELL".equals(type) ? userId : matchedOrderUserId;
+                    int buyerId, sellerId, buyOrderId, sellOrderId;
+                    if ("BUY".equals(type)) {
+                        buyerId = userId;
+                        sellerId = matchedOrderUserId;
+                        buyOrderId = (int) newOrderId;
+                        sellOrderId = matchedOrderId;
+                    } else {
+                        buyerId = matchedOrderUserId;
+                        sellerId = userId;
+                        buyOrderId = matchedOrderId;
+                        sellOrderId = (int) newOrderId;
+                    }
 
-                    // Update balances
+                    // Perform the transaction
                     updateBalance(conn, buyerId, -(tradeQuantity * tradePrice));
                     updateBalance(conn, sellerId, (tradeQuantity * tradePrice));
+                    updateUserInventory(conn, sellerId, goodId, -tradeQuantity);
+                    updateUserInventory(conn, buyerId, goodId, tradeQuantity);
 
-                    // Update order statuses (simplified: assume full match closes both)
+                    // TODO: Handle partial fills properly. For now, assume full fills and close both orders.
                     updateOrderStatus(conn, matchedOrderId, "CLOSED");
-                    // How to find the new order's ID? For now, let's assume it's the last one for the user.
-                    // This is a flaw in this simplified approach. A better way is needed.
-                    // For now, we will just close the matched order. The new order will remain open if partially filled.
-
-                    // Create transaction record
-                    // This also has a flaw: we need both order IDs.
-                    // For now, we'll insert a placeholder.
-                    // createTransaction(conn, newOrderId, matchedOrderId, tradeQuantity, tradePrice);
+                    updateOrderStatus(conn, (int) newOrderId, "CLOSED");
+                    createTransaction(conn, buyOrderId, sellOrderId, tradeQuantity, tradePrice);
                 }
             }
 
@@ -125,24 +140,49 @@ public class TradingService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if (conn != null) {
-                try {
-                    conn.rollback(); // Rollback on error
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            if (conn != null) { try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); } }
             result.put("success", false).put("message", "An error occurred: " + e.getMessage());
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            if (conn != null) { try { conn.close(); } catch (SQLException e) { e.printStackTrace(); } }
         }
         return result;
+    }
+
+    private boolean hasSufficientInventory(Connection conn, int userId, int goodId, int quantity) throws SQLException {
+        String sql = "SELECT quantity FROM User_Inventories WHERE user_id = ? AND good_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, goodId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("quantity") >= quantity;
+            }
+        }
+        return false; // No inventory record means they have 0
+    }
+
+    private void updateUserInventory(Connection conn, int userId, int goodId, int quantityDelta) throws SQLException {
+        // This query will insert a new record if it doesn't exist, or update the existing one.
+        String sql = "INSERT INTO User_Inventories (user_id, good_id, quantity) VALUES (?, ?, ?) " +
+                     "ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, goodId);
+            ps.setInt(3, quantityDelta);
+            ps.setInt(4, quantityDelta); // For the UPDATE part of ON DUPLICATE KEY
+            ps.executeUpdate();
+        }
+    }
+
+    private void createTransaction(Connection conn, int buyOrderId, int sellOrderId, int quantity, double price) throws SQLException {
+        String sql = "INSERT INTO Transactions (buy_order_id, sell_order_id, quantity, price) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, buyOrderId);
+            ps.setInt(2, sellOrderId);
+            ps.setInt(3, quantity);
+            ps.setDouble(4, price);
+            ps.executeUpdate();
+        }
     }
 
     private boolean hasSufficientFunds(Connection conn, int userId, double amount) throws SQLException {

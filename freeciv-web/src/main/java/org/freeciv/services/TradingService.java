@@ -31,6 +31,16 @@ import org.json.JSONObject;
  */
 public class TradingService {
 
+    private static final int TREASURY_USER_ID = 1; // User ID for collecting commissions
+    private static volatile double cachedCommissionRate = -1.0;
+
+    /**
+     * Invalidates the commission rate cache. Called when the setting is updated.
+     */
+    public static void invalidateCommissionRateCache() {
+        cachedCommissionRate = -1.0;
+    }
+
     /**
      * Creates a new order and immediately tries to match it with existing orders.
      * All database operations are performed in a single transaction.
@@ -123,15 +133,23 @@ public class TradingService {
                         sellOrderId = (int) newOrderId;
                     }
 
+                    // Calculate commission
+                    double commissionRate = getCommissionRate(conn);
+                    double totalValue = tradeQuantity * tradePrice;
+                    double commission = totalValue * commissionRate;
+
                     // Perform the transaction
-                    updateBalance(conn, buyerId, -(tradeQuantity * tradePrice));
-                    updateBalance(conn, sellerId, (tradeQuantity * tradePrice));
+                    updateBalance(conn, buyerId, -totalValue); // Buyer pays full price
+                    updateBalance(conn, sellerId, totalValue - commission); // Seller receives price minus commission
+                    updateBalance(conn, TREASURY_USER_ID, commission); // Treasury receives commission
+
                     updateUserInventory(conn, sellerId, goodId, -tradeQuantity);
                     updateUserInventory(conn, buyerId, goodId, tradeQuantity);
 
+                    // TODO: Handle partial fills properly. For now, assume full fills and close both orders.
                     updateOrderStatus(conn, matchedOrderId, "CLOSED");
                     updateOrderStatus(conn, (int) newOrderId, "CLOSED");
-                    createTransaction(conn, buyOrderId, sellOrderId, tradeQuantity, tradePrice);
+                    createTransaction(conn, buyOrderId, sellOrderId, tradeQuantity, tradePrice, commission);
 
                     // Prepare details for notification
                     tradeDetails = new JSONObject();
@@ -185,13 +203,14 @@ public class TradingService {
         }
     }
 
-    private void createTransaction(Connection conn, int buyOrderId, int sellOrderId, int quantity, double price) throws SQLException {
-        String sql = "INSERT INTO Transactions (buy_order_id, sell_order_id, quantity, price) VALUES (?, ?, ?, ?)";
+    private void createTransaction(Connection conn, int buyOrderId, int sellOrderId, int quantity, double price, double commission) throws SQLException {
+        String sql = "INSERT INTO Transactions (buy_order_id, sell_order_id, quantity, price, commission) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, buyOrderId);
             ps.setInt(2, sellOrderId);
             ps.setInt(3, quantity);
             ps.setDouble(4, price);
+            ps.setDouble(5, commission);
             ps.executeUpdate();
         }
     }
@@ -224,6 +243,24 @@ public class TradingService {
             ps.setInt(2, orderId);
             ps.executeUpdate();
         }
+    }
+
+    private double getCommissionRate(Connection conn) throws SQLException {
+        if (cachedCommissionRate >= 0) {
+            return cachedCommissionRate;
+        }
+        String sql = "SELECT setting_value FROM Global_Settings WHERE setting_key = 'commission_rate'";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                double rate = Double.parseDouble(rs.getString("setting_value"));
+                cachedCommissionRate = rate;
+                return rate;
+            }
+        }
+        // Fallback to a default value if not found in DB, and cache it.
+        cachedCommissionRate = 0.01; // Default to 1% if setting is missing
+        return cachedCommissionRate;
     }
 
     private Connection getDbConnection() throws Exception {

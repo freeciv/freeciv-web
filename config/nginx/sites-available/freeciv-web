@@ -138,7 +138,8 @@
 	}
 
         location = /meta/metaserver {
-          deny all;
+          proxy_pass         http://localhost:8080/freeciv-web/meta/metaserver;
+          proxy_redirect     off;
         }
 
 	# proxy for app-server on port 8080

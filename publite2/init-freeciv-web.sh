@@ -22,7 +22,7 @@ echo "init-freeciv-web.sh port ${2}"
 
 addArgs --debug 1
 addArgs --port "${2}"
-addArgs --Announce none
+# Removed --Announce none to allow metaserver registration
 addArgs --exit-on-end
 addArgs --meta --keep --Metaserver "http://${4}"
 addArgs --type "${5}"

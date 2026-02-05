@@ -1,0 +1,20 @@
+diff -ruN freeciv-base/utility/netintf.c freeciv/utility/netintf.c
+--- freeciv-base/utility/netintf.c	2026-02-03 10:52:54.352188697 +1000
++++ freeciv/utility/netintf.c	2026-02-04 15:45:41.965238170 +1000
+@@ -14,6 +14,10 @@
+ /***********************************************************************
+   Common network interface.
+ ***********************************************************************/
++#ifdef __EMSCRIPTEN__
++/* For Emscripten builds, use virtual socket implementation */
++#include "netintf_virtual.c"
++#else
+ 
+ #ifdef HAVE_CONFIG_H
+ #include <fc_config.h>
+@@ -697,3 +701,4 @@
+ 
+   return AF_UNSPEC;
+ }
++#endif /* __EMSCRIPTEN__ */
+

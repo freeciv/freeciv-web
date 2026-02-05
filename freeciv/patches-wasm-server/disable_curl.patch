@@ -1,0 +1,74 @@
+diff -ruN freeciv-base/common/networking/dataio_json.c freeciv/common/networking/dataio_json.c
+--- freeciv-base/common/networking/dataio_json.c	2026-02-03 10:52:53.542182720 +1000
++++ freeciv/common/networking/dataio_json.c	2026-02-04 15:54:46.283998157 +1000
+@@ -19,7 +19,9 @@
+ 
+ #include "fc_prehdrs.h"
+ 
++#ifndef __EMSCRIPTEN__
+ #include <curl/curl.h>
++#endif
+ 
+ #include <limits.h>
+ #include <math.h>
+@@ -64,6 +66,7 @@
+                                         const struct plocation *location,
+                                         bool *dest);
+ 
++#ifndef __EMSCRIPTEN__
+ /**********************************************************************//**
+   Returns a CURL easy handle for name encoding and decoding
+ **************************************************************************/
+@@ -80,6 +83,7 @@
+ 
+   return curl_easy_handle;
+ }
++#endif /* __EMSCRIPTEN__ */
+ 
+ static int plocation_write_data(json_t *item,
+                                 const struct plocation *location,
+@@ -1147,6 +1151,11 @@
+                          const struct plocation *location,
+                          const char *value)
+ {
++  #ifdef __EMSCRIPTEN__
++  /* Emscripten have no libcurl. */
++  return dio_put_string_json(dout, location, value);
++
++  #else
+   int e;
+ 
+   if (dout->json) {
+@@ -1165,6 +1174,7 @@
+   }
+ 
+   return e;
++  #endif
+ }
+ 
+ /**********************************************************************//**
+@@ -1453,6 +1463,15 @@
+                           const struct plocation *location,
+                           char *dest, size_t max_dest_size)
+ {
++  #ifdef __EMSCRIPTEN__
++  /* Emscripten have no libcurl. */
++  if (pc->json_mode) {
++    return dio_get_string_json_internal(pc->json_packet, location,
++                                        dest, max_dest_size);
++  } else {
++    return dio_get_estring_raw(din, dest, max_dest_size);
++  }
++  #else
+   if (pc->json_mode) {
+     char *escaped_value;
+     char *unescaped_value;
+@@ -1487,6 +1506,7 @@
+   }
+ 
+   return TRUE;
++  #endif /* __EMSCRIPTEN__ */
+ }
+ 
+ #endif /* FREECIV_JSON_CONNECTION */
+

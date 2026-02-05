@@ -1,0 +1,29 @@
+diff -ruN freeciv-base/server/sernet.c freeciv/server/sernet.c
+--- freeciv-base/server/sernet.c	2026-02-03 10:52:54.231187804 +1000
++++ freeciv/server/sernet.c	2026-02-04 15:59:21.278246396 +1000
+@@ -91,6 +91,15 @@
+ 
+ #include "sernet.h"
+ 
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#include "utility/netintf_virtual.h"
++#define socket(d,t,p)     vsock_socket(d,t,p)
++#define bind(s,a,l)       vsock_bind(s,a,l)
++#define listen(s,b)       vsock_listen(s,b)
++#define accept(s,a,l)     vsock_accept(s,a,l)
++#endif
++
+ static struct connection connections[MAX_NUM_CONNECTIONS];
+ 
+ static int *listen_socks;
+@@ -572,6 +581,9 @@
+ #endif /* FREECIV_HAVE_LIBREADLINE */
+ 
+   while (TRUE) {
++    #ifdef __EMSCRIPTEN__
++    emscripten_sleep(0);
++    #endif
+     int selret;
+ 
+     con_prompt_on();   /* accepting new input */

@@ -1,0 +1,12 @@
+diff -ruN freeciv-base/server/stdinhand.c freeciv/server/stdinhand.c
+--- freeciv-base/server/stdinhand.c	2026-02-03 10:52:54.234187826 +1000
++++ freeciv/server/stdinhand.c	2026-02-04 15:56:39.853934853 +1000
+@@ -22,6 +22,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <time.h>
++#include <ctype.h>
+ 
+ #ifdef FREECIV_HAVE_LIBREADLINE
+ #include <readline/readline.h>
+

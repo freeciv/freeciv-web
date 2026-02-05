@@ -1,0 +1,54 @@
+diff -ruN freeciv-base/meson.build freeciv/meson.build
+--- freeciv-base/meson.build	2026-02-03 10:52:54.181187435 +1000
++++ freeciv/meson.build	2026-02-05 12:17:03.135616229 +1000
+@@ -243,6 +243,42 @@
+ #endif''',
+   name: 'emscripten')
+     emscripten = true
++    message('Emscripten cross-build detected')
++
++    # enable debug
++    add_global_arguments('-g',
++                         language : [ 'c', 'cpp'])
++    # use ZLIB for emscripten builds
++    add_global_arguments('-s', 'USE_ZLIB=1',
++                         language : [ 'c', 'cpp'])
++    # use SQLITE3 for emscripten builds
++    add_global_arguments('-s', 'USE_SQLITE3=1',
++                         language : [ 'c', 'cpp'])
++    # use ALWAYS_ROOT for emscripten builds
++    add_global_arguments('-DALWAYS_ROOT',
++                         language : [ 'c', 'cpp'])
++    # add ALLOW_MEMORY_GROWTH for emscripten builds
++    add_global_link_arguments('-s', 'ALLOW_MEMORY_GROWTH=1',
++                              language : [ 'c', 'cpp'])
++    # set stack size to 30mb
++    add_global_link_arguments('-s', 'STACK_SIZE=31457280',
++                              language : [ 'c', 'cpp'])
++    add_global_link_arguments('-s', 'ASYNCIFY_STACK_SIZE=31457280',
++                              language : [ 'c', 'cpp'])
++    # use ASYNCIFY for emscripten builds
++    add_global_link_arguments('-s', 'ASYNCIFY',
++                              language : [ 'c', 'cpp'])
++    # export malloc/free functions
++    add_global_link_arguments('-s', 'EXPORTED_FUNCTIONS=["_malloc","_free", "_main"]',
++                              language : [ 'c', 'cpp'])
++    # add HEAPU8 export for emscripten builds
++    add_global_link_arguments('-s', 'EXPORTED_RUNTIME_METHODS=["HEAPU8"]',
++                              language : [ 'c', 'cpp'])
++    # include ruleset files
++    add_global_link_arguments('--preload-file', join_paths(meson.source_root(), 'data/classic@data/classic'), language : [ 'c', 'cpp'])
++    add_global_link_arguments('--preload-file', join_paths(meson.source_root(), 'data/default@data/default'), language : [ 'c', 'cpp'])
++    add_global_link_arguments('--preload-file', join_paths(meson.source_root(), 'data/nation@data/nation'), language : [ 'c', 'cpp'])
++    add_global_link_arguments('--preload-file', join_paths(meson.source_root(), 'data/override@data/override'), language : [ 'c', 'cpp'])
+   else
+     emscripten = false
+   endif
+@@ -1306,6 +1342,7 @@
+   'utility/mem.c',
+   'utility/netfile.c',
+   'utility/netintf.c',
++  'utility/netintf_virtual.c',
+   'utility/rand.c',
+   'utility/randseed.c',
+   'utility/registry.c',

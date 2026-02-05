@@ -1,0 +1,22 @@
+diff -ruN freeciv-base/platforms/emscripten/setups/cross-ems.tmpl freeciv/platforms/emscripten/setups/cross-ems.tmpl
+--- freeciv-base/platforms/emscripten/setups/cross-ems.tmpl	2026-02-03 10:52:54.209187642 +1000
++++ freeciv/platforms/emscripten/setups/cross-ems.tmpl	2026-02-05 12:07:02.650621571 +1000
+@@ -4,6 +4,17 @@
+ ar = '<EMSDK_ROOT>/upstream/emscripten/emar'
+ strip = '<EMSDK_ROOT>/upstream/emscripten/emstrip'
+ 
++[host_machine]
++system = 'emscripten'
++cpu_family = 'wasm32'
++cpu = 'generic'
++endian = 'little'
++
+ [properties]
++cross_inc_path = '<EMSDK_ROOT>/upstream/emscripten/cache/sysroot/include'
+ cross_lib_path = '<EMSDK_ROOT>/upstream/emscripten/system/lib'
+ crosser = false
++
++[built-in options]
++c_args = ['-I<PLATFORM_ROOT>/../../jansson/src/']
++c_link_args = ['-L<PLATFORM_ROOT>/../../jansson/src/.libs', '-ljansson']
+

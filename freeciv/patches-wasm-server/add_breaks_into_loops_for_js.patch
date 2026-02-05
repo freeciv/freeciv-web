@@ -1,0 +1,74 @@
+diff -ruN freeciv-base/server/srv_main.c freeciv/server/srv_main.c
+--- freeciv-base/server/srv_main.c	2026-02-03 10:52:54.223187745 +1000
++++ freeciv/server/srv_main.c	2026-02-04 16:02:16.111647221 +1000
+@@ -41,6 +41,9 @@
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#endif
+ 
+ /* dependencies/lua */
+ #include "lua.h" /* lua_Integer */
+@@ -2064,6 +2067,9 @@
+   int retries = 0;
+ 
+   while (identity_number_is_used(increment_identity_number())) {
++    #ifdef __EMSCRIPTEN__
++    emscripten_sleep(0);
++    #endif
+     /* Try again */
+     if (++retries >= IDENTITY_NUMBER_SIZE) {
+       /* Always fails. */
+@@ -2925,6 +2931,9 @@
+ 
+   fc_assert(S_S_RUNNING == server_state());
+   while (S_S_RUNNING == server_state()) {
++    #ifdef __EMSCRIPTEN__
++    emscripten_sleep(0);
++    #endif
+     /* The beginning of a turn.
+      *
+      * We have to initialize data as well as do some actions.  However when
+@@ -2998,6 +3007,9 @@
+       }
+ 
+       while (server_sniff_all_input() == S_E_OTHERWISE) {
++        #ifdef __EMSCRIPTEN__
++        emscripten_sleep(0);
++        #endif
+         /* Nothing */
+       }
+ 
+@@ -3583,6 +3595,9 @@
+ 
+   /* Run server loop */
+   do {
++    #ifdef __EMSCRIPTEN__
++    emscripten_sleep(0);
++    #endif
+     set_server_state(S_S_INITIAL);
+ 
+     /* Load a script file. */
+@@ -3600,6 +3615,9 @@
+                srvarg.port);
+     /* Remain in S_S_INITIAL until all players are ready. */
+     while (S_E_FORCE_END_OF_SNIFF != server_sniff_all_input()) {
++      #ifdef __EMSCRIPTEN__
++      emscripten_sleep(0);
++      #endif
+       /* When force_end_of_sniff is used in pregame, it means that the server
+        * is ready to start (usually set within start_game()). */
+     }
+@@ -3614,6 +3632,9 @@
+ 
+     /* Remain in S_S_OVER until players log out */
+     while (conn_list_size(game.est_connections) > 0) {
++      #ifdef __EMSCRIPTEN__
++      emscripten_sleep(0);
++      #endif
+       server_sniff_all_input();
+     }
+ 
+

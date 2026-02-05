@@ -1,0 +1,46 @@
+diff -ruN freeciv-base/platforms/emscripten/emsbuild.sh freeciv/platforms/emscripten/emsbuild.sh
+--- freeciv-base/platforms/emscripten/emsbuild.sh	2026-02-03 10:52:54.209187642 +1000
++++ freeciv/platforms/emscripten/emsbuild.sh	2026-02-05 12:05:40.729979741 +1000
+@@ -15,6 +15,7 @@
+ EMSDK_ROOT="$1"
+ BUILD_ROOT="$(pwd)"
+ PLATFORM_ROOT="$(cd $(dirname "$0") && pwd)"
++INSTALL_DIR="${HOME}/freeciv"
+ 
+ if test "${PLATFORM_ROOT}" = "${BUILD_ROOT}" ; then
+   echo "Run $0 from a separate build directory." >&2
+@@ -36,23 +37,23 @@
+ cd "${BUILD_ROOT}" || exit 1
+ 
+ sed -e "s,<EMSDK_ROOT>,${EMSDK_ROOT}," \
++    -e "s,<BUILD_ROOT>,${BUILD_ROOT}," \
++    -e "s,<PLATFORM_ROOT>,${PLATFORM_ROOT}," \
+     "${PLATFORM_ROOT}/setups/cross-ems.tmpl" > cross.txt
+ 
+-# Build SDL2 separately first, without USE_PTHREADS that
+-# the main build uses.
+-if ! embuilder build sdl2 sdl2_image sdl2_ttf sdl2_gfx sdl2_mixer ; then
+-  echo "SDL2 build failed!" >&2
+-  exit 1
+-fi
+-
+ if ! CC=emcc CXX=em++ AR=emar meson setup \
+      --cross-file=cross.txt \
++     -Dserver=freeciv-web \
++     -Dclients=[] \
++     -Dfcmp=cli \
++     -Djson-protocol=true \
++     -Dnls=false \
++     -Dprefix="${INSTALL_DIR}" \
++     -Doptimization=3 \
++     -Db_lto=true \
+      -Ddefault_library=static \
+-     -Ddebug=true \
+      -Daudio=none \
+-     -Dmwand=false \
+      -Dtools=[] \
+-     -Dclients=stub,sdl2 \
+      -Dfcmp=[] \
+      "${PLATFORM_ROOT}/../../"
+ then
+

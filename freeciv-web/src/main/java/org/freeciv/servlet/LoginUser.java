@@ -25,9 +25,9 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
+import org.freeciv.util.PasswordUtil;
 
 
 /**
@@ -67,7 +67,6 @@ public class LoginUser extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			// Salted, hashed password.
 			String saltHashQuery =
 					"SELECT secure_hashed_password "
 							+ "FROM auth "
@@ -80,9 +79,8 @@ public class LoginUser extends HttpServlet {
 				response.getOutputStream().print("Failed");
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB != null &&
-						hashedPasswordFromDB.equals(DigestUtils.sha256Hex(secure_password))) {
-					// Login OK!
+				if (PasswordUtil.verifyPassword(secure_password, hashedPasswordFromDB)) {
+					PasswordUtil.upgradeHashIfNeeded(conn, username, secure_password, hashedPasswordFromDB);
 					response.getOutputStream().print("OK");
 				} else {
 					response.getOutputStream().print("Failed");

@@ -1,6 +1,5 @@
 package org.freeciv.servlet;
 
-import org.apache.commons.codec.digest.Crypt;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -16,6 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.freeciv.util.Constants;
+import org.freeciv.util.PasswordUtil;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -129,7 +129,7 @@ public class ResetPassword extends HttpServlet {
 
             String query = "UPDATE auth SET secure_hashed_password = ? where email = ? and activated = 1";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, Crypt.crypt(hashedPwd));
+            preparedStatement.setString(1, PasswordUtil.hashPassword(hashedPwd));
             preparedStatement.setString(2, email_parameter);
             int noUpdated = preparedStatement.executeUpdate();
             if (noUpdated != 1) {

@@ -17,8 +17,6 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
-import org.apache.commons.codec.digest.Crypt;
-
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -30,6 +28,7 @@ import javax.naming.*;
 
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
+import org.freeciv.util.PasswordUtil;
 
 
 /**
@@ -75,7 +74,7 @@ public class DeactivateUser extends HttpServlet {
 				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
+				if (PasswordUtil.verifyPassword(secure_password, hashedPasswordFromDB)) {
 
 					String query = "UPDATE auth SET activated = '0' WHERE username = ? ";
 					PreparedStatement preparedStatement = conn.prepareStatement(query);

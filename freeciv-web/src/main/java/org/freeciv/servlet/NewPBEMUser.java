@@ -29,7 +29,6 @@ import java.util.Properties;
 
 import javax.sql.*;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -42,6 +41,7 @@ import javax.naming.*;
 
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
+import org.freeciv.util.PasswordUtil;
 
 
 /**
@@ -133,7 +133,7 @@ public class NewPBEMUser extends HttpServlet {
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setString(1, username.toLowerCase());
 			preparedStatement.setString(2, email);
-			preparedStatement.setString(3, DigestUtils.sha256Hex(password));
+			preparedStatement.setString(3, PasswordUtil.hashPassword(password));
 			preparedStatement.setInt(4, ACTIVATED);
 			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();

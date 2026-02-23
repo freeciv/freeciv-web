@@ -17,8 +17,6 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
-import org.apache.commons.codec.digest.Crypt;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.sql.Connection;
@@ -32,9 +30,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import javax.sql.DataSource;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
+import org.freeciv.util.PasswordUtil;
 
 /**
  * Deletes a savegame.
@@ -85,7 +83,6 @@ public class DeleteSaveGame extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			// Salted, hashed password.
 			String saltHashQuery =
 					"SELECT secure_hashed_password "
 							+ "FROM auth "
@@ -99,9 +96,8 @@ public class DeleteSaveGame extends HttpServlet {
 				return;
 			} else {
 				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB != null &&
-						hashedPasswordFromDB.equals(DigestUtils.sha256Hex(secure_password))) {
-					// Login OK!
+				if (PasswordUtil.verifyPassword(secure_password, hashedPasswordFromDB)) {
+					PasswordUtil.upgradeHashIfNeeded(conn, username, secure_password, hashedPasswordFromDB);
 				} else {
 					response.getOutputStream().print("Failed");
 					return;

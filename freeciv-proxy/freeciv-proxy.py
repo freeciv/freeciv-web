@@ -28,6 +28,7 @@ from tornado import web, websocket, ioloop, httpserver
 from debugging import *
 import logging
 from civcom import *
+from password_utils import verify_password, hash_password, needs_upgrade
 import json
 import uuid
 import gc
@@ -35,7 +36,6 @@ import MySQLdb
 import configparser
 import urllib.request
 import urllib.parse
-import hashlib
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
@@ -123,8 +123,19 @@ class WSHandler(websocket.WebSocketHandler):
             del(self.civcom)
             gc.collect()
 
-    # Check user authentication
     def check_user(self, username, token):
+      """Authenticate a user via password or Google sign-in.
+
+      Delegates to the appropriate authentication method based on the
+      game's configuration (password-based or Google OAuth).
+
+      Args:
+          username: The username to authenticate.
+          token: The password hash or Google OAuth token.
+
+      Returns:
+          True if authentication succeeds, False otherwise.
+      """
       cursor = None
       cnx = None
       try:
@@ -133,15 +144,17 @@ class WSHandler(websocket.WebSocketHandler):
 
         auth_method = self.get_game_auth_method(cursor)
         if auth_method == "password":
-          return self.check_user_password(cursor, username, token)
+          return self.check_user_password(cursor, cnx, username, token)
         elif auth_method == "google":
           return self.check_user_google(username, token)
         else:
           return False
 
       finally:
-        cursor.close()
-        cnx.close()
+        if cursor is not None:
+          cursor.close()
+        if cnx is not None:
+          cnx.close()
 
     # Returns the auth method for this game
     # Right now this is:
@@ -157,20 +170,65 @@ class WSHandler(websocket.WebSocketHandler):
         else:
             return "password"
 
-    def check_user_password(self, cursor, username, password):
-        query = ("select secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
-        cursor.execute(query, {'usr': username, 'pwd': password})
+    def check_user_password(self, cursor, cnx, username, password):
+        """Verify a user's password against the database.
+
+        Supports both bcrypt and legacy SHA-256 hash formats. On successful
+        authentication with a legacy SHA-256 hash, the stored hash is
+        transparently upgraded to bcrypt.
+
+        Args:
+            cursor: Active database cursor.
+            cnx: Database connection (required for committing hash upgrades).
+            username: The username to authenticate.
+            password: The password token to verify.
+
+        Returns:
+            True if authentication succeeds, False otherwise.
+        """
+        query = ("select secure_hashed_password, activated from auth "
+                 "where lower(username)=lower(%(usr)s)")
+        cursor.execute(query, {'usr': username})
         result = cursor.fetchall()
 
         if len(result) == 0:
             # Unreserved user, no password needed
             return True
 
-        for secure_shashed_password, active in result:
-            if (active == 0): return False
-            if secure_shashed_password == hashlib.sha256(password.encode('utf-8')).hexdigest(): return True
+        for stored_hash, active in result:
+            if active == 0:
+                return False
+            if verify_password(password, stored_hash):
+                # Transparently upgrade legacy SHA-256 hashes to bcrypt.
+                if needs_upgrade(stored_hash):
+                    self._upgrade_password_hash(cursor, cnx, username, password)
+                return True
 
         return False
+
+    def _upgrade_password_hash(self, cursor, cnx, username, password):
+        """Upgrade a legacy password hash to bcrypt in the database.
+
+        Called transparently after successful authentication with a legacy
+        hash format. This is best-effort: failures are logged but do not
+        affect the authentication result.
+
+        Args:
+            cursor: Active database cursor.
+            cnx: Database connection for committing the update.
+            username: The username whose hash is being upgraded.
+            password: The verified password token to re-hash with bcrypt.
+        """
+        try:
+            new_hash = hash_password(password)
+            update_query = ("UPDATE auth SET secure_hashed_password = %(hash)s "
+                           "WHERE lower(username) = lower(%(usr)s)")
+            cursor.execute(update_query, {'hash': new_hash, 'usr': username})
+            cnx.commit()
+            logger.info("Upgraded password hash to bcrypt for user: %s", username)
+        except Exception as e:
+            logger.error("Failed to upgrade password hash for user %s: %s",
+                        username, e)
 
     def check_user_google(self, username, token):
         # Check login with Google Account

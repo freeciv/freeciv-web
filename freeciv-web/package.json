@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.9"
   },
   "scripts": {
     "compile-hb": "f() { ./node_modules/handlebars/bin/handlebars src/main/webapp/webclient -e hbs -f \"$1\"/hbs-templates.js --knownOnly; }; f"
